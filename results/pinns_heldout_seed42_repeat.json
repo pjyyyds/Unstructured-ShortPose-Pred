@@ -1,0 +1,145 @@
+{
+  "scope": "Independent Kaggle sessions on the four reused PINNS development sites, same seed and frozen protocol.",
+  "runs": {
+    "interactive": {
+      "bundle_sha256": "507c0a5decf79a4a48b982987e89c37b8c99e456f5c7f11cc3d49f34bd5741ec",
+      "pose_stage_start_utc": "2026-11-24 13:37:16"
+    },
+    "saved_version": {
+      "version_id": 373483765,
+      "recorded_elapsed_seconds": 770.4,
+      "bundle_sha256": "e9a77cefbf2494f92730c8dd547f7eecf6db4f24fbdb84235ca061efde2a85c9",
+      "pose_stage_start_utc": "2026-11-24 16:30:48"
+    }
+  },
+  "recorded_environment": {
+    "training_gpu_model_all_checkpoints": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "ordered_pose_execution_providers": [
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "hardware_scope": "The bundles record the GPU model but do not identify a physical GPU. Independent sessions do not establish reproducibility across GPU models."
+  },
+  "identity": {
+    "protocol": {
+      "seed": 42,
+      "epochs": 28,
+      "batch_size": 64,
+      "learning_rate": 0.002,
+      "min_lr_ratio": 0.05,
+      "weight_decay": 0.0001,
+      "gradient_clip": 2.0
+    },
+    "data_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "torch_version": "2.11.0+cu130"
+  },
+  "pose_model": {
+    "name": "OpenMMLab RTMPose-m",
+    "onnx_sha256": "5c0a4bf67953e6d2ac43ce15e77dc9d5d354ae18430a47d2c5963a7bc5683e3c",
+    "input_video_hashes_compared": 47
+  },
+  "pose_cache": {
+    "array_names_compared": [
+      "clip",
+      "person_id",
+      "t0",
+      "hist_kpts",
+      "hist_bbox",
+      "img_h",
+      "hist_pos_relative",
+      "hist_mask",
+      "ego_type",
+      "pose_inferred",
+      "metadata_json"
+    ],
+    "arrays_and_complete_npz_byte_identical": true,
+    "history_person_frames": 7410,
+    "test_windows": 1482
+  },
+  "four_folds": {
+    "america_crossroad": {
+      "test_windows": 816,
+      "models": {
+        "M0": {
+          "state_tensors": 37,
+          "state_elements": 236741
+        },
+        "M1": {
+          "state_tensors": 88,
+          "state_elements": 302214
+        }
+      }
+    },
+    "italy_park": {
+      "test_windows": 84,
+      "models": {
+        "M0": {
+          "state_tensors": 37,
+          "state_elements": 236741
+        },
+        "M1": {
+          "state_tensors": 88,
+          "state_elements": 302214
+        }
+      }
+    },
+    "japan_crossroad": {
+      "test_windows": 432,
+      "models": {
+        "M0": {
+          "state_tensors": 37,
+          "state_elements": 236741
+        },
+        "M1": {
+          "state_tensors": 88,
+          "state_elements": 302214
+        }
+      }
+    },
+    "thailand_street": {
+      "test_windows": 150,
+      "models": {
+        "M0": {
+          "state_tensors": 37,
+          "state_elements": 236741
+        },
+        "M1": {
+          "state_tensors": 88,
+          "state_elements": 302214
+        }
+      }
+    }
+  },
+  "weights": {
+    "checkpoints": 8,
+    "state_tensors_bit_identical": 500,
+    "total_state_elements": 2155820,
+    "max_absolute_element_difference": 0
+  },
+  "results": {
+    "ade_fde_scalar_values_compared_across_M0_M1": 5928,
+    "max_absolute_paired_per_window_error_difference_m": 0,
+    "macro_by_model_m": {
+      "constant_velocity": {
+        "ade_m": 0.5556918258065034,
+        "fde_m": 1.2103253936302683
+      },
+      "M0": {
+        "ade_m": 0.5044356746089765,
+        "fde_m": 1.0896217484412039
+      },
+      "M1": {
+        "ade_m": 0.5462913232096576,
+        "fde_m": 1.1638134071369697
+      }
+    },
+    "all_four_fold_json_and_report_json_byte_identical": true,
+    "independent_cpu_replay_each_bundle_torch": "2.10.0",
+    "both_cpu_replays_identical_max_abs_difference_from_cloud_m": 2.692283796790207e-06
+  },
+  "container_differences": "All 20 paths agree and pass CRC. Eight PyTorch checkpoint containers use different temporary directory names internally. Every uncompressed member is byte-identical after removing that prefix. The six text logs match after stripping timestamps. Fold scores, poses, and reported parameter values are unchanged."
+}
