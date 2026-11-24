@@ -1,0 +1,218 @@
+{
+  "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "model_archive_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "window_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "checkpoint_hashes": {
+    "seed_42/america_crossroad/M1.pt": "8ce6d093d1dc34dda0f57da008464f1ca66c9ce7b4638347bfa33111f020026b",
+    "seed_42/italy_park/M1.pt": "d73d488a7b37b98d5b2e786a402ca61c3d14c7c35fd00cba3dfd2e57796a832d",
+    "seed_42/japan_crossroad/M1.pt": "0a2734ddbc1f5a1208552d0784fba6bc6ff0b56a40875d473295e0fd91fc46a1",
+    "seed_42/thailand_street/M1.pt": "aeaf2b9a8ce966c65f22013604a14c051f3116a18ada7c97715782f41ae1452b",
+    "seed_1024/america_crossroad/M1.pt": "fb5bc17d0e80abd336f5012d65b68bab71df9f0ce443191fe4604dd50f2291ee",
+    "seed_1024/italy_park/M1.pt": "4cf72c5a0f29be8a1397789e366c0efa30cb6573e2f4d3c9ddc2018adcc0d8af",
+    "seed_1024/japan_crossroad/M1.pt": "5c3a538ad10c0742f0773b9173f3c9ef14cde3f7c0a9cf248e088081449608ee",
+    "seed_1024/thailand_street/M1.pt": "b468ac3d17312c144ff32efa181ed359a0dd0e5b3c66f3c077d9806fe8efb221",
+    "seed_2025/america_crossroad/M1.pt": "886f2eaf1453bcb1f2344651ba3937d758cd8dcf7be5f3381e81700142f03ff4",
+    "seed_2025/italy_park/M1.pt": "7429012f2e08cdbde9330f6b78247983c474a5bd56c8d2a34ae1044375880fd3",
+    "seed_2025/japan_crossroad/M1.pt": "baf14f44b1bba7805352d5ac0d2cebb01561421cb7176845110fc10f3f1991bf",
+    "seed_2025/thailand_street/M1.pt": "435fd0007641d20c6e2ca5141b7f172faa585823dfd8d6f76d005e7acfa14834",
+    "seed_3407/america_crossroad/M1.pt": "bf227ea4bd27443acc78db83645533a8c280e53d7fd9b9812de09173a8af559d",
+    "seed_3407/italy_park/M1.pt": "adf69f06a7c9e5a0101fb8a36a39be8596410a0758fcaa5840606898e270e3cc",
+    "seed_3407/japan_crossroad/M1.pt": "cca75bfa4b6dea820c0c58eaefe66201f1ea29d7829787482c2ccc7f84b520d4",
+    "seed_3407/thailand_street/M1.pt": "3b3342570f94488912ae7f567e0a86c59fa74f73ba979f617f558519bcab4fd7",
+    "seed_4096/america_crossroad/M1.pt": "40e031f453c446f9dc7f8b527e3153f18974fbde0cb60dfee0cef020ebf0db5e",
+    "seed_4096/italy_park/M1.pt": "8ad9debaff2bf356ed2717fecd3e2449d55c658ad23c6ee979b4ddc18a92b233",
+    "seed_4096/japan_crossroad/M1.pt": "29200c1a40f2cf7c22e9cdc0ef08e1c41164702c873a790569cefe3533cfb63d",
+    "seed_4096/thailand_street/M1.pt": "d400ec070c1f14904a08753aa73606098aee51ab16abb432bbb787ff7392a763"
+  },
+  "script_sha256": "9193197f6536c18e11f826bef9a80d1d6a51ab5bc132ed0f4d0a8d0a5603d3ea",
+  "conditions": [
+    "recorded",
+    "interior_order",
+    "static_by_joint_and_root",
+    "disabled_residual"
+  ],
+  "seeds": [
+    42,
+    1024,
+    2025,
+    3407,
+    4096
+  ],
+  "all_windows_coverage": {
+    "windows": 1482,
+    "window_joints_total": 25194,
+    "joint_time_slots_total": 125970,
+    "joint_time_slots_valid": 116141,
+    "joints_swappable_in_both_interior_slots": 21185,
+    "fraction_all_window_joints_swappable": 0.8408748114630468,
+    "windows_with_swappable_joint": 1324,
+    "interior_order": {
+      "changed_joint_time_slots": 42282,
+      "fraction_all_joint_time_slots": 0.3356513455584663,
+      "fraction_valid_joint_time_slots": 0.36405748185395337,
+      "changed_window_joints": 21141,
+      "fraction_all_window_joints": 0.8391283638961657,
+      "changed_windows": 1324,
+      "fraction_all_windows": 0.893387314439946
+    },
+    "static_by_joint_and_root": {
+      "changed_joint_time_slots": 88770,
+      "fraction_all_joint_time_slots": 0.7046915932364849,
+      "fraction_valid_joint_time_slots": 0.7643295649253924,
+      "changed_window_joints": 24005,
+      "fraction_all_window_joints": 0.9528062237040565,
+      "changed_windows": 1478,
+      "fraction_all_windows": 0.9973009446693657
+    }
+  },
+  "frozen_window_coverage": {
+    "america_crossroad": {
+      "windows": 816,
+      "window_joints_total": 13872,
+      "joint_time_slots_total": 69360,
+      "joint_time_slots_valid": 65516,
+      "joints_swappable_in_both_interior_slots": 12190,
+      "fraction_all_window_joints_swappable": 0.8787485582468282,
+      "windows_with_swappable_joint": 748,
+      "interior_order": {
+        "changed_joint_time_slots": 24342,
+        "fraction_all_joint_time_slots": 0.3509515570934256,
+        "fraction_valid_joint_time_slots": 0.3715428292325539,
+        "changed_window_joints": 12171,
+        "fraction_all_window_joints": 0.8773788927335641,
+        "changed_windows": 748,
+        "fraction_all_windows": 0.9166666666666666
+      },
+      "static_by_joint_and_root": {
+        "changed_joint_time_slots": 50517,
+        "fraction_all_joint_time_slots": 0.7283304498269896,
+        "fraction_valid_joint_time_slots": 0.7710635569937114,
+        "changed_window_joints": 13476,
+        "fraction_all_window_joints": 0.9714532871972318,
+        "changed_windows": 815,
+        "fraction_all_windows": 0.9987745098039216
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "window_joints_total": 1428,
+      "joint_time_slots_total": 7140,
+      "joint_time_slots_valid": 5946,
+      "joints_swappable_in_both_interior_slots": 979,
+      "fraction_all_window_joints_swappable": 0.6855742296918768,
+      "windows_with_swappable_joint": 69,
+      "interior_order": {
+        "changed_joint_time_slots": 1952,
+        "fraction_all_joint_time_slots": 0.2733893557422969,
+        "fraction_valid_joint_time_slots": 0.32828792465523043,
+        "changed_window_joints": 976,
+        "fraction_all_window_joints": 0.6834733893557423,
+        "changed_windows": 69,
+        "fraction_all_windows": 0.8214285714285714
+      },
+      "static_by_joint_and_root": {
+        "changed_joint_time_slots": 4320,
+        "fraction_all_joint_time_slots": 0.6050420168067226,
+        "fraction_valid_joint_time_slots": 0.7265388496468214,
+        "changed_window_joints": 1251,
+        "fraction_all_window_joints": 0.8760504201680672,
+        "changed_windows": 83,
+        "fraction_all_windows": 0.9880952380952381
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "window_joints_total": 7344,
+      "joint_time_slots_total": 36720,
+      "joint_time_slots_valid": 32332,
+      "joints_swappable_in_both_interior_slots": 5599,
+      "fraction_all_window_joints_swappable": 0.7623910675381264,
+      "windows_with_swappable_joint": 364,
+      "interior_order": {
+        "changed_joint_time_slots": 11154,
+        "fraction_all_joint_time_slots": 0.3037581699346405,
+        "fraction_valid_joint_time_slots": 0.34498329828034147,
+        "changed_window_joints": 5577,
+        "fraction_all_window_joints": 0.7593954248366013,
+        "changed_windows": 364,
+        "fraction_all_windows": 0.8425925925925926
+      },
+      "static_by_joint_and_root": {
+        "changed_joint_time_slots": 24203,
+        "fraction_all_joint_time_slots": 0.6591230936819172,
+        "fraction_valid_joint_time_slots": 0.748577260917976,
+        "changed_window_joints": 6798,
+        "fraction_all_window_joints": 0.9256535947712419,
+        "changed_windows": 432,
+        "fraction_all_windows": 1.0
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "window_joints_total": 2550,
+      "joint_time_slots_total": 12750,
+      "joint_time_slots_valid": 12347,
+      "joints_swappable_in_both_interior_slots": 2417,
+      "fraction_all_window_joints_swappable": 0.947843137254902,
+      "windows_with_swappable_joint": 143,
+      "interior_order": {
+        "changed_joint_time_slots": 4834,
+        "fraction_all_joint_time_slots": 0.37913725490196076,
+        "fraction_valid_joint_time_slots": 0.3915121082044221,
+        "changed_window_joints": 2417,
+        "fraction_all_window_joints": 0.947843137254902,
+        "changed_windows": 143,
+        "fraction_all_windows": 0.9533333333333334
+      },
+      "static_by_joint_and_root": {
+        "changed_joint_time_slots": 9730,
+        "fraction_all_joint_time_slots": 0.7631372549019608,
+        "fraction_valid_joint_time_slots": 0.788045679112335,
+        "changed_window_joints": 2480,
+        "fraction_all_window_joints": 0.9725490196078431,
+        "changed_windows": 148,
+        "fraction_all_windows": 0.9866666666666667
+      }
+    }
+  },
+  "first_annotation_secondary_coverage": {
+    "windows": 449,
+    "window_joints_total": 7633,
+    "joint_time_slots_total": 38165,
+    "joint_time_slots_valid": 34609,
+    "joints_swappable_in_both_interior_slots": 6206,
+    "fraction_all_window_joints_swappable": 0.8130486047425651,
+    "windows_with_swappable_joint": 392,
+    "interior_order": {
+      "changed_joint_time_slots": 12392,
+      "fraction_all_joint_time_slots": 0.324695401545919,
+      "fraction_valid_joint_time_slots": 0.35805715276373196,
+      "changed_window_joints": 6196,
+      "fraction_all_window_joints": 0.8117385038647976,
+      "changed_windows": 392,
+      "fraction_all_windows": 0.8730512249443207
+    },
+    "static_by_joint_and_root": {
+      "changed_joint_time_slots": 26223,
+      "fraction_all_joint_time_slots": 0.6870955063539893,
+      "fraction_valid_joint_time_slots": 0.7576930856135687,
+      "changed_window_joints": 7209,
+      "fraction_all_window_joints": 0.9444517227826542,
+      "changed_windows": 448,
+      "fraction_all_windows": 0.9977728285077951
+    }
+  },
+  "first_annotation_counts_by_site": {
+    "america_crossroad": 240,
+    "italy_park": 28,
+    "japan_crossroad": 117,
+    "thailand_street": 64
+  },
+  "registration_stage": "Before any outcomes from the new order/static/disabled conditions; earlier seed-42 missing and full reversal results were known.",
+  "primary_metric": "interior_order minus recorded ADE in metres",
+  "scope": "Exploratory fixed-weight intervention on four previously used physical sites. Per-site window means, then four-site and five-seed equal means; 20,000 whole-clip paired resamples within each site, conditional on these fits.",
+  "bootstrap_rng_seed": 2026,
+  "replicates": 20000
+}
