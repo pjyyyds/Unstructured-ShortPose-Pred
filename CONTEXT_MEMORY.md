@@ -2,15 +2,15 @@
 
 > [!NOTE]
 > 本文档由 `context-memory-manager` 滚动维护，记录《短时姿态观测下的非结构化道路行人动作轨迹预测》核心规格、代码排雷记录、实证数据与算法演进决策。
-> 更新时间：2026-11-23 23:09
+> 更新时间：2026-11-24 14:48
 
 ---
 
 ## 1. 核心目标与硬性技术边界 (Core Objectives & Boundaries)
 
 - **课题定位**：面向无车道线、人车混行、近场遮挡的非结构化道路，仅利用 $t \le t_0$ 的地面历史与 2D 骨骼（$T \in \{5, 10, 20\}, \Delta t = 0.1\text{ s}$），预测未来 $T_f = 30$（$3.0\text{ s}$）的 $K=6$ 条地面候选轨迹 $\hat{\mathbf{Y}}$、模态概率 $\hat{\boldsymbol{\pi}} \in \Delta^5$ 及五类可观测动作概率 $\hat{\mathbf{p}}_{\text{act}} \in [0,1]^5$（绝不预测未来人体骨骼）。
-- **硬指标红线**：主干参数量 $< 2.5\text{ M}$（当前完整版 `Ours_Full` 实测仅 **`0.495 M`**）、$N=12$ 单次前向 $< 0.80\text{ GFLOPs}$（实测 $T=5$ 为 **`0.410 GFLOPs`**，$T=20$ 为 **`0.799 GFLOPs`**）；严禁跨帧线性插值；同机位切分强制 $\ge 6.0\text{ s}$ 物理时间隔离带。
-- **云端资源状态**：Kaggle (`pengjy25`, Phone Verified, `30h/30h` 免费 GPU 满额) 与 Google Colab (`Google One`) 已在内置浏览器完成核验；`PINNS`（`973 MB` Google Drive 直链）与 `Social-Transmotion/JTA`（`306 MB` GitHub Release）实测免登 HTTP 200 直达。
+- **硬指标红线**：主干参数量 $< 2.5\text{ M}$（当前完整版 `Ours_Full` 实测仅 **`0.512 M`**）、$N=12$ 单次前向 $< 0.80\text{ GFLOPs}$（实测 $T=5$ 为 **`0.415 GFLOPs`**，$T=10$ 为 **`0.545 GFLOPs`**，$T=20$ 为 **`0.799 GFLOPs`**）；严禁跨帧线性插值；同机位切分强制 $\ge 6.0\text{ s}$ 物理时间隔离带。
+- **云端资源状态**：Kaggle (`pengjy25`, `GPU T4 x2` 双卡后台 Commit，零本机负载)；`PINNS`（`973 MB` 直链，实测共 47 段 10Hz 视频）与 `Social-Transmotion/JTA`（`306 MB` Release，原生 2.5Hz 共 3,604 样本）均已验证直连解析通过。
 
 ---
 
@@ -24,6 +24,7 @@
 5. **解码静态上下文预投影与死参数清除**（`action_and_decoder.py`, `env_and_gatv2.py`）：将 Eq. (9) 中 30 步恒定的 112 维静态输入门提至循环外单次矩阵乘（数学严格等价 `GRUCell(114,128)`，输入门提速 $16.7\times$），结合深度可分离时间卷积并移除 `GATv2` 第 2 层未使用的死分支 `nbr_ffn`，确保 100% 参数均有真实梯度且全窗长满足 `< 0.80 GFLOPs`。
 6. **`PINNS` 数据集足底接地锚点重大审计修正**（`pinns_extractor.py`）：真机抽帧实测发现 `PINNS` 官方 `README` 标注的 `(ox, oy)` 并非几何框中心 `(cx, cy)`，而是用于单应矩阵地面投影的**足底接地中心 `(u_foot, v_bottom)`**。修正裁剪中心为 `(ox, oy - 0.5 * h)` 后，避免了头肩先兆区域被截断，使美/意/泰多国监控视频的 `RTMPose-m` 有效关节检出率跃升至 `100%`、平均置信度翻倍（`0.20~0.29 -> 0.47~0.58`）。
 7. **压缩包 `__MACOSX` 字典序抢占与 `JTA` `540p` 尺度校准**（`jta_builder.py`, `cloud_experiment_runner.py`）：过滤 `Social-Transmotion` 归档中的 `__MACOSX` 资源分支，并将 `JTA` 分辨率尺度对齐至发布的 `960x540` 坐标系。
+8. **`PINNS` 短视频分层无泄漏切分与 Turing 双卡推理加速**（`splits.py`, `dataset_builder.py`, `pinns_extractor.py`，`13/13` 单测通过）：针对 `PINNS` 47 段 `20~35s` 短片段内插双隔离带导致末端 `test` 被挤空的实测发现，升级为按 4 处跨国路口的时间序片段比例（`70%/15%/15%`）划分独立视频段 + 跨子集首段起始 `6.0s`（60 帧）时间隔离带 + 仅由 `train` 片段冻结生成静态折线；同时针对 `cuDNN 9.27` 在 `sm_75` 上拒绝 `FusedConv` 的问题，构建 `onnx2torch` 双卡 `Tesla T4` 并行推理（含 `<5e-2` 精度自动对账与 `ORT_ENABLE_BASIC` 兜底）及 `extracted_samples_v1.pt` 缓存。
 
 ---
 
@@ -37,6 +38,6 @@
 
 ## 4. 核心文件索引与当前阶段 (Key Files & Active Stage)
 
-- **核心源码**：`src/data/`（特征/动作/折线/防泄漏切分）、`src/models/`（`M0–M3`、`M1p/M3p`、`Ext-1..3`）、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（12/12 通过）。
-- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（SSH 别名 `github-shortpose`，已开启自动里程碑推送）。
-- **云端执行通道**：Kaggle Notebook `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1`（通过 GitHub 外层直连导入，绕开跨域编辑子帧；`Version #2` 正在 `GPU T4 x2` 双卡后台 Commit 运行 Suites A–E，本机保持零负载）。
+- **核心源码**：`src/data/`（特征/动作/折线/防泄漏切分）、`src/models/`（`M0–M3`、`M1p/M3p`、`Ext-1..3`）、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（13/13 通过）。
+- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（当前最新提交 `c7592de`）。
+- **云端执行通道**：Kaggle Notebook `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1a7fec47764`（`scriptVersionId=373370043`，正在 `GPU T4 x2` 双卡后台 Commit 运行 Suites A–E，本机保持零负载）。
