@@ -22,7 +22,7 @@ These analyses use existing public PINNS recordings. The original 484 training r
 - Reconstructing the archived split produced all 497 windows. The saved M0 checkpoint reproduced its seed-42 cloud ADE/FDE within 0.000001 m. All five history positions are available in every window. Only 233 windows have a labeled position at 3.0 s. The archived FDE uses the last available future position in each window. M0 includes the moving/static target-type input. [Split reconstruction and results](results/pinns_motion_audit.json)
 - In 496 of the 497 archived windows, the same pedestrian had an annotation during the 15 sampling steps before the five-frame input. In the site-held-out cohort, 1,033 of 1,482 inputs followed at least 35 consecutive annotated steps. Three US clips use person frame numbers spanning 0 through the video frame count minus one, while the frozen extractor pairs label 1 with video frame 0. They contribute 597 of the 1,482 windows. [Track history and video index audit](results/pinns_observation_audit.json)
 - On the original split, constant velocity from the final two positions scored 0.5041 m ADE and the explicit pose gate (M1) scored 0.4783 m. The US site contributes 316 of 497 windows and is the only site where M1 improves on constant velocity. Giving all four sites equal weight yields 0.3897 m for constant velocity and 0.4288 m for M1. A paired bootstrap of 21 clips gives a window-weighted M1-minus-constant-velocity difference of −0.0258 m (95% percentile interval −0.1297 to +0.0713 m). [Cluster bootstrap](results/pinns_clip_bootstrap.json)
-- In a separate leave-one-site-out study, each person track contributed disjoint, complete five-history/30-future frame windows. Across 1,482 windows, five-point constant velocity and ridge regression trained on the other three sites had four-site macro ADE of 0.5557 and 0.7189 m. The pose networks still require evaluation with this protocol. [Fold definitions, counts and errors](results/pinns_heldout_sites.json)
+- In a separate leave-one-site-out study, each person track contributed disjoint, complete five-history/30-future frame windows. Across 1,482 windows, five-point constant velocity and ridge regression trained on the other three sites had four-site macro ADE of 0.5557 and 0.7189 m. The neural pilot below uses the same protocol. [Fold definitions, counts and errors](results/pinns_heldout_sites.json)
 
 On the same 1,482 complete windows, extrapolation from the last two observations had lower ADE and FDE at each of the four sites than the five-point fit or the coordinatewise median of four interframe velocities. Four-site macro ADE/FDE was 0.4839/1.1046, 0.5557/1.2103 and 0.5555/1.2104 m respectively. These are descriptive comparisons on previously examined locations. [Per-site and per-clip results](results/pinns_velocity_estimators.json)
 
@@ -60,13 +60,30 @@ python3 -m scripts.count_forward_ops
 
 ### Neural held-out site pilot
 
-With a CUDA runtime and Internet access, run the following from the repository root. The runner verifies both archives, applies frozen RTMPose to the five observed frames, fits M0 and M1 independently on the other three sites, and saves per-window test errors with clip, person and time identifiers. The initial seed is 42 and the final epoch is fixed at 28. Each method uses the same 1,482 windows. The five-point constant-velocity baseline is the primary prespecified reference. The two-point baseline is reported as a separate sensitivity check.
+With a CUDA runtime and Internet access, run the following from the repository root. The runner verifies both archives, applies frozen RTMPose to the five observed frames, fits M0 and M1 independently on the other three sites, and saves per-window test errors with clip, person and time identifiers. The initial seed is 42 and the final epoch is fixed at 28. Each method uses the same 1,482 windows. Before inspecting the neural results, we fixed M1 minus M0 as the primary paired comparison. Five-point and two-point constant velocity are secondary comparisons.
 
 ```bash
 python -m scripts.run_heldout_cloud --scratch-dir /tmp/shortpose_heldout_cache --output-dir /kaggle/working/shortpose_heldout
 ```
 
-The final archive is `shortpose_heldout.zip` in the output directory. On Colab, choose an output path under `/content`. The scratch directory keeps verified downloads and per-clip extraction checkpoints. Reusing the same scratch and output directories resumes completed clips and models.
+The Kaggle pilot completed all eight fits. With equal weight per site, ADE/FDE in metres was 0.5044/1.0896 for motion-only M0, 0.5463/1.1638 for quality-gated pose M1, 0.5557/1.2103 for five-point velocity and 0.4839/1.1046 for two-point velocity. The M1 minus M0 ADE difference was +0.0419 m (within-site clip-bootstrap 95% interval +0.0230 to +0.0620 m). The US site was the only one with a lower mean ADE for M1 than M0. The 47 clips come from four previously examined sites, and the intervals condition on one seed. The verified weights reproduce each window's cloud ADE and FDE on CPU within 0.000003 m. [Checkpoint replay](results/pinns_heldout_replay.json) · [Paired comparisons](results/pinns_heldout_paired.json)
+
+The frozen pose-quality rules assigned 409 windows to clear, 691 to partial and 382 to heavy or low quality. Within each bucket, the four-site mean M1-minus-M0 ADE/FDE differences were +0.0135/+0.0152, +0.0375/+0.0682 and +0.0776/+0.1446 m, respectively. These groups use keypoint availability, confidence and relative box height. The dataset supplied no manual physical occlusion labels for this comparison. [Quality definitions, per-site counts and errors](results/pinns_heldout_pose_quality.json)
+
+Applying the same event rules to annotated and forecast trajectories gave four-site macro-F1/mAP of 0.2376/0.3709 for M0 and 0.2419/0.3795 for M1. These scores describe events implied by six probability-weighted trajectory modes. Neither network trained an action head in this pilot. [Trajectory-implied event scores](results/pinns_heldout_implied_actions.json)
+
+To reproduce the checkpoint verification, run `python -m scripts.verify_heldout_bundle /path/to/shortpose_heldout.zip "$PINNS_ROOT" --output replay.json`. With the archive extracted, run `python -m scripts.analyze_heldout_pairs /path/to/folds "$PINNS_ROOT" --output paired.json`.
+
+The runner writes `shortpose_heldout.zip` to the output directory. The scratch directory keeps verified downloads and per-clip extraction checkpoints. Reusing the same scratch and output directories resumes completed clips and models.
+
+### Five-seed extension
+
+The extension reuses the eight verified seed-42 fits and schedules 32 more across the four sites, two models and seeds 1024, 2025, 3407 and 4096. The reported four-site results above use seed 42. Training requires a CUDA device and the pilot's PyTorch build (`2.11.0+cu130`). Supply the official label/calibration directory with its video inventory, the extracted seed-42 bundle containing `pose.npz` and `folds/`, and a separate writable output directory. The first command verifies the inputs on CPU. The second resumes matching checkpoints and writes `shortpose_heldout_five_seeds.zip` when all 40 fits are present. [Five-seed runner](scripts/run_heldout_seed_sensitivity.py)
+
+```bash
+python -m scripts.run_heldout_seed_sensitivity --data-root "$PINNS_ROOT" --pilot-dir "$PILOT_DIR" --check-only
+python -m scripts.run_heldout_seed_sensitivity --data-root "$PINNS_ROOT" --pilot-dir "$PILOT_DIR" --output-dir "$SEED_OUTPUT_DIR"
+```
 
 ### Test sensitivity to a one-frame image offset
 

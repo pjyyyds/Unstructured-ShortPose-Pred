@@ -1,0 +1,355 @@
+{
+  "source": {
+    "bundle_sha256": "507c0a5decf79a4a48b982987e89c37b8c99e456f5c7f11cc3d49f34bd5741ec",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "training_source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "seed": 42
+  },
+  "protocol": {
+    "cohort": "All 1,482 windows in the four previously examined PINNS sites. Five 10 Hz observations span 0.4 s. Score top-mode ADE over 30 future steps and FDE at 3.0 s, in metres.",
+    "quality_inputs": "Historical RTMPose features. q1 is the valid keypoint fraction (confidence >= 0.20); q2 is mean confidence over valid joints; q3 is mean relative annotated box height.",
+    "proposal_section": "Section 5.3 of the original research proposal, conditions (1) through (3).",
+    "proposal_clear": "q1 >= 0.85 AND q2 >= 0.60 AND q3 >= 0.08",
+    "proposal_partial": "0.50 <= q1 < 0.85 OR (q1 >= 0.85 AND 0.40 <= q2 < 0.60 AND q3 >= 0.04)",
+    "proposal_heavy": "q1 < 0.50 OR q2 < 0.40 OR q3 < 0.04",
+    "archived_assignment": "Use src.data.features.assign_quality_bucket. Clear and heavy are disjoint. Heavy takes priority over literal partial in overlaps. All remaining non-clear, non-heavy windows are assigned partial, including those satisfying no literal rule.",
+    "aggregation": "Equal window weight within each site and bucket. Give all four site means equal weight within each bucket. Paired differences are M1 minus M0; positive means higher M1 error. A clip can contribute windows to multiple buckets.",
+    "interpretation": "Descriptive, conditional on four fixed sites and a single trained seed (42). Windows from a clip can be correlated. The buckets summarize estimated joint quality and image scale. Physical occlusion and blind-spot onset were not annotated in this analysis. No bucket-wise hypothesis test or five-seed inference was performed."
+  },
+  "verification": "Cache IDs and stored fold error rows matched by clip, person and anchor. Frozen bucket counts matched each site report. Window-weighted bucket means reproduced each site's archived M0 and M1 ADE/FDE to an absolute tolerance of 1e-12 m.",
+  "proposal_condition_counts": {
+    "clear": 409,
+    "partial": 759,
+    "heavy": 382,
+    "partial_and_heavy": 158,
+    "none_of_three": 90
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "buckets": {
+        "clear": {
+          "windows": 246,
+          "clips": 14,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.40464614728702447,
+              "fde_m": 0.8989709380075215
+            },
+            "M1": {
+              "ade_m": 0.3919456559128309,
+              "fde_m": 0.867195393373372
+            },
+            "M1_minus_M0": {
+              "ade_m": -0.012700491374193528,
+              "fde_m": -0.03177554463414945
+            }
+          }
+        },
+        "partial": {
+          "windows": 390,
+          "clips": 13,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.7718007915484637,
+              "fde_m": 1.5429856612800787
+            },
+            "M1": {
+              "ade_m": 0.7632690242029784,
+              "fde_m": 1.5244392580997486
+            },
+            "M1_minus_M0": {
+              "ade_m": -0.008531767345485318,
+              "fde_m": -0.018546403180330226
+            }
+          }
+        },
+        "heavy": {
+          "windows": 180,
+          "clips": 11,
+          "errors_m": {
+            "M0": {
+              "ade_m": 1.5159407239161111,
+              "fde_m": 2.734082587932547
+            },
+            "M1": {
+              "ade_m": 1.5156481587925823,
+              "fde_m": 2.737727203209781
+            },
+            "M1_minus_M0": {
+              "ade_m": -0.00029256512352732574,
+              "fde_m": 0.003644615277234051
+            }
+          }
+        }
+      },
+      "proposal_condition_counts": {
+        "clear": 246,
+        "partial": 409,
+        "heavy": 180,
+        "partial_and_heavy": 57,
+        "none_of_three": 38
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "buckets": {
+        "clear": {
+          "windows": 9,
+          "clips": 4,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.2284640761075058,
+              "fde_m": 0.5495493337512016
+            },
+            "M1": {
+              "ade_m": 0.21145995812904503,
+              "fde_m": 0.5006327927112579
+            },
+            "M1_minus_M0": {
+              "ade_m": -0.017004117978460805,
+              "fde_m": -0.048916541039943695
+            }
+          }
+        },
+        "partial": {
+          "windows": 38,
+          "clips": 8,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.4170934751025287,
+              "fde_m": 0.9485341457552031
+            },
+            "M1": {
+              "ade_m": 0.46661011411955494,
+              "fde_m": 1.0204789709103734
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.049516639017026166,
+              "fde_m": 0.07194482515517034
+            }
+          }
+        },
+        "heavy": {
+          "windows": 37,
+          "clips": 7,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.43025027706019314,
+              "fde_m": 1.0568872142482448
+            },
+            "M1": {
+              "ade_m": 0.5536262608019988,
+              "fde_m": 1.2573254350069407
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.12337598374180561,
+              "fde_m": 0.20043822075869586
+            }
+          }
+        }
+      },
+      "proposal_condition_counts": {
+        "clear": 9,
+        "partial": 52,
+        "heavy": 37,
+        "partial_and_heavy": 23,
+        "none_of_three": 9
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "buckets": {
+        "clear": {
+          "windows": 58,
+          "clips": 8,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.3675130605023226,
+              "fde_m": 0.8568605125464243
+            },
+            "M1": {
+              "ade_m": 0.4156133971840742,
+              "fde_m": 0.9216252041274103
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.0481003366817517,
+              "fde_m": 0.06476469158098616
+            }
+          }
+        },
+        "partial": {
+          "windows": 217,
+          "clips": 11,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.42224449198317465,
+              "fde_m": 0.9295880859588972
+            },
+            "M1": {
+              "ade_m": 0.4619071993382777,
+              "fde_m": 1.0080008289266018
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.03966270735510233,
+              "fde_m": 0.07841274296770448
+            }
+          }
+        },
+        "heavy": {
+          "windows": 157,
+          "clips": 11,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.40248832525255346,
+              "fde_m": 0.8990063813936179
+            },
+            "M1": {
+              "ade_m": 0.46698978993241574,
+              "fde_m": 1.0231963260941634
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.06450146467986245,
+              "fde_m": 0.12418994470054556
+            }
+          }
+        }
+      },
+      "proposal_condition_counts": {
+        "clear": 58,
+        "partial": 266,
+        "heavy": 157,
+        "partial_and_heavy": 75,
+        "none_of_three": 26
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "buckets": {
+        "clear": {
+          "windows": 96,
+          "clips": 13,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.4388010467995225,
+              "fde_m": 0.9878363494450847
+            },
+            "M1": {
+              "ade_m": 0.47446947550245855,
+              "fde_m": 1.0644029528387666
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.03566842870293637,
+              "fde_m": 0.07656660339368197
+            }
+          }
+        },
+        "partial": {
+          "windows": 46,
+          "clips": 9,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.2757944725037121,
+              "fde_m": 0.6867462035430514
+            },
+            "M1": {
+              "ade_m": 0.3451624852475251,
+              "fde_m": 0.8277887723044209
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.0693680127438131,
+              "fde_m": 0.14104256876136945
+            }
+          }
+        },
+        "heavy": {
+          "windows": 8,
+          "clips": 4,
+          "errors_m": {
+            "M0": {
+              "ade_m": 0.3126609327776047,
+              "fde_m": 0.7850841879844666
+            },
+            "M1": {
+              "ade_m": 0.43543036959599707,
+              "fde_m": 1.035205714404583
+            },
+            "M1_minus_M0": {
+              "ade_m": 0.12276943681839235,
+              "fde_m": 0.2501215264201164
+            }
+          }
+        }
+      },
+      "proposal_condition_counts": {
+        "clear": 96,
+        "partial": 32,
+        "heavy": 8,
+        "partial_and_heavy": 3,
+        "none_of_three": 17
+      }
+    }
+  },
+  "by_bucket": {
+    "clear": {
+      "windows": 409,
+      "clips": 39,
+      "equal_site_errors_m": {
+        "M0": {
+          "ade_m": 0.3598560826740938,
+          "fde_m": 0.823304283437558
+        },
+        "M1": {
+          "ade_m": 0.37337212168210215,
+          "fde_m": 0.8384640857627017
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.013516039008008435,
+          "fde_m": 0.015159802325143749
+        }
+      }
+    },
+    "partial": {
+      "windows": 691,
+      "clips": 41,
+      "equal_site_errors_m": {
+        "M0": {
+          "ade_m": 0.47173330778446976,
+          "fde_m": 1.0269635241343076
+        },
+        "M1": {
+          "ade_m": 0.5092372057270841,
+          "fde_m": 1.0951769575602863
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.03750389794261407,
+          "fde_m": 0.0682134334259785
+        }
+      }
+    },
+    "heavy": {
+      "windows": 382,
+      "clips": 33,
+      "equal_site_errors_m": {
+        "M0": {
+          "ade_m": 0.6653350647516155,
+          "fde_m": 1.368765092889719
+        },
+        "M1": {
+          "ade_m": 0.7429236447807486,
+          "fde_m": 1.513363669678867
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.07758858002913327,
+          "fde_m": 0.14459857678914798
+        }
+      }
+    }
+  }
+}

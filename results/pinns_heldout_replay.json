@@ -1,0 +1,336 @@
+{
+  "bundle_sha256": "507c0a5decf79a4a48b982987e89c37b8c99e456f5c7f11cc3d49f34bd5741ec",
+  "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "frozen_source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "cpu_torch": "2.10.0",
+  "cpu_error_tolerance": {
+    "atol_m": 0.0002,
+    "rtol": 2e-05
+  },
+  "sites": {
+    "america_crossroad": {
+      "clips": 14,
+      "clips_with_windows": 14,
+      "clip_person_tracks_with_windows": 240,
+      "train_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 666,
+      "test_windows": 816,
+      "coverage": {
+        "history_frames": 4080,
+        "frames_inferred": 4080,
+        "frames_with_any_valid_joint": 4055,
+        "windows_without_valid_joints": 0,
+        "quality_buckets_clear_partial_heavy": [
+          246,
+          390,
+          180
+        ]
+      },
+      "metrics_m": {
+        "constant_velocity": {
+          "ade_m": 1.159872577771962,
+          "fde_m": 2.2980731188769172
+        },
+        "last_two": {
+          "ade_m": 0.9476538962934843,
+          "fde_m": 1.9414660044131353
+        },
+        "M0": {
+          "ade_m": 0.8252629794625107,
+          "fde_m": 1.6115761329374259
+        },
+        "M1": {
+          "ade_m": 0.817291935510273,
+          "fde_m": 1.593936610302098
+        }
+      },
+      "checkpoint_sha256": {
+        "M0": "b58e909e67ce3b94f34cf6c5933d1c75d39184207107cba17da79291bff6a743",
+        "M1": "8ce6d093d1dc34dda0f57da008464f1ca66c9ce7b4638347bfa33111f020026b"
+      },
+      "cpu_vs_cloud_max_abs_m": {
+        "M0": 2.692283796790207e-06,
+        "M1": 2.2706687747842125e-06
+      },
+      "training_devices": {
+        "M0": "Tesla T4",
+        "M1": "Tesla T4"
+      },
+      "network_parameters_sha256": {
+        "M0": "d217db25565052722877516d89d5ca31a1266a70cca7a32dae927dc243deab2e",
+        "M1": "b823931f84d44aa38a1180be216326e2cdbdebd8bceef8d8966b5b4a5394ea38"
+      },
+      "differences_m": {
+        "M0_minus_last_two": {
+          "ade_m": -0.12239091683097358,
+          "fde_m": -0.3298898714757095
+        },
+        "M1_minus_last_two": {
+          "ade_m": -0.13036196078321127,
+          "fde_m": -0.34752939411103734
+        },
+        "M1_minus_M0": {
+          "ade_m": -0.007971043952237689,
+          "fde_m": -0.017639522635327864
+        }
+      }
+    },
+    "italy_park": {
+      "clips": 9,
+      "clips_with_windows": 9,
+      "clip_person_tracks_with_windows": 28,
+      "train_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 1398,
+      "test_windows": 84,
+      "coverage": {
+        "history_frames": 420,
+        "frames_inferred": 420,
+        "frames_with_any_valid_joint": 414,
+        "windows_without_valid_joints": 0,
+        "quality_buckets_clear_partial_heavy": [
+          9,
+          38,
+          37
+        ]
+      },
+      "metrics_m": {
+        "constant_velocity": {
+          "ade_m": 0.40600327404711817,
+          "fde_m": 0.9606783946263748
+        },
+        "last_two": {
+          "ade_m": 0.37034172516347347,
+          "fde_m": 0.9319507406765014
+        },
+        "M0": {
+          "ade_m": 0.4026784403582236,
+          "fde_m": 0.9535127198767095
+        },
+        "M1": {
+          "ade_m": 0.47760113820688616,
+          "fde_m": 1.069106394336337
+        }
+      },
+      "checkpoint_sha256": {
+        "M0": "39bdc069331a19d1480e00ce519ec7d8076ade70ddda75225ff914e75a200e84",
+        "M1": "d73d488a7b37b98d5b2e786a402ca61c3d14c7c35fd00cba3dfd2e57796a832d"
+      },
+      "cpu_vs_cloud_max_abs_m": {
+        "M0": 9.40345870947823e-07,
+        "M1": 1.2881611238801938e-06
+      },
+      "training_devices": {
+        "M0": "Tesla T4",
+        "M1": "Tesla T4"
+      },
+      "network_parameters_sha256": {
+        "M0": "b77fe4373e119839c9290e5f8460823d50b024de86b571c28551b477d1851ff0",
+        "M1": "49d02a06e62c97c9a0ecb434da450411acc863ef48e86e2bee154ebc3ca7647f"
+      },
+      "differences_m": {
+        "M0_minus_last_two": {
+          "ade_m": 0.03233671519475012,
+          "fde_m": 0.02156197920020808
+        },
+        "M1_minus_last_two": {
+          "ade_m": 0.10725941304341269,
+          "fde_m": 0.13715565365983562
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.07492269784866257,
+          "fde_m": 0.11559367445962754
+        }
+      }
+    },
+    "japan_crossroad": {
+      "clips": 11,
+      "clips_with_windows": 11,
+      "clip_person_tracks_with_windows": 117,
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_windows": 1050,
+      "test_windows": 432,
+      "coverage": {
+        "history_frames": 2160,
+        "frames_inferred": 2160,
+        "frames_with_any_valid_joint": 2129,
+        "windows_without_valid_joints": 0,
+        "quality_buckets_clear_partial_heavy": [
+          58,
+          217,
+          157
+        ]
+      },
+      "metrics_m": {
+        "constant_velocity": {
+          "ade_m": 0.3150709672521753,
+          "fde_m": 0.7522684279959283
+        },
+        "last_two": {
+          "ade_m": 0.29374234806948507,
+          "fde_m": 0.718657490277494
+        },
+        "M0": {
+          "ade_m": 0.40771638734753357,
+          "fde_m": 0.9087095515267855
+        },
+        "M1": {
+          "ade_m": 0.4575389729455367,
+          "fde_m": 1.0019265391510326
+        }
+      },
+      "checkpoint_sha256": {
+        "M0": "328c15620a68c7070fe82d0b742f7dfcb01fb22c9011ee022ae832ed249db4f4",
+        "M1": "0a2734ddbc1f5a1208552d0784fba6bc6ff0b56a40875d473295e0fd91fc46a1"
+      },
+      "cpu_vs_cloud_max_abs_m": {
+        "M0": 1.498691678980535e-06,
+        "M1": 1.3160460043959432e-06
+      },
+      "training_devices": {
+        "M0": "Tesla T4",
+        "M1": "Tesla T4"
+      },
+      "network_parameters_sha256": {
+        "M0": "31fac63aa239d0b3975ab0f73ad6d028898f95a67ae569abfa6ae40a3ebbfe0d",
+        "M1": "52245c3319441c73697c70cec4a59ec9d41fcfe20910404d16d08d048b5ff6fb"
+      },
+      "differences_m": {
+        "M0_minus_last_two": {
+          "ade_m": 0.1139740392780485,
+          "fde_m": 0.19005206124929142
+        },
+        "M1_minus_last_two": {
+          "ade_m": 0.16379662487605162,
+          "fde_m": 0.28326904887353854
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.04982258559800312,
+          "fde_m": 0.09321698762424713
+        }
+      }
+    },
+    "thailand_street": {
+      "clips": 13,
+      "clips_with_windows": 13,
+      "clip_person_tracks_with_windows": 64,
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_windows": 1332,
+      "test_windows": 150,
+      "coverage": {
+        "history_frames": 750,
+        "frames_inferred": 750,
+        "frames_with_any_valid_joint": 743,
+        "windows_without_valid_joints": 0,
+        "quality_buckets_clear_partial_heavy": [
+          96,
+          46,
+          8
+        ]
+      },
+      "metrics_m": {
+        "constant_velocity": {
+          "ade_m": 0.3418204841547583,
+          "fde_m": 0.8302816330218525
+        },
+        "last_two": {
+          "ade_m": 0.323757325362731,
+          "fde_m": 0.826159806245917
+        },
+        "M0": {
+          "ade_m": 0.3820848912676382,
+          "fde_m": 0.8846885894238948
+        },
+        "M1": {
+          "ade_m": 0.4327332461759345,
+          "fde_m": 0.9902840847584109
+        }
+      },
+      "checkpoint_sha256": {
+        "M0": "028204da29c49d1c4efd4fa3d071ce40218e77fdc4a4d228c28dd9956721e542",
+        "M1": "aeaf2b9a8ce966c65f22013604a14c051f3116a18ada7c97715782f41ae1452b"
+      },
+      "cpu_vs_cloud_max_abs_m": {
+        "M0": 1.1180410179889577e-06,
+        "M1": 1.2248560210537107e-06
+      },
+      "training_devices": {
+        "M0": "Tesla T4",
+        "M1": "Tesla T4"
+      },
+      "network_parameters_sha256": {
+        "M0": "88a57810a63c61e502f55c142c855f0c52af0dc8c8be8c23f30d643341179972",
+        "M1": "712ce70632c989a6fb0412aeed0b8efcf0a5d649305f6d8ab5621b656144ed5e"
+      },
+      "differences_m": {
+        "M0_minus_last_two": {
+          "ade_m": 0.05832756590490723,
+          "fde_m": 0.05852878317797783
+        },
+        "M1_minus_last_two": {
+          "ade_m": 0.10897592081320351,
+          "fde_m": 0.1641242785124939
+        },
+        "M1_minus_M0": {
+          "ade_m": 0.05064835490829628,
+          "fde_m": 0.10559549533451607
+        }
+      }
+    }
+  },
+  "cloud_torch": "2.11.0+cu130",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "video_digests_checked": 47,
+  "videos_with_reported_digest": 47,
+  "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "differences_m": {
+    "M0_minus_last_two": {
+      "ade_m": 0.020561850886683053,
+      "fde_m": -0.014936761962058176
+    },
+    "M1_minus_last_two": {
+      "ade_m": 0.06241749948736408,
+      "fde_m": 0.05925489673370765
+    },
+    "M1_minus_M0": {
+      "ade_m": 0.04185564860068103,
+      "fde_m": 0.07419165869576583
+    }
+  },
+  "macro_m": {
+    "constant_velocity": {
+      "ade_m": 0.5556918258065034,
+      "fde_m": 1.210325393630268
+    },
+    "last_two": {
+      "ade_m": 0.4838738237222935,
+      "fde_m": 1.104558510403262
+    },
+    "M0": {
+      "ade_m": 0.5044356746089765,
+      "fde_m": 1.0896217484412039
+    },
+    "M1": {
+      "ade_m": 0.5462913232096576,
+      "fde_m": 1.1638134071369697
+    }
+  },
+  "verified_windows": 1482,
+  "verified_checkpoints": 8,
+  "verification": "All saved ADE and FDE rows reproduced by CPU inference from each held-out-site checkpoint. Fold design checked against frozen code, labels and recorded metadata."
+}

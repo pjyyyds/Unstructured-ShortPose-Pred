@@ -1,0 +1,158 @@
+{
+  "protocol": {
+    "primary": "M1 minus M0. Negative differences favor M1.",
+    "secondary": "M1 minus five-point least-squares velocity; M1 minus last-two-point velocity.",
+    "metrics": "Top-mode 30-step ADE and final-step FDE, in metres. Equal window weight within each site, then equal weight across the four sites.",
+    "bootstrap": "For each replicate, sample with replacement the original number of complete clips independently within each fixed site. Use the same sampled clips for paired models and both metrics. Include all windows in each selected clip, then average the four site means equally.",
+    "seed": 2026,
+    "replicates": 20000,
+    "rng": "NumPy PCG64",
+    "interval": "Marginal 2.5th and 97.5th percentiles, linear interpolation; no multiplicity adjustment. Intervals are for the primary comparison only.",
+    "scope": "Post-hoc analysis of four fixed, previously seen locations with one fitted seed (42). Assumes approximate independence between clips within a location. Conditional on these fits, the intervals exclude training-seed, retraining and new-site variation."
+  },
+  "verification": {
+    "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "pose_cache_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "windows": 1482,
+    "velocity_check": "Five-point errors matched the cloud fold for every key. Five- and two-point ADE and FDE matched the prior clip and site summaries to 1e-10 m."
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "m1_minus_reference_m": {
+        "M0": {
+          "ade_m": -0.007971043952237506,
+          "fde_m": -0.017639522635327726
+        },
+        "ols_five": {
+          "ade_m": -0.3425806422616891,
+          "fde_m": -0.7041365085748191
+        },
+        "last_two": {
+          "ade_m": -0.13036196078321285,
+          "fde_m": -0.3475293941110393
+        }
+      },
+      "m1_minus_m0_percentile_95_m": {
+        "ade_m": [
+          -0.01913932308720363,
+          0.007258895232507651
+        ],
+        "fde_m": [
+          -0.04006267076231618,
+          0.010288123564302152
+        ]
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "m1_minus_reference_m": {
+        "M0": {
+          "ade_m": 0.07492269784866255,
+          "fde_m": 0.11559367445962769
+        },
+        "ols_five": {
+          "ade_m": 0.07159786415976797,
+          "fde_m": 0.10842799970996296
+        },
+        "last_two": {
+          "ade_m": 0.10725941304341283,
+          "fde_m": 0.13715565365983534
+        }
+      },
+      "m1_minus_m0_percentile_95_m": {
+        "ade_m": [
+          0.02462798858711475,
+          0.1317461366375685
+        ],
+        "fde_m": [
+          0.02191163508896716,
+          0.23332439525795332
+        ]
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "m1_minus_reference_m": {
+        "M0": {
+          "ade_m": 0.04982258559800276,
+          "fde_m": 0.09321698762424704
+        },
+        "ols_five": {
+          "ade_m": 0.14246800569336135,
+          "fde_m": 0.24965811115510406
+        },
+        "last_two": {
+          "ade_m": 0.16379662487605137,
+          "fde_m": 0.28326904887353827
+        }
+      },
+      "m1_minus_m0_percentile_95_m": {
+        "ade_m": [
+          0.004058711322319073,
+          0.09829979008795398
+        ],
+        "fde_m": [
+          -0.006030931969742439,
+          0.20134259023544845
+        ]
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "m1_minus_reference_m": {
+        "M0": {
+          "ade_m": 0.05064835490829623,
+          "fde_m": 0.10559549533451597
+        },
+        "ols_five": {
+          "ade_m": 0.0909127620211763,
+          "fde_m": 0.16000245173655794
+        },
+        "last_two": {
+          "ade_m": 0.10897592081320323,
+          "fde_m": 0.16412427851249453
+        }
+      },
+      "m1_minus_m0_percentile_95_m": {
+        "ade_m": [
+          0.014789068533691573,
+          0.08179529420707572
+        ],
+        "fde_m": [
+          0.028507972181675844,
+          0.17024278757816796
+        ]
+      }
+    }
+  },
+  "equal_site_m1_minus_reference_m": {
+    "M0": {
+      "ade_m": 0.04185564860068101,
+      "fde_m": 0.07419165869576574
+    },
+    "ols_five": {
+      "ade_m": -0.009400502596845866,
+      "fde_m": -0.04651198649329854
+    },
+    "last_two": {
+      "ade_m": 0.062417499487363644,
+      "fde_m": 0.059254896733707214
+    }
+  },
+  "equal_site_m1_minus_m0_percentile_95_m": {
+    "ade_m": [
+      0.022976412428581217,
+      0.06204274172941365
+    ],
+    "fde_m": [
+      0.035503681895703534,
+      0.11712783667165765
+    ]
+  }
+}
