@@ -1,0 +1,155 @@
+{
+  "scope": "All 1,482 original complete five-observation, 30-future PINNS trajectories. Reflection applied to every relative Y coordinate with X unchanged; a per-scene constant translation cancels in the anchored tracks.",
+  "original_cache_sha256": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+  "input_cache_sha256": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+  "analysis_field_sha256": "96dd49a25b07a6f6a1064218b107341186a7a821b9b0321ad88514eff696474c",
+  "original_zip_bytes_matched": true,
+  "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "action_rules_sha256": "4b1300c579377a6013355fb6920779ef56972781dd1b548a19f9f8f940af7646",
+  "verifier_sha256": "151ca4243ac753276cc827e7ce7f57011b0a1414b4c0f71c5e9fbcf4f835d481",
+  "numpy": "2.0.2",
+  "conditions_with_declared_u_x_v_minus_y": 22,
+  "clips_source_relative_trajectory_verified": 47,
+  "original_positions_replayed": 51870,
+  "interpretation": "The original left/right fields index positive/negative signed changes in the stored metric XY axes. In declared BEV axes +X right/+Y up the signed classes exchange. This is a planar coordinate convention audit; the records do not independently validate anatomical or physical turn labels, image mirroring or camera heading.",
+  "earliest_rule": "Three sustained future samples to reach each sign. Preserve earliest eligible tick across moving segments; the frozen code favors its positive sign on an exact tie. Both trigger times checked even when only the first is emitted.",
+  "results": {
+    "pooled": {
+      "windows": 1482,
+      "raw": {
+        "start": 49,
+        "stop": 53,
+        "positive_heading_change": 214,
+        "negative_heading_change": 208,
+        "maintain": 975
+      },
+      "declared_bev": {
+        "start": 49,
+        "stop": 53,
+        "positive_heading_change": 208,
+        "negative_heading_change": 214,
+        "maintain": 975
+      },
+      "unchanged_entire_vector": 1060,
+      "changed_entire_vector": 422,
+      "mismatched_after_swapping_turn_columns": 0,
+      "start_stop_maintain_changed": 0,
+      "multiple_labels": 17,
+      "both_signed_turn_thresholds_sustained": 28,
+      "same_earliest_tick_for_two_signs": 0,
+      "raw_positive_first_when_both": 16,
+      "raw_negative_first_when_both": 12,
+      "first_sustained_tick_of_either_sign_fails_exchange": 0
+    },
+    "by_site": {
+      "america_crossroad": {
+        "windows": 816,
+        "raw": {
+          "start": 27,
+          "stop": 35,
+          "positive_heading_change": 152,
+          "negative_heading_change": 156,
+          "maintain": 458
+        },
+        "declared_bev": {
+          "start": 27,
+          "stop": 35,
+          "positive_heading_change": 156,
+          "negative_heading_change": 152,
+          "maintain": 458
+        },
+        "unchanged_entire_vector": 508,
+        "changed_entire_vector": 308,
+        "mismatched_after_swapping_turn_columns": 0,
+        "start_stop_maintain_changed": 0,
+        "multiple_labels": 12,
+        "both_signed_turn_thresholds_sustained": 28,
+        "same_earliest_tick_for_two_signs": 0,
+        "raw_positive_first_when_both": 16,
+        "raw_negative_first_when_both": 12,
+        "first_sustained_tick_of_either_sign_fails_exchange": 0
+      },
+      "italy_park": {
+        "windows": 84,
+        "raw": {
+          "start": 8,
+          "stop": 3,
+          "positive_heading_change": 4,
+          "negative_heading_change": 13,
+          "maintain": 57
+        },
+        "declared_bev": {
+          "start": 8,
+          "stop": 3,
+          "positive_heading_change": 13,
+          "negative_heading_change": 4,
+          "maintain": 57
+        },
+        "unchanged_entire_vector": 67,
+        "changed_entire_vector": 17,
+        "mismatched_after_swapping_turn_columns": 0,
+        "start_stop_maintain_changed": 0,
+        "multiple_labels": 1,
+        "both_signed_turn_thresholds_sustained": 0,
+        "same_earliest_tick_for_two_signs": 0,
+        "raw_positive_first_when_both": 0,
+        "raw_negative_first_when_both": 0,
+        "first_sustained_tick_of_either_sign_fails_exchange": 0
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "raw": {
+          "start": 12,
+          "stop": 12,
+          "positive_heading_change": 45,
+          "negative_heading_change": 31,
+          "maintain": 336
+        },
+        "declared_bev": {
+          "start": 12,
+          "stop": 12,
+          "positive_heading_change": 31,
+          "negative_heading_change": 45,
+          "maintain": 336
+        },
+        "unchanged_entire_vector": 356,
+        "changed_entire_vector": 76,
+        "mismatched_after_swapping_turn_columns": 0,
+        "start_stop_maintain_changed": 0,
+        "multiple_labels": 4,
+        "both_signed_turn_thresholds_sustained": 0,
+        "same_earliest_tick_for_two_signs": 0,
+        "raw_positive_first_when_both": 0,
+        "raw_negative_first_when_both": 0,
+        "first_sustained_tick_of_either_sign_fails_exchange": 0
+      },
+      "thailand_street": {
+        "windows": 150,
+        "raw": {
+          "start": 2,
+          "stop": 3,
+          "positive_heading_change": 13,
+          "negative_heading_change": 8,
+          "maintain": 124
+        },
+        "declared_bev": {
+          "start": 2,
+          "stop": 3,
+          "positive_heading_change": 8,
+          "negative_heading_change": 13,
+          "maintain": 124
+        },
+        "unchanged_entire_vector": 129,
+        "changed_entire_vector": 21,
+        "mismatched_after_swapping_turn_columns": 0,
+        "start_stop_maintain_changed": 0,
+        "multiple_labels": 0,
+        "both_signed_turn_thresholds_sustained": 0,
+        "same_earliest_tick_for_two_signs": 0,
+        "raw_positive_first_when_both": 0,
+        "raw_negative_first_when_both": 0,
+        "first_sustained_tick_of_either_sign_fails_exchange": 0
+      }
+    }
+  }
+}

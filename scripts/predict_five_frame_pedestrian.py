@@ -83,6 +83,23 @@ def unpack_model(checkpoint):
     return model.eval(), family, site, use_pose, use_head
 
 
+def action_coordinate_convention():
+    """Describe the turn labels used to supervise the registered PINNS checkpoints."""
+    return {
+        "heading_change": "Change in unwrapped atan2(v_y, v_x) of smoothed ground velocity from the start of a moving segment.",
+        "archived_turn_sign": {"Turn-Left": "positive", "Turn-Right": "negative"},
+        "pinns_calibration": {
+            "u_axis": "x", "v_axis": "-y",
+            "archived_displacement_in_declared_bev_axes": "[dx, -dy]",
+        },
+        "interpretation": (
+            "Reflecting Y reverses the signed heading change of the same path. Forecast paths use "
+            "the supplied ground axes. A pedestrian's physical left or right requires independent "
+            "confirmation of ground-axis orientation and direction of travel."
+        ),
+    }
+
+
 @torch.inference_mode()
 def forecast(checkpoint, observation):
     model, family, site, use_pose, use_head = unpack_model(checkpoint)
@@ -100,6 +117,7 @@ def forecast(checkpoint, observation):
         "decision_time_s": float(decision_time),
         "forecast_offsets_s": np.round(steps * DT, 3).tolist(),
         "ground_origin_m": world[-1].tolist(),
+        "action_coordinate_convention": action_coordinate_convention(),
         "top_mode_zero_based": int(probability.argmax()),
         "mode_probabilities": probability.tolist(),
         "trajectories_ground_xy_m": (relative + world[-1]).tolist(),

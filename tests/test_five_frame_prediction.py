@@ -4,7 +4,9 @@ import unittest
 import numpy as np
 import torch
 
-from scripts.predict_five_frame_pedestrian import forecast, observation_inputs
+from scripts.predict_five_frame_pedestrian import action_coordinate_convention, forecast, observation_inputs
+from src.data.actions import compute_action_labels
+from src.data.constants import ACTION_NAMES
 from reviews.pinns_individual_actions.run_individual_joint_actions import model_for
 
 
@@ -22,6 +24,18 @@ class FiveFramePredictionTests(unittest.TestCase):
         np.testing.assert_allclose(batch["x_m"][0, -1, :5], [0, 0, 1, 0, 1])
         self.assertEqual(float(batch["q_vec"][0, 0]), 0.)
         self.assertEqual(int(batch["ego_type_oh"].argmax()), 0)
+
+    def test_archived_turn_names_follow_signed_heading_and_reflect_with_y(self):
+        hist = np.column_stack([np.arange(5) * 0.1, np.zeros(5)])
+        future = hist[-1] + np.column_stack([np.zeros(30), np.arange(1, 31) * 0.1])
+        convention = action_coordinate_convention()
+        self.assertEqual(convention["pinns_calibration"], {
+            "u_axis": "x", "v_axis": "-y", "archived_displacement_in_declared_bev_axes": "[dx, -dy]"})
+        for y_sign, expected in [(1, "positive"), (-1, "negative")]:
+            bits, valid = compute_action_labels(hist, np.ones(5), future * [1, y_sign], np.ones(30))
+            self.assertEqual(valid, 1)
+            self.assertEqual(bits.sum(), 1)
+            self.assertEqual(convention["archived_turn_sign"][ACTION_NAMES[bits.argmax()]], expected)
 
     def test_reject_irregular_observations_and_invalid_boxes(self):
         sample = observation()
@@ -45,6 +59,7 @@ class FiveFramePredictionTests(unittest.TestCase):
         with torch.inference_mode():
             raw = train_model(batch)
         decoded = forecast(state, sample)
+        self.assertEqual(decoded["action_coordinate_convention"], action_coordinate_convention())
         np.testing.assert_allclose(decoded["trajectories_ground_xy_m"], raw["trajs"][0].numpy() + world[-1])
         np.testing.assert_array_equal(decoded["mode_probabilities"], raw["mode_probs"][0].numpy())
         np.testing.assert_array_equal(list(decoded["observable_action_probabilities"].values()),

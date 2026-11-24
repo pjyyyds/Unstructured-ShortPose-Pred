@@ -1,0 +1,144 @@
+{
+  "variant": "source_label_sync_v2",
+  "files_sha256": {
+    "pinns_sync_latency_source_label_private.bin": "ab7308ab016d0cad05bbecc268d0fad1e11ca1cbe2cf066be6e01dea07465ecb",
+    "01_PINNS_source_label_sync_latency.ipynb": "8fd3bf69d6aaf0b2fca720153492af83204eb6832bfbcf9fb23622eac69af787",
+    "02_PINNS_source_label_pose_ab.ipynb": "9080824aa15a4fdc2ead2a9579c3b8c55772ae9a9fd7b5e85347b3e360c03a9f",
+    "measure_latency.py": "8409a475f81d494a023aa6c341c8b4d4b7c3150c500cb8aadebba148c8ea8084",
+    "paired_pose_compute.py": "83c07be96784fc237227b2f29c330b002b81adda7a65283e26ea216f4c2dd478",
+    "pose_inference.py": "3059a50208a07b76294f763f500c1043fce638b4902657380e9a6aa5188bfe23",
+    "sync/protocol.json": "933949fa5a8df237f785027499a18da55bb43966d4191dfc16d4c2d30fa51bda",
+    "sync/sync_T5.npz": "8fbaa403d60e7cb644098edf8f1dde841a41225b44c41b67d6f760cf720a269e",
+    "sync/sync_T10.npz": "da1bcbcf24c796b51e76c388ef3ca82fd2caed31fa669d70ea0832079c8e4890",
+    "sync/sync_T20.npz": "bb457bf8bd8606439eeb22ed6638b3e4a0ac439e32a1f91257df0d274cda59c7"
+  },
+  "freeze": {
+    "original_latency_package_sha256": "2e4646ca4bf54fcfb2c714fe79f4da7d938a9992181716b3f31d131a92a8e339",
+    "original_paired_notebook_sha256": "94b86d434b08f9273a20ed70cd9b39c3f087301ef30fb20d1a7303d58389cf0d",
+    "original_public_latency_runner_sha256": "5de7c4993380ced7341bc04e4667a51fb7d4d81ce12c5296dac4e7b8df464e61",
+    "original_public_paired_runner_sha256": "7d7e5ea3a0f778369fbacc765f4ea2adcea2e78de790add80dd3c62677c49774",
+    "model_sha256": "5069c5be520f2308dd190c01cd68427ba8bdb321d405fc963f5436e911d30689"
+  },
+  "input_provenance": {
+    "files_sha256": {
+      "sync_T5.npz": "8fbaa403d60e7cb644098edf8f1dde841a41225b44c41b67d6f760cf720a269e",
+      "sync_T10.npz": "da1bcbcf24c796b51e76c388ef3ca82fd2caed31fa669d70ea0832079c8e4890",
+      "sync_T20.npz": "bb457bf8bd8606439eeb22ed6638b3e4a0ac439e32a1f91257df0d274cda59c7"
+    },
+    "checkpoint": "checkpoints/PINNS_T5_Ours_Full_seed42.pt",
+    "checkpoint_sha256": "5069c5be520f2308dd190c01cd68427ba8bdb321d405fc963f5436e911d30689",
+    "matched_inputs_sha256": "59e59e3dfa6a2b5583ce4c3fbcb010866e793a3595e43cf691dbefbfcddc64f1",
+    "original_pose_member_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "source_files_sha256": {
+      "videos/america_crossroad_summer_nightfall_sunny/calib.json": "36c5f559ecc24af39d4117e9124cdf22f2298293ab96da737dc20d5cf73ba634",
+      "labels/america_crossroad_summer_nightfall_sunny_1.txt": "1111a8496fed32d93a3a66aeb9dbf01dabdb1d56dfc44dd4cce5b47587648567",
+      "videos/america_crossroad_summer_nightfall_sunny/videos/bev_1.mp4": "b57e0a56cb76fab74b9c56453de1e9e8f23dc26fe6e53ac8c3bec4ba953ae931",
+      "videos/japan_crossroad_winter_daytime_sunny/calib.json": "ac96e6926671e5f51932f4205f2dc167dcbe8b78da1e23c936b9de885da10f98",
+      "labels/japan_crossroad_winter_daytime_sunny_1.txt": "db216b16e8407aa2695ed74842060c1f14536b26d82323859681705af7b7609a",
+      "videos/japan_crossroad_winter_daytime_sunny/videos/bev_1.mp4": "a65870f7e7b5dc1833c690297239145314ea47800e9861660dc24dc407dbbc1a"
+    },
+    "scene_support": [
+      {
+        "site": "america_crossroad",
+        "targets": 12,
+        "scene_contours": 10,
+        "neighbor_slots": 100,
+        "car_slots": 0,
+        "map_rows_with_points": 12
+      },
+      {
+        "site": "japan_crossroad",
+        "targets": 12,
+        "scene_contours": 10,
+        "neighbor_slots": 124,
+        "car_slots": 0,
+        "map_rows_with_points": 12
+      }
+    ],
+    "original_roster_qualifying_camera_ticks_by_minimum_targets": {
+      "1": 753,
+      "4": 83,
+      "8": 26,
+      "12": 6
+    },
+    "matched_roster_qualifying_camera_ticks_by_minimum_targets": {
+      "1": 349,
+      "4": 35,
+      "8": 11,
+      "12": 2
+    },
+    "scope": "Use every matched-roster camera tick with at least 12 distinct targets. The source roster required complete future labels for the prior forecasting study. Timed inputs contain only measurements up to each decision, with the same people across histories. Person ID orders a nested subset at each target count. No sample of future trajectories is timed.",
+    "clock": "Nominal 10 Hz source label grid subsampled from 30 fps. The original extractor's possible one-video-frame offset for some US clips remains. The source clock is common to all targets in a scene.",
+    "pose": "PINNS annotated boxes and original frozen RTMPose. Joint confidence and missingness are retained. Last-five-frame keypoints and boxes match the separate original cache exactly.",
+    "map": "Image Canny contours from each clip's own frame zero. BEV u/W and v/H are scaled into released raw tracking axes, then the actual loader's handedness flag is applied. A fresh 20 m radius selection and arclength resampling are done per person. Image edges have unverified road semantics.",
+    "neighbors": "Up to 12 nearest original typed Person/Car records within 10 m per target. Relative displacement, velocity and observation fractions use the latest five measured ground ticks for all history-length comparisons. Includes observed background actors outside the timed batch.",
+    "timing_scope": "The real full-model input tensors can be loaded before timing. This fixture does not measure image decoding, tracking, pose or map extraction, feature transfer, or a new device.",
+    "version": "source_label_sync_v2",
+    "parent": {
+      "private_bundle_sha256": "362efbaa576340495749b0820f398d768b82e000e714492265b91183ef061873",
+      "protocol_sha256": "b3f33a5b8a4216fb4240d4b3412145315a510d0bd4eaad21cce542de7137f52c",
+      "files_sha256": {
+        "sync_T5.npz": "f7a3205beb48279ec7b90941e4b9ac48211f5f2cafa530cd22e1321176b103e2",
+        "sync_T10.npz": "e3639b14c779b87f87e8b1a50d847735b7144df13400dffca5d578054a905681",
+        "sync_T20.npz": "95ff277dcd06253e30d7e70d97d2a0f219155a216d3fb9cd4085f69a6eb9996b"
+      }
+    },
+    "map_correction": {
+      "source_implementation": "src/data/pinns_bev.py",
+      "converter_sha256": "c481af901ce4f0ac2176df515c65993e5e70ae330d93991b3d464e8fec58e532",
+      "preparation_sha256": "2ceb29a38438a2818eba929bfb334f375511de1dea0a010a0de47cb9f717a76e",
+      "opencv": "5.1.0",
+      "numpy": "2.5.5",
+      "untouched_fields_bytewise_per_duration": [
+        "clip",
+        "ego_type_oh",
+        "nbr_edges",
+        "nbr_mask",
+        "nbr_type_oh",
+        "person_id",
+        "q_part",
+        "q_vec",
+        "site",
+        "t0",
+        "x_m",
+        "x_p"
+      ],
+      "untouched_field_count": 12,
+      "old_local_map_exact_from_raw_first_frame": true,
+      "m_map_exact_as_parent": true,
+      "scene_comparison": [
+        {
+          "site": "america_crossroad",
+          "targets": 12,
+          "raw_map_frame": 0,
+          "source_bgr_frame_sha256": "aac01b667e65e04a808aa6f985bd1c2872eaa1d81119c5966d152eb35f2d2b98",
+          "camera_handedness_flip": false,
+          "scene_pixel_contours": 10,
+          "old_slots": 66,
+          "source_label_slots": 102,
+          "new_slot_memberships": 38,
+          "removed_slot_memberships": 2,
+          "people_with_different_set": 12,
+          "people_with_different_order_or_set": 12,
+          "people_with_changed_map": 12
+        },
+        {
+          "site": "japan_crossroad",
+          "targets": 12,
+          "raw_map_frame": 0,
+          "source_bgr_frame_sha256": "40af5d232ce431394cc2c88dd6582e77c8c519109bfd543afb256265c8dd461f",
+          "camera_handedness_flip": false,
+          "scene_pixel_contours": 10,
+          "old_slots": 108,
+          "source_label_slots": 102,
+          "new_slot_memberships": 4,
+          "removed_slot_memberships": 10,
+          "people_with_different_set": 5,
+          "people_with_different_order_or_set": 11,
+          "people_with_changed_map": 12
+        }
+      ]
+    }
+  },
+  "scope": "Two scenes, 24 people, 3 durations and 72 timed loads. Source-label map units fixed. No real forward or timing at package preparation."
+}

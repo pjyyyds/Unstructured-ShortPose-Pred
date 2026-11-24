@@ -1,0 +1,40 @@
+{
+  "scope": "History-only map availability on the original fixed development windows; no corrected real-prediction score is included.",
+  "registered_protocol": "75bde74",
+  "input_lock_sha256": "a34a48d26cfa9bf5bef560f85e674f3918b1b9c71c686b8b792b13fe82028c60",
+  "splits": {
+    "train": {
+      "windows": 5686,
+      "training_reference": 3499,
+      "independent_occupancy": 3438,
+      "image_old_only": 0,
+      "image_new_only": 0,
+      "image_both": 3499,
+      "image_neither": 2187,
+      "without_image_geometry_old": 2187,
+      "without_image_geometry_new": 2187
+    },
+    "val": {
+      "windows": 1100,
+      "training_reference": 965,
+      "independent_occupancy": 937,
+      "image_old_only": 0,
+      "image_new_only": 16,
+      "image_both": 949,
+      "image_neither": 135,
+      "without_image_geometry_old": 151,
+      "without_image_geometry_new": 135
+    },
+    "test": {
+      "windows": 497,
+      "training_reference": 461,
+      "independent_occupancy": 446,
+      "image_old_only": 0,
+      "image_new_only": 11,
+      "image_both": 450,
+      "image_neither": 36,
+      "without_image_geometry_old": 47,
+      "without_image_geometry_new": 36
+    }
+  }
+}

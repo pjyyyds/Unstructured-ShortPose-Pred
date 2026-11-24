@@ -1,0 +1,17 @@
+{
+  "private_input_sha256": "db2526c98236e04a2469d5419baed6e7316bebeba92ecc828ede6938ea82928c",
+  "member_sha256": {
+    "legacy_raster/manifest.json": "f4652973442957e8c99357cb455a0585660e3692a4106a76ea1f86367cf52d2b",
+    "legacy_raster/maps.npz": "47453819b0542cefadb0122685d5a45876596191c21d0a855d35d596c8ee8fe7",
+    "legacy_replay.npz": "af471b7be832e47b74eee0d4232b15cba177393262468cf06166eabaed90cc7e",
+    "source_label/manifest.json": "7c260c2490f49ecf2eba7bfdf12610a17c8862d6ac20e853a3c8980617c12270",
+    "source_label/maps.npz": "0d4abbe1ac37e4d6974601c40ad65fd3bcaf60b81b4bdca63878925657a32150"
+  },
+  "original_input_archive_sha256": "eee02923ce3e2aec28f62e66e8d5580097bd65c22b2584721f2e1b03b68b9517",
+  "original_return_archive_sha256": "093a4d1901fe392e9181897287b86cddf686bd46d1a063a706c733cf7ca58fda",
+  "map_array_sha256": {
+    "legacy_raster": "2b1873f056dfba34b79fd939da4cf6aa89c352d0d11f78988068072db14b5e90",
+    "source_label": "5ccfd4104fba191376899d74adcfc04b683af022c3ca70f74b5bbbc4ba07da1a"
+  },
+  "title": "Historical map convention and source-label axis correction; original archive remains immutable."
+}
