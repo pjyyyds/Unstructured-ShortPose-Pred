@@ -1,0 +1,307 @@
+{
+  "name": "Same-cohort five-frame 2D geometry ridge and permutation-blind heldout replay",
+  "source": {
+    "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_key_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "frozen_neural_source_and_reader_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "script_sha256": {
+      "scripts/evaluate_pinns_action_probes.py": "24e5a51d8679bccb193dd1e5260cd6c73d3dc8487f5e8f0ef559fb815c056fce",
+      "scripts/analyze_heldout_pairs.py": "d082666cdd7e50d6c32e938ca4f8366754a15209a4c8f9073a84567ceeb0a047",
+      "scripts/compare_pinns_velocity_estimators.py": "3324fc51e3961286aa9b46f46e08c4a556801c1959b496d3e253d4d0681d22ff",
+      "scripts/evaluate_pinns_pose_residuals.py": "930c255b240233dad3dab6cba6d9448443f681436c03669a64bed488af84a6f6"
+    }
+  },
+  "legacy_public_sha256": "46b2ffb04936701fa658220791202b4ca6b2c5e3ba512686183b0a44df4ad4f4",
+  "driver_sha256": "cb867c184f7516379fa432aa9e1f2c8b562c90d0fc4e19324cbdf2c4c3026ee2",
+  "geometry_sha256": "d6fb6c8140993b2d2b8e020378301bda57497b8bfff4d43d7d2f2087028e32db",
+  "keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "source_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "5138c8d34313d2443dd2501d41024793983973d75facc9d4aabbd13fbe33a19c",
+      "test_keys_sha256": "fe925bd2b94e094d8e75f407d5a87e9d1a9ebe575e7a49f6e8e415388c7157fb",
+      "published_training_only_multiplier": 0.125,
+      "history_support": {
+        "windows": 816,
+        "valid_frames_by_descriptor": [
+          3929,
+          3716,
+          3722,
+          3917,
+          3744,
+          3744
+        ],
+        "valid_last_by_descriptor": [
+          788,
+          741,
+          744,
+          790,
+          749,
+          749
+        ],
+        "valid_all_five_by_descriptor": [
+          757,
+          670,
+          668,
+          740,
+          678,
+          678
+        ],
+        "joint_support_complete_windows": 654,
+        "any_complete_descriptor_windows": 774,
+        "different_step_values_by_descriptor": [
+          756,
+          670,
+          667,
+          740,
+          678,
+          678
+        ],
+        "windows_where_permutation_can_change_features": 774
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "source_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "9743e797dc3c21844379d1fd777a7d55f5425d9c56848c8fbcd207e5185aeb18",
+      "test_keys_sha256": "d1a55cb06eb6603487ef357dd43ef27c0679c30af6c05b0feb5e7a3799d07ec5",
+      "published_training_only_multiplier": 0.25,
+      "history_support": {
+        "windows": 84,
+        "valid_frames_by_descriptor": [
+          337,
+          294,
+          296,
+          368,
+          307,
+          307
+        ],
+        "valid_last_by_descriptor": [
+          66,
+          57,
+          59,
+          73,
+          61,
+          61
+        ],
+        "valid_all_five_by_descriptor": [
+          61,
+          48,
+          49,
+          60,
+          48,
+          48
+        ],
+        "joint_support_complete_windows": 47,
+        "any_complete_descriptor_windows": 70,
+        "different_step_values_by_descriptor": [
+          61,
+          48,
+          49,
+          60,
+          48,
+          48
+        ],
+        "windows_where_permutation_can_change_features": 70
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "source_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "c53cab0ed205f9ad582163021f92583e0652a6b18eac5d599cf165033ca124ae",
+      "test_keys_sha256": "dd4cf28d80d4f42b4d9bcfbb6d6e6f2870e5ca6a1eb621454f0830f082fe6f20",
+      "published_training_only_multiplier": 0.125,
+      "history_support": {
+        "windows": 432,
+        "valid_frames_by_descriptor": [
+          2019,
+          1737,
+          1752,
+          1919,
+          1756,
+          1756
+        ],
+        "valid_last_by_descriptor": [
+          403,
+          352,
+          351,
+          383,
+          353,
+          353
+        ],
+        "valid_all_five_by_descriptor": [
+          368,
+          299,
+          299,
+          332,
+          302,
+          302
+        ],
+        "joint_support_complete_windows": 287,
+        "any_complete_descriptor_windows": 380,
+        "different_step_values_by_descriptor": [
+          368,
+          299,
+          299,
+          331,
+          302,
+          302
+        ],
+        "windows_where_permutation_can_change_features": 380
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "source_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_keys_sha256": "d6a1b03ba46fcbfad203c85152320ac11eeb3b7b26402eec5f8142708da28fd5",
+      "test_keys_sha256": "96a8494222d1d7e9c5f3bc3720793614d8bbbab1bd3e98dad9c5dc0ebfd5a734",
+      "published_training_only_multiplier": 0.125,
+      "history_support": {
+        "windows": 150,
+        "valid_frames_by_descriptor": [
+          731,
+          716,
+          718,
+          727,
+          717,
+          717
+        ],
+        "valid_last_by_descriptor": [
+          147,
+          145,
+          145,
+          145,
+          145,
+          145
+        ],
+        "valid_all_five_by_descriptor": [
+          145,
+          140,
+          140,
+          141,
+          139,
+          139
+        ],
+        "joint_support_complete_windows": 139,
+        "any_complete_descriptor_windows": 145,
+        "different_step_values_by_descriptor": [
+          145,
+          140,
+          140,
+          141,
+          139,
+          139
+        ],
+        "windows_where_permutation_can_change_features": 145
+      }
+    }
+  },
+  "geometry_names": [
+    "ankle_distance",
+    "left_knee_cosine",
+    "right_knee_cosine",
+    "shoulder_width",
+    "torso_offset_x",
+    "torso_height_y"
+  ],
+  "geometry_definition": "Ankle distance, left/right internal knee cosines, shoulder width, midpoint shoulders minus hips signed x and hips minus shoulders signed y. Euclidean distances/offsets are normalized by each measured box height. Cosine requires both projected segment lengths >1e-6 box heights. All constituent joints finite with confidence>=0.20 and box height>1. No 3D or heading inference from images.",
+  "prior_comparison": "Published 28/79/283-dimensional linear motion/final raw joints/ordered joint-delta models; new six handcrafted image-space geometry values include nonlinear distances and cosine operations. This specifies a new representation, not new observations or independent sites.",
+  "dimensions": {
+    "motion": 28,
+    "common": 46,
+    "static_and_dynamic": 70,
+    "transition_slots": 4,
+    "geometry_per_slot": 6
+  },
+  "support_overall": {
+    "windows": 1482,
+    "valid_frames_by_descriptor": [
+      7016,
+      6463,
+      6488,
+      6931,
+      6524,
+      6524
+    ],
+    "valid_last_by_descriptor": [
+      1404,
+      1295,
+      1299,
+      1391,
+      1308,
+      1308
+    ],
+    "valid_all_five_by_descriptor": [
+      1331,
+      1157,
+      1156,
+      1273,
+      1167,
+      1167
+    ],
+    "joint_support_complete_windows": 1127,
+    "any_complete_descriptor_windows": 1369,
+    "different_step_values_by_descriptor": [
+      1330,
+      1157,
+      1155,
+      1272,
+      1167,
+      1167
+    ],
+    "windows_where_permutation_can_change_features": 1369
+  },
+  "common_inputs": "28 historical heading-aligned motion features; six final geometry values, six terminal-valid flags, six all-five-common masks (same in all geometry arms). Static model sees these shared historical availability flags; earlier geometry values are unavailable to it. Invalids zero, no interpolation.",
+  "contrast": "Same ridge and 70 columns: final geometry + zeroed 24 dynamic slots vs final geometry + four signed adjacent changes of descriptors valid in all five frames.",
+  "blind_control": "Use the same already-fitted ordered model. Uniform mean of all 24 permutations of the four transition vectors at test, moving all six columns together. Holds terminal values, masks, unordered set and total increments fixed. Canonical averaged input produces a bitwise order-invariant output; compare to explicit 24-forecast mean. Not a separately retrained control.",
+  "fits": "From source three sites only fit 3 ridge models: motion, last_geometry, ordered_geometry (12 final fits). Same calibrated fold multiplier from the already published source-only nested grid for all arms; no new tuning on geometry or held-out scores. Validates reconstructed motion and CV heldout metrics against the old report for each site.",
+  "objective": "Published train-only standardization and local-heading residual ridge, mean squared error plus 0.1 times squared coefficients, unpenalized intercept, 30 target x/y offsets about unchanged last-two velocity. No new hyperparameter choices after scoring.",
+  "primary": "Ordered minus final geometry: equal-site mean single-path ADE (metres), paired whole-clip conditional 95% interval. Negative favors ordered geometry.",
+  "secondary_contrasts": [
+    [
+      "ordered_geometry",
+      "order_blind"
+    ],
+    [
+      "ordered_geometry",
+      "last_two"
+    ],
+    [
+      "ordered_geometry",
+      "motion"
+    ],
+    [
+      "last_geometry",
+      "motion"
+    ],
+    [
+      "order_blind",
+      "last_geometry"
+    ]
+  ],
+  "membership": "All 1482 windows, no exclusions. Four previously analysed development sites, no independent external generalization. Prediction depends on projected 2D measurements and visibility.",
+  "interval": "20,000 joint clip bootstrap draws with replacement within site, PCG64 seed2026, average four site means. FDE at 3.0 seconds. No finding sign guarantees.",
+  "frozen_status": "Source-only shrinkage previously known; no fits/outcomes from this geometry design were used in specifying it."
+}
