@@ -1,0 +1,226 @@
+{
+  "vci-raw-dut/intersection_01_roi.mp4": {
+    "compressed": 1917683,
+    "uncompressed": 1917936,
+    "offset": 26,
+    "data_offset": 102,
+    "crc": 3336150169,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_02_roi.mp4": {
+    "compressed": 1098915,
+    "uncompressed": 1100554,
+    "offset": 1917785,
+    "data_offset": 1917861,
+    "crc": 1467068865,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_03_roi.mp4": {
+    "compressed": 1678233,
+    "uncompressed": 1680274,
+    "offset": 3016776,
+    "data_offset": 3016852,
+    "crc": 3887913174,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_04_roi.mp4": {
+    "compressed": 6206515,
+    "uncompressed": 6206515,
+    "offset": 4695085,
+    "data_offset": 4695161,
+    "crc": 4291318031,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_05_roi.mp4": {
+    "compressed": 5734620,
+    "uncompressed": 5734620,
+    "offset": 10901676,
+    "data_offset": 10901752,
+    "crc": 3907588807,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_06_roi.mp4": {
+    "compressed": 3645327,
+    "uncompressed": 3645327,
+    "offset": 16636372,
+    "data_offset": 16636448,
+    "crc": 2053743370,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_07_roi.mp4": {
+    "compressed": 4127806,
+    "uncompressed": 4127806,
+    "offset": 20281775,
+    "data_offset": 20281851,
+    "crc": 3863659191,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_08_roi.mp4": {
+    "compressed": 4384290,
+    "uncompressed": 4384290,
+    "offset": 24409657,
+    "data_offset": 24409733,
+    "crc": 2668907587,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_09_roi.mp4": {
+    "compressed": 3393516,
+    "uncompressed": 3393516,
+    "offset": 28794023,
+    "data_offset": 28794099,
+    "crc": 2925132911,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_10_roi.mp4": {
+    "compressed": 2758212,
+    "uncompressed": 2758212,
+    "offset": 32187615,
+    "data_offset": 32187691,
+    "crc": 2926470138,
+    "method": 48
+  },
+  "vci-raw-dut/intersection_11_roi.mp4": {
+    "compressed": 2312114,
+    "uncompressed": 2327719,
+    "offset": 34945903,
+    "data_offset": 34945979,
+    "crc": 188551548,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_12_roi.mp4": {
+    "compressed": 1589963,
+    "uncompressed": 1593737,
+    "offset": 37258093,
+    "data_offset": 37258169,
+    "crc": 615096103,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_13_roi.mp4": {
+    "compressed": 1442685,
+    "uncompressed": 1445309,
+    "offset": 38848132,
+    "data_offset": 38848208,
+    "crc": 3798467068,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_14_roi.mp4": {
+    "compressed": 1093113,
+    "uncompressed": 1097240,
+    "offset": 40290893,
+    "data_offset": 40290969,
+    "crc": 152727301,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_15_roi.mp4": {
+    "compressed": 1110197,
+    "uncompressed": 1113240,
+    "offset": 41384082,
+    "data_offset": 41384158,
+    "crc": 1313153059,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_16_roi.mp4": {
+    "compressed": 1460092,
+    "uncompressed": 1463906,
+    "offset": 42494355,
+    "data_offset": 42494431,
+    "crc": 3031913965,
+    "method": 51
+  },
+  "vci-raw-dut/intersection_17_roi.mp4": {
+    "compressed": 1134950,
+    "uncompressed": 1139669,
+    "offset": 43954523,
+    "data_offset": 43954599,
+    "crc": 2352187562,
+    "method": 51
+  },
+  "vci-raw-dut/roundabout_01_roi.mp4": {
+    "compressed": 1338326,
+    "uncompressed": 1338326,
+    "offset": 45089549,
+    "data_offset": 45089623,
+    "crc": 786052711,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_02_roi.mp4": {
+    "compressed": 1225326,
+    "uncompressed": 1225326,
+    "offset": 46427949,
+    "data_offset": 46428023,
+    "crc": 860652974,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_03_roi.mp4": {
+    "compressed": 23267583,
+    "uncompressed": 23267583,
+    "offset": 47653349,
+    "data_offset": 47653425,
+    "crc": 2076892578,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_04_roi.mp4": {
+    "compressed": 5021141,
+    "uncompressed": 5021141,
+    "offset": 70921008,
+    "data_offset": 70921082,
+    "crc": 1233747725,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_05_roi.mp4": {
+    "compressed": 16037612,
+    "uncompressed": 16037612,
+    "offset": 75942223,
+    "data_offset": 75942299,
+    "crc": 3346006617,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_06_roi.mp4": {
+    "compressed": 1567170,
+    "uncompressed": 1570103,
+    "offset": 91979911,
+    "data_offset": 91979985,
+    "crc": 248587513,
+    "method": 51
+  },
+  "vci-raw-dut/roundabout_07_roi.mp4": {
+    "compressed": 4700867,
+    "uncompressed": 4700867,
+    "offset": 93547155,
+    "data_offset": 93547229,
+    "crc": 2981826257,
+    "method": 48
+  },
+  "vci-raw-dut/roundabout_08_roi.mp4": {
+    "compressed": 334654,
+    "uncompressed": 338416,
+    "offset": 98248096,
+    "data_offset": 98248166,
+    "crc": 1168709176,
+    "method": 51
+  },
+  "vci-raw-dut/roundabout_09_roi.mp4": {
+    "compressed": 716610,
+    "uncompressed": 717856,
+    "offset": 98582820,
+    "data_offset": 98582890,
+    "crc": 120741920,
+    "method": 51
+  },
+  "vci-raw-dut/roundabout_10_roi.mp4": {
+    "compressed": 2706803,
+    "uncompressed": 2711073,
+    "offset": 99299500,
+    "data_offset": 99299574,
+    "crc": 1514795502,
+    "method": 51
+  },
+  "vci-raw-dut/roundabout_11_roi.mp4": {
+    "compressed": 2234744,
+    "uncompressed": 2237649,
+    "offset": 102006377,
+    "data_offset": 102006451,
+    "crc": 1100066280,
+    "method": 51
+  }
+}

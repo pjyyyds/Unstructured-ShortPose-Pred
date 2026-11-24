@@ -1,0 +1,77 @@
+{
+  "protocol_sha256": "2dd4e77f5023088cfdede6cce026c1fe52b757c0d370d025329fe3e48427bac5",
+  "implementation_checks_sha256": "aef4256dc3a6e52a8d2ce594bb415ad750418554788864ea9973749412ca75e8",
+  "source_sha256": {
+    "equivariant_model.py": "707369992216fa6cf1544b3a60d754cf1381796ebd404e7f1de82bd625bcc428",
+    "run_equivariant.py": "bdeda07aaaad3a10f1d3b0df1d660da39c5a4158b5c4c1e539d5a6e8cf773086",
+    "test_equivariance.py": "7503f5a989e8e531f7fef23143e0830be10760045547788df6719fe35907ed25"
+  },
+  "source_revision": "66fb39d2de3df280ac831a4b5a0c0f095f1a0779",
+  "canonical_reader_sha256": {
+    "src/data/features.py": "d2f351fcd75ce8241604743d2d1b18a8db4f41eba76cf6fb64a49393faad7cea",
+    "src/data/constants.py": "1586cd8dab2868a39bc0969de4408b2d11e23afd673ee4b8c1e229ce948029df",
+    "src/data/pinns_extractor.py": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+    "scripts/benchmark_heldout_sites.py": "bca0ee4de9775adfa38a1de7a4a7e371c6860e8dcad7d841b44bf97adc76f9bd",
+    "scripts/train_pinns_heldout_sites.py": "216bef79c3a2f56e42ec031caac02efdf724c67d877823a48f140d9a610fbffb",
+    "scripts/verify_heldout_bundle.py": "852d9108870aa8dcc161a76e6e2309d7a791f6513f869a1b631da24a6dbdaad5",
+    "scripts/run_heldout_seed_sensitivity.py": "e894ca8228f69e0f768ff80cc00ad7d240903c3c3a013e577f5603b0f242bf8d",
+    "scripts/stage_pinns_metadata.py": "2d9d040580301eea9d9298a477dce1209734e0656ca48292831eda7521ce5c7a"
+  },
+  "label_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "folds_sha256": "497ffa7a1d9714137b492ce974b1958a51378100c50a644662628c50cee6bb06",
+  "observed_support": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "heading_identifiable": 747,
+      "degenerate": 69,
+      "tracks": 240
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "heading_identifiable": 69,
+      "degenerate": 15,
+      "tracks": 28
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "heading_identifiable": 369,
+      "degenerate": 63,
+      "tracks": 117
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "heading_identifiable": 144,
+      "degenerate": 6,
+      "tracks": 64
+    }
+  },
+  "seed": 42,
+  "same_initial_state_sha256": "817258d75ad0967bf8edd74397c204c188a7f8209f1d6108e26890079962ea47",
+  "architectures": {
+    "global_motion": [
+      false,
+      false
+    ],
+    "global_pose": [
+      false,
+      true
+    ],
+    "local_motion": [
+      true,
+      false
+    ],
+    "local_pose": [
+      true,
+      true
+    ]
+  },
+  "shared_initial_npz_sha256": "b1ff904b3cf9b28b146c55a50dbbc5e69a2bd56d1eabf8e41b68208b7a73cd80",
+  "parameters_allocated_in_every_arm": 19596,
+  "axes_from_history_only": true
+}
