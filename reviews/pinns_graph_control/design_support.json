@@ -1,0 +1,130 @@
+{
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "labels_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "frozen_tree_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "typed_slot_structure_sha256": "8f3d6c78e5e4bc40091db485729774e9b53e5402e32f65a3091084c0226506b3",
+  "runtime_graph_sha256": "ed8087076be26f30dc0174c75ad86d6a116b7ed3de32cd33464c756e0788a863",
+  "by_site": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "strata": {
+        "empty": 13,
+        "person_only": 436,
+        "car_only": 23,
+        "mixed": 344,
+        "with_any_person": 780,
+        "with_any_car": 367
+      },
+      "edges": 6368,
+      "velocity_valid_edges": 6340,
+      "truncated_windows": 208,
+      "within_radius_before_cap_person_windows": 780,
+      "within_radius_before_cap_car_windows": 491,
+      "near_coincident_excluded_rows": 0,
+      "edges_lost_to_cap": 1896,
+      "observed_types": {
+        "pedestrian_or_unclassified_speed": 5478,
+        "history_slow_pedestrian": 417,
+        "car": 473
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "strata": {
+        "empty": 14,
+        "person_only": 14,
+        "car_only": 4,
+        "mixed": 52,
+        "with_any_person": 66,
+        "with_any_car": 56
+      },
+      "edges": 343,
+      "velocity_valid_edges": 343,
+      "truncated_windows": 0,
+      "within_radius_before_cap_person_windows": 66,
+      "within_radius_before_cap_car_windows": 56,
+      "near_coincident_excluded_rows": 0,
+      "edges_lost_to_cap": 0,
+      "observed_types": {
+        "pedestrian_or_unclassified_speed": 212,
+        "history_slow_pedestrian": 20,
+        "car": 111
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "strata": {
+        "empty": 7,
+        "person_only": 272,
+        "car_only": 3,
+        "mixed": 150,
+        "with_any_person": 422,
+        "with_any_car": 153
+      },
+      "edges": 2687,
+      "velocity_valid_edges": 2678,
+      "truncated_windows": 15,
+      "within_radius_before_cap_person_windows": 422,
+      "within_radius_before_cap_car_windows": 153,
+      "near_coincident_excluded_rows": 0,
+      "edges_lost_to_cap": 24,
+      "observed_types": {
+        "pedestrian_or_unclassified_speed": 2117,
+        "history_slow_pedestrian": 371,
+        "car": 199
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "strata": {
+        "empty": 3,
+        "person_only": 100,
+        "car_only": 1,
+        "mixed": 46,
+        "with_any_person": 146,
+        "with_any_car": 47
+      },
+      "edges": 564,
+      "velocity_valid_edges": 564,
+      "truncated_windows": 0,
+      "within_radius_before_cap_person_windows": 146,
+      "within_radius_before_cap_car_windows": 47,
+      "near_coincident_excluded_rows": 0,
+      "edges_lost_to_cap": 0,
+      "observed_types": {
+        "pedestrian_or_unclassified_speed": 489,
+        "history_slow_pedestrian": 25,
+        "car": 50
+      }
+    }
+  },
+  "all": {
+    "windows": 1482,
+    "clips": 47,
+    "strata": {
+      "empty": 37,
+      "person_only": 822,
+      "car_only": 31,
+      "mixed": 592,
+      "with_any_person": 1414,
+      "with_any_car": 623
+    },
+    "edges": 9962,
+    "velocity_valid_edges": 9925,
+    "truncated_windows": 223,
+    "within_radius_before_cap_person_windows": 1414,
+    "within_radius_before_cap_car_windows": 747,
+    "near_coincident_excluded_rows": 0,
+    "edges_lost_to_cap": 1920,
+    "observed_types": {
+      "pedestrian_or_unclassified_speed": 8296,
+      "history_slow_pedestrian": 833,
+      "car": 833
+    }
+  }
+}

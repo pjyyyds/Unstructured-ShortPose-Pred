@@ -1,0 +1,78 @@
+{
+  "synthetic": {
+    "native": {
+      "code_sha256": "87ab7809431d943f1b94a62d92323641e2474d5030ca6569ef11888e08cc78f4",
+      "synthetic_people": 2,
+      "input_shape": [
+        2,
+        9,
+        4,
+        4
+      ],
+      "full_shape": [
+        2,
+        21,
+        1,
+        2
+      ],
+      "future_shape": [
+        2,
+        12,
+        1,
+        2
+      ],
+      "parameters": 3217858
+    },
+    "pinns_adapted": {
+      "code_sha256": "32a6f06d7d685c3558ccdcd50186ca5ba192ab3ccd0fdda90c20156aceab0d8d",
+      "synthetic_people": 1,
+      "input_shape": [
+        2,
+        5,
+        2,
+        4
+      ],
+      "full_shape": [
+        2,
+        35,
+        1,
+        2
+      ],
+      "future_shape": [
+        2,
+        30,
+        1,
+        2
+      ],
+      "parameters": 3217730
+    },
+    "torch": "2.10.0"
+  },
+  "cohort": {
+    "source_label_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "source_pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "site_windows": {
+      "america_crossroad": 816,
+      "italy_park": 84,
+      "japan_crossroad": 432,
+      "thailand_street": 150
+    },
+    "complete_box_windows": 1482,
+    "valid_history_boxes": 7410,
+    "motion_tokens_shape": [
+      1482,
+      5,
+      2,
+      4
+    ],
+    "complete_box_tokens_shape": [
+      1482,
+      5,
+      2,
+      4
+    ],
+    "real_model_forwards": 0,
+    "real_training_steps": 0
+  }
+}

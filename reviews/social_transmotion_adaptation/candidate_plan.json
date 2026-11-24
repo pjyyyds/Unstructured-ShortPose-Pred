@@ -1,0 +1,110 @@
+{
+  "name": "PINNS target-only Social-Transmotion official JRDB code adaptation",
+  "code_revision": "7695ba335f7cba7f41660d0edc66a57cd52da08a",
+  "upstream_repository": "https://github.com/vita-epfl/social-transmotion",
+  "upstream_model_sha256": "87ab7809431d943f1b94a62d92323641e2474d5030ca6569ef11888e08cc78f4",
+  "temporal_adapter_model_sha256": "32a6f06d7d685c3558ccdcd50186ca5ba192ab3ccd0fdda90c20156aceab0d8d",
+  "upstream_loss_sha256": "7b0f40c3b3ea1efca79815c75cc1fff2abce8d5567277d113c5026cba1ab0e63",
+  "license_sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+  "source_notice": "Social-Transmotion, Saadatnejad, Gao, Messaoud, Alahi (ICLR 2024), VITA EPFL, GNU AGPL v3. See THIRD_PARTY.md and the upstream license. The temporal adapter modifies 9 and 21 to 5 and 35. Original author datasets and pretrained weights are not used.",
+  "registered_with": "outcomes of this external-method adaptation unseen; four-site PINNS development results for other predictors seen",
+  "data_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "cache_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "folds": {
+    "america_crossroad": {
+      "train_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 666,
+      "test_windows": 816,
+      "test_clips": 14,
+      "train_keys": "5138c8d34313d2443dd2501d41024793983973d75facc9d4aabbd13fbe33a19c",
+      "test_keys": "fe925bd2b94e094d8e75f407d5a87e9d1a9ebe575e7a49f6e8e415388c7157fb"
+    },
+    "italy_park": {
+      "train_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 1398,
+      "test_windows": 84,
+      "test_clips": 9,
+      "train_keys": "9743e797dc3c21844379d1fd777a7d55f5425d9c56848c8fbcd207e5185aeb18",
+      "test_keys": "d1a55cb06eb6603487ef357dd43ef27c0679c30af6c05b0feb5e7a3799d07ec5"
+    },
+    "japan_crossroad": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_windows": 1050,
+      "test_windows": 432,
+      "test_clips": 11,
+      "train_keys": "c53cab0ed205f9ad582163021f92583e0652a6b18eac5d599cf165033ca124ae",
+      "test_keys": "dd4cf28d80d4f42b4d9bcfbb6d6e6f2870e5ca6a1eb621454f0830f082fe6f20"
+    },
+    "thailand_street": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_windows": 1332,
+      "test_windows": 150,
+      "test_clips": 13,
+      "train_keys": "d6a1b03ba46fcbfad203c85152320ac11eeb3b7b26402eec5f8142708da28fd5",
+      "test_keys": "96a8494222d1d7e9c5f3bc3720793614d8bbbab1bd3e98dad9c5dc0ebfd5a734"
+    }
+  },
+  "inputs": {
+    "targets": 1,
+    "neighbor_people": 0,
+    "joints": 0,
+    "ground_xy": "five real samples; last-centered metres",
+    "traj_box": "five observed left/top/width/height in pixels, each token minus its final observed box times .25",
+    "traj": "identical full network with the box token values zeroed throughout fitting and evaluation"
+  },
+  "fit": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 16,
+    "optimizer": "Adam defaults, no weight decay",
+    "lr": "1e-4 through epoch 23 inclusive, then 1e-5 (official 80%-of-budget rule)",
+    "loss": "Unmodified official MSE_LOSS: mean per-step Euclidean error of one target path times 100",
+    "gradient_norm_clip": 1,
+    "batch_order_seed": 49,
+    "rotation_augmentation": false,
+    "precision": "float32, no AMP or TF32",
+    "worker": "same worker/device and common init, batch permutation, dropout/random streams in all eight fits; CPU scoring from final weights",
+    "checkpoint_selection": "28th and final epoch; no held-out tuning or early stopping"
+  },
+  "adaptation": "One target, no neighboring people or skeleton, no rotation augmentation, 10 Hz 5+30, 28 epochs vs native 100, seed42 vs native0. Original learned layers and author ADE loss. Three training sites per fold. This is not a native JRDB score.",
+  "primary": "signed difference in deterministic traj_box ADE minus direct last-two-position CV ADE in metres, equal site means",
+  "contrasts": [
+    [
+      "traj_box",
+      "last_two"
+    ],
+    [
+      "traj",
+      "last_two"
+    ],
+    [
+      "traj_box",
+      "traj"
+    ]
+  ],
+  "reference": "last two measured positions extrapolated unchanged 30 steps over 0.1s steps, no training",
+  "scoring": "one primary-person path per method; ADE is mean 30-step distance and FDE is step 30 at 3 seconds. No modal probabilities or oracle metrics. Keep all outcomes. No new-site generalization claim.",
+  "uncertainty": "20,000 within-site paired whole-clip bootstrap replicates, PCG64 seed2026, combine four site means equally; intervals conditional on these four sites and fixed training seed.",
+  "code_sha256": {
+    "run_pinns.py": "19ed6716197b9703990ff94d23b630a67b2912c3abfd5cb0edf9cbabd981dfd6",
+    "check_protocol.py": "04fb90a642a6d318616f8cc4ca0a9972532bb51cbbe365cf87255d7d8fbde228",
+    "THIRD_PARTY.md": "b76fc766952368a0cbe7e8dc0ef1944f35e2257de5ba0bce865725beced5617a"
+  }
+}

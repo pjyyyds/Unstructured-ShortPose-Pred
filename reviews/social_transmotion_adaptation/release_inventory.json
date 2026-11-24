@@ -1,0 +1,49 @@
+{
+  "tag": "ckpt_data",
+  "asset": "releases.zip",
+  "asset_url": "https://github.com/vita-epfl/social-transmotion/releases/download/ckpt_data/releases.zip",
+  "asset_bytes": 305870808,
+  "published_at": "2023-12-27T01:16:26Z",
+  "directory_sha256": "69c74f796b7f819bf67c611faad6433141260600dcedcb27415043822055c18b",
+  "checkpoints": {
+    "jrdb/checkpoint/checkpoint.pth.tar": {
+      "bytes": 37280495,
+      "crc32": "5e44c3cb"
+    },
+    "jta/checkpoint/checkpoint.pth.tar": {
+      "bytes": 37712843,
+      "crc32": "6bbfc5af"
+    }
+  },
+  "license_or_readme_names": [],
+  "split_files": {
+    "jta": {
+      "train": 206,
+      "val": 10,
+      "test": 12
+    },
+    "jrdb": {
+      "train": [
+        "jrdb/data/train/bytes-cafe-2019-02-07_0_shift_0.ndjson",
+        "jrdb/data/train/gates-basement-elevators-2019-01-17_1_shift_0.ndjson",
+        "jrdb/data/train/hewlett-packard-intersection-2019-01-24_0_shift_0.ndjson",
+        "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson",
+        "jrdb/data/train/jordan-hall-2019-04-22_0_shift_0.ndjson",
+        "jrdb/data/train/packard-poster-session-2019-03-20_2_shift_0.ndjson",
+        "jrdb/data/train/stlc-111-2019-04-19_0_shift_0.ndjson",
+        "jrdb/data/train/svl-meeting-gates-2-2019-04-08_0_shift_0.ndjson",
+        "jrdb/data/train/svl-meeting-gates-2-2019-04-08_1_shift_0.ndjson",
+        "jrdb/data/train/tressider-2019-03-16_1_shift_0.ndjson"
+      ],
+      "val": [
+        "jrdb/data/val/gates-ai-lab-2019-02-08_0_shift_0.ndjson"
+      ],
+      "test": [
+        "jrdb/data/test/packard-poster-session-2019-03-20_1_shift_0.ndjson",
+        "jrdb/data/test/tressider-2019-03-16_0_shift_0.ndjson"
+      ]
+    }
+  },
+  "bytes_downloaded": 65318,
+  "data_members_opened": 0
+}

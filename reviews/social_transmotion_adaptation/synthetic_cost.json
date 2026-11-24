@@ -1,0 +1,20 @@
+{
+  "hardware": "arm64",
+  "torch": "2.10.0",
+  "threads": 4,
+  "synthetic_batch": 16,
+  "updates_in_benchmark": 6,
+  "skipped_warmup_steps": 1,
+  "seconds_per_batch": [
+    0.2694023745134473,
+    0.14783400017768145,
+    0.22902170941233635,
+    0.37086062412709,
+    0.23065050039440393,
+    0.2745890421792865
+  ],
+  "post_warmup_median_seconds": 0.23065050039440393,
+  "updates_planned": 15680,
+  "same_machine_training_projection_hours": 1.0046110683845149,
+  "interpretation": "Synthetic single-machine extrapolation. Kaggle benchmarks or guarantees unavailable."
+}
