@@ -1,0 +1,189 @@
+{
+  "bundle_sha256": "0b3e590b8d7cb2bf99670fd27d3bdbf2a40fa0e77bf29f7ac0423b73535589f8",
+  "frozen_runner_sha256": "d63162e1ee8d1824436d0cc1a60e573b9108beb6982ea3998cfbb27543a6a9bd",
+  "auditor_sha256": "ecc84b316f7a773e4c25e63a094316d2a098d30d8f2585ecb0fcad204af387a7",
+  "forward_replayed_fits": 12,
+  "initialization_evidence": {
+    "local_shared": "4bbeb97aaa4f8a0c1ace410f5a3bd264a341ebcc3553c4f0e6c8bd1cd24b6efe",
+    "local_full_graph": "654c3f3aa87168f9178a89c4a9f9a871d8226339cf4ae19013e1aae4c428cd3e",
+    "local_torch": "2.10.0",
+    "training_shared": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+    "training_full_graph": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+    "local_all_digests_match": false,
+    "status": "independent_bitwise_seed_state_corroborated_from_same_torch_build",
+    "sidecar_sha256": "3a9c182b6d36a7dff15792e7acc0cabfa6ab008a9da608ca11d93f5af7484e36",
+    "all_12_full_and_shared_hashes_match": true,
+    "source_environment_match": {
+      "torch": true,
+      "numpy": true,
+      "torch_build": true,
+      "python": true,
+      "cpu": true,
+      "threads": true,
+      "interop": true,
+      "determinism": true,
+      "mkldnn": true
+    },
+    "local_vs_reconstruction_per_tensor": {
+      "M1": {
+        "tensor_count": 88,
+        "differing_tensors": {
+          "decoder.mode_queries": {
+            "differing_elements": 154,
+            "total_elements": 192,
+            "max_abs_diff": 3.8743019104003906e-07
+          }
+        }
+      },
+      "M2b_real": {
+        "tensor_count": 128,
+        "differing_tensors": {
+          "decoder.mode_queries": {
+            "differing_elements": 154,
+            "total_elements": 192,
+            "max_abs_diff": 3.8743019104003906e-07
+          }
+        }
+      }
+    }
+  },
+  "verification_complete": true,
+  "windows": 1482,
+  "candidate_paths_compared_including_inference_controls": 53352,
+  "top1_decisions_compared": 8892,
+  "ADE_FDE_scalars_compared": 17784,
+  "max_graph_channel_abs_diff": 0.0,
+  "max_candidate_coordinate_abs_diff_m": 3.337860107421875e-06,
+  "max_candidate_probability_abs_diff": 4.172325134277344e-07,
+  "max_top1_ADE_FDE_abs_diff_m": 1.9867467666578875e-06,
+  "four_site_m": {
+    "M1": {
+      "ade_m": 0.5215563401838088,
+      "fde_m": 1.1005869033599065
+    },
+    "M2b_real": {
+      "ade_m": 0.5181743865677543,
+      "fde_m": 1.1046485868007223
+    },
+    "M2b_empty": {
+      "ade_m": 0.5158396713871659,
+      "fde_m": 1.103693365737086
+    },
+    "real_edges_off": {
+      "ade_m": 0.5112456036196055,
+      "fde_m": 1.0963463372256899
+    },
+    "real_drop_car": {
+      "ade_m": 0.5158501437377432,
+      "fde_m": 1.1010035296990983
+    },
+    "real_drop_people": {
+      "ade_m": 0.5223276229169576,
+      "fde_m": 1.1119307742803821
+    }
+  },
+  "contrasts": {
+    "M2b_real_minus_M1": {
+      "four_site_m": {
+        "ade_m": -0.0033819536160546587,
+        "fde_m": 0.0040616834408157
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.02644403363999812,
+          0.018414225413755547
+        ],
+        "fde_m": [
+          -0.0497142085807371,
+          0.05126694101410531
+        ]
+      }
+    },
+    "M2b_real_minus_M2b_empty": {
+      "four_site_m": {
+        "ade_m": 0.0023347151805882954,
+        "fde_m": 0.0009552210636361302
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.011860739171985856,
+          0.01607618698531978
+        ],
+        "fde_m": [
+          -0.031024014561543974,
+          0.028238832440781028
+        ]
+      }
+    },
+    "M2b_empty_minus_M1": {
+      "four_site_m": {
+        "ade_m": -0.005716668796642954,
+        "fde_m": 0.0031064623771795696
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.01707693992118662,
+          0.005027176673617063
+        ],
+        "fde_m": [
+          -0.024964032351359394,
+          0.02983627904257614
+        ]
+      }
+    },
+    "real_edges_off_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": -0.0069287829481487345,
+        "fde_m": -0.008302249575032311
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.02109246913500769,
+          0.0026328940977715615
+        ],
+        "fde_m": [
+          -0.034242019792485104,
+          0.007951129633644695
+        ]
+      }
+    },
+    "real_drop_car_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": -0.002324242830011064,
+        "fde_m": -0.003645057101623772
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.0059819608941733046,
+          -0.0003604537083200122
+        ],
+        "fde_m": [
+          -0.009728443087931908,
+          -7.8900160172467e-07
+        ]
+      }
+    },
+    "real_drop_people_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": 0.004153236349203365,
+        "fde_m": 0.007282187479659946
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.007723095101723713,
+          0.013884920268325128
+        ],
+        "fde_m": [
+          -0.013076810057684806,
+          0.022879894697813652
+        ]
+      }
+    }
+  },
+  "limits": "No refitting. The code checks reproducible recorded batch order, source and initial checksums, loss counts, resulting weights/predictions, not every historical optimizer operation.",
+  "kaggle_training_version": 373627962,
+  "kaggle_initialization_replay_version": 373636927,
+  "registration_commit": "5ca42db131741902327c0e44f7858b37d5b14024",
+  "unmodified_public_aggregate_sha256": "e7ae2c74cf8afedd57d1f40623e2802b6a5058ecb29d7a8ffdbd213cf3f4db4f",
+  "initialization_checker_sha256": "d567824ae7eef150e80e58be212e05078f98ae56d61d9801ed554d647d06d60d"
+}

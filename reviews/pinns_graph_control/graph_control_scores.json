@@ -1,0 +1,690 @@
+{
+  "scope": "One seed, previously studied fixed four PINNS sites. Input is label-derived tracking; exclude any future neighbor membership. Frozen five-frame pose, motion and ego-type oracle shared. No map or action objective.",
+  "protocol": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 64,
+    "learning_rate": 0.002,
+    "min_lr_ratio": 0.05,
+    "weight_decay": 0.0001,
+    "gradient_clip": 2.0
+  },
+  "protocol_sha256": "51c70ae3866ddd14b327d00bfa91aed665e0e6c703da8eba1a96d9e7dbd4f057",
+  "runner_sha256": "d63162e1ee8d1824436d0cc1a60e573b9108beb6982ea3998cfbb27543a6a9bd",
+  "source": {
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "labels_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "frozen_tree_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "typed_slot_structure_sha256": "8f3d6c78e5e4bc40091db485729774e9b53e5402e32f65a3091084c0226506b3",
+    "runtime_graph_sha256": "ed8087076be26f30dc0174c75ad86d6a116b7ed3de32cd33464c756e0788a863",
+    "by_site": {
+      "america_crossroad": {
+        "windows": 816,
+        "clips": 14,
+        "strata": {
+          "empty": 13,
+          "person_only": 436,
+          "car_only": 23,
+          "mixed": 344,
+          "with_any_person": 780,
+          "with_any_car": 367
+        },
+        "edges": 6368,
+        "velocity_valid_edges": 6340,
+        "truncated_windows": 208,
+        "within_radius_before_cap_person_windows": 780,
+        "within_radius_before_cap_car_windows": 491,
+        "near_coincident_excluded_rows": 0,
+        "edges_lost_to_cap": 1896,
+        "observed_types": {
+          "pedestrian_or_unclassified_speed": 5478,
+          "history_slow_pedestrian": 417,
+          "car": 473
+        }
+      },
+      "italy_park": {
+        "windows": 84,
+        "clips": 9,
+        "strata": {
+          "empty": 14,
+          "person_only": 14,
+          "car_only": 4,
+          "mixed": 52,
+          "with_any_person": 66,
+          "with_any_car": 56
+        },
+        "edges": 343,
+        "velocity_valid_edges": 343,
+        "truncated_windows": 0,
+        "within_radius_before_cap_person_windows": 66,
+        "within_radius_before_cap_car_windows": 56,
+        "near_coincident_excluded_rows": 0,
+        "edges_lost_to_cap": 0,
+        "observed_types": {
+          "pedestrian_or_unclassified_speed": 212,
+          "history_slow_pedestrian": 20,
+          "car": 111
+        }
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "clips": 11,
+        "strata": {
+          "empty": 7,
+          "person_only": 272,
+          "car_only": 3,
+          "mixed": 150,
+          "with_any_person": 422,
+          "with_any_car": 153
+        },
+        "edges": 2687,
+        "velocity_valid_edges": 2678,
+        "truncated_windows": 15,
+        "within_radius_before_cap_person_windows": 422,
+        "within_radius_before_cap_car_windows": 153,
+        "near_coincident_excluded_rows": 0,
+        "edges_lost_to_cap": 24,
+        "observed_types": {
+          "pedestrian_or_unclassified_speed": 2117,
+          "history_slow_pedestrian": 371,
+          "car": 199
+        }
+      },
+      "thailand_street": {
+        "windows": 150,
+        "clips": 13,
+        "strata": {
+          "empty": 3,
+          "person_only": 100,
+          "car_only": 1,
+          "mixed": 46,
+          "with_any_person": 146,
+          "with_any_car": 47
+        },
+        "edges": 564,
+        "velocity_valid_edges": 564,
+        "truncated_windows": 0,
+        "within_radius_before_cap_person_windows": 146,
+        "within_radius_before_cap_car_windows": 47,
+        "near_coincident_excluded_rows": 0,
+        "edges_lost_to_cap": 0,
+        "observed_types": {
+          "pedestrian_or_unclassified_speed": 489,
+          "history_slow_pedestrian": 25,
+          "car": 50
+        }
+      }
+    },
+    "all": {
+      "windows": 1482,
+      "clips": 47,
+      "strata": {
+        "empty": 37,
+        "person_only": 822,
+        "car_only": 31,
+        "mixed": 592,
+        "with_any_person": 1414,
+        "with_any_car": 623
+      },
+      "edges": 9962,
+      "velocity_valid_edges": 9925,
+      "truncated_windows": 223,
+      "within_radius_before_cap_person_windows": 1414,
+      "within_radius_before_cap_car_windows": 747,
+      "near_coincident_excluded_rows": 0,
+      "edges_lost_to_cap": 1920,
+      "observed_types": {
+        "pedestrian_or_unclassified_speed": 8296,
+        "history_slow_pedestrian": 833,
+        "car": 833
+      }
+    }
+  },
+  "backend": {
+    "device": "cpu",
+    "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+    "torch": "2.11.0+cpu",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.10.2 (Git Hash f1d471933dc852f956fd05389f9313c7148783d5)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=70d99e998b4955e0049d13a98d77ae1b14db1f45, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.11.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "numpy": "2.1.3",
+    "python": "3.13.18",
+    "threads": 4,
+    "interop": 1,
+    "determinism": true,
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "mkldnn": true
+  },
+  "interval": "Site-stratified paired whole-clip bootstrap, preserve all windows of each replicate clip. Four sites equal, conditional on these fits/sites, RNG 2026, 20000 marginal percentile draws.",
+  "primary": "M2b_real minus M1 ADE. M2b_empty has the identical graph architecture; all graph inputs masked in train and test. real_* rows mask only at inference.",
+  "folds": {
+    "america_crossroad": {
+      "M1": {
+        "weights": "america_crossroad_M1.pt",
+        "optimizer_steps": 308,
+        "batch_order_sha256": "578001d0a1b4a1362a9b7ce73dc22140adc96e8bfadec44d05e77d0f3d37f90a",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "train_windows": 666,
+        "test_windows": 816
+      },
+      "M2b_real": {
+        "weights": "america_crossroad_M2b_real.pt",
+        "optimizer_steps": 308,
+        "batch_order_sha256": "578001d0a1b4a1362a9b7ce73dc22140adc96e8bfadec44d05e77d0f3d37f90a",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 666,
+        "test_windows": 816
+      },
+      "M2b_empty": {
+        "weights": "america_crossroad_M2b_empty.pt",
+        "optimizer_steps": 308,
+        "batch_order_sha256": "578001d0a1b4a1362a9b7ce73dc22140adc96e8bfadec44d05e77d0f3d37f90a",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 666,
+        "test_windows": 816
+      }
+    },
+    "italy_park": {
+      "M1": {
+        "weights": "italy_park_M1.pt",
+        "optimizer_steps": 616,
+        "batch_order_sha256": "3871b26059cf3fc01ef3e9a297248d65f9f482a58ac485161b9e425677d9531f",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "train_windows": 1398,
+        "test_windows": 84
+      },
+      "M2b_real": {
+        "weights": "italy_park_M2b_real.pt",
+        "optimizer_steps": 616,
+        "batch_order_sha256": "3871b26059cf3fc01ef3e9a297248d65f9f482a58ac485161b9e425677d9531f",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1398,
+        "test_windows": 84
+      },
+      "M2b_empty": {
+        "weights": "italy_park_M2b_empty.pt",
+        "optimizer_steps": 616,
+        "batch_order_sha256": "3871b26059cf3fc01ef3e9a297248d65f9f482a58ac485161b9e425677d9531f",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1398,
+        "test_windows": 84
+      }
+    },
+    "japan_crossroad": {
+      "M1": {
+        "weights": "japan_crossroad_M1.pt",
+        "optimizer_steps": 476,
+        "batch_order_sha256": "7fdf97c7ba87848f7a1f49f6f8783cab5b1a49a9f29719ca3767df920df832c1",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "train_windows": 1050,
+        "test_windows": 432
+      },
+      "M2b_real": {
+        "weights": "japan_crossroad_M2b_real.pt",
+        "optimizer_steps": 476,
+        "batch_order_sha256": "7fdf97c7ba87848f7a1f49f6f8783cab5b1a49a9f29719ca3767df920df832c1",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1050,
+        "test_windows": 432
+      },
+      "M2b_empty": {
+        "weights": "japan_crossroad_M2b_empty.pt",
+        "optimizer_steps": 476,
+        "batch_order_sha256": "7fdf97c7ba87848f7a1f49f6f8783cab5b1a49a9f29719ca3767df920df832c1",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1050,
+        "test_windows": 432
+      }
+    },
+    "thailand_street": {
+      "M1": {
+        "weights": "thailand_street_M1.pt",
+        "optimizer_steps": 588,
+        "batch_order_sha256": "53e757079b45a40fca2af1752a3a7399febfa5b3663ed2e09d229e33bcaef3db",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "train_windows": 1332,
+        "test_windows": 150
+      },
+      "M2b_real": {
+        "weights": "thailand_street_M2b_real.pt",
+        "optimizer_steps": 588,
+        "batch_order_sha256": "53e757079b45a40fca2af1752a3a7399febfa5b3663ed2e09d229e33bcaef3db",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1332,
+        "test_windows": 150
+      },
+      "M2b_empty": {
+        "weights": "thailand_street_M2b_empty.pt",
+        "optimizer_steps": 588,
+        "batch_order_sha256": "53e757079b45a40fca2af1752a3a7399febfa5b3663ed2e09d229e33bcaef3db",
+        "shared_initial_sha256": "67a640a0754b9d2d6b2a63c293d72950b2dc8eac53612393a733d59a7ac0ee89",
+        "full_initial_sha256": "d4ff2d962aca9af10b04f684ed7e7c42d596902e764b66a3a962a5d207e41582",
+        "train_windows": 1332,
+        "test_windows": 150
+      }
+    }
+  },
+  "four_site_m": {
+    "M1": {
+      "ade_m": 0.5215563401838088,
+      "fde_m": 1.1005869033599065
+    },
+    "M2b_real": {
+      "ade_m": 0.5181743865677543,
+      "fde_m": 1.1046485868007223
+    },
+    "M2b_empty": {
+      "ade_m": 0.5158396713871659,
+      "fde_m": 1.103693365737086
+    },
+    "real_edges_off": {
+      "ade_m": 0.5112456036196055,
+      "fde_m": 1.0963463372256899
+    },
+    "real_drop_car": {
+      "ade_m": 0.5158501437377432,
+      "fde_m": 1.1010035296990983
+    },
+    "real_drop_people": {
+      "ade_m": 0.5223276229169576,
+      "fde_m": 1.1119307742803821
+    }
+  },
+  "site_m": {
+    "america_crossroad": {
+      "M1": {
+        "ade_m": 0.8348954881023172,
+        "fde_m": 1.6164597128314988
+      },
+      "M2b_real": {
+        "ade_m": 0.8378123254393983,
+        "fde_m": 1.632250612032083
+      },
+      "M2b_empty": {
+        "ade_m": 0.8208365065816433,
+        "fde_m": 1.5968966602530799
+      },
+      "real_edges_off": {
+        "ade_m": 0.8530799993188402,
+        "fde_m": 1.6603944253644747
+      },
+      "real_drop_car": {
+        "ade_m": 0.8356663083040443,
+        "fde_m": 1.629898222706109
+      },
+      "real_drop_people": {
+        "ade_m": 0.8553195341728098,
+        "fde_m": 1.6626189859553457
+      }
+    },
+    "italy_park": {
+      "M1": {
+        "ade_m": 0.427196904055153,
+        "fde_m": 0.9797110376257384
+      },
+      "M2b_real": {
+        "ade_m": 0.44979964150745116,
+        "fde_m": 1.0148496227870207
+      },
+      "M2b_empty": {
+        "ade_m": 0.43529310160937223,
+        "fde_m": 0.9950671689636321
+      },
+      "real_edges_off": {
+        "ade_m": 0.43123070401797164,
+        "fde_m": 0.9834042273949086
+      },
+      "real_drop_car": {
+        "ade_m": 0.44190075206654633,
+        "fde_m": 1.002788331187448
+      },
+      "real_drop_people": {
+        "ade_m": 0.46555333328024545,
+        "fde_m": 1.0305838408338892
+      }
+    },
+    "japan_crossroad": {
+      "M1": {
+        "ade_m": 0.39911890352412194,
+        "fde_m": 0.8864228719935184
+      },
+      "M2b_real": {
+        "ade_m": 0.3741941615111668,
+        "fde_m": 0.8291791460440032
+      },
+      "M2b_empty": {
+        "ade_m": 0.40016769587877216,
+        "fde_m": 0.8915679570897377
+      },
+      "real_edges_off": {
+        "ade_m": 0.3784378514991446,
+        "fde_m": 0.8385072802920249
+      },
+      "real_drop_car": {
+        "ade_m": 0.3768631646225437,
+        "fde_m": 0.8340917149607648
+      },
+      "real_drop_people": {
+        "ade_m": 0.3787498963598989,
+        "fde_m": 0.8386384910259763
+      }
+    },
+    "thailand_street": {
+      "M1": {
+        "ade_m": 0.4250140650536434,
+        "fde_m": 0.9197539909888703
+      },
+      "M2b_real": {
+        "ade_m": 0.4108914178130006,
+        "fde_m": 0.9423149663397818
+      },
+      "M2b_empty": {
+        "ade_m": 0.407061381478876,
+        "fde_m": 0.9312416766418946
+      },
+      "real_edges_off": {
+        "ade_m": 0.38223385964246553,
+        "fde_m": 0.9030794158513513
+      },
+      "real_drop_car": {
+        "ade_m": 0.40897034995783826,
+        "fde_m": 0.937235849942072
+      },
+      "real_drop_people": {
+        "ade_m": 0.38968772785487615,
+        "fde_m": 0.9158817793063173
+      }
+    }
+  },
+  "contrasts": {
+    "M2b_real_minus_M1": {
+      "four_site_m": {
+        "ade_m": -0.0033819536160546587,
+        "fde_m": 0.0040616834408157
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.02644403363999812,
+          0.018414225413755547
+        ],
+        "fde_m": [
+          -0.0497142085807371,
+          0.05126694101410531
+        ]
+      }
+    },
+    "M2b_real_minus_M2b_empty": {
+      "four_site_m": {
+        "ade_m": 0.0023347151805882954,
+        "fde_m": 0.0009552210636361302
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.011860739171985856,
+          0.01607618698531978
+        ],
+        "fde_m": [
+          -0.031024014561543974,
+          0.028238832440781028
+        ]
+      }
+    },
+    "M2b_empty_minus_M1": {
+      "four_site_m": {
+        "ade_m": -0.005716668796642954,
+        "fde_m": 0.0031064623771795696
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.01707693992118662,
+          0.005027176673617063
+        ],
+        "fde_m": [
+          -0.024964032351359394,
+          0.02983627904257614
+        ]
+      }
+    },
+    "real_edges_off_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": -0.0069287829481487345,
+        "fde_m": -0.008302249575032311
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.02109246913500769,
+          0.0026328940977715615
+        ],
+        "fde_m": [
+          -0.034242019792485104,
+          0.007951129633644695
+        ]
+      }
+    },
+    "real_drop_car_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": -0.002324242830011064,
+        "fde_m": -0.003645057101623772
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.0059819608941733046,
+          -0.0003604537083200122
+        ],
+        "fde_m": [
+          -0.009728443087931908,
+          -7.8900160172467e-07
+        ]
+      }
+    },
+    "real_drop_people_minus_M2b_real": {
+      "four_site_m": {
+        "ade_m": 0.004153236349203365,
+        "fde_m": 0.007282187479659946
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.007723095101723713,
+          0.013884920268325128
+        ],
+        "fde_m": [
+          -0.013076810057684806,
+          0.022879894697813652
+        ]
+      }
+    }
+  },
+  "strata_by_site": {
+    "america_crossroad": {
+      "empty": {
+        "windows": 13,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.06108011439185427,
+          "fde_m": -0.08421695300298282
+        }
+      },
+      "person_only": {
+        "windows": 436,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.012927253870682784,
+          "fde_m": -0.0068647605284972366
+        }
+      },
+      "car_only": {
+        "windows": 23,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.024692421703454318,
+          "fde_m": 0.043194385573651725
+        }
+      },
+      "mixed": {
+        "windows": 344,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.02396086553078676,
+          "fde_m": 0.046452787380657355
+        }
+      },
+      "with_any_person": {
+        "windows": 780,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.0033413526345806963,
+          "fde_m": 0.01664964521605299
+        }
+      },
+      "with_any_car": {
+        "windows": 367,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.024006712375395343,
+          "fde_m": 0.046248582362779636
+        }
+      }
+    },
+    "italy_park": {
+      "empty": {
+        "windows": 14,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.019554163571196752,
+          "fde_m": -0.07109243409013771
+        }
+      },
+      "person_only": {
+        "windows": 14,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.033841890927380144,
+          "fde_m": -0.08746922990031959
+        }
+      },
+      "car_only": {
+        "windows": 4,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.09730734701914079,
+          "fde_m": 0.07806110443652318
+        }
+      },
+      "mixed": {
+        "windows": 52,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.04340279463262648,
+          "fde_m": 0.09344730830130914
+        }
+      },
+      "with_any_person": {
+        "windows": 66,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.027017558301715976,
+          "fde_m": 0.05507107292520607
+        }
+      },
+      "with_any_car": {
+        "windows": 56,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.04725311980309178,
+          "fde_m": 0.09234829373953868
+        }
+      }
+    },
+    "japan_crossroad": {
+      "empty": {
+        "windows": 7,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.03399340701756727,
+          "fde_m": -0.05715796246920542
+        }
+      },
+      "person_only": {
+        "windows": 272,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.016247891586638852,
+          "fde_m": -0.047093148208884564
+        }
+      },
+      "car_only": {
+        "windows": 3,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.07050593409027699,
+          "fde_m": -0.1249280151827355
+        }
+      },
+      "mixed": {
+        "windows": 150,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.03932393591091396,
+          "fde_m": -0.07430042343027703
+        }
+      },
+      "with_any_person": {
+        "windows": 422,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.024450277009959366,
+          "fde_m": -0.05676398063355008
+        }
+      },
+      "with_any_car": {
+        "windows": 153,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.039935347639921084,
+          "fde_m": -0.07529312130777625
+        }
+      }
+    },
+    "thailand_street": {
+      "empty": {
+        "windows": 3,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.2229693026025988,
+          "fde_m": -0.4415054203754672
+        }
+      },
+      "person_only": {
+        "windows": 100,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.012315191254027762,
+          "fde_m": 0.08735253564975701
+        }
+      },
+      "car_only": {
+        "windows": 1,
+        "paired_real_minus_m1_m": {
+          "ade_m": 0.035285008177551425,
+          "fde_m": -0.049109626836683073
+        }
+      },
+      "mixed": {
+        "windows": 46,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.05904985460584646,
+          "fde_m": -0.08646698639947538
+        }
+      },
+      "with_any_person": {
+        "windows": 146,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.010169686208672328,
+          "fde_m": 0.032587480757533094
+        }
+      },
+      "with_any_car": {
+        "windows": 47,
+        "paired_real_minus_m1_m": {
+          "ade_m": -0.057042729865774154,
+          "fde_m": -0.08567214896196919
+        }
+      }
+    }
+  }
+}

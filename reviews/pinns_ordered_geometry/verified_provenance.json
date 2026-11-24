@@ -1,0 +1,22 @@
+{
+  "archive_sha256": "8592c1a8c42ba71edd027a207c3c03613f05f0f5acfa9d337fb2e64da99da2df",
+  "original_public_sha256": "3540528abc1139f19df828ba7498fd03b148934f3f9257e1d4ffac9d8d5dc173",
+  "verifier_sha256": "8249dd9cc546549f9af5336cc52e515edfbf5a0aba15e8c0e7ec0238a7369dcb",
+  "windows": 1482,
+  "fits_reconstructed": 12,
+  "candidate_forecasts_compared": 7410,
+  "explicit_permuted_forecasts": 35568,
+  "max_abs_feature_difference": 1.13464793116691e-13,
+  "max_abs_fit_parameter_difference": 1.3711254354120683e-14,
+  "max_abs_trajectory_difference_m": 1.7763568394002505e-14,
+  "max_abs_ADE_FDE_difference_m": 7.105427357601002e-15,
+  "max_abs_site_macro_or_interval_difference_m": 9.13331910101789e-16,
+  "max_abs_explicit_blind_vs_linear_averaged_difference_m": 1.0658141036401503e-14,
+  "max_abs_blind_order_check_m": 7.105427357601002e-15,
+  "max_abs_sensitivity_summary_difference_m": 2.7200464103316335e-15,
+  "kaggle_version": 373635870,
+  "kaggle_elapsed_seconds": 68.2,
+  "registration_commit": "054a55225cf789f2128baca64f0d29bb6c739279",
+  "source_site_ids_and_geometry_masks_match_registration": true,
+  "method": "Scalar geometry, observed-only inputs and native motion features; independently standardized and solved augmented ridge by SVD least squares with common source-only shrinkage; fully enumerated 24 permutations of heldout transition vectors. Rebuilt clip bootstrap with multiplicities."
+}

@@ -27,7 +27,7 @@ def jh(x):return h(json.dumps(x,separators=(',',':')).encode())
 def ah(x):
     d=hashlib.sha256()
     for k in sorted(x):
-        v=np.asarray(x[k]);head=[k.encode(),v.dtype.str.encode(),str(v.shape).encode()]
+        v=np.ascontiguousarray(x[k]);head=[k.encode(),v.dtype.str.encode(),str(v.shape).encode()]
         d.update(b'\0'.join(head)+b'\0'+v.tobytes(order='C'))
     return d.hexdigest()
 def near(a,b,tol=0,rtol=0):
@@ -242,7 +242,8 @@ def batch_digest(inds):
 def state_code(model):
     return ah({k:v.detach().cpu().numpy() for k,v in model.state_dict().items()})
 
-def verify(path,root,pose,repo,out,expected_sha):
+def verify(path,root,pose,repo,out,expected_sha,init_replay=None,partial=False):
+    from verify_initialization_evidence import certification
     import zipfile
     torch.set_num_threads(2);torch.use_deterministic_algorithms(True)
     bundle=h(path.read_bytes());assert bundle==expected_sha
@@ -257,6 +258,7 @@ def verify(path,root,pose,repo,out,expected_sha):
         assert z.testzip() is None and len(z.namelist())==16 and set(z.namelist())==members|{'sha256.json'} and set(manifests)==members
         for n in manifests:assert h(z.read(n))==manifests[n]
         A=json.loads(z.read('aggregate.json'));identity=A['source']
+        common,full,init_evidence=certification(A,manifests,bundle,init_replay,partial)
         assert A['runner_sha256']==manifests['run_graph_control.py']==TRAIN_SHA and A['protocol_sha256']==LOCK
         assert A['protocol']=={'seed':42,'epochs':28,'batch_size':64,'learning_rate':.002,'min_lr_ratio':.05,'weight_decay':.0001,'gradient_clip':2.}
         assert (identity['pose_sha256'],identity['labels_calibration_sha256'],identity['ordered_keys_sha256'],identity['frozen_tree_sha256'],
@@ -278,8 +280,6 @@ def verify(path,root,pose,repo,out,expected_sha):
             train=np.concatenate([v for k,v in sidx.items() if k!=s]);assert not set(clips[train])&set(clips[g])
             # One identical minibatch permutation and one identical initialization across each paired arm's shared parameters.
             batch_checks[s]=bh=batch_digest(train)
-            torch.manual_seed(42);prototype=UnstructuredShortPosePredictor('M1');common=state_code(prototype)
-            torch.manual_seed(42);q=UnstructuredShortPosePredictor('M2b');q.load_state_dict({**q.state_dict(),**prototype.state_dict()});full=state_code(q)
             for arm in MODELS:
                 model=UnstructuredShortPosePredictor('M1' if arm=='M1' else 'M2b')
                 name=s+'_'+arm+'.pt';ck=torch.load(io.BytesIO(z.read(name)),map_location='cpu',weights_only=True)
@@ -303,7 +303,7 @@ def verify(path,root,pose,repo,out,expected_sha):
             u=~mask.any(1)
             for f in ('_paths','_probs','_errors'):np.testing.assert_array_equal(rows[control+f][u],rows['M2b_real'+f][u])
         summary(keys,sidx,graph['source_class'],err,A)
-    result={'bundle_sha256':bundle,'frozen_runner_sha256':TRAIN_SHA,'auditor_sha256':h(Path(__file__).read_bytes()),'verified_fits':len(states),
+    result={'bundle_sha256':bundle,'frozen_runner_sha256':TRAIN_SHA,'auditor_sha256':h(Path(__file__).read_bytes()),'forward_replayed_fits':len(states),'initialization_evidence':init_evidence,'verification_complete':init_evidence['status']!='initialization_not_certified',
             'windows':len(keys),'candidate_paths_compared_including_inference_controls':direct_paths,'top1_decisions_compared':argmax,
             'ADE_FDE_scalars_compared':pairs,'max_graph_channel_abs_diff':max_edge,'max_candidate_coordinate_abs_diff_m':max_path,
             'max_candidate_probability_abs_diff':max_p,'max_top1_ADE_FDE_abs_diff_m':max_err,'four_site_m':A['four_site_m'],'contrasts':A['contrasts'],
@@ -315,4 +315,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for k in ('archive','metadata','pose','repo','output'):p.add_argument(k,type=Path)
     p.add_argument('--expected-sha256',required=True)
-    o=p.parse_args();verify(o.archive,o.metadata,o.pose,o.repo,o.output,o.expected_sha256)
+    group=p.add_mutually_exclusive_group()
+    group.add_argument('--initial-replay',type=Path,help='Independent same-stack initial tensors and reconstructed hashes')
+    group.add_argument('--partial-cross-platform',action='store_true',help='Replay all other items; records initialization as uncertified')
+    o=p.parse_args();verify(o.archive,o.metadata,o.pose,o.repo,o.output,o.expected_sha256,o.initial_replay,o.partial_cross_platform)

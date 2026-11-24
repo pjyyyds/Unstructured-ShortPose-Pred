@@ -1,0 +1,509 @@
+{
+  "scope": "Pre-outcome historical-support and frozen-mode audit. Distances are approximate ground metres; moving angle is unsigned from tangent. No future paths opened.",
+  "protocol_sha256": "b435feb70bfe2f2f0876d80beeac38a85d4b6a988974b97a1e2737f57936a22c",
+  "all": {
+    "first": {
+      "windows": 59,
+      "supported": 7,
+      "fallback": 52,
+      "reasons": {
+        "beyond_5m": 26,
+        "insufficient_visible_arc": 22,
+        "supported": 7,
+        "anchor_outside_control_hull": 4
+      },
+      "nearest_finite_edge_m": {
+        "min": 0.440834082596226,
+        "median": 5.037722081453421,
+        "p90": 8.29034237052967,
+        "max": 18.91048604522156
+      },
+      "speed_m_s": {
+        "min": 0.0,
+        "median": 0.9378381820442105,
+        "p90": 1.5248994818618318,
+        "max": 2.3635194272948135
+      },
+      "supported_motion_angle_count": 7,
+      "supported_unoriented_motion_angle_degrees": {
+        "min": 6.038192957087307,
+        "median": 43.21382070389506,
+        "p90": 69.536933449585,
+        "max": 84.84658833910969
+      },
+      "supported_score_span_m": {
+        "normal": {
+          "min": 0.044591584663179744,
+          "median": 0.14253802773890606,
+          "p90": 0.31632917634155916,
+          "max": 0.39615754640878037
+        },
+        "full_velocity": {
+          "min": 0.14279379175400272,
+          "median": 0.22278550242500816,
+          "p90": 0.3406729801932943,
+          "max": 0.37947983765382315
+        },
+        "tangent": {
+          "min": 0.08768980060430115,
+          "median": 0.19499842161180367,
+          "p90": 0.29777734843446124,
+          "max": 0.31091226006115297
+        }
+      },
+      "changed_from_probability": {
+        "normal": 5,
+        "full_velocity": 6,
+        "tangent": 4
+      }
+    },
+    "independent": {
+      "windows": 59,
+      "supported": 1,
+      "fallback": 58,
+      "reasons": {
+        "beyond_5m": 46,
+        "insufficient_visible_arc": 8,
+        "anchor_outside_control_hull": 4,
+        "supported": 1
+      },
+      "nearest_finite_edge_m": {
+        "min": 0.3024408828194966,
+        "median": 12.255041685933037,
+        "p90": 19.698548305051446,
+        "max": 28.288353688131842
+      },
+      "speed_m_s": {
+        "min": 0.0,
+        "median": 0.9378381820442105,
+        "p90": 1.5248994818618318,
+        "max": 2.3635194272948135
+      },
+      "supported_motion_angle_count": 1,
+      "supported_unoriented_motion_angle_degrees": {
+        "min": 19.423607225231613,
+        "median": 19.423607225231613,
+        "p90": 19.423607225231613,
+        "max": 19.423607225231613
+      },
+      "supported_score_span_m": {
+        "normal": {
+          "min": 0.26836350844825335,
+          "median": 0.26836350844825335,
+          "p90": 0.26836350844825335,
+          "max": 0.26836350844825335
+        },
+        "full_velocity": {
+          "min": 0.22010068486305737,
+          "median": 0.22010068486305737,
+          "p90": 0.22010068486305737,
+          "max": 0.22010068486305737
+        },
+        "tangent": {
+          "min": 0.12319334492294863,
+          "median": 0.12319334492294863,
+          "p90": 0.12319334492294863,
+          "max": 0.12319334492294863
+        }
+      },
+      "changed_from_probability": {
+        "normal": 1,
+        "full_velocity": 1,
+        "tangent": 0
+      }
+    },
+    "map_comparison": {
+      "both_supported": 1,
+      "first_only": 6,
+      "independent_only": 0,
+      "neither": 52,
+      "same_normal_mode_if_both": 1
+    }
+  },
+  "by_clip": {
+    "america_crossroad_spring_daytime_sunny_1": {
+      "first": {
+        "windows": 5,
+        "supported": 0,
+        "fallback": 5,
+        "reasons": {
+          "beyond_5m": 5
+        },
+        "nearest_finite_edge_m": {
+          "min": 14.727940986316854,
+          "median": 14.727940986316854,
+          "p90": 17.907864250078987,
+          "max": 18.91048604522156
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.0,
+          "p90": 1.2544041966457902,
+          "max": 1.3939392835055784
+        },
+        "supported_motion_angle_count": 0,
+        "supported_unoriented_motion_angle_degrees": null,
+        "supported_score_span_m": {
+          "normal": null,
+          "full_velocity": null,
+          "tangent": null
+        },
+        "changed_from_probability": {
+          "normal": 0,
+          "full_velocity": 0,
+          "tangent": 0
+        }
+      },
+      "independent": {
+        "windows": 5,
+        "supported": 0,
+        "fallback": 5,
+        "reasons": {
+          "beyond_5m": 5
+        },
+        "nearest_finite_edge_m": {
+          "min": 16.1243369681945,
+          "median": 16.1243369681945,
+          "p90": 26.795771723235337,
+          "max": 28.288353688131842
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.0,
+          "p90": 1.2544041966457902,
+          "max": 1.3939392835055784
+        },
+        "supported_motion_angle_count": 0,
+        "supported_unoriented_motion_angle_degrees": null,
+        "supported_score_span_m": {
+          "normal": null,
+          "full_velocity": null,
+          "tangent": null
+        },
+        "changed_from_probability": {
+          "normal": 0,
+          "full_velocity": 0,
+          "tangent": 0
+        }
+      },
+      "map_comparison": {
+        "both_supported": 0,
+        "first_only": 0,
+        "independent_only": 0,
+        "neither": 5,
+        "same_normal_mode_if_both": 0
+      }
+    },
+    "italy_park_summer_daytime_sunny_0": {
+      "first": {
+        "windows": 13,
+        "supported": 1,
+        "fallback": 12,
+        "reasons": {
+          "beyond_5m": 11,
+          "insufficient_visible_arc": 1,
+          "supported": 1
+        },
+        "nearest_finite_edge_m": {
+          "min": 4.2660088897195685,
+          "median": 6.025603103134028,
+          "p90": 7.753570326246648,
+          "max": 10.17589305468717
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.8698804801810479,
+          "p90": 1.2033496678002789,
+          "max": 1.2669737942435761
+        },
+        "supported_motion_angle_count": 1,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 43.21382070389506,
+          "median": 43.21382070389506,
+          "p90": 43.21382070389506,
+          "max": 43.21382070389506
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.044591584663179744,
+            "median": 0.044591584663179744,
+            "p90": 0.044591584663179744,
+            "max": 0.044591584663179744
+          },
+          "full_velocity": {
+            "min": 0.31480174188627497,
+            "median": 0.31480174188627497,
+            "p90": 0.31480174188627497,
+            "max": 0.31480174188627497
+          },
+          "tangent": {
+            "min": 0.31091226006115297,
+            "median": 0.31091226006115297,
+            "p90": 0.31091226006115297,
+            "max": 0.31091226006115297
+          }
+        },
+        "changed_from_probability": {
+          "normal": 0,
+          "full_velocity": 0,
+          "tangent": 0
+        }
+      },
+      "independent": {
+        "windows": 13,
+        "supported": 0,
+        "fallback": 13,
+        "reasons": {
+          "beyond_5m": 13
+        },
+        "nearest_finite_edge_m": {
+          "min": 7.1440215478972915,
+          "median": 11.46347683311753,
+          "p90": 14.088872770869724,
+          "max": 14.298924595233059
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.8698804801810479,
+          "p90": 1.2033496678002789,
+          "max": 1.2669737942435761
+        },
+        "supported_motion_angle_count": 0,
+        "supported_unoriented_motion_angle_degrees": null,
+        "supported_score_span_m": {
+          "normal": null,
+          "full_velocity": null,
+          "tangent": null
+        },
+        "changed_from_probability": {
+          "normal": 0,
+          "full_velocity": 0,
+          "tangent": 0
+        }
+      },
+      "map_comparison": {
+        "both_supported": 0,
+        "first_only": 1,
+        "independent_only": 0,
+        "neither": 12,
+        "same_normal_mode_if_both": 0
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_0": {
+      "first": {
+        "windows": 28,
+        "supported": 4,
+        "fallback": 24,
+        "reasons": {
+          "insufficient_visible_arc": 20,
+          "supported": 4,
+          "anchor_outside_control_hull": 1,
+          "beyond_5m": 3
+        },
+        "nearest_finite_edge_m": {
+          "min": 0.440834082596226,
+          "median": 2.4871958311557316,
+          "p90": 5.330684013683482,
+          "max": 6.69604312433746
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 1.0309964600461798,
+          "p90": 1.6574614753758514,
+          "max": 2.3635194272948135
+        },
+        "supported_motion_angle_count": 4,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 17.122664051587293,
+          "median": 43.90845058525907,
+          "p90": 55.25759579747189,
+          "max": 59.33049685656853
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.08324883413569936,
+            "median": 0.23967514394560402,
+            "p90": 0.35624336137516976,
+            "max": 0.39615754640878037
+          },
+          "full_velocity": {
+            "min": 0.22010068486305737,
+            "median": 0.2556501586415255,
+            "p90": 0.3521903308150891,
+            "max": 0.37947983765382315
+          },
+          "tangent": {
+            "min": 0.12964017432121905,
+            "median": 0.21851034909753875,
+            "p90": 0.2749212014533155,
+            "max": 0.2890207406833334
+          }
+        },
+        "changed_from_probability": {
+          "normal": 4,
+          "full_velocity": 4,
+          "tangent": 3
+        }
+      },
+      "independent": {
+        "windows": 28,
+        "supported": 1,
+        "fallback": 27,
+        "reasons": {
+          "beyond_5m": 18,
+          "insufficient_visible_arc": 8,
+          "anchor_outside_control_hull": 1,
+          "supported": 1
+        },
+        "nearest_finite_edge_m": {
+          "min": 0.3024408828194966,
+          "median": 8.703565322097642,
+          "p90": 15.743500223365011,
+          "max": 18.06497925992913
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 1.0309964600461798,
+          "p90": 1.6574614753758514,
+          "max": 2.3635194272948135
+        },
+        "supported_motion_angle_count": 1,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 19.423607225231613,
+          "median": 19.423607225231613,
+          "p90": 19.423607225231613,
+          "max": 19.423607225231613
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.26836350844825335,
+            "median": 0.26836350844825335,
+            "p90": 0.26836350844825335,
+            "max": 0.26836350844825335
+          },
+          "full_velocity": {
+            "min": 0.22010068486305737,
+            "median": 0.22010068486305737,
+            "p90": 0.22010068486305737,
+            "max": 0.22010068486305737
+          },
+          "tangent": {
+            "min": 0.12319334492294863,
+            "median": 0.12319334492294863,
+            "p90": 0.12319334492294863,
+            "max": 0.12319334492294863
+          }
+        },
+        "changed_from_probability": {
+          "normal": 1,
+          "full_velocity": 1,
+          "tangent": 0
+        }
+      },
+      "map_comparison": {
+        "both_supported": 1,
+        "first_only": 3,
+        "independent_only": 0,
+        "neither": 24,
+        "same_normal_mode_if_both": 1
+      }
+    },
+    "thailand_street_winter_daytime_sunny_0": {
+      "first": {
+        "windows": 13,
+        "supported": 2,
+        "fallback": 11,
+        "reasons": {
+          "beyond_5m": 7,
+          "supported": 2,
+          "insufficient_visible_arc": 1,
+          "anchor_outside_control_hull": 3
+        },
+        "nearest_finite_edge_m": {
+          "min": 1.9443931869191495,
+          "median": 5.623830214520979,
+          "p90": 6.0999347587885735,
+          "max": 6.439758885252083
+        },
+        "speed_m_s": {
+          "min": 0.22935623754326517,
+          "median": 0.6226459907523577,
+          "p90": 1.4754241533994177,
+          "max": 1.5576824821830504
+        },
+        "supported_motion_angle_count": 2,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 6.038192957087307,
+          "median": 45.442390648098495,
+          "p90": 76.96574880090745,
+          "max": 84.84658833910969
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.12958948596696984,
+            "median": 0.13606375685293795,
+            "p90": 0.14124317356171243,
+            "max": 0.14253802773890606
+          },
+          "full_velocity": {
+            "min": 0.14279379175400272,
+            "median": 0.1433716965038383,
+            "p90": 0.14383402030370673,
+            "max": 0.14394960125367384
+          },
+          "tangent": {
+            "min": 0.08768980060430115,
+            "median": 0.09968679887743839,
+            "p90": 0.10928439749594818,
+            "max": 0.11168379715057562
+          }
+        },
+        "changed_from_probability": {
+          "normal": 1,
+          "full_velocity": 2,
+          "tangent": 1
+        }
+      },
+      "independent": {
+        "windows": 13,
+        "supported": 0,
+        "fallback": 13,
+        "reasons": {
+          "beyond_5m": 10,
+          "anchor_outside_control_hull": 3
+        },
+        "nearest_finite_edge_m": {
+          "min": 10.368656789415345,
+          "median": 18.31623790453252,
+          "p90": 21.078257425030035,
+          "max": 21.400627733645784
+        },
+        "speed_m_s": {
+          "min": 0.22935623754326517,
+          "median": 0.6226459907523577,
+          "p90": 1.4754241533994177,
+          "max": 1.5576824821830504
+        },
+        "supported_motion_angle_count": 0,
+        "supported_unoriented_motion_angle_degrees": null,
+        "supported_score_span_m": {
+          "normal": null,
+          "full_velocity": null,
+          "tangent": null
+        },
+        "changed_from_probability": {
+          "normal": 0,
+          "full_velocity": 0,
+          "tangent": 0
+        }
+      },
+      "map_comparison": {
+        "both_supported": 0,
+        "first_only": 2,
+        "independent_only": 0,
+        "neither": 11,
+        "same_normal_mode_if_both": 0
+      }
+    }
+  }
+}

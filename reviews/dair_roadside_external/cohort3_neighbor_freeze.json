@@ -1,0 +1,26 @@
+{
+  "utc": "2026-11-24T19:16:52.392798+00:00",
+  "cohort_keys_sha256": "7f5771e9cd540259b7a059bfef8794600cd563adf96d733e71503925b94b2c71",
+  "objective": "Descriptive support for roadside interactions on all 54 fixed third-cohort windows; no fitting, no outcome-based thresholds. Written after source label census and after pilot outcomes. The third-cohort archive exists; the registration author has not inspected its outcome metrics.",
+  "clock": "Only final observed camera exposure t0. Use source camera-time labels at t0 and virtual-LiDAR XY centres in the same instant. No neighbor needs any future observation or persistence. Count exactly one source instance per (category,track_id) at t0. Report duplicates as errors.",
+  "distance": "Planar Euclidean target-to-neighbor distance in native metric XY. Inclusion radius <=10.0 m. List distinct and overlapping windows for every class-group plus per-sequence/local-person denominators; describe nearest distance where supported. No threshold search.",
+  "groups": {
+    "Cyclist": [
+      "Cyclist"
+    ],
+    "Motorcyclist": [
+      "Motorcyclist"
+    ],
+    "motor_vehicle_four_wheel": [
+      "Car",
+      "Van",
+      "Truck",
+      "Bus"
+    ],
+    "other_person": [
+      "Pedestrian"
+    ]
+  },
+  "classification": "Count other raw category labels verbatim without recoding. Exclude only the target Pedestrian. Cyclist and Motorcyclist are separate authoritative tags; propulsion and users’ legal road classes are not independently established. The two-wheel class cannot be inferred from raw imagery.",
+  "limits": "These are annotated neighbours near a pedestrian at decision time, not measured interactions, yielding, causality, future membership or a new fitted model. Validate numbers across all 54 windows without looking up forecasts. No outcome tests or claims of model benefit are registered."
+}

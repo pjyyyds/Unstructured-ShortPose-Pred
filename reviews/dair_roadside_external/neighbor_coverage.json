@@ -1,0 +1,426 @@
+{
+  "study": "Roadside source labels at last observed camera time for 54 predefined pedestrian windows. Category support only. Labelled geometric proximity does not establish avoidance/yielding.",
+  "protocol_sha256": "534ae1bca28ec0010bb100352cee003ab4db11019da1175085c8ba7b39bbde65",
+  "keys_sha256": "7f5771e9cd540259b7a059bfef8794600cd563adf96d733e71503925b94b2c71",
+  "release": "https://github.com/AIR-THU/DAIR-V2X-Seq/tree/main/dataset/v2x-seq-spd",
+  "groups": {
+    "Cyclist": [
+      "Cyclist"
+    ],
+    "Motorcyclist": [
+      "Motorcyclist"
+    ],
+    "motor_vehicle_four_wheel": [
+      "Car",
+      "Van",
+      "Truck",
+      "Bus"
+    ],
+    "other_person": [
+      "Pedestrian"
+    ]
+  },
+  "duplicate_id_audit": {
+    "affected_windows": 3,
+    "occurrences": [
+      {
+        "source_sequence": "0066",
+        "duplicate_categories": [
+          "Car"
+        ]
+      },
+      {
+        "source_sequence": "0066",
+        "duplicate_categories": [
+          "Car"
+        ]
+      },
+      {
+        "source_sequence": "0066",
+        "duplicate_categories": [
+          "Car"
+        ]
+      }
+    ],
+    "policy": "Report the source duplicate as an error for that window and class-group. Joint overlaps use only windows with unambiguous IDs in every group; unaffected class coverage uses all valid windows. No duplicated instance is silently selected or counted."
+  },
+  "unit": "window at t0; a physical image or actor can contribute to multiple candidate windows; each count is a window-neighbour incidence",
+  "raw_label_counts_across_54_target_frames": {
+    "Car": 697,
+    "Motorcyclist": 155,
+    "Pedestrian": 266,
+    "Van": 71,
+    "Truck": 36,
+    "Bus": 55,
+    "Cyclist": 58,
+    "Barrowlist": 2
+  },
+  "overall": {
+    "support": {
+      "windows": 54,
+      "people": 29,
+      "sequences": 10
+    },
+    "within_10m": {
+      "Cyclist": {
+        "windows": 10,
+        "people": 4,
+        "sequences": 3,
+        "evaluable_windows": 54,
+        "duplicate_id_unevaluable_windows": 0,
+        "neighbor_instances": 10,
+        "nearest_m_min_median_max_present_within_10m": [
+          4.982161146366103,
+          6.061452971408917,
+          9.56110371340569
+        ]
+      },
+      "Motorcyclist": {
+        "windows": 9,
+        "people": 9,
+        "sequences": 3,
+        "evaluable_windows": 54,
+        "duplicate_id_unevaluable_windows": 0,
+        "neighbor_instances": 12,
+        "nearest_m_min_median_max_present_within_10m": [
+          3.5409466358369466,
+          7.522755257419245,
+          9.245053546991494
+        ]
+      },
+      "motor_vehicle_four_wheel": {
+        "windows": 10,
+        "people": 8,
+        "sequences": 3,
+        "evaluable_windows": 51,
+        "duplicate_id_unevaluable_windows": 3,
+        "neighbor_instances": 12,
+        "nearest_m_min_median_max_present_within_10m": [
+          2.3748695012419105,
+          7.505442347185029,
+          9.848101173071731
+        ]
+      },
+      "other_person": {
+        "windows": 33,
+        "people": 20,
+        "sequences": 5,
+        "evaluable_windows": 54,
+        "duplicate_id_unevaluable_windows": 0,
+        "neighbor_instances": 58,
+        "nearest_m_min_median_max_present_within_10m": [
+          0.5021260178650414,
+          0.7154614232542525,
+          8.925950450565693
+        ]
+      }
+    },
+    "overlapping_10m": {
+      "none": 15,
+      "motor_vehicle_four_wheel": 3,
+      "Motorcyclist,motor_vehicle_four_wheel": 1,
+      "Motorcyclist": 1,
+      "Cyclist": 1,
+      "other_person": 13,
+      "Motorcyclist,motor_vehicle_four_wheel,other_person": 4,
+      "motor_vehicle_four_wheel,other_person": 2,
+      "Motorcyclist,other_person": 2,
+      "Cyclist,Motorcyclist,other_person": 1,
+      "Cyclist,other_person": 8
+    },
+    "jointly_evaluable_windows": 51
+  },
+  "by_site": {
+    "yizhuang08": {
+      "support": {
+        "windows": 0,
+        "people": 0,
+        "sequences": 0
+      },
+      "within_10m": {
+        "Cyclist": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 0,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "Motorcyclist": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 0,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "motor_vehicle_four_wheel": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 0,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "other_person": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 0,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        }
+      },
+      "overlapping_10m": {},
+      "jointly_evaluable_windows": 0
+    },
+    "yizhuang09": {
+      "support": {
+        "windows": 13,
+        "people": 4,
+        "sequences": 3
+      },
+      "within_10m": {
+        "Cyclist": {
+          "windows": 1,
+          "people": 1,
+          "sequences": 1,
+          "evaluable_windows": 13,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 1,
+          "nearest_m_min_median_max_present_within_10m": [
+            6.410910123146401,
+            6.410910123146401,
+            6.410910123146401
+          ]
+        },
+        "Motorcyclist": {
+          "windows": 2,
+          "people": 2,
+          "sequences": 2,
+          "evaluable_windows": 13,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 2,
+          "nearest_m_min_median_max_present_within_10m": [
+            7.522755257419245,
+            7.593330525678214,
+            7.6639057939371815
+          ]
+        },
+        "motor_vehicle_four_wheel": {
+          "windows": 2,
+          "people": 1,
+          "sequences": 1,
+          "evaluable_windows": 13,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 2,
+          "nearest_m_min_median_max_present_within_10m": [
+            6.565538883281779,
+            7.046371590111588,
+            7.527204296941396
+          ]
+        },
+        "other_person": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 13,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        }
+      },
+      "overlapping_10m": {
+        "none": 9,
+        "motor_vehicle_four_wheel": 1,
+        "Motorcyclist,motor_vehicle_four_wheel": 1,
+        "Motorcyclist": 1,
+        "Cyclist": 1
+      },
+      "jointly_evaluable_windows": 13
+    },
+    "yizhuang10": {
+      "support": {
+        "windows": 1,
+        "people": 1,
+        "sequences": 1
+      },
+      "within_10m": {
+        "Cyclist": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 1,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "Motorcyclist": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 1,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "motor_vehicle_four_wheel": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 1,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "other_person": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 1,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        }
+      },
+      "overlapping_10m": {
+        "none": 1
+      },
+      "jointly_evaluable_windows": 1
+    },
+    "yizhuang13": {
+      "support": {
+        "windows": 18,
+        "people": 7,
+        "sequences": 2
+      },
+      "within_10m": {
+        "Cyclist": {
+          "windows": 8,
+          "people": 2,
+          "sequences": 1,
+          "evaluable_windows": 18,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 8,
+          "nearest_m_min_median_max_present_within_10m": [
+            4.982161146366103,
+            6.704050345424435,
+            9.56110371340569
+          ]
+        },
+        "Motorcyclist": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 18,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "motor_vehicle_four_wheel": {
+          "windows": 0,
+          "people": 0,
+          "sequences": 0,
+          "evaluable_windows": 18,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 0,
+          "nearest_m_min_median_max_present_within_10m": null
+        },
+        "other_person": {
+          "windows": 16,
+          "people": 6,
+          "sequences": 2,
+          "evaluable_windows": 18,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 16,
+          "nearest_m_min_median_max_present_within_10m": [
+            0.5577757400604634,
+            0.7144983870939485,
+            7.036158252763368
+          ]
+        }
+      },
+      "overlapping_10m": {
+        "none": 2,
+        "other_person": 8,
+        "Cyclist,other_person": 8
+      },
+      "jointly_evaluable_windows": 18
+    },
+    "yizhuang16": {
+      "support": {
+        "windows": 22,
+        "people": 17,
+        "sequences": 4
+      },
+      "within_10m": {
+        "Cyclist": {
+          "windows": 1,
+          "people": 1,
+          "sequences": 1,
+          "evaluable_windows": 22,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 1,
+          "nearest_m_min_median_max_present_within_10m": [
+            5.44553158374396,
+            5.44553158374396,
+            5.44553158374396
+          ]
+        },
+        "Motorcyclist": {
+          "windows": 7,
+          "people": 7,
+          "sequences": 1,
+          "evaluable_windows": 22,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 10,
+          "nearest_m_min_median_max_present_within_10m": [
+            3.5409466358369466,
+            7.431531366982182,
+            9.245053546991494
+          ]
+        },
+        "motor_vehicle_four_wheel": {
+          "windows": 8,
+          "people": 7,
+          "sequences": 2,
+          "evaluable_windows": 19,
+          "duplicate_id_unevaluable_windows": 3,
+          "neighbor_instances": 10,
+          "nearest_m_min_median_max_present_within_10m": [
+            2.3748695012419105,
+            7.876380190895443,
+            9.848101173071731
+          ]
+        },
+        "other_person": {
+          "windows": 17,
+          "people": 14,
+          "sequences": 3,
+          "evaluable_windows": 22,
+          "duplicate_id_unevaluable_windows": 0,
+          "neighbor_instances": 42,
+          "nearest_m_min_median_max_present_within_10m": [
+            0.5021260178650414,
+            0.7376419366094886,
+            8.925950450565693
+          ]
+        }
+      },
+      "overlapping_10m": {
+        "none": 3,
+        "motor_vehicle_four_wheel": 2,
+        "other_person": 5,
+        "Motorcyclist,motor_vehicle_four_wheel,other_person": 4,
+        "motor_vehicle_four_wheel,other_person": 2,
+        "Motorcyclist,other_person": 2,
+        "Cyclist,Motorcyclist,other_person": 1
+      },
+      "jointly_evaluable_windows": 19
+    }
+  }
+}
