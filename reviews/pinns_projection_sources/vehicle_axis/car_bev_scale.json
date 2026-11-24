@@ -1,0 +1,3206 @@
+{
+  "purpose": "Release-wide coordinate correspondence: all original Car rows, not a forecast evaluation.",
+  "official_fields": "https://github.com/Songan-Lab/PINNS#annotation-format",
+  "program_sha256": "da48a37493862e537ea78ba81c0591b0faf0158a7446a2755ff157f88c9dc7da",
+  "inputs_sha256": {
+    "videos/america_crossroad_spring_daytime_sunny/calib.json": "b1a76f0d526e34d50b9764b86d49b9550a9b58a2a3effc8f77de258844b12300",
+    "videos/america_crossroad_summer_daytime_sunny/calib.json": "d89f3207a2b71f9d970a0d0c4ac80246f07ec97f3eff21adfef53a97377283ea",
+    "videos/america_crossroad_summer_night_sunny/calib.json": "fea8d741852d7bba426c81078185a0ce80712ba3bb80152190b0a5203645fd38",
+    "videos/america_crossroad_summer_nightfall_sunny/calib.json": "36c5f559ecc24af39d4117e9124cdf22f2298293ab96da737dc20d5cf73ba634",
+    "videos/america_crossroad_winter_daytime_sunny/calib.json": "a39df601aa3457c10884703fde0793af8e4d8039800c2bb3386c0687ab1b1cca",
+    "videos/america_crossroad_winter_night_snow/calib.json": "4b2ce029d4d7ad1fe9263f395a7c5ebabd9528a94b9412d84718bcfe8e124345",
+    "videos/america_crossroad_winter_nightfall_sunny/calib.json": "b91305b23046f8e25b53ebe66a6d7290e105e8f96b1689d237329db455d15266",
+    "videos/italy_park_spring_night_sunny/calib.json": "0fecc09e5231eb3abb2146d495ab7f7d2d5cc8c072adc3507781c2c2de09bd0f",
+    "videos/italy_park_summer_daytime_sunny/calib.json": "e1b5c18c11c76232f2c8dbce437859d47be0bccfdbc34cffe735c7c2bd608b36",
+    "videos/italy_park_summer_nightfall_sunny/calib.json": "eaae0161a23f253bb51d71d050c9ce439164d169dfe4f512fa5dc2ea045d5aff",
+    "videos/italy_park_winter_daytime_snow/calib.json": "c5d5eaba1615156f596e9a49096db7cf4d924a8a3bf1f7da17885d3af12b6efc",
+    "videos/japan_crossroad_summer_daytime_sunny/calib.json": "45838096d7bc7d9c853b6962b6ca04de3bff9a5b200e2073124f24f7c17fe618",
+    "videos/japan_crossroad_summer_morning_sunny/calib.json": "467be62358cdf97527be786e457105658d8bc1a1ae6ff7bba4bca2d747d4962f",
+    "videos/japan_crossroad_summer_night_sunny/calib.json": "e3e3eca3d53d9ff93f0a81281c874303f9687d770ac776ebb9266ed89507fa22",
+    "videos/japan_crossroad_winter_daytime_sunny/calib.json": "ac96e6926671e5f51932f4205f2dc167dcbe8b78da1e23c936b9de885da10f98",
+    "videos/japan_crossroad_winter_nightfall_sunny/calib.json": "4697c68650babc0a764038e3473b1ad0e8b9e6513d9a26c1148e8b5685aed40c",
+    "videos/thailand_street_summer_daytime_afterraining/calib.json": "c44325f0f16f958577c125b94b3df767e38395c5218b52ca5e800e24ed58d856",
+    "videos/thailand_street_summer_night_sunny/calib.json": "3d64fffc86e184b820117abcf0b28a2174ecd09a5d86f63b6a154d484d510305",
+    "videos/thailand_street_summer_nightfall_sunny/calib.json": "47ba2549f5b3d15ecc8c65cd3488935429dfae5c4e7cde5b34efe23389453a0e",
+    "videos/thailand_street_winter_daytime_sunny/calib.json": "f6fadeed8fe9294bac20e171ed79bc61036263e835389ba54d475e3a3e05e328",
+    "videos/thailand_street_winter_night_sunny/calib.json": "19b77a540fee48418a5177120179626146d8f8b7b8b4121f4977146471fd3a4d",
+    "videos/thailand_street_winter_nightfall_sunny/calib.json": "18003b92d219b8a5bedf3dab7b3d51d7d9c08014f0d2198d9afe7082fa781293",
+    "labels/america_crossroad_spring_daytime_sunny_1.txt": "3b7fd36bf48b6d3eecedc53d73058f1f9081455fe83590dbe6fdebcf00e06533",
+    "labels/america_crossroad_spring_daytime_sunny_2.txt": "2be6f477f5fbf4756a70b31d852d243cca05dc08e3439979b92ed7c10d89014c",
+    "labels/america_crossroad_summer_daytime_sunny_0.txt": "d3181bb14da3ca881bd2dd411d926d900d2b8d0fdbfb8bccece43e5fb1e72129",
+    "labels/america_crossroad_summer_daytime_sunny_1.txt": "5641c92e1240ac3fcf33fe89b7ad386ae4d8a9892c08a92793f14c3ff6e0dfb5",
+    "labels/america_crossroad_summer_night_sunny_0.txt": "42de727c285fd974c5263d2ced51fea26c938c261bf67e98418a49b722c06d70",
+    "labels/america_crossroad_summer_night_sunny_1.txt": "562d5965c21e0a8975e7f1f88300600ef7bc1bbb85e78dfca3232ac035a8f10f",
+    "labels/america_crossroad_summer_nightfall_sunny_0.txt": "66a0cb4156ca380adf387f83aae4e677c5217166657c2442f2594891ead842ee",
+    "labels/america_crossroad_summer_nightfall_sunny_1.txt": "1111a8496fed32d93a3a66aeb9dbf01dabdb1d56dfc44dd4cce5b47587648567",
+    "labels/america_crossroad_winter_daytime_sunny_0.txt": "8474f415390f24fec5e12aeeabb76deb018db47e513596f0ec85fe9a70d83d75",
+    "labels/america_crossroad_winter_daytime_sunny_1.txt": "208029e0378fc9c3a60a191afda9854239c68a93a1496d0fc61003946ac9f6a0",
+    "labels/america_crossroad_winter_night_snow_0.txt": "4722f8bb7fef40748329c29e49fe1d0bd691d824f9d17a2cc0eb76e4f7d8ee4c",
+    "labels/america_crossroad_winter_night_snow_1.txt": "d7cf75cdb507d35280721b203f674851d9ae4901bf6c02461a91c3055f7f77c5",
+    "labels/america_crossroad_winter_nightfall_sunny_0.txt": "81e8e5f9401327e7eccd1fd2c540a3ab2d0e6210a530501e0cb4b304df59c986",
+    "labels/america_crossroad_winter_nightfall_sunny_1.txt": "5c82288393b09173803b51fa26787b75bfda97c22b6d17afb0247271b4bb14cd",
+    "labels/italy_park_spring_night_sunny_0.txt": "3b20dba814a1c9fdb454f0c4ed708595a5982f1709d84036ec589531534bca4a",
+    "labels/italy_park_summer_daytime_sunny_0.txt": "499e4de7f6f6d015d5b29348a4fa077b4e2586c75366bea26bd346fa4564c8fb",
+    "labels/italy_park_summer_daytime_sunny_1.txt": "b5a98651c28a4a43b0945dc6bcec53ca222caa6c4582a4f2065da24fb7735fee",
+    "labels/italy_park_summer_nightfall_sunny_0.txt": "33c8e954f6e7af4ad0ac35acdb2ad980552217688e4b4dbca081c859e971f377",
+    "labels/italy_park_summer_nightfall_sunny_1.txt": "8d903affa58d50a067962e7047e959faa1659a007d142e24162d1985fc389b2e",
+    "labels/italy_park_winter_daytime_snow_0.txt": "9c686ed2b5deca5e8eabf162de968eb50d449cc7cc6499c84ced3c2be54d50f3",
+    "labels/italy_park_winter_daytime_snow_1.txt": "a6794987582b36ca59d5aa93afa91f2c51f5a8c23e0e4e501e8ee6a791b6dbc6",
+    "labels/italy_park_winter_daytime_snow_2.txt": "77f00b3cc404bfeb06fb95b6740e00c04e35d8e76e2a2a6f50948ffc2a7702be",
+    "labels/italy_park_winter_daytime_snow_3.txt": "da50332fa915e1c406d04108624ec05c68af67834c208fe566c3f55307201cd3",
+    "labels/japan_crossroad_summer_daytime_sunny_0.txt": "c4edbe564e0f9fc6da139210c21fd6a7ae6873ea4c348159da455ddf236dcac2",
+    "labels/japan_crossroad_summer_daytime_sunny_1.txt": "0710fcac23f4a2a822ff6d39739c901d574e6554cd9fd41a3f7e4fd91f587833",
+    "labels/japan_crossroad_summer_morning_sunny_0.txt": "d74e8fe85d991ed1ff56a27b11b69b4b4dc042aa8945a5a6fc8ccf7cf0466dfb",
+    "labels/japan_crossroad_summer_morning_sunny_1.txt": "1f25637d6ddc729be86b7b7122223fe7b4d2ead75dbe626f7f553b58b77c85dd",
+    "labels/japan_crossroad_summer_night_sunny_0.txt": "8f4fc5c452e5110cefedd5b61e6338bf1ee3791fc316c9fc48b5f34b30db8d24",
+    "labels/japan_crossroad_summer_night_sunny_1.txt": "28bc7ed6c3457c01d4160b9c1cf132263e7a38cbe6e835b27472bb026b56c493",
+    "labels/japan_crossroad_summer_night_sunny_2.txt": "0d0046c0db16b3bfa64398f1504637b3bf964d7718169bd1df50786e522a1f48",
+    "labels/japan_crossroad_winter_daytime_sunny_0.txt": "e2c436b06c8f6a4a6adc8b1826650b057b48efa38d47b6d68090b2419217cc7a",
+    "labels/japan_crossroad_winter_daytime_sunny_1.txt": "db216b16e8407aa2695ed74842060c1f14536b26d82323859681705af7b7609a",
+    "labels/japan_crossroad_winter_nightfall_sunny_0.txt": "3ccb28e285010be3f391359eb909ac1b8c8ef63a6669e3aa6ee6b6dce58c4445",
+    "labels/japan_crossroad_winter_nightfall_sunny_1.txt": "272ae9aa4ddc2a29e5c741943bfa7bfb41b0ad8e7859b97e1a444ab3e3c036df",
+    "labels/thailand_street_summer_daytime_afterraining_0.txt": "5a73f5f50131ea9270852a2151cb627a46470b06d1c5b6bc6450a8377882b379",
+    "labels/thailand_street_summer_daytime_afterraining_1.txt": "1c30b84ace41d71ec026dfcc2065e7df9b7358cfe599c81b221a8e3133f38014",
+    "labels/thailand_street_summer_night_sunny_0.txt": "5f4af5ef820aad82dba97c4f5a421cc44aeada9002df22d876232aae33ac9125",
+    "labels/thailand_street_summer_night_sunny_1.txt": "a5bfee6f0ba044c23bd03c90cae8f89bfa4c7876b51970a2b9e7b7dd1f69ec9b",
+    "labels/thailand_street_summer_night_sunny_2.txt": "6f60382ec66c90ccc1e6b69c5594e5d422031c57bd2fca31c22f46ad7d42de50",
+    "labels/thailand_street_summer_nightfall_sunny_0.txt": "cb35a60cc80e3b2ff2ef0418441e6fffc78771418751ef692a04b2e18cbc94bb",
+    "labels/thailand_street_summer_nightfall_sunny_1.txt": "766d390a121711b8b7c52cccbd70dbae53429870be75c9c346e9af0bdfec9c7d",
+    "labels/thailand_street_winter_daytime_sunny_0.txt": "cbd6c0c658c0e10294e20be8d8328c77b13f4af6ba28d4fb88eb48d80606d8d4",
+    "labels/thailand_street_winter_daytime_sunny_1.txt": "9762970078c7151c81e55deae44bdf551e85a311e36931b12cf996af0df850cc",
+    "labels/thailand_street_winter_night_sunny_0.txt": "91a0b721083ce533b0a2b048dc65bc5e5184a3f0335ed5d7ac25607501df48aa",
+    "labels/thailand_street_winter_night_sunny_1.txt": "bb5103148e1cd170ef0756c5c7378c395e5aa7168f6cb169e5acb68472376966",
+    "labels/thailand_street_winter_nightfall_sunny_0.txt": "306b9abb0645a37943613b5688d7502f27a8f8564feaf8ffa1118f48105c3e5f",
+    "labels/thailand_street_winter_nightfall_sunny_1.txt": "88ba084c777f477345ff261a57d0aafe0130b9627cdd533b5c12b13463332c1b"
+  },
+  "numpy": "2.5.5",
+  "inputs": {
+    "calibrations": 22,
+    "clips": 47,
+    "clips_with_car_rows": 47,
+    "source_rows_car": 47555,
+    "clips_with_local_bev_header_verified": 41
+  },
+  "project_check": {
+    "source_sha256": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+    "opencv": "5.1.0"
+  },
+  "conditions": {
+    "america_crossroad_spring_daytime_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_summer_daytime_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_summer_night_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_summer_nightfall_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_winter_daytime_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_winter_night_snow": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "america_crossroad_winter_nightfall_sunny": {
+      "dimensions_wh": [
+        792,
+        744
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        33.93791723960827,
+        31.350337940201598
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.042850905605565995,
+        0.04213755099489462
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 1.4376063148802132e-06,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005906968260701379,
+      "loader_flip_y": false
+    },
+    "italy_park_spring_night_sunny": {
+      "dimensions_wh": [
+        1152,
+        624
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        48.644946402960244,
+        26.815948477975518
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04222651597479188,
+        0.04297427640701205
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 6.490417092663847e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005586759672894356,
+      "loader_flip_y": false
+    },
+    "italy_park_summer_daytime_sunny": {
+      "dimensions_wh": [
+        1152,
+        624
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        48.644946402960244,
+        26.815948477975518
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04222651597479188,
+        0.04297427640701205
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 6.490417092663847e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005586759672894356,
+      "loader_flip_y": false
+    },
+    "italy_park_summer_nightfall_sunny": {
+      "dimensions_wh": [
+        1152,
+        624
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        48.644946402960244,
+        26.815948477975518
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04222651597479188,
+        0.04297427640701205
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 6.490417092663847e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005586759672894356,
+      "loader_flip_y": false
+    },
+    "italy_park_winter_daytime_snow": {
+      "dimensions_wh": [
+        1152,
+        624
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        48.644946402960244,
+        26.815948477975518
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04222651597479188,
+        0.04297427640701205
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 6.490417092663847e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0005586759672894356,
+      "loader_flip_y": false
+    },
+    "japan_crossroad_summer_daytime_sunny": {
+      "dimensions_wh": [
+        696,
+        480
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        29.943451546662814,
+        20.481900296263863
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.043022200498078755,
+        0.04267062561721638
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 8.725593794167708e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0009261470380452291,
+      "loader_flip_y": false
+    },
+    "japan_crossroad_summer_morning_sunny": {
+      "dimensions_wh": [
+        696,
+        480
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        29.943451546662814,
+        20.481900296263863
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.043022200498078755,
+        0.04267062561721638
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 8.725593794167708e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0009261470380452291,
+      "loader_flip_y": false
+    },
+    "japan_crossroad_summer_night_sunny": {
+      "dimensions_wh": [
+        696,
+        480
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        29.943451546662814,
+        20.481900296263863
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.043022200498078755,
+        0.04267062561721638
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 8.725593794167708e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0009261470380452291,
+      "loader_flip_y": false
+    },
+    "japan_crossroad_winter_daytime_sunny": {
+      "dimensions_wh": [
+        696,
+        480
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        29.943451546662814,
+        20.481900296263863
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.043022200498078755,
+        0.04267062561721638
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 8.725593794167708e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0009261470380452291,
+      "loader_flip_y": false
+    },
+    "japan_crossroad_winter_nightfall_sunny": {
+      "dimensions_wh": [
+        696,
+        480
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        29.943451546662814,
+        20.481900296263863
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.043022200498078755,
+        0.04267062561721638
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 8.725593794167708e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.0009261470380452291,
+      "loader_flip_y": false
+    },
+    "thailand_street_summer_daytime_afterraining": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    },
+    "thailand_street_summer_night_sunny": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    },
+    "thailand_street_summer_nightfall_sunny": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    },
+    "thailand_street_winter_daytime_sunny": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    },
+    "thailand_street_winter_night_sunny": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    },
+    "thailand_street_winter_nightfall_sunny": {
+      "dimensions_wh": [
+        624,
+        264
+      ],
+      "minimum_xy_m": [
+        0.0,
+        0.0
+      ],
+      "maximum_xy_m": [
+        26.62439479945976,
+        11.560152052569016
+      ],
+      "meters_per_bev_pixel_xy_for_actual_x_and_minus_y_axes": [
+        0.04266729935810859,
+        0.043788454744579604
+      ],
+      "u_axis": "x",
+      "v_axis": "-y",
+      "max_abs_outer_corner_difference_m": 5.710236372635791e-07,
+      "image_to_reference_metric_jacobian_det_at_mean": -0.00024005192295142354,
+      "loader_flip_y": false
+    }
+  },
+  "per_site": {
+    "america_crossroad": {
+      "calibrations": 7,
+      "clips": 14,
+      "metrics": {
+        "raw_width_height": {
+          "n": 30851,
+          "median_m": 3.8625567195469336e-07,
+          "p95_m": 5.804712919763731e-07,
+          "max_m": 7.16337902022533e-07,
+          "mean_m": 3.647227453885189e-07,
+          "rows_within_1um": 30851
+        },
+        "raw_width_height_minus_one": {
+          "n": 30851,
+          "median_m": 0.034655450171042934,
+          "p95_m": 0.04891749742443693,
+          "max_m": 0.05153423748484656,
+          "mean_m": 0.03375764663410283,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 30851,
+          "median_m": 13.529291559392282,
+          "p95_m": 23.82625644717581,
+          "max_m": 28.267554384606754,
+          "mean_m": 13.440179809887999,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 30851,
+          "median_m": 13.536831092764825,
+          "p95_m": 23.863387494469674,
+          "max_m": 28.3076817493001,
+          "mean_m": 13.459527155798556,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 30851,
+          "median_m": 3.8625567195469336e-07,
+          "p95_m": 5.804712919763731e-07,
+          "max_m": 7.16337902022533e-07,
+          "mean_m": 3.647227453885189e-07,
+          "rows_within_1um": 30851
+        }
+      }
+    },
+    "italy_park": {
+      "calibrations": 4,
+      "clips": 9,
+      "metrics": {
+        "raw_width_height": {
+          "n": 7599,
+          "median_m": 4.0397571545792577e-07,
+          "p95_m": 5.947983734327985e-07,
+          "max_m": 7.194378410286116e-07,
+          "mean_m": 3.8113735123823316e-07,
+          "rows_within_1um": 7599
+        },
+        "raw_width_height_minus_one": {
+          "n": 7599,
+          "median_m": 0.036581105079828626,
+          "p95_m": 0.047304281048982065,
+          "max_m": 0.04948236759829766,
+          "mean_m": 0.036447251585095264,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 7599,
+          "median_m": 5.078777817519836,
+          "p95_m": 21.667654423289076,
+          "max_m": 25.02592735652514,
+          "mean_m": 7.885241682603839,
+          "rows_within_1um": 2
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 7599,
+          "median_m": 5.103818157424546,
+          "p95_m": 21.706577376782093,
+          "max_m": 25.067542853843467,
+          "mean_m": 7.9093487979660395,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 7599,
+          "median_m": 4.0397571545792577e-07,
+          "p95_m": 5.947983734327985e-07,
+          "max_m": 7.194378410286116e-07,
+          "mean_m": 3.8113735123823316e-07,
+          "rows_within_1um": 7599
+        }
+      }
+    },
+    "japan_crossroad": {
+      "calibrations": 5,
+      "clips": 11,
+      "metrics": {
+        "raw_width_height": {
+          "n": 5900,
+          "median_m": 3.7855482315722063e-07,
+          "p95_m": 5.86004362080825e-07,
+          "max_m": 7.115089849884639e-07,
+          "mean_m": 3.618473589921335e-07,
+          "rows_within_1um": 5900
+        },
+        "raw_width_height_minus_one": {
+          "n": 5900,
+          "median_m": 0.03601540889471935,
+          "p95_m": 0.04613139826358643,
+          "max_m": 0.054550149580572256,
+          "mean_m": 0.03575077222425199,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 5900,
+          "median_m": 11.36334819239103,
+          "p95_m": 18.56172192361263,
+          "max_m": 19.073769677315934,
+          "mean_m": 10.729368074787669,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 5900,
+          "median_m": 11.382144897531223,
+          "p95_m": 18.602477692457448,
+          "max_m": 19.11506317746054,
+          "mean_m": 10.750408608639288,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 5900,
+          "median_m": 3.7855482315722063e-07,
+          "p95_m": 5.86004362080825e-07,
+          "max_m": 7.115089849884639e-07,
+          "mean_m": 3.618473589921335e-07,
+          "rows_within_1um": 5900
+        }
+      }
+    },
+    "thailand_street": {
+      "calibrations": 6,
+      "clips": 13,
+      "metrics": {
+        "raw_width_height": {
+          "n": 3205,
+          "median_m": 3.996139643051504e-07,
+          "p95_m": 5.949542195389929e-07,
+          "max_m": 7.222932290157763e-07,
+          "mean_m": 3.828178693807107e-07,
+          "rows_within_1um": 3205
+        },
+        "raw_width_height_minus_one": {
+          "n": 3205,
+          "median_m": 0.02669667528299888,
+          "p95_m": 0.03882183541107468,
+          "max_m": 0.04235658127063248,
+          "mean_m": 0.02686837436250773,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 3205,
+          "median_m": 3.0924264511550903,
+          "p95_m": 5.346385219647782,
+          "max_m": 6.0729617319750675,
+          "mean_m": 3.425810408384883,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 3205,
+          "median_m": 3.076528365211731,
+          "p95_m": 5.334649668447512,
+          "max_m": 6.0625835218902555,
+          "mean_m": 3.410442640397151,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 3205,
+          "median_m": 3.996139643051504e-07,
+          "p95_m": 5.949542195389929e-07,
+          "max_m": 7.222932290157763e-07,
+          "mean_m": 3.828178693807107e-07,
+          "rows_within_1um": 3205
+        }
+      }
+    }
+  },
+  "pooled": {
+    "raw_width_height": {
+      "n": 47555,
+      "median_m": 3.8840581256239994e-07,
+      "p95_m": 5.85697409478072e-07,
+      "max_m": 7.222932290157763e-07,
+      "mean_m": 3.68208492050453e-07,
+      "rows_within_1um": 47555
+    },
+    "raw_width_height_minus_one": {
+      "n": 47555,
+      "median_m": 0.0346432598643302,
+      "p95_m": 0.047510193793310444,
+      "max_m": 0.054550149580572256,
+      "mean_m": 0.033970403050336856,
+      "rows_within_1um": 0
+    },
+    "declared_axes_direct_vs_raw": {
+      "n": 47555,
+      "median_m": 11.174156130872651,
+      "p95_m": 23.82625644717581,
+      "max_m": 28.267554384606754,
+      "mean_m": 11.541287621934222,
+      "rows_within_1um": 2
+    },
+    "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+      "n": 47555,
+      "median_m": 11.187031780921677,
+      "p95_m": 23.863387494469674,
+      "max_m": 28.3076817493001,
+      "mean_m": 11.559265971038375,
+      "rows_within_1um": 0
+    },
+    "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+      "n": 47555,
+      "median_m": 3.8840581256239994e-07,
+      "p95_m": 5.85697409478072e-07,
+      "max_m": 7.222932290157763e-07,
+      "mean_m": 3.68208492050453e-07,
+      "rows_within_1um": 47555
+    }
+  },
+  "by_clip": {
+    "america_crossroad_spring_daytime_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 398,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 398,
+          "median_m": 3.3852219259278103e-07,
+          "p95_m": 5.724106361782566e-07,
+          "max_m": 6.901025365090807e-07,
+          "mean_m": 3.5639544857943316e-07,
+          "rows_within_1um": 398
+        },
+        "raw_width_height_minus_one": {
+          "n": 398,
+          "median_m": 0.036561448697407774,
+          "p95_m": 0.038806693653889,
+          "max_m": 0.04150683351076917,
+          "mean_m": 0.03264130390453477,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 398,
+          "median_m": 22.833496096455953,
+          "p95_m": 24.145553136315296,
+          "max_m": 25.028019924363008,
+          "mean_m": 17.569055493421565,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 398,
+          "median_m": 22.869959129996623,
+          "p95_m": 24.18290442525719,
+          "max_m": 25.065960628837512,
+          "mean_m": 17.59246175928887,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 398,
+          "median_m": 3.3852219259278103e-07,
+          "p95_m": 5.724106361782566e-07,
+          "max_m": 6.901025365090807e-07,
+          "mean_m": 3.5639544857943316e-07,
+          "rows_within_1um": 398
+        }
+      }
+    },
+    "america_crossroad_spring_daytime_sunny_2": {
+      "site": "america_crossroad",
+      "n_car_rows": 987,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 987,
+          "median_m": 4.4931874336662375e-07,
+          "p95_m": 5.947429397182614e-07,
+          "max_m": 6.935294013191888e-07,
+          "mean_m": 4.0172418890158126e-07,
+          "rows_within_1um": 987
+        },
+        "raw_width_height_minus_one": {
+          "n": 987,
+          "median_m": 0.019342316058482127,
+          "p95_m": 0.038463638705189325,
+          "max_m": 0.0434096339214406,
+          "mean_m": 0.021953394245808094,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 987,
+          "median_m": 14.449778227552828,
+          "p95_m": 26.909040002770656,
+          "max_m": 27.37003418591684,
+          "mean_m": 14.993199843596154,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 987,
+          "median_m": 14.480611265348628,
+          "p95_m": 26.906055789454555,
+          "max_m": 27.40955580438058,
+          "mean_m": 14.993970716265999,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 987,
+          "median_m": 4.4931874336662375e-07,
+          "p95_m": 5.947429397182614e-07,
+          "max_m": 6.935294013191888e-07,
+          "mean_m": 4.0172418890158126e-07,
+          "rows_within_1um": 987
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 4919,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 4919,
+          "median_m": 4.21440106224246e-07,
+          "p95_m": 5.918372527556565e-07,
+          "max_m": 7.051329410230055e-07,
+          "mean_m": 3.9645741384567757e-07,
+          "rows_within_1um": 4919
+        },
+        "raw_width_height_minus_one": {
+          "n": 4919,
+          "median_m": 0.03441033638631282,
+          "p95_m": 0.04651116003857471,
+          "max_m": 0.050924403265571204,
+          "mean_m": 0.035612475536301855,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 4919,
+          "median_m": 16.824681710519968,
+          "p95_m": 23.65085614800209,
+          "max_m": 24.45326382657782,
+          "mean_m": 15.313309887833169,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 4919,
+          "median_m": 16.8571012250124,
+          "p95_m": 23.687869633932326,
+          "max_m": 24.490818471948106,
+          "mean_m": 15.340520782822622,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 4919,
+          "median_m": 4.21440106224246e-07,
+          "p95_m": 5.918372527556565e-07,
+          "max_m": 7.051329410230055e-07,
+          "mean_m": 3.9645741384567757e-07,
+          "rows_within_1um": 4919
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 3082,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 3082,
+          "median_m": 3.468959526529395e-07,
+          "p95_m": 5.873319325641735e-07,
+          "max_m": 6.931292545191069e-07,
+          "mean_m": 3.300793871457882e-07,
+          "rows_within_1um": 3082
+        },
+        "raw_width_height_minus_one": {
+          "n": 3082,
+          "median_m": 0.03921344629388571,
+          "p95_m": 0.047326929710648905,
+          "max_m": 0.05122088833797553,
+          "mean_m": 0.03681040728470498,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 3082,
+          "median_m": 7.632333869140417,
+          "p95_m": 23.049626687078458,
+          "max_m": 28.267554384606754,
+          "mean_m": 11.31395043708488,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 3082,
+          "median_m": 7.622940372452162,
+          "p95_m": 23.08624006099639,
+          "max_m": 28.3076817493001,
+          "mean_m": 11.331911089005427,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 3082,
+          "median_m": 3.468959526529395e-07,
+          "p95_m": 5.873319325641735e-07,
+          "max_m": 6.931292545191069e-07,
+          "mean_m": 3.300793871457882e-07,
+          "rows_within_1um": 3082
+        }
+      }
+    },
+    "america_crossroad_summer_night_sunny_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 1305,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1305,
+          "median_m": 4.0307621544480343e-07,
+          "p95_m": 6.047486183331781e-07,
+          "max_m": 6.919016296624257e-07,
+          "mean_m": 3.873231045807034e-07,
+          "rows_within_1um": 1305
+        },
+        "raw_width_height_minus_one": {
+          "n": 1305,
+          "median_m": 0.03216031384834568,
+          "p95_m": 0.04647905234764963,
+          "max_m": 0.05153423748484656,
+          "mean_m": 0.031504232498332604,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1305,
+          "median_m": 14.40611777368359,
+          "p95_m": 24.753079514484206,
+          "max_m": 24.92351836112934,
+          "mean_m": 14.366070632622419,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1305,
+          "median_m": 14.42395703541435,
+          "p95_m": 24.79084011093404,
+          "max_m": 24.961390652720137,
+          "mean_m": 14.380384599767641,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1305,
+          "median_m": 4.0307621544480343e-07,
+          "p95_m": 6.047486183331781e-07,
+          "max_m": 6.919016296624257e-07,
+          "mean_m": 3.873231045807034e-07,
+          "rows_within_1um": 1305
+        }
+      }
+    },
+    "america_crossroad_summer_night_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 872,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 872,
+          "median_m": 4.3505365349645256e-07,
+          "p95_m": 6.00976100206643e-07,
+          "max_m": 6.931664771585907e-07,
+          "mean_m": 4.170457406384934e-07,
+          "rows_within_1um": 872
+        },
+        "raw_width_height_minus_one": {
+          "n": 872,
+          "median_m": 0.0345398787182369,
+          "p95_m": 0.03940154116627983,
+          "max_m": 0.045961673185249005,
+          "mean_m": 0.031038084766235593,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 872,
+          "median_m": 15.675168514949604,
+          "p95_m": 23.913838660358536,
+          "max_m": 27.170292470653227,
+          "mean_m": 13.913916233462514,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 872,
+          "median_m": 15.706823037521055,
+          "p95_m": 23.951029151679492,
+          "max_m": 27.20967628983874,
+          "mean_m": 13.932522492676718,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 872,
+          "median_m": 4.3505365349645256e-07,
+          "p95_m": 6.00976100206643e-07,
+          "max_m": 6.931664771585907e-07,
+          "mean_m": 4.170457406384934e-07,
+          "rows_within_1um": 872
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 3717,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 3717,
+          "median_m": 3.304035592342358e-07,
+          "p95_m": 5.705160168359332e-07,
+          "max_m": 7.137807514513526e-07,
+          "mean_m": 3.523503191196035e-07,
+          "rows_within_1um": 3717
+        },
+        "raw_width_height_minus_one": {
+          "n": 3717,
+          "median_m": 0.03573129168351572,
+          "p95_m": 0.046975239180697174,
+          "max_m": 0.04989424839791727,
+          "mean_m": 0.037254770448153514,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 3717,
+          "median_m": 12.749137744406866,
+          "p95_m": 18.909096896505577,
+          "max_m": 25.0280198645646,
+          "mean_m": 13.242094520921194,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 3717,
+          "median_m": 12.778869323252747,
+          "p95_m": 18.94292112708557,
+          "max_m": 25.02377018610766,
+          "mean_m": 13.269275729692438,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 3717,
+          "median_m": 3.304035592342358e-07,
+          "p95_m": 5.705160168359332e-07,
+          "max_m": 7.137807514513526e-07,
+          "mean_m": 3.523503191196035e-07,
+          "rows_within_1um": 3717
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 7532,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 7532,
+          "median_m": 3.967432976033978e-07,
+          "p95_m": 5.303203319743282e-07,
+          "max_m": 6.980936790233776e-07,
+          "mean_m": 3.6934930709162364e-07,
+          "rows_within_1um": 7532
+        },
+        "raw_width_height_minus_one": {
+          "n": 7532,
+          "median_m": 0.037192487648733785,
+          "p95_m": 0.04993825501616975,
+          "max_m": 0.04993825501616975,
+          "mean_m": 0.0368755346359351,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 7532,
+          "median_m": 13.426732998465567,
+          "p95_m": 23.82625644717581,
+          "max_m": 28.006301976522586,
+          "mean_m": 13.940807987266608,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 7532,
+          "median_m": 13.42194190191453,
+          "p95_m": 23.863387494469674,
+          "max_m": 28.046252545482663,
+          "mean_m": 13.96390785398248,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 7532,
+          "median_m": 3.967432976033978e-07,
+          "p95_m": 5.303203319743282e-07,
+          "max_m": 6.980936790233776e-07,
+          "mean_m": 3.6934930709162364e-07,
+          "rows_within_1um": 7532
+        }
+      }
+    },
+    "america_crossroad_winter_daytime_sunny_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 1830,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1830,
+          "median_m": 4.030149284260877e-07,
+          "p95_m": 5.956679593062696e-07,
+          "max_m": 6.993747555791134e-07,
+          "mean_m": 3.8414577559116053e-07,
+          "rows_within_1um": 1830
+        },
+        "raw_width_height_minus_one": {
+          "n": 1830,
+          "median_m": 0.024299966089681574,
+          "p95_m": 0.04468311830460921,
+          "max_m": 0.04950197797000333,
+          "mean_m": 0.028456670530538897,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1830,
+          "median_m": 9.083402124494977,
+          "p95_m": 23.003100369116662,
+          "max_m": 27.118042189036398,
+          "mean_m": 10.366132711713968,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1830,
+          "median_m": 9.075696486229134,
+          "p95_m": 23.023323235567734,
+          "max_m": 27.15739457027698,
+          "mean_m": 10.369310334448707,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1830,
+          "median_m": 4.030149284260877e-07,
+          "p95_m": 5.956679593062696e-07,
+          "max_m": 6.993747555791134e-07,
+          "mean_m": 3.8414577559116053e-07,
+          "rows_within_1um": 1830
+        }
+      }
+    },
+    "america_crossroad_winter_daytime_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 1477,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1477,
+          "median_m": 2.4529708359303176e-07,
+          "p95_m": 5.683804670136407e-07,
+          "max_m": 6.889710871802745e-07,
+          "mean_m": 2.752415439449718e-07,
+          "rows_within_1um": 1477
+        },
+        "raw_width_height_minus_one": {
+          "n": 1477,
+          "median_m": 0.020070433195383087,
+          "p95_m": 0.04190588613232753,
+          "max_m": 0.04820815449417893,
+          "mean_m": 0.023764727676548185,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1477,
+          "median_m": 15.215364036721462,
+          "p95_m": 16.876931932338394,
+          "max_m": 23.356001852825898,
+          "mean_m": 12.839034945078835,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1477,
+          "median_m": 15.244816283701114,
+          "p95_m": 16.86719658671751,
+          "max_m": 23.350625055260483,
+          "mean_m": 12.844024311492953,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1477,
+          "median_m": 2.4529708359303176e-07,
+          "p95_m": 5.683804670136407e-07,
+          "max_m": 6.889710871802745e-07,
+          "mean_m": 2.752415439449718e-07,
+          "rows_within_1um": 1477
+        }
+      }
+    },
+    "america_crossroad_winter_night_snow_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 1170,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1170,
+          "median_m": 4.1555049974395343e-07,
+          "p95_m": 6.495172312613249e-07,
+          "max_m": 6.996414913371034e-07,
+          "mean_m": 4.049481367879744e-07,
+          "rows_within_1um": 1170
+        },
+        "raw_width_height_minus_one": {
+          "n": 1170,
+          "median_m": 0.03717423300586128,
+          "p95_m": 0.04253092233170268,
+          "max_m": 0.04913256574583581,
+          "mean_m": 0.03641958726389757,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1170,
+          "median_m": 4.5402440549587775,
+          "p95_m": 22.36324156190444,
+          "max_m": 25.655026303765023,
+          "mean_m": 10.886114087538829,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1170,
+          "median_m": 4.564471126162419,
+          "p95_m": 22.39938837901871,
+          "max_m": 25.693393760172746,
+          "mean_m": 10.912949261471201,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1170,
+          "median_m": 4.1555049974395343e-07,
+          "p95_m": 6.495172312613249e-07,
+          "max_m": 6.996414913371034e-07,
+          "mean_m": 4.049481367879744e-07,
+          "rows_within_1um": 1170
+        }
+      }
+    },
+    "america_crossroad_winter_night_snow_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 836,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 836,
+          "median_m": 7.362099017508862e-08,
+          "p95_m": 5.525024170656581e-07,
+          "max_m": 6.814132998435746e-07,
+          "mean_m": 2.009125754082104e-07,
+          "rows_within_1um": 836
+        },
+        "raw_width_height_minus_one": {
+          "n": 836,
+          "median_m": 0.014104651851987768,
+          "p95_m": 0.0363246963207032,
+          "max_m": 0.04513352624698958,
+          "mean_m": 0.01795643251660704,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 836,
+          "median_m": 21.31822986976934,
+          "p95_m": 21.31822986976934,
+          "max_m": 23.87850766899425,
+          "mean_m": 17.588995117185487,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 836,
+          "median_m": 21.311482385709336,
+          "p95_m": 21.311482385709336,
+          "max_m": 23.873487904071755,
+          "mean_m": 17.586407299351183,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 836,
+          "median_m": 7.362099017508862e-08,
+          "p95_m": 5.525024170656581e-07,
+          "max_m": 6.814132998435746e-07,
+          "mean_m": 2.009125754082104e-07,
+          "rows_within_1um": 836
+        }
+      }
+    },
+    "america_crossroad_winter_nightfall_sunny_0": {
+      "site": "america_crossroad",
+      "n_car_rows": 618,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 618,
+          "median_m": 3.903169041768301e-07,
+          "p95_m": 6.07096415275118e-07,
+          "max_m": 7.115844361393724e-07,
+          "mean_m": 3.7775315685448797e-07,
+          "rows_within_1um": 618
+        },
+        "raw_width_height_minus_one": {
+          "n": 618,
+          "median_m": 0.027759788230199325,
+          "p95_m": 0.043161205093125196,
+          "max_m": 0.046457120400794694,
+          "mean_m": 0.029434298755488496,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 618,
+          "median_m": 9.192731988612104,
+          "p95_m": 23.192510143003375,
+          "max_m": 26.64778765448488,
+          "mean_m": 10.268666340875127,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 618,
+          "median_m": 9.219503889698805,
+          "p95_m": 23.222891574378487,
+          "max_m": 26.686822839769235,
+          "mean_m": 10.280535002360454,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 618,
+          "median_m": 3.903169041768301e-07,
+          "p95_m": 6.07096415275118e-07,
+          "max_m": 7.115844361393724e-07,
+          "mean_m": 3.7775315685448797e-07,
+          "rows_within_1um": 618
+        }
+      }
+    },
+    "america_crossroad_winter_nightfall_sunny_1": {
+      "site": "america_crossroad",
+      "n_car_rows": 2108,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        792,
+        744
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 2108,
+          "median_m": 4.2246690642298723e-07,
+          "p95_m": 5.520470104405201e-07,
+          "max_m": 7.16337902022533e-07,
+          "mean_m": 3.7987082393569193e-07,
+          "rows_within_1um": 2108
+        },
+        "raw_width_height_minus_one": {
+          "n": 2108,
+          "median_m": 0.035785083895736765,
+          "p95_m": 0.04891749742443693,
+          "max_m": 0.04891749742443693,
+          "mean_m": 0.03357714976126414,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 2108,
+          "median_m": 9.300600157695776,
+          "p95_m": 21.788484464119254,
+          "max_m": 23.878507668994242,
+          "mean_m": 12.254408679612114,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 2108,
+          "median_m": 9.328015103494103,
+          "p95_m": 21.824244143663005,
+          "max_m": 23.873482644807606,
+          "mean_m": 12.272399786453008,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 2108,
+          "median_m": 4.2246690642298723e-07,
+          "p95_m": 5.520470104405201e-07,
+          "max_m": 7.16337902022533e-07,
+          "mean_m": 3.7987082393569193e-07,
+          "rows_within_1um": 2108
+        }
+      }
+    },
+    "italy_park_spring_night_sunny_0": {
+      "site": "italy_park",
+      "n_car_rows": 97,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 97,
+          "median_m": 3.8771445036721765e-07,
+          "p95_m": 6.269288876254251e-07,
+          "max_m": 6.739039814977596e-07,
+          "mean_m": 3.9320772951552313e-07,
+          "rows_within_1um": 97
+        },
+        "raw_width_height_minus_one": {
+          "n": 97,
+          "median_m": 0.03318728829331789,
+          "p95_m": 0.04264444725441573,
+          "max_m": 0.04357140944101991,
+          "mean_m": 0.03368976945768152,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 97,
+          "median_m": 5.304265691159161,
+          "p95_m": 6.571636866220997,
+          "max_m": 6.672997343760763,
+          "mean_m": 5.385807905075583,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 97,
+          "median_m": 5.330064641764973,
+          "p95_m": 6.598476980938113,
+          "max_m": 6.699916340130974,
+          "mean_m": 5.411703161691194,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 97,
+          "median_m": 3.8771445036721765e-07,
+          "p95_m": 6.269288876254251e-07,
+          "max_m": 6.739039814977596e-07,
+          "mean_m": 3.9320772951552313e-07,
+          "rows_within_1um": 97
+        }
+      }
+    },
+    "italy_park_summer_daytime_sunny_0": {
+      "site": "italy_park",
+      "n_car_rows": 1512,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1512,
+          "median_m": 4.081722274533746e-07,
+          "p95_m": 6.04015755386952e-07,
+          "max_m": 7.066801634388661e-07,
+          "mean_m": 3.85147862642506e-07,
+          "rows_within_1um": 1512
+        },
+        "raw_width_height_minus_one": {
+          "n": 1512,
+          "median_m": 0.033280944994092766,
+          "p95_m": 0.04682523733787827,
+          "max_m": 0.0472242245457021,
+          "mean_m": 0.03481071384401493,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1512,
+          "median_m": 2.261782636720595,
+          "p95_m": 22.559272685295728,
+          "max_m": 25.02592735652514,
+          "mean_m": 5.756210542924666,
+          "rows_within_1um": 1
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1512,
+          "median_m": 2.285397567723896,
+          "p95_m": 22.598913146309695,
+          "max_m": 25.067542853843467,
+          "mean_m": 5.779438319499939,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1512,
+          "median_m": 4.081722274533746e-07,
+          "p95_m": 6.04015755386952e-07,
+          "max_m": 7.066801634388661e-07,
+          "mean_m": 3.85147862642506e-07,
+          "rows_within_1um": 1512
+        }
+      }
+    },
+    "italy_park_summer_daytime_sunny_1": {
+      "site": "italy_park",
+      "n_car_rows": 1132,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1132,
+          "median_m": 4.5145471718360116e-07,
+          "p95_m": 5.943412947989605e-07,
+          "max_m": 6.917052655477896e-07,
+          "mean_m": 4.0105332708593346e-07,
+          "rows_within_1um": 1132
+        },
+        "raw_width_height_minus_one": {
+          "n": 1132,
+          "median_m": 0.03223679270168913,
+          "p95_m": 0.03952891903956308,
+          "max_m": 0.04242720124586811,
+          "mean_m": 0.030486900234677754,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1132,
+          "median_m": 2.3237466399389453,
+          "p95_m": 14.306752673613692,
+          "max_m": 21.184599409812577,
+          "mean_m": 5.029481843879762,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1132,
+          "median_m": 2.3042364407246074,
+          "p95_m": 14.339762863802543,
+          "max_m": 21.223127154938165,
+          "mean_m": 5.04361464339971,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1132,
+          "median_m": 4.5145471718360116e-07,
+          "p95_m": 5.943412947989605e-07,
+          "max_m": 6.917052655477896e-07,
+          "mean_m": 4.0105332708593346e-07,
+          "rows_within_1um": 1132
+        }
+      }
+    },
+    "italy_park_summer_nightfall_sunny_0": {
+      "site": "italy_park",
+      "n_car_rows": 1107,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1107,
+          "median_m": 4.049147659330081e-07,
+          "p95_m": 5.70205862086592e-07,
+          "max_m": 6.964456596408961e-07,
+          "mean_m": 3.6990959500802587e-07,
+          "rows_within_1um": 1107
+        },
+        "raw_width_height_minus_one": {
+          "n": 1107,
+          "median_m": 0.035290601604115415,
+          "p95_m": 0.0415263949879206,
+          "max_m": 0.04327677620187216,
+          "mean_m": 0.03467890531796901,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1107,
+          "median_m": 4.848245654675356,
+          "p95_m": 5.550582026317564,
+          "max_m": 7.4190787784410475,
+          "mean_m": 4.641962328851127,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1107,
+          "median_m": 4.873036462824378,
+          "p95_m": 5.573713589488634,
+          "max_m": 7.403621586584893,
+          "mean_m": 4.662728656303013,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1107,
+          "median_m": 4.049147659330081e-07,
+          "p95_m": 5.70205862086592e-07,
+          "max_m": 6.964456596408961e-07,
+          "mean_m": 3.6990959500802587e-07,
+          "rows_within_1um": 1107
+        }
+      }
+    },
+    "italy_park_summer_nightfall_sunny_1": {
+      "site": "italy_park",
+      "n_car_rows": 2261,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 2261,
+          "median_m": 3.875599545673545e-07,
+          "p95_m": 5.890795902421052e-07,
+          "max_m": 7.194378410286116e-07,
+          "mean_m": 3.7159668686590925e-07,
+          "rows_within_1um": 2261
+        },
+        "raw_width_height_minus_one": {
+          "n": 2261,
+          "median_m": 0.04154283912518245,
+          "p95_m": 0.04762683317945244,
+          "max_m": 0.04948236759829766,
+          "mean_m": 0.03981599508591491,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 2261,
+          "median_m": 8.21885324466747,
+          "p95_m": 22.192679927645738,
+          "max_m": 23.96080388579755,
+          "mean_m": 10.290903374045241,
+          "rows_within_1um": 1
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 2261,
+          "median_m": 8.247035498546072,
+          "p95_m": 22.232028762136245,
+          "max_m": 24.001559175046747,
+          "mean_m": 10.319836930358756,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 2261,
+          "median_m": 3.875599545673545e-07,
+          "p95_m": 5.890795902421052e-07,
+          "max_m": 7.194378410286116e-07,
+          "mean_m": 3.7159668686590925e-07,
+          "rows_within_1um": 2261
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_0": {
+      "site": "italy_park",
+      "n_car_rows": 569,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 569,
+          "median_m": 3.9737642681971273e-07,
+          "p95_m": 6.401509486026419e-07,
+          "max_m": 6.959095263766259e-07,
+          "mean_m": 3.911149530664805e-07,
+          "rows_within_1um": 569
+        },
+        "raw_width_height_minus_one": {
+          "n": 569,
+          "median_m": 0.03384296602254564,
+          "p95_m": 0.043766983907236025,
+          "max_m": 0.04595788404432688,
+          "mean_m": 0.0343123616937683,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 569,
+          "median_m": 4.349342166902352,
+          "p95_m": 13.029550340412085,
+          "max_m": 17.523929169036816,
+          "mean_m": 4.951550436826372,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 569,
+          "median_m": 4.37380589897822,
+          "p95_m": 13.061536599141613,
+          "max_m": 17.559519954817382,
+          "mean_m": 4.971227940786627,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 569,
+          "median_m": 3.9737642681971273e-07,
+          "p95_m": 6.401509486026419e-07,
+          "max_m": 6.959095263766259e-07,
+          "mean_m": 3.911149530664805e-07,
+          "rows_within_1um": 569
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_1": {
+      "site": "italy_park",
+      "n_car_rows": 300,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        1152,
+        624
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 300,
+          "median_m": 3.972625245239033e-07,
+          "p95_m": 6.107338258786853e-07,
+          "max_m": 7.060082053770388e-07,
+          "mean_m": 3.8358038811298644e-07,
+          "rows_within_1um": 300
+        },
+        "raw_width_height_minus_one": {
+          "n": 300,
+          "median_m": 0.04566799066953754,
+          "p95_m": 0.047221453655154004,
+          "max_m": 0.0472714790042403,
+          "mean_m": 0.04563021327866492,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 300,
+          "median_m": 13.999980844404066,
+          "p95_m": 21.85904904500346,
+          "max_m": 22.290121982139553,
+          "mean_m": 13.09511105166028,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 300,
+          "median_m": 14.032774488539602,
+          "p95_m": 21.89812991038528,
+          "max_m": 22.329547840385263,
+          "mean_m": 13.124034726365092,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 300,
+          "median_m": 3.972625245239033e-07,
+          "p95_m": 6.107338258786853e-07,
+          "max_m": 7.060082053770388e-07,
+          "mean_m": 3.8358038811298644e-07,
+          "rows_within_1um": 300
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_2": {
+      "site": "italy_park",
+      "n_car_rows": 252,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 252,
+          "median_m": 4.0049513010942166e-07,
+          "p95_m": 5.796024640761075e-07,
+          "max_m": 6.790349758055989e-07,
+          "mean_m": 3.8171428917712125e-07,
+          "rows_within_1um": 252
+        },
+        "raw_width_height_minus_one": {
+          "n": 252,
+          "median_m": 0.04508391904367878,
+          "p95_m": 0.0462031509746241,
+          "max_m": 0.046339703429941016,
+          "mean_m": 0.044464371529518064,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 252,
+          "median_m": 19.667521242081023,
+          "p95_m": 21.968953416268416,
+          "max_m": 22.09210584754537,
+          "mean_m": 17.874763389108193,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 252,
+          "median_m": 19.704839648350486,
+          "p95_m": 22.00811597498924,
+          "max_m": 22.131367044113578,
+          "mean_m": 17.91065452021035,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 252,
+          "median_m": 4.0049513010942166e-07,
+          "p95_m": 5.796024640761075e-07,
+          "max_m": 6.790349758055989e-07,
+          "mean_m": 3.8171428917712125e-07,
+          "rows_within_1um": 252
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_3": {
+      "site": "italy_park",
+      "n_car_rows": 369,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 369,
+          "median_m": 3.93474648698967e-07,
+          "p95_m": 5.823293190738852e-07,
+          "max_m": 6.699169500264423e-07,
+          "mean_m": 3.748105459092654e-07,
+          "rows_within_1um": 369
+        },
+        "raw_width_height_minus_one": {
+          "n": 369,
+          "median_m": 0.040727539395593225,
+          "p95_m": 0.044551570923911384,
+          "max_m": 0.044764621694527516,
+          "mean_m": 0.037177382847968767,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 369,
+          "median_m": 16.372579529040866,
+          "p95_m": 22.396148492489516,
+          "max_m": 22.570089745493608,
+          "mean_m": 14.482313485848813,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 369,
+          "median_m": 16.407260045384717,
+          "p95_m": 22.435653250872228,
+          "max_m": 22.609733103323542,
+          "mean_m": 14.515468336771804,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 369,
+          "median_m": 3.93474648698967e-07,
+          "p95_m": 5.823293190738852e-07,
+          "max_m": 6.699169500264423e-07,
+          "mean_m": 3.748105459092654e-07,
+          "rows_within_1um": 369
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_0": {
+      "site": "japan_crossroad",
+      "n_car_rows": 252,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 252,
+          "median_m": 3.9855002547309936e-07,
+          "p95_m": 5.993434193414487e-07,
+          "max_m": 6.591111616020344e-07,
+          "mean_m": 3.84169017008488e-07,
+          "rows_within_1um": 252
+        },
+        "raw_width_height_minus_one": {
+          "n": 252,
+          "median_m": 0.037549618074200555,
+          "p95_m": 0.050603977522310155,
+          "max_m": 0.05183079908567338,
+          "mean_m": 0.03716204694012192,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 252,
+          "median_m": 12.559924021113812,
+          "p95_m": 17.367293529949063,
+          "max_m": 17.61930135702861,
+          "mean_m": 10.86337818387597,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 252,
+          "median_m": 12.573055962618206,
+          "p95_m": 17.406805476474975,
+          "max_m": 17.65907717691173,
+          "mean_m": 10.882427141869497,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 252,
+          "median_m": 3.9855002547309936e-07,
+          "p95_m": 5.993434193414487e-07,
+          "max_m": 6.591111616020344e-07,
+          "mean_m": 3.84169017008488e-07,
+          "rows_within_1um": 252
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_1": {
+      "site": "japan_crossroad",
+      "n_car_rows": 376,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 376,
+          "median_m": 3.926883867650664e-07,
+          "p95_m": 5.868114970422276e-07,
+          "max_m": 6.780305683763457e-07,
+          "mean_m": 3.794029940452324e-07,
+          "rows_within_1um": 376
+        },
+        "raw_width_height_minus_one": {
+          "n": 376,
+          "median_m": 0.03560649577136887,
+          "p95_m": 0.036574292822166884,
+          "max_m": 0.03675743865824236,
+          "mean_m": 0.03451996113557627,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 376,
+          "median_m": 10.376318956323697,
+          "p95_m": 13.802336936088674,
+          "max_m": 13.95329414028295,
+          "mean_m": 9.019560960887405,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 376,
+          "median_m": 10.40854110293942,
+          "p95_m": 13.838125461323042,
+          "max_m": 13.989239529796478,
+          "mean_m": 9.045638006989147,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 376,
+          "median_m": 3.926883867650664e-07,
+          "p95_m": 5.868114970422276e-07,
+          "max_m": 6.780305683763457e-07,
+          "mean_m": 3.794029940452324e-07,
+          "rows_within_1um": 376
+        }
+      }
+    },
+    "japan_crossroad_summer_morning_sunny_0": {
+      "site": "japan_crossroad",
+      "n_car_rows": 270,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 270,
+          "median_m": 2.7678692544879823e-07,
+          "p95_m": 5.578741375631392e-07,
+          "max_m": 6.084254230624338e-07,
+          "mean_m": 3.260336024952742e-07,
+          "rows_within_1um": 270
+        },
+        "raw_width_height_minus_one": {
+          "n": 270,
+          "median_m": 0.040947654582377306,
+          "p95_m": 0.040947654582377306,
+          "max_m": 0.040947654582377306,
+          "mean_m": 0.03554888488535334,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 270,
+          "median_m": 18.56172192361263,
+          "p95_m": 18.56172192361263,
+          "max_m": 18.56172192361263,
+          "mean_m": 12.763287835849376,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 270,
+          "median_m": 18.602477692457448,
+          "p95_m": 18.602477692457448,
+          "max_m": 18.602477692457448,
+          "mean_m": 12.783806921551571,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 270,
+          "median_m": 2.7678692544879823e-07,
+          "p95_m": 5.578741375631392e-07,
+          "max_m": 6.084254230624338e-07,
+          "mean_m": 3.260336024952742e-07,
+          "rows_within_1um": 270
+        }
+      }
+    },
+    "japan_crossroad_summer_morning_sunny_1": {
+      "site": "japan_crossroad",
+      "n_car_rows": 217,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 217,
+          "median_m": 3.6778094157592084e-07,
+          "p95_m": 6.23288457757858e-07,
+          "max_m": 6.980857285365255e-07,
+          "mean_m": 3.6220917806518124e-07,
+          "rows_within_1um": 217
+        },
+        "raw_width_height_minus_one": {
+          "n": 217,
+          "median_m": 0.03551610105575556,
+          "p95_m": 0.043684467802411746,
+          "max_m": 0.044707593771370485,
+          "mean_m": 0.03571340573888839,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 217,
+          "median_m": 7.676249398356517,
+          "p95_m": 16.170548187233237,
+          "max_m": 17.09223374389918,
+          "mean_m": 7.996207979727823,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 217,
+          "median_m": 7.705667830350694,
+          "p95_m": 16.20882124133772,
+          "max_m": 17.131468616796283,
+          "mean_m": 8.018381947189866,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 217,
+          "median_m": 3.6778094157592084e-07,
+          "p95_m": 6.23288457757858e-07,
+          "max_m": 6.980857285365255e-07,
+          "mean_m": 3.6220917806518124e-07,
+          "rows_within_1um": 217
+        }
+      }
+    },
+    "japan_crossroad_summer_night_sunny_0": {
+      "site": "japan_crossroad",
+      "n_car_rows": 604,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 604,
+          "median_m": 4.0316613833112095e-07,
+          "p95_m": 6.040424648822012e-07,
+          "max_m": 7.057793168251255e-07,
+          "mean_m": 3.8559187980624623e-07,
+          "rows_within_1um": 604
+        },
+        "raw_width_height_minus_one": {
+          "n": 604,
+          "median_m": 0.030110186128849713,
+          "p95_m": 0.036181724307870054,
+          "max_m": 0.036590997232362664,
+          "mean_m": 0.030771131646363928,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 604,
+          "median_m": 3.911704161250775,
+          "p95_m": 12.56211196235957,
+          "max_m": 14.166648000589856,
+          "mean_m": 5.110725678292,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 604,
+          "median_m": 3.9158538996101964,
+          "p95_m": 12.5538702963269,
+          "max_m": 14.160078735810641,
+          "mean_m": 5.108714299338062,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 604,
+          "median_m": 4.0316613833112095e-07,
+          "p95_m": 6.040424648822012e-07,
+          "max_m": 7.057793168251255e-07,
+          "mean_m": 3.8559187980624623e-07,
+          "rows_within_1um": 604
+        }
+      }
+    },
+    "japan_crossroad_summer_night_sunny_1": {
+      "site": "japan_crossroad",
+      "n_car_rows": 1050,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 1050,
+          "median_m": 3.7610964390665943e-07,
+          "p95_m": 5.924575399309295e-07,
+          "max_m": 6.938417462756642e-07,
+          "mean_m": 3.722844957930098e-07,
+          "rows_within_1um": 1050
+        },
+        "raw_width_height_minus_one": {
+          "n": 1050,
+          "median_m": 0.036464838438243066,
+          "p95_m": 0.05244395945020918,
+          "max_m": 0.054550149580572256,
+          "mean_m": 0.03700916844451992,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1050,
+          "median_m": 13.153370146757943,
+          "p95_m": 17.286531227170716,
+          "max_m": 17.58029772901465,
+          "mean_m": 12.026263925961656,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1050,
+          "median_m": 13.188485015047767,
+          "p95_m": 17.325986804354347,
+          "max_m": 17.620055268478293,
+          "mean_m": 12.050037037214068,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1050,
+          "median_m": 3.7610964390665943e-07,
+          "p95_m": 5.924575399309295e-07,
+          "max_m": 6.938417462756642e-07,
+          "mean_m": 3.722844957930098e-07,
+          "rows_within_1um": 1050
+        }
+      }
+    },
+    "japan_crossroad_summer_night_sunny_2": {
+      "site": "japan_crossroad",
+      "n_car_rows": 762,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 762,
+          "median_m": 3.718430488007958e-07,
+          "p95_m": 5.36828536431447e-07,
+          "max_m": 6.637328701942555e-07,
+          "mean_m": 3.0550121345850564e-07,
+          "rows_within_1um": 762
+        },
+        "raw_width_height_minus_one": {
+          "n": 762,
+          "median_m": 0.033215834774769463,
+          "p95_m": 0.041283438919980105,
+          "max_m": 0.041283438919980105,
+          "mean_m": 0.03328708545420752,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 762,
+          "median_m": 12.48106950188763,
+          "p95_m": 14.210543980671588,
+          "max_m": 14.210543980671588,
+          "mean_m": 9.812087420936367,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 762,
+          "median_m": 12.480172018467437,
+          "p95_m": 14.246771177141166,
+          "max_m": 14.246771177141166,
+          "mean_m": 9.828877686789827,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 762,
+          "median_m": 3.718430488007958e-07,
+          "p95_m": 5.36828536431447e-07,
+          "max_m": 6.637328701942555e-07,
+          "mean_m": 3.0550121345850564e-07,
+          "rows_within_1um": 762
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_0": {
+      "site": "japan_crossroad",
+      "n_car_rows": 1116,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 1116,
+          "median_m": 3.719274061225709e-07,
+          "p95_m": 5.921213512132743e-07,
+          "max_m": 7.115089849884639e-07,
+          "mean_m": 3.491521847996708e-07,
+          "rows_within_1um": 1116
+        },
+        "raw_width_height_minus_one": {
+          "n": 1116,
+          "median_m": 0.04081293278700583,
+          "p95_m": 0.04245013278376076,
+          "max_m": 0.04495025592355786,
+          "mean_m": 0.03755131856491685,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 1116,
+          "median_m": 17.745305917028354,
+          "p95_m": 18.556411062583443,
+          "max_m": 18.919991495591876,
+          "mean_m": 13.862683668733599,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 1116,
+          "median_m": 17.785211453515437,
+          "p95_m": 18.597164576207618,
+          "max_m": 18.961124427072964,
+          "mean_m": 13.89057339768519,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 1116,
+          "median_m": 3.719274061225709e-07,
+          "p95_m": 5.921213512132743e-07,
+          "max_m": 7.115089849884639e-07,
+          "mean_m": 3.491521847996708e-07,
+          "rows_within_1um": 1116
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_1": {
+      "site": "japan_crossroad",
+      "n_car_rows": 221,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 221,
+          "median_m": 3.695430963847623e-07,
+          "p95_m": 5.952429904779416e-07,
+          "max_m": 6.782152411353723e-07,
+          "mean_m": 3.703420044812354e-07,
+          "rows_within_1um": 221
+        },
+        "raw_width_height_minus_one": {
+          "n": 221,
+          "median_m": 0.04068787295991447,
+          "p95_m": 0.042198117510964514,
+          "max_m": 0.04418666333198708,
+          "mean_m": 0.03642644201221666,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 221,
+          "median_m": 14.541195911494846,
+          "p95_m": 18.59873805145035,
+          "max_m": 18.610425409592995,
+          "mean_m": 12.659397598985436,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 221,
+          "median_m": 14.54256643676519,
+          "p95_m": 18.639533218613423,
+          "max_m": 18.65123253173727,
+          "mean_m": 12.682270783339467,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 221,
+          "median_m": 3.695430963847623e-07,
+          "p95_m": 5.952429904779416e-07,
+          "max_m": 6.782152411353723e-07,
+          "mean_m": 3.703420044812354e-07,
+          "rows_within_1um": 221
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_0": {
+      "site": "japan_crossroad",
+      "n_car_rows": 213,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 213,
+          "median_m": 3.9457912890175455e-07,
+          "p95_m": 5.889696137733573e-07,
+          "max_m": 6.895234748958616e-07,
+          "mean_m": 3.732045558145796e-07,
+          "rows_within_1um": 213
+        },
+        "raw_width_height_minus_one": {
+          "n": 213,
+          "median_m": 0.040780809950757564,
+          "p95_m": 0.04308307341185098,
+          "max_m": 0.045174496338232374,
+          "mean_m": 0.0389823259656108,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 213,
+          "median_m": 17.6910160625479,
+          "p95_m": 18.561929741244757,
+          "max_m": 18.561929741244764,
+          "mean_m": 13.328541782509472,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 213,
+          "median_m": 17.73086344974851,
+          "p95_m": 18.60268751311785,
+          "max_m": 18.60268785965984,
+          "mean_m": 13.359892781086689,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 213,
+          "median_m": 3.9457912890175455e-07,
+          "p95_m": 5.889696137733573e-07,
+          "max_m": 6.895234748958616e-07,
+          "mean_m": 3.732045558145796e-07,
+          "rows_within_1um": 213
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_1": {
+      "site": "japan_crossroad",
+      "n_car_rows": 819,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        696,
+        480
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 819,
+          "median_m": 4.237507606724629e-07,
+          "p95_m": 5.616924198951863e-07,
+          "max_m": 6.964006635522496e-07,
+          "mean_m": 3.9221575511143746e-07,
+          "rows_within_1um": 819
+        },
+        "raw_width_height_minus_one": {
+          "n": 819,
+          "median_m": 0.036855373389909546,
+          "p95_m": 0.05032999459142562,
+          "max_m": 0.05444166294009502,
+          "mean_m": 0.0368330974502285,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 819,
+          "median_m": 8.548020172864579,
+          "p95_m": 16.557290752606917,
+          "max_m": 19.073769677315934,
+          "mean_m": 9.394814750034124,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 819,
+          "median_m": 8.578350017747585,
+          "p95_m": 16.59598233496225,
+          "max_m": 19.11506317746054,
+          "mean_m": 9.418970047275549,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 819,
+          "median_m": 4.237507606724629e-07,
+          "p95_m": 5.616924198951863e-07,
+          "max_m": 6.964006635522496e-07,
+          "mean_m": 3.9221575511143746e-07,
+          "rows_within_1um": 819
+        }
+      }
+    },
+    "thailand_street_summer_daytime_afterraining_0": {
+      "site": "thailand_street",
+      "n_car_rows": 118,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 118,
+          "median_m": 3.9784046427575693e-07,
+          "p95_m": 5.669074933027303e-07,
+          "max_m": 6.263076082061117e-07,
+          "mean_m": 3.880884109260791e-07,
+          "rows_within_1um": 118
+        },
+        "raw_width_height_minus_one": {
+          "n": 118,
+          "median_m": 0.01889032099663869,
+          "p95_m": 0.02805156587583059,
+          "max_m": 0.029427780302922025,
+          "mean_m": 0.01971453100847315,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 118,
+          "median_m": 4.619811408551026,
+          "p95_m": 5.39498946319936,
+          "max_m": 5.517345675193035,
+          "mean_m": 4.410457184163527,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 118,
+          "median_m": 4.606624693917057,
+          "p95_m": 5.383273642919908,
+          "max_m": 5.505860822982034,
+          "mean_m": 4.396894575075823,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 118,
+          "median_m": 3.9784046427575693e-07,
+          "p95_m": 5.669074933027303e-07,
+          "max_m": 6.263076082061117e-07,
+          "mean_m": 3.880884109260791e-07,
+          "rows_within_1um": 118
+        }
+      }
+    },
+    "thailand_street_summer_daytime_afterraining_1": {
+      "site": "thailand_street",
+      "n_car_rows": 291,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 291,
+          "median_m": 4.005314865573665e-07,
+          "p95_m": 5.969819201865997e-07,
+          "max_m": 6.790905739520545e-07,
+          "mean_m": 3.812579084028453e-07,
+          "rows_within_1um": 291
+        },
+        "raw_width_height_minus_one": {
+          "n": 291,
+          "median_m": 0.030077870624175017,
+          "p95_m": 0.04140259506178563,
+          "max_m": 0.04235658127063248,
+          "mean_m": 0.030056413547641134,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 291,
+          "median_m": 2.4052419478873803,
+          "p95_m": 4.552539763250515,
+          "max_m": 4.816730037236388,
+          "mean_m": 2.606780474683512,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 291,
+          "median_m": 2.3879361777016865,
+          "p95_m": 4.5392280651119155,
+          "max_m": 4.80391501637637,
+          "mean_m": 2.5899333983225223,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 291,
+          "median_m": 4.005314865573665e-07,
+          "p95_m": 5.969819201865997e-07,
+          "max_m": 6.790905739520545e-07,
+          "mean_m": 3.812579084028453e-07,
+          "rows_within_1um": 291
+        }
+      }
+    },
+    "thailand_street_summer_night_sunny_0": {
+      "site": "thailand_street",
+      "n_car_rows": 143,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 143,
+          "median_m": 4.253852836328166e-07,
+          "p95_m": 6.220165435859878e-07,
+          "max_m": 7.105131126082959e-07,
+          "mean_m": 4.0302253457859915e-07,
+          "rows_within_1um": 143
+        },
+        "raw_width_height_minus_one": {
+          "n": 143,
+          "median_m": 0.0285287306144195,
+          "p95_m": 0.03846826601836463,
+          "max_m": 0.03928237200841054,
+          "mean_m": 0.02784586024407579,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 143,
+          "median_m": 2.8688163458672995,
+          "p95_m": 4.384454603855309,
+          "max_m": 4.510210445630375,
+          "mean_m": 2.891658875177334,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 143,
+          "median_m": 2.852387706781158,
+          "p95_m": 4.370818497607258,
+          "max_m": 4.496810568160369,
+          "mean_m": 2.875312417426949,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 143,
+          "median_m": 4.253852836328166e-07,
+          "p95_m": 6.220165435859878e-07,
+          "max_m": 7.105131126082959e-07,
+          "mean_m": 4.0302253457859915e-07,
+          "rows_within_1um": 143
+        }
+      }
+    },
+    "thailand_street_summer_night_sunny_1": {
+      "site": "thailand_street",
+      "n_car_rows": 215,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 215,
+          "median_m": 3.900180523880439e-07,
+          "p95_m": 5.926306581162061e-07,
+          "max_m": 6.864406096488507e-07,
+          "mean_m": 3.7369253540046097e-07,
+          "rows_within_1um": 215
+        },
+        "raw_width_height_minus_one": {
+          "n": 215,
+          "median_m": 0.030152575017026652,
+          "p95_m": 0.04025551755682676,
+          "max_m": 0.040928751919495375,
+          "mean_m": 0.029184351823543474,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 215,
+          "median_m": 3.032539635935556,
+          "p95_m": 4.708832822491247,
+          "max_m": 4.739456162827148,
+          "mean_m": 3.157118662186106,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 215,
+          "median_m": 3.0164345807543245,
+          "p95_m": 4.695814789393078,
+          "max_m": 4.7264927155920935,
+          "mean_m": 3.1412783135973097,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 215,
+          "median_m": 3.900180523880439e-07,
+          "p95_m": 5.926306581162061e-07,
+          "max_m": 6.864406096488507e-07,
+          "mean_m": 3.7369253540046097e-07,
+          "rows_within_1um": 215
+        }
+      }
+    },
+    "thailand_street_summer_night_sunny_2": {
+      "site": "thailand_street",
+      "n_car_rows": 280,
+      "outside_center_bounds_count": 0,
+      "metrics": {
+        "raw_width_height": {
+          "n": 280,
+          "median_m": 3.8773971887890255e-07,
+          "p95_m": 5.952758655022588e-07,
+          "max_m": 7.222932290157763e-07,
+          "mean_m": 3.7489171674721284e-07,
+          "rows_within_1um": 280
+        },
+        "raw_width_height_minus_one": {
+          "n": 280,
+          "median_m": 0.025969623560384094,
+          "p95_m": 0.03724553162499786,
+          "max_m": 0.03816066374925268,
+          "mean_m": 0.025939168735079603,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 280,
+          "median_m": 3.229944118958186,
+          "p95_m": 4.5182486879895345,
+          "max_m": 4.59778790037494,
+          "mean_m": 3.2600926346410795,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 280,
+          "median_m": 3.2141731229587527,
+          "p95_m": 4.504864850040365,
+          "max_m": 4.584553296280476,
+          "mean_m": 3.244411757771336,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 280,
+          "median_m": 3.8773971887890255e-07,
+          "p95_m": 5.952758655022588e-07,
+          "max_m": 7.222932290157763e-07,
+          "mean_m": 3.7489171674721284e-07,
+          "rows_within_1um": 280
+        }
+      }
+    },
+    "thailand_street_summer_nightfall_sunny_0": {
+      "site": "thailand_street",
+      "n_car_rows": 125,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 125,
+          "median_m": 3.954768267094668e-07,
+          "p95_m": 6.048196262478542e-07,
+          "max_m": 6.431792308744375e-07,
+          "mean_m": 3.8009660289608916e-07,
+          "rows_within_1um": 125
+        },
+        "raw_width_height_minus_one": {
+          "n": 125,
+          "median_m": 0.022947845749091526,
+          "p95_m": 0.031000839561297674,
+          "max_m": 0.031847117031789336,
+          "mean_m": 0.02275957486974335,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 125,
+          "median_m": 3.648257964805087,
+          "p95_m": 4.833784460790294,
+          "max_m": 4.948095719353265,
+          "mean_m": 3.8495132271470722,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 125,
+          "median_m": 3.633257674635407,
+          "p95_m": 4.821000664780777,
+          "max_m": 4.935527564910619,
+          "mean_m": 3.8349041302596545,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 125,
+          "median_m": 3.954768267094668e-07,
+          "p95_m": 6.048196262478542e-07,
+          "max_m": 6.431792308744375e-07,
+          "mean_m": 3.8009660289608916e-07,
+          "rows_within_1um": 125
+        }
+      }
+    },
+    "thailand_street_summer_nightfall_sunny_1": {
+      "site": "thailand_street",
+      "n_car_rows": 258,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 258,
+          "median_m": 4.04861695158543e-07,
+          "p95_m": 5.826248153513592e-07,
+          "max_m": 6.519116370058097e-07,
+          "mean_m": 3.92988431427131e-07,
+          "rows_within_1um": 258
+        },
+        "raw_width_height_minus_one": {
+          "n": 258,
+          "median_m": 0.022895140918499937,
+          "p95_m": 0.03471060697714363,
+          "max_m": 0.035788762355232644,
+          "mean_m": 0.02348489357504353,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 258,
+          "median_m": 3.903254607869586,
+          "p95_m": 5.2568913085932225,
+          "max_m": 5.517345675193024,
+          "mean_m": 3.8272385769856587,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 258,
+          "median_m": 3.888737920346228,
+          "p95_m": 5.244910911241653,
+          "max_m": 5.505860175455746,
+          "mean_m": 3.8126037742359355,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 258,
+          "median_m": 4.04861695158543e-07,
+          "p95_m": 5.826248153513592e-07,
+          "max_m": 6.519116370058097e-07,
+          "mean_m": 3.92988431427131e-07,
+          "rows_within_1um": 258
+        }
+      }
+    },
+    "thailand_street_winter_daytime_sunny_0": {
+      "site": "thailand_street",
+      "n_car_rows": 617,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 617,
+          "median_m": 3.8922356127990727e-07,
+          "p95_m": 5.971359464818663e-07,
+          "max_m": 7.210921060094997e-07,
+          "mean_m": 3.7434141538777105e-07,
+          "rows_within_1um": 617
+        },
+        "raw_width_height_minus_one": {
+          "n": 617,
+          "median_m": 0.03297840803948377,
+          "p95_m": 0.03888269497779092,
+          "max_m": 0.039195051203696346,
+          "mean_m": 0.031658172619682894,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 617,
+          "median_m": 2.937176475141116,
+          "p95_m": 4.201823079888504,
+          "max_m": 6.0729617319750675,
+          "mean_m": 2.996603306280746,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 617,
+          "median_m": 2.920993543603275,
+          "p95_m": 4.1879081563951015,
+          "max_m": 6.0625835218902555,
+          "mean_m": 2.9804530118970853,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 617,
+          "median_m": 3.8922356127990727e-07,
+          "p95_m": 5.971359464818663e-07,
+          "max_m": 7.210921060094997e-07,
+          "mean_m": 3.7434141538777105e-07,
+          "rows_within_1um": 617
+        }
+      }
+    },
+    "thailand_street_winter_daytime_sunny_1": {
+      "site": "thailand_street",
+      "n_car_rows": 103,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 103,
+          "median_m": 3.884259062725046e-07,
+          "p95_m": 5.821785509299399e-07,
+          "max_m": 6.176190546004401e-07,
+          "mean_m": 3.931633280389853e-07,
+          "rows_within_1um": 103
+        },
+        "raw_width_height_minus_one": {
+          "n": 103,
+          "median_m": 0.025376997237041544,
+          "p95_m": 0.03640986235546168,
+          "max_m": 0.037637530804348174,
+          "mean_m": 0.025083904188026074,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 103,
+          "median_m": 5.636199870030449,
+          "p95_m": 5.688409987166734,
+          "max_m": 5.692499584682194,
+          "mean_m": 5.5647650283172325,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 103,
+          "median_m": 5.624944883288235,
+          "p95_m": 5.677271773111691,
+          "max_m": 5.681365433838101,
+          "mean_m": 5.55341781327212,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 103,
+          "median_m": 3.884259062725046e-07,
+          "p95_m": 5.821785509299399e-07,
+          "max_m": 6.176190546004401e-07,
+          "mean_m": 3.931633280389853e-07,
+          "rows_within_1um": 103
+        }
+      }
+    },
+    "thailand_street_winter_night_sunny_0": {
+      "site": "thailand_street",
+      "n_car_rows": 174,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 174,
+          "median_m": 3.922333345089189e-07,
+          "p95_m": 5.755466022296522e-07,
+          "max_m": 6.835342289809466e-07,
+          "mean_m": 3.8120880218765724e-07,
+          "rows_within_1um": 174
+        },
+        "raw_width_height_minus_one": {
+          "n": 174,
+          "median_m": 0.02798503703614178,
+          "p95_m": 0.039259827752332714,
+          "max_m": 0.040386563823170386,
+          "mean_m": 0.027769071419198443,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 174,
+          "median_m": 3.5636568322815965,
+          "p95_m": 3.897658932438227,
+          "max_m": 3.8979164642836346,
+          "mean_m": 3.5460662703380414,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 174,
+          "median_m": 3.5485321559341774,
+          "p95_m": 3.883100949467112,
+          "max_m": 3.883364169037905,
+          "mean_m": 3.530920411689219,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 174,
+          "median_m": 3.922333345089189e-07,
+          "p95_m": 5.755466022296522e-07,
+          "max_m": 6.835342289809466e-07,
+          "mean_m": 3.8120880218765724e-07,
+          "rows_within_1um": 174
+        }
+      }
+    },
+    "thailand_street_winter_night_sunny_1": {
+      "site": "thailand_street",
+      "n_car_rows": 524,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 524,
+          "median_m": 4.059935614632243e-07,
+          "p95_m": 5.86561847464959e-07,
+          "max_m": 6.930145228794053e-07,
+          "mean_m": 3.841028469966322e-07,
+          "rows_within_1um": 524
+        },
+        "raw_width_height_minus_one": {
+          "n": 524,
+          "median_m": 0.024288381746917893,
+          "p95_m": 0.038462129363612395,
+          "max_m": 0.041337376986785544,
+          "mean_m": 0.02566408900067484,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 524,
+          "median_m": 2.8285022940716495,
+          "p95_m": 3.138984950475057,
+          "max_m": 3.2841340792062637,
+          "mean_m": 2.841499904060056,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 524,
+          "median_m": 2.8119699169044106,
+          "p95_m": 3.1229853899904696,
+          "max_m": 3.2684032126353144,
+          "mean_m": 2.8250026493990457,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 524,
+          "median_m": 4.059935614632243e-07,
+          "p95_m": 5.86561847464959e-07,
+          "max_m": 6.930145228794053e-07,
+          "mean_m": 3.841028469966322e-07,
+          "rows_within_1um": 524
+        }
+      }
+    },
+    "thailand_street_winter_nightfall_sunny_0": {
+      "site": "thailand_street",
+      "n_car_rows": 88,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 88,
+          "median_m": 4.061893706311404e-07,
+          "p95_m": 5.989107336961178e-07,
+          "max_m": 6.804671133527407e-07,
+          "mean_m": 3.835619755567676e-07,
+          "rows_within_1um": 88
+        },
+        "raw_width_height_minus_one": {
+          "n": 88,
+          "median_m": 0.025418152114839478,
+          "p95_m": 0.0361460096491944,
+          "max_m": 0.03740253431512383,
+          "mean_m": 0.02510207437915042,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 88,
+          "median_m": 5.342996291074105,
+          "p95_m": 5.542065499238777,
+          "max_m": 5.578259647313707,
+          "mean_m": 5.372486226053678,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 88,
+          "median_m": 5.3312475248946125,
+          "p95_m": 5.530642311930992,
+          "max_m": 5.566903985335755,
+          "mean_m": 5.360773579154697,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 88,
+          "median_m": 4.061893706311404e-07,
+          "p95_m": 5.989107336961178e-07,
+          "max_m": 6.804671133527407e-07,
+          "mean_m": 3.835619755567676e-07,
+          "rows_within_1um": 88
+        }
+      }
+    },
+    "thailand_street_winter_nightfall_sunny_1": {
+      "site": "thailand_street",
+      "n_car_rows": 269,
+      "outside_center_bounds_count": 0,
+      "local_bev_header_wh": [
+        624,
+        264
+      ],
+      "metrics": {
+        "raw_width_height": {
+          "n": 269,
+          "median_m": 4.1523857824399973e-07,
+          "p95_m": 6.09066246046613e-07,
+          "max_m": 7.003492994238552e-07,
+          "mean_m": 3.9228158095631897e-07,
+          "rows_within_1um": 269
+        },
+        "raw_width_height_minus_one": {
+          "n": 269,
+          "median_m": 0.021705852130844878,
+          "p95_m": 0.03234287529953808,
+          "max_m": 0.034289134049058076,
+          "mean_m": 0.022346766841030964,
+          "rows_within_1um": 0
+        },
+        "declared_axes_direct_vs_raw": {
+          "n": 269,
+          "median_m": 4.602166323112174,
+          "p95_m": 5.024120633128574,
+          "max_m": 5.040535703201351,
+          "mean_m": 4.558251341943818,
+          "rows_within_1um": 0
+        },
+        "old_contour_formula_minus_one_and_y_opposite_vs_parsed_trajectory": {
+          "n": 269,
+          "median_m": 4.588953642958506,
+          "p95_m": 5.011787256457281,
+          "max_m": 5.028221916719135,
+          "mean_m": 4.544976692874066,
+          "rows_within_1um": 0
+        },
+        "raw_scaled_then_frozen_project_transform_vs_parsed_trajectory": {
+          "n": 269,
+          "median_m": 4.1523857824399973e-07,
+          "p95_m": 6.09066246046613e-07,
+          "max_m": 7.003492994238552e-07,
+          "mean_m": 3.9228158095631897e-07,
+          "rows_within_1um": 269
+        }
+      }
+    }
+  },
+  "limits": [
+    "Rows are all original 30-Hz label rows of type Car. A tracked object contributes repeatedly; no disjoint-people claim.",
+    "The reference is the same released row's world columns, not an independent physical survey. No trajectory model or future window is accessed.",
+    "The legacy contour expression is evaluated at the car centers as coordinate test points. These errors are not measured errors in actual road-edge positions.",
+    "Frozen camera-Jacobian flip controls a later operation applied to raw ground labels. The calibration's BEV-axis sign and that loader operation are distinct.",
+    "Use native raster coordinates; unknown resize, crop, padding, rotation, new axis conventions or degenerate bounds require explicit handling."
+  ]
+}

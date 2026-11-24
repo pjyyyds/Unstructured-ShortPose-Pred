@@ -2,6 +2,8 @@
 
 Kaggle 解压交付包后，将 `pinns_sync_latency_private.bin` 单独上传为私有 Dataset，给新私有 Notebook 添加该输入，导入 `PINNS_sync_latency.ipynb`。在设置中选择 NVIDIA GPU，再运行全部单元。运行仅需本地挂载的输入以及自带 PyTorch CUDA 和 NumPy 的环境，Internet 可关闭。结果在 `/kaggle/working/pinns_sync_latency_results.zip`。其中 `timing.json` 是实际计时，`checked.json` 仅校验输入与权重。当前交付包经本地软件核验，尚无新设备实测结果。
 
+这里的私有输入和两套哈希记录归档系统的计时负载。后来对 47,555 个车辆中心的核对发现，原提取器的鸟瞰图像轮廓相对轨迹纵轴翻转。要测量配准正确的场景负载，应使用修正版输入及对应哈希；原版本用于复现历史负载。[坐标核验与适用范围](../pinns_projection_sources/README.md)
+
 ## 相同的设备实测命令
 
 在 RTX 4090 工作站或 Jetson Orin NX，使用与该设备相容的 CUDA PyTorch 2.x、NumPy 和 Python 3.9+ 环境。先将本包中的私有输入展开到空目录。

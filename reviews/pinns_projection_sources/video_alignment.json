@@ -1,0 +1,287 @@
+{
+  "protocol_sha256": "6cbcb2376a0fac91860d1f480b00ded99c092944e417a58325f126318b331c76",
+  "opencv": "5.1.0",
+  "numpy": "2.5.5",
+  "clips": {
+    "america_crossroad_summer_daytime_sunny_0": {
+      "sha256": {
+        "calib.json": "d89f3207a2b71f9d970a0d0c4ac80246f07ec97f3eff21adfef53a97377283ea",
+        "ori_0.mp4": "008d29e41cd20240b1882b231bfffe88a9c050046936d69243a0ff0f7451f444",
+        "bev_0.mp4": "72fb650a3fe27f6f7840d49482509074837cf84a4e111bb5b15c43a91ba1296a",
+        "america_crossroad_summer_daytime_sunny_0.txt": "d3181bb14da3ca881bd2dd411d926d900d2b8d0fdbfb8bccece43e5fb1e72129"
+      },
+      "frames": {
+        "0": {
+          "matches": 570,
+          "released_corner_offset_px": {
+            "n": 570,
+            "median": 0.8359778752119706,
+            "p90": 1.384856086775757,
+            "p95": 1.6912598378019579
+          },
+          "fit_inliers": 567,
+          "image_alignment_offset_px": {
+            "n": 570,
+            "median": 0.29375939540017115,
+            "p90": 0.8409240731196003,
+            "p95": 1.1600265760647104
+          }
+        },
+        "60": {
+          "matches": 668,
+          "released_corner_offset_px": {
+            "n": 668,
+            "median": 0.7783289830281886,
+            "p90": 1.1592745033577614,
+            "p95": 1.350849242059565
+          },
+          "image_alignment_offset_px": {
+            "n": 668,
+            "median": 0.23784263260635433,
+            "p90": 0.7447042884438227,
+            "p95": 0.9876951811866536
+          }
+        },
+        "150": {
+          "matches": 614,
+          "released_corner_offset_px": {
+            "n": 614,
+            "median": 0.8090266323576776,
+            "p90": 1.2179173642582963,
+            "p95": 1.4269868816226863
+          },
+          "image_alignment_offset_px": {
+            "n": 614,
+            "median": 0.27199819822737337,
+            "p90": 0.733067025376135,
+            "p95": 1.031256300479011
+          }
+        }
+      },
+      "labels": {
+        "released_corners_m": {
+          "n": 4261,
+          "median": 0.706925536420491,
+          "p90": 1.8844968832301512,
+          "p95": 1.8941496663174728
+        },
+        "after_independent_image_alignment_m": {
+          "n": 4261,
+          "median": 0.7225442218004373,
+          "p90": 1.9341849996136153,
+          "p95": 1.9433213963956197
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_1": {
+      "sha256": {
+        "calib.json": "d89f3207a2b71f9d970a0d0c4ac80246f07ec97f3eff21adfef53a97377283ea",
+        "ori_1.mp4": "d23c30b2b43ac95de17ac4385b81076e978ac406ec4f0df226afb40f2c13c4b2",
+        "bev_1.mp4": "bf1dbcd9458fa13ef5263fdefcdca6f2fef1a363234fb882a17fc6e0c7479e2f",
+        "america_crossroad_summer_daytime_sunny_1.txt": "5641c92e1240ac3fcf33fe89b7ad386ae4d8a9892c08a92793f14c3ff6e0dfb5"
+      },
+      "frames": {
+        "0": {
+          "matches": 397,
+          "released_corner_offset_px": {
+            "n": 397,
+            "median": 0.8791124949594402,
+            "p90": 1.4231439966512236,
+            "p95": 1.7495758165714772
+          },
+          "fit_inliers": 393,
+          "image_alignment_offset_px": {
+            "n": 397,
+            "median": 0.27037226258426444,
+            "p90": 0.8912930720352531,
+            "p95": 1.4027485422422734
+          }
+        },
+        "60": {
+          "matches": 496,
+          "released_corner_offset_px": {
+            "n": 496,
+            "median": 0.7653400821436959,
+            "p90": 1.2202111909272495,
+            "p95": 1.4243562803084506
+          },
+          "image_alignment_offset_px": {
+            "n": 496,
+            "median": 0.2488497665701343,
+            "p90": 0.6767656724860118,
+            "p95": 0.9420774766558726
+          }
+        },
+        "150": {
+          "matches": 543,
+          "released_corner_offset_px": {
+            "n": 543,
+            "median": 0.7409118897520638,
+            "p90": 1.266396500735549,
+            "p95": 1.4630864474656515
+          },
+          "image_alignment_offset_px": {
+            "n": 543,
+            "median": 0.22491435064323415,
+            "p90": 0.6718198304921262,
+            "p95": 0.928628231717312
+          }
+        }
+      },
+      "labels": {
+        "released_corners_m": {
+          "n": 1261,
+          "median": 2.3005177205883145e-06,
+          "p90": 4.9449294838416985e-06,
+          "p95": 5.886164970060503e-06
+        },
+        "after_independent_image_alignment_m": {
+          "n": 1261,
+          "median": 0.025471621134464124,
+          "p90": 0.036687746684762296,
+          "p95": 0.04544435306289921
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_0": {
+      "sha256": {
+        "calib.json": "36c5f559ecc24af39d4117e9124cdf22f2298293ab96da737dc20d5cf73ba634",
+        "ori_0.mp4": "fbdd35c90613a887d689804933810e3ad9e63b651635f687525bbb87028baf7a",
+        "bev_0.mp4": "2d49eb2320dc82512a5fcc5bf035dbce0e6d79d17aac9ff43fcac2369b607ab0",
+        "america_crossroad_summer_nightfall_sunny_0.txt": "66a0cb4156ca380adf387f83aae4e677c5217166657c2442f2594891ead842ee"
+      },
+      "frames": {
+        "0": {
+          "matches": 360,
+          "released_corner_offset_px": {
+            "n": 360,
+            "median": 0.7328829203204312,
+            "p90": 1.3260531719678093,
+            "p95": 1.5466418201928267
+          },
+          "fit_inliers": 356,
+          "image_alignment_offset_px": {
+            "n": 360,
+            "median": 0.2729296561278701,
+            "p90": 0.804124921739976,
+            "p95": 1.1158545918851452
+          }
+        },
+        "60": {
+          "matches": 332,
+          "released_corner_offset_px": {
+            "n": 332,
+            "median": 0.6963112756544163,
+            "p90": 1.1770700139090133,
+            "p95": 1.4661733674422661
+          },
+          "image_alignment_offset_px": {
+            "n": 332,
+            "median": 0.22487699684825432,
+            "p90": 0.7302999652919965,
+            "p95": 0.9275923268982283
+          }
+        },
+        "150": {
+          "matches": 395,
+          "released_corner_offset_px": {
+            "n": 395,
+            "median": 0.67748599712662,
+            "p90": 1.1228055575146811,
+            "p95": 1.2589317763931072
+          },
+          "image_alignment_offset_px": {
+            "n": 395,
+            "median": 0.22779142954762271,
+            "p90": 0.6175095293792633,
+            "p95": 0.8188871035579672
+          }
+        }
+      },
+      "labels": {
+        "released_corners_m": {
+          "n": 4230,
+          "median": 0.6818851984928087,
+          "p90": 0.9601367499268763,
+          "p95": 1.2973848454703285
+        },
+        "after_independent_image_alignment_m": {
+          "n": 4230,
+          "median": 0.6979808496948938,
+          "p90": 0.9735337136383408,
+          "p95": 1.308396021925819
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_1": {
+      "sha256": {
+        "calib.json": "36c5f559ecc24af39d4117e9124cdf22f2298293ab96da737dc20d5cf73ba634",
+        "ori_1.mp4": "5737a95d4a2980a335b0ef71bc7723106d959bc6e80ed2ea3b748f4479eb52ba",
+        "bev_1.mp4": "b57e0a56cb76fab74b9c56453de1e9e8f23dc26fe6e53ac8c3bec4ba953ae931",
+        "america_crossroad_summer_nightfall_sunny_1.txt": "1111a8496fed32d93a3a66aeb9dbf01dabdb1d56dfc44dd4cce5b47587648567"
+      },
+      "frames": {
+        "0": {
+          "matches": 152,
+          "released_corner_offset_px": {
+            "n": 152,
+            "median": 0.6467992769197318,
+            "p90": 1.3025592502841332,
+            "p95": 1.5427807388720305
+          },
+          "fit_inliers": 148,
+          "image_alignment_offset_px": {
+            "n": 152,
+            "median": 0.30936394208773194,
+            "p90": 0.86935497079398,
+            "p95": 1.1170509503463548
+          }
+        },
+        "60": {
+          "matches": 315,
+          "released_corner_offset_px": {
+            "n": 315,
+            "median": 0.7055680159860616,
+            "p90": 1.1810847808080511,
+            "p95": 1.4243238998444536
+          },
+          "image_alignment_offset_px": {
+            "n": 315,
+            "median": 0.2524225637383119,
+            "p90": 0.6781696656213834,
+            "p95": 0.8549323005940493
+          }
+        },
+        "150": {
+          "matches": 427,
+          "released_corner_offset_px": {
+            "n": 427,
+            "median": 0.7379902992962984,
+            "p90": 1.1492260285741585,
+            "p95": 1.3654420566001222
+          },
+          "image_alignment_offset_px": {
+            "n": 427,
+            "median": 0.21872756524970463,
+            "p90": 0.6067282533879217,
+            "p95": 0.79967676583169
+          }
+        }
+      },
+      "labels": {
+        "released_corners_m": {
+          "n": 15813,
+          "median": 1.1403214890637694,
+          "p90": 1.8349415853756297,
+          "p95": 1.885503523365646
+        },
+        "after_independent_image_alignment_m": {
+          "n": 15813,
+          "median": 1.165018066183186,
+          "p90": 1.8684936052204155,
+          "p95": 1.9182301914681614
+        }
+      }
+    }
+  }
+}
