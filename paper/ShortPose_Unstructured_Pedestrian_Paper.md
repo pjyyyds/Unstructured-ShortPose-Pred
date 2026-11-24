@@ -7,13 +7,13 @@
 
 ## 摘要
 
-本研究考察行人在短时观测下的二维姿态能否为地面轨迹预测提供运动与静动状态以外的信息。我们在 PINNS 路侧视频上比较运动编码、运动与姿态等权相加、隐式门控和显式质量门控，并在 JTA 上重新训练各模型，检验模拟关键点缺失与漂移的影响。V2 在 PINNS 的 0.4 s 观测窗中，显式门控 M1、等权相加、无质量向量门控和无姿态运动基线 M0 的首选轨迹平均位移误差分别为 0.4783、0.4929、0.4755 和 0.4856 m。在 JTA 重噪声桶中，显式门控把等权相加的误差从 2.3063 m 降至 1.5138 m，M0 为 1.4397 m。包含地图、邻居交互、分部位门控和动作解码的完整模型在 PINNS 短窗上的误差从 V1 的 0.6161 m 降至 V2 的 0.5295 m，仍高于同版 M0。同一 497 窗测试集上，显式门控比匀速外推的平均误差低 0.0258 m；按片段重采样的 95% 区间为 −0.1297 至 +0.0713 m（门控减匀速）。另将同一数据集的四处地点轮流留出，在 1,482 个完整窗口上比较五个种子。按四地等权，M0 与 M1 的平均 ADE 分别为 0.5126 和 0.5375 m。M1 在四个种子上误差升高，一个种子上下降。用最后两帧的速度给原有六条候选重排后，M1 的 ADE 降为 0.4961 m，直接匀速外推为 0.4839 m。另对轨迹推导的起步和停止事件逐地点留出，在训练地点内选择阈值，有序姿态模型检出 39/49 个起步（89 个误报）及 24/53 个停止（487 个误报）。V2 的设计参考了同一测试集上的 V1 诊断，且相邻测试窗口可能重叠。这些结果支持将质量门控作为加法融合的一种替代方案，其相对运动基线的收益随对照模型和工况而变化。
+本研究考察行人在短时观测下的二维姿态能否为地面轨迹预测提供运动与静动状态以外的信息。我们在 PINNS 路侧视频上比较运动编码、运动与姿态等权相加、隐式门控和显式质量门控，并在 JTA 上重新训练各模型，检验模拟关键点缺失与漂移的影响。V2 在 PINNS 的 0.4 s 观测窗中，显式门控 M1、等权相加、无质量向量门控和无姿态运动基线 M0 的首选轨迹平均位移误差分别为 0.4783、0.4929、0.4755 和 0.4856 m。在 JTA 重噪声桶中，显式门控把等权相加的误差从 2.3063 m 降至 1.5138 m，M0 为 1.4397 m。包含地图、邻居交互、分部位门控和动作解码的完整模型在 PINNS 短窗上的误差从 V1 的 0.6161 m 降至 V2 的 0.5295 m，仍高于同版 M0。同一 497 窗测试集上，显式门控比匀速外推的平均误差低 0.0258 m；按片段重采样的 95% 区间为 −0.1297 至 +0.0713 m（门控减匀速）。另将同一数据集的四处地点轮流留出，在 1,482 个完整窗口上比较五个种子。按四地等权，M0 与 M1 的平均 ADE 分别为 0.5126 和 0.5375 m。M1 在四个种子上误差升高，一个种子上下降。用最后两帧的速度给原有六条候选重排后，M1 的 ADE 降为 0.4961 m，直接匀速外推为 0.4839 m。另在同一批窗口上训练个体动作与轨迹联合模型。单种子下，无动作分支的 ADE 为 0.5885 m，仅加入动作辅助监督为 0.5161 m，动作条件端到端训练为 0.5068 m，截断梯度为 0.5081 m。三种动作头在 0.5 阈值下最多检出 53 个停止中的 1 个。V2 的设计参考了同一测试集上的 V1 诊断，且相邻测试窗口可能重叠。这些结果支持将质量门控作为加法融合的一种替代方案，其相对运动基线的收益随对照模型和工况而变化。
 
 **关键词**　非结构化道路、行人轨迹预测、短时观测、姿态质量、动作条件解码
 
 ## Abstract
 
-We study whether short histories of 2D body pose improve pedestrian trajectory prediction beyond observed ground motion. We compare a motion baseline with an ego-type input (M0), additive pose fusion, an implicit gate, and an explicit gate based on observed pose quality (M1). Models are trained and tested separately on roadside video from PINNS and on JTA with simulated pose corruption. With 0.4 s of observation on PINNS, top-ranked average displacement error was 0.4783 m for the explicit gate, 0.4929 m for additive fusion, 0.4755 m for the implicit gate, and 0.4856 m for M0. In the JTA heavy-noise subset, the explicit gate reduced error from 2.3063 m for additive fusion to 1.5138 m, while M0 reached 1.4397 m. The integrated model improved from 0.6161 m in V1 to 0.5295 m in V2 on the PINNS short window. On the original 497 test windows, the gate improved on constant velocity by 0.0258 m on average (95% clip-bootstrap interval for gate minus constant velocity, −0.1297 to +0.0713 m). We also held out each of the four PINNS sites in turn and repeated the comparison for five seeds on the same 1,482 complete windows. Site-averaged ADE was 0.5126 m for M0 and 0.5375 m for M1. The gate had higher error for four seeds and lower error for one. V2 was developed after inspecting V1 on the same test split, and neighboring windows can share future frames. The comparisons therefore provide exploratory evidence about the conditions under which explicit pose quality helps. Using the last observed velocity to rank the six pose-model candidates reduced its ADE to 0.4961 m, compared with 0.4839 m for direct constant velocity. A separate temporal-pose classifier with thresholds selected on training sites detected 39 of 49 starts with 89 false positives and 24 of 53 stops with 487 false positives. Events were derived from future ground trajectories.
+We study whether short histories of 2D body pose improve pedestrian trajectory prediction beyond observed ground motion. We compare a motion baseline with an ego-type input (M0), additive pose fusion, an implicit gate, and an explicit gate based on observed pose quality (M1). Models are trained and tested separately on roadside video from PINNS and on JTA with simulated pose corruption. With 0.4 s of observation on PINNS, top-ranked average displacement error was 0.4783 m for the explicit gate, 0.4929 m for additive fusion, 0.4755 m for the implicit gate, and 0.4856 m for M0. In the JTA heavy-noise subset, the explicit gate reduced error from 2.3063 m for additive fusion to 1.5138 m, while M0 reached 1.4397 m. The integrated model improved from 0.6161 m in V1 to 0.5295 m in V2 on the PINNS short window. On the original 497 test windows, the gate improved on constant velocity by 0.0258 m on average (95% clip-bootstrap interval for gate minus constant velocity, −0.1297 to +0.0713 m). We also held out each of the four PINNS sites in turn and repeated the comparison for five seeds on the same 1,482 complete windows. Site-averaged ADE was 0.5126 m for M0 and 0.5375 m for M1. The gate had higher error for four seeds and lower error for one. V2 was developed after inspecting V1 on the same test split, and neighboring windows can share future frames. The comparisons therefore provide exploratory evidence about the conditions under which explicit pose quality helps. Using the last observed velocity to rank the six pose-model candidates reduced its ADE to 0.4961 m, compared with 0.4839 m for direct constant velocity. In a separate one-seed comparison of individual models, top-ranked ADE was 0.5885 m without action supervision, 0.5161 m with auxiliary supervision, 0.5068 m with end-to-end action conditioning and 0.5081 m with the conditioning gradient detached. At a threshold of 0.5, the best stop count among the three action heads was one detection in 53 trajectory-derived events.
 
 ---
 
@@ -304,7 +304,22 @@ M1 减五帧匀速的 ADE/FDE 为 −0.0094/−0.0465 m，M1 减末两帧匀速�
 
 ![图7 三种窗长下的平均位移误差与姿态门控对运动基线的配对差值](../docs/figures/fig7_matched_duration_pose_errors.png)
 
-### 5.8 外部数据的采样核验与运动预测
+### 5.8 五帧观测下的动作与轨迹联合预测
+
+在第 5.6 节的 1,482 个窗口上，我们对同一套个体运动与姿态编码器比较四种动作训练方式。各臂关闭地图与邻体输入，共用种子 42、四地留出和固定 28 轮预算，共有的参数以相同数值初始化。辅助监督训练五个动作分数，轨迹解码器接收零动作条件；另外两组将预测动作分数送入解码器，一组允许轨迹损失沿动作分支反传，另一组在动作分数处截断该梯度。输入只含五帧历史，训练标签来自随后三秒轨迹的可观测事件。各折的类别权重只从训练地点估计。[评分前登记的设置](../reviews/pinns_individual_actions/preregistration.json)
+
+| 五帧联合模型 | 首选 ADE（m） | 3 s FDE（m） | 动作宏 AP | 动作宏 F1 | 五类平均 Brier |
+|---|---:|---:|---:|---:|---:|
+| 无动作分支 | 0.5885 | 1.2419 | — | — | — |
+| 仅辅助监督 | 0.5161 | 1.0997 | 0.3260 | 0.2811 | 0.1206 |
+| 预测动作条件，端到端 | 0.5068 | 1.0846 | 0.3056 | 0.2897 | 0.1223 |
+| 预测动作条件，截断梯度 | 0.5081 | 1.0855 | 0.3212 | 0.2963 | 0.1210 |
+
+表中先在每个测试地点计算指标，再给四地相同权重。F1 使用固定阈值 0.5。预注册主比较为截断梯度减端到端的首选 ADE，差值 +0.0014 m，按地点内整段视频配对重采样的 95% 区间为 [−0.0087, +0.0144] m。动作概率的平均 Brier 差为 −0.00134，区间为 [−0.00298, −0.00024]。三个动作头均检出 40/49 个起步，辅助、端到端、截断梯度的起步误报分别为 149、151、155 个。辅助和端到端均漏掉全部 53 个停止，截断梯度检出 1 个。16 份权重的 35,568 条候选轨迹和 22,230 个动作分数均通过独立前向复核。[逐地逐类结果及主比较](../results/pinns_individual_joint_actions.json)
+
+449 个首次标注窗中，无动作分支、仅辅助监督、端到端、截断梯度的四地 ADE 依次为 0.6543、0.5939、0.5946、0.5821 m，末两点匀速为 0.5617 m。在 1,033 个此前已有连续标注的窗口中，对应结果为 0.5596、0.4837、0.4698、0.4779 m，匀速为 0.4517 m。首次标注组只有 9 个起步和 21 个停止，泰国地点没有停止正例。分组依据仅为输入前的标注记录，不能据此判断实际遮挡物和首次可见时刻。[分组预设](../reviews/pinns_individual_actions/first_annotation_analysis.md) · [分组样本量与预测指标](../results/pinns_joint_action_history_groups.json)
+
+### 5.9 外部数据的采样核验与运动预测
 
 **SDD 备选数据的采样核验。** 在八个场景、60 段视频的标注中，有 4,094,713 条画面内行人框，其中 74,818 条没有自动插值标记。在原 30 fps 的三个取样相位上逐人检查，未插值框在 10 Hz 下最长连续三个位置，无法用现有标注构成连续五帧实测输入。此项仅核实标注频率。若从原画面重新检测目标，仍需独立验证三秒未来的地面位置。[逐段计数与数据来源](../reviews/sdd_external/annotation_support.json)
 
@@ -332,7 +347,7 @@ M1 减五帧匀速的 ADE/FDE 为 −0.0094/−0.0465 m，M1 减末两帧匀速�
 
 ## 7 结论 (Conclusion)
 
-在现有切分上，显式门控相较等权姿态相加，减轻了 JTA 人工重噪声桶的误差，PINNS 五帧上的平均收益较小。PINNS 的结果触发开题情形 C，尚不能确立显式质量向量相对同参数隐式门控的增益。完整模型在 PINNS 与 JTA 均落后于各自的 M0 对照。两轮实验中，截断梯度模型具有更高的动作 Macro-F1 均值，轨迹收益则随版本改变。在相同的 497 个测试窗中，M1 对匀速的平均 ADE 优势随地点权重改变而反转，按片段重采样的区间包含零。整地点留出后，五种子 M1 的四地等权 ADE 平均比 M0 高 0.0250 m，逐种子差值在 −0.0149 至 +0.0739 m 之间。末帧姿态提高了已见地点上起步事件的排序表现。在整地点留出的起停实验中，改用内层阈值后，有序姿态模型检出 24/53 个停止，同时产生 487 次误报。用历史速度给六条候选重排使 M1 的平均 ADE 降低 0.0415 m，仍比直接匀速外推高 0.0122 m。现有结果未显示显式门控在这些留出地点平均优于运动网络。新地点上的多种子复现、其他模块比较的分组区间和真实感知链路的耗时仍待验证。
+在现有切分上，显式门控相较等权姿态相加，减轻了 JTA 人工重噪声桶的误差，PINNS 五帧上的平均收益较小。PINNS 的结果触发开题情形 C，尚不能确立显式质量向量相对同参数隐式门控的增益。完整模型在 PINNS 与 JTA 均落后于各自的 M0 对照。两轮实验中，截断梯度模型具有更高的动作 Macro-F1 均值，轨迹收益则随版本改变。在额外的五帧个体联合模型中，动作辅助监督改善了这一种子的平均轨迹误差，截断梯度与端到端的 ADE 差为 +0.0014 m，按视频片段重采样的区间覆盖零。在相同的 497 个测试窗中，M1 对匀速的平均 ADE 优势随地点权重改变而反转，按片段重采样的区间包含零。整地点留出后，五种子 M1 的四地等权 ADE 平均比 M0 高 0.0250 m，逐种子差值在 −0.0149 至 +0.0739 m 之间。末帧姿态提高了已见地点上起步事件的排序表现。在整地点留出的起停实验中，改用内层阈值后，有序姿态模型检出 24/53 个停止，同时产生 487 次误报。用历史速度给六条候选重排使 M1 的平均 ADE 降低 0.0415 m，仍比直接匀速外推高 0.0122 m。现有结果未显示显式门控在这些留出地点平均优于运动网络。新地点上的多种子复现、其他模块比较的分组区间和真实感知链路的耗时仍待验证。
 
 ---
 

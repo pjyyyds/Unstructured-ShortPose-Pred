@@ -1,0 +1,1072 @@
+{
+  "experiment": "individual_only_joint_actions_loso_seed42",
+  "scope": "Registered before evaluating this experiment. Four physical development sites previously studied.",
+  "cohort": "Original 1,482 five-frame windows, 47 clips; disjoint 35-frame blocks within each clip/person; 10 Hz, 0.4 s observed span and all 30 future ground points through 3.0 s.",
+  "architecture": "Common quality-gated M1 individual motion/pose/ego type; maps and neighbor graph disabled in all arms. no_head has no action parameters and no head scores. Auxiliary fits the head but supplies zero action condition. End_to_end and detached use identical logit-to-trajectory bridge; only the latter detaches predicted action probabilities before the bridge. Shared backbone still receives trajectory and action supervision.",
+  "arms": {
+    "no_head": "none",
+    "auxiliary": "aux_only",
+    "end_to_end": "e2e",
+    "detached": "stop_grad"
+  },
+  "actions": [
+    "start",
+    "stop",
+    "left",
+    "right",
+    "maintain"
+  ],
+  "labels": "Unmodified five observable event rules applied to float64 label-derived history and future. Original window-level validity applies to all five classes. Targets and validity are only used for training loss and evaluation.",
+  "optimization": "Frozen 28-epoch final state, AdamW and cosine schedule. Uniform shuffle of training windows, permutation seed 49. JointPredictionLoss defaults: beta=.50, mode weight=.25, supervised BCE weight=.15. Fold-specific positive weights are the project dampened ratio computed exclusively from training labels. No validation/tuning/early stopping.",
+  "training": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 64,
+    "learning_rate": 0.002,
+    "min_lr_ratio": 0.05,
+    "weight_decay": 0.0001,
+    "gradient_clip": 2.0
+  },
+  "initialization": "All arms use identical seed-42 M1 backbone and common trajectory decoder state; supervised heads share initial values; conditional bridges share initial values. Same batches and backbone/decoder dropout stream; separate per-minibatch seed for head dropout (420000+epoch*10000+batch).",
+  "metric_plan": {
+    "primary": "Detached minus end_to_end paired highest-probability ADE (metres), site means equally weighted; positive means greater error for detached. Report the difference regardless of sign.",
+    "action_calibration": "Companion measure is detached minus end_to_end mean binary Brier score on valid windows, equally weighting five classes then four sites. Sigmoid probabilities are used without post-hoc calibration.",
+    "secondary": "Exact 3s top1 FDE, per-class equal-score-group AP, F1 at >=0.5, class-macro and four-site macro; no positive class yields null F1/AP and is absent from that site macro. Auxiliary vs no_head trajectory, end_to_end vs auxiliary trajectory and action, and detached vs end_to_end trajectory and action. AP and F1 may be unstable for rare start and stop.",
+    "interval": "Primary ADE and companion Brier: 20,000 paired within-site whole-clip bootstrap draws, seed 2026; four sites equally weighted. Conditional on these trained models; descriptive, no seed or unseen-site inference."
+  },
+  "limits": "Each model trains on three sites and predicts the fourth. The report equally weights four development sites. Fixed seed 42, 47 clips and 16 fit states. Class ratios, thresholds and results do not establish true intent or recognition of actual occluder emergence. Timing is for the cloud training and scoring job; it is not video-to-forecast latency.",
+  "provenance": {
+    "registered_git_commit": "e713d25",
+    "frozen_model_git_revision": "e8aafb53a74c0e0dcc10610ed9e74064c34bfaad",
+    "registration_canonical_sha256": "0eb60b827089822cffa096596848f6e0d0e8b47436c715afda9345a2f84ac1cc",
+    "driver_sha256": "7adbdbab4d60d0336514a1d7e6c1335615b89a655f5bc01c71e7bed8cf39d492",
+    "archive_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "labels_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "target_values_sha256": "80ac6319d32adcf8a3b2689458ab81467203ac1e72ce66d8e7fc383dca79299b",
+    "kaggle_script_version": 373610725,
+    "kaggle_reported_run_seconds": 1461.9,
+    "hardware": {
+      "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+      "deterministic": true,
+      "device": "cpu",
+      "interop_threads": 1,
+      "numpy": "2.1.3",
+      "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+      "threads": 4,
+      "torch": "2.11.0+cpu"
+    }
+  },
+  "independent_replay": {
+    "weights_loaded": 16,
+    "model_windows": 5928,
+    "trajectory_modes_replayed": 35568,
+    "supervised_probabilities_replayed": 22230,
+    "max_abs_difference_by_output": {
+      "trajs": 2.86102294921875e-06,
+      "mode_probs": 5.960464477539062e-07,
+      "mode_logits": 3.0994415283203125e-06,
+      "act_probs": 2.980232238769531e-07,
+      "act_logits": 2.384185791015625e-06,
+      "errors": 2.362066773287097e-06
+    },
+    "independent_numpy_metrics_match_cloud": true,
+    "checks": "Stored weights replayed on CPU in batches of 23 with independent native model construction. Input-only feature dictionary for prediction; targets, per-class masks, train/test identities, all probability/logit fields, candidate paths, every error, class metrics and paired intervals cross-checked."
+  },
+  "label_support": {
+    "valid_windows": 1482,
+    "positives": {
+      "start": 49,
+      "stop": 53,
+      "left": 214,
+      "right": 208,
+      "maintain": 975
+    },
+    "sites": {
+      "america_crossroad": {
+        "windows": 816,
+        "clips": 14,
+        "positives": {
+          "start": 27,
+          "stop": 35,
+          "left": 152,
+          "right": 156,
+          "maintain": 458
+        }
+      },
+      "italy_park": {
+        "windows": 84,
+        "clips": 9,
+        "positives": {
+          "start": 8,
+          "stop": 3,
+          "left": 4,
+          "right": 13,
+          "maintain": 57
+        }
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "clips": 11,
+        "positives": {
+          "start": 12,
+          "stop": 12,
+          "left": 45,
+          "right": 31,
+          "maintain": 336
+        }
+      },
+      "thailand_street": {
+        "windows": 150,
+        "clips": 13,
+        "positives": {
+          "start": 2,
+          "stop": 3,
+          "left": 13,
+          "right": 8,
+          "maintain": 124
+        }
+      }
+    }
+  },
+  "four_site_macro": {
+    "no_head": {
+      "ade_m": 0.5884591293016984,
+      "fde_m": 1.2419081778699148,
+      "action_head": null
+    },
+    "auxiliary": {
+      "ade_m": 0.5160851909947928,
+      "fde_m": 1.0996929303343908,
+      "action_head": {
+        "macro_ap": 0.32595629666220166,
+        "macro_f1": 0.28109943548177707,
+        "macro_brier": 0.12063444598656362
+      }
+    },
+    "end_to_end": {
+      "ade_m": 0.5067775998452283,
+      "fde_m": 1.0845893032153142,
+      "action_head": {
+        "macro_ap": 0.3056435306163876,
+        "macro_f1": 0.2896518242002416,
+        "macro_brier": 0.12231223747395878
+      }
+    },
+    "detached": {
+      "ade_m": 0.5081491402194539,
+      "fde_m": 1.0855279281658503,
+      "action_head": {
+        "macro_ap": 0.32119396327407423,
+        "macro_f1": 0.29630020956796016,
+        "macro_brier": 0.12097433929043233
+      }
+    }
+  },
+  "primary_paired": {
+    "ade_m": {
+      "detached_minus_e2e": 0.0013715403742256109,
+      "paired_clip_95pct": [-0.008694530863989863, 0.014436086443843393]
+    },
+    "brier": {
+      "detached_minus_e2e": -0.001337898183526436,
+      "paired_clip_95pct": [-0.002979066847326535, -0.00024246919660642627]
+    }
+  },
+  "secondary_contrasts": {
+    "auxiliary_minus_no_head": {
+      "ade_m": -0.07237393830690564,
+      "fde_m": -0.14221524753552406
+    },
+    "end_to_end_minus_auxiliary": {
+      "ade_m": -0.009307591149564476,
+      "fde_m": -0.015103627119076535,
+      "macro_ap": -0.020312766045814057,
+      "macro_f1": 0.008552388718464532,
+      "macro_brier": 0.0016777914873951638
+    },
+    "detached_minus_end_to_end": {
+      "ade_m": 0.0013715403742255994,
+      "fde_m": 0.0009386249505360933,
+      "macro_ap": 0.01555043265768663,
+      "macro_f1": 0.006648385367718557,
+      "macro_brier": -0.001337898183526448
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "no_head": {
+        "ade_m": 0.8519611282528947,
+        "fde_m": 1.6391594352694232,
+        "action_head": null
+      },
+      "auxiliary": {
+        "ade_m": 0.8331932973996425,
+        "fde_m": 1.6013454371982005,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 27,
+              "predicted_positive": 93,
+              "tp": 18,
+              "fp": 75,
+              "fn": 9,
+              "brier": 0.045547612809223814,
+              "ap": 0.14186620431406596,
+              "f1": 0.3
+            },
+            "stop": {
+              "positives": 35,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "brier": 0.052708120479394945,
+              "ap": 0.0718039083806818,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 152,
+              "predicted_positive": 18,
+              "tp": 1,
+              "fp": 17,
+              "fn": 151,
+              "brier": 0.16405603910765906,
+              "ap": 0.21500156613488958,
+              "f1": 0.011764705882352941
+            },
+            "right": {
+              "positives": 156,
+              "predicted_positive": 129,
+              "tp": 35,
+              "fp": 94,
+              "fn": 121,
+              "brier": 0.18560505438286756,
+              "ap": 0.24839001891101642,
+              "f1": 0.24561403508771928
+            },
+            "maintain": {
+              "positives": 458,
+              "predicted_positive": 738,
+              "tp": 422,
+              "fp": 316,
+              "fn": 36,
+              "brier": 0.29143942818224117,
+              "ap": 0.5562967420999854,
+              "f1": 0.705685618729097
+            }
+          },
+          "macro_ap": 0.24667168796812783,
+          "macro_f1": 0.25261287193983384,
+          "macro_brier": 0.14787125099227733
+        }
+      },
+      "end_to_end": {
+        "ade_m": 0.8346660802558357,
+        "fde_m": 1.622530389875552,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 27,
+              "predicted_positive": 95,
+              "tp": 18,
+              "fp": 77,
+              "fn": 9,
+              "brier": 0.0504036168109495,
+              "ap": 0.13958935609340065,
+              "f1": 0.29508196721311475
+            },
+            "stop": {
+              "positives": 35,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "brier": 0.05147944710193118,
+              "ap": 0.05437670068311416,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 152,
+              "predicted_positive": 24,
+              "tp": 2,
+              "fp": 22,
+              "fn": 150,
+              "brier": 0.16828212329021866,
+              "ap": 0.20065939903919267,
+              "f1": 0.022727272727272728
+            },
+            "right": {
+              "positives": 156,
+              "predicted_positive": 133,
+              "tp": 34,
+              "fp": 99,
+              "fn": 122,
+              "brier": 0.18425168407836445,
+              "ap": 0.2408273735896777,
+              "f1": 0.23529411764705882
+            },
+            "maintain": {
+              "positives": 458,
+              "predicted_positive": 746,
+              "tp": 423,
+              "fp": 323,
+              "fn": 35,
+              "brier": 0.2933318196918058,
+              "ap": 0.5423217670708872,
+              "f1": 0.7026578073089701
+            }
+          },
+          "macro_ap": 0.23555491929525446,
+          "macro_f1": 0.25115223297928324,
+          "macro_brier": 0.14954973819465392
+        }
+      },
+      "detached": {
+        "ade_m": 0.7989331908287826,
+        "fde_m": 1.5417335755202848,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 27,
+              "predicted_positive": 95,
+              "tp": 18,
+              "fp": 77,
+              "fn": 9,
+              "brier": 0.04875045786607034,
+              "ap": 0.1497647354874928,
+              "f1": 0.29508196721311475
+            },
+            "stop": {
+              "positives": 35,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "brier": 0.05121298830859964,
+              "ap": 0.059910594695076605,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 152,
+              "predicted_positive": 9,
+              "tp": 0,
+              "fp": 9,
+              "fn": 152,
+              "brier": 0.16889184894266357,
+              "ap": 0.18758211810785552,
+              "f1": 0.0
+            },
+            "right": {
+              "positives": 156,
+              "predicted_positive": 141,
+              "tp": 36,
+              "fp": 105,
+              "fn": 120,
+              "brier": 0.18902546916575222,
+              "ap": 0.23961121606175728,
+              "f1": 0.24242424242424243
+            },
+            "maintain": {
+              "positives": 458,
+              "predicted_positive": 745,
+              "tp": 421,
+              "fp": 324,
+              "fn": 37,
+              "brier": 0.2918821704838544,
+              "ap": 0.5500131526191665,
+              "f1": 0.6999168744804655
+            }
+          },
+          "macro_ap": 0.23737636339426973,
+          "macro_f1": 0.24748461682356454,
+          "macro_brier": 0.14995258695338803
+        }
+      }
+    },
+    "italy_park": {
+      "no_head": {
+        "ade_m": 0.44682005238660205,
+        "fde_m": 1.0127937223962893,
+        "action_head": null
+      },
+      "auxiliary": {
+        "ade_m": 0.4348013706813349,
+        "fde_m": 0.9904942230111363,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 8,
+              "predicted_positive": 16,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "brier": 0.05382783748107805,
+              "ap": 0.7756410256410257,
+              "f1": 0.6666666666666666
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "brier": 0.04838425110761864,
+              "ap": 0.3947606142728094,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 4,
+              "predicted_positive": 2,
+              "tp": 0,
+              "fp": 2,
+              "fn": 4,
+              "brier": 0.09467052245118057,
+              "ap": 0.05161867404107276,
+              "f1": 0.0
+            },
+            "right": {
+              "positives": 13,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "brier": 0.12072437313418373,
+              "ap": 0.4339298690513266,
+              "f1": 0.0
+            },
+            "maintain": {
+              "positives": 57,
+              "predicted_positive": 84,
+              "tp": 57,
+              "fp": 27,
+              "fn": 0,
+              "brier": 0.23155086400982,
+              "ap": 0.6904913057980351,
+              "f1": 0.8085106382978723
+            }
+          },
+          "macro_ap": 0.4692882977608539,
+          "macro_f1": 0.2950354609929078,
+          "macro_brier": 0.1098315696367762
+        }
+      },
+      "end_to_end": {
+        "ade_m": 0.40772360692206844,
+        "fde_m": 0.94186850313868,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 8,
+              "predicted_positive": 16,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "brier": 0.05622500613464028,
+              "ap": 0.6150613275613276,
+              "f1": 0.6666666666666666
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "brier": 0.0501434190947871,
+              "ap": 0.3786482334869431,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 4,
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "brier": 0.09406742404380106,
+              "ap": 0.04433061308061308,
+              "f1": 0.0
+            },
+            "right": {
+              "positives": 13,
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 11,
+              "brier": 0.12322747485150852,
+              "ap": 0.43767781866984495,
+              "f1": 0.26666666666666666
+            },
+            "maintain": {
+              "positives": 57,
+              "predicted_positive": 81,
+              "tp": 56,
+              "fp": 25,
+              "fn": 1,
+              "brier": 0.2252932851352166,
+              "ap": 0.6941345247389094,
+              "f1": 0.8115942028985508
+            }
+          },
+          "macro_ap": 0.43397050350752764,
+          "macro_f1": 0.34898550724637684,
+          "macro_brier": 0.10979132185199073
+        }
+      },
+      "detached": {
+        "ade_m": 0.4409826019463129,
+        "fde_m": 1.002102278575673,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 8,
+              "predicted_positive": 16,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "brier": 0.053453373076433094,
+              "ap": 0.8356150793650794,
+              "f1": 0.6666666666666666
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "brier": 0.0456530032896164,
+              "ap": 0.3850517183850517,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 4,
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "brier": 0.09968870912334937,
+              "ap": 0.049142044586959845,
+              "f1": 0.0
+            },
+            "right": {
+              "positives": 13,
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 11,
+              "brier": 0.11915465798342208,
+              "ap": 0.4993943975806579,
+              "f1": 0.26666666666666666
+            },
+            "maintain": {
+              "positives": 57,
+              "predicted_positive": 81,
+              "tp": 56,
+              "fp": 25,
+              "fn": 1,
+              "brier": 0.23317831362242417,
+              "ap": 0.688345989238979,
+              "f1": 0.8115942028985508
+            }
+          },
+          "macro_ap": 0.4915098458313456,
+          "macro_f1": 0.34898550724637684,
+          "macro_brier": 0.11022561141904903
+        }
+      }
+    },
+    "japan_crossroad": {
+      "no_head": {
+        "ade_m": 0.4123381604338237,
+        "fde_m": 0.9126274084050429,
+        "action_head": null
+      },
+      "auxiliary": {
+        "ade_m": 0.40751742333295443,
+        "fde_m": 0.9099563013965759,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 12,
+              "predicted_positive": 72,
+              "tp": 12,
+              "fp": 60,
+              "fn": 0,
+              "brier": 0.07856037109770027,
+              "ap": 0.21001427212959273,
+              "f1": 0.2857142857142857
+            },
+            "stop": {
+              "positives": 12,
+              "predicted_positive": 23,
+              "tp": 0,
+              "fp": 23,
+              "fn": 12,
+              "brier": 0.07085483545915879,
+              "ap": 0.034929244923374146,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 45,
+              "predicted_positive": 56,
+              "tp": 12,
+              "fp": 44,
+              "fn": 33,
+              "brier": 0.12200007586184707,
+              "ap": 0.20079156447212732,
+              "f1": 0.2376237623762376
+            },
+            "right": {
+              "positives": 31,
+              "predicted_positive": 55,
+              "tp": 3,
+              "fp": 52,
+              "fn": 28,
+              "brier": 0.13165090783996483,
+              "ap": 0.12450521997546034,
+              "f1": 0.06976744186046512
+            },
+            "maintain": {
+              "positives": 336,
+              "predicted_positive": 351,
+              "tp": 274,
+              "fp": 77,
+              "fn": 62,
+              "brier": 0.20400607079246652,
+              "ap": 0.8002016743932063,
+              "f1": 0.7976710334788938
+            }
+          },
+          "macro_ap": 0.27408839517875216,
+          "macro_f1": 0.2781553046859765,
+          "macro_brier": 0.12141445221022748
+        }
+      },
+      "end_to_end": {
+        "ade_m": 0.39799132463502795,
+        "fde_m": 0.8690631006898161,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 12,
+              "predicted_positive": 72,
+              "tp": 12,
+              "fp": 60,
+              "fn": 0,
+              "brier": 0.07331919067975338,
+              "ap": 0.21012179467711592,
+              "f1": 0.2857142857142857
+            },
+            "stop": {
+              "positives": 12,
+              "predicted_positive": 32,
+              "tp": 0,
+              "fp": 32,
+              "fn": 12,
+              "brier": 0.07876990074033632,
+              "ap": 0.036991420163400075,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 45,
+              "predicted_positive": 57,
+              "tp": 11,
+              "fp": 46,
+              "fn": 34,
+              "brier": 0.12642841337253627,
+              "ap": 0.20463174338197185,
+              "f1": 0.21568627450980393
+            },
+            "right": {
+              "positives": 31,
+              "predicted_positive": 69,
+              "tp": 4,
+              "fp": 65,
+              "fn": 27,
+              "brier": 0.1419850416064009,
+              "ap": 0.12106352432438372,
+              "f1": 0.08
+            },
+            "maintain": {
+              "positives": 336,
+              "predicted_positive": 318,
+              "tp": 251,
+              "fp": 67,
+              "fn": 85,
+              "brier": 0.2161701040228399,
+              "ap": 0.7973871233817744,
+              "f1": 0.7675840978593272
+            }
+          },
+          "macro_ap": 0.2740391211857292,
+          "macro_f1": 0.2697969316166834,
+          "macro_brier": 0.12733453008437334
+        }
+      },
+      "detached": {
+        "ade_m": 0.41239421090230344,
+        "fde_m": 0.91063406984542,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 12,
+              "predicted_positive": 76,
+              "tp": 12,
+              "fp": 64,
+              "fn": 0,
+              "brier": 0.07636069389128876,
+              "ap": 0.2151865548448092,
+              "f1": 0.2727272727272727
+            },
+            "stop": {
+              "positives": 12,
+              "predicted_positive": 34,
+              "tp": 1,
+              "fp": 33,
+              "fn": 11,
+              "brier": 0.07674007055845881,
+              "ap": 0.04263982411307367,
+              "f1": 0.043478260869565216
+            },
+            "left": {
+              "positives": 45,
+              "predicted_positive": 58,
+              "tp": 14,
+              "fp": 44,
+              "fn": 31,
+              "brier": 0.12342719763344136,
+              "ap": 0.22414003185024772,
+              "f1": 0.27184466019417475
+            },
+            "right": {
+              "positives": 31,
+              "predicted_positive": 64,
+              "tp": 4,
+              "fp": 60,
+              "fn": 27,
+              "brier": 0.13437065295168577,
+              "ap": 0.12451973889959925,
+              "f1": 0.08421052631578947
+            },
+            "maintain": {
+              "positives": 336,
+              "predicted_positive": 367,
+              "tp": 288,
+              "fp": 79,
+              "fn": 48,
+              "brier": 0.20074424237907312,
+              "ap": 0.8029099762464,
+              "f1": 0.8193456614509246
+            }
+          },
+          "macro_ap": 0.281879225190826,
+          "macro_f1": 0.29832127631154537,
+          "macro_brier": 0.12232857148278957
+        }
+      }
+    },
+    "thailand_street": {
+      "no_head": {
+        "ade_m": 0.6427171761334733,
+        "fde_m": 1.403052145408904,
+        "action_head": null
+      },
+      "auxiliary": {
+        "ade_m": 0.3888286725652394,
+        "fde_m": 0.8969757597316504,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 2,
+              "predicted_positive": 8,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "brier": 0.017821520754522792,
+              "ap": 0.375,
+              "f1": 0.4
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "brier": 0.03652454308116179,
+              "ap": 0.020167981032467013,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 13,
+              "predicted_positive": 36,
+              "tp": 5,
+              "fp": 31,
+              "fn": 8,
+              "brier": 0.19401239971677944,
+              "ap": 0.2299097121027598,
+              "f1": 0.20408163265306123
+            },
+            "right": {
+              "positives": 8,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "brier": 0.08225723814933131,
+              "ap": 0.10667480656725026,
+              "f1": 0.0
+            },
+            "maintain": {
+              "positives": 124,
+              "predicted_positive": 146,
+              "tp": 120,
+              "fp": 26,
+              "fn": 4,
+              "brier": 0.18648685383307212,
+              "ap": 0.8371315290028865,
+              "f1": 0.8888888888888888
+            }
+          },
+          "macro_ap": 0.3137768057410727,
+          "macro_f1": 0.29859410430839006,
+          "macro_brier": 0.10342051110697348
+        }
+      },
+      "end_to_end": {
+        "ade_m": 0.386729387567981,
+        "fde_m": 0.9048952191572083,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 2,
+              "predicted_positive": 8,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "brier": 0.01987418842313034,
+              "ap": 0.25,
+              "f1": 0.4
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "brier": 0.034876624686677266,
+              "ap": 0.0241250625767988,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 13,
+              "predicted_positive": 44,
+              "tp": 5,
+              "fp": 39,
+              "fn": 8,
+              "brier": 0.19657024860371622,
+              "ap": 0.15263728743126875,
+              "f1": 0.17543859649122806
+            },
+            "right": {
+              "positives": 8,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "brier": 0.07791219656855976,
+              "ap": 0.13147078114548974,
+              "f1": 0.0
+            },
+            "maintain": {
+              "positives": 124,
+              "predicted_positive": 141,
+              "tp": 115,
+              "fp": 26,
+              "fn": 9,
+              "brier": 0.18363354054200196,
+              "ap": 0.8368147612316381,
+              "f1": 0.8679245283018868
+            }
+          },
+          "macro_ap": 0.2790095784770391,
+          "macro_f1": 0.288672624958623,
+          "macro_brier": 0.1025733597648171
+        }
+      },
+      "detached": {
+        "ade_m": 0.38028655720041693,
+        "fde_m": 0.8876417887220236,
+        "action_head": {
+          "classes": {
+            "start": {
+              "positives": 2,
+              "predicted_positive": 8,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "brier": 0.018743034838414156,
+              "ap": 0.20833333333333331,
+              "f1": 0.4
+            },
+            "stop": {
+              "positives": 3,
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "brier": 0.03684907492366649,
+              "ap": 0.02199300699300699,
+              "f1": 0.0
+            },
+            "left": {
+              "positives": 13,
+              "predicted_positive": 31,
+              "tp": 4,
+              "fp": 27,
+              "fn": 9,
+              "brier": 0.1655034114519313,
+              "ap": 0.22390210759018808,
+              "f1": 0.18181818181818182
+            },
+            "right": {
+              "positives": 8,
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 8,
+              "brier": 0.0982621279254218,
+              "ap": 0.08578583441942725,
+              "f1": 0.0
+            },
+            "maintain": {
+              "positives": 124,
+              "predicted_positive": 138,
+              "tp": 114,
+              "fp": 24,
+              "fn": 10,
+              "brier": 0.18759528739307987,
+              "ap": 0.8300378110633237,
+              "f1": 0.8702290076335878
+            }
+          },
+          "macro_ap": 0.27401041867985587,
+          "macro_f1": 0.29040943789035395,
+          "macro_brier": 0.10139058730650272
+        }
+      }
+    }
+  },
+  "pooled_confusion_by_action": {
+    "auxiliary": {
+      "start": {
+        "positives": 49,
+        "predicted_positive": 189,
+        "tp": 40,
+        "fp": 149,
+        "fn": 9
+      },
+      "stop": {
+        "positives": 53,
+        "predicted_positive": 23,
+        "tp": 0,
+        "fp": 23,
+        "fn": 53
+      },
+      "left": {
+        "positives": 214,
+        "predicted_positive": 112,
+        "tp": 18,
+        "fp": 94,
+        "fn": 196
+      },
+      "right": {
+        "positives": 208,
+        "predicted_positive": 184,
+        "tp": 38,
+        "fp": 146,
+        "fn": 170
+      },
+      "maintain": {
+        "positives": 975,
+        "predicted_positive": 1319,
+        "tp": 873,
+        "fp": 446,
+        "fn": 102
+      }
+    },
+    "end_to_end": {
+      "start": {
+        "positives": 49,
+        "predicted_positive": 191,
+        "tp": 40,
+        "fp": 151,
+        "fn": 9
+      },
+      "stop": {
+        "positives": 53,
+        "predicted_positive": 33,
+        "tp": 0,
+        "fp": 33,
+        "fn": 53
+      },
+      "left": {
+        "positives": 214,
+        "predicted_positive": 126,
+        "tp": 18,
+        "fp": 108,
+        "fn": 196
+      },
+      "right": {
+        "positives": 208,
+        "predicted_positive": 204,
+        "tp": 40,
+        "fp": 164,
+        "fn": 168
+      },
+      "maintain": {
+        "positives": 975,
+        "predicted_positive": 1286,
+        "tp": 845,
+        "fp": 441,
+        "fn": 130
+      }
+    },
+    "detached": {
+      "start": {
+        "positives": 49,
+        "predicted_positive": 195,
+        "tp": 40,
+        "fp": 155,
+        "fn": 9
+      },
+      "stop": {
+        "positives": 53,
+        "predicted_positive": 34,
+        "tp": 1,
+        "fp": 33,
+        "fn": 52
+      },
+      "left": {
+        "positives": 214,
+        "predicted_positive": 99,
+        "tp": 18,
+        "fp": 81,
+        "fn": 196
+      },
+      "right": {
+        "positives": 208,
+        "predicted_positive": 208,
+        "tp": 42,
+        "fp": 166,
+        "fn": 166
+      },
+      "maintain": {
+        "positives": 975,
+        "predicted_positive": 1331,
+        "tp": 879,
+        "fp": 452,
+        "fn": 96
+      }
+    }
+  }
+}
