@@ -1,0 +1,1554 @@
+{
+  "experiment": "Kaggle CPU, matched seed-42 fusion ablations, four fixed previously examined sites",
+  "cohort": {
+    "initial_five_frame_windows": 1482,
+    "without_complete_20": 449,
+    "complete_20_windows": 1033,
+    "removed_for_temporal_overlap": 410,
+    "windows": 623,
+    "clips": 47,
+    "clip_person_tracks": 375,
+    "sites": {
+      "america_crossroad": {
+        "windows": 342,
+        "clips": 14,
+        "tracks": 197,
+        "train_windows": 281,
+        "training_batches_per_fit": 140,
+        "initial_five_frame_windows": 816,
+        "without_complete_20": 240,
+        "removed_for_temporal_overlap": 234
+      },
+      "italy_park": {
+        "windows": 32,
+        "clips": 9,
+        "tracks": 25,
+        "train_windows": 591,
+        "training_batches_per_fit": 280,
+        "initial_five_frame_windows": 84,
+        "without_complete_20": 28,
+        "removed_for_temporal_overlap": 24
+      },
+      "japan_crossroad": {
+        "windows": 186,
+        "clips": 11,
+        "tracks": 100,
+        "train_windows": 437,
+        "training_batches_per_fit": 196,
+        "initial_five_frame_windows": 432,
+        "without_complete_20": 117,
+        "removed_for_temporal_overlap": 129
+      },
+      "thailand_street": {
+        "windows": 63,
+        "clips": 13,
+        "tracks": 53,
+        "train_windows": 560,
+        "training_batches_per_fit": 252,
+        "initial_five_frame_windows": 150,
+        "without_complete_20": 64,
+        "removed_for_temporal_overlap": 23
+      }
+    },
+    "history_frames": [
+      5,
+      10,
+      20
+    ],
+    "history_span_seconds": [
+      0.4,
+      0.9,
+      1.9
+    ],
+    "forecast_steps": 30,
+    "endpoint_s": 3.0,
+    "source_cache_sha256": "59e59e3dfa6a2b5583ce4c3fbcb010866e793a3595e43cf691dbefbfcddc64f1",
+    "ordered_keys_sha256": "11ec9713c26fdd3db6a9a887b4ac8b79fbbf13c6389b5924fcd61c315a38aa34"
+  },
+  "models": {
+    "M0": "Motion only",
+    "M1": "Explicit quality gate",
+    "M1b": "Implicit gate, no continuous quality input; pose presence retained",
+    "M1-concat": "Learned bias-free projection of concatenated motion and available pose; missing pose bypass"
+  },
+  "protocol": {
+    "training": {
+      "seed": 42,
+      "epochs": 28,
+      "batch_size": 64,
+      "learning_rate": 0.002,
+      "min_lr_ratio": 0.05,
+      "weight_decay": 0.0001,
+      "gradient_clip": 2.0
+    },
+    "folds": "One site held out; training uses all windows of the other three sites.",
+    "loss": "Frozen JointPredictionLoss, action loss disabled. Batch counts follow the recorded 28 epochs and batch size 64; the model archives contain no per-batch or per-epoch numerical training loss history.",
+    "metrics": "Each window selects its highest-probability trajectory among six. ADE uses all 30 points and FDE uses the 3 s endpoint. Intervals are marginal unadjusted 95% percentiles from the same 20,000 paired, whole-clip resamples (PCG64 seed 2026, multinomial draw per site). Retain every window in selected clips, average within site by window and across sites equally. Lower errors favor the first method. Window and site sign counts use the archived paired errors with strict inequality. Conditional on these sites, one seed and the fitted models; training/seed or new-site uncertainty is excluded."
+  },
+  "provenance": {
+    "fusion_model_source_sha256": "251145ae0e33f47cfae858ddfe787595844dea23beb3455b607139e81c594606",
+    "core_source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "local_cpu_torch": "2.10.0",
+    "jobs": {
+      "5": {
+        "base": {
+          "archive_sha256": "a4ff0e2ff8e7e625dca0dacc30b20e31c13d05e8418f09add2fe42801e02097a",
+          "device": "cpu",
+          "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "e8aafb53a74c0e0dcc10610ed9e74064c34bfaad",
+          "cpu_driver_sha256": "4ae1755a2bd5d9cc57cfcb8ee820bbafbb84883cbe3665dc6ce21d5a781ca744",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373601953
+        },
+        "fusion": {
+          "archive_sha256": "cc5837725ac83009ec6d5256f2df76133e16f9e3cc6f6a573c9c5f55383233ae",
+          "device": "cpu",
+          "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "032800e94bb0828c45d3f5195ac5cc17aa93bc4c",
+          "cpu_driver_sha256": "2a5dde4b68ad47c971efc124be0d9112d3a4d26dadb24fb7dc642459745dc18e",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373604843,
+          "reported_kaggle_seconds": 359.7
+        }
+      },
+      "10": {
+        "base": {
+          "archive_sha256": "e37f246be983da20dd8ecce34dc66bbeeb1048b0d29ee3bc33c557e08e361aaa",
+          "device": "cpu",
+          "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "e8aafb53a74c0e0dcc10610ed9e74064c34bfaad",
+          "cpu_driver_sha256": "4ae1755a2bd5d9cc57cfcb8ee820bbafbb84883cbe3665dc6ce21d5a781ca744",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373601970
+        },
+        "fusion": {
+          "archive_sha256": "35fafe3b55e8053f120b364a3c8fb798cb423a1871d9deec00fe397f32a2fff8",
+          "device": "cpu",
+          "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "032800e94bb0828c45d3f5195ac5cc17aa93bc4c",
+          "cpu_driver_sha256": "2a5dde4b68ad47c971efc124be0d9112d3a4d26dadb24fb7dc642459745dc18e",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373604882,
+          "reported_kaggle_seconds": 431.7
+        }
+      },
+      "20": {
+        "base": {
+          "archive_sha256": "866552d875bcc9a08c1e0069e2e464970a5ce3a806bfe78dac65f1ccf8918178",
+          "device": "cpu",
+          "cpu_model": "AMD EPYC 7B12",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "e8aafb53a74c0e0dcc10610ed9e74064c34bfaad",
+          "cpu_driver_sha256": "4ae1755a2bd5d9cc57cfcb8ee820bbafbb84883cbe3665dc6ce21d5a781ca744",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373601987
+        },
+        "fusion": {
+          "archive_sha256": "a1e604063a1b9859957982d55d09efe1c5f44eb78b9d8a1ea93a20753fb4d65a",
+          "device": "cpu",
+          "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+          "threads": 4,
+          "interop_threads": 1,
+          "torch": "2.11.0+cpu",
+          "numpy": "2.1.3",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+          "revision": "032800e94bb0828c45d3f5195ac5cc17aa93bc4c",
+          "cpu_driver_sha256": "2a5dde4b68ad47c971efc124be0d9112d3a4d26dadb24fb7dc642459745dc18e",
+          "deterministic_algorithms": true,
+          "mkldnn": true,
+          "float32_matmul_precision": "highest",
+          "kaggle_version": 373604876,
+          "reported_kaggle_seconds": 590.6
+        }
+      }
+    },
+    "hardware_scope": "At T5 and T10 both archive families record Intel Xeon 2.20 GHz. At T20 M0/M1 were trained on AMD EPYC 7B12 and M1b/M1-concat on Intel Xeon 2.20 GHz. Differences between these T20 archive families combine architecture with training hardware; the M1b vs M1-concat comparison at T20 is within one job. Matching processor names do not identify a physical machine."
+  },
+  "verification": {
+    "distinct_checkpoints": 48,
+    "outer_model_window_rows": 7476,
+    "replayed_candidate_trajectories": 44856,
+    "fusion_candidate_trajectories_matched_to_archive": 22428,
+    "top1_scalar_errors_compared": 14952,
+    "maximum_absolute_difference": {
+      "fusion_six_paths_m": 2.86102294921875e-06,
+      "fusion_six_probabilities": 8.940696716308594e-07,
+      "all_top1_errors_m": 2.3262551245295526e-06
+    },
+    "source_detail": "All four arms were independently replayed on CPU. Fusion checkpoints store all six trajectories, probabilities and per-window ADE/FDE. M0/M1 checkpoints only store per-window errors; their six trajectories and probabilities were reconstructed, and their selected errors checked. Public summaries use the paired archived errors after this elementwise replay check."
+  },
+  "durations": {
+    "5": {
+      "four_site_macro_m": {
+        "M0": {
+          "ade_m": 0.5329456111007106,
+          "fde_m": 1.135660949090539
+        },
+        "M1": {
+          "ade_m": 0.5896370283506429,
+          "fde_m": 1.2411105853259459
+        },
+        "M1b": {
+          "ade_m": 0.5805408668029289,
+          "fde_m": 1.2424303114928517
+        },
+        "M1-concat": {
+          "ade_m": 0.5679201109020549,
+          "fde_m": 1.2084132040798068
+        }
+      },
+      "sites_m": {
+        "america_crossroad": {
+          "M0": {
+            "ade_m": 0.801015970431539,
+            "fde_m": 1.535932328739906
+          },
+          "M1": {
+            "ade_m": 0.863935632632334,
+            "fde_m": 1.6622515162616445
+          },
+          "M1b": {
+            "ade_m": 0.8532810852536568,
+            "fde_m": 1.6628170990281634
+          },
+          "M1-concat": {
+            "ade_m": 0.7562664959926679,
+            "fde_m": 1.4428360185515114
+          }
+        },
+        "italy_park": {
+          "M0": {
+            "ade_m": 0.4953410311049081,
+            "fde_m": 1.118780848570168
+          },
+          "M1": {
+            "ade_m": 0.48268896031731856,
+            "fde_m": 1.0848719643545337
+          },
+          "M1b": {
+            "ade_m": 0.4153759836355069,
+            "fde_m": 0.9570624781772494
+          },
+          "M1-concat": {
+            "ade_m": 0.4263058273854162,
+            "fde_m": 1.0074411784298718
+          }
+        },
+        "japan_crossroad": {
+          "M0": {
+            "ade_m": 0.42973700833955836,
+            "fde_m": 0.9340090323039281
+          },
+          "M1": {
+            "ade_m": 0.46027232609239827,
+            "fde_m": 0.9879473579286407
+          },
+          "M1b": {
+            "ade_m": 0.7018393615671301,
+            "fde_m": 1.4757202769158988
+          },
+          "M1-concat": {
+            "ade_m": 0.5048356915047179,
+            "fde_m": 1.0979515979547174
+          }
+        },
+        "thailand_street": {
+          "M0": {
+            "ade_m": 0.40568843452683684,
+            "fde_m": 0.9539215867481534
+          },
+          "M1": {
+            "ade_m": 0.5516511943605211,
+            "fde_m": 1.2293715027589647
+          },
+          "M1b": {
+            "ade_m": 0.3516670367554221,
+            "fde_m": 0.874121391850095
+          },
+          "M1-concat": {
+            "ade_m": 0.5842724287254175,
+            "fde_m": 1.2854240213831265
+          }
+        }
+      },
+      "paired_contrasts": {
+        "M1b_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": -0.009096161547714074,
+            "fde_m": 0.001319726166905788
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.05455069281298359,
+              0.03981437903305229
+            ],
+            "fde_m": [
+              -0.09076009758183029,
+              0.10599452013929557
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.010654547378677475,
+              "fde_m": 0.0005655827665189553
+            },
+            "italy_park": {
+              "ade_m": -0.06731297668181163,
+              "fde_m": -0.12780948617728427
+            },
+            "japan_crossroad": {
+              "ade_m": 0.24156703547473202,
+              "fde_m": 0.48777291898725816
+            },
+            "thailand_street": {
+              "ade_m": -0.1999841576050992,
+              "fde_m": -0.3552501109088697
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 305,
+              "equal": 0,
+              "higher": 318
+            },
+            "fde_m": {
+              "lower": 296,
+              "equal": 0,
+              "higher": 327
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 3,
+              "equal": 0,
+              "higher": 1
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1-concat_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": -0.0217169174485882,
+            "fde_m": -0.03269738124613913
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.08269567174491599,
+              0.036039643164235066
+            ],
+            "fde_m": [
+              -0.16441675712739814,
+              0.08885990948245791
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.10766913663966603,
+              "fde_m": -0.21941549771013316
+            },
+            "italy_park": {
+              "ade_m": -0.056383132931902474,
+              "fde_m": -0.0774307859246619
+            },
+            "japan_crossroad": {
+              "ade_m": 0.044563365412319374,
+              "fde_m": 0.11000424002607663
+            },
+            "thailand_street": {
+              "ade_m": 0.03262123436489632,
+              "fde_m": 0.05605251862416192
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 310,
+              "equal": 0,
+              "higher": 313
+            },
+            "fde_m": {
+              "lower": 302,
+              "equal": 0,
+              "higher": 321
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1b_minus_M1-concat": {
+          "equal_site_mean_m": {
+            "ade_m": 0.012620755900874032,
+            "fde_m": 0.034017107413044895
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.0384805469453127,
+              0.06433982999086948
+            ],
+            "fde_m": [
+              -0.07289425416106528,
+              0.15536961558048892
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.09701458926098855,
+              "fde_m": 0.2199810804766521
+            },
+            "italy_park": {
+              "ade_m": -0.01092984374990921,
+              "fde_m": -0.050378700252622366
+            },
+            "japan_crossroad": {
+              "ade_m": 0.19700367006241226,
+              "fde_m": 0.3777686789611815
+            },
+            "thailand_street": {
+              "ade_m": -0.2326053919699955,
+              "fde_m": -0.41130262953303165
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 287,
+              "equal": 0,
+              "higher": 336
+            },
+            "fde_m": {
+              "lower": 293,
+              "equal": 0,
+              "higher": 330
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.05669141724993249,
+            "fde_m": 0.105449636235407
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.016067786051011737,
+              0.10495320899660816
+            ],
+            "fde_m": [
+              0.02166002115820736,
+              0.21435269707207685
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.06291966220079542,
+              "fde_m": 0.12631918752173843
+            },
+            "italy_park": {
+              "ade_m": -0.012652070787589766,
+              "fde_m": -0.033908884215634316
+            },
+            "japan_crossroad": {
+              "ade_m": 0.03053531775283994,
+              "fde_m": 0.053938325624712694
+            },
+            "thailand_street": {
+              "ade_m": 0.14596275983368437,
+              "fde_m": 0.2754499160108112
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 295,
+              "equal": 0,
+              "higher": 328
+            },
+            "fde_m": {
+              "lower": 315,
+              "equal": 0,
+              "higher": 308
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        },
+        "M1b_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.04759525570221841,
+            "fde_m": 0.10676936240231279
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.020096215556595843,
+              0.08780746055699097
+            ],
+            "fde_m": [
+              0.04963125048208148,
+              0.2117401634169333
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.052265114822117965,
+              "fde_m": 0.1268847702882574
+            },
+            "italy_park": {
+              "ade_m": -0.07996504746940142,
+              "fde_m": -0.1617183703929186
+            },
+            "japan_crossroad": {
+              "ade_m": 0.2721023532275719,
+              "fde_m": 0.5417112446119708
+            },
+            "thailand_street": {
+              "ade_m": -0.05402139777141483,
+              "fde_m": -0.0798001948980585
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 265,
+              "equal": 0,
+              "higher": 358
+            },
+            "fde_m": {
+              "lower": 268,
+              "equal": 0,
+              "higher": 355
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1-concat_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.034974499801344275,
+            "fde_m": 0.07275225498926788
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.0021119135122920213,
+              0.07737294706344018
+            ],
+            "fde_m": [
+              -0.017201836758635347,
+              0.17572897607077634
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.04474947443887061,
+              "fde_m": -0.09309631018839472
+            },
+            "italy_park": {
+              "ade_m": -0.06903520371949225,
+              "fde_m": -0.11133967014029622
+            },
+            "japan_crossroad": {
+              "ade_m": 0.07509868316515932,
+              "fde_m": 0.16394256565078932
+            },
+            "thailand_street": {
+              "ade_m": 0.17858399419858065,
+              "fde_m": 0.33150243463497314
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 293,
+              "equal": 0,
+              "higher": 330
+            },
+            "fde_m": {
+              "lower": 299,
+              "equal": 0,
+              "higher": 324
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        }
+      }
+    },
+    "10": {
+      "four_site_macro_m": {
+        "M0": {
+          "ade_m": 0.535674993951473,
+          "fde_m": 1.1314457722458988
+        },
+        "M1": {
+          "ade_m": 0.6282756173517531,
+          "fde_m": 1.3283770735472702
+        },
+        "M1b": {
+          "ade_m": 0.5789883644350152,
+          "fde_m": 1.2380944989923803
+        },
+        "M1-concat": {
+          "ade_m": 0.6226551140211675,
+          "fde_m": 1.3227442445444337
+        }
+      },
+      "sites_m": {
+        "america_crossroad": {
+          "M0": {
+            "ade_m": 0.7704010903757007,
+            "fde_m": 1.4720826264884737
+          },
+          "M1": {
+            "ade_m": 0.779766523334884,
+            "fde_m": 1.4295304987949935
+          },
+          "M1b": {
+            "ade_m": 0.8138196626393083,
+            "fde_m": 1.5543327745355187
+          },
+          "M1-concat": {
+            "ade_m": 0.8674666222240037,
+            "fde_m": 1.6492300568834732
+          }
+        },
+        "italy_park": {
+          "M0": {
+            "ade_m": 0.5292820511279084,
+            "fde_m": 1.1702663507312536
+          },
+          "M1": {
+            "ade_m": 0.6601455346652073,
+            "fde_m": 1.445802235044539
+          },
+          "M1b": {
+            "ade_m": 0.4770139916441015,
+            "fde_m": 1.0712429867126048
+          },
+          "M1-concat": {
+            "ade_m": 0.5301316034247673,
+            "fde_m": 1.2279132347321138
+          }
+        },
+        "japan_crossroad": {
+          "M0": {
+            "ade_m": 0.43475341580442645,
+            "fde_m": 0.9540793365768848
+          },
+          "M1": {
+            "ade_m": 0.5259901072204072,
+            "fde_m": 1.170965887285689
+          },
+          "M1b": {
+            "ade_m": 0.4322892572245925,
+            "fde_m": 0.9575523280348348
+          },
+          "M1-concat": {
+            "ade_m": 0.5267058156439066,
+            "fde_m": 1.1687024659527245
+          }
+        },
+        "thailand_street": {
+          "M0": {
+            "ade_m": 0.4082634184978564,
+            "fde_m": 0.9293547751869828
+          },
+          "M1": {
+            "ade_m": 0.5472003041865137,
+            "fde_m": 1.2672096730638591
+          },
+          "M1b": {
+            "ade_m": 0.5928305462320588,
+            "fde_m": 1.3692499066865633
+          },
+          "M1-concat": {
+            "ade_m": 0.5663164147919921,
+            "fde_m": 1.2451312206094227
+          }
+        }
+      },
+      "paired_contrasts": {
+        "M1b_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": -0.04928725291673795,
+            "fde_m": -0.09028257455488972
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.08848347614085207,
+              -0.012091961715396518
+            ],
+            "fde_m": [
+              -0.17517655196872492,
+              -0.010369681359555584
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.034053139304423934,
+              "fde_m": 0.12480227574052517
+            },
+            "italy_park": {
+              "ade_m": -0.18313154302110585,
+              "fde_m": -0.3745592483319342
+            },
+            "japan_crossroad": {
+              "ade_m": -0.09370084999581489,
+              "fde_m": -0.21341355925085403
+            },
+            "thailand_street": {
+              "ade_m": 0.04563024204554501,
+              "fde_m": 0.10204023362270423
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 310,
+              "equal": 0,
+              "higher": 313
+            },
+            "fde_m": {
+              "lower": 314,
+              "equal": 0,
+              "higher": 309
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1-concat_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": -0.005620503330585733,
+            "fde_m": -0.00563282900283656
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.05752580631767737,
+              0.04291936243752027
+            ],
+            "fde_m": [
+              -0.12401056904754837,
+              0.11074953819801274
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.08770009888911948,
+              "fde_m": 0.21969955808847969
+            },
+            "italy_park": {
+              "ade_m": -0.13001393124044022,
+              "fde_m": -0.2178890003124252
+            },
+            "japan_crossroad": {
+              "ade_m": 0.0007157084234993477,
+              "fde_m": -0.002263421332964333
+            },
+            "thailand_street": {
+              "ade_m": 0.019116110605478465,
+              "fde_m": -0.022078452454436393
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 242,
+              "equal": 0,
+              "higher": 381
+            },
+            "fde_m": {
+              "lower": 264,
+              "equal": 0,
+              "higher": 359
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 3,
+              "equal": 0,
+              "higher": 1
+            }
+          }
+        },
+        "M1b_minus_M1-concat": {
+          "equal_site_mean_m": {
+            "ade_m": -0.043666749586152215,
+            "fde_m": -0.08464974555205315
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              -0.09577729035554185,
+              0.0027872854295668383
+            ],
+            "fde_m": [
+              -0.2021719505748439,
+              0.015470863606791877
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.05364695958469553,
+              "fde_m": -0.0948972823479545
+            },
+            "italy_park": {
+              "ade_m": -0.05311761178066565,
+              "fde_m": -0.15667024801950902
+            },
+            "japan_crossroad": {
+              "ade_m": -0.0944165584193142,
+              "fde_m": -0.2111501379178897
+            },
+            "thailand_street": {
+              "ade_m": 0.026514131440066542,
+              "fde_m": 0.12411868607714063
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 380,
+              "equal": 0,
+              "higher": 243
+            },
+            "fde_m": {
+              "lower": 366,
+              "equal": 0,
+              "higher": 257
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 3,
+              "equal": 0,
+              "higher": 1
+            },
+            "fde_m": {
+              "lower": 3,
+              "equal": 0,
+              "higher": 1
+            }
+          }
+        },
+        "M1_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.09260062340028025,
+            "fde_m": 0.19693130130137138
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.05123090258652042,
+              0.14637519555732983
+            ],
+            "fde_m": [
+              0.10518493861664643,
+              0.3153000082220547
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.009365432959183923,
+              "fde_m": -0.04255212769348022
+            },
+            "italy_park": {
+              "ade_m": 0.13086348353729893,
+              "fde_m": 0.27553588431328535
+            },
+            "japan_crossroad": {
+              "ade_m": 0.0912366914159809,
+              "fde_m": 0.21688655070880408
+            },
+            "thailand_street": {
+              "ade_m": 0.1389368856886572,
+              "fde_m": 0.3378548978768762
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 284,
+              "equal": 0,
+              "higher": 339
+            },
+            "fde_m": {
+              "lower": 320,
+              "equal": 0,
+              "higher": 303
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        },
+        "M1b_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.0433133704835423,
+            "fde_m": 0.10664872674648164
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.00377146415107594,
+              0.0907716807094853
+            ],
+            "fde_m": [
+              0.02539710100017686,
+              0.20141388108108585
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.043418572263607895,
+              "fde_m": 0.08225014804704496
+            },
+            "italy_park": {
+              "ade_m": -0.0522680594838069,
+              "fde_m": -0.09902336401864886
+            },
+            "japan_crossroad": {
+              "ade_m": -0.0024641585798339943,
+              "fde_m": 0.0034729914579500433
+            },
+            "thailand_street": {
+              "ade_m": 0.1845671277342022,
+              "fde_m": 0.4398951314995804
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 300,
+              "equal": 0,
+              "higher": 323
+            },
+            "fde_m": {
+              "lower": 284,
+              "equal": 0,
+              "higher": 339
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        },
+        "M1-concat_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.08698012006969455,
+            "fde_m": 0.1912984722985348
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.04286186091422574,
+              0.1375805061774812
+            ],
+            "fde_m": [
+              0.09052690761990527,
+              0.31023371566505736
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.09706553184830359,
+              "fde_m": 0.17714743039499947
+            },
+            "italy_park": {
+              "ade_m": 0.0008495522968587459,
+              "fde_m": 0.057646884000860155
+            },
+            "japan_crossroad": {
+              "ade_m": 0.09195239983948018,
+              "fde_m": 0.21462312937583974
+            },
+            "thailand_street": {
+              "ade_m": 0.15805299629413563,
+              "fde_m": 0.3157764454224398
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 230,
+              "equal": 0,
+              "higher": 393
+            },
+            "fde_m": {
+              "lower": 242,
+              "equal": 0,
+              "higher": 381
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            },
+            "fde_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            }
+          }
+        }
+      }
+    },
+    "20": {
+      "four_site_macro_m": {
+        "M0": {
+          "ade_m": 0.5392708081557429,
+          "fde_m": 1.1373716841876136
+        },
+        "M1": {
+          "ade_m": 0.611000738003169,
+          "fde_m": 1.2924706325422364
+        },
+        "M1b": {
+          "ade_m": 0.7605150945108372,
+          "fde_m": 1.584115642302126
+        },
+        "M1-concat": {
+          "ade_m": 0.6972684810208121,
+          "fde_m": 1.5075708596124164
+        }
+      },
+      "sites_m": {
+        "america_crossroad": {
+          "M0": {
+            "ade_m": 0.7847376314110528,
+            "fde_m": 1.5203087967085211
+          },
+          "M1": {
+            "ade_m": 0.9372373343001028,
+            "fde_m": 1.8496590833130635
+          },
+          "M1b": {
+            "ade_m": 0.8275450755141041,
+            "fde_m": 1.5864467672480826
+          },
+          "M1-concat": {
+            "ade_m": 1.1242765312807883,
+            "fde_m": 2.245189319620704
+          }
+        },
+        "italy_park": {
+          "M0": {
+            "ade_m": 0.5061143201644882,
+            "fde_m": 1.1203629542142153
+          },
+          "M1": {
+            "ade_m": 0.5864953707826014,
+            "fde_m": 1.33695547861862
+          },
+          "M1b": {
+            "ade_m": 0.5629414455984564,
+            "fde_m": 1.2594652362167835
+          },
+          "M1-concat": {
+            "ade_m": 0.47526129775275566,
+            "fde_m": 1.0909444778226316
+          }
+        },
+        "japan_crossroad": {
+          "M0": {
+            "ade_m": 0.46017756893609957,
+            "fde_m": 1.0038927414965244
+          },
+          "M1": {
+            "ade_m": 0.5179207568671088,
+            "fde_m": 1.0713338841113351
+          },
+          "M1b": {
+            "ade_m": 1.149262456393193,
+            "fde_m": 2.3629457161070837
+          },
+          "M1-concat": {
+            "ade_m": 0.7746244361356243,
+            "fde_m": 1.7473385837930504
+          }
+        },
+        "thailand_street": {
+          "M0": {
+            "ade_m": 0.4060537121113312,
+            "fde_m": 0.9049222443311934
+          },
+          "M1": {
+            "ade_m": 0.4023494900628633,
+            "fde_m": 0.9119340841259275
+          },
+          "M1b": {
+            "ade_m": 0.5023114005375959,
+            "fde_m": 1.1276048496365547
+          },
+          "M1-concat": {
+            "ade_m": 0.41491165891407966,
+            "fde_m": 0.94681105721328
+          }
+        }
+      },
+      "paired_contrasts": {
+        "M1b_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": 0.14951435650766837,
+            "fde_m": 0.29164500975988966
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.1046800858133708,
+              0.20023892351088884
+            ],
+            "fde_m": [
+              0.19742194844349437,
+              0.4101509033103683
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.10969225878599874,
+              "fde_m": -0.26321231606498097
+            },
+            "italy_park": {
+              "ade_m": -0.023553925184144946,
+              "fde_m": -0.07749024240183644
+            },
+            "japan_crossroad": {
+              "ade_m": 0.6313416995260845,
+              "fde_m": 1.2916118319957488
+            },
+            "thailand_street": {
+              "ade_m": 0.09996191047473256,
+              "fde_m": 0.2156707655106272
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 301,
+              "equal": 0,
+              "higher": 322
+            },
+            "fde_m": {
+              "lower": 311,
+              "equal": 0,
+              "higher": 312
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            },
+            "fde_m": {
+              "lower": 2,
+              "equal": 0,
+              "higher": 2
+            }
+          }
+        },
+        "M1-concat_minus_M1": {
+          "equal_site_mean_m": {
+            "ade_m": 0.08626774301764283,
+            "fde_m": 0.21510022707017995
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.028058423454663486,
+              0.14127403238442202
+            ],
+            "fde_m": [
+              0.09489223306312267,
+              0.3356671948315818
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.18703919698068508,
+              "fde_m": 0.3955302363076405
+            },
+            "italy_park": {
+              "ade_m": -0.1112340730298456,
+              "fde_m": -0.24601100079598837
+            },
+            "japan_crossroad": {
+              "ade_m": 0.25670367926851545,
+              "fde_m": 0.6760046996817153
+            },
+            "thailand_street": {
+              "ade_m": 0.012562168851216375,
+              "fde_m": 0.03487697308735242
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 239,
+              "equal": 0,
+              "higher": 384
+            },
+            "fde_m": {
+              "lower": 224,
+              "equal": 0,
+              "higher": 399
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        },
+        "M1b_minus_M1-concat": {
+          "equal_site_mean_m": {
+            "ade_m": 0.06324661349002543,
+            "fde_m": 0.07654478268970966
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.008840547429722343,
+              0.12458517686861799
+            ],
+            "fde_m": [
+              -0.04062993514295138,
+              0.20989688816576413
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": -0.2967314557666839,
+              "fde_m": -0.6587425523726215
+            },
+            "italy_park": {
+              "ade_m": 0.08768014784570063,
+              "fde_m": 0.16852075839415193
+            },
+            "japan_crossroad": {
+              "ade_m": 0.37463802025756887,
+              "fde_m": 0.6156071323140334
+            },
+            "thailand_street": {
+              "ade_m": 0.08739974162351613,
+              "fde_m": 0.18079379242327479
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 313,
+              "equal": 0,
+              "higher": 310
+            },
+            "fde_m": {
+              "lower": 315,
+              "equal": 0,
+              "higher": 308
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        },
+        "M1_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.07172992984742618,
+            "fde_m": 0.155098948354623
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.03868053308923035,
+              0.11094885631540481
+            ],
+            "fde_m": [
+              0.08216851805480761,
+              0.23612602100257632
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.15249970288905013,
+              "fde_m": 0.32935028660454246
+            },
+            "italy_park": {
+              "ade_m": 0.0803810506181132,
+              "fde_m": 0.21659252440440468
+            },
+            "japan_crossroad": {
+              "ade_m": 0.057743187931009125,
+              "fde_m": 0.0674411426148107
+            },
+            "thailand_street": {
+              "ade_m": -0.0037042220484677117,
+              "fde_m": 0.007011839794734168
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 222,
+              "equal": 0,
+              "higher": 401
+            },
+            "fde_m": {
+              "lower": 231,
+              "equal": 0,
+              "higher": 392
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            }
+          }
+        },
+        "M1b_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.22124428635509447,
+            "fde_m": 0.4467439581145126
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.17696625785666942,
+              0.27458782659256536
+            ],
+            "fde_m": [
+              0.35637376568226936,
+              0.5647250988588499
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.04280744410305132,
+              "fde_m": 0.06613797053956148
+            },
+            "italy_park": {
+              "ade_m": 0.05682712543396823,
+              "fde_m": 0.13910228200256824
+            },
+            "japan_crossroad": {
+              "ade_m": 0.6890848874570935,
+              "fde_m": 1.3590529746105593
+            },
+            "thailand_street": {
+              "ade_m": 0.09625768842626484,
+              "fde_m": 0.22268260530536138
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 209,
+              "equal": 0,
+              "higher": 414
+            },
+            "fde_m": {
+              "lower": 237,
+              "equal": 0,
+              "higher": 386
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            },
+            "fde_m": {
+              "lower": 0,
+              "equal": 0,
+              "higher": 4
+            }
+          }
+        },
+        "M1-concat_minus_M0": {
+          "equal_site_mean_m": {
+            "ade_m": 0.15799767286506897,
+            "fde_m": 0.37019917542480296
+          },
+          "paired_clip_percentile_95_m": {
+            "ade_m": [
+              0.11075078133918144,
+              0.20993370004538742
+            ],
+            "fde_m": [
+              0.2788044151291183,
+              0.4756956512951266
+            ]
+          },
+          "site_mean_m": {
+            "america_crossroad": {
+              "ade_m": 0.3395388998697352,
+              "fde_m": 0.724880522912183
+            },
+            "italy_park": {
+              "ade_m": -0.03085302241173242,
+              "fde_m": -0.02941847639158368
+            },
+            "japan_crossroad": {
+              "ade_m": 0.3144468671995245,
+              "fde_m": 0.743445842296526
+            },
+            "thailand_street": {
+              "ade_m": 0.008857946802748652,
+              "fde_m": 0.04188881288208659
+            }
+          },
+          "window_counts_first_arm": {
+            "ade_m": {
+              "lower": 184,
+              "equal": 0,
+              "higher": 439
+            },
+            "fde_m": {
+              "lower": 173,
+              "equal": 0,
+              "higher": 450
+            }
+          },
+          "site_counts_first_arm": {
+            "ade_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            },
+            "fde_m": {
+              "lower": 1,
+              "equal": 0,
+              "higher": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}
