@@ -58,6 +58,8 @@ OUT_ROOT = Path('/kaggle/working') if Path('/kaggle/working').exists() else Path
 BUNDLE_PATH = execute_suites_from_samples(
     PINNS_SAMPLES, JTA_SAMPLES, DATASET_DIAG, out_dir=OUT_ROOT, epochs_pinns=28, epochs_jta=24
 )
+rep_txt = (OUT_ROOT / 'results' / 'master_experiment_report.json').read_text(encoding='utf-8')
+print('=== MASTER_REPORT_BYTES ===', len(rep_txt))
 if (OUT_ROOT / 'shortpose_proj').exists():
     shutil.rmtree(OUT_ROOT / 'shortpose_proj', ignore_errors=True)
 shutil.rmtree('/tmp/shortpose_raw', ignore_errors=True)
