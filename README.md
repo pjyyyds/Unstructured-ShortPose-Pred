@@ -25,6 +25,8 @@ These analyses use existing public PINNS recordings. The original 484 training r
 
 On the same 1,482 complete windows, extrapolation from the last two observations had lower ADE and FDE at each of the four sites than the five-point fit or the coordinatewise median of four interframe velocities. Four-site macro ADE/FDE was 0.4839/1.1046, 0.5557/1.2103 and 0.5555/1.2104 m respectively. These are descriptive comparisons on previously examined locations. [Per-site and per-clip results](results/pinns_velocity_estimators.json)
 
+A prespecified single-coefficient speed reduction fit on the three training locations raised four-site macro ADE/FDE to 0.6068/1.2338 m. It improved on unscaled two-point velocity only at the US location. [Coefficients and held-out errors](results/pinns_velocity_scale.json)
+
 ## Project files
 
 - [V2 benchmark tables](results/EMPIRICAL_BENCHMARK_REPORT.md) and [V1 archive](results/v1_initial_diagnosis/EMPIRICAL_BENCHMARK_REPORT.md)
@@ -48,6 +50,7 @@ python3 -m scripts.audit_pinns_short_window "$PINNS_ROOT"
 python3 -m scripts.cluster_pinns_errors
 python3 -m scripts.benchmark_heldout_sites "$PINNS_ROOT"
 python3 -m scripts.compare_pinns_velocity_estimators "$PINNS_ROOT"
+python3 -m scripts.fit_pinns_velocity_scale "$PINNS_ROOT"
 python3 -m scripts.count_forward_ops
 ```
 

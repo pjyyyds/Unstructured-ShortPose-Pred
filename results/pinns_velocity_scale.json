@@ -1,0 +1,121 @@
+{
+  "protocol": {
+    "scope": "One exploratory alternative on four PINNS sites examined in earlier work. One fixed coefficient fit per held-out site, no validation or tuning.",
+    "windows": "Five complete observations (0.4 s span), then 30 complete targets (3.0 s). Within each clip/person, split at missing or nonfinite frames and take consecutive, disjoint 35-frame blocks from each run's start. Drop short remainders.",
+    "coordinates": "Annotated pedestrian ground positions in metres, downsampled from 30 to 10 Hz without interpolation, with the project's calibration-based Y orientation.",
+    "forecast": "C[t] = t * (last position - penultimate position), t=1..30, relative to the last observation. Compare a*C to C.",
+    "fit": "Minimize squared 2D position errors with no intercept. a = clip(sum_s mean_windows,steps(C dot Y) / sum_s mean_windows,steps(C dot C), 0, 1), using the three training sites only.",
+    "metrics": "ADE is the mean Euclidean position error at steps 1..30; FDE is the Euclidean error at 3.0 s. Macro gives each held-out site equal weight. Negative deltas mean lower errors."
+  },
+  "verification": {
+    "baseline_reference_file": "pinns_velocity_estimators.json",
+    "label_and_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "coefficient_inputs": "fit_scale receives only the three arrays named in train_site_windows. The held-out array is read for evaluation after fitting.",
+    "baseline_checked": "Counts and unscaled ADE/FDE from all four folds plus the macro ADE/FDE; tolerance 1e-10 m."
+  },
+  "test_windows_total": 1482,
+  "macro": {
+    "last_two": {
+      "ade_m": 0.4838738237222939,
+      "fde_m": 1.1045585104032625
+    },
+    "scaled_last_two": {
+      "ade_m": 0.6068033963144271,
+      "fde_m": 1.233789560788876
+    },
+    "scaled_minus_last_two": {
+      "ade_m": 0.12292957259213326,
+      "fde_m": 0.12923105038561344
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "train_site_windows": {
+        "italy_park": 84,
+        "japan_crossroad": 432,
+        "thailand_street": 150
+      },
+      "train_windows": 666,
+      "test_windows": 816,
+      "fitted_scale": 0.8916546732560379,
+      "last_two": {
+        "ade_m": 0.9476538962934861,
+        "fde_m": 1.9414660044131375
+      },
+      "scaled_last_two": {
+        "ade_m": 0.8955291338684636,
+        "fde_m": 1.8086261754886728
+      },
+      "scaled_minus_last_two": {
+        "ade_m": -0.05212476242502251,
+        "fde_m": -0.13283982892446478
+      }
+    },
+    "italy_park": {
+      "train_site_windows": {
+        "america_crossroad": 816,
+        "japan_crossroad": 432,
+        "thailand_street": 150
+      },
+      "train_windows": 1398,
+      "test_windows": 84,
+      "fitted_scale": 0.672806031906798,
+      "last_two": {
+        "ade_m": 0.3703417251634734,
+        "fde_m": 0.9319507406765016
+      },
+      "scaled_last_two": {
+        "ade_m": 0.4800949213734,
+        "fde_m": 1.0015768728644385
+      },
+      "scaled_minus_last_two": {
+        "ade_m": 0.10975319620992657,
+        "fde_m": 0.0696261321879369
+      }
+    },
+    "japan_crossroad": {
+      "train_site_windows": {
+        "america_crossroad": 816,
+        "italy_park": 84,
+        "thailand_street": 150
+      },
+      "train_windows": 1050,
+      "test_windows": 432,
+      "fitted_scale": 0.6507807627458567,
+      "last_two": {
+        "ade_m": 0.2937423480694851,
+        "fde_m": 0.7186574902774941
+      },
+      "scaled_last_two": {
+        "ade_m": 0.4968446535548694,
+        "fde_m": 1.0177187258260227
+      },
+      "scaled_minus_last_two": {
+        "ade_m": 0.20310230548538427,
+        "fde_m": 0.2990612355485286
+      }
+    },
+    "thailand_street": {
+      "train_site_windows": {
+        "america_crossroad": 816,
+        "italy_park": 84,
+        "japan_crossroad": 432
+      },
+      "train_windows": 1332,
+      "test_windows": 150,
+      "fitted_scale": 0.6406215198420782,
+      "last_two": {
+        "ade_m": 0.3237573253627311,
+        "fde_m": 0.8261598062459166
+      },
+      "scaled_last_two": {
+        "ade_m": 0.5547448764609758,
+        "fde_m": 1.1072364689763696
+      },
+      "scaled_minus_last_two": {
+        "ade_m": 0.2309875510982447,
+        "fde_m": 0.28107666273045306
+      }
+    }
+  }
+}

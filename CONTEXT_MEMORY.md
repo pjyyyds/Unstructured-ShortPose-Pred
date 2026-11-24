@@ -32,3 +32,7 @@ PINNS 任务从 5、10 或 20 帧、10 Hz 的观测中预测未来 3.0 秒的地
 首轮神经模型比较在训练前固定四地轮流留出的划分，每折重训 M0 和 M1。两者共用窗口、静动态类型位、损失、训练设置。种子 42，28 轮、批量 64，AdamW 初始学习率 0.002，采用最后一轮的模型。主要读数为最高概率轨迹的四地点等权 ADE 和固定 3 秒 FDE。保留每个地点的得分与姿态覆盖率。既有四地点均已在开发过程中观察，首轮单种子结果按探索性证据报告。
 
 Kaggle 作业 373483765（版本 1，提交 a40fdd0）的神经模型数值发布前，固定主比较为 M1 减 M0，次比较为 M1 减五点拟合匀速及末两帧匀速。以四地点等权报告 ADE/FDE；主要比较的 95% 百分位区间在各地点内按片段成对重采样 20,000 次，种子 2026。分析器直接核对云端与原始标签中的窗口身份。[分析代码](scripts/analyze_heldout_pairs.py)
+
+JRDB 外部评测已检查输入可行性。Social-Transmotion 发布包的 JRDB 训练与验证样例为 2.5 Hz，有坐标和边界框，无关节置信度。其两个留出片段均列在 JRDB 官方原始训练划分内。本次只读取其文件名。做跨数据集姿态试验前，先在开发片段核对尺度、机器人自运动和关键点定义，并选定一致的观测及预测时域。[作者发布物](https://github.com/vita-epfl/social-transmotion/releases/tag/ckpt_data) · [JRDB 官方划分](https://github.com/JRDB-dataset/jrdb_toolkit/blob/main/traj_eval/convert_dataset_to_KITTI_tracking.py) · [姿态标注定义](https://jrdb.erc.monash.edu/dataset/pose)
+
+速度缩放备选已排除。在每折三个训练地点等权拟合一个全局减速系数后，四地等权 ADE 从末两帧原速的 0.4839 m 升至 0.6068 m，仅美国路口改善。保留负结果，以原速为对照。新模型的改进和参数选择使用开发数据，四地点结果继续作为探索性报告。[复现](results/pinns_velocity_scale.json)
