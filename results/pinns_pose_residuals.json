@@ -1,0 +1,356 @@
+{
+  "protocol": {
+    "scope": "Single-trajectory linear development prototype at four previously examined sites, separate from the multimodal neural models. The 5 consecutive observations span 0.4 s; all 30 future points through 3 s are scored.",
+    "anchor_and_frame": "Last-two-point constant velocity (0.1 s gap). Rotate ground motion and target residuals into the last velocity heading. Below 0.20 m/s use the fixed global +x heading. Pose stays in image axes.",
+    "features": "Fixed nested arms: motion; motion + 17 final box-height-normalized relative joint xy/valid flags; both plus four ordered same-root, pair-valid, signed joint changes with flags. All windows retained. Pose gains include differences in joint availability and detector noise.",
+    "fit": "One training-window-weighted ridge per arm, predicting all 30 local residual xy pairs. Mean squared loss + 0.1 times squared coefficient norm, unpenalized intercept. Training-only means and population SD, divide by 1 when SD <= 1e-10. No outer-held data enters fitting or selection.",
+    "shrinkage": "Within three outer-training sites, leave each site out and fit on the other two. For each grid value, average ADE equally over three arms and three inner sites, windows equal within each. Take the smallest grid value attaining the minimum, refit on three training sites and use the same multiplier in all arms on outer test. Zero is exactly the original constant-velocity forecast.",
+    "metrics": "Primary: ordered pose minus last-two constant velocity, equal-site mean ADE. Also report FDE and paired increments (ordered versus motion, ordered versus last pose, last pose versus motion). Negative favors the first method. Primary interval: 20,000 paired within-site whole-clip draws, PCG64 seed 2026, observed windows weighted within site, sites weighted equally. Conditional on four development sites and the selected fits. The zero candidate does not guarantee lower held-site error."
+  },
+  "identity": {
+    "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_key_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "frozen_neural_source_and_reader_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "script_sha256": {
+      "scripts/evaluate_pinns_action_probes.py": "24e5a51d8679bccb193dd1e5260cd6c73d3dc8487f5e8f0ef559fb815c056fce",
+      "scripts/analyze_heldout_pairs.py": "d082666cdd7e50d6c32e938ca4f8366754a15209a4c8f9073a84567ceeb0a047",
+      "scripts/compare_pinns_velocity_estimators.py": "3324fc51e3961286aa9b46f46e08c4a556801c1959b496d3e253d4d0681d22ff",
+      "scripts/evaluate_pinns_pose_residuals.py": "930c255b240233dad3dab6cba6d9448443f681436c03669a64bed488af84a6f6"
+    }
+  },
+  "design_only": false,
+  "grid": [
+    0.0,
+    0.125,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "ridge": 0.1,
+  "grid_arm_order": [
+    "motion",
+    "motion_last_pose",
+    "motion_last_pose_ordered_changes"
+  ],
+  "versions": {
+    "numpy": "2.1.3",
+    "python": "3.13.18"
+  },
+  "feature_dimensions": {
+    "motion": 28,
+    "motion_last_pose": 79,
+    "motion_last_pose_ordered_changes": 283
+  },
+  "windows": 1482,
+  "clips": 47,
+  "sites": {
+    "america_crossroad": {
+      "test_windows": 816,
+      "test_clips": 14,
+      "fixed_heading_windows": 95,
+      "training_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "selected_multiplier": 0.125,
+      "inner_ade_by_grid_m": [
+        0.32928046619856327,
+        0.3286590659480465,
+        0.3323536861390784,
+        0.34662478501822724,
+        0.3672727339891068,
+        0.3923640696889697
+      ],
+      "mean_m": {
+        "motion": {
+          "ade_m": 0.9359369339387175,
+          "fde_m": 1.9108036939463793
+        },
+        "motion_last_pose": {
+          "ade_m": 0.9365153296429639,
+          "fde_m": 1.9120944741029386
+        },
+        "motion_last_pose_ordered_changes": {
+          "ade_m": 0.9359379217753924,
+          "fde_m": 1.9110135494135467
+        },
+        "last_two": {
+          "ade_m": 0.9476538962934843,
+          "fde_m": 1.9414660044131353
+        }
+      },
+      "paired_m": {
+        "motion_last_pose_ordered_changes_minus_last_two": {
+          "ade_m": -0.011715974518093976,
+          "fde_m": -0.030452454999589807
+        },
+        "motion_last_pose_ordered_changes_minus_motion": {
+          "ade_m": 9.878366752773165e-07,
+          "fde_m": 0.00020985546717039222
+        },
+        "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+          "ade_m": -0.000577407867571741,
+          "fde_m": -0.0010809246893916447
+        },
+        "motion_last_pose_minus_motion": {
+          "ade_m": 0.0005783957042470176,
+          "fde_m": 0.001290780156562036
+        },
+        "motion_last_pose_minus_last_two": {
+          "ade_m": -0.011138566650522198,
+          "fde_m": -0.02937153031019817
+        },
+        "motion_minus_last_two": {
+          "ade_m": -0.011716962354769258,
+          "fde_m": -0.03066231046676015
+        }
+      }
+    },
+    "italy_park": {
+      "test_windows": 84,
+      "test_clips": 9,
+      "fixed_heading_windows": 16,
+      "training_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "selected_multiplier": 0.25,
+      "inner_ade_by_grid_m": [
+        0.5217178565752341,
+        0.5136655917448787,
+        0.513320244128531,
+        0.5349619508012536,
+        0.5784930501267618,
+        0.6326913601824457
+      ],
+      "mean_m": {
+        "motion": {
+          "ade_m": 0.3634335269578821,
+          "fde_m": 0.9000585132279665
+        },
+        "motion_last_pose": {
+          "ade_m": 0.38339281220667215,
+          "fde_m": 0.9332924326525445
+        },
+        "motion_last_pose_ordered_changes": {
+          "ade_m": 0.39439614057116373,
+          "fde_m": 0.9443047091732796
+        },
+        "last_two": {
+          "ade_m": 0.37034172516347347,
+          "fde_m": 0.9319507406765014
+        }
+      },
+      "paired_m": {
+        "motion_last_pose_ordered_changes_minus_last_two": {
+          "ade_m": 0.024054415407690394,
+          "fde_m": 0.01235396849677788
+        },
+        "motion_last_pose_ordered_changes_minus_motion": {
+          "ade_m": 0.030962613613281644,
+          "fde_m": 0.04424619594531336
+        },
+        "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+          "ade_m": 0.011003328364491607,
+          "fde_m": 0.011012276520734901
+        },
+        "motion_last_pose_minus_motion": {
+          "ade_m": 0.01995928524879003,
+          "fde_m": 0.03323391942457847
+        },
+        "motion_last_pose_minus_last_two": {
+          "ade_m": 0.013051087043198779,
+          "fde_m": 0.00134169197604297
+        },
+        "motion_minus_last_two": {
+          "ade_m": -0.006908198205591248,
+          "fde_m": -0.03189222744853549
+        }
+      }
+    },
+    "japan_crossroad": {
+      "test_windows": 432,
+      "test_clips": 11,
+      "fixed_heading_windows": 70,
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "selected_multiplier": 0.125,
+      "inner_ade_by_grid_m": [
+        0.5472509822732303,
+        0.5403045972728143,
+        0.5408245141390599,
+        0.5644670118131951,
+        0.6107389580533991,
+        0.6717181909948379
+      ],
+      "mean_m": {
+        "motion": {
+          "ade_m": 0.28999849972418246,
+          "fde_m": 0.7033287610231108
+        },
+        "motion_last_pose": {
+          "ade_m": 0.2962239155632458,
+          "fde_m": 0.7110498505303384
+        },
+        "motion_last_pose_ordered_changes": {
+          "ade_m": 0.30297153487397543,
+          "fde_m": 0.7203689830428914
+        },
+        "last_two": {
+          "ade_m": 0.2937423480694851,
+          "fde_m": 0.718657490277494
+        }
+      },
+      "paired_m": {
+        "motion_last_pose_ordered_changes_minus_last_two": {
+          "ade_m": 0.00922918680449048,
+          "fde_m": 0.0017114927653968926
+        },
+        "motion_last_pose_ordered_changes_minus_motion": {
+          "ade_m": 0.01297303514979278,
+          "fde_m": 0.017040222019780504
+        },
+        "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+          "ade_m": 0.006747619310729925,
+          "fde_m": 0.009319132512552838
+        },
+        "motion_last_pose_minus_motion": {
+          "ade_m": 0.006225415839062848,
+          "fde_m": 0.007721089507227657
+        },
+        "motion_last_pose_minus_last_two": {
+          "ade_m": 0.0024815674937605564,
+          "fde_m": -0.007607639747155943
+        },
+        "motion_minus_last_two": {
+          "ade_m": -0.0037438483453023025,
+          "fde_m": -0.015328729254383612
+        }
+      }
+    },
+    "thailand_street": {
+      "test_windows": 150,
+      "test_clips": 13,
+      "fixed_heading_windows": 8,
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "selected_multiplier": 0.125,
+      "inner_ade_by_grid_m": [
+        0.5372459898421482,
+        0.5362407503831828,
+        0.5420123913420871,
+        0.567615710022824,
+        0.606249229320117,
+        0.6554838778959948
+      ],
+      "mean_m": {
+        "motion": {
+          "ade_m": 0.30461421566121766,
+          "fde_m": 0.7826446797874276
+        },
+        "motion_last_pose": {
+          "ade_m": 0.3060201811842736,
+          "fde_m": 0.7837697460876841
+        },
+        "motion_last_pose_ordered_changes": {
+          "ade_m": 0.3072369934175545,
+          "fde_m": 0.7813039782557644
+        },
+        "last_two": {
+          "ade_m": 0.32375732536273094,
+          "fde_m": 0.826159806245917
+        }
+      },
+      "paired_m": {
+        "motion_last_pose_ordered_changes_minus_last_two": {
+          "ade_m": -0.016520331945176644,
+          "fde_m": -0.04485582799015172
+        },
+        "motion_last_pose_ordered_changes_minus_motion": {
+          "ade_m": 0.0026227777563367113,
+          "fde_m": -0.0013407015316630273
+        },
+        "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+          "ade_m": 0.0012168122332810443,
+          "fde_m": -0.002465767831919653
+        },
+        "motion_last_pose_minus_motion": {
+          "ade_m": 0.0014059655230556662,
+          "fde_m": 0.001125066300256626
+        },
+        "motion_last_pose_minus_last_two": {
+          "ade_m": -0.017737144178457676,
+          "fde_m": -0.04239006015823209
+        },
+        "motion_minus_last_two": {
+          "ade_m": -0.019143109701513342,
+          "fde_m": -0.04351512645848874
+        }
+      }
+    }
+  },
+  "equal_site_macro_m": {
+    "motion": {
+      "ade_m": 0.47349579407049996,
+      "fde_m": 1.074208911996221
+    },
+    "motion_last_pose": {
+      "ade_m": 0.48053805964928886,
+      "fde_m": 1.0850516258433764
+    },
+    "motion_last_pose_ordered_changes": {
+      "ade_m": 0.4851356476595215,
+      "fde_m": 1.0892478049713705
+    },
+    "last_two": {
+      "ade_m": 0.4838738237222935,
+      "fde_m": 1.104558510403262
+    }
+  },
+  "equal_site_paired_m": {
+    "motion_last_pose_ordered_changes_minus_last_two": {
+      "ade_m": 0.0012618239372275634,
+      "fde_m": -0.015310705431891688
+    },
+    "motion_last_pose_ordered_changes_minus_motion": {
+      "ade_m": 0.011639853589021603,
+      "fde_m": 0.015038892975150308
+    },
+    "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+      "ade_m": 0.004597588010232709,
+      "fde_m": 0.0041961791279941105
+    },
+    "motion_last_pose_minus_motion": {
+      "ade_m": 0.007042265578788891,
+      "fde_m": 0.010842713847156196
+    },
+    "motion_last_pose_minus_last_two": {
+      "ade_m": -0.0033357640730051347,
+      "fde_m": -0.019506884559885806
+    },
+    "motion_minus_last_two": {
+      "ade_m": -0.010378029651794038,
+      "fde_m": -0.030349598407041996
+    }
+  },
+  "primary_ordered_minus_anchor_percentile_95_m": {
+    "ade_m": [
+      -0.005648065237895505,
+      0.01026164604699922
+    ],
+    "fde_m": [
+      -0.030250996900811677,
+      0.007317752579603992
+    ]
+  }
+}
