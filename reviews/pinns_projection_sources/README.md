@@ -29,3 +29,11 @@ python "$study/vehicle_axis/check_bev_scale.py" METADATA /tmp/car_bev_scale.json
 python "$study/label_projection/diagnose_projection.py" METADATA /tmp/label_projection.json --reference results/pinns_projection_audit.json
 python "$study/plot_axis.py" "$study/vehicle_axis/car_bev_scale.json" /tmp/fig9.png
 ```
+
+
+生成新的私有 Kaggle 网络训练笔记本时，在仓库根目录运行以下命令。两个入口均需挂载 `pinns_source_label_causal_maps.bin`。该文件是上述 `source_label` 构建所得 `maps.npz` 的原始字节。笔记本逐窗核对片段、目标、预测时刻、划分、历史和评分轨迹后，只把决策点前的同片训练图像轮廓传入网络。此设置排除人员占用凸包。第一条只训练五帧 M2a 的配对两臂。第二条运行多窗长、多模块的完整历史实验配置。早期配置中直接抽取的静态背景及训练期轨迹凸包存在第 5.3 节所述的时间重合，需与这两个新入口区分。[配对检验的预注册](../pinns_map_axis_comparison/neural/PROTOCOL.md)
+
+```sh
+python -m scripts.build_kaggle_notebook --suite paired --output paired.ipynb
+python -m scripts.build_kaggle_notebook --suite full --output full.ipynb
+```

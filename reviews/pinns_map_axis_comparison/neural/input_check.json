@@ -1,0 +1,34 @@
+{
+  "scope": "Source enrollment and causal image geometry only; no pose estimation, fitting or prediction.",
+  "ordered_keys_sha256": "c086c690aff485ab3d51671371ed33368e9cfb274b7e15c4f0ae6236bc500f7a",
+  "geometry_and_source_availability_sha256": "3199ef10fe0a90dc0dacb2c8bca298870f7278d81a9848f1f7e4dad7170cf27f",
+  "motion_and_masks_sha256": "03cd41ab844d52cb13c67ebf7a5b9ed243163681715ffbe60cbd4b569f70c6fa",
+  "source_label_maps_sha256": "0d4abbe1ac37e4d6974601c40ad65fd3bcaf60b81b4bdca63878925657a32150",
+  "heldout_exact_3s_target_windows": 233,
+  "splits": {
+    "train": {
+      "windows": 5686,
+      "clips": 25,
+      "historical_reference": 3499,
+      "local_image": 3499,
+      "no_reference": 2187,
+      "no_local_image": 2187
+    },
+    "val": {
+      "windows": 1100,
+      "clips": 40,
+      "historical_reference": 965,
+      "local_image": 965,
+      "no_reference": 135,
+      "no_local_image": 135
+    },
+    "test": {
+      "windows": 497,
+      "clips": 21,
+      "historical_reference": 461,
+      "local_image": 461,
+      "no_reference": 36,
+      "no_local_image": 36
+    }
+  }
+}

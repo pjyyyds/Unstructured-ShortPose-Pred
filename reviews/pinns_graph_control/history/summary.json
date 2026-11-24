@@ -1,0 +1,1508 @@
+{
+  "source_label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "archived_function_sha256": "36cef98611cc26253f6a33b85edf63c86aa4f7bbdf04dae67b3bcdd1ddbb9d88",
+  "current_function_sha256": "1c8a283e7566fcf0ea09b011d60ea0a5731001b1acbd8627090b4a7d03587ff9",
+  "archived_commit": "c5344f1e5c1efea657381f7d2e6d4e74dd1db977",
+  "archived_source_file_sha256": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+  "historical_and_production_assembly_both_executed": true,
+  "current_assembly_ast_changes": "Uses lags 1..4 in place of 1..5 and returns the same independently recovered person ID in sample metadata.",
+  "control_graph_function_sha256": "06cb4c1011c23d96f67ed1b367602914eb02604fa542d3a7526588973127bee2",
+  "program_sha256": "2f6dc65fd35945e748e2ef7d47fdc0cdf79b93e5b84ca73de66426e4a62344f4",
+  "numpy": "2.5.5",
+  "source_counts_by_nearest_t0_predecessor_lag_1_to_5_zero_none": {
+    "Car": {
+      "0": 189,
+      "1": 15685,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "Person": {
+      "0": 457,
+      "1": 59729,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    }
+  },
+  "source_t0_fixed_by_class": {
+    "Car": {
+      "-1": 15874
+    },
+    "Person": {
+      "-1": 60186
+    }
+  },
+  "frozen_key_counts": {
+    "historical": 7283,
+    "historical_test": 497,
+    "four_site": 1482
+  },
+  "strict_heldout_graph_exact_match_to_returned_tensor_fields_by_window": {
+    "nbr_edges": 1482,
+    "nbr_type_oh": 1482,
+    "nbr_mask": 1482,
+    "neighbor_id": 1482,
+    "source_class": 1482,
+    "velocity_gap_ticks": 1482
+  },
+  "cohorts": {
+    "archived/all": {
+      "windows": 7283,
+      "ego_standing": 1041,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 7142,
+      "windows_with_any_neighbor": 7142,
+      "selected_slots": 54472,
+      "neighbor_velocity_valid": 54136,
+      "selected_person_slots": 50292,
+      "selected_car_slots": 4180,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 336,
+      "windows_with_such_neighbor": 302,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 35,
+        "3": 53,
+        "4": 53,
+        "5": 7142
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/america_crossroad/test": {
+      "windows": 316,
+      "ego_standing": 106,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 316,
+      "windows_with_any_neighbor": 306,
+      "selected_slots": 1704,
+      "neighbor_velocity_valid": 1704,
+      "selected_person_slots": 1523,
+      "selected_car_slots": 181,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 316
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/america_crossroad/train": {
+      "windows": 3868,
+      "ego_standing": 422,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 3770,
+      "windows_with_any_neighbor": 3825,
+      "selected_slots": 34568,
+      "neighbor_velocity_valid": 34255,
+      "selected_person_slots": 32411,
+      "selected_car_slots": 2157,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 313,
+      "windows_with_such_neighbor": 283,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 27,
+        "3": 36,
+        "4": 35,
+        "5": 3770
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/america_crossroad/val": {
+      "windows": 608,
+      "ego_standing": 69,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 601,
+      "windows_with_any_neighbor": 606,
+      "selected_slots": 4352,
+      "neighbor_velocity_valid": 4351,
+      "selected_person_slots": 3922,
+      "selected_car_slots": 430,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 1,
+      "windows_with_such_neighbor": 1,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 1,
+        "3": 3,
+        "4": 3,
+        "5": 601
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/italy_park/test": {
+      "windows": 20,
+      "ego_standing": 1,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 20,
+      "windows_with_any_neighbor": 16,
+      "selected_slots": 22,
+      "neighbor_velocity_valid": 22,
+      "selected_person_slots": 4,
+      "selected_car_slots": 18,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 20
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/italy_park/train": {
+      "windows": 189,
+      "ego_standing": 18,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 189,
+      "windows_with_any_neighbor": 132,
+      "selected_slots": 736,
+      "neighbor_velocity_valid": 736,
+      "selected_person_slots": 448,
+      "selected_car_slots": 288,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 189
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/italy_park/val": {
+      "windows": 55,
+      "ego_standing": 23,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 55,
+      "windows_with_any_neighbor": 53,
+      "selected_slots": 161,
+      "neighbor_velocity_valid": 161,
+      "selected_person_slots": 120,
+      "selected_car_slots": 41,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 55
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/japan_crossroad/test": {
+      "windows": 150,
+      "ego_standing": 15,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 150,
+      "windows_with_any_neighbor": 147,
+      "selected_slots": 983,
+      "neighbor_velocity_valid": 983,
+      "selected_person_slots": 913,
+      "selected_car_slots": 70,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 150
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/japan_crossroad/train": {
+      "windows": 1416,
+      "ego_standing": 346,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 1382,
+      "windows_with_any_neighbor": 1401,
+      "selected_slots": 7895,
+      "neighbor_velocity_valid": 7878,
+      "selected_person_slots": 7327,
+      "selected_car_slots": 568,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 17,
+      "windows_with_such_neighbor": 13,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 7,
+        "3": 12,
+        "4": 15,
+        "5": 1382
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/japan_crossroad/val": {
+      "windows": 379,
+      "ego_standing": 30,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 379,
+      "windows_with_any_neighbor": 379,
+      "selected_slots": 2986,
+      "neighbor_velocity_valid": 2981,
+      "selected_person_slots": 2655,
+      "selected_car_slots": 331,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 5,
+      "windows_with_such_neighbor": 5,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 379
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/test": {
+      "windows": 497,
+      "ego_standing": 122,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 497,
+      "windows_with_any_neighbor": 480,
+      "selected_slots": 2724,
+      "neighbor_velocity_valid": 2724,
+      "selected_person_slots": 2444,
+      "selected_car_slots": 280,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 497
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/thailand_street/test": {
+      "windows": 11,
+      "ego_standing": 0,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 11,
+      "windows_with_any_neighbor": 11,
+      "selected_slots": 15,
+      "neighbor_velocity_valid": 15,
+      "selected_person_slots": 4,
+      "selected_car_slots": 11,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 11
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/thailand_street/train": {
+      "windows": 213,
+      "ego_standing": 4,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 213,
+      "windows_with_any_neighbor": 213,
+      "selected_slots": 848,
+      "neighbor_velocity_valid": 848,
+      "selected_person_slots": 797,
+      "selected_car_slots": 51,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 213
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/thailand_street/val": {
+      "windows": 58,
+      "ego_standing": 7,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 56,
+      "windows_with_any_neighbor": 53,
+      "selected_slots": 202,
+      "neighbor_velocity_valid": 202,
+      "selected_person_slots": 168,
+      "selected_car_slots": 34,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "3": 2,
+        "5": 56
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/train": {
+      "windows": 5686,
+      "ego_standing": 790,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 5554,
+      "windows_with_any_neighbor": 5571,
+      "selected_slots": 44047,
+      "neighbor_velocity_valid": 43717,
+      "selected_person_slots": 40983,
+      "selected_car_slots": 3064,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 330,
+      "windows_with_such_neighbor": 296,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 34,
+        "3": 48,
+        "4": 50,
+        "5": 5554
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "archived/val": {
+      "windows": 1100,
+      "ego_standing": 129,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 1091,
+      "windows_with_any_neighbor": 1091,
+      "selected_slots": 7701,
+      "neighbor_velocity_valid": 7695,
+      "selected_person_slots": 6865,
+      "selected_car_slots": 836,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 6,
+      "windows_with_such_neighbor": 6,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "2": 1,
+        "3": 5,
+        "4": 3,
+        "5": 1091
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "heldout/all": {
+      "windows": 1482,
+      "ego_standing": 189,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 1482,
+      "windows_with_any_neighbor": 1445,
+      "selected_slots": 9962,
+      "neighbor_velocity_valid": 9925,
+      "selected_person_slots": 9129,
+      "selected_car_slots": 833,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 37,
+      "windows_with_such_neighbor": 36,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 1482
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "heldout/america_crossroad": {
+      "windows": 816,
+      "ego_standing": 95,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 816,
+      "windows_with_any_neighbor": 803,
+      "selected_slots": 6368,
+      "neighbor_velocity_valid": 6340,
+      "selected_person_slots": 5895,
+      "selected_car_slots": 473,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 28,
+      "windows_with_such_neighbor": 27,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 816
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "heldout/italy_park": {
+      "windows": 84,
+      "ego_standing": 16,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 84,
+      "windows_with_any_neighbor": 70,
+      "selected_slots": 343,
+      "neighbor_velocity_valid": 343,
+      "selected_person_slots": 232,
+      "selected_car_slots": 111,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 84
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "heldout/japan_crossroad": {
+      "windows": 432,
+      "ego_standing": 70,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 432,
+      "windows_with_any_neighbor": 425,
+      "selected_slots": 2687,
+      "neighbor_velocity_valid": 2678,
+      "selected_person_slots": 2488,
+      "selected_car_slots": 199,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 9,
+      "windows_with_such_neighbor": 9,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 432
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    },
+    "heldout/thailand_street": {
+      "windows": 150,
+      "ego_standing": 8,
+      "ego_type_changes": 0,
+      "exposed_ego_with_only_t0": 0,
+      "windows_with_all_five_positions": 150,
+      "windows_with_any_neighbor": 147,
+      "selected_slots": 564,
+      "neighbor_velocity_valid": 564,
+      "selected_person_slots": 514,
+      "selected_car_slots": 50,
+      "selected_neighbor_slots_without_previous_point_at_lags_1_to_4": 0,
+      "windows_with_such_neighbor": 0,
+      "changed_graph_windows": 0,
+      "changed_neighbor_value_slots": 0,
+      "changed_neighbor_type_slots": 0,
+      "changed_membership_mask_slots": 0,
+      "histogram_valid_ego_positions_in_last_five": {
+        "5": 150
+      },
+      "channels": {
+        "dx_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dy_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvx_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "dvy_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "distance_m": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "radial_m_per_s": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "speed_valid": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_neighbor": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        },
+        "rho_ego": {
+          "changed_slots": 0,
+          "min_signed_change": 0.0,
+          "max_signed_change": 0.0
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "Raw IDs are typed and clip-local; source scan is over every observed object at raw frame 1+3*t. Zero means no same-object predecessor in the previous five ticks.",
+    "The 7,283 cohort and splits match the causal-sidecar keys. The 497-test subset is contained in 7,283. Historical assembly checks t0-5 for membership if the previous four ticks are missing. When absent, both paths emit identical fallback, and never read a position at that tick.",
+    "The pinned full archival assembly and current checked-in production assembly run separately; the latter uses four predecessor ticks and adds person ID metadata; no pose model, prediction network, optimizer, forecast score or image is used. Future availability is used by the original archived enrollment, not to form the graph.",
+    "Actual LOSO pilot M0/M1 consume ego type and motion (M1 also pose and quality); neither receives neighbor edge tensors. Its separate real-graph control only receives t0-4..t0: the table compares its true five snapshots vs a hypothetical extra predecessor, preserving the five-tick visibility ratio.",
+    "Rows without a qualifying predecessor are counted even when source speed is unavailable. The code can distinguish re-appearance at a five-tick gap on other data.",
+    "Archive channel signed changes are legacy minus strict; heldout changes are registered strict minus hypothetical broader. Per-channel extrema cover active slots only; masks and categorical one-hots are compared separately."
+  ]
+}

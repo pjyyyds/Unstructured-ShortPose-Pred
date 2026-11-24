@@ -1,0 +1,29 @@
+{
+  "source_files": {
+    "labels": 47,
+    "calibrations": 22
+  },
+  "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "five_frame_relative_sha256": "03cd41ab844d52cb13c67ebf7a5b9ed243163681715ffbe60cbd4b569f70c6fa",
+  "full_20_frame_absolute_sha256": "67b1c8036ccf2378aadc6f9a08cd0aaf0ea3dff98db4ff95a36b42a0110800e3",
+  "unique_windows": 7283,
+  "by_split": {
+    "train": {
+      "windows": 5686,
+      "eligible_historical_image_source": 3499
+    },
+    "val": {
+      "windows": 1100,
+      "eligible_historical_image_source": 965
+    },
+    "test": {
+      "windows": 497,
+      "eligible_historical_image_source": 461
+    }
+  },
+  "map_comparison": {
+    "maps_sha256": "0d4abbe1ac37e4d6974601c40ad65fd3bcaf60b81b4bdca63878925657a32150",
+    "matched_keys_splits_and_source_flags": 7283,
+    "nonempty_image_map_windows": 4925
+  }
+}
