@@ -1,0 +1,14 @@
+{
+  "scope": "Secondary descriptive analysis requested while Kaggle joint-action run 373610725 was still running, before opening any joint-action results. Original primary registration 0eb60b827089822cffa096596848f6e0d0e8b47436c715afda9345a2f84ac1cc and detached minus end-to-end four-site top-1 ADE are unchanged.",
+  "groups": {
+    "first_sampled_annotation": "t0-4 is the earliest 10 Hz sampled timestamp for this person in this clip.",
+    "at_least_35_preceding_samples": "All 35 consecutive timestamps before t0-4 have this person's measured label."
+  },
+  "expected_windows": {"first_sampled_annotation":449,"at_least_35_preceding_samples":1033},
+  "expected_site_first_prior": {"america_crossroad":[240,576],"italy_park":[28,56],"japan_crossroad":[117,315],"thailand_street":[64,86]},
+  "inputs": "All models receive the same five-frame observations. Earlier annotations only define groups. Annotation onset can mark entry, an annotation or track boundary, or other circumstances; actual emergence from behind an occluder is unverified.",
+  "report": "For each site, group and five-event class give windows, clips, valid and positive supports, and number of clips containing a positive. For each group report all four joint arms' top-1 ADE and exact-3s FDE, both within site and giving four sites equal weight.",
+  "action_scores": "For auxiliary, end_to_end and detached heads: five native sigmoid probabilities. Score F1 at >=0.5 per class independently; AP uses unique score groups without score thresholding. Binary Brier uses continuous probabilities. Report each class and within-site class-macros separately; average available class-macros across the four equally weighted sites. Zero-positive class has null AP/F1, retained in the per-class Brier if any valid rows. Individual class equal-site AP/F1 is null unless the event has positives in all four sites; report eligible-site count. No_head has no supervised head scores.",
+  "historic_references": "On the exact same IDs, recompute two training-free paths (last two ground points and OLS over five, extrapolated from the last location) and restore the verified original seed-42 movement-only M0. Report top-1 ADE/FDE for all; if available, list five event scores implied by each forecast under a separate heading: deterministic 0/1 for CV and probability-weighted mode events for M0. Such references do not have action heads.",
+  "inference": "Unadjusted descriptive strata; no subgroup hypothesis test, new threshold, model selection, causal occlusion claim, additional training, or revision of primary endpoint."
+}

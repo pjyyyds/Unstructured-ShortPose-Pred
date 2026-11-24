@@ -1,0 +1,7 @@
+{
+  "scope": "Secondary cross-seed matched-cohort decomposition, specified before opening any new extension fit or prediction. Seed 42 was previously examined.",
+  "grouping": "Assign once on each of the 623 matched windows using the original cache's last five observed positions/crops, existing build_pose_and_quality_features and assign_quality_bucket. Apply those exact same class labels to histories of length 5, 10 and 20. Fixed clear/partial/heavy counts are 188/283/152. Published mutually exclusive implementation resolves overlapping/incomplete literal proposal conditions. These are estimated pose-quality groups and do not establish physical or obstacle-caused occlusion.",
+  "report": "Within each duration and fixed bin, report windows, clips and positive coverage per physical site as applicable; per seed and across seeds give site-equal, within-site window-weighted paired ADE/FDE differences M1 minus M0 and M1 minus M1b. Display each seed and across-seed arithmetic mean with sample spread for the five specified seeds. Retain all estimable sites; require all four for four-site macro; no generalization claim to the population of sites.",
+  "random_seeds": [42,1024,2025,3407,4096],
+  "seed42_once": "Use verified seed-42 matched 5 and 10 results and the same-worker four-arm 20-frame control when available. Earlier 20-frame different-host fits are supplementary; do not count a replay or repeated fit of seed 42 as an additional seed."
+}
