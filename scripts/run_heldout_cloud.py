@@ -149,7 +149,12 @@ def run(scratch, output):
         raise ValueError("Place the raw-data scratch directory outside the result directory")
     if importlib.util.find_spec("cv2") is None:
         pip_install("opencv-python-headless")
-    if importlib.util.find_spec("onnxruntime") is None:
+    ort_probe = subprocess.run(
+        [sys.executable, "-c", "import onnxruntime as ort; "
+         "raise SystemExit('CUDAExecutionProvider' not in ort.get_available_providers())"],
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
+    if ort_probe.returncode:
         pip_install("onnxruntime-gpu")
     dataset, model = stage(scratch)
     output.mkdir(parents=True, exist_ok=True)
