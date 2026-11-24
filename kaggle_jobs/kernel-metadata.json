@@ -1,0 +1,15 @@
+{
+  "id": "pengjy25/unstructured-shortpose-pred-exp-v1",
+  "title": "unstructured-shortpose-pred-exp-v1",
+  "code_file": "unstructured_shortpose_exp_v1.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
