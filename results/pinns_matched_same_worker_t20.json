@@ -1,0 +1,484 @@
+{
+  "experiment": "T20 four-model comparison on one Kaggle CPU allocation, with separate original Intel sessions for T5/T10",
+  "kaggle_version": 373610670,
+  "source_url": "https://www.kaggle.com/code/pengjy25/shortpose-t20-four-models-on-one-cpu-worker?scriptVersionId=373610670",
+  "source": {
+    "bundle_sha256": "c60f8c64c752784aa779b6ef3f30d0b87515a6668c729b39abc8c360d274c3ad",
+    "inner_sha256": {
+      "cpu_T20.zip": "cbc25d27e2ed1def36281652a2496583f5a3aaca334cee61727baf2c5a9e36cc",
+      "matched_fusion_cpu_T20.zip": "dfd47f8e4f398d92a12c8e67f3a874acfe250718b82801fe4242cba330fd224e"
+    },
+    "hardware": {
+      "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+      "torch": "2.11.0+cpu",
+      "threads": 4,
+      "interop_threads": 1,
+      "deterministic_algorithms": true,
+      "float32_matmul_precision": "highest"
+    },
+    "training_subprocess_seconds": {
+      "M0/M1": 409.95875,
+      "M1b/M1-concat": 541.577699
+    },
+    "same_parent_affinity_boot_and_cgroup": true,
+    "ordered_keys_sha256": "11ec9713c26fdd3db6a9a887b4ac8b79fbbf13c6389b5924fcd61c315a38aa34",
+    "matched_cache_sha256": "59e59e3dfa6a2b5583ce4c3fbcb010866e793a3595e43cf691dbefbfcddc64f1"
+  },
+  "protocol": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 64,
+    "learning_rate": 0.002,
+    "min_lr_ratio": 0.05,
+    "weight_decay": 0.0001,
+    "gradient_clip": 2.0
+  },
+  "cohort": {
+    "windows": 623,
+    "clips": 47,
+    "observed_frames": 20,
+    "future_native_10Hz_steps": 30,
+    "by_held_site": {
+      "america_crossroad": {
+        "windows": 342,
+        "clips": 14,
+        "train_windows": 281,
+        "optimization_batches_per_fit": 140
+      },
+      "italy_park": {
+        "windows": 32,
+        "clips": 9,
+        "train_windows": 591,
+        "optimization_batches_per_fit": 280
+      },
+      "japan_crossroad": {
+        "windows": 186,
+        "clips": 11,
+        "train_windows": 437,
+        "optimization_batches_per_fit": 196
+      },
+      "thailand_street": {
+        "windows": 63,
+        "clips": 13,
+        "train_windows": 560,
+        "optimization_batches_per_fit": 252
+      }
+    }
+  },
+  "interval": "Difference in metres, first minus second. Within four fixed sites, draw whole clips with replacement, pair all arms and durations, retain all clip windows, average within site by window then equally across sites. 20,000 percentile draws, RNG seed 2026, marginal 95% intervals without multiplicity adjustment. Conditions on this seed, these checkpoints and these previously analyzed sites.",
+  "hardware_scope": "All four T20 models ran on a single Kaggle Intel allocation in two successive subprocesses. T5/T10 figures use separate previous Intel sessions of the same reported CPU model. The original T20 comparison used AMD EPYC 7B12 for M0/M1 and Intel for M1b/M1-concat. Differences between original and same-worker fits combine allocation and numerical backend effects. The study cannot isolate CPU manufacturer as their cause.",
+  "previous_runs": {
+    "5": {
+      "base": {
+        "kaggle_version": 373601953,
+        "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+        "archive_sha256": "a4ff0e2ff8e7e625dca0dacc30b20e31c13d05e8418f09add2fe42801e02097a"
+      },
+      "fusion": {
+        "kaggle_version": 373604843,
+        "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+        "archive_sha256": "cc5837725ac83009ec6d5256f2df76133e16f9e3cc6f6a573c9c5f55383233ae"
+      }
+    },
+    "10": {
+      "base": {
+        "kaggle_version": 373601970,
+        "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+        "archive_sha256": "e37f246be983da20dd8ecce34dc66bbeeb1048b0d29ee3bc33c557e08e361aaa"
+      },
+      "fusion": {
+        "kaggle_version": 373604882,
+        "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+        "archive_sha256": "35fafe3b55e8053f120b364a3c8fb798cb423a1871d9deec00fe397f32a2fff8"
+      }
+    },
+    "20": {
+      "base": {
+        "kaggle_version": 373601987,
+        "cpu_model": "AMD EPYC 7B12",
+        "archive_sha256": "866552d875bcc9a08c1e0069e2e464970a5ce3a806bfe78dac65f1ccf8918178"
+      },
+      "fusion": {
+        "kaggle_version": 373604876,
+        "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+        "archive_sha256": "a1e604063a1b9859957982d55d09efe1c5f44eb78b9d8a1ea93a20753fb4d65a"
+      }
+    }
+  },
+  "verification": {
+    "verified_fits": 16,
+    "replayed_candidate_trajectories": 14952,
+    "fusion_candidate_trajectories_directly_checked": 7476,
+    "all_cloud_ade_fde_scalar_values_checked": 4984,
+    "max_cpu_cloud_abs_m": 2.1117142114945864e-06,
+    "max_fusion_path_abs_m": 2.86102294921875e-06,
+    "max_fusion_probability_abs": 4.172325134277344e-07
+  },
+  "replay_scope": "Six candidate trajectories, six probabilities and top-1 ADE/FDE were reconstructed for every window and model. For M1b/M1-concat all stored trajectories/probabilities were directly compared. For M0/M1 the cloud archive includes only the two error scalars per test window.",
+  "four_site_macro": {
+    "M0": {
+      "ade_m": 0.5275665514216075,
+      "fde_m": 1.117008177542362
+    },
+    "M1": {
+      "ade_m": 0.6445031631896392,
+      "fde_m": 1.388496324993219
+    },
+    "M1b": {
+      "ade_m": 0.7605150945108372,
+      "fde_m": 1.584115642302126
+    },
+    "M1-concat": {
+      "ade_m": 0.6972684810208121,
+      "fde_m": 1.5075708596124164
+    }
+  },
+  "same_worker_T20_pairs": {
+    "M1b_minus_M1": {
+      "four_site_mean_m": {
+        "ade_m": 0.11601193132119779,
+        "fde_m": 0.19561931730890733
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.059026364069457535,
+          0.18617665236686498
+        ],
+        "fde_m": [
+          0.06992500654619804,
+          0.35597198588547785
+        ]
+      }
+    },
+    "M1-concat_minus_M1": {
+      "four_site_mean_m": {
+        "ade_m": 0.05276531783117233,
+        "fde_m": 0.11907453461919768
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          -0.019873153543158186,
+          0.1239739221656638
+        ],
+        "fde_m": [
+          -0.036188332941664854,
+          0.27467772068468055
+        ]
+      }
+    },
+    "M1b_minus_M1-concat": {
+      "four_site_mean_m": {
+        "ade_m": 0.06324661349002543,
+        "fde_m": 0.07654478268970966
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.008840547429722343,
+          0.12458517686861799
+        ],
+        "fde_m": [
+          -0.04062993514295138,
+          0.20989688816576413
+        ]
+      }
+    },
+    "M1_minus_M0": {
+      "four_site_mean_m": {
+        "ade_m": 0.1169366117680321,
+        "fde_m": 0.27148814745085686
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.08450303232320847,
+          0.16072811839213863
+        ],
+        "fde_m": [
+          0.19884945993464515,
+          0.36813953291116036
+        ]
+      }
+    },
+    "M1b_minus_M0": {
+      "four_site_mean_m": {
+        "ade_m": 0.2329485430892299,
+        "fde_m": 0.46710746475976417
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.19613553354991958,
+          0.28774617276207676
+        ],
+        "fde_m": [
+          0.3919716553641507,
+          0.5869242313688797
+        ]
+      }
+    },
+    "M1-concat_minus_M0": {
+      "four_site_mean_m": {
+        "ade_m": 0.16970192959920435,
+        "fde_m": 0.3905626820700545
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.1186031094177932,
+          0.23149044561134166
+        ],
+        "fde_m": [
+          0.282029474496363,
+          0.5212383696714776
+        ]
+      }
+    }
+  },
+  "history_duration_contrasts": {
+    "T20_minus_T5": {
+      "M0": {
+        "four_site_mean_m": {
+          "ade_m": -0.005379059679103105,
+          "fde_m": -0.018652771548176912
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            -0.031903174404693674,
+            0.02309057174823358
+          ],
+          "fde_m": [
+            -0.08219611656015846,
+            0.052154258703647934
+          ]
+        }
+      },
+      "M1": {
+        "four_site_mean_m": {
+          "ade_m": 0.05486613483899659,
+          "fde_m": 0.14738573966727295
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            0.009546372362687955,
+            0.10613263326067082
+          ],
+          "fde_m": [
+            0.05049738468940574,
+            0.25281426071104846
+          ]
+        }
+      },
+      "M1b": {
+        "four_site_mean_m": {
+          "ade_m": 0.17997422770790844,
+          "fde_m": 0.3416853308092745
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            0.15201022424545196,
+            0.21712748923730632
+          ],
+          "fde_m": [
+            0.2757402347431925,
+            0.4233706307147524
+          ]
+        }
+      },
+      "M1-concat": {
+        "four_site_mean_m": {
+          "ade_m": 0.12934837011875702,
+          "fde_m": 0.29915765553260976
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            0.07111069654500489,
+            0.1930258504377949
+          ],
+          "fde_m": [
+            0.17493047805782558,
+            0.4413251182999882
+          ]
+        }
+      }
+    },
+    "T20_minus_T10": {
+      "M0": {
+        "four_site_mean_m": {
+          "ade_m": -0.008108442529865461,
+          "fde_m": -0.014437594703536762
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            -0.03579134946589821,
+            0.01880428631633482
+          ],
+          "fde_m": [
+            -0.07795271270064065,
+            0.05009540095010594
+          ]
+        }
+      },
+      "M1": {
+        "four_site_mean_m": {
+          "ade_m": 0.01622754583788641,
+          "fde_m": 0.060119251445948756
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            -0.03782710711908106,
+            0.07319586073051575
+          ],
+          "fde_m": [
+            -0.06575790010108719,
+            0.19625269986656335
+          ]
+        }
+      },
+      "M1b": {
+        "four_site_mean_m": {
+          "ade_m": 0.1815267300758221,
+          "fde_m": 0.3460211433097458
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            0.139684942583796,
+            0.23764925925538744
+          ],
+          "fde_m": [
+            0.25095412061283645,
+            0.4770917152219087
+          ]
+        }
+      },
+      "M1-concat": {
+        "four_site_mean_m": {
+          "ade_m": 0.07461336699964444,
+          "fde_m": 0.18482661506798304
+        },
+        "paired_clip_95_m": {
+          "ade_m": [
+            0.0003268196470385524,
+            0.14409835497727633
+          ],
+          "fde_m": [
+            0.022001433075009933,
+            0.3373831768817892
+          ]
+        }
+      }
+    }
+  },
+  "last_two_positions_constant_velocity_four_site_macro": {
+    "ade_m": 0.4750520406751957,
+    "fde_m": 1.1034534864547687
+  },
+  "T20_minus_last_two_positions_constant_velocity": {
+    "M0": {
+      "four_site_mean_m": {
+        "ade_m": 0.052514510746411926,
+        "fde_m": 0.013554691087593095
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.01923395754129774,
+          0.12108880569254639
+        ],
+        "fde_m": [
+          -0.08309007273172295,
+          0.19610913216619805
+        ]
+      }
+    },
+    "M1": {
+      "four_site_mean_m": {
+        "ade_m": 0.169451122514444,
+        "fde_m": 0.28504283853844986
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.1256406505692584,
+          0.26829785082401797
+        ],
+        "fde_m": [
+          0.17308047359825476,
+          0.533802335739905
+        ]
+      }
+    },
+    "M1b": {
+      "four_site_mean_m": {
+        "ade_m": 0.28546305383564186,
+        "fde_m": 0.4806621558473575
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.23693322937063202,
+          0.37785480207981165
+        ],
+        "fde_m": [
+          0.3669271911153321,
+          0.7080866382046311
+        ]
+      }
+    },
+    "M1-concat": {
+      "four_site_mean_m": {
+        "ade_m": 0.22221644034561636,
+        "fde_m": 0.4041173731576476
+      },
+      "paired_clip_95_m": {
+        "ade_m": [
+          0.1640510044040867,
+          0.32255857812207217
+        ],
+        "fde_m": [
+          0.25875120262875484,
+          0.6546213259075727
+        ]
+      }
+    }
+  },
+  "change_from_original_T20": {
+    "M0": {
+      "state_tensors_per_fit": 37,
+      "identical_state_tensors_per_fit": 3,
+      "fully_identical_fits": 0,
+      "max_abs_parameter_change_across_folds": 0.2918148934841156,
+      "max_abs_per_window_ADE_or_FDE_change_m": 1.8444645404815674,
+      "new_minus_original_four_site_m": {
+        "ade_m": -0.01170425673413543,
+        "fde_m": -0.020363506645251567
+      }
+    },
+    "M1": {
+      "state_tensors_per_fit": 88,
+      "identical_state_tensors_per_fit": 9,
+      "fully_identical_fits": 0,
+      "max_abs_parameter_change_across_folds": 0.24247374385595322,
+      "max_abs_per_window_ADE_or_FDE_change_m": 4.089267730712891,
+      "new_minus_original_four_site_m": {
+        "ade_m": 0.03350242518647057,
+        "fde_m": 0.09602569245098228
+      }
+    },
+    "M1b": {
+      "state_tensors_per_fit": 88,
+      "identical_state_tensors_per_fit": 88,
+      "fully_identical_fits": 4,
+      "max_abs_parameter_change_across_folds": 0.0,
+      "max_abs_per_window_ADE_or_FDE_change_m": 0.0,
+      "new_minus_original_four_site_m": {
+        "ade_m": 0.0,
+        "fde_m": 0.0
+      }
+    },
+    "M1-concat": {
+      "state_tensors_per_fit": 79,
+      "identical_state_tensors_per_fit": 79,
+      "fully_identical_fits": 4,
+      "max_abs_parameter_change_across_folds": 0.0,
+      "max_abs_per_window_ADE_or_FDE_change_m": 0.0,
+      "new_minus_original_four_site_m": {
+        "ade_m": 0.0,
+        "fde_m": 0.0
+      }
+    }
+  }
+}
