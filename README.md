@@ -13,6 +13,12 @@ Supply five ascending `timestamps_s` at 10 Hz and five measured, consistently or
 
 The output contains six future paths of 30 positions at 0.1 s intervals in the input ground coordinate frame, the six probabilities, the zero-based selected path and the last-pair constant-velocity reference. A checkpoint trained with an action head additionally returns five independent event probabilities for start, stop, left turn, right turn and maintain. These targets describe movement events derived from ground trajectories. The four sites have already participated in research development.
 
+For input directly from five camera images, supply timestamps, five tracked center-width-height boxes for one pedestrian and a camera-to-ground homography in metres. The image runner reads the original pixels, estimates 17 RTMPose joints and projects the bottom centre of each box into the supplied coordinate frame. A registered joint-action checkpoint produces six trajectories and five event probabilities. The input schema and time, calibration and image checks are in [the image runner](scripts/predict_five_frame_images.py).
+
+```sh
+python -m scripts.predict_five_frame_images detached.pt camera_input.json end2end.onnx --output forecast.json --observations-out observations.json
+```
+
 ## Benchmark status
 
 The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training runs. In each version, 46 configurations use five seeds and four sensitivity settings use three. V2 reused the split on which V1 had already been inspected. Independent confirmation and the proposed JRDB evaluation are pending. Under the original proposal, the data do not establish A (improvement at all three window lengths) or B (improvement in both short-window quality groups). C applies to the comparisons without a net benefit, including M1 versus its implicit-gate control at five frames.

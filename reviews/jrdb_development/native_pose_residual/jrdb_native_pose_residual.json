@@ -1,0 +1,406 @@
+{
+  "experiment": "JRDB released stationary outdoor training recordings, native two-observation pose residual prototype",
+  "frozen_helper_sha256": {
+    "evaluate_outdoor_motion.py": "782f4125e5500ddc3170e30f7a1c85da6cf6cb6d953562279c6dfd65c174d089",
+    "check_outdoor_projection.py": "1acc686949350614117a96113f56c61114e0bf29e2eecc3fae8742f534ffc4fa",
+    "check_training_coordinates.py": "d0ed11f6cc1a2c8256e8b4eca4ceceed11c2ba798f2b5c95c9fd9a1b6a57233c"
+  },
+  "public_source_datasets": {
+    "HST": "https://github.com/google-research/human-scene-transformer/tree/f60bc7fd63487f7135f70b7ed4a1f25a1f32c5bd/human_scene_transformer/data",
+    "ST": "https://github.com/vita-epfl/social-transmotion/releases/tag/ckpt_data"
+  },
+  "scope": "Three recordings already examined during development. Identities are local to a recording. Estimated 33-joint 3D HST poses, ST native 2.5 Hz tracks; no sensor milliseconds, ST manual/interpolated distinction, calibrated independent distance reference or shared identities across recordings.",
+  "timing": "Native frame number / nominal 15 Hz. History 0.4s, seven future ST points through nominal 2.8s. Frame and ID alignment is exact; time gaps are nominal.",
+  "protocol_sha256": "19b9d9364f671934d5a673835c2af8953f88a4f92908b6aef473cee2e93e78a3",
+  "runner_sha256": "e6f20edef20130590a41f581ccac1f2fcf95e76eab3eeb33f6af84d608e3a575",
+  "ridge_mean_loss_penalty": 1.0,
+  "primary": "ordered_pose_minus_motion ADE, equal recording weights",
+  "interval": "Marginal 95% percentiles, 20,000 within-recording recording-local-person cluster draws, RNG 2026. Tressider has five windows from just one person, giving zero within-recording person-resampling variance there. One Hewlett person contributes 27 windows. Same draws across arms, conditional on these fits, subjects and recordings. Interactions and uncertainty from unseen sites/training are outside this interval.",
+  "site_support": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "motion_blocks_before_pose_join": 755,
+      "pose_windows": 91,
+      "recording_local_people": 21,
+      "historical_person_frames": 182,
+      "finite_joint_triplets": 6006,
+      "possible_joint_triplets": 6006,
+      "people_window_count_min_max": [
+        1,
+        27
+      ],
+      "native_odometry": {
+        "native_frames": 1730,
+        "max_horizontal_displacement_m": 0.0,
+        "max_3d_rotation_deg": 0.0
+      }
+    },
+    "huang-lane-2019-02-12_0": {
+      "motion_blocks_before_pose_join": 683,
+      "pose_windows": 42,
+      "recording_local_people": 25,
+      "historical_person_frames": 84,
+      "finite_joint_triplets": 2772,
+      "possible_joint_triplets": 2772,
+      "people_window_count_min_max": [
+        1,
+        3
+      ],
+      "native_odometry": {
+        "native_frames": 725,
+        "max_horizontal_displacement_m": 0.00020694732666015625,
+        "max_3d_rotation_deg": 0.000887924592110543
+      }
+    },
+    "tressider-2019-03-16_1": {
+      "motion_blocks_before_pose_join": 239,
+      "pose_windows": 5,
+      "recording_local_people": 1,
+      "historical_person_frames": 10,
+      "finite_joint_triplets": 330,
+      "possible_joint_triplets": 330,
+      "people_window_count_min_max": [
+        5,
+        5
+      ],
+      "native_odometry": {
+        "native_frames": 505,
+        "max_horizontal_displacement_m": 0.0002542734146118164,
+        "max_3d_rotation_deg": 0.0022949435612776964
+      }
+    }
+  },
+  "source_member_sha256": {
+    "jrdb/data/train/hewlett-packard-intersection-2019-01-24_0_shift_0.ndjson": "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818",
+    "labels_3d_keypoints/train/hewlett-packard-intersection-2019-01-24_0.json": "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45",
+    "odometry/train/hewlett-packard-intersection-2019-01-24_0.json": "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+    "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson": "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd",
+    "labels_3d_keypoints/train/huang-lane-2019-02-12_0.json": "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb",
+    "odometry/train/huang-lane-2019-02-12_0.json": "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+    "jrdb/data/train/tressider-2019-03-16_1_shift_0.ndjson": "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc",
+    "labels_3d_keypoints/train/tressider-2019-03-16_1.json": "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9",
+    "odometry/train/tressider-2019-03-16_1.json": "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+  },
+  "ordered_keys_sha256": "8a7bdd1223cece22fc2f622cc6a744040cd9e7458bc413108ba26727fe097d01",
+  "folds": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "training_sites": [
+        "huang-lane-2019-02-12_0",
+        "tressider-2019-03-16_1"
+      ],
+      "train_windows": 47,
+      "test_windows": 91,
+      "prefix": "fold_0"
+    },
+    "huang-lane-2019-02-12_0": {
+      "training_sites": [
+        "hewlett-packard-intersection-2019-01-24_0",
+        "tressider-2019-03-16_1"
+      ],
+      "train_windows": 96,
+      "test_windows": 42,
+      "prefix": "fold_1"
+    },
+    "tressider-2019-03-16_1": {
+      "training_sites": [
+        "hewlett-packard-intersection-2019-01-24_0",
+        "huang-lane-2019-02-12_0"
+      ],
+      "train_windows": 133,
+      "test_windows": 5,
+      "prefix": "fold_2"
+    }
+  },
+  "features_per_arm": {
+    "motion": 3,
+    "last_pose": 135,
+    "ordered_pose": 267
+  },
+  "software": {
+    "python": "3.13.18",
+    "numpy": "2.1.3"
+  },
+  "three_recording_equal_m": {
+    "last_two_cv": {
+      "ade_m": 0.1731373374363242,
+      "fde_m": 0.3496754442284849
+    },
+    "motion": {
+      "ade_m": 0.20165946667888346,
+      "fde_m": 0.41036413441300407
+    },
+    "last_pose": {
+      "ade_m": 0.24859070277282094,
+      "fde_m": 0.49277041730519766
+    },
+    "ordered_pose": {
+      "ade_m": 0.2809009053983114,
+      "fde_m": 0.5665071166227466
+    }
+  },
+  "by_recording_m": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "last_two_cv": {
+        "ade_m": 0.16642333992711858,
+        "fde_m": 0.3376361178661017
+      },
+      "motion": {
+        "ade_m": 0.2363678483380396,
+        "fde_m": 0.5123529356956068
+      },
+      "last_pose": {
+        "ade_m": 0.27832230650729556,
+        "fde_m": 0.5576542940870292
+      },
+      "ordered_pose": {
+        "ade_m": 0.3161696275594281,
+        "fde_m": 0.6411002693400283
+      }
+    },
+    "huang-lane-2019-02-12_0": {
+      "last_two_cv": {
+        "ade_m": 0.31763258747200257,
+        "fde_m": 0.6407280901934377
+      },
+      "motion": {
+        "ade_m": 0.31485889547027374,
+        "fde_m": 0.634191747120361
+      },
+      "last_pose": {
+        "ade_m": 0.34813377422061714,
+        "fde_m": 0.6705558911969627
+      },
+      "ordered_pose": {
+        "ade_m": 0.37534891440328,
+        "fde_m": 0.7454054902388166
+      }
+    },
+    "tressider-2019-03-16_1": {
+      "last_two_cv": {
+        "ade_m": 0.03535608490985141,
+        "fde_m": 0.07066212462591545
+      },
+      "motion": {
+        "ade_m": 0.05375165622833701,
+        "fde_m": 0.08454772042304445
+      },
+      "last_pose": {
+        "ade_m": 0.11931602759055013,
+        "fde_m": 0.25010106663160114
+      },
+      "ordered_pose": {
+        "ade_m": 0.1511841742322261,
+        "fde_m": 0.3130155902893949
+      }
+    }
+  },
+  "contrasts": {
+    "ordered_pose_minus_motion": {
+      "three_recording_equal_m": {
+        "ade_m": 0.07924143871942796,
+        "fde_m": 0.15614298220974254
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.058465201225119494,
+          0.09627339304658893
+        ],
+        "fde_m": [
+          0.10821975038855845,
+          0.19389979059662812
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.07980177922138854,
+          "fde_m": 0.12874733364442148
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": 0.06049001893300626,
+          "fde_m": 0.11121374311845567
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.0974325180038891,
+          "fde_m": 0.22846786986635045
+        }
+      }
+    },
+    "last_pose_minus_motion": {
+      "three_recording_equal_m": {
+        "ade_m": 0.04693123609393749,
+        "fde_m": 0.08240628289219358
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.030595014203808772,
+          0.058519019596374
+        ],
+        "fde_m": [
+          0.04770680976890788,
+          0.10622905267234165
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.04195445816925597,
+          "fde_m": 0.04530135839142235
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": 0.033274878750343406,
+          "fde_m": 0.03636414407660171
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.06556437136221312,
+          "fde_m": 0.1655533462085567
+        }
+      }
+    },
+    "ordered_pose_minus_last_pose": {
+      "three_recording_equal_m": {
+        "ade_m": 0.03231020262549047,
+        "fde_m": 0.07373669931754895
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.022772016485642553,
+          0.04374942558588755
+        ],
+        "fde_m": [
+          0.05059191787342061,
+          0.09924324082088755
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.037847321052132565,
+          "fde_m": 0.08344597525299913
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": 0.027215140182662856,
+          "fde_m": 0.07484959904185395
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.031868146641675976,
+          "fde_m": 0.06291452365779376
+        }
+      }
+    },
+    "motion_minus_last_two_cv": {
+      "three_recording_equal_m": {
+        "ade_m": 0.028522129242559258,
+        "fde_m": 0.06068869018451913
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.019949623832028345,
+          0.03988188355404027
+        ],
+        "fde_m": [
+          0.03843865056901064,
+          0.0841199879377079
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.06994450841092101,
+          "fde_m": 0.1747168178295051
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": -0.0027736920017288336,
+          "fde_m": -0.006536343073076711
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.0183955713184856,
+          "fde_m": 0.013885595797129002
+        }
+      }
+    },
+    "last_pose_minus_last_two_cv": {
+      "three_recording_equal_m": {
+        "ade_m": 0.07545336533649676,
+        "fde_m": 0.1430949730767127
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.056877035216010764,
+          0.09083740704240177
+        ],
+        "fde_m": [
+          0.09822209612387067,
+          0.17763850531141367
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.11189896658017698,
+          "fde_m": 0.22001817622092745
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": 0.030501186748614573,
+          "fde_m": 0.029827801003525
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.08395994268069872,
+          "fde_m": 0.1794389420056857
+        }
+      }
+    },
+    "ordered_pose_minus_last_two_cv": {
+      "three_recording_equal_m": {
+        "ade_m": 0.10776356796198722,
+        "fde_m": 0.21683167239426168
+      },
+      "paired_person_percentile95_m": {
+        "ade_m": [
+          0.08579868004146811,
+          0.12787205820523534
+        ],
+        "fde_m": [
+          0.1630620638340016,
+          0.26202559332076697
+        ]
+      },
+      "by_recording_m": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "ade_m": 0.14974628763230954,
+          "fde_m": 0.3034641514739266
+        },
+        "huang-lane-2019-02-12_0": {
+          "ade_m": 0.05771632693127743,
+          "fde_m": 0.10467740004537895
+        },
+        "tressider-2019-03-16_1": {
+          "ade_m": 0.11582808932237469,
+          "fde_m": 0.24235346566347946
+        }
+      }
+    }
+  },
+  "provenance": {
+    "kaggle_version": 373627793,
+    "reported_seconds": 34.4,
+    "raw_result_sha256": "2d7a2ff1cbc6a7cff6dd87b10be01ffff413abf685150df6f3e65a34540d451a",
+    "raw_result_bytes": 432226,
+    "public_cloud_aggregate_sha256": "1756155d7b42525068a19c775b6d6932386fa984e2317d22f6e368a4f2584d53",
+    "project_helper_source_commit": "032800e94bb0828c45d3f5195ac5cc17aa93bc4c",
+    "ST_authors_release": "https://github.com/vita-epfl/social-transmotion/releases/tag/ckpt_data",
+    "HST_authors_format": "https://github.com/google-research/human-scene-transformer/blob/f60bc7fd63487f7135f70b7ed4a1f25a1f32c5bd/human_scene_transformer/data/utils.py#L68-L80"
+  },
+  "independent_verification": {
+    "auditor_sha256": "3a42b741fcbf1a01da4da13d10e78e06547ee84c63daa51e12599b88836eb7b6",
+    "verified_source_members": 9,
+    "matched_recording_local_people": 47,
+    "verified_windows": 138,
+    "matched_input_person_frames": 276,
+    "finite_joint_triplets": 9108,
+    "verified_training_solutions": 9,
+    "max_abs_regularized_normal_equation_residual": 4.4167686001628237e-16,
+    "verified_method_windows": 552,
+    "forecast_points": 3864,
+    "ADE_FDE_values": 1104,
+    "max_abs_forecast_coordinate_difference_m": 1.7763568394002505e-15,
+    "max_abs_ADE_FDE_difference_m": 8.881784197001252e-16,
+    "all_six_contrasts_verified": true,
+    "max_abs_interval_endpoint_difference_m": 1.1102230246251565e-16,
+    "method": "Original source members independently parsed; same-person tracks tiled before pose filtering. Shapes, raw frame numbers, nominal relative time, landmarks and XY entries checked against stored inputs. Independently reconstructed training-only standardization and attested saved coefficients via the strict ridge optimum without local fitting. All paths, errors, per-recording/equal-recording means, paired contrasts and 20,000 person-cluster intervals replayed."
+  }
+}
