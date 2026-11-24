@@ -1,0 +1,198 @@
+{
+  "kaggle_version": "373610112",
+  "preregistration_commit": "0947e83d502893bfca13e78c8dd70f71945704fb",
+  "kaggle_result_zip_sha256": "a4f3014e3f4f2172ae5e6466bf4911b4d43c2e20433e98fd3ee12a3796c568e2",
+  "returned_public_aggregate_sha256": "c9ad30919718228e8fd75e87844bda54d698a386071f4c8aad51bec4d138eb11",
+  "returned_private_paired_sha256": "d45882307bbbbb15b39fdcfbe88e9b671eeaf0f380e6ace81a32b0cd92377d5f",
+  "frozen_protocol_sha256": "4028bd84477d517459e36703a2360c0d5e7d0703a907f228f51e979a451a4e87",
+  "frozen_lock_sha256": "7cd158c5c16c9751ed2fdd3f999026f6c211512fe6e8faf019efe27a31f5d2b8",
+  "frozen_scorer_sha256": "9193197f6536c18e11f826bef9a80d1d6a51ab5bc132ed0f4d0a8d0a5603d3ea",
+  "weights_archive_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+  "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "ordered_window_key_hash": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "prior_independent_mode_index_archive_sha256": "72c9fd39724dc50aefe2b4b766a84a8b70c236e6965c575dc3bf1937b786361e",
+  "local_verifier_sha256": "3bc7663b40d5b39c359d2436c3b397594c772c886cbba2aeb816f68445a23266",
+  "local_cpu_torch": "2.10.0",
+  "device": "CPU",
+  "threads": 2,
+  "weights": 20,
+  "sites": 4,
+  "clips": 47,
+  "seeds": [
+    42,
+    1024,
+    2025,
+    3407,
+    4096
+  ],
+  "windows": 1482,
+  "first_annotation_windows": 449,
+  "forward_batches": 500,
+  "extra_byte_identical_recorded_repeat_batches": 125,
+  "recorded_mode_indices_matched_to_prior_archive": 7410,
+  "private_tensor_shape": [
+    5,
+    1482,
+    4,
+    5
+  ],
+  "all_mode_change_flags_matched": true,
+  "mode_changes_summed_over_windows_and_seeds": {
+    "recorded": 0,
+    "interior_order": 0,
+    "static_by_joint_and_root": 0,
+    "disabled_residual": 47
+  },
+  "max_absolute_difference_to_original_checkpoint_ADE_FDE_m": {
+    "returned": 3.689792331229569e-06,
+    "local": 3.498927776846017e-06
+  },
+  "max_absolute_difference_to_returned_per_window": {
+    "recorded": {
+      "ade_m": 1.0618365005043984e-06,
+      "fde_m": 2.2491390438972303e-06,
+      "mean_top_path_shift_m": 0.0,
+      "top_mode_changed": 0.0,
+      "absolute_gate_change": 0.0
+    },
+    "interior_order": {
+      "ade_m": 1.172459241249868e-06,
+      "fde_m": 2.020502813060432e-06,
+      "mean_top_path_shift_m": 1.0404259482682343e-06,
+      "top_mode_changed": 0.0,
+      "absolute_gate_change": 5.21540641784668e-08
+    },
+    "static_by_joint_and_root": {
+      "ade_m": 1.3657172770464854e-06,
+      "fde_m": 2.7183496138505348e-06,
+      "mean_top_path_shift_m": 1.1202435875575303e-06,
+      "top_mode_changed": 0.0,
+      "absolute_gate_change": 5.960464477539063e-08
+    },
+    "disabled_residual": {
+      "ade_m": 1.4895040711948582e-06,
+      "fde_m": 3.0113811106957655e-06,
+      "mean_top_path_shift_m": 1.2729693173452183e-06,
+      "top_mode_changed": 0.0,
+      "absolute_gate_change": 4.470348358154297e-08
+    }
+  },
+  "max_cross_runtime_per_window_paired_effect_difference_ADE_FDE_m": {
+    "interior_order": [
+      1.0997362718256909e-06,
+      2.4354971492890343e-06
+    ],
+    "static_by_joint_and_root": [
+      1.6361198786896125e-06,
+      3.192490484416055e-06
+    ],
+    "disabled_residual": [
+      1.2469958425853633e-06,
+      2.8869530801500787e-06
+    ]
+  },
+  "order_effect_precision": {
+    "primary_all_windows": {
+      "n": 1482,
+      "local_order_minus_recorded": {
+        "mean": {
+          "ade_m": 3.597385018280936e-07,
+          "fde_m": 3.0135135432413947e-07
+        },
+        "paired_clip_percentile95": {
+          "ade_m": [
+            -3.231557634243916e-07,
+            1.2213727939937377e-06
+          ],
+          "fde_m": [
+            -4.4024535223850814e-07,
+            8.46984656512455e-07
+          ]
+        }
+      },
+      "cloud_order_minus_recorded": {
+        "mean": {
+          "ade_m": 3.608975241355189e-07,
+          "fde_m": 3.0018444173916303e-07
+        },
+        "paired_clip_percentile95": {
+          "ade_m": [
+            -3.2153661536236806e-07,
+            1.223294440450928e-06
+          ],
+          "fde_m": [
+            -4.4088880782253775e-07,
+            8.464522363780647e-07
+          ]
+        }
+      },
+      "absolute_cloud_local_effect_discrepancy_m": {
+        "ade_m": 1.1590223074253054e-09,
+        "fde_m": 1.1669125849764364e-09
+      },
+      "absolute_cloud_local_interval_endpoint_discrepancy_m": {
+        "ade_m": [
+          1.619148062023528e-09,
+          1.9216464571903696e-09
+        ],
+        "fde_m": [
+          6.434555840296115e-10,
+          5.324201343902566e-10
+        ]
+      }
+    },
+    "secondary_first_sampled_449": {
+      "n": 449,
+      "local_order_minus_recorded": {
+        "mean": {
+          "ade_m": 1.0502581465059193e-07,
+          "fde_m": 2.8664235061866993e-07
+        },
+        "paired_clip_percentile95": {
+          "ade_m": [
+            -8.29938983170511e-07,
+            9.061050764448212e-07
+          ],
+          "fde_m": [
+            -1.4044163110848575e-06,
+            1.670756354263802e-06
+          ]
+        }
+      },
+      "cloud_order_minus_recorded": {
+        "mean": {
+          "ade_m": 1.089036003126336e-07,
+          "fde_m": 2.8953086456944996e-07
+        },
+        "paired_clip_percentile95": {
+          "ade_m": [
+            -8.221146403642964e-07,
+            9.113661242044264e-07
+          ],
+          "fde_m": [
+            -1.395959043734687e-06,
+            1.6736485246853765e-06
+          ]
+        }
+      },
+      "absolute_cloud_local_effect_discrepancy_m": {
+        "ade_m": 3.8777856620416706e-09,
+        "fde_m": 2.8885139507800313e-09
+      },
+      "absolute_cloud_local_interval_endpoint_discrepancy_m": {
+        "ade_m": [
+          7.82434280621459e-09,
+          5.2610477596051926e-09
+        ],
+        "fde_m": [
+          8.457267350170511e-09,
+          2.8921704215744173e-09
+        ]
+      }
+    }
+  },
+  "aggregation": "Every public site/seed/condition value, four-site and five-seed averages, and both cohort bootstrap intervals were recomputed from the private file. All agree within 5e-13. The original public aggregate is unmodified.",
+  "limits": "Cross-runtime per-window absolute error differences are measured separately from discrepancies in paired group effects. The reported order effects are very small. Intervals condition on these four development sites and five fits. The archive saves binary mode-change flags but not the absolute index of a switched disabled-residual candidate. The previous independent archive supplies the recorded mode IDs; order and static produced no switches."
+}
