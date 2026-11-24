@@ -1,0 +1,154 @@
+{
+  "protocol_sha256": "6226c674c523ebb0aab4c7776eb509a74d02191ca8454478b0f88e4bd096457f",
+  "source_labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "design": {
+    "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "history_only_groups": {
+      "first_short": {
+        "windows": 323,
+        "distinct_clips": 46,
+        "clip_persons": 323,
+        "ordered_keys_sha256": "198c634d9c5d447a14b05327ffd51d738962cf71a628dfcce571551e4e092684",
+        "by_site": {
+          "america_crossroad": 146,
+          "italy_park": 24,
+          "japan_crossroad": 102,
+          "thailand_street": 51
+        }
+      },
+      "first_long": {
+        "windows": 126,
+        "distinct_clips": 30,
+        "clip_persons": 126,
+        "ordered_keys_sha256": "5031c91673158fd66cf04b442a1a6e7f3d13cf0d1185138b9a81af41d7283245",
+        "by_site": {
+          "america_crossroad": 94,
+          "italy_park": 4,
+          "japan_crossroad": 15,
+          "thailand_street": 13
+        }
+      },
+      "prior_short": {
+        "windows": 798,
+        "distinct_clips": 45,
+        "clip_persons": 323,
+        "ordered_keys_sha256": "0ba98215e040b3b1733320866f9596012473f7ea3398dc18214ffe3bc1520dce",
+        "by_site": {
+          "america_crossroad": 409,
+          "italy_park": 51,
+          "japan_crossroad": 270,
+          "thailand_street": 68
+        }
+      },
+      "prior_long": {
+        "windows": 235,
+        "distinct_clips": 32,
+        "clip_persons": 157,
+        "ordered_keys_sha256": "810a3aac9c5c05fbdabe864f75a132915aa67060e4c6f078a178be436edb9811",
+        "by_site": {
+          "america_crossroad": 167,
+          "italy_park": 5,
+          "japan_crossroad": 45,
+          "thailand_street": 18
+        }
+      }
+    },
+    "site_distances": {
+      "all": {
+        "windows": 1482,
+        "cumulative": {
+          "below_half_metre": 1121,
+          "q25_median_q75_m": [
+            0.2551665359298483,
+            0.3789612098237054,
+            0.49527685155573525
+          ]
+        },
+        "net": {
+          "below_half_metre": 1133,
+          "q25_median_q75_m": [
+            0.2515069324505361,
+            0.375351162392185,
+            0.4913377689293709
+          ]
+        }
+      },
+      "america_crossroad": {
+        "windows": 816,
+        "cumulative": {
+          "below_half_metre": 555,
+          "q25_median_q75_m": [
+            0.28572867611683295,
+            0.4119329122250853,
+            0.5424480629665933
+          ]
+        },
+        "net": {
+          "below_half_metre": 567,
+          "q25_median_q75_m": [
+            0.27718900185437656,
+            0.40490365428364994,
+            0.5390093923475856
+          ]
+        }
+      },
+      "italy_park": {
+        "windows": 84,
+        "cumulative": {
+          "below_half_metre": 75,
+          "q25_median_q75_m": [
+            0.18863256484963126,
+            0.33535148422937155,
+            0.40544266236054843
+          ]
+        },
+        "net": {
+          "below_half_metre": 75,
+          "q25_median_q75_m": [
+            0.18863256450280008,
+            0.3353514841429194,
+            0.4054426622942112
+          ]
+        }
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "cumulative": {
+          "below_half_metre": 372,
+          "q25_median_q75_m": [
+            0.2285620740983857,
+            0.34008439526413514,
+            0.43957470574663043
+          ]
+        },
+        "net": {
+          "below_half_metre": 372,
+          "q25_median_q75_m": [
+            0.22856149171344342,
+            0.3400843952297379,
+            0.4385937949085404
+          ]
+        }
+      },
+      "thailand_street": {
+        "windows": 150,
+        "cumulative": {
+          "below_half_metre": 119,
+          "q25_median_q75_m": [
+            0.28279270474276563,
+            0.36393793754581705,
+            0.464928199866219
+          ]
+        },
+        "net": {
+          "below_half_metre": 119,
+          "q25_median_q75_m": [
+            0.28279270473942675,
+            0.3638334875112642,
+            0.46492819969694105
+          ]
+        }
+      }
+    }
+  }
+}
