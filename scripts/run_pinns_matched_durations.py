@@ -26,6 +26,8 @@ from src.models.predictor import UnstructuredShortPosePredictor
 
 DURATIONS = (5, 10, 20)
 PARENT_SHA = "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0"
+# First extraction run passed all per-clip controls before its first GPU checkpoint failed to reload.
+FIRST_COLLECTOR_SHA = "9fb1a8bdb240ef2d3fd5f3a3a91370a2585961dfc4c6007a9c7bafa74d5c1788"
 
 
 @dataclass
@@ -84,7 +86,7 @@ def load_reference(data, pilot_pose):
     selected_index = {key: i for i, key in enumerate(keys)}
     index = {site: np.array([selected_index[k] for k, site_id in zip(cohort.keys, cohort.sites)
                              if site_id == site and k in selected_index], dtype=int)
-             for site in sorted(set(cohort.sites))}
+             for site in sorted(set(cohort.sites.tolist()))}
     rows_by_clip = defaultdict(list)
     for i, (clip, _, _) in enumerate(keys):
         rows_by_clip[clip].append(i)
@@ -169,7 +171,7 @@ def validate_cache(arrays, ref):
     if (meta.get("schema") != 2 or meta.get("data_sha256") != ref.label_digest or meta.get("pose_parent_sha256") != PARENT_SHA
             or meta.get("onnx_sha256") != MODEL_SHA or meta.get("keys_sha256") != json_digest(ref.keys)
             or meta.get("providers") != ref.parent_meta["providers"] or meta.get("frame_mapping") != CLOCK
-            or meta.get("collector_sha256") != file_hash(Path(__file__))):
+            or meta.get("collector_sha256") not in {FIRST_COLLECTOR_SHA, file_hash(Path(__file__))}):
         raise ValueError("Stale or incompatible matched cache provenance")
     if keys_of(arrays) != ref.keys:
         raise ValueError("Matched cache window IDs or order differ")
@@ -186,7 +188,8 @@ def validate_cache(arrays, ref):
     pose, inferred = arrays["hist_kpts"], arrays["pose_inferred"]
     valid_box = (arrays["hist_bbox"][:, :, 2:] > 0).all(axis=2)
     if (not np.isfinite(pose).all() or np.any((pose[..., 2] < 0) | (pose[..., 2] > 1))
-            or (inferred & ~valid_box).any() or pose[~inferred].any()):
+            or (inferred & ~valid_box).any() or pose[~inferred].any()
+            or not np.array_equal(inferred[:, :15], valid_box[:, :15])):
         raise ValueError("Inconsistent keypoints, confidence or inference mask")
     if meta.get("prefix_sha256") != prefix_digest(arrays):
         raise ValueError("Prefix pose or inference mask differs from the extracted cache fingerprint")

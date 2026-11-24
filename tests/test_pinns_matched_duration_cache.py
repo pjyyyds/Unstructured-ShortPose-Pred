@@ -76,6 +76,16 @@ class MatchedCacheTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 run.validate_cache(arrays, ref)
 
+    def test_undecoded_valid_prefix_crop_is_rejected_even_with_matching_fingerprint(self):
+        ref, arrays = fixture()
+        arrays["pose_inferred"][0, 3] = False
+        arrays["hist_kpts"][0, 3] = 0
+        meta = json.loads(arrays["metadata_json"].item())
+        meta["prefix_sha256"] = run.prefix_digest(arrays)
+        arrays["metadata_json"] = np.array(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError, "inference mask"):
+            run.validate_cache(arrays, ref)
+
     def test_cache_hit_and_training_entry_verify_before_use(self):
         ref, arrays = fixture()
         arrays["xy"][0, 20, 1] = 1
