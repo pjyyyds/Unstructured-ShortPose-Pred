@@ -1,0 +1,144 @@
+{
+  "experiment": "five_history_six_candidate_cv_anchor_seed42",
+  "controlled_primary": "cv_M0 minus zero_M0, predicted highest-probability ADE in metres, four sites equally weighted.",
+  "secondary_comparisons": [
+    [
+      "cv_M1",
+      "zero_M1"
+    ],
+    [
+      "cv_M1",
+      "cv_M0"
+    ],
+    [
+      "zero_M1",
+      "zero_M0"
+    ],
+    [
+      "cv_M0",
+      "last_two"
+    ],
+    [
+      "cv_M1",
+      "last_two"
+    ],
+    [
+      "cv_M0",
+      "original_M0"
+    ],
+    [
+      "cv_M1",
+      "original_M1"
+    ]
+  ],
+  "scope": "Exploratory development; the four sites previously informed this choice. One training seed. All signs retained.",
+  "arms": {
+    "zero_M0": [
+      "M0",
+      false
+    ],
+    "zero_M1": [
+      "M1",
+      false
+    ],
+    "cv_M0": [
+      "M0",
+      true
+    ],
+    "cv_M1": [
+      "M1",
+      true
+    ]
+  },
+  "optimization": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 64,
+    "learning_rate": 0.002,
+    "min_lr_ratio": 0.05,
+    "weight_decay": 0.0001,
+    "gradient_clip": 2.0
+  },
+  "normalization": "Frozen tensorize and feature builders. Motion/targets in metres relative to the last observed position; velocity in metres/second. Each pose frame uses hip midpoint or box centre and divides by box height. No dataset-fitted feature or target scaler.",
+  "folds": {
+    "america_crossroad": {
+      "training_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "training_windows": 666,
+      "test_windows": 816,
+      "test_clips": 14,
+      "train_key_sha256": "5138c8d34313d2443dd2501d41024793983973d75facc9d4aabbd13fbe33a19c",
+      "test_key_sha256": "fe925bd2b94e094d8e75f407d5a87e9d1a9ebe575e7a49f6e8e415388c7157fb"
+    },
+    "italy_park": {
+      "training_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "training_windows": 1398,
+      "test_windows": 84,
+      "test_clips": 9,
+      "train_key_sha256": "9743e797dc3c21844379d1fd777a7d55f5425d9c56848c8fbcd207e5185aeb18",
+      "test_key_sha256": "d1a55cb06eb6603487ef357dd43ef27c0679c30af6c05b0feb5e7a3799d07ec5"
+    },
+    "japan_crossroad": {
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "training_windows": 1050,
+      "test_windows": 432,
+      "test_clips": 11,
+      "train_key_sha256": "c53cab0ed205f9ad582163021f92583e0652a6b18eac5d599cf165033ca124ae",
+      "test_key_sha256": "dd4cf28d80d4f42b4d9bcfbb6d6e6f2870e5ca6a1eb621454f0830f082fe6f20"
+    },
+    "thailand_street": {
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "training_windows": 1332,
+      "test_windows": 150,
+      "test_clips": 13,
+      "train_key_sha256": "d6a1b03ba46fcbfad203c85152320ac11eeb3b7b26402eec5f8142708da28fd5",
+      "test_key_sha256": "96a8494222d1d7e9c5f3bc3720793614d8bbbab1bd3e98dad9c5dc0ebfd5a734"
+    }
+  },
+  "backend": "All sixteen new fits on one deterministic Kaggle CPU worker. Same init across common parameters; seed 49 permutations and seed 42 stochastic modules reset for every fit.",
+  "base": "Centered ground XY. The float64 fixed base is zero for the control or p5+(p5-p4)/0.1 times (h*0.1) for h=1..30. Float32 decoder cumulative residual is added in float64. Training and scoring use label-derived float64 target positions.",
+  "assignment": "Original detached nearest-ADE winner, smooth-L1 beta .5, mode weight .25, label smoothing .04, 65/35 hard vs distance rank. Exact best-ADE ties choose the closest fixed 60-degree direction among tied queries to the largest valid future excursion from the arm base (earliest peak), rotated relative to the last observed step. Zero speed uses world +x; zero deviation and exact directional ties average the tied optima. The change of labels on completely tied batches is an intended consequence of adding the anchor.",
+  "reference": "Original seed-42 M0 and explicit M1 weights, plus last-two CV; network replay of archived top1 must match saved per-window errors at fixed legacy tolerance.",
+  "metrics": [
+    "top1_ade_m",
+    "top1_fde_m",
+    "minade6_m",
+    "minfde6_m",
+    "top1_is_minade",
+    "mean_pair_distance_m",
+    "top1_probability",
+    "probability_entropy_nats"
+  ],
+  "interval": "20000 whole-clip paired draws within each site, seed 2026, average four site means; conditional on these sites and seed.",
+  "scope_of_inference": "Hypothesis concerns the starting path and its corresponding residual fit under a fixed tie rule; old independently trained networks are descriptive.",
+  "frozen_source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "archive_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "utility_sha256": {
+    "analyze_heldout_pairs.py": "d082666cdd7e50d6c32e938ca4f8366754a15209a4c8f9073a84567ceeb0a047",
+    "rerank_pinns_velocity_modes.py": "252975a2b992fdbdcb822c5889713c77141be3ad02b1cd1ad6b5b3aecf79a16a",
+    "run_heldout_seed_sensitivity.py": "e894ca8228f69e0f768ff80cc00ad7d240903c3c3a013e577f5603b0f242bf8d",
+    "verify_heldout_bundle.py": "852d9108870aa8dcc161a76e6e2309d7a791f6513f869a1b631da24a6dbdaad5"
+  },
+  "files_sha256": {
+    "run_anchor.py": "ebf3ca64f15c038fb85c11f08829e1e07d1a6f63c508fe36006a58ce8bbd79f1",
+    "anchored_model.py": "ac7ca86c54cb777a8fac549b64a4ad77d7ff5fc55647152cc88ec32e6bc97947"
+  }
+}
