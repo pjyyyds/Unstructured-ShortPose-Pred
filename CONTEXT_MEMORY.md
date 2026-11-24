@@ -52,3 +52,5 @@ JRDB 的 10 个派生训练片段均找到了匹配的轮式里程计，最大�
 ETH University（`seq_eth`）是 PINNS 之外的单片段开发检查。用每窗两个相隔 0.4 秒的标注位置做匀速外推，828 窗、343 人的七步 ADE 为 0.475251 米，2.8 秒 FDE 为 0.850817 米。该结果衡量纯运动基线，PINNS 神经模型的独立外部验证仍待完成。[评分方法与可复现汇总](reviews/eth_development/) · [ETH 原数据](https://vision.ee.ethz.ch/datsets.html)
 
 五帧四地点单种子实验已在 Kaggle 跑完。八份权重在 CPU 上复现 1,482 个同窗预测。四地点等权 ADE 为 M0 0.5044 m、M1 0.5463 m。逐地点内按视频整群抽样，M1 相对 M0 的 ADE 差为 +0.0419 m，95% 区间为 +0.0230 至 +0.0620 m。归档质量分组的清晰、部分、重度或低质量桶共 409、691、382 窗，M1 相对 M0 的四地等权 ADE 分别高 0.0135、0.0375、0.0776 米。冻结权重的轨迹隐含动作规则已评分，真实帧号偏移影响及另外四种子的训练结果有待核验。[质量桶](results/pinns_heldout_pose_quality.json) · [轨迹隐含动作](results/pinns_heldout_implied_actions.json) · [五种子复现](README.md#five-seed-extension) 开题所列 JRDB、防泄漏独立验证及真实部署硬件计时仍待完成。[逐窗重放](results/pinns_heldout_replay.json) · [配对统计](results/pinns_heldout_paired.json)
+
+固定 M1 权重的五帧姿态输入检查：取消关节会让等地点 ADE 增加 0.0130 m，逆序对齐五帧姿态只变化 −0.000017 m，全部窗口保持原首选模态。动作轨迹联合建模的下一项开发对照用按片段分组的五折预测比较运动、末帧姿态和五帧姿态变化，对起步与停止同时报告正例数、固定阈值 F1 及 AP。原图网络在 497 窗输入中实际接收 2,724 条边（280 条汽车、其余行人）；JRDB Huang Lane 开发片已核对全景方位和 ID，2.5 Hz 派生轨迹仍不足以检验开题的五帧 10 Hz 条件。

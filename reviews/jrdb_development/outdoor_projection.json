@@ -1,0 +1,99 @@
+{
+  "recording": "huang-lane-2019-02-12_0",
+  "panorama_width_px": 3760,
+  "source_members": {
+    "tracks_and_boxes": {
+      "url": "https://github.com/vita-epfl/social-transmotion/releases/download/ckpt_data/releases.zip",
+      "archive_member": "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson",
+      "member_bytes": 1394018,
+      "member_sha256": "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd"
+    },
+    "keypoints": {
+      "url": "https://storage.googleapis.com/gresearch/human_scene_transformer/keypoints.zip?generation=1699186254967082",
+      "archive_member": "labels_3d_keypoints/train/huang-lane-2019-02-12_0.json",
+      "member_bytes": 10571151,
+      "member_sha256": "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb"
+    },
+    "moving_odometry": {
+      "url": "https://storage.googleapis.com/gresearch/human_scene_transformer/odometry.zip?generation=1699184889005564",
+      "archive_member": "odometry/train/memorial-court-2019-03-16_0.json",
+      "member_bytes": 299640,
+      "member_sha256": "ee9de392716120c169fc56dedc8abd72cf83f56ee9cb7f02b7b38e67a95ba151"
+    }
+  },
+  "source_revisions": {
+    "jrdb_toolkit": "4fbf7d6eba3255746000eb8c15f707af69561c5d",
+    "hst_code": "f60bc7fd63487f7135f70b7ed4a1f25a1f32c5bd",
+    "st_github_release_id": 135144126,
+    "st_github_asset_id": 157559343
+  },
+  "jrdb_nominal_native_rgb_hz": 15,
+  "native_frames_per_st_sample": 6,
+  "st_track_samples_hz": [
+    2.5
+  ],
+  "st_unique_frame_person_pairs": 6430,
+  "st_valid_boxes_and_nonzero_xy": 6430,
+  "st_people": 70,
+  "st_distinct_frames": 121,
+  "st_native_frame_range": [
+    0,
+    720
+  ],
+  "st_frame_steps": [
+    6
+  ],
+  "st_boxes_at_or_above_jrdb_pose_general_6500px2_guideline": 1582,
+  "horiz_center_vs_jrdb_bearing_circular_error_px": {
+    "p50": 8.532067926695845,
+    "p90": 19.92094258860409,
+    "p95": 27.35246038466095,
+    "max": 119.22020343460895
+  },
+  "horiz_center_vs_jrdb_bearing_circular_error_deg": {
+    "p50": 0.8169001206410915,
+    "p90": 1.907324290398264,
+    "p95": 2.618852590020729,
+    "max": 11.414700328845537
+  },
+  "projected_bearing_inside_box_horizontal_extent": 4839,
+  "next_person_same_frame_control": {
+    "eligible_pairs": 6430,
+    "correct_id_px": {
+      "p50": 8.532067926695845,
+      "p90": 19.92094258860409,
+      "p95": 27.35246038466095,
+      "max": 119.22020343460895
+    },
+    "wrong_id_px": {
+      "p50": 208.05419986686923,
+      "p90": 1477.584408625576,
+      "p95": 1667.2484113193639,
+      "max": 1879.2820507977472
+    }
+  },
+  "hst_frame_person_pairs_all_native_frames": 3320,
+  "hst_matched_st_valid_pairs": 554,
+  "hst_matched_st_people": 40,
+  "hst_matched_all_33_xyz_finite": 554,
+  "hst_matched_finite_mid_hip_norm_native": {
+    "p50": 0.0027088025363651313,
+    "p90": 0.0037286081134918444,
+    "p95": 0.0040788508605386934,
+    "max": 0.005242355193037068
+  },
+  "moving_outdoor_reference": {
+    "recording": "memorial-court-2019-03-16_0",
+    "native_frames": 1091,
+    "max_translation_from_first_xy_m": 62.691891023570896,
+    "max_rotation_from_first_deg": 59.994797065504564,
+    "displacement_over_42_native_frames_xy_m": {
+      "p50": 2.613654766818175,
+      "p90": 2.6783598998783553,
+      "p95": 2.690930531480123,
+      "max": 2.740754846349513
+    },
+    "scope": "Robot wheel odometry only. Moving clip absent from Social-Transmotion training release. No pedestrian coordinates or forecast targets used in this second recording."
+  },
+  "semantics": "Angular agreement tests horizontal axes/origin direction. It is invariant to positive radial scale. Matched HST records store 33x3 body landmarks without pixel boxes or confidence. An ID match and an angular check do not independently verify raw 3D box centres, metric scale or a moving-sequence compensation convention."
+}

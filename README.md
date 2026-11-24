@@ -28,6 +28,12 @@ On the same 1,482 complete windows, extrapolation from the last two observations
 
 A prespecified single-coefficient speed reduction fit on the three training locations raised four-site macro ADE/FDE to 0.6068/1.2338 m. It improved on unscaled two-point velocity only at the US location. [Coefficients and held-out errors](results/pinns_velocity_scale.json)
 
+The original scenario model received neighbors in 480 of 497 archived test windows. Its 2,724 directed edges comprised 2,444 pedestrian edges and 280 car edges. All edge tensors, masks and type vectors were reconstructed from observed data. The release distinguishes people and cars at source. [Input coverage and temporal reconstruction](results/pinns_neighbor_inputs.json)
+
+On the outdoor JRDB training recording Huang Lane, projecting 6,430 person positions into the panorama gave a median horizontal discrepancy of 8.53 pixels from the matching box center. HST supplied 33-joint 3D records for 554 of these person-frame pairs. The derived tracks run at 2.5 Hz and the joint records lack image-plane confidence. The planned 10 Hz RTMPose evaluation still requires suitable source frames and annotations. [Outdoor JRDB development check](reviews/jrdb_development/README.md)
+
+The five-frame action development probe fits three regularized logistic heads to motion, motion plus final-frame pose, and motion plus final-frame pose and observed joint changes. The five cross-validation folds group whole clips, with all four known locations represented in each fold. The program records held-out probabilities, class supports, AP and fixed-threshold F1. Run `python -m scripts.evaluate_pinns_action_probes "$PINNS_ROOT" "$PILOT_DIR/pose.npz" --output action_probes.json` from the repository root.
+
 ## Project files
 
 - [V2 benchmark tables](results/EMPIRICAL_BENCHMARK_REPORT.md) and [V1 archive](results/v1_initial_diagnosis/EMPIRICAL_BENCHMARK_REPORT.md)
@@ -71,6 +77,8 @@ The Kaggle pilot completed all eight fits. With equal weight per site, ADE/FDE i
 The frozen pose-quality rules assigned 409 windows to clear, 691 to partial and 382 to heavy or low quality. Within each bucket, the four-site mean M1-minus-M0 ADE/FDE differences were +0.0135/+0.0152, +0.0375/+0.0682 and +0.0776/+0.1446 m, respectively. These groups use keypoint availability, confidence and relative box height. The dataset supplied no manual physical occlusion labels for this comparison. [Quality definitions, per-site counts and errors](results/pinns_heldout_pose_quality.json)
 
 Applying the same event rules to annotated and forecast trajectories gave four-site macro-F1/mAP of 0.2376/0.3709 for M0 and 0.2419/0.3795 for M1. These scores describe events implied by six probability-weighted trajectory modes. Neither network trained an action head in this pilot. [Trajectory-implied event scores](results/pinns_heldout_implied_actions.json)
+
+With the four trained M1 checkpoints fixed, masking every observed joint raised the four-site macro ADE by 0.0130 m and FDE by 0.0230 m. Reversing the order of the five observed pose frames while keeping motion and quality fixed changed macro ADE by less than 0.00002 m. All 1,482 windows retained the same top-mode index under the order reversal. These interventions assess input sensitivity for seed 42. [Matched fixed-weight controls](results/pinns_heldout_pose_input_controls.json)
 
 To reproduce the checkpoint verification, run `python -m scripts.verify_heldout_bundle /path/to/shortpose_heldout.zip "$PINNS_ROOT" --output replay.json`. With the archive extracted, run `python -m scripts.analyze_heldout_pairs /path/to/folds "$PINNS_ROOT" --output paired.json`.
 

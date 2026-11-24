@@ -1,0 +1,185 @@
+{
+  "scope": "Post-hoc test-input diagnostics for four fixed, already examined sites and a single trained seed (42).",
+  "conditions": {
+    "recorded": "Original five-frame pose tensor, motion history, and quality vector.",
+    "missing_joints": "All pose channels and joint validity/confidence zero; retain motion, observed-frame ratio and box-height quality.",
+    "reversed_pose_frames": "Reverse all five observed pose frames together; the motion history keeps its order and aggregate quality stays fixed. This perturbs both pose order and its alignment with motion."
+  },
+  "interpretation": "Positive control minus recorded errors favor the recorded pose input under the same weights. Different training procedures and a physically occluded camera are outside this comparison.",
+  "weight_and_input_identity": {
+    "protocol": {
+      "seed": 42,
+      "epochs": 28,
+      "batch_size": 64,
+      "learning_rate": 0.002,
+      "min_lr_ratio": 0.05,
+      "weight_decay": 0.0001,
+      "gradient_clip": 2.0
+    },
+    "data_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "torch_version": "2.11.0+cu130"
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "recorded_errors_m": {
+        "ade_m": 0.817291926738952,
+        "fde_m": 1.5939365866038089
+      },
+      "recorded_mean_gate": 0.08858904242515564,
+      "controls": {
+        "missing_joints": {
+          "errors_m": {
+            "ade_m": 0.8334269909293543,
+            "fde_m": 1.6152135618765704
+          },
+          "minus_recorded_m": {
+            "ade_m": 0.016135064190402715,
+            "fde_m": 0.021276975272761272
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.0835413932800293,
+          "mean_gate": 0.0
+        },
+        "reversed_pose_frames": {
+          "errors_m": {
+            "ade_m": 0.8172174437626026,
+            "fde_m": 1.5937776027637744
+          },
+          "minus_recorded_m": {
+            "ade_m": -7.448297635111727e-05,
+            "fde_m": -0.00015898384003309432
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.0008090343326330185,
+          "mean_gate": 0.08858982473611832
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "recorded_errors_m": {
+        "ade_m": 0.47760115611291837,
+        "fde_m": 1.0691064093478406
+      },
+      "recorded_mean_gate": 0.1179652214050293,
+      "controls": {
+        "missing_joints": {
+          "errors_m": {
+            "ade_m": 0.5001751488555874,
+            "fde_m": 1.0981721488164158
+          },
+          "minus_recorded_m": {
+            "ade_m": 0.02257399274266935,
+            "fde_m": 0.029065739468575776
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.08650636672973633,
+          "mean_gate": 0.0
+        },
+        "reversed_pose_frames": {
+          "errors_m": {
+            "ade_m": 0.4776409893157038,
+            "fde_m": 1.0691866950533604
+          },
+          "minus_recorded_m": {
+            "ade_m": 3.98332027855476e-05,
+            "fde_m": 8.028570551934487e-05
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.00048249709652736783,
+          "mean_gate": 0.11795365065336227
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "recorded_errors_m": {
+        "ade_m": 0.4575389920206535,
+        "fde_m": 1.001926573480276
+      },
+      "recorded_mean_gate": 0.0659094825387001,
+      "controls": {
+        "missing_joints": {
+          "errors_m": {
+            "ade_m": 0.45283053489416597,
+            "fde_m": 0.9913586876735423
+          },
+          "minus_recorded_m": {
+            "ade_m": -0.004708457126487825,
+            "fde_m": -0.010567885806733499
+          },
+          "top_mode_changes": 27,
+          "mean_distance_between_top_paths_m": 0.05094921961426735,
+          "mean_gate": 0.0
+        },
+        "reversed_pose_frames": {
+          "errors_m": {
+            "ade_m": 0.4575382682191278,
+            "fde_m": 1.0019185079129993
+          },
+          "minus_recorded_m": {
+            "ade_m": -7.238015263819411e-07,
+            "fde_m": -8.065567275881098e-06
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.000331483141053468,
+          "mean_gate": 0.06591135263442993
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "recorded_errors_m": {
+        "ade_m": 0.43273323113344314,
+        "fde_m": 0.9902840773142566
+      },
+      "recorded_mean_gate": 0.15712377429008484,
+      "controls": {
+        "missing_joints": {
+          "errors_m": {
+            "ade_m": 0.4507097592779947,
+            "fde_m": 1.0426389637837365
+          },
+          "minus_recorded_m": {
+            "ade_m": 0.017976528144551522,
+            "fde_m": 0.052354886469480236
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.08339306712150574,
+          "mean_gate": 0.0
+        },
+        "reversed_pose_frames": {
+          "errors_m": {
+            "ade_m": 0.4327011336918136,
+            "fde_m": 0.9902424327906916
+          },
+          "minus_recorded_m": {
+            "ade_m": -3.209744162959933e-05,
+            "fde_m": -4.164452356462993e-05
+          },
+          "top_mode_changes": 0,
+          "mean_distance_between_top_paths_m": 0.00037912611151114106,
+          "mean_gate": 0.15712501108646393
+        }
+      }
+    }
+  },
+  "equal_site_control_minus_recorded_m": {
+    "missing_joints": {
+      "ade_m": 0.012994281987783941,
+      "fde_m": 0.023032428851020945
+    },
+    "reversed_pose_frames": {
+      "ade_m": -1.6867754180387737e-05,
+      "fde_m": -3.210205633856512e-05
+    }
+  }
+}

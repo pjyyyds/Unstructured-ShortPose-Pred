@@ -1,0 +1,1850 @@
+{
+  "protocol": {
+    "reference_window_counts_sha256": "b6fe7510e4375eab0e787150f481e864244c3838c314a0f02f3f118ee7c18d78",
+    "population": "Original 497 five-frame PINNS test windows, already used throughout development. 21 clips, four previously examined sites. Graph inputs apply to graph-enabled M2b/M2/M3 and full models. M0 and M1 in the separate four-site retraining use no neighbor graph.",
+    "edge": "Directed neighbor-to-ego slots, at t0. Keep 0.00001 < ground distance <= 10 metres, nearest first, at most 12. A window can have multiple slots, and consecutive windows can observe the same pair.",
+    "type": "Raw Person or Car labels. Assigned tensor slots use eight-dimensional one-hot: person standing when fixed flag==1 or valid speed <0.20 m/s; otherwise walking-person code, even if velocity missing. All non-person objects map to passenger-car code. Physical riders, disability/assistance or vehicle subtypes cannot be identified from these labels.",
+    "time": "Separate known test-window selection (requires at least 15 annotated future frames) from graph construction. Recompute every retained input tensor from source detections limited to t0-5..t0. Five-frame observation ratios cover t0-4..t0; velocities choose nearest available same-type/ID detection among t0-1..t0-5. No coordinates after t0 enter edges. This is an input audit, not an online trigger or static-map validation.",
+    "radial": "If both velocities exist, v_rad = -dot(p_j-p_i,v_j-v_i)/(distance+1e-6); positive means distance decreasing. The 1 m/s cutoff is descriptive. Invalid velocities yield zero plus mask=0; valid zero means no measured radial motion. All positions/IDs are label-supplied, not detector estimates.",
+    "ablation": "The M2b_norad model masks the explicit radial scalar before graph processing. Relative position, distance and relative velocity remain, so the underlying radial relation can still be derived from the other channels.",
+    "verification": "Compared all 12x9 edges, 12x8 neighbor one-hot and 12 masks exactly with the unmodified archived input builder on every original held-out window. Verified materialize_window_split(t_obs=5) forwards all three arrays unchanged. Independently checked distance, radial sign/magnitude and typed slot order against raw actor IDs.",
+    "source_sha256": {
+      "src/data/pinns_extractor.py": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+      "src/data/scene_graph.py": "1e8503a0da25574a1ac62272d05fdc6cfce94388055cf5464fc6a3b1db867e29",
+      "src/data/dataset_builder.py": "7d8936371c52ee2bc6c9bd60c73ea155b431d41d493e4345de9b99dc3cf36d9e",
+      "scripts/audit_pinns_short_window.py": "ceb0b1df934c4ecc1a2e308a3aef97e99179f7e8625c2f563050b82501efed29"
+    },
+    "label_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "numpy_version": "2.5.5"
+  },
+  "all_47_source_clips_raw_30hz_class_rows": {
+    "Car": 47555,
+    "Person": 180344
+  },
+  "total": {
+    "windows": 497,
+    "clips": 21,
+    "distinct_clip_trigger_times": 106,
+    "windows_without_neighbors": 17,
+    "windows_at_12_slots": 1,
+    "windows_truncated_by_12": 0,
+    "edge_slots_dropped_by_12": 0,
+    "edge_slots": 2724,
+    "available_radial_edges": 2724,
+    "edges_using_t0_minus_5": 0,
+    "encoded_types": {
+      "walking_person": 1806,
+      "assisted_person": 0,
+      "standing_person": 638,
+      "bicycle_rider": 0,
+      "scooter_rider": 0,
+      "utility_cart": 0,
+      "passenger_car": 280,
+      "shuttle_van": 0
+    },
+    "source_neighbor_types": {
+      "Person": {
+        "edge_slots": 2444,
+        "distinct_directed_clip_ego_neighbor_pairs": 369,
+        "windows_with_one_or_more": 433,
+        "valid_radial_edges": 2444,
+        "missing_radial_edges": 0,
+        "approaching_positive": 1161,
+        "receding_negative": 1283,
+        "zero_radial": 0,
+        "approaching_at_least_1_mps": 106,
+        "windows_with_approach_at_least_1_mps": 69,
+        "radial_speed_p05_p50_p95_mps": [
+          -1.1909290671348571,
+          -0.020857077091932297,
+          0.9024503827095032
+        ]
+      },
+      "Car": {
+        "edge_slots": 280,
+        "distinct_directed_clip_ego_neighbor_pairs": 64,
+        "windows_with_one_or_more": 227,
+        "valid_radial_edges": 280,
+        "missing_radial_edges": 0,
+        "approaching_positive": 108,
+        "receding_negative": 171,
+        "zero_radial": 1,
+        "approaching_at_least_1_mps": 34,
+        "windows_with_approach_at_least_1_mps": 34,
+        "radial_speed_p05_p50_p95_mps": [
+          -2.0521464586257934,
+          -0.1657528504729271,
+          1.5659927546977999
+        ]
+      },
+      "Bicycle/Scooter": {
+        "edge_slots": 0,
+        "distinct_directed_clip_ego_neighbor_pairs": 0,
+        "windows_with_one_or_more": 0,
+        "valid_radial_edges": 0,
+        "missing_radial_edges": 0,
+        "approaching_positive": 0,
+        "receding_negative": 0,
+        "zero_radial": 0,
+        "approaching_at_least_1_mps": 0,
+        "windows_with_approach_at_least_1_mps": 0,
+        "radial_speed_p05_p50_p95_mps": null
+      }
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 316,
+      "clips": 8,
+      "distinct_clip_trigger_times": 50,
+      "windows_without_neighbors": 10,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 1704,
+      "available_radial_edges": 1704,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 1020,
+        "assisted_person": 0,
+        "standing_person": 503,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 181,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 1523,
+          "distinct_directed_clip_ego_neighbor_pairs": 204,
+          "windows_with_one_or_more": 284,
+          "valid_radial_edges": 1523,
+          "missing_radial_edges": 0,
+          "approaching_positive": 813,
+          "receding_negative": 710,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 101,
+          "windows_with_approach_at_least_1_mps": 64,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.8986872613430023,
+            0.02525857277214527,
+            1.1685972332954375
+          ]
+        },
+        "Car": {
+          "edge_slots": 181,
+          "distinct_directed_clip_ego_neighbor_pairs": 30,
+          "windows_with_one_or_more": 142,
+          "valid_radial_edges": 181,
+          "missing_radial_edges": 0,
+          "approaching_positive": 80,
+          "receding_negative": 100,
+          "zero_radial": 1,
+          "approaching_at_least_1_mps": 22,
+          "windows_with_approach_at_least_1_mps": 22,
+          "radial_speed_p05_p50_p95_mps": [
+            -2.3173413276672363,
+            -0.023411095142364502,
+            1.5765188932418823
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 20,
+      "clips": 3,
+      "distinct_clip_trigger_times": 18,
+      "windows_without_neighbors": 4,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 22,
+      "available_radial_edges": 22,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 4,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 18,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 4,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 4,
+          "valid_radial_edges": 4,
+          "missing_radial_edges": 0,
+          "approaching_positive": 2,
+          "receding_negative": 2,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.043004509061574936,
+            0.057005854323506355,
+            0.15701621770858765
+          ]
+        },
+        "Car": {
+          "edge_slots": 18,
+          "distinct_directed_clip_ego_neighbor_pairs": 7,
+          "windows_with_one_or_more": 16,
+          "valid_radial_edges": 18,
+          "missing_radial_edges": 0,
+          "approaching_positive": 14,
+          "receding_negative": 4,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 9,
+          "windows_with_approach_at_least_1_mps": 9,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.698268073797226,
+            0.9418602287769318,
+            1.8019218802452088
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 150,
+      "clips": 7,
+      "distinct_clip_trigger_times": 28,
+      "windows_without_neighbors": 3,
+      "windows_at_12_slots": 1,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 983,
+      "available_radial_edges": 983,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 778,
+        "assisted_person": 0,
+        "standing_person": 135,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 70,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 913,
+          "distinct_directed_clip_ego_neighbor_pairs": 157,
+          "windows_with_one_or_more": 142,
+          "valid_radial_edges": 913,
+          "missing_radial_edges": 0,
+          "approaching_positive": 343,
+          "receding_negative": 570,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 5,
+          "windows_with_approach_at_least_1_mps": 5,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.2886457920074463,
+            -0.19269147515296936,
+            0.6496712207794185
+          ]
+        },
+        "Car": {
+          "edge_slots": 70,
+          "distinct_directed_clip_ego_neighbor_pairs": 23,
+          "windows_with_one_or_more": 58,
+          "valid_radial_edges": 70,
+          "missing_radial_edges": 0,
+          "approaching_positive": 11,
+          "receding_negative": 59,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.5824792861938477,
+            -0.38583147525787354,
+            0.3130376145243643
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 11,
+      "clips": 3,
+      "distinct_clip_trigger_times": 10,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 15,
+      "available_radial_edges": 15,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 4,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 11,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 4,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 3,
+          "valid_radial_edges": 4,
+          "missing_radial_edges": 0,
+          "approaching_positive": 3,
+          "receding_negative": 1,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.1271329544484615,
+            0.17468863725662231,
+            0.6161813229322431
+          ]
+        },
+        "Car": {
+          "edge_slots": 11,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 11,
+          "valid_radial_edges": 11,
+          "missing_radial_edges": 0,
+          "approaching_positive": 3,
+          "receding_negative": 8,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 2,
+          "windows_with_approach_at_least_1_mps": 2,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.3794652223587036,
+            -1.1418603658676147,
+            1.3940700888633728
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    }
+  },
+  "clips": {
+    "america_crossroad_spring_daytime_sunny_2": {
+      "windows": 1,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 1,
+      "available_radial_edges": 1,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 0,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 1,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Car": {
+          "edge_slots": 1,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 1,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            0.44213372468948364,
+            0.44213372468948364,
+            0.44213372468948364
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_0": {
+      "windows": 40,
+      "clips": 1,
+      "distinct_clip_trigger_times": 11,
+      "windows_without_neighbors": 4,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 158,
+      "available_radial_edges": 158,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 117,
+        "assisted_person": 0,
+        "standing_person": 9,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 32,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 126,
+          "distinct_directed_clip_ego_neighbor_pairs": 40,
+          "windows_with_one_or_more": 22,
+          "valid_radial_edges": 126,
+          "missing_radial_edges": 0,
+          "approaching_positive": 84,
+          "receding_negative": 42,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 36,
+          "windows_with_approach_at_least_1_mps": 17,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.4735282957553864,
+            0.30886197090148926,
+            2.6376559734344482
+          ]
+        },
+        "Car": {
+          "edge_slots": 32,
+          "distinct_directed_clip_ego_neighbor_pairs": 6,
+          "windows_with_one_or_more": 27,
+          "valid_radial_edges": 32,
+          "missing_radial_edges": 0,
+          "approaching_positive": 8,
+          "receding_negative": 24,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 5,
+          "windows_with_approach_at_least_1_mps": 5,
+          "radial_speed_p05_p50_p95_mps": [
+            -3.986219048500061,
+            -0.03146720491349697,
+            2.3817070841789243
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_1": {
+      "windows": 14,
+      "clips": 1,
+      "distinct_clip_trigger_times": 7,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 42,
+      "available_radial_edges": 42,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 14,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 28,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 14,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 14,
+          "valid_radial_edges": 14,
+          "missing_radial_edges": 0,
+          "approaching_positive": 10,
+          "receding_negative": 4,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.02958379127085209,
+            0.022145459428429604,
+            0.045363061130046844
+          ]
+        },
+        "Car": {
+          "edge_slots": 28,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 14,
+          "valid_radial_edges": 28,
+          "missing_radial_edges": 0,
+          "approaching_positive": 11,
+          "receding_negative": 17,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 4,
+          "windows_with_approach_at_least_1_mps": 4,
+          "radial_speed_p05_p50_p95_mps": [
+            -2.0096432089805605,
+            -0.6839104443788528,
+            1.3553350269794462
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_0": {
+      "windows": 41,
+      "clips": 1,
+      "distinct_clip_trigger_times": 7,
+      "windows_without_neighbors": 4,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 186,
+      "available_radial_edges": 186,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 168,
+        "assisted_person": 0,
+        "standing_person": 15,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 3,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 183,
+          "distinct_directed_clip_ego_neighbor_pairs": 36,
+          "windows_with_one_or_more": 34,
+          "valid_radial_edges": 183,
+          "missing_radial_edges": 0,
+          "approaching_positive": 100,
+          "receding_negative": 83,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 12,
+          "windows_with_approach_at_least_1_mps": 10,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.0640072703361512,
+            0.11953551322221756,
+            1.0058750867843629
+          ]
+        },
+        "Car": {
+          "edge_slots": 3,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 3,
+          "valid_radial_edges": 3,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 2,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            -3.832233726978302,
+            -1.0337311029434204,
+            4.4175661444664
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_1": {
+      "windows": 187,
+      "clips": 1,
+      "distinct_clip_trigger_times": 13,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 1194,
+      "available_radial_edges": 1194,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 611,
+        "assisted_person": 0,
+        "standing_person": 479,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 104,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 1090,
+          "distinct_directed_clip_ego_neighbor_pairs": 94,
+          "windows_with_one_or_more": 183,
+          "valid_radial_edges": 1090,
+          "missing_radial_edges": 0,
+          "approaching_positive": 568,
+          "receding_negative": 522,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 51,
+          "windows_with_approach_at_least_1_mps": 35,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.8317698717117309,
+            0.017446129582822323,
+            0.9259710788726806
+          ]
+        },
+        "Car": {
+          "edge_slots": 104,
+          "distinct_directed_clip_ego_neighbor_pairs": 12,
+          "windows_with_one_or_more": 84,
+          "valid_radial_edges": 104,
+          "missing_radial_edges": 0,
+          "approaching_positive": 58,
+          "receding_negative": 45,
+          "zero_radial": 1,
+          "approaching_at_least_1_mps": 11,
+          "windows_with_approach_at_least_1_mps": 11,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.5654100477695465,
+            0.031001808121800423,
+            1.414225924015045
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_winter_daytime_sunny_0": {
+      "windows": 8,
+      "clips": 1,
+      "distinct_clip_trigger_times": 4,
+      "windows_without_neighbors": 2,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 8,
+      "available_radial_edges": 8,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 6,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 2,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 6,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 6,
+          "valid_radial_edges": 6,
+          "missing_radial_edges": 0,
+          "approaching_positive": 4,
+          "receding_negative": 2,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.8200864195823669,
+            0.349162220954895,
+            0.6100739240646362
+          ]
+        },
+        "Car": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 1,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            -2.0582029461860656,
+            -0.2884596586227417,
+            1.4812836289405822
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_winter_night_snow_1": {
+      "windows": 21,
+      "clips": 1,
+      "distinct_clip_trigger_times": 5,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 91,
+      "available_radial_edges": 91,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 84,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 7,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 84,
+          "distinct_directed_clip_ego_neighbor_pairs": 20,
+          "windows_with_one_or_more": 21,
+          "valid_radial_edges": 84,
+          "missing_radial_edges": 0,
+          "approaching_positive": 39,
+          "receding_negative": 45,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 2,
+          "windows_with_approach_at_least_1_mps": 2,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.6415482759475708,
+            -0.01657581701874733,
+            0.42121461033821106
+          ]
+        },
+        "Car": {
+          "edge_slots": 7,
+          "distinct_directed_clip_ego_neighbor_pairs": 3,
+          "windows_with_one_or_more": 7,
+          "valid_radial_edges": 7,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 7,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -3.7885205030441282,
+            -3.0073306560516357,
+            -1.2930889844894418
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "america_crossroad_winter_nightfall_sunny_1": {
+      "windows": 4,
+      "clips": 1,
+      "distinct_clip_trigger_times": 2,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 24,
+      "available_radial_edges": 24,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 20,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 4,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 20,
+          "distinct_directed_clip_ego_neighbor_pairs": 10,
+          "windows_with_one_or_more": 4,
+          "valid_radial_edges": 20,
+          "missing_radial_edges": 0,
+          "approaching_positive": 8,
+          "receding_negative": 12,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.5621556639671326,
+            -0.10485370457172394,
+            0.3570810914039612
+          ]
+        },
+        "Car": {
+          "edge_slots": 4,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 4,
+          "valid_radial_edges": 4,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 4,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.2285563230514527,
+            -0.9832141697406769,
+            -0.7677260011434555
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "italy_park_summer_nightfall_sunny_0": {
+      "windows": 2,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 6,
+      "available_radial_edges": 6,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 2,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 4,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 2,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.043004509061574936,
+            -0.043004509061574936,
+            -0.043004509061574936
+          ]
+        },
+        "Car": {
+          "edge_slots": 4,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 4,
+          "missing_radial_edges": 0,
+          "approaching_positive": 4,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            0.2125078968703747,
+            0.6030683070421219,
+            1.4584224492311475
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "italy_park_summer_nightfall_sunny_1": {
+      "windows": 2,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 4,
+      "available_radial_edges": 4,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 2,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 2,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 2,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            0.15701621770858765,
+            0.15701621770858765,
+            0.15701621770858765
+          ]
+        },
+        "Car": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 2,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            0.8363265454769134,
+            0.9480454325675964,
+            1.0597643196582793
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_3": {
+      "windows": 16,
+      "clips": 1,
+      "distinct_clip_trigger_times": 16,
+      "windows_without_neighbors": 4,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 12,
+      "available_radial_edges": 12,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 0,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 12,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Car": {
+          "edge_slots": 12,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 12,
+          "valid_radial_edges": 12,
+          "missing_radial_edges": 0,
+          "approaching_positive": 8,
+          "receding_negative": 4,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 7,
+          "windows_with_approach_at_least_1_mps": 7,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.7253687918186188,
+            1.0721914768218994,
+            1.8035670399665833
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_0": {
+      "windows": 4,
+      "clips": 1,
+      "distinct_clip_trigger_times": 4,
+      "windows_without_neighbors": 3,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 1,
+      "available_radial_edges": 1,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 0,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 1,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Car": {
+          "edge_slots": 1,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 1,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            1.144579529762268,
+            1.144579529762268,
+            1.144579529762268
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_1": {
+      "windows": 2,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 3,
+      "available_radial_edges": 3,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 1,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 2,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 1,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 1,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 1,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.1758200079202652,
+            -0.1758200079202652,
+            -0.1758200079202652
+          ]
+        },
+        "Car": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 2,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -2.388080584316049,
+            -1.2585228612879291,
+            -0.12896513825980957
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_summer_night_sunny_2": {
+      "windows": 12,
+      "clips": 1,
+      "distinct_clip_trigger_times": 3,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 36,
+      "available_radial_edges": 36,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 12,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 24,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 12,
+          "distinct_directed_clip_ego_neighbor_pairs": 4,
+          "windows_with_one_or_more": 12,
+          "valid_radial_edges": 12,
+          "missing_radial_edges": 0,
+          "approaching_positive": 6,
+          "receding_negative": 6,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.1452660858631134,
+            0.03154393658041954,
+            0.43547534942626953
+          ]
+        },
+        "Car": {
+          "edge_slots": 24,
+          "distinct_directed_clip_ego_neighbor_pairs": 8,
+          "windows_with_one_or_more": 12,
+          "valid_radial_edges": 24,
+          "missing_radial_edges": 0,
+          "approaching_positive": 3,
+          "receding_negative": 21,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.8567716777324677,
+            -0.3551010489463806,
+            0.1437674462795257
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_0": {
+      "windows": 102,
+      "clips": 1,
+      "distinct_clip_trigger_times": 10,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 1,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 866,
+      "available_radial_edges": 866,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 693,
+        "assisted_person": 0,
+        "standing_person": 134,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 39,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 827,
+          "distinct_directed_clip_ego_neighbor_pairs": 125,
+          "windows_with_one_or_more": 102,
+          "valid_radial_edges": 827,
+          "missing_radial_edges": 0,
+          "approaching_positive": 312,
+          "receding_negative": 515,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 4,
+          "windows_with_approach_at_least_1_mps": 4,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.2425145626068115,
+            -0.19997960329055786,
+            0.667517817020416
+          ]
+        },
+        "Car": {
+          "edge_slots": 39,
+          "distinct_directed_clip_ego_neighbor_pairs": 10,
+          "windows_with_one_or_more": 39,
+          "valid_radial_edges": 39,
+          "missing_radial_edges": 0,
+          "approaching_positive": 7,
+          "receding_negative": 32,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.5691193103790284,
+            -0.3819189667701721,
+            0.37458608746528677
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_1": {
+      "windows": 13,
+      "clips": 1,
+      "distinct_clip_trigger_times": 3,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 20,
+      "available_radial_edges": 20,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 20,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 0,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 20,
+          "distinct_directed_clip_ego_neighbor_pairs": 8,
+          "windows_with_one_or_more": 13,
+          "valid_radial_edges": 20,
+          "missing_radial_edges": 0,
+          "approaching_positive": 16,
+          "receding_negative": 4,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.11822239309549332,
+            0.1110688541084528,
+            0.20698653161525726
+          ]
+        },
+        "Car": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_0": {
+      "windows": 14,
+      "clips": 1,
+      "distinct_clip_trigger_times": 4,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 54,
+      "available_radial_edges": 54,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 52,
+        "assisted_person": 0,
+        "standing_person": 1,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 1,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 53,
+          "distinct_directed_clip_ego_neighbor_pairs": 19,
+          "windows_with_one_or_more": 14,
+          "valid_radial_edges": 53,
+          "missing_radial_edges": 0,
+          "approaching_positive": 9,
+          "receding_negative": 44,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.7379846572875977,
+            -1.0863326787948608,
+            0.4576340556144714
+          ]
+        },
+        "Car": {
+          "edge_slots": 1,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 1,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 1,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.7978036403656006,
+            -1.7978036403656006,
+            -1.7978036403656006
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_1": {
+      "windows": 3,
+      "clips": 1,
+      "distinct_clip_trigger_times": 3,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 3,
+      "available_radial_edges": 3,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 0,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 3,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Car": {
+          "edge_slots": 3,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 3,
+          "valid_radial_edges": 3,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 3,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.0023156523704528,
+            -0.9040406942367554,
+            -0.679604709148407
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "thailand_street_summer_night_sunny_2": {
+      "windows": 8,
+      "clips": 1,
+      "distinct_clip_trigger_times": 8,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 8,
+      "available_radial_edges": 8,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 0,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 8,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        },
+        "Car": {
+          "edge_slots": 8,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 8,
+          "valid_radial_edges": 8,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 8,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -1.3805336713790894,
+            -1.3295534253120422,
+            -0.5426188766956329
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "thailand_street_winter_night_sunny_1": {
+      "windows": 2,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 4,
+      "available_radial_edges": 4,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 2,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 2,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 2,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            0.17468863725662231,
+            0.17468863725662231,
+            0.17468863725662231
+          ]
+        },
+        "Car": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 2,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 2,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            0.9683988630771637,
+            1.04496568441391,
+            1.1215325057506562
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    },
+    "thailand_street_winter_nightfall_sunny_1": {
+      "windows": 1,
+      "clips": 1,
+      "distinct_clip_trigger_times": 1,
+      "windows_without_neighbors": 0,
+      "windows_at_12_slots": 0,
+      "windows_truncated_by_12": 0,
+      "edge_slots_dropped_by_12": 0,
+      "edge_slots": 3,
+      "available_radial_edges": 3,
+      "edges_using_t0_minus_5": 0,
+      "encoded_types": {
+        "walking_person": 2,
+        "assisted_person": 0,
+        "standing_person": 0,
+        "bicycle_rider": 0,
+        "scooter_rider": 0,
+        "utility_cart": 0,
+        "passenger_car": 1,
+        "shuttle_van": 0
+      },
+      "source_neighbor_types": {
+        "Person": {
+          "edge_slots": 2,
+          "distinct_directed_clip_ego_neighbor_pairs": 2,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 2,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 1,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": [
+            -0.13667121902108192,
+            0.2568481042981148,
+            0.6503674276173115
+          ]
+        },
+        "Car": {
+          "edge_slots": 1,
+          "distinct_directed_clip_ego_neighbor_pairs": 1,
+          "windows_with_one_or_more": 1,
+          "valid_radial_edges": 1,
+          "missing_radial_edges": 0,
+          "approaching_positive": 1,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 1,
+          "windows_with_approach_at_least_1_mps": 1,
+          "radial_speed_p05_p50_p95_mps": [
+            1.6581002473831177,
+            1.6581002473831177,
+            1.6581002473831177
+          ]
+        },
+        "Bicycle/Scooter": {
+          "edge_slots": 0,
+          "distinct_directed_clip_ego_neighbor_pairs": 0,
+          "windows_with_one_or_more": 0,
+          "valid_radial_edges": 0,
+          "missing_radial_edges": 0,
+          "approaching_positive": 0,
+          "receding_negative": 0,
+          "zero_radial": 0,
+          "approaching_at_least_1_mps": 0,
+          "windows_with_approach_at_least_1_mps": 0,
+          "radial_speed_p05_p50_p95_mps": null
+        }
+      }
+    }
+  }
+}
