@@ -1,0 +1,345 @@
+{
+  "scope": "Unfitted development baselines on the three outdoor members of Social-Transmotion's ten shift_0 training recordings, classified using Table 5.1 of the cited study. All three are JRDB training recordings with verified nearly stationary odometry. No predictor was fitted; evaluations use release training records. Identities are recording-local and are never pooled across recordings.",
+  "window_protocol": "Two consecutive real rows of the released track, 0.4 s apart at 2.5 Hz. Demand seven consecutive subsequent rows through 2.8 s. Independently tile each uninterrupted recording/person run from its earliest record into blocks of nine, dropping incomplete tails. All scored futures are complete and blocks of the same person share no frames. Different people in a recording can appear at the same time. Score both predictions on the same windows.",
+  "coordinates": "Predict offsets within each track's native exported horizontal frame. Static holds the last xy; constant velocity uses the last two points. The benchmark specifies LiDAR horizontal metres and the authors' JRDB-Traj training export reads 3D box cx/cy. Angular agreement with panorama boxes checks the direction; it cannot validate metric scale or the export transform independently. Both models and all targets use the identical ST frame. Wheel odometry establishes stationarity. Scoring native planar positions requires no camera-to-LiDAR transform. Original per-ID raw 3D centres were not available for an independent scale check.",
+  "sampling_limit": "The source RGB is 15 Hz. JRDB documents manual 3D box annotations at 7.5 Hz and interpolation to 15 Hz, with an interpolated flag in raw records. ST releases positions at 2.5 Hz and does not retain that flag. No resampling/interpolation was performed here. HST provides estimated 33\u00d73 landmarks on selected frames, without image-plane confidence. Two native observations and a 2.8 s forecast cannot reproduce PINNS's five 10 Hz observations and 3.0 s endpoint. The records do not supply five genuine synchronized 10 Hz pose/ground measurements.",
+  "interpretation": "Metrics describe three recording-specific external development checks in the source coordinate scale. Person-equal and window-weighted estimates summarize different weightings. A recording-local track ID is not guaranteed unique across recordings. No unseen-site model evaluation, pose effect, significance test or generalization claim follows from these deterministic baselines.",
+  "source_urls": {
+    "outdoor_classification_all_three_table_5_1": "https://publications.rwth-aachen.de/record/1027011/files/1027011.pdf",
+    "original_dataset_and_annotation_frequency": "https://arxiv.org/html/1910.11792#S4.SS2",
+    "official_metric_ground_coordinates": "https://jrdb.erc.monash.edu/benchmark/",
+    "official_trajectory_export": "https://github.com/vita-epfl/JRDB-Traj/blob/main/train_traj_extractor.py",
+    "official_rig_calibration": "https://github.com/JRDB-dataset/jrdb_toolkit/tree/4fbf7d6eba3255746000eb8c15f707af69561c5d/calibration",
+    "hst_data_and_odometry": "https://github.com/google-research/human-scene-transformer/tree/f60bc7fd63487f7135f70b7ed4a1f25a1f32c5bd/human_scene_transformer/data",
+    "official_pose_format": "https://jrdb.erc.monash.edu/dataset/pose",
+    "st_data_release": "https://github.com/vita-epfl/social-transmotion/releases/tag/ckpt_data"
+  },
+  "archives": {
+    "tracks": "https://github.com/vita-epfl/social-transmotion/releases/download/ckpt_data/releases.zip",
+    "poses": "https://storage.googleapis.com/gresearch/human_scene_transformer/keypoints.zip?generation=1699186254967082",
+    "odom": "https://storage.googleapis.com/gresearch/human_scene_transformer/odometry.zip?generation=1699184889005564"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.4"
+  },
+  "script_sha256": "782f4125e5500ddc3170e30f7a1c85da6cf6cb6d953562279c6dfd65c174d089",
+  "recordings": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "sampling": {
+        "nominal_rgb_hz": 15,
+        "track_hz": 2.5,
+        "native_step": 6,
+        "first_and_last_native_track_frame": [
+          0,
+          1722
+        ],
+        "distinct_track_frames": 288
+      },
+      "odometry": {
+        "native_frames": 1730,
+        "max_horizontal_displacement_m": 0.0,
+        "max_3d_rotation_deg": 0.0
+      },
+      "support": {
+        "source_rows": 7089,
+        "excluded_invalid_or_zero_xy": 0,
+        "track_fields": [
+          "bb_height",
+          "bb_left",
+          "bb_top",
+          "bb_width",
+          "f",
+          "h",
+          "l",
+          "p",
+          "rot_z",
+          "w",
+          "x",
+          "y"
+        ],
+        "bearing_vs_box_center_pairs": 7089,
+        "bearing_vs_box_center_px_p50_p95": [
+          8.070592649643004,
+          21.363717390916186
+        ],
+        "valid_xy_frame_person_pairs": 7089,
+        "people_with_xy": 80,
+        "continuous_person_runs": 80,
+        "all_consecutive_two_point_history_anchors": 7009,
+        "history_anchors_with_all_seven_future_steps_before_thinning": 6456,
+        "disjoint_complete_windows": 755,
+        "people_in_scored_windows": 77,
+        "distinct_scored_anchor_times": 234,
+        "target_positions_scored": 5285,
+        "scored_windows_per_person_min_median_max": [
+          1.0,
+          7.0,
+          32.0
+        ]
+      },
+      "pose_coverage": {
+        "finite_hst_33x3_frame_person_entries_all_native_frames": 6255,
+        "matched_st_frame_person_pairs": 1048,
+        "scored_windows_with_0_1_2_matched_history_frames": [
+          626,
+          38,
+          91
+        ],
+        "scored_people_with_both_historical_poses": 21
+      },
+      "ordered_scored_keys_sha256": "1d4fe2b940ba23340b7625215d9fb997f0d63ae7c079d82ebf131cebbb4a6ac0",
+      "window_weighted": {
+        "stationary": {
+          "ade_m": 2.3419328410322757,
+          "fde_m": 4.069707820822099
+        },
+        "last_two_cv": {
+          "ade_m": 0.4420678980065917,
+          "fde_m": 0.8777627943488442
+        }
+      },
+      "person_equal_weighted": {
+        "stationary": {
+          "ade_m": 3.19452966346975,
+          "fde_m": 5.552624729339635
+        },
+        "last_two_cv": {
+          "ade_m": 0.6069658994873484,
+          "fde_m": 1.2009910850609418
+        }
+      },
+      "sources": {
+        "tracks": {
+          "member": "jrdb/data/train/hewlett-packard-intersection-2019-01-24_0_shift_0.ndjson",
+          "uncompressed_bytes": 1509311,
+          "sha256": "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818"
+        },
+        "poses": {
+          "member": "labels_3d_keypoints/train/hewlett-packard-intersection-2019-01-24_0.json",
+          "uncompressed_bytes": 19930842,
+          "sha256": "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45"
+        },
+        "odom": {
+          "member": "odometry/train/hewlett-packard-intersection-2019-01-24_0.json",
+          "uncompressed_bytes": 470582,
+          "sha256": "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d"
+        }
+      }
+    },
+    "huang-lane-2019-02-12_0": {
+      "sampling": {
+        "nominal_rgb_hz": 15,
+        "track_hz": 2.5,
+        "native_step": 6,
+        "first_and_last_native_track_frame": [
+          0,
+          720
+        ],
+        "distinct_track_frames": 121
+      },
+      "odometry": {
+        "native_frames": 725,
+        "max_horizontal_displacement_m": 0.00020694732666015625,
+        "max_3d_rotation_deg": 0.000887924592110543
+      },
+      "support": {
+        "source_rows": 6430,
+        "excluded_invalid_or_zero_xy": 0,
+        "track_fields": [
+          "bb_height",
+          "bb_left",
+          "bb_top",
+          "bb_width",
+          "f",
+          "h",
+          "l",
+          "p",
+          "rot_z",
+          "w",
+          "x",
+          "y"
+        ],
+        "bearing_vs_box_center_pairs": 6430,
+        "bearing_vs_box_center_px_p50_p95": [
+          8.532067926695845,
+          27.35246038466095
+        ],
+        "valid_xy_frame_person_pairs": 6430,
+        "people_with_xy": 70,
+        "continuous_person_runs": 70,
+        "all_consecutive_two_point_history_anchors": 6360,
+        "history_anchors_with_all_seven_future_steps_before_thinning": 5871,
+        "disjoint_complete_windows": 683,
+        "people_in_scored_windows": 69,
+        "distinct_scored_anchor_times": 83,
+        "target_positions_scored": 4781,
+        "scored_windows_per_person_min_median_max": [
+          2.0,
+          12.0,
+          13.0
+        ]
+      },
+      "pose_coverage": {
+        "finite_hst_33x3_frame_person_entries_all_native_frames": 3320,
+        "matched_st_frame_person_pairs": 554,
+        "scored_windows_with_0_1_2_matched_history_frames": [
+          613,
+          28,
+          42
+        ],
+        "scored_people_with_both_historical_poses": 25
+      },
+      "ordered_scored_keys_sha256": "3821ed743654f425730d736051042b568b9388fcdb9d120035b8dd46c2aa6c6d",
+      "window_weighted": {
+        "stationary": {
+          "ade_m": 1.8856106589836148,
+          "fde_m": 3.2828914013409327
+        },
+        "last_two_cv": {
+          "ade_m": 0.29676396437671493,
+          "fde_m": 0.5815820869202919
+        }
+      },
+      "person_equal_weighted": {
+        "stationary": {
+          "ade_m": 2.209957570780793,
+          "fde_m": 3.845395811241023
+        },
+        "last_two_cv": {
+          "ade_m": 0.3513378838493763,
+          "fde_m": 0.6870174603370213
+        }
+      },
+      "sources": {
+        "tracks": {
+          "member": "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson",
+          "uncompressed_bytes": 1394018,
+          "sha256": "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd"
+        },
+        "poses": {
+          "member": "labels_3d_keypoints/train/huang-lane-2019-02-12_0.json",
+          "uncompressed_bytes": 10571151,
+          "sha256": "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb"
+        },
+        "odom": {
+          "member": "odometry/train/huang-lane-2019-02-12_0.json",
+          "uncompressed_bytes": 197820,
+          "sha256": "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d"
+        }
+      }
+    },
+    "tressider-2019-03-16_1": {
+      "sampling": {
+        "nominal_rgb_hz": 15,
+        "track_hz": 2.5,
+        "native_step": 6,
+        "first_and_last_native_track_frame": [
+          0,
+          498
+        ],
+        "distinct_track_frames": 84
+      },
+      "odometry": {
+        "native_frames": 505,
+        "max_horizontal_displacement_m": 0.0002542734146118164,
+        "max_3d_rotation_deg": 0.0022949435612776964
+      },
+      "support": {
+        "source_rows": 2251,
+        "excluded_invalid_or_zero_xy": 0,
+        "track_fields": [
+          "bb_height",
+          "bb_left",
+          "bb_top",
+          "bb_width",
+          "f",
+          "h",
+          "l",
+          "p",
+          "rot_z",
+          "w",
+          "x",
+          "y"
+        ],
+        "bearing_vs_box_center_pairs": 2251,
+        "bearing_vs_box_center_px_p50_p95": [
+          5.395010736528775,
+          25.607757646532264
+        ],
+        "valid_xy_frame_person_pairs": 2251,
+        "people_with_xy": 33,
+        "continuous_person_runs": 33,
+        "all_consecutive_two_point_history_anchors": 2218,
+        "history_anchors_with_all_seven_future_steps_before_thinning": 1990,
+        "disjoint_complete_windows": 239,
+        "people_in_scored_windows": 32,
+        "distinct_scored_anchor_times": 50,
+        "target_positions_scored": 1673,
+        "scored_windows_per_person_min_median_max": [
+          2.0,
+          9.0,
+          9.0
+        ]
+      },
+      "pose_coverage": {
+        "finite_hst_33x3_frame_person_entries_all_native_frames": 399,
+        "matched_st_frame_person_pairs": 68,
+        "scored_windows_with_0_1_2_matched_history_frames": [
+          232,
+          2,
+          5
+        ],
+        "scored_people_with_both_historical_poses": 1
+      },
+      "ordered_scored_keys_sha256": "b0620112111bd3d4febfb2145e79035a5870ecc2aa7ea965b78c0fa4ef3f87aa",
+      "window_weighted": {
+        "stationary": {
+          "ade_m": 1.4469481834023152,
+          "fde_m": 2.5135728251455314
+        },
+        "last_two_cv": {
+          "ade_m": 0.35944298585603895,
+          "fde_m": 0.6951084245121337
+        }
+      },
+      "person_equal_weighted": {
+        "stationary": {
+          "ade_m": 1.5649860697662006,
+          "fde_m": 2.715240021671208
+        },
+        "last_two_cv": {
+          "ade_m": 0.3887016405769802,
+          "fde_m": 0.7553575558777451
+        }
+      },
+      "sources": {
+        "tracks": {
+          "member": "jrdb/data/train/tressider-2019-03-16_1_shift_0.ndjson",
+          "uncompressed_bytes": 469580,
+          "sha256": "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc"
+        },
+        "poses": {
+          "member": "labels_3d_keypoints/train/tressider-2019-03-16_1.json",
+          "uncompressed_bytes": 1279543,
+          "sha256": "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9"
+        },
+        "odom": {
+          "member": "odometry/train/tressider-2019-03-16_1.json",
+          "uncompressed_bytes": 138194,
+          "sha256": "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+        }
+      }
+    }
+  },
+  "three_recording_equal_window_means": {
+    "stationary": {
+      "ade_m": 1.8914972278060687,
+      "fde_m": 3.288724015769521
+    },
+    "last_two_cv": {
+      "ade_m": 0.3660916160797818,
+      "fde_m": 0.71815110192709
+    }
+  }
+}

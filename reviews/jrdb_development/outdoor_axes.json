@@ -1,0 +1,198 @@
+{
+  "scope": "Three named outdoor training clips. Compare horizontal cyclic panorama bearing error to the matched 2D box centre for all signed axis permutations. Same frame and person ID joins HST body-relative 33-joint estimates. Neither bearings nor HST identity matches supply an independent raw metric pedestrian centre. When separately provided, the optional raw train labels are compared without translation, rescaling or rotation first.",
+  "axis_convention": "JRDB robot x forward, y left, z up. x,y in the ST export used directly. Horizontal panorama is u=W*((atan2(-y,x)+pi) mod 2pi)/(2pi), W=3760 pixels.",
+  "sources": {
+    "sensor_format": "https://drive.google.com/file/d/1DyfU_A0x5OzdDGUWPPPWuW-epupIyvT7/view",
+    "projection": "https://github.com/JRDB-dataset/jrdb_toolkit/blob/4fbf7d6eba3255746000eb8c15f707af69561c5d/visualisation/visualise.py#L556-L591",
+    "release_checksums": "outdoor_motion_baselines.json"
+  },
+  "script_sha256": "d49692fe11646f749719e88028cdeb48583a7b624c32ec51367214fc6eb9c2a4",
+  "recordings": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "st_frame_person_pairs": 7089,
+      "st_people": 80,
+      "hst_finite_33_joint_same_frame_same_id_pairs": 1048,
+      "people_with_matched_hst_pose": 35,
+      "axis_conventions_vs_2d_box_center_px": {
+        "x,y": {
+          "p50": 8.070592649643004,
+          "p95": 21.363717390916186,
+          "max": 134.1347770843363
+        },
+        "x,-y": {
+          "p50": 489.1963089633882,
+          "p95": 1366.690597040142,
+          "max": 1878.493350028426
+        },
+        "-x,y": {
+          "p50": 1390.8036910366118,
+          "p95": 1858.5163760236087,
+          "max": 1879.982171115783
+        },
+        "-x,-y": {
+          "p50": 1871.929407350357,
+          "p95": 1878.8272250395862,
+          "max": 1879.999397829703
+        },
+        "y,x": {
+          "p50": 886.0309892971097,
+          "p95": 1802.0381707197123,
+          "max": 1879.8952477441353
+        },
+        "y,-x": {
+          "p50": 947.6228138701863,
+          "p95": 959.9582690289268,
+          "max": 1074.1347770843358
+        },
+        "-y,x": {
+          "p50": 932.3771861298137,
+          "p95": 946.26348413266,
+          "max": 1064.2643885858643
+        },
+        "-y,-x": {
+          "p50": 993.9690107028905,
+          "p95": 1741.7226474182814,
+          "max": 1879.4142222323599
+        }
+      },
+      "same_frame_id_control": {
+        "rows": 7089,
+        "correct_id_px": {
+          "p50": 8.070592649643004,
+          "p95": 21.363717390916186,
+          "max": 134.1347770843363
+        },
+        "cyclically_shifted_other_id_px": {
+          "p50": 501.66687123422344,
+          "p95": 1793.6990309383543,
+          "max": 1879.9304349088998
+        }
+      },
+      "independent_raw_center": null
+    },
+    "huang-lane-2019-02-12_0": {
+      "st_frame_person_pairs": 6430,
+      "st_people": 70,
+      "hst_finite_33_joint_same_frame_same_id_pairs": 554,
+      "people_with_matched_hst_pose": 40,
+      "axis_conventions_vs_2d_box_center_px": {
+        "x,y": {
+          "p50": 8.532067926695845,
+          "p95": 27.35246038466095,
+          "max": 119.22020343460895
+        },
+        "x,-y": {
+          "p50": 489.5214521279149,
+          "p95": 1692.3896674175182,
+          "max": 1879.034742953273
+        },
+        "-x,y": {
+          "p50": 1390.4785478720855,
+          "p95": 1836.8646065381931,
+          "max": 1879.8276978636568
+        },
+        "-x,-y": {
+          "p50": 1871.467932073304,
+          "p95": 1879.1924028428464,
+          "max": 1879.9992533952227
+        },
+        "y,x": {
+          "p50": 1011.1760184726487,
+          "p95": 1749.3950957286527,
+          "max": 1879.8844732755297
+        },
+        "y,-x": {
+          "p50": 947.7509449662125,
+          "p95": 964.5530992735992,
+          "max": 1059.2202034346087
+        },
+        "-y,x": {
+          "p50": 932.2490550337877,
+          "p95": 947.063938185405,
+          "max": 1050.6293890698744
+        },
+        "-y,-x": {
+          "p50": 868.8239815273516,
+          "p95": 1752.795975715124,
+          "max": 1879.606789348958
+        }
+      },
+      "same_frame_id_control": {
+        "rows": 6430,
+        "correct_id_px": {
+          "p50": 8.532067926695845,
+          "p95": 27.35246038466095,
+          "max": 119.22020343460895
+        },
+        "cyclically_shifted_other_id_px": {
+          "p50": 210.90385065174655,
+          "p95": 1660.6635943401088,
+          "max": 1879.829675359424
+        }
+      },
+      "independent_raw_center": null
+    },
+    "tressider-2019-03-16_1": {
+      "st_frame_person_pairs": 2251,
+      "st_people": 33,
+      "hst_finite_33_joint_same_frame_same_id_pairs": 68,
+      "people_with_matched_hst_pose": 6,
+      "axis_conventions_vs_2d_box_center_px": {
+        "x,y": {
+          "p50": 5.395010736528775,
+          "p95": 25.607757646532264,
+          "max": 116.50611870071862
+        },
+        "x,-y": {
+          "p50": 1080.43602617943,
+          "p95": 1810.916621008607,
+          "max": 1879.9910315848365
+        },
+        "-x,y": {
+          "p50": 799.5639738205705,
+          "p95": 1711.1584696216437,
+          "max": 1873.0476204128045
+        },
+        "-x,-y": {
+          "p50": 1874.604989263471,
+          "p95": 1879.529133850771,
+          "max": 1879.9997671195556
+        },
+        "y,x": {
+          "p50": 1063.2085343629615,
+          "p95": 1854.2020979486242,
+          "max": 1879.9841977690257
+        },
+        "y,-x": {
+          "p50": 944.9369241352324,
+          "p95": 963.2932450575604,
+          "max": 1056.506118700719
+        },
+        "-y,x": {
+          "p50": 935.0630758647677,
+          "p95": 944.4095239950639,
+          "max": 986.1011092792905
+        },
+        "-y,-x": {
+          "p50": 816.7914656370385,
+          "p95": 1686.9257745963146,
+          "max": 1876.7627115724122
+        }
+      },
+      "same_frame_id_control": {
+        "rows": 2251,
+        "correct_id_px": {
+          "p50": 5.395010736528775,
+          "p95": 25.607757646532264,
+          "max": 116.50611870071862
+        },
+        "cyclically_shifted_other_id_px": {
+          "p50": 245.0906396674427,
+          "p95": 1722.0302693423323,
+          "max": 1879.8332369728168
+        }
+      },
+      "independent_raw_center": null
+    }
+  }
+}
