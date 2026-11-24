@@ -1,0 +1,84 @@
+{
+  "scope": "Path length from four adjacent ground-plane displacements in the five historical image timestamps only. Future positions, neural forecasts and joint estimates do not enter the statistic.",
+  "ordered_keys_sha256": "02c44cf55e5ca8690dc1fe9ac9c076af44dc89f11629b8ccc9e725e49e4580ec",
+  "windows": 3066,
+  "short_windows": 400,
+  "median_m": 0.6071872977768261,
+  "q25_q75_m": [
+    0.5524659008748569,
+    0.6646830253199566
+  ],
+  "observed_span_s_min_median_max": [
+    0.4170837504170777,
+    0.4170837504170848,
+    0.4170837504170848
+  ],
+  "by_clip": {
+    "roundabout_01": {
+      "windows": 47,
+      "below_0p5_m": 14,
+      "median_m": 0.5812098178662933,
+      "pixels_per_metre": 26.350084233085006
+    },
+    "roundabout_02": {
+      "windows": 64,
+      "below_0p5_m": 5,
+      "median_m": 0.5937729685310107,
+      "pixels_per_metre": 23.08570509447359
+    },
+    "roundabout_03": {
+      "windows": 1876,
+      "below_0p5_m": 154,
+      "median_m": 0.6220148899297568,
+      "pixels_per_metre": 22.943476740735843
+    },
+    "roundabout_04": {
+      "windows": 331,
+      "below_0p5_m": 55,
+      "median_m": 0.5833939545785709,
+      "pixels_per_metre": 22.838179907905353
+    },
+    "roundabout_05": {
+      "windows": 510,
+      "below_0p5_m": 124,
+      "median_m": 0.5723311583157,
+      "pixels_per_metre": 23.080851449724815
+    },
+    "roundabout_06": {
+      "windows": 15,
+      "below_0p5_m": 2,
+      "median_m": 0.6799491197734674,
+      "pixels_per_metre": 23.042511138454007
+    },
+    "roundabout_07": {
+      "windows": 100,
+      "below_0p5_m": 23,
+      "median_m": 0.5896009040014915,
+      "pixels_per_metre": 23.21650037294245
+    },
+    "roundabout_08": {
+      "windows": 5,
+      "below_0p5_m": 1,
+      "median_m": 0.6248624924601187,
+      "pixels_per_metre": 23.443894600466024
+    },
+    "roundabout_09": {
+      "windows": 21,
+      "below_0p5_m": 3,
+      "median_m": 0.5595766353494989,
+      "pixels_per_metre": 23.53297613880408
+    },
+    "roundabout_10": {
+      "windows": 46,
+      "below_0p5_m": 13,
+      "median_m": 0.5706204875618988,
+      "pixels_per_metre": 23.58580138772248
+    },
+    "roundabout_11": {
+      "windows": 51,
+      "below_0p5_m": 6,
+      "median_m": 0.6168143974088633,
+      "pixels_per_metre": 23.513924846578956
+    }
+  }
+}
