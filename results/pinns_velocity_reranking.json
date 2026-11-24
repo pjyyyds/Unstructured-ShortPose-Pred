@@ -1,0 +1,1713 @@
+{
+  "archive_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+  "paired_windows_sha256": "72c9fd39724dc50aefe2b4b766a84a8b70c236e6965c575dc3bf1937b786361e",
+  "script_sha256": "252975a2b992fdbdcb822c5889713c77141be3ad02b1cd1ad6b5b3aecf79a16a",
+  "seeds": [
+    42,
+    1024,
+    2025,
+    3407,
+    4096
+  ],
+  "site_window_counts": {
+    "america_crossroad": 816,
+    "italy_park": 84,
+    "japan_crossroad": 432,
+    "thailand_street": 150
+  },
+  "cpu_torch": "2.11.0+cpu",
+  "rule": "The last two of five measured xy points at 10 Hz define an unscaled constant velocity. Minimize mean Euclidean distance to its 30-step extrapolation; exact ties choose higher network probability then lower index. Each method scores the mean error and step-30 error of its one path.",
+  "oracle_definition": "Future-informed reference: select the candidate with minimum true ADE (lowest index on ties); FDE is for that same candidate. The direct velocity path is unrestricted.",
+  "development_scope": "Exploratory choice informed by earlier CV and candidate-coverage results on these same four sites. All 40 fits frozen. Each site averages its own windows, then sites and the five seeds receive equal weight. New-site performance has not been measured.",
+  "interval": {
+    "replicates": 20000,
+    "rng_seed": 2026,
+    "method": "Average paired reranked-minus-network errors over the same five seeds per window, then jointly resample whole clips within each site. Four-site means give equal weight to sites. Percentile intervals conditional on these sites and fits."
+  },
+  "by_seed_site": {
+    "42": {
+      "america_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8252629779178673,
+              "fde_m": 1.6115761415007224
+            },
+            "velocity_selected": {
+              "ade_m": 0.867601485256492,
+              "fde_m": 1.7029267255960443
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.5919694254917695,
+              "fde_m": 1.110805597692165
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.042338507338624765,
+            "fde_m": 0.09135058409532193
+          },
+          "changed_mode_rate": 0.49754901960784315
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8172919290335519,
+              "fde_m": 1.5939366113875046
+            },
+            "velocity_selected": {
+              "ade_m": 0.8593628052226052,
+              "fde_m": 1.688796559898795
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.5804508490563343,
+              "fde_m": 1.0754290182718262
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.04207087618905336,
+            "fde_m": 0.09485994851129043
+          },
+          "changed_mode_rate": 0.45465686274509803
+        }
+      },
+      "italy_park": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4026784519431503,
+              "fde_m": 0.9535126869156424
+            },
+            "velocity_selected": {
+              "ade_m": 0.3881577798907775,
+              "fde_m": 0.9052111674688965
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.27051047297830044,
+              "fde_m": 0.6222341749620837
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.014520672052372785,
+            "fde_m": -0.04830151944674588
+          },
+          "changed_mode_rate": 0.21428571428571427
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.47760112067920363,
+              "fde_m": 1.0691063505294969
+            },
+            "velocity_selected": {
+              "ade_m": 0.3900138640277688,
+              "fde_m": 0.8963056490472855
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2840334821744432,
+              "fde_m": 0.6291436972495392
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.08758725665143485,
+            "fde_m": -0.17280070148221138
+          },
+          "changed_mode_rate": 0.4642857142857143
+        }
+      },
+      "japan_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.40771638556608314,
+              "fde_m": 0.908709525482048
+            },
+            "velocity_selected": {
+              "ade_m": 0.35694442523797393,
+              "fde_m": 0.810471341733063
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.25445406708943547,
+              "fde_m": 0.5481656347629735
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.05077196032810921,
+            "fde_m": -0.09823818374898496
+          },
+          "changed_mode_rate": 0.5532407407407407
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.45753897888619544,
+              "fde_m": 1.0019265485630484
+            },
+            "velocity_selected": {
+              "ade_m": 0.36535223342453804,
+              "fde_m": 0.801150063237756
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2652869147279237,
+              "fde_m": 0.5436105166222307
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.0921867454616574,
+            "fde_m": -0.20077648532529246
+          },
+          "changed_mode_rate": 0.6087962962962963
+        }
+      },
+      "thailand_street": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3820849034993908,
+              "fde_m": 0.8846886171436534
+            },
+            "velocity_selected": {
+              "ade_m": 0.34734889528761564,
+              "fde_m": 0.8257721923156606
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.25296278056241944,
+              "fde_m": 0.5608060132462396
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.03473600821177514,
+            "fde_m": -0.058916424827992864
+          },
+          "changed_mode_rate": 0.21333333333333335
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.432733242974191,
+              "fde_m": 0.9902840863396682
+            },
+            "velocity_selected": {
+              "ade_m": 0.3583708576561016,
+              "fde_m": 0.8231003263494557
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2628506051197158,
+              "fde_m": 0.5716990641297073
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.07436238531808942,
+            "fde_m": -0.1671837599902125
+          },
+          "changed_mode_rate": 0.6666666666666666
+        }
+      }
+    },
+    "1024": {
+      "america_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8420480971736126,
+              "fde_m": 1.616591525585384
+            },
+            "velocity_selected": {
+              "ade_m": 0.873266441402375,
+              "fde_m": 1.6946425799714333
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.6366379054537069,
+              "fde_m": 1.1907944444544358
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.03121834422876235,
+            "fde_m": 0.07805105438604931
+          },
+          "changed_mode_rate": 0.24754901960784315
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8527426647385802,
+              "fde_m": 1.6408032874326792
+            },
+            "velocity_selected": {
+              "ade_m": 0.8731426673646693,
+              "fde_m": 1.6879147548124283
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.623679494567263,
+              "fde_m": 1.1636532820171477
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.020400002626089098,
+            "fde_m": 0.04711146737974903
+          },
+          "changed_mode_rate": 0.3088235294117647
+        }
+      },
+      "italy_park": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4479803110657234,
+              "fde_m": 1.027647330038549
+            },
+            "velocity_selected": {
+              "ade_m": 0.40775834651551157,
+              "fde_m": 0.9418264801046434
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.28870257420188766,
+              "fde_m": 0.637975793811558
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.04022196455021182,
+            "fde_m": -0.08582084993390549
+          },
+          "changed_mode_rate": 0.34523809523809523
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.43439617937252833,
+              "fde_m": 1.005036039632942
+            },
+            "velocity_selected": {
+              "ade_m": 0.39793190741372525,
+              "fde_m": 0.9353160926891322
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.28109362044901304,
+              "fde_m": 0.6425289850875817
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.036464271958803085,
+            "fde_m": -0.0697199469438099
+          },
+          "changed_mode_rate": 0.42857142857142855
+        }
+      },
+      "japan_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.39365298594522147,
+              "fde_m": 0.8698151751190362
+            },
+            "velocity_selected": {
+              "ade_m": 0.3502581562225862,
+              "fde_m": 0.7889297925109443
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.26109672040885823,
+              "fde_m": 0.573662317371278
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.04339482972263525,
+            "fde_m": -0.08088538260809186
+          },
+          "changed_mode_rate": 0.34953703703703703
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3970721363979507,
+              "fde_m": 0.875059831994177
+            },
+            "velocity_selected": {
+              "ade_m": 0.35048980704138555,
+              "fde_m": 0.799071430261489
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.23946380295633138,
+              "fde_m": 0.5105511511660867
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.046582329356565144,
+            "fde_m": -0.07598840173268806
+          },
+          "changed_mode_rate": 0.45601851851851855
+        }
+      },
+      "thailand_street": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3656172700142952,
+              "fde_m": 0.8627318021500484
+            },
+            "velocity_selected": {
+              "ade_m": 0.3554350663235845,
+              "fde_m": 0.8429859214492639
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.26570010312793263,
+              "fde_m": 0.6237225837885109
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.010182203690710712,
+            "fde_m": -0.019745880700784535
+          },
+          "changed_mode_rate": 0.19333333333333333
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.38063812677004655,
+              "fde_m": 0.8966302409903447
+            },
+            "velocity_selected": {
+              "ade_m": 0.36154302249975806,
+              "fde_m": 0.829581000264599
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2653293646899971,
+              "fde_m": 0.5988985255733124
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.019095104270288488,
+            "fde_m": -0.0670492407257457
+          },
+          "changed_mode_rate": 0.4
+        }
+      }
+    },
+    "2025": {
+      "america_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8705994813667406,
+              "fde_m": 1.6961105713455573
+            },
+            "velocity_selected": {
+              "ade_m": 0.8861507894216294,
+              "fde_m": 1.7343762901475042
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.6276218267270752,
+              "fde_m": 1.1761459409466175
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.015551308054888802,
+            "fde_m": 0.038265718801946846
+          },
+          "changed_mode_rate": 0.33578431372549017
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.9077930689626182,
+              "fde_m": 1.7565240990060758
+            },
+            "velocity_selected": {
+              "ade_m": 0.8676427553631129,
+              "fde_m": 1.6938098230961207
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.5991532386122739,
+              "fde_m": 1.1236209949857665
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.04015031359950538,
+            "fde_m": -0.06271427590995504
+          },
+          "changed_mode_rate": 0.8186274509803921
+        }
+      },
+      "italy_park": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3901412042423451,
+              "fde_m": 0.9042662664439459
+            },
+            "velocity_selected": {
+              "ade_m": 0.3872700965233371,
+              "fde_m": 0.9149835626837892
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2703638774355615,
+              "fde_m": 0.5995794872416806
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.0028711077190080037,
+            "fde_m": 0.0107172962398433
+          },
+          "changed_mode_rate": 0.25
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.5517406983513853,
+              "fde_m": 1.1971602794731393
+            },
+            "velocity_selected": {
+              "ade_m": 0.4172341800618816,
+              "fde_m": 0.9679238223931715
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2724583480962476,
+              "fde_m": 0.6075536529077683
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.13450651828950366,
+            "fde_m": -0.22923645707996776
+          },
+          "changed_mode_rate": 0.9047619047619048
+        }
+      },
+      "japan_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.36443578242777996,
+              "fde_m": 0.8312098805820264
+            },
+            "velocity_selected": {
+              "ade_m": 0.33640582587659434,
+              "fde_m": 0.7707856951869012
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.24426033313351037,
+              "fde_m": 0.5365264500845708
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.02802995655118562,
+            "fde_m": -0.060424185395125174
+          },
+          "changed_mode_rate": 0.3472222222222222
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.42043336057030617,
+              "fde_m": 0.9352248606174819
+            },
+            "velocity_selected": {
+              "ade_m": 0.35985953715369545,
+              "fde_m": 0.8153532533052407
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2586291465686471,
+              "fde_m": 0.5535775927243696
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.06057382341661072,
+            "fde_m": -0.11987160731224122
+          },
+          "changed_mode_rate": 0.5509259259259259
+        }
+      },
+      "thailand_street": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3778369890029317,
+              "fde_m": 0.8905863287894334
+            },
+            "velocity_selected": {
+              "ade_m": 0.3737533676631697,
+              "fde_m": 0.8615110516668822
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2728894228847624,
+              "fde_m": 0.6252051203241052
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.0040836213397620336,
+            "fde_m": -0.029075277122551202
+          },
+          "changed_mode_rate": 0.52
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.418600267121418,
+              "fde_m": 0.9598618655774654
+            },
+            "velocity_selected": {
+              "ade_m": 0.3646686147773655,
+              "fde_m": 0.8548319141280438
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.28002159023055784,
+              "fde_m": 0.6262627641273327
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.053931652344052505,
+            "fde_m": -0.10502995144942162
+          },
+          "changed_mode_rate": 0.44
+        }
+      }
+    },
+    "3407": {
+      "america_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8679733017421798,
+              "fde_m": 1.6814813111816855
+            },
+            "velocity_selected": {
+              "ade_m": 0.882273553354421,
+              "fde_m": 1.7218398840269866
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.6142227181617278,
+              "fde_m": 1.1379995950318387
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.014300251612241244,
+            "fde_m": 0.04035857284530109
+          },
+          "changed_mode_rate": 0.8088235294117647
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8538831862607296,
+              "fde_m": 1.6435904672469042
+            },
+            "velocity_selected": {
+              "ade_m": 0.8624740707610482,
+              "fde_m": 1.67337085726727
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.6118615209148615,
+              "fde_m": 1.1459776413872838
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.00859088450031864,
+            "fde_m": 0.02978039002036592
+          },
+          "changed_mode_rate": 0.47549019607843135
+        }
+      },
+      "italy_park": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4234720388656307,
+              "fde_m": 0.9786960617600332
+            },
+            "velocity_selected": {
+              "ade_m": 0.3871456778659663,
+              "fde_m": 0.9137803344410402
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.27368567639825553,
+              "fde_m": 0.6167172498522366
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.03632636099966435,
+            "fde_m": -0.06491572731899298
+          },
+          "changed_mode_rate": 0.5
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4022677646803756,
+              "fde_m": 0.945977555665565
+            },
+            "velocity_selected": {
+              "ade_m": 0.3930207909585894,
+              "fde_m": 0.931955389750506
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.28010086255945477,
+              "fde_m": 0.6231435570906756
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.009246973721786234,
+            "fde_m": -0.014022165915059004
+          },
+          "changed_mode_rate": 0.23809523809523808
+        }
+      },
+      "japan_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3827745782064994,
+              "fde_m": 0.8431702664397775
+            },
+            "velocity_selected": {
+              "ade_m": 0.36128198313327,
+              "fde_m": 0.8033494419034221
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2531934167138197,
+              "fde_m": 0.5417411718115809
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.021492595073229426,
+            "fde_m": -0.03982082453635549
+          },
+          "changed_mode_rate": 0.23842592592592593
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.3644068614765554,
+              "fde_m": 0.814177033554859
+            },
+            "velocity_selected": {
+              "ade_m": 0.3436105711161199,
+              "fde_m": 0.7787617029325802
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.25012988681604387,
+              "fde_m": 0.5368113166123973
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.020796290360435454,
+            "fde_m": -0.03541533062227886
+          },
+          "changed_mode_rate": 0.32407407407407407
+        }
+      },
+      "thailand_street": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.39025806178833106,
+              "fde_m": 0.8892687416282578
+            },
+            "velocity_selected": {
+              "ade_m": 0.3587082947225119,
+              "fde_m": 0.8265876378980689
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2581992382803155,
+              "fde_m": 0.5774703896106488
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.031549767065819134,
+            "fde_m": -0.06268110373018887
+          },
+          "changed_mode_rate": 0.2866666666666667
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.38440166519742963,
+              "fde_m": 0.8995890210169383
+            },
+            "velocity_selected": {
+              "ade_m": 0.3721491492725755,
+              "fde_m": 0.8747186109959993
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.26015807039832095,
+              "fde_m": 0.5973544672288899
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.012252515924854157,
+            "fde_m": -0.024870410020938927
+          },
+          "changed_mode_rate": 0.5666666666666667
+        }
+      }
+    },
+    "4096": {
+      "america_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.8571162876290936,
+              "fde_m": 1.6620940418258487
+            },
+            "velocity_selected": {
+              "ade_m": 0.8775187143348212,
+              "fde_m": 1.7059425256228935
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.631273087031329,
+              "fde_m": 1.1830182210954123
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": 0.02040242670572756,
+            "fde_m": 0.04384848379704476
+          },
+          "changed_mode_rate": 0.23039215686274508
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.947319768371386,
+              "fde_m": 1.8433596472299936
+            },
+            "velocity_selected": {
+              "ade_m": 0.8794847548100307,
+              "fde_m": 1.7089318582466784
+            },
+            "last_two_velocity": {
+              "ade_m": 0.9476538962432385,
+              "fde_m": 1.941466005193391
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.61189132242628,
+              "fde_m": 1.145232728749396
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.06783501356135524,
+            "fde_m": -0.1344277889833152
+          },
+          "changed_mode_rate": 0.9375
+        }
+      },
+      "italy_park": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4261485392966141,
+              "fde_m": 0.9880617653205328
+            },
+            "velocity_selected": {
+              "ade_m": 0.3775917925942011,
+              "fde_m": 0.8918918924440898
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.277204582481385,
+              "fde_m": 0.6245348751913948
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.048556746702413,
+            "fde_m": -0.09616987287644296
+          },
+          "changed_mode_rate": 0.30952380952380953
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.4369051124165652,
+              "fde_m": 1.0061056704360334
+            },
+            "velocity_selected": {
+              "ade_m": 0.393328429071997,
+              "fde_m": 0.9280327061791637
+            },
+            "last_two_velocity": {
+              "ade_m": 0.3703417260001087,
+              "fde_m": 0.9319507432849343
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.29067502097424186,
+              "fde_m": 0.6718787348092368
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.04357668334456821,
+            "fde_m": -0.07807296425686971
+          },
+          "changed_mode_rate": 0.3333333333333333
+        }
+      },
+      "japan_crossroad": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.408899967617981,
+              "fde_m": 0.8867002065324828
+            },
+            "velocity_selected": {
+              "ade_m": 0.35308233979900516,
+              "fde_m": 0.7846147966013859
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2615849220808965,
+              "fde_m": 0.5626917355116219
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.05581762781897581,
+            "fde_m": -0.10208540993109694
+          },
+          "changed_mode_rate": 0.3680555555555556
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.451130737765252,
+              "fde_m": 0.9816103376764117
+            },
+            "velocity_selected": {
+              "ade_m": 0.35653305861970574,
+              "fde_m": 0.7994289298399899
+            },
+            "last_two_velocity": {
+              "ade_m": 0.2937423483200088,
+              "fde_m": 0.7186574926734197
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.2539088251118202,
+              "fde_m": 0.5492257308979056
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.09459767914554623,
+            "fde_m": -0.18218140783642178
+          },
+          "changed_mode_rate": 0.6087962962962963
+        }
+      },
+      "thailand_street": {
+        "M0": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.42512313429957566,
+              "fde_m": 0.9677291009800005
+            },
+            "velocity_selected": {
+              "ade_m": 0.3984384491319929,
+              "fde_m": 0.9273252049898173
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.289832118860002,
+              "fde_m": 0.6549874729296815
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.026684685167582767,
+            "fde_m": -0.040403895990183236
+          },
+          "changed_mode_rate": 0.4533333333333333
+        },
+        "M1": {
+          "methods": {
+            "network_top1": {
+              "ade_m": 0.36203614677181056,
+              "fde_m": 0.8530750110577257
+            },
+            "velocity_selected": {
+              "ade_m": 0.3552262410358367,
+              "fde_m": 0.8391468765394537
+            },
+            "last_two_velocity": {
+              "ade_m": 0.32375732654686196,
+              "fde_m": 0.8261598095785622
+            },
+            "oracle_minade_mode": {
+              "ade_m": 0.25542258940937196,
+              "fde_m": 0.5739296392824734
+            }
+          },
+          "reranked_minus_network_m": {
+            "ade_m": -0.006809905735973842,
+            "fde_m": -0.013928134518271906
+          },
+          "changed_mode_rate": 0.36666666666666664
+        }
+      }
+    }
+  },
+  "four_site_means_by_seed": {
+    "42": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5044356797316228,
+            "fde_m": 1.0896217427605166
+          },
+          "velocity_selected": {
+            "ade_m": 0.49001314641821475,
+            "fde_m": 1.061095356778416
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.34247418653048123,
+            "fde_m": 0.7105028551658654
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.014422533313408092,
+          "fde_m": -0.028526385982100444
+        },
+        "changed_mode_rate": 0.36960220199190785
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5462913178932856,
+            "fde_m": 1.1638133992049295
+          },
+          "velocity_selected": {
+            "ade_m": 0.4932749400827534,
+            "fde_m": 1.052338149633323
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3481554627696043,
+            "fde_m": 0.7049705740683259
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.053016377810532075,
+          "fde_m": -0.11147524957160648
+        },
+        "changed_mode_rate": 0.5486013849984438
+      }
+    },
+    "1024": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5123246660497132,
+            "fde_m": 1.0941964582232544
+          },
+          "velocity_selected": {
+            "ade_m": 0.4966795026160143,
+            "fde_m": 1.0670961935090713
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.36303432579809636,
+            "fde_m": 0.7565387848564457
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.015645163433698858,
+          "fde_m": -0.027100264714183142
+        },
+        "changed_mode_rate": 0.2839143713040772
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5162122768197764,
+            "fde_m": 1.1043823500125358
+          },
+          "velocity_selected": {
+            "ade_m": 0.4957768510798845,
+            "fde_m": 1.062970819506912
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3523915706656512,
+            "fde_m": 0.7289079859610321
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.020435425739891905,
+          "fde_m": -0.041411530505623656
+        },
+        "changed_mode_rate": 0.39835336912542796
+      }
+    },
+    "2025": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5007533642599493,
+            "fde_m": 1.0805432617902408
+          },
+          "velocity_selected": {
+            "ade_m": 0.4958950198711826,
+            "fde_m": 1.0704141499212692
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3537838650452274,
+            "fde_m": 0.7343642496492435
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.004858344388766714,
+          "fde_m": -0.010129111868971558
+        },
+        "changed_mode_rate": 0.36325163398692806
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5746418487514319,
+            "fde_m": 1.2121927761685407
+          },
+          "velocity_selected": {
+            "ade_m": 0.5023512718390138,
+            "fde_m": 1.0829797032306443
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3525655808769316,
+            "fde_m": 0.7277537511863093
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.07229057691241807,
+          "fde_m": -0.1292130729378964
+        },
+        "changed_mode_rate": 0.6785788204170558
+      }
+    },
+    "3407": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5161194951506602,
+            "fde_m": 1.0981540952524385
+          },
+          "velocity_selected": {
+            "ade_m": 0.4973523772690423,
+            "fde_m": 1.0663893245673794
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3498252623885296,
+            "fde_m": 0.7184821015765763
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.018767117881617917,
+          "fde_m": -0.03176477068505906
+        },
+        "changed_mode_rate": 0.4584790305010893
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5012398694037726,
+            "fde_m": 1.0758335193710666
+          },
+          "velocity_selected": {
+            "ade_m": 0.49281364552708323,
+            "fde_m": 1.0647016402365888
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3505625851721703,
+            "fde_m": 0.7258217455798116
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.008426223876689301,
+          "fde_m": -0.011131879134477718
+        },
+        "changed_mode_rate": 0.40108154372860255
+      }
+    },
+    "4096": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5293219822108162,
+            "fde_m": 1.1261462786647163
+          },
+          "velocity_selected": {
+            "ade_m": 0.5016578239650051,
+            "fde_m": 1.0774436049145466
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3649736776134031,
+            "fde_m": 0.7563080761820276
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.027664158245811005,
+          "fde_m": -0.048702673750169595
+        },
+        "changed_mode_rate": 0.34032621381886086
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.5493479413312534,
+            "fde_m": 1.171037666600041
+          },
+          "velocity_selected": {
+            "ade_m": 0.49614312088439255,
+            "fde_m": 1.0688850927013214
+          },
+          "last_two_velocity": {
+            "ade_m": 0.48387382427755443,
+            "fde_m": 1.1045585126825768
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.3529744394804285,
+            "fde_m": 0.735066708434753
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.05320482044686088,
+          "fde_m": -0.10215257389871965
+        },
+        "changed_mode_rate": 0.561574074074074
+      }
+    }
+  },
+  "five_seed_means_by_site": {
+    "america_crossroad": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.8526000291658988,
+            "fde_m": 1.6535707182878396
+          },
+          "velocity_selected": {
+            "ade_m": 0.8773621967539478,
+            "fde_m": 1.7119456010729723
+          },
+          "last_two_velocity": {
+            "ade_m": 0.9476538962432384,
+            "fde_m": 1.9414660051933912
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.6203449925731217,
+            "fde_m": 1.1597527598440938
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": 0.024762167588048944,
+          "fde_m": 0.05837488278513279
+        },
+        "changed_mode_rate": 0.42401960784313725
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.8758061234733733,
+            "fde_m": 1.6956428224606312
+          },
+          "velocity_selected": {
+            "ade_m": 0.8684214107042934,
+            "fde_m": 1.6905647706642586
+          },
+          "last_two_velocity": {
+            "ade_m": 0.9476538962432384,
+            "fde_m": 1.9414660051933912
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.6054072851154024,
+            "fde_m": 1.1307827330822842
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.007384712769079904,
+          "fde_m": -0.005078051796372973
+        },
+        "changed_mode_rate": 0.5990196078431372
+      }
+    },
+    "italy_park": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.41808410908269267,
+            "fde_m": 0.9704368220957406
+          },
+          "velocity_selected": {
+            "ade_m": 0.38958473867795873,
+            "fde_m": 0.9135386874284919
+          },
+          "last_two_velocity": {
+            "ade_m": 0.3703417260001087,
+            "fde_m": 0.9319507432849343
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.27609343669907804,
+            "fde_m": 0.6202083162117906
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.028499370404733992,
+          "fde_m": -0.0568981346672488
+        },
+        "changed_mode_rate": 0.3238095238095238
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.4605821751000116,
+            "fde_m": 1.0446771791474354
+          },
+          "velocity_selected": {
+            "ade_m": 0.3983058343067924,
+            "fde_m": 0.9319067320118519
+          },
+          "last_two_velocity": {
+            "ade_m": 0.3703417260001087,
+            "fde_m": 0.9319507432849343
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.2816722668506801,
+            "fde_m": 0.6348497254289602
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.06227634079321921,
+          "fde_m": -0.11277044713558355
+        },
+        "changed_mode_rate": 0.4738095238095238
+      }
+    },
+    "japan_crossroad": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.391495939952713,
+            "fde_m": 0.8679210108310741
+          },
+          "velocity_selected": {
+            "ade_m": 0.3515945460538859,
+            "fde_m": 0.7916302135871434
+          },
+          "last_two_velocity": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.254917891885304,
+            "fde_m": 0.552557461908405
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.03990139389882706,
+          "fde_m": -0.07629079724393088
+        },
+        "changed_mode_rate": 0.37129629629629635
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.41811641501925195,
+            "fde_m": 0.9215997224811957
+          },
+          "velocity_selected": {
+            "ade_m": 0.35516904147108896,
+            "fde_m": 0.7987530759154111
+          },
+          "last_two_velocity": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.25348371523615326,
+            "fde_m": 0.538755261604598
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.06294737354816299,
+          "fde_m": -0.12284664656578448
+        },
+        "changed_mode_rate": 0.5097222222222222
+      }
+    },
+    "thailand_street": {
+      "M0": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.3881840717209049,
+            "fde_m": 0.8990009181382786
+          },
+          "velocity_selected": {
+            "ade_m": 0.36673681462577495,
+            "fde_m": 0.8568364016639386
+          },
+          "last_two_velocity": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785623
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.26791673274308636,
+            "fde_m": 0.6084383159798371
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.021447257095129957,
+          "fde_m": -0.04216451647434014
+        },
+        "changed_mode_rate": 0.33333333333333337
+      },
+      "M1": {
+        "methods": {
+          "network_top1": {
+            "ade_m": 0.3956818897669791,
+            "fde_m": 0.9198880449964284
+          },
+          "velocity_selected": {
+            "ade_m": 0.3623915770483275,
+            "fde_m": 0.8442757456555103
+          },
+          "last_two_velocity": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785623
+          },
+          "oracle_minade_mode": {
+            "ade_m": 0.26475644396959275,
+            "fde_m": 0.5936288920683431
+          }
+        },
+        "reranked_minus_network_m": {
+          "ade_m": -0.03329031271865168,
+          "fde_m": -0.07561229934091813
+        },
+        "changed_mode_rate": 0.488
+      }
+    }
+  },
+  "four_site_five_seed_means": {
+    "M0": {
+      "methods": {
+        "network_top1": {
+          "ade_m": 0.5125910374805523,
+          "fde_m": 1.0977323673382333
+        },
+        "velocity_selected": {
+          "ade_m": 0.4963195740278918,
+          "fde_m": 1.0684877259381365
+        },
+        "last_two_velocity": {
+          "ade_m": 0.4838738242775545,
+          "fde_m": 1.1045585126825768
+        },
+        "oracle_minade_mode": {
+          "ade_m": 0.35481826347514756,
+          "fde_m": 0.7352392134860317
+        }
+      },
+      "reranked_minus_network_m": {
+        "ade_m": -0.016271463452660517,
+        "fde_m": -0.02924464140009676
+      },
+      "changed_mode_rate": 0.36311469032057264
+    },
+    "M1": {
+      "methods": {
+        "network_top1": {
+          "ade_m": 0.5375466508399039,
+          "fde_m": 1.1454519422714227
+        },
+        "velocity_selected": {
+          "ade_m": 0.4960719658826256,
+          "fde_m": 1.0663750810617578
+        },
+        "last_two_velocity": {
+          "ade_m": 0.4838738242775545,
+          "fde_m": 1.1045585126825768
+        },
+        "oracle_minade_mode": {
+          "ade_m": 0.3513299277929572,
+          "fde_m": 0.7245041530460463
+        }
+      },
+      "reranked_minus_network_m": {
+        "ade_m": -0.04147468495727844,
+        "fde_m": -0.07907686120966477
+      },
+      "changed_mode_rate": 0.5176378384687208
+    }
+  },
+  "paired_clip_percentile95_m": {
+    "M0": {
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": [
+            -0.024529351854017396,
+            0.040623728516967855
+          ],
+          "fde_m": [
+            -0.0594929591481106,
+            0.09658120496520406
+          ]
+        },
+        "italy_park": {
+          "ade_m": [
+            -0.05494251033083058,
+            -0.011641080619523876
+          ],
+          "fde_m": [
+            -0.11949060677011379,
+            -0.020971179816924458
+          ]
+        },
+        "japan_crossroad": {
+          "ade_m": [
+            -0.06981487218956832,
+            -0.018939764319434782
+          ],
+          "fde_m": [
+            -0.14103058955055026,
+            -0.02650988020606518
+          ]
+        },
+        "thailand_street": {
+          "ade_m": [
+            -0.04249114219059947,
+            -0.0014641721548746102
+          ],
+          "fde_m": [
+            -0.08791675776425896,
+            -0.0008570465783396098
+          ]
+        }
+      },
+      "four_site_equal": {
+        "ade_m": [
+          -0.03249345458455805,
+          -0.006969117031647449
+        ],
+        "fde_m": [
+          -0.06670492398706374,
+          -0.008433123252544273
+        ]
+      }
+    },
+    "M1": {
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": [
+            -0.0545730316602237,
+            0.0072477174212768865
+          ],
+          "fde_m": [
+            -0.11279595255014743,
+            0.028785660364520765
+          ]
+        },
+        "italy_park": {
+          "ade_m": [
+            -0.09935005485402051,
+            -0.044206812776497496
+          ],
+          "fde_m": [
+            -0.21379892721599084,
+            -0.0672675781682723
+          ]
+        },
+        "japan_crossroad": {
+          "ade_m": [
+            -0.09813412087818665,
+            -0.044636333699413874
+          ],
+          "fde_m": [
+            -0.20111622127048873,
+            -0.08116692933102854
+          ]
+        },
+        "thailand_street": {
+          "ade_m": [
+            -0.06654435960315375,
+            0.003245023653108975
+          ],
+          "fde_m": [
+            -0.1533781393462754,
+            0.0061959967804046355
+          ]
+        }
+      },
+      "four_site_equal": {
+        "ade_m": [
+          -0.060490688402538496,
+          -0.029837143272010723
+        ],
+        "fde_m": [
+          -0.12426254937427675,
+          -0.052601130012999896
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1049 @@
+{
+  "protocol": {
+    "scope": "Development at four PINNS locations already examined. Each outer fold holds out one complete physical site; its labels and features never enter any model, feature scaling or threshold selection for that fold. Thresholds are specific to the outer training sites, event and feature family. No independent new-site validation.",
+    "events": "Over the next 30 samples (3 s), apply the archived coordinate-derived start and stop definitions. Five historical samples span 0.4 s. Start eligibility requires mean pre-event speed <=0.20 m/s, stop >=0.60 m/s, using only the last three causal smoothed historical speeds. Scores are 0 and decisions negative outside the event's eligibility mask, including at threshold 0.",
+    "methods": "All-eligible dummy scores one for an eligible row. Three feature families are fixed from the published five-frame probe: motion, motion plus the last normalized pose, and both plus four ordered masked joint changes. Fit each event separately, on eligible rows only. Equal window weights, no resampling or class weights. Training-only population mean and SD, divisor 1 for constant features. Fixed C=0.1; summed logistic loss + squared coefficient norm/(2C), unpenalized intercept. An eligible training set containing one class predicts its observed frequency; an empty eligible training set predicts zero.",
+    "threshold": "Within the three outer training sites, hold out each site in turn and fit on the other two. Pool the three inner OOF scores over eligible training windows. Among distinct observed OOF scores choose the highest threshold maximizing pooled eligible F1; prediction is score >= threshold. No eligible inner rows or no inner positives: use fixed 0.5. Refit on all three outer training sites, then evaluate once on the fourth. Compare to fixed 0.5 on the identical outer probabilities.",
+    "metrics": "TP, FP and FN use all outer windows and the eligibility decision gate. AP is non-interpolated, grouped at score ties, and uses scores independently of threshold. Also report AP within history-eligible rows. If the evaluation group has no positives, AP/F1 are null and all confusion counts remain. Four-site macro averages AP/F1 equally over sites with actual positives for that event, giving the denominator; confusion counts are also averaged over all four sites and pooled sums are provided. OOF fits share development locations and observations within a clip may be correlated."
+  },
+  "design_only": false,
+  "verification": {
+    "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "probe_script_sha256": "24e5a51d8679bccb193dd1e5260cd6c73d3dc8487f5e8f0ef559fb815c056fce",
+    "nested_script_sha256": "95b323cda3e759cb26e622a485cbfa0d107cb59f6249a86dec43f22f3f41d024"
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3"
+  },
+  "feature_dimensions": {
+    "motion": 28,
+    "motion_last_pose": 79,
+    "motion_last_pose_ordered_changes": 283
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "training_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "event_support": {
+        "start": {
+          "positive": 27,
+          "eligible": 85
+        },
+        "stop": {
+          "positive": 35,
+          "eligible": 644
+        }
+      },
+      "methods": {
+        "all_history_eligible": {
+          "start": {
+            "positive": 27,
+            "eligible": 85,
+            "ap": 0.3176470588235294,
+            "eligible_only_ap": 0.3176470588235294,
+            "fixed_0_5": {
+              "tp": 27,
+              "fp": 58,
+              "fn": 0,
+              "f1": 0.48214285714285715
+            },
+            "inner_f1": {
+              "tp": 27,
+              "fp": 58,
+              "fn": 0,
+              "f1": 0.48214285714285715
+            }
+          },
+          "stop": {
+            "positive": 35,
+            "eligible": 644,
+            "ap": 0.05434782608695652,
+            "eligible_only_ap": 0.05434782608695652,
+            "fixed_0_5": {
+              "tp": 35,
+              "fp": 609,
+              "fn": 0,
+              "f1": 0.10309278350515463
+            },
+            "inner_f1": {
+              "tp": 35,
+              "fp": 609,
+              "fn": 0,
+              "f1": 0.10309278350515463
+            }
+          }
+        },
+        "motion": {
+          "start": {
+            "positive": 27,
+            "eligible": 85,
+            "ap": 0.3451320018989156,
+            "eligible_only_ap": 0.3451320018989156,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 27,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 27,
+              "fp": 58,
+              "fn": 0,
+              "f1": 0.48214285714285715
+            }
+          },
+          "stop": {
+            "positive": 35,
+            "eligible": 644,
+            "ap": 0.2099603269156617,
+            "eligible_only_ap": 0.2099603269156617,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 8,
+              "fp": 26,
+              "fn": 27,
+              "f1": 0.2318840579710145
+            }
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "positive": 27,
+            "eligible": 85,
+            "ap": 0.3440883102844332,
+            "eligible_only_ap": 0.3440883102844332,
+            "fixed_0_5": {
+              "tp": 2,
+              "fp": 2,
+              "fn": 25,
+              "f1": 0.12903225806451613
+            },
+            "inner_f1": {
+              "tp": 27,
+              "fp": 58,
+              "fn": 0,
+              "f1": 0.48214285714285715
+            }
+          },
+          "stop": {
+            "positive": 35,
+            "eligible": 644,
+            "ap": 0.10390161485295252,
+            "eligible_only_ap": 0.10390161485295252,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 6,
+              "fp": 47,
+              "fn": 29,
+              "f1": 0.13636363636363635
+            }
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "positive": 27,
+            "eligible": 85,
+            "ap": 0.4336509903336915,
+            "eligible_only_ap": 0.4336509903336915,
+            "fixed_0_5": {
+              "tp": 6,
+              "fp": 6,
+              "fn": 21,
+              "f1": 0.3076923076923077
+            },
+            "inner_f1": {
+              "tp": 27,
+              "fp": 58,
+              "fn": 0,
+              "f1": 0.48214285714285715
+            }
+          },
+          "stop": {
+            "positive": 35,
+            "eligible": 644,
+            "ap": 0.06027747820920973,
+            "eligible_only_ap": 0.06027747820920973,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 3,
+              "fn": 35,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 12,
+              "fp": 166,
+              "fn": 23,
+              "f1": 0.11267605633802817
+            }
+          }
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "training_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "event_support": {
+        "start": {
+          "positive": 8,
+          "eligible": 16
+        },
+        "stop": {
+          "positive": 3,
+          "eligible": 57
+        }
+      },
+      "methods": {
+        "all_history_eligible": {
+          "start": {
+            "positive": 8,
+            "eligible": 16,
+            "ap": 0.5,
+            "eligible_only_ap": 0.5,
+            "fixed_0_5": {
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "f1": 0.6666666666666666
+            },
+            "inner_f1": {
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "f1": 0.6666666666666666
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 57,
+            "ap": 0.05263157894736842,
+            "eligible_only_ap": 0.05263157894736842,
+            "fixed_0_5": {
+              "tp": 3,
+              "fp": 54,
+              "fn": 0,
+              "f1": 0.1
+            },
+            "inner_f1": {
+              "tp": 3,
+              "fp": 54,
+              "fn": 0,
+              "f1": 0.1
+            }
+          }
+        },
+        "motion": {
+          "start": {
+            "positive": 8,
+            "eligible": 16,
+            "ap": 0.5520833333333333,
+            "eligible_only_ap": 0.5520833333333333,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "f1": 0.6666666666666666
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 57,
+            "ap": 0.055555555555555546,
+            "eligible_only_ap": 0.055555555555555546,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "f1": 0.0
+            }
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "positive": 8,
+            "eligible": 16,
+            "ap": 0.5199592074592074,
+            "eligible_only_ap": 0.5199592074592074,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 8,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 8,
+              "fp": 7,
+              "fn": 0,
+              "f1": 0.6956521739130435
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 57,
+            "ap": 0.06644069924363682,
+            "eligible_only_ap": 0.06644069924363682,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 7,
+              "fn": 3,
+              "f1": 0.0
+            }
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "positive": 8,
+            "eligible": 16,
+            "ap": 0.6004006410256411,
+            "eligible_only_ap": 0.6004006410256411,
+            "fixed_0_5": {
+              "tp": 2,
+              "fp": 1,
+              "fn": 6,
+              "f1": 0.36363636363636365
+            },
+            "inner_f1": {
+              "tp": 4,
+              "fp": 1,
+              "fn": 4,
+              "f1": 0.6153846153846154
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 57,
+            "ap": 0.06699440909967225,
+            "eligible_only_ap": 0.06699440909967225,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 2,
+              "fp": 28,
+              "fn": 1,
+              "f1": 0.12121212121212122
+            }
+          }
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "event_support": {
+        "start": {
+          "positive": 12,
+          "eligible": 69
+        },
+        "stop": {
+          "positive": 12,
+          "eligible": 314
+        }
+      },
+      "methods": {
+        "all_history_eligible": {
+          "start": {
+            "positive": 12,
+            "eligible": 69,
+            "ap": 0.17391304347826086,
+            "eligible_only_ap": 0.17391304347826086,
+            "fixed_0_5": {
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "f1": 0.2962962962962963
+            },
+            "inner_f1": {
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "f1": 0.2962962962962963
+            }
+          },
+          "stop": {
+            "positive": 12,
+            "eligible": 314,
+            "ap": 0.03821656050955414,
+            "eligible_only_ap": 0.03821656050955414,
+            "fixed_0_5": {
+              "tp": 12,
+              "fp": 302,
+              "fn": 0,
+              "f1": 0.0736196319018405
+            },
+            "inner_f1": {
+              "tp": 12,
+              "fp": 302,
+              "fn": 0,
+              "f1": 0.0736196319018405
+            }
+          }
+        },
+        "motion": {
+          "start": {
+            "positive": 12,
+            "eligible": 69,
+            "ap": 0.16928752407013276,
+            "eligible_only_ap": 0.16928752407013276,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 12,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "f1": 0.2962962962962963
+            }
+          },
+          "stop": {
+            "positive": 12,
+            "eligible": 314,
+            "ap": 0.033442065056270266,
+            "eligible_only_ap": 0.033442065056270266,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 8,
+              "fn": 12,
+              "f1": 0.0
+            }
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "positive": 12,
+            "eligible": 69,
+            "ap": 0.3159751050958947,
+            "eligible_only_ap": 0.3159751050958947,
+            "fixed_0_5": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 10,
+              "f1": 0.2
+            },
+            "inner_f1": {
+              "tp": 11,
+              "fp": 55,
+              "fn": 1,
+              "f1": 0.28205128205128205
+            }
+          },
+          "stop": {
+            "positive": 12,
+            "eligible": 314,
+            "ap": 0.060805754071632474,
+            "eligible_only_ap": 0.060805754071632474,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 12,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 12,
+              "fp": 302,
+              "fn": 0,
+              "f1": 0.0736196319018405
+            }
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "positive": 12,
+            "eligible": 69,
+            "ap": 0.2617872371518958,
+            "eligible_only_ap": 0.2617872371518958,
+            "fixed_0_5": {
+              "tp": 2,
+              "fp": 10,
+              "fn": 10,
+              "f1": 0.16666666666666666
+            },
+            "inner_f1": {
+              "tp": 6,
+              "fp": 24,
+              "fn": 6,
+              "f1": 0.2857142857142857
+            }
+          },
+          "stop": {
+            "positive": 12,
+            "eligible": 314,
+            "ap": 0.034742760273119955,
+            "eligible_only_ap": 0.034742760273119955,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 7,
+              "fn": 12,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 10,
+              "fp": 277,
+              "fn": 2,
+              "f1": 0.06688963210702341
+            }
+          }
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "training_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "event_support": {
+        "start": {
+          "positive": 2,
+          "eligible": 8
+        },
+        "stop": {
+          "positive": 3,
+          "eligible": 124
+        }
+      },
+      "methods": {
+        "all_history_eligible": {
+          "start": {
+            "positive": 2,
+            "eligible": 8,
+            "ap": 0.25,
+            "eligible_only_ap": 0.25,
+            "fixed_0_5": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "f1": 0.4
+            },
+            "inner_f1": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "f1": 0.4
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 124,
+            "ap": 0.024193548387096774,
+            "eligible_only_ap": 0.024193548387096774,
+            "fixed_0_5": {
+              "tp": 3,
+              "fp": 121,
+              "fn": 0,
+              "f1": 0.047244094488188976
+            },
+            "inner_f1": {
+              "tp": 3,
+              "fp": 121,
+              "fn": 0,
+              "f1": 0.047244094488188976
+            }
+          }
+        },
+        "motion": {
+          "start": {
+            "positive": 2,
+            "eligible": 8,
+            "ap": 0.30952380952380953,
+            "eligible_only_ap": 0.30952380952380953,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 2,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "f1": 0.4
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 124,
+            "ap": 0.04857129857129857,
+            "eligible_only_ap": 0.04857129857129857,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0
+            }
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "positive": 2,
+            "eligible": 8,
+            "ap": 0.45,
+            "eligible_only_ap": 0.45,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "f1": 0.4
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 124,
+            "ap": 0.0212922059469374,
+            "eligible_only_ap": 0.0212922059469374,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 5,
+              "fn": 3,
+              "f1": 0.0
+            }
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "positive": 2,
+            "eligible": 8,
+            "ap": 0.3666666666666667,
+            "eligible_only_ap": 0.3666666666666667,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 2,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "f1": 0.4
+            }
+          },
+          "stop": {
+            "positive": 3,
+            "eligible": 124,
+            "ap": 0.02714823303058597,
+            "eligible_only_ap": 0.02714823303058597,
+            "fixed_0_5": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 3,
+              "f1": 0.0
+            },
+            "inner_f1": {
+              "tp": 0,
+              "fp": 16,
+              "fn": 3,
+              "f1": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "pooled": {
+    "all_history_eligible": {
+      "start": {
+        "positive": 49,
+        "eligible": 178,
+        "ap": 0.2752808988764045,
+        "eligible_only_ap": 0.2752808988764045,
+        "fixed_0_5": {
+          "tp": 49,
+          "fp": 129,
+          "fn": 0,
+          "f1": 0.43171806167400884
+        },
+        "inner_f1": {
+          "tp": 49,
+          "fp": 129,
+          "fn": 0,
+          "f1": 0.43171806167400884
+        }
+      },
+      "stop": {
+        "positive": 53,
+        "eligible": 1139,
+        "ap": 0.046532045654082525,
+        "eligible_only_ap": 0.046532045654082525,
+        "fixed_0_5": {
+          "tp": 53,
+          "fp": 1086,
+          "fn": 0,
+          "f1": 0.08892617449664429
+        },
+        "inner_f1": {
+          "tp": 53,
+          "fp": 1086,
+          "fn": 0,
+          "f1": 0.08892617449664429
+        }
+      }
+    },
+    "motion": {
+      "start": {
+        "positive": 49,
+        "eligible": 178,
+        "ap": 0.22644050848524908,
+        "eligible_only_ap": 0.22644050848524908,
+        "fixed_0_5": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 49,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp": 49,
+          "fp": 129,
+          "fn": 0,
+          "f1": 0.43171806167400884
+        }
+      },
+      "stop": {
+        "positive": 53,
+        "eligible": 1139,
+        "ap": 0.1488613261742941,
+        "eligible_only_ap": 0.1488613261742941,
+        "fixed_0_5": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 53,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp": 8,
+          "fp": 35,
+          "fn": 45,
+          "f1": 0.16666666666666666
+        }
+      }
+    },
+    "motion_last_pose": {
+      "start": {
+        "positive": 49,
+        "eligible": 178,
+        "ap": 0.30070265904006377,
+        "eligible_only_ap": 0.30070265904006377,
+        "fixed_0_5": {
+          "tp": 4,
+          "fp": 9,
+          "fn": 45,
+          "f1": 0.12903225806451613
+        },
+        "inner_f1": {
+          "tp": 48,
+          "fp": 126,
+          "fn": 1,
+          "f1": 0.4304932735426009
+        }
+      },
+      "stop": {
+        "positive": 53,
+        "eligible": 1139,
+        "ap": 0.06287342396361428,
+        "eligible_only_ap": 0.06287342396361428,
+        "fixed_0_5": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 53,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp": 18,
+          "fp": 361,
+          "fn": 35,
+          "f1": 0.08333333333333333
+        }
+      }
+    },
+    "motion_last_pose_ordered_changes": {
+      "start": {
+        "positive": 49,
+        "eligible": 178,
+        "ap": 0.3478895248287394,
+        "eligible_only_ap": 0.3478895248287394,
+        "fixed_0_5": {
+          "tp": 10,
+          "fp": 19,
+          "fn": 39,
+          "f1": 0.2564102564102564
+        },
+        "inner_f1": {
+          "tp": 39,
+          "fp": 89,
+          "fn": 10,
+          "f1": 0.4406779661016949
+        }
+      },
+      "stop": {
+        "positive": 53,
+        "eligible": 1139,
+        "ap": 0.0426443700152272,
+        "eligible_only_ap": 0.0426443700152272,
+        "fixed_0_5": {
+          "tp": 0,
+          "fp": 13,
+          "fn": 53,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp": 24,
+          "fp": 487,
+          "fn": 29,
+          "f1": 0.0851063829787234
+        }
+      }
+    }
+  },
+  "equal_site_macro": {
+    "all_history_eligible": {
+      "start": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.3103900255754476,
+        "eligible_only_ap": 0.3103900255754476,
+        "fixed_0_5": {
+          "tp_mean_per_site": 12.25,
+          "fp_mean_per_site": 32.25,
+          "fn_mean_per_site": 0.0,
+          "f1": 0.461276455026455
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 12.25,
+          "fp_mean_per_site": 32.25,
+          "fn_mean_per_site": 0.0,
+          "f1": 0.461276455026455
+        }
+      },
+      "stop": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.04234737848274396,
+        "eligible_only_ap": 0.04234737848274396,
+        "fixed_0_5": {
+          "tp_mean_per_site": 13.25,
+          "fp_mean_per_site": 271.5,
+          "fn_mean_per_site": 0.0,
+          "f1": 0.08098912747379602
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 13.25,
+          "fp_mean_per_site": 271.5,
+          "fn_mean_per_site": 0.0,
+          "f1": 0.08098912747379602
+        }
+      }
+    },
+    "motion": {
+      "start": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.34400666720654777,
+        "eligible_only_ap": 0.34400666720654777,
+        "fixed_0_5": {
+          "tp_mean_per_site": 0.0,
+          "fp_mean_per_site": 0.75,
+          "fn_mean_per_site": 12.25,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 12.25,
+          "fp_mean_per_site": 32.25,
+          "fn_mean_per_site": 0.0,
+          "f1": 0.461276455026455
+        }
+      },
+      "stop": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.08688231152469651,
+        "eligible_only_ap": 0.08688231152469651,
+        "fixed_0_5": {
+          "tp_mean_per_site": 0.0,
+          "fp_mean_per_site": 0.0,
+          "fn_mean_per_site": 13.25,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 2.0,
+          "fp_mean_per_site": 8.75,
+          "fn_mean_per_site": 11.25,
+          "f1": 0.057971014492753624
+        }
+      }
+    },
+    "motion_last_pose": {
+      "start": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.40750565570988384,
+        "eligible_only_ap": 0.40750565570988384,
+        "fixed_0_5": {
+          "tp_mean_per_site": 1.0,
+          "fp_mean_per_site": 2.25,
+          "fn_mean_per_site": 11.25,
+          "f1": 0.08225806451612903
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 12.0,
+          "fp_mean_per_site": 31.5,
+          "fn_mean_per_site": 0.25,
+          "f1": 0.46496157827679563
+        }
+      },
+      "stop": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.06311006852878981,
+        "eligible_only_ap": 0.06311006852878981,
+        "fixed_0_5": {
+          "tp_mean_per_site": 0.0,
+          "fp_mean_per_site": 0.5,
+          "fn_mean_per_site": 13.25,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 4.5,
+          "fp_mean_per_site": 90.25,
+          "fn_mean_per_site": 8.75,
+          "f1": 0.052495817066369216
+        }
+      }
+    },
+    "motion_last_pose_ordered_changes": {
+      "start": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.4156263837944738,
+        "eligible_only_ap": 0.4156263837944738,
+        "fixed_0_5": {
+          "tp_mean_per_site": 2.5,
+          "fp_mean_per_site": 4.75,
+          "fn_mean_per_site": 9.75,
+          "f1": 0.2094988344988345
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 9.75,
+          "fp_mean_per_site": 22.25,
+          "fn_mean_per_site": 2.5,
+          "f1": 0.44581043956043953
+        }
+      },
+      "stop": {
+        "sites_total": 4,
+        "sites_with_positives": 4,
+        "ap": 0.047290720153146976,
+        "eligible_only_ap": 0.047290720153146976,
+        "fixed_0_5": {
+          "tp_mean_per_site": 0.0,
+          "fp_mean_per_site": 3.25,
+          "fn_mean_per_site": 13.25,
+          "f1": 0.0
+        },
+        "inner_f1": {
+          "tp_mean_per_site": 6.0,
+          "fp_mean_per_site": 121.75,
+          "fn_mean_per_site": 7.25,
+          "f1": 0.0751944524142932
+        }
+      }
+    }
+  },
+  "independent_verification": {
+    "archive_sha256": "c0e925f48c88c9fccfdacac06bca2760b7858a498ef389920b2ceb82790a053a",
+    "verified_windows": 1482,
+    "verified_clips": 47,
+    "distinct_saved_fits": 60,
+    "probability_and_decision_counts": {
+      "outer": 8892,
+      "inner": 26676,
+      "outer_with_dummy": 11856,
+      "inner_with_dummy": 35568,
+      "decisions": 23712,
+      "local_decision_roundoff_ties": 0
+    },
+    "max_abs_training_mean_or_divisor_error": 2.220446049250313e-16,
+    "max_abs_probability_difference": 5.551115123125783e-16,
+    "max_abs_inner_threshold_difference": 5.551115123125783e-17,
+    "max_abs_aggregate_score_error": 1.1102230246251565e-16,
+    "max_training_gradient_linf": 3.7326533474295946e-07,
+    "verified": "Independent feature reconstruction from source tracks and frozen pose; inner/outer training sites, eligible rows and normalization, saved coefficient stationarity and all OOF scores, decisions, thresholds, site/public macro metrics and eligibility dummy, without refitting."
+  }
+}
