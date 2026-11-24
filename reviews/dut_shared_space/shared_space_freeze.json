@@ -1,0 +1,23 @@
+{
+  "utc": "2026-11-24T19:22:53.890603+00:00",
+  "source_commit": "80b8c746833664cd1e5244fccad79c7f2a7cbe31",
+  "clips": [
+    "roundabout_01",
+    "roundabout_02",
+    "roundabout_03",
+    "roundabout_04",
+    "roundabout_05",
+    "roundabout_06",
+    "roundabout_07",
+    "roundabout_08",
+    "roundabout_09",
+    "roundabout_10",
+    "roundabout_11"
+  ],
+  "site": "Authors’ single campus shared space next to the roundabout, all eleven clips. Exclude all 17 crosswalk clips. No claim every point or image in the selected clips lacks painted road markings.",
+  "enrollment": "On all eleven released clips, within each ID form maximal runs of consecutive source rows indexed from 1. Need same-ID history, ground-plane unfiltered tracked centres, source ratio, released image times and 30 future 10Hz-nearest index positions. Starting from the earliest t in a run, fix its first image as history start and use the nearest progressively dated real source frame to each nominal 0.1 s increment up to 3.4 s, with ties earlier. t0 equals fifth snapped frame. Require max absolute nominal grid deviation relative to t0 <= 0.050 s, monotone unique image IDs and all 35 source tracked observations; then advance beyond last used source frame. No interpolation of imagery, poses or source coordinates. Include zero-support clips. If raw recorded exposure times are unavailable, document container presentation times and separate from sensor-derived microsecond clocks. Do not call this strict 10Hz. One prespecified timing subset each for actual observed history differences <=1ms and endpoint <=1ms; report both denominators.",
+  "spatial": "Source per-clip tracked XY/ratio in metres; y follows author image growing down unless separately validated. Source tracker point-centres may lie above ground in top view. Any transform to source full video follows official stabilised crop ROI; do not assume per-person bounding box.",
+  "pose_gate": "Release contains same-ID tracked positions but no explicit per-person box columns. A model run requires either recoverable authoritative measured boxes or outcome-blind image-only person detections on each actual past image associated only to t0-or-earlier tracked points, with a prespecified geometry/one-to-one association/crop-quality policy. Before scoring first quantify the actual per-image mapping, sizes, chance of multiple competing IDs and ground/camera calibration. If these cannot be validated, leave this cohort a motion/occupancy/time-coverage analysis; do not invent per-person crop boxes or successful five-frame poses.",
+  "weights": "If qualified: same four seed42 PINNS M0/M1 checkpoint pairs without adaptation plus both actual- and nominal-time last-pair CV. Top-probability forecast of six; average four frozen-checkpoint errors per window. Report by window, sequence-local person, and clip, and before outcome inspection lock primary axes. No deployment or cross-site inference from one overhead shared space. No new training and no local external forecast.",
+  "rights": "Official public author GitHub and author-provided Google Drive video only. No clear repo grant to redistribute source images or tracks; private research download as the author offers, no raw redistribution. Kaggle private forward evaluation only if it can fetch original public author URLs without uploading or republishing source assets."
+}
