@@ -49,6 +49,19 @@ class FiveFramePredictionTests(unittest.TestCase):
         np.testing.assert_array_equal(decoded["mode_probabilities"], raw["mode_probs"][0].numpy())
         np.testing.assert_array_equal(list(decoded["observable_action_probabilities"].values()),
                                       raw["act_probs"][0].numpy())
+        self.assertEqual(decoded["observable_action_eligibility"], {"Start": False, "Stop": True})
+        self.assertAlmostEqual(decoded["pre_event_mean_speed_m_s"], 1.0)
+        original = decoded["observable_action_probabilities"]
+        filtered = decoded["eligible_action_probabilities"]
+        self.assertEqual(filtered, {**original, "Start": 0.0})
+        for velocity, flags in [(0.0, (True, False)), (0.4, (False, False))]:
+            changed = copy.deepcopy(sample)
+            changed["ground_xy_m"] = [[i * 0.1 * velocity, 0.0] for i in range(5)]
+            reported = forecast(state, changed)
+            self.assertEqual(tuple(reported["observable_action_eligibility"].values()), flags)
+            for name in ("Turn-Left", "Turn-Right", "Maintain"):
+                self.assertEqual(reported["eligible_action_probabilities"][name],
+                                 reported["observable_action_probabilities"][name])
         shifted = copy.deepcopy(sample)
         shift = np.array([100., -200.])
         shifted["ground_xy_m"] = (world + shift).tolist()

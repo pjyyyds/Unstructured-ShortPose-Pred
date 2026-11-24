@@ -87,8 +87,8 @@ def main(weights,onnx,out,check):
   joint=np.stack(joint);assert joint.shape==(5,17,3) and np.isfinite(joint).all()
   joint_cache.append(joint);case=[];pq=[]
   elapsed=(times[5:]-times[4])/(times[4]-times[3])
-  cv1=elapsed[:,None]*(hxy[-1]-hxy[-2])[None,:];cv2=np.arange(1,31)[:,None]*(hxy[-1]-hxy[-2])[None,:]
-  measured.append(cv1);nominal.append(cv2)
+  cv1=elapsed[:,None]*(hxy[-1]-hxy[-2])[None,:];cv_nom=np.arange(1,31)[:,None]*(hxy[-1]-hxy[-2])[None,:]
+  measured.append(cv1);nominal.append(cv_nom)
   for a in ANGLES:
    m=matrix(a);x=inputs(hxy,joint,boxes,r['images_wh'][0][1],a)
    if not a:qualities.append(x['q_vec'][0].numpy())

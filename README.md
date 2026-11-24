@@ -13,6 +13,8 @@ Supply five ascending `timestamps_s` at 10 Hz and five measured, consistently or
 
 The output contains six future paths of 30 positions at 0.1 s intervals in the input ground coordinate frame, the six probabilities, the zero-based selected path and the last-pair constant-velocity reference. A checkpoint trained with an action head additionally returns five independent event probabilities for start, stop, left turn, right turn and maintain. These targets describe movement events derived from ground trajectories. The four sites have already participated in research development.
 
+Supervised checkpoints report both the raw action probabilities and a history-only version. The latter sets Start to zero when pre-event speed exceeds 0.20 m/s and Stop to zero below 0.60 m/s. The pre-event speed is the mean of the final three causally smoothed ground speeds. The forward pass and candidate selection precede this reporting step.
+
 For input directly from five camera images, supply timestamps, five tracked center-width-height boxes for one pedestrian and a camera-to-ground homography in metres. The image runner reads the original pixels, estimates 17 RTMPose joints and projects the bottom centre of each box into the supplied coordinate frame. A registered joint-action checkpoint produces six trajectories and five event probabilities. The input schema and time, calibration and image checks are in [the image runner](scripts/predict_five_frame_images.py).
 
 ```sh
@@ -21,7 +23,7 @@ python -m scripts.predict_five_frame_images detached.pt camera_input.json end2en
 
 ## Benchmark status
 
-The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training runs. In each version, 46 configurations use five seeds and four sensitivity settings use three. V2 reused the split on which V1 had already been inspected. Independent confirmation and the proposed JRDB evaluation are pending. Under the original proposal, the data do not establish A (improvement at all three window lengths) or B (improvement in both short-window quality groups). C applies to the comparisons without a net benefit, including M1 versus its implicit-gate control at five frames.
+The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training runs. In each version, 46 configurations use five seeds and four sensitivity settings use three. V2 reused the split on which V1 had already been inspected. JRDB now has a two-frame 2.5 Hz development comparison. Independent testing under the original five-frame 10 Hz protocol remains a separate requirement. Under the original proposal, the data do not establish A (improvement at all three window lengths) or B (improvement in both short-window quality groups). C applies to the comparisons without a net benefit, including M1 versus its implicit-gate control at five frames.
 
 - On PINNS at five frames, mean top-mode displacement error (ADE, lower is better) was 0.5295 m for the full model and 0.4856 m for the motion-only baseline. On JTA the corresponding errors were 1.8637 m and 1.6640 m.
 - There is a narrower result for pose fusion. In 193 JTA test windows with injected heavy noise, M1 reduced mean ADE from 2.3063 m (M1a) to 1.5138 m. The motion-only baseline reached 1.4397 m. M1a adds the motion and available pose embeddings elementwise with equal weight, then applies LayerNorm. M1 scales the pose residual by a quality-dependent gate.

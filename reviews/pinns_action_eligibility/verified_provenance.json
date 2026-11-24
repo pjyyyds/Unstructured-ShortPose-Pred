@@ -1,0 +1,68 @@
+{
+  "kaggle_version": 373631270,
+  "kaggle_duration_seconds": 60.5,
+  "parent_kaggle_version": 373610725,
+  "archive_sha256": "8a5a2c909814dae53573f5c18897c07e1d1f82901d52284e585766be83618756",
+  "parent_archive_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+  "public_scores_sha256": "7ed6f85e43faec8eef7a300f099492ac9dcf8e3b5850b202ee0ad3db527fecf1",
+  "preregistered_plan_file_sha256": "0097ba177a249be7f2f27f7bd0f28c457d7d5410a4fcf2f09db9fee5ba612b14",
+  "plan_sha256": "303d251e568652a6859c84d31a7dcf9163904718a44e1e02e4857f0b0c8cab34",
+  "independent_verifier_sha256": "b82e0e34c55f2616f7bf3d1e2ccb76edaed7d097fc8e8e11dd25a759cf42869c",
+  "known_before_scoring": "Five-frame eligibility rules and previously published low stop recall.",
+  "plans_and_cloud_code_byte_or_structurally_equal": true,
+  "site_counts": {
+    "america_crossroad": {
+      "windows": 816,
+      "eligible_start_stop": [
+        85,
+        644
+      ],
+      "positive_start_stop": [
+        27,
+        35
+      ]
+    },
+    "italy_park": {
+      "windows": 84,
+      "eligible_start_stop": [
+        16,
+        57
+      ],
+      "positive_start_stop": [
+        8,
+        3
+      ]
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "eligible_start_stop": [
+        69,
+        314
+      ],
+      "positive_start_stop": [
+        12,
+        12
+      ]
+    },
+    "thailand_street": {
+      "windows": 150,
+      "eligible_start_stop": [
+        8,
+        124
+      ],
+      "positive_start_stop": [
+        2,
+        3
+      ]
+    }
+  },
+  "frozen_folds_heads": 16,
+  "frozen_trajectory_field_hashes_verified": 64,
+  "trajectory_coordinate_values_checked": 2134080,
+  "per_model_per_window_candidate_paths_checked": 35568,
+  "other_class_head_window_probabilities_unchanged": 13338,
+  "max_abs_raw_sigmoid_vs_frozen_score": 7.903431531453009e-08,
+  "max_abs_brier_identity_error_per_window": 0.0,
+  "max_abs_aggregates_counts_and_interval_difference": 3.469446951953614e-17,
+  "verification": "Original labeler causal velocities calculated on history alone, labels recalculated from ground truth. Threshold 0.5, exact paired confusion reconstruction and per-window Brier identity; bootstrap independently expressed via clip multiplicities. Unmodified frozen forecast and mode fields identified by checksums. No model refitted or re-forwarded."
+}

@@ -1,0 +1,1089 @@
+{
+  "plan_sha256": "303d251e568652a6859c84d31a7dcf9163904718a44e1e02e4857f0b0c8cab34",
+  "source_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+  "site_windows": {
+    "america_crossroad": 816,
+    "italy_park": 84,
+    "japan_crossroad": 432,
+    "thailand_street": 150
+  },
+  "scope": "Post-hoc intervention proposed after prior poor stop recall; its scores on this intervention are unseen. Four previously examined sites and seed42; all outcomes reported.",
+  "summary": {
+    "auxiliary": {
+      "start": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 149,
+            "fn": 9,
+            "tn": 1284,
+            "recall": 0.8163265306122449,
+            "precision": 0.21164021164021163,
+            "f1": 0.33613445378151263,
+            "brier": 0.05283380487727539
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 129,
+            "fn": 9,
+            "tn": 1304,
+            "recall": 0.8163265306122449,
+            "precision": 0.23668639053254437,
+            "f1": 0.3669724770642202,
+            "brier": 0.0435798829486729
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.04893933553563123,
+          "projected": 0.04143594056213539
+        },
+        "projected_minus_original_equal_site_brier": -0.007503394973495836,
+        "paired_site_macro_brier95": [
+          -0.009736556009492322,
+          -0.004147587287436239
+        ],
+        "removed_false_positives": 20,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 75,
+              "fn": 9,
+              "tn": 714,
+              "recall": 0.6666666666666666,
+              "precision": 0.1935483870967742,
+              "f1": 0.3,
+              "brier": 0.045547612809223814
+            },
+            "projected": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 58,
+              "fn": 9,
+              "tn": 731,
+              "recall": 0.6666666666666666,
+              "precision": 0.23684210526315788,
+              "f1": 0.34951456310679613,
+              "brier": 0.03804187184277255
+            },
+            "eligible": 85,
+            "eligible_positives": 27,
+            "removed_false_positives": 17,
+            "changed_probabilities": 731,
+            "paired_brier_difference_95": [
+              -0.012425560155962884,
+              -0.0001471330670614036
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.05382783748107805
+            },
+            "projected": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.04882791845609739
+            },
+            "eligible": 16,
+            "eligible_positives": 8,
+            "removed_false_positives": 0,
+            "changed_probabilities": 68,
+            "paired_brier_difference_95": [
+              -0.011346045139647284,
+              -0.0014378679307036088
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 60,
+              "fn": 0,
+              "tn": 360,
+              "recall": 1.0,
+              "precision": 0.16666666666666666,
+              "f1": 0.2857142857142857,
+              "brier": 0.07856037109770027
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "tn": 363,
+              "recall": 1.0,
+              "precision": 0.17391304347826086,
+              "f1": 0.2962962962962963,
+              "brier": 0.062448858735701794
+            },
+            "eligible": 69,
+            "eligible_positives": 12,
+            "removed_false_positives": 3,
+            "changed_probabilities": 363,
+            "paired_brier_difference_95": [
+              -0.021046442923752254,
+              -0.0017715283298688508
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.017821520754522792
+            },
+            "projected": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.016425113213969833
+            },
+            "eligible": 8,
+            "eligible_positives": 2,
+            "removed_false_positives": 0,
+            "changed_probabilities": 142,
+            "paired_brier_difference_95": [
+              -0.0031677750907620314,
+              -0.00014345388195411866
+            ]
+          }
+        }
+      },
+      "stop": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 0,
+            "fp": 23,
+            "fn": 53,
+            "tn": 1406,
+            "recall": 0.0,
+            "precision": 0.0,
+            "f1": 0.0,
+            "brier": 0.05611475963883745
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 0,
+            "fp": 19,
+            "fn": 53,
+            "tn": 1410,
+            "recall": 0.0,
+            "precision": 0.0,
+            "f1": 0.0,
+            "brier": 0.04943722766967984
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.052117937531833546,
+          "projected": 0.0444454995087811
+        },
+        "projected_minus_original_equal_site_brier": -0.0076724380230524455,
+        "paired_site_macro_brier95": [
+          -0.009482676228171035,
+          -0.005270607101375367
+        ],
+        "removed_false_positives": 4,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.052708120479394945
+            },
+            "projected": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.04883957222315584
+            },
+            "eligible": 644,
+            "eligible_positives": 35,
+            "removed_false_positives": 0,
+            "changed_probabilities": 172,
+            "paired_brier_difference_95": [
+              -0.005295310145677248,
+              -0.002841907181893198
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.04838425110761864
+            },
+            "projected": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.039036403874461244
+            },
+            "eligible": 57,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 27,
+            "paired_brier_difference_95": [
+              -0.013520941980769065,
+              -0.00591737105891801
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 0,
+              "fp": 23,
+              "fn": 12,
+              "tn": 397,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.07085483545915879
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 0,
+              "fp": 19,
+              "fn": 12,
+              "tn": 401,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.05903517466769334
+            },
+            "eligible": 314,
+            "eligible_positives": 12,
+            "removed_false_positives": 4,
+            "changed_probabilities": 118,
+            "paired_brier_difference_95": [
+              -0.016614785431329316,
+              -0.002595851207017882
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 147,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.03652454308116179
+            },
+            "projected": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 147,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.03087084726981399
+            },
+            "eligible": 124,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 26,
+            "paired_brier_difference_95": [
+              -0.00937903174749929,
+              -0.002359141004961804
+            ]
+          }
+        }
+      }
+    },
+    "end_to_end": {
+      "start": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 151,
+            "fn": 9,
+            "tn": 1282,
+            "recall": 0.8163265306122449,
+            "precision": 0.2094240837696335,
+            "f1": 0.3333333333333333,
+            "brier": 0.054323394379330356
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 129,
+            "fn": 9,
+            "tn": 1304,
+            "recall": 0.8163265306122449,
+            "precision": 0.23668639053254437,
+            "f1": 0.3669724770642202,
+            "brier": 0.046511145009780236
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.04995550051211838,
+          "projected": 0.043909649707297216
+        },
+        "projected_minus_original_equal_site_brier": -0.0060458508048211665,
+        "paired_site_macro_brier95": [
+          -0.007977883375675926,
+          -0.0035512504567325217
+        ],
+        "removed_false_positives": 22,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 77,
+              "fn": 9,
+              "tn": 712,
+              "recall": 0.6666666666666666,
+              "precision": 0.18947368421052632,
+              "f1": 0.29508196721311475,
+              "brier": 0.0504036168109495
+            },
+            "projected": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 58,
+              "fn": 9,
+              "tn": 731,
+              "recall": 0.6666666666666666,
+              "precision": 0.23684210526315788,
+              "f1": 0.34951456310679613,
+              "brier": 0.04210530940157392
+            },
+            "eligible": 85,
+            "eligible_positives": 27,
+            "removed_false_positives": 19,
+            "changed_probabilities": 731,
+            "paired_brier_difference_95": [
+              -0.013870277422682724,
+              -0.00015767083306312196
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.05622500613464028
+            },
+            "projected": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.05288935326758499
+            },
+            "eligible": 16,
+            "eligible_positives": 8,
+            "removed_false_positives": 0,
+            "changed_probabilities": 68,
+            "paired_brier_difference_95": [
+              -0.005863792661884758,
+              -0.001811112944743972
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 60,
+              "fn": 0,
+              "tn": 360,
+              "recall": 1.0,
+              "precision": 0.16666666666666666,
+              "f1": 0.2857142857142857,
+              "brier": 0.07331919067975338
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "tn": 363,
+              "recall": 1.0,
+              "precision": 0.17391304347826086,
+              "f1": 0.2962962962962963,
+              "brier": 0.06394428487350481
+            },
+            "eligible": 69,
+            "eligible_positives": 12,
+            "removed_false_positives": 3,
+            "changed_probabilities": 363,
+            "paired_brier_difference_95": [
+              -0.011921406518484869,
+              -0.0010016426318464517
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.01987418842313034
+            },
+            "projected": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.01669965128652514
+            },
+            "eligible": 8,
+            "eligible_positives": 2,
+            "removed_false_positives": 0,
+            "changed_probabilities": 142,
+            "paired_brier_difference_95": [
+              -0.007980370025841671,
+              -0.00023505156187976687
+            ]
+          }
+        }
+      },
+      "stop": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 0,
+            "fp": 33,
+            "fn": 53,
+            "tn": 1396,
+            "recall": 0.0,
+            "precision": 0.0,
+            "f1": 0.0,
+            "brier": 0.05767838519700732
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 0,
+            "fp": 25,
+            "fn": 53,
+            "tn": 1404,
+            "recall": 0.0,
+            "precision": 0.0,
+            "f1": 0.0,
+            "brier": 0.050221569263152646
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.05381734790593297,
+          "projected": 0.04579254719495404
+        },
+        "projected_minus_original_equal_site_brier": -0.008024800710978927,
+        "paired_site_macro_brier95": [
+          -0.010173558463476057,
+          -0.0051609895971961185
+        ],
+        "removed_false_positives": 8,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.05147944710193118
+            },
+            "projected": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.047435639748541904
+            },
+            "eligible": 644,
+            "eligible_positives": 35,
+            "removed_false_positives": 0,
+            "changed_probabilities": 172,
+            "paired_brier_difference_95": [
+              -0.00561945546051067,
+              -0.0029416696363577933
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.0501434190947871
+            },
+            "projected": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.04202963895928789
+            },
+            "eligible": 57,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 27,
+            "paired_brier_difference_95": [
+              -0.01362147499616313,
+              -0.0050858210109834085
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 0,
+              "fp": 32,
+              "fn": 12,
+              "tn": 388,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.07876990074033632
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 0,
+              "fp": 24,
+              "fn": 12,
+              "tn": 396,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.06430729585036836
+            },
+            "eligible": 314,
+            "eligible_positives": 12,
+            "removed_false_positives": 8,
+            "changed_probabilities": 118,
+            "paired_brier_difference_95": [
+              -0.020229022406617753,
+              -0.0025139087215458864
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "tn": 146,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.034876624686677266
+            },
+            "projected": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "tn": 146,
+              "recall": 0.0,
+              "precision": 0.0,
+              "f1": 0.0,
+              "brier": 0.029397614221618032
+            },
+            "eligible": 124,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 26,
+            "paired_brier_difference_95": [
+              -0.008978161168928137,
+              -0.0023606646607940845
+            ]
+          }
+        }
+      }
+    },
+    "detached": {
+      "start": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 155,
+            "fn": 9,
+            "tn": 1278,
+            "recall": 0.8163265306122449,
+            "precision": 0.20512820512820512,
+            "f1": 0.32786885245901637,
+            "brier": 0.05402815920643229
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 49,
+            "tp": 40,
+            "fp": 129,
+            "fn": 9,
+            "tn": 1304,
+            "recall": 0.8163265306122449,
+            "precision": 0.23668639053254437,
+            "f1": 0.3669724770642202,
+            "brier": 0.045541905038974595
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.04932688991805159,
+          "projected": 0.042653456385660746
+        },
+        "projected_minus_original_equal_site_brier": -0.006673433532390846,
+        "paired_site_macro_brier95": [
+          -0.008744848746073189,
+          -0.0038341886345984763
+        ],
+        "removed_false_positives": 26,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 77,
+              "fn": 9,
+              "tn": 712,
+              "recall": 0.6666666666666666,
+              "precision": 0.18947368421052632,
+              "f1": 0.29508196721311475,
+              "brier": 0.04875045786607034
+            },
+            "projected": {
+              "n": 816,
+              "positives": 27,
+              "tp": 18,
+              "fp": 58,
+              "fn": 9,
+              "tn": 731,
+              "recall": 0.6666666666666666,
+              "precision": 0.23684210526315788,
+              "f1": 0.34951456310679613,
+              "brier": 0.04065588359522136
+            },
+            "eligible": 85,
+            "eligible_positives": 27,
+            "removed_false_positives": 19,
+            "changed_probabilities": 731,
+            "paired_brier_difference_95": [
+              -0.013384358137729311,
+              -9.85508699608277e-05
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.053453373076433094
+            },
+            "projected": {
+              "n": 84,
+              "positives": 8,
+              "tp": 8,
+              "fp": 8,
+              "fn": 0,
+              "tn": 68,
+              "recall": 1.0,
+              "precision": 0.5,
+              "f1": 0.6666666666666666,
+              "brier": 0.04930452476321712
+            },
+            "eligible": 16,
+            "eligible_positives": 8,
+            "removed_false_positives": 0,
+            "changed_probabilities": 68,
+            "paired_brier_difference_95": [
+              -0.009289962358140696,
+              -0.001170152297605943
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 64,
+              "fn": 0,
+              "tn": 356,
+              "recall": 1.0,
+              "precision": 0.15789473684210525,
+              "f1": 0.2727272727272727,
+              "brier": 0.07636069389128876
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 12,
+              "fp": 57,
+              "fn": 0,
+              "tn": 363,
+              "recall": 1.0,
+              "precision": 0.17391304347826086,
+              "f1": 0.2962962962962963,
+              "brier": 0.06410748083800993
+            },
+            "eligible": 69,
+            "eligible_positives": 12,
+            "removed_false_positives": 7,
+            "changed_probabilities": 363,
+            "paired_brier_difference_95": [
+              -0.01629423530845519,
+              -0.0015386314490227213
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.018743034838414156
+            },
+            "projected": {
+              "n": 150,
+              "positives": 2,
+              "tp": 2,
+              "fp": 6,
+              "fn": 0,
+              "tn": 142,
+              "recall": 1.0,
+              "precision": 0.25,
+              "f1": 0.4,
+              "brier": 0.01654593634619457
+            },
+            "eligible": 8,
+            "eligible_positives": 2,
+            "removed_false_positives": 0,
+            "changed_probabilities": 142,
+            "paired_brier_difference_95": [
+              -0.005109241100475486,
+              -0.00039693210897660336
+            ]
+          }
+        }
+      },
+      "stop": {
+        "total_windows": 1482,
+        "pooled": {
+          "original": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 1,
+            "fp": 33,
+            "fn": 52,
+            "tn": 1396,
+            "recall": 0.018867924528301886,
+            "precision": 0.029411764705882353,
+            "f1": 0.022988505747126436,
+            "brier": 0.05688510287176063
+          },
+          "projected": {
+            "n": 1482,
+            "positives": 53,
+            "tp": 1,
+            "fp": 27,
+            "fn": 52,
+            "tn": 1402,
+            "recall": 0.018867924528301886,
+            "precision": 0.03571428571428571,
+            "f1": 0.024691358024691357,
+            "brier": 0.05080774931615603
+          }
+        },
+        "equal_site_brier": {
+          "original": 0.05261378427008533,
+          "projected": 0.0456138118942883
+        },
+        "projected_minus_original_equal_site_brier": -0.0069999723757970325,
+        "paired_site_macro_brier95": [
+          -0.008714077266204708,
+          -0.004888215367000352
+        ],
+        "removed_false_positives": 6,
+        "by_site": {
+          "america_crossroad": {
+            "original": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.05121298830859964
+            },
+            "projected": {
+              "n": 816,
+              "positives": 35,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "tn": 781,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.04699978557509857
+            },
+            "eligible": 644,
+            "eligible_positives": 35,
+            "removed_false_positives": 0,
+            "changed_probabilities": 172,
+            "paired_brier_difference_95": [
+              -0.005843889384889866,
+              -0.0030685437148400725
+            ]
+          },
+          "italy_park": {
+            "original": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.0456530032896164
+            },
+            "projected": {
+              "n": 84,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 81,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.03699446397837062
+            },
+            "eligible": 57,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 27,
+            "paired_brier_difference_95": [
+              -0.01257073074695048,
+              -0.005338503943393093
+            ]
+          },
+          "japan_crossroad": {
+            "original": {
+              "n": 432,
+              "positives": 12,
+              "tp": 1,
+              "fp": 33,
+              "fn": 11,
+              "tn": 387,
+              "recall": 0.08333333333333333,
+              "precision": 0.029411764705882353,
+              "f1": 0.043478260869565216,
+              "brier": 0.07674007055845881
+            },
+            "projected": {
+              "n": 432,
+              "positives": 12,
+              "tp": 1,
+              "fp": 27,
+              "fn": 11,
+              "tn": 393,
+              "recall": 0.08333333333333333,
+              "precision": 0.03571428571428571,
+              "f1": 0.05,
+              "brier": 0.06761905950186906
+            },
+            "eligible": 314,
+            "eligible_positives": 12,
+            "removed_false_positives": 6,
+            "changed_probabilities": 118,
+            "paired_brier_difference_95": [
+              -0.013185909618935987,
+              -0.0011370347395395519
+            ]
+          },
+          "thailand_street": {
+            "original": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 147,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.03684907492366649
+            },
+            "projected": {
+              "n": 150,
+              "positives": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 147,
+              "recall": 0.0,
+              "precision": null,
+              "f1": 0.0,
+              "brier": 0.030841938521814972
+            },
+            "eligible": 124,
+            "eligible_positives": 3,
+            "removed_false_positives": 0,
+            "changed_probabilities": 26,
+            "paired_brier_difference_95": [
+              -0.010157396048927117,
+              -0.002467003663939277
+            ]
+          }
+        }
+      }
+    }
+  },
+  "identity_audit": {
+    "frozen_trajectories_checked": 35568,
+    "six_mode_forecasts": 5928,
+    "trajectory_or_probability_mutations": 0,
+    "threshold_selection_labels": 0,
+    "new_fits": 0,
+    "trajectory_feedback_used": false
+  }
+}

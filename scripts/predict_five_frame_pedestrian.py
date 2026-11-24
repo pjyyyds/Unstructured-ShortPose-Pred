@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from src.data.actions import _estimate_causal_velocities
 from src.data.constants import ACTION_NAMES, DT, T_FUT
 from src.data.features import build_motion_features, build_pose_and_quality_features
 from src.models.action_and_decoder import ActionConditionedDecoder
@@ -111,6 +112,17 @@ def forecast(checkpoint, observation):
         if scores.shape != (5,) or not np.isfinite(scores).all() or np.any((scores < 0) | (scores > 1)):
             raise ValueError("Invalid action-head probabilities")
         output["observable_action_probabilities"] = dict(zip(ACTION_NAMES, scores.tolist()))
+        # These are necessary conditions in the published action definitions. Apply them
+        # after decoding so inference still returns the original probabilities and paths.
+        _, _, speed = _estimate_causal_velocities(world, np.ones(len(world), dtype=bool), dt=DT)
+        pre_speed = float(np.mean(speed[-3:]))
+        eligible = {"Start": pre_speed <= 0.20, "Stop": pre_speed >= 0.60}
+        output["observable_action_eligibility"] = eligible
+        output["pre_event_mean_speed_m_s"] = pre_speed
+        output["eligible_action_probabilities"] = {
+            name: value if eligible.get(name, True) else 0.0
+            for name, value in output["observable_action_probabilities"].items()
+        }
     return output
 
 
