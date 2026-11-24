@@ -1,10 +1,46 @@
 """Table 5 Row 6 & Eq. (9): 5-class action classifier and K=6 conditional autoregressive GRU decoder."""
 
-from typing import Dict
+from typing import Dict, Tuple
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 from ..data.constants import DT, K_MODES, NUM_ACTIONS, T_FUT
+
+
+@torch.jit.script
+def _jit_decoder_rollout(
+    prev_delta: torch.Tensor,
+    s_flat: torch.Tensor,
+    static_gates: torch.Tensor,
+    ih_w: torch.Tensor,
+    ih_b: torch.Tensor,
+    hh_w: torch.Tensor,
+    hh_b: torch.Tensor,
+    out_w: torch.Tensor,
+    out_b: torch.Tensor,
+    bsz: int,
+    k_num: int,
+    fut_steps: int,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    cur_pos = torch.zeros((bsz * k_num, 2), dtype=s_flat.dtype, device=s_flat.device)
+    traj_steps = torch.jit.annotate(list[torch.Tensor], [])
+    delta_steps = torch.jit.annotate(list[torch.Tensor], [])
+    for _ in range(fut_steps):
+        gi = F.linear(prev_delta, ih_w, ih_b) + static_gates
+        gh = F.linear(s_flat, hh_w, hh_b)
+        i_r, i_z, i_n = gi.chunk(3, dim=-1)
+        h_r, h_z, h_n = gh.chunk(3, dim=-1)
+        r_gate = torch.sigmoid(i_r + h_r)
+        z_gate = torch.sigmoid(i_z + h_z)
+        n_cand = torch.tanh(i_n + r_gate * h_n)
+        s_flat = (1.0 - z_gate) * n_cand + z_gate * s_flat
+        delta = F.linear(s_flat, out_w, out_b)
+        cur_pos = cur_pos + delta
+        prev_delta = delta
+        traj_steps.append(cur_pos.view(bsz, k_num, 2))
+        delta_steps.append(delta.view(bsz, k_num, 2))
+    return torch.stack(traj_steps, dim=2), torch.stack(delta_steps, dim=2), s_flat.view(bsz, k_num, -1)
 
 
 def extract_trajectory_kinematics(
@@ -77,22 +113,29 @@ class ActionConditionedDecoder(nn.Module):
                 nn.Linear(hidden_dim, 64),
                 nn.LayerNorm(64),
                 nn.SiLU(),
+                nn.Dropout(0.15),
                 nn.Linear(64, NUM_ACTIONS),
             )
         if action_mode in ("e2e", "stop_grad", "acmc"):
+            # Smooth Tanh bottleneck without LayerNorm avoids amplifying detached calibration jitter
             self.cond_mlp = nn.Sequential(
                 nn.Linear(NUM_ACTIONS, 32),
                 nn.SiLU(),
                 nn.Linear(32, cond_dim),
-                nn.LayerNorm(cond_dim),
+                nn.Tanh(),
             )
+            self.cond_scale = nn.Parameter(torch.tensor(0.25))
         if action_mode == "acmc":
+            self.acmc_norm = nn.LayerNorm(6)
             self.acmc_head = nn.Sequential(
-                nn.Linear(6 + NUM_ACTIONS, 32),
+                nn.Linear(6 + NUM_ACTIONS + 2, 32),
                 nn.SiLU(),
                 nn.Linear(32, 1),
             )
+            nn.init.normal_(self.acmc_head[-1].weight, std=0.02)
+            nn.init.zeros_(self.acmc_head[-1].bias)
 
+        self.dec_env_scale = nn.Parameter(torch.tensor(0.10))
         self.mode_queries = nn.Parameter(torch.empty(num_modes, mode_dim))
         nn.init.orthogonal_(self.mode_queries)
         self.mode_init_proj = nn.Linear(mode_dim, hidden_dim)
@@ -106,6 +149,7 @@ class ActionConditionedDecoder(nn.Module):
             nn.Linear(hidden_dim * 2 + mode_dim + cond_dim, 64),
             nn.LayerNorm(64),
             nn.SiLU(),
+            nn.Dropout(0.15),
             nn.Linear(64, 1),
         )
 
@@ -130,49 +174,42 @@ class ActionConditionedDecoder(nn.Module):
             if self.action_mode == "aux_only":
                 c_act = h_tilde.new_zeros((bsz, self.cond_dim))
             elif self.action_mode == "e2e":
-                c_act = self.cond_mlp(p_act)
+                c_act = torch.tanh(self.cond_scale) * self.cond_mlp(2.0 * p_act - 1.0)
             else:  # 'stop_grad' or 'acmc'
-                c_act = self.cond_mlp(p_act.detach())
+                p_det = p_act.detach()
+                c_act = torch.tanh(self.cond_scale) * self.cond_mlp(2.0 * p_det - 1.0)
 
         q_k = self.mode_queries.unsqueeze(0).expand(bsz, -1, -1)  # [B, K, 32]
         s_k = h_tilde.unsqueeze(1) + self.mode_init_proj(q_k)  # [B, K, 128]
         s_flat = s_k.reshape(bsz * k_num, self.hidden_dim)
 
-        env_flat = h_env.unsqueeze(1).expand(bsz, k_num, -1).reshape(bsz * k_num, -1)
+        env_scaled = torch.tanh(self.dec_env_scale) * h_env
+        env_flat = env_scaled.unsqueeze(1).expand(bsz, k_num, -1).reshape(bsz * k_num, -1)
         qk_flat = q_k.reshape(bsz * k_num, -1)
         cond_flat = c_act.unsqueeze(1).expand(bsz, k_num, -1).reshape(bsz * k_num, -1)
         static_ctx = torch.cat([env_flat, qk_flat, cond_flat], dim=-1)  # [B*K, 112]
 
-        # Precompute time-invariant static context input gates ONCE outside the 30-step loop!
         static_gates = self.ih_static(static_ctx)  # [B*K, 3*D]
-        cur_pos = h_tilde.new_zeros((bsz * k_num, 2))
         prev_delta = (v0_xy * self.dt).unsqueeze(1).expand(bsz, k_num, 2).reshape(bsz * k_num, 2)
-
-        traj_steps = []
-        delta_steps = []
-        for _ in range(self.fut_steps):
-            gi = self.ih_delta(prev_delta) + static_gates
-            gh = self.hh_proj(s_flat)
-            i_r, i_z, i_n = gi.chunk(3, dim=-1)
-            h_r, h_z, h_n = gh.chunk(3, dim=-1)
-            r_gate = torch.sigmoid(i_r + h_r)
-            z_gate = torch.sigmoid(i_z + h_z)
-            n_cand = torch.tanh(i_n + r_gate * h_n)
-            s_flat = (1.0 - z_gate) * n_cand + z_gate * s_flat
-            delta = self.delta_out(s_flat)
-            cur_pos = cur_pos + delta
-            prev_delta = delta
-            traj_steps.append(cur_pos.view(bsz, k_num, 2))
-            delta_steps.append(delta.view(bsz, k_num, 2))
-
-        trajs = torch.stack(traj_steps, dim=2)  # [B, K, 30, 2]
-        deltas = torch.stack(delta_steps, dim=2)  # [B, K, 30, 2]
-        s_final = s_flat.view(bsz, k_num, self.hidden_dim)
+        trajs, deltas, s_final = _jit_decoder_rollout(
+            prev_delta,
+            s_flat,
+            static_gates,
+            self.ih_delta.weight,
+            self.ih_delta.bias,
+            self.hh_proj.weight,
+            self.hh_proj.bias,
+            self.delta_out.weight,
+            self.delta_out.bias,
+            bsz,
+            k_num,
+            self.fut_steps,
+        )
 
         pi_in = torch.cat(
             [
                 h_tilde.unsqueeze(1).expand(bsz, k_num, -1),
-                s_final,
+                s_final - h_tilde.unsqueeze(1),
                 q_k,
                 c_act.unsqueeze(1).expand(bsz, k_num, -1),
             ],
@@ -183,8 +220,10 @@ class ActionConditionedDecoder(nn.Module):
         if self.action_mode == "acmc":
             psi = extract_trajectory_kinematics(trajs.detach(), deltas.detach(), v0_xy.detach(), dt=self.dt)
             p_rep = p_act.detach().unsqueeze(1).expand(bsz, k_num, -1)
-            compat_delta = self.acmc_head(torch.cat([psi, p_rep], dim=-1)).squeeze(-1)
-            mode_logits = mode_logits + compat_delta
+            lon_align = psi[:, :, 2:3] * (p_rep[:, :, 0:1] - p_rep[:, :, 1:2])
+            lat_align = psi[:, :, 4:5] * (p_rep[:, :, 2:3] - p_rep[:, :, 3:4])
+            compat_in = torch.cat([self.acmc_norm(psi), p_rep, lon_align, lat_align], dim=-1)
+            mode_logits = mode_logits + self.acmc_head(compat_in).squeeze(-1)
 
         mode_probs = torch.softmax(mode_logits, dim=-1)
         return {

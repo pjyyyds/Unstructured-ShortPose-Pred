@@ -1,0 +1,39 @@
+{
+  "pinns": {
+    "total_samples": 7283,
+    "num_sequences": 47,
+    "split_counts": {
+      "train": 5686,
+      "val": 1100,
+      "test": 497
+    },
+    "leakage_check": "PASS: zero physical time overlap across train/val/test",
+    "rtmpose_providers": [
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "bbox_is_topleft": false
+  },
+  "jta": {
+    "total_samples": 3604,
+    "split_counts": {
+      "train": 1844,
+      "val": 800,
+      "test": 960
+    },
+    "fps": 2.5
+  },
+  "pinns_test_buckets": {
+    "Clear": 111,
+    "Partial": 252,
+    "Heavy": 134
+  },
+  "pinns_test_valid_actions": 277,
+  "pinns_test_action_pos_counts": [
+    43,
+    29,
+    25,
+    10,
+    178
+  ]
+}

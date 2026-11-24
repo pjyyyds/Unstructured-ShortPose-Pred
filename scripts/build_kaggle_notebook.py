@@ -29,7 +29,7 @@ PAYLOAD_B64 = "{b64_payload}"
 with tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD_B64)), mode='r:gz') as tf:
     tf.extractall(PROJ_DIR)
 
-subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'onnx2torch', 'onnx', 'onnxruntime-gpu', 'gdown'], check=True)
+subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'onnxruntime-gpu', 'gdown'], check=True)
 sys.path.insert(0, str(PROJ_DIR))
 os.environ['PYTHONPATH'] = str(PROJ_DIR)
 

@@ -59,26 +59,8 @@ class RTMPoseONNXExtractor:
 
             if torch.cuda.is_available() and device_id < torch.cuda.device_count():
                 try:
-                    import onnx2torch
-
-                    dev = torch.device(f"cuda:{device_id}")
-                    tm = onnx2torch.convert(str(onnx_path)).to(dev).eval()
-                    with torch.no_grad():
-                        tx, ty = tm(torch.from_numpy(test_x).to(dev))
-                    err = max(
-                        float(np.max(np.abs(tx.cpu().numpy() - ref_sx))),
-                        float(np.max(np.abs(ty.cpu().numpy() - ref_sy))),
-                    )
-                    if err < 5e-2:
-                        self.torch_model = tm
-                        self.torch_dev = dev
-                        self.active_providers = [f"PyTorchCUDA:{device_id}"]
-                        return
-                except Exception as exc:
-                    print(f"[RTMPose] onnx2torch GPU path skipped ({exc}); trying ORT_ENABLE_BASIC...", flush=True)
-
-                try:
                     g_opts = ort.SessionOptions()
+                    g_opts.log_severity_level = 3
                     g_opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_BASIC
                     g_provs = [
                         ("CUDAExecutionProvider", {"device_id": str(device_id), "cudnn_conv_algo_search": "DEFAULT"}),

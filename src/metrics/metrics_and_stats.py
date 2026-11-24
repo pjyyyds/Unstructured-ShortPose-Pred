@@ -127,9 +127,9 @@ def compute_sample_trajectory_metrics(
     viol = np.zeros(n_samp, dtype=np.float64)
     if p_env is not None:
         top1_traj = pred_trajs[row_idx, top1_k]  # [N, T_f, 2]
-        # Channels 3..6 correspond to impassable wall/barrier/cone/parked-car contours (indices 3..6 in 0-based: 3,4,5,6)
-        # Recall p_env layout: 0:2 xy, 2:10 attr_8 (attr[1..4] = wall, barrier, cone, parked_car => p_env ch 3..7), 10 m_pt
-        obs_flag = (p_env[:, :, :, 10] > 0.5) & (p_env[:, :, :, 3:7].sum(axis=-1) > 0.5)
+        # Channels 2..7 correspond to structural edges/walls/barriers/cones/parked-cars (attr[0..4]);
+        # gt_min_d >= clearance_m ensures legal crosswalk curb crossings are NOT counted as violations!
+        obs_flag = (p_env[:, :, :, 10] > 0.5) & (p_env[:, :, :, 2:7].sum(axis=-1) > 0.5)
         for i in range(n_samp):
             if not np.any(obs_flag[i]):
                 continue

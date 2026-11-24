@@ -27,19 +27,15 @@ class QualityGatedFusion(nn.Module):
         self.out_norm = nn.LayerNorm(hidden_dim)
 
         if fusion_mode in ("M1b", "M1"):
-            self.gate_mlp = nn.Sequential(
-                nn.Linear(hidden_dim * 2 + 4, 64),
-                nn.LayerNorm(64),
-                nn.SiLU(),
-                nn.Linear(64, 1),
-            )
+            self.mp_proj = nn.Linear(hidden_dim * 2, 32)
+            self.q_mlp = nn.Sequential(nn.Linear(4, 32), nn.SiLU(), nn.Linear(32, 32))
+            self.gate_out = nn.Sequential(nn.LayerNorm(64), nn.SiLU(), nn.Linear(64, 1))
+            nn.init.constant_(self.gate_out[-1].bias, -1.0)
         elif fusion_mode == "M1p":
-            self.part_gate_mlp = nn.Sequential(
-                nn.Linear(hidden_dim * 2 + 4 + 3, 64),
-                nn.LayerNorm(64),
-                nn.SiLU(),
-                nn.Linear(64, 1),
-            )
+            self.mp_proj = nn.Linear(hidden_dim * 2, 32)
+            self.part_q_mlp = nn.Sequential(nn.Linear(7, 32), nn.SiLU(), nn.Linear(32, 32))
+            self.part_gate_out = nn.Sequential(nn.LayerNorm(64), nn.SiLU(), nn.Linear(64, 1))
+            nn.init.constant_(self.part_gate_out[-1].bias, -0.8)
 
     def forward(
         self,
@@ -63,30 +59,35 @@ class QualityGatedFusion(nn.Module):
             return self.out_norm(h_m + g * safe_hp), g
 
         if self.fusion_mode in ("M1b", "M1"):
-            q_in = torch.zeros_like(q_vec) if self.fusion_mode == "M1b" else q_vec
-            gate_in = torch.cat([h_m, safe_hp, q_in], dim=-1)
-            g = m_pose * torch.sigmoid(self.gate_mlp(gate_in))
+            u_mp = self.mp_proj(torch.cat([h_m, safe_hp], dim=-1))
+            if self.fusion_mode == "M1b":
+                q_emb = self.q_mlp(torch.zeros_like(q_vec))
+                rel_env = 1.0
+            else:
+                q_emb = self.q_mlp(q_vec)
+                # Physical observability envelope sqrt(q1 * q2) * resolution factor prevents Heavy negative transfer
+                rel_env = torch.sqrt((q_vec[:, 0:1] * q_vec[:, 1:2]).clamp(min=0.0)) * (0.4 + 0.6 * q_vec[:, 3:4])
+            g = m_pose * rel_env * torch.sigmoid(self.gate_out(torch.cat([u_mp, q_emb], dim=-1)))
             return self.out_norm(h_m + g * safe_hp), g
 
-        # M1p: Biomechanical Part-Decomposed Quality Gate (BPD-Gate)
+        # M1p: Biomechanical Part-Decomposed Quality Gate (BPD-Gate, convex non-saturating aggregation)
         assert q_part is not None and part_feats is not None, "M1p requires q_part and part_feats"
-        part_keys = ("head_sho", "torso", "legs")
+        part_specs = (("head_sho", 0.45), ("torso", 0.30), ("legs", 0.25))
         gates = []
-        weighted_parts = []
+        agg_hp = h_m.new_zeros((bsz, self.hidden_dim))
         eye3 = torch.eye(3, device=h_m.device, dtype=h_m.dtype)
-        for r_idx, key in enumerate(part_keys):
+        res_mod = 0.4 + 0.6 * q_vec[:, 3:4]
+        for r_idx, (key, bio_w) in enumerate(part_specs):
             q1_r = q_part[:, 2 * r_idx : 2 * r_idx + 1]
             q2_r = q_part[:, 2 * r_idx + 1 : 2 * r_idx + 2]
             m_r = (q1_r > 0.0).to(h_m.dtype)
             hp_r = m_r * part_feats[key]
-            qr_vec = torch.cat([q1_r, q2_r, q_vec[:, 2:4]], dim=-1)
-            er_vec = eye3[r_idx].unsqueeze(0).expand(bsz, -1)
-            gin = torch.cat([h_m, hp_r, qr_vec, er_vec], dim=-1)
-            g_r = m_r * torch.sigmoid(self.part_gate_mlp(gin))
+            rel_r = torch.sqrt((q1_r * q2_r).clamp(min=0.0)) * res_mod
+            u_r = self.mp_proj(torch.cat([h_m, hp_r], dim=-1))
+            qr_in = torch.cat([q1_r, q2_r, q_vec[:, 2:4], eye3[r_idx].unsqueeze(0).expand(bsz, -1)], dim=-1)
+            g_r = m_r * rel_r * torch.sigmoid(self.part_gate_out(torch.cat([u_r, self.part_q_mlp(qr_in)], dim=-1)))
             gates.append(g_r)
-            weighted_parts.append(g_r * hp_r)
+            agg_hp = agg_hp + (bio_w * g_r) * hp_r
 
         g_stack = torch.cat(gates, dim=-1)  # [B, 3]
-        denom = torch.clamp(g_stack.sum(dim=-1, keepdim=True), min=1.0)
-        agg_hp = m_pose * (sum(weighted_parts) / denom)
-        return self.out_norm(h_m + agg_hp), g_stack
+        return self.out_norm(h_m + m_pose * agg_hp), g_stack

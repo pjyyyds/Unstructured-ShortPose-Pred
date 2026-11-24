@@ -12,7 +12,7 @@ class JointPredictionLoss(nn.Module):
     def __init__(
         self,
         lambda_mode: float = 0.25,
-        lambda_act: float = 0.50,
+        lambda_act: float = 0.15,
         smooth_l1_beta: float = 0.50,
         use_action_loss: bool = True,
         act_pos_weights: Optional[torch.Tensor] = None,
@@ -59,7 +59,10 @@ class JointPredictionLoss(nn.Module):
 
         reg_elem = F.smooth_l1_loss(win_traj, gt_clean_2d, beta=self.smooth_l1_beta, reduction="none").sum(dim=-1)
         loss_reg = ((reg_elem * f_mask).sum(dim=-1) / valid_cnt.squeeze(-1)).mean()
-        loss_mode = F.cross_entropy(mode_logits, k_star)
+        # Distance-aware soft ranking + winner CE prevents arbitrary tie-flipping & NLL blowup
+        soft_rank = torch.softmax(-ade_per_mode.detach() / 0.15, dim=-1)
+        loss_soft_ce = -(soft_rank * F.log_softmax(mode_logits, dim=-1)).sum(dim=-1).mean()
+        loss_mode = 0.65 * F.cross_entropy(mode_logits, k_star, label_smoothing=0.04) + 0.35 * loss_soft_ce
 
         loss_act = trajs.new_tensor(0.0)
         if self.use_action_loss and y_act is not None and m_act is not None:

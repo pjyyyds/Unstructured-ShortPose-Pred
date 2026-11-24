@@ -34,6 +34,7 @@ class LocalPolylineEncoder(nn.Module):
         self.k_proj = nn.Linear(env_dim, env_dim)
         self.v_proj = nn.Linear(env_dim, env_dim)
         self.out_norm = nn.LayerNorm(env_dim)
+        self.env_drop = nn.Dropout(0.15)
 
     def forward(
         self,
@@ -43,6 +44,9 @@ class LocalPolylineEncoder(nn.Module):
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """Return h_env [B, 64] and effective map flag eff_map [B, 1]."""
         clean_p = torch.nan_to_num(p_env, nan=0.0, posinf=0.0, neginf=0.0)
+        if self.training:
+            clean_p = clean_p.clone()
+            clean_p[:, :, :, :2] = clean_p[:, :, :, :2] + 0.06 * torch.randn_like(clean_p[:, :, :, :2])
         m_pt = (clean_p[:, :, :, 10:11] > 0.5).to(h_mp.dtype)  # [B, 16, 10, 1]
         pt_feat = self.pt_mlp(clean_p * m_pt) * m_pt  # [B, 16, 10, 64]
 
@@ -61,8 +65,7 @@ class LocalPolylineEncoder(nn.Module):
         has_poly = (m_poly.sum(dim=-1, keepdim=True) > 0.5).to(h_mp.dtype)  # [B, 1]
         eff_map = (m_map > 0.5).to(h_mp.dtype)
         agg = (attn.unsqueeze(-1) * v).sum(dim=1)  # [B, 64]
-        # Exact 0.0 when either map is unavailable (m_map=0) or 20m is open space (has_poly=0)
-        h_env = (eff_map * has_poly) * self.out_norm(agg)
+        h_env = (eff_map * has_poly) * self.env_drop(self.out_norm(agg))
         return h_env, eff_map
 
 
@@ -84,6 +87,8 @@ class DirectedGATv2Layer(nn.Module):
         self.w_e = nn.Linear(edge_dim, hidden_dim, bias=False)
         self.attn_vec = nn.Parameter(torch.empty(num_heads, self.head_dim))
         nn.init.xavier_uniform_(self.attn_vec.unsqueeze(-1))
+        # Learnable Null-Sink logit avoids forcing bystander attention to sum to 1.0 when non-conflicting
+        self.sink_logit = nn.Parameter(torch.full((1, 1, num_heads), 0.5))
 
         self.w_v = nn.Linear(hidden_dim + edge_dim, hidden_dim)
         self.leaky = nn.LeakyReLU(0.2)
@@ -110,7 +115,9 @@ class DirectedGATv2Layer(nn.Module):
 
         act = self.leaky(q + k + e)  # [B, M, H, Dh]
         logits = (act * self.attn_vec.view(1, 1, self.num_heads, self.head_dim)).sum(dim=-1)  # [B, M, H]
-        alpha = _safe_masked_softmax(logits, nbr_mask.unsqueeze(-1), dim=1)  # [B, M, H]
+        m_exp = nbr_mask.unsqueeze(-1) > 0.5
+        cat_logits = torch.cat([logits.masked_fill(~m_exp, -1e9), self.sink_logit.expand(bsz, 1, self.num_heads)], dim=1)
+        alpha = torch.softmax(cat_logits, dim=1)[:, :max_m, :] * nbr_mask.unsqueeze(-1).to(h_i.dtype)
 
         val = self.w_v(torch.cat([h_j, e_ji], dim=-1)).view(bsz, max_m, self.num_heads, self.head_dim)
         msg = (alpha.unsqueeze(-1) * val).sum(dim=1).reshape(bsz, self.hidden_dim)  # [B, D]
@@ -139,7 +146,11 @@ class HeteroInteractionGraph(nn.Module):
         self.hidden_dim = hidden_dim
         self.use_graph = use_graph
         self.use_v_rad = use_v_rad
-        self.node_proj = nn.Linear(node_in_dim, hidden_dim)
+        env_flag_dim = max(1, node_in_dim - hidden_dim - 8)
+        self.type_proj = nn.Linear(8, hidden_dim, bias=False)
+        self.map_proj = nn.Linear(env_flag_dim, hidden_dim, bias=False)
+        self.map_scale = nn.Parameter(torch.tensor(0.10))
+        self.map_drop = nn.Dropout(0.15)
         self.base_norm = nn.LayerNorm(hidden_dim)
 
         if use_graph:
@@ -158,6 +169,10 @@ class HeteroInteractionGraph(nn.Module):
             )
             self.layer1 = DirectedGATv2Layer(hidden_dim, edge_emb_dim, num_heads=4, update_nbr=True)
             self.layer2 = DirectedGATv2Layer(hidden_dim, edge_emb_dim, num_heads=4, update_nbr=False)
+            self.nbr_gate = nn.Linear(hidden_dim * 2, 1)
+            nn.init.constant_(self.nbr_gate.bias, -1.5)
+            self.nbr_drop = nn.Dropout(0.15)
+            self.out_norm = nn.LayerNorm(hidden_dim)
 
     def forward(
         self,
@@ -170,9 +185,9 @@ class HeteroInteractionGraph(nn.Module):
         nbr_mask: Optional[torch.Tensor] = None,
         nbr_h_mp: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-        """Return interaction-enhanced representation h_tilde [B, 128] and attention weights [B, M]."""
-        z_i = torch.cat([h_mp, h_env, ego_type_oh, eff_map], dim=-1)  # [B, 201]
-        h0 = self.base_norm(self.node_proj(z_i))  # [B, 128]
+        """Return ego-preserving interaction representation h_tilde [B, 128] and attention [B, M]."""
+        map_delta = self.map_drop(self.map_proj(torch.cat([h_env, eff_map], dim=-1)))
+        h0 = self.base_norm(h_mp + self.type_proj(ego_type_oh) + torch.tanh(self.map_scale) * map_delta)
         if not self.use_graph or nbr_edges is None or nbr_mask is None or nbr_type_oh is None:
             return h0, None
 
@@ -184,14 +199,13 @@ class HeteroInteractionGraph(nn.Module):
         mask_f = (nbr_mask > 0.5).to(h_mp.dtype)
         e_emb = self.edge_mlp(clean_e * mask_f.unsqueeze(-1)) * mask_f.unsqueeze(-1)
         if nbr_h_mp is not None:
-            bsz, max_m, _ = nbr_h_mp.shape
-            zeros_env = h_mp.new_zeros((bsz, max_m, h_env.shape[-1]))
-            map_rep = eff_map.unsqueeze(1).expand(bsz, max_m, 1)
-            z_j = torch.cat([nbr_h_mp, zeros_env, nbr_type_oh, map_rep], dim=-1)
-            hj = self.base_norm(self.node_proj(z_j)) * mask_f.unsqueeze(-1)
+            hj = self.base_norm(nbr_h_mp + self.type_proj(nbr_type_oh)) * mask_f.unsqueeze(-1)
         else:
             hj = self.nbr_init_proj(torch.cat([clean_e, nbr_type_oh], dim=-1)) * mask_f.unsqueeze(-1)
 
         h1, hj1, _ = self.layer1(h0, hj, e_emb, mask_f)
         h2, _, attn2 = self.layer2(h1, hj1, e_emb, mask_f)
-        return h2, attn2
+        delta_gat = h2 - h0
+        has_nbr = (mask_f.sum(dim=-1, keepdim=True) > 0.5).to(h_mp.dtype)
+        g_nbr = has_nbr * torch.sigmoid(self.nbr_gate(torch.cat([h0, delta_gat], dim=-1)))
+        return self.out_norm(h0 + g_nbr * self.nbr_drop(delta_gat)), attn2
