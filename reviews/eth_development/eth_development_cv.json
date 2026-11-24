@@ -1,0 +1,45 @@
+{
+  "scope": "ETH University seq_eth development sequence only; manually annotated tracks. No model fitting, interpolation or tuning.",
+  "protocol": {
+    "dt_s": 0.4,
+    "raw_frame_step": 6,
+    "history_observations": 2,
+    "history_span_s": 0.4,
+    "future_steps": 7,
+    "last_horizon_s": 2.8,
+    "xy_columns_one_based": [
+      3,
+      5
+    ],
+    "windows": "Group by original pedestrian ID, sort by frame and start new runs at every delta other than 6. Use disjoint blocks of nine from the beginning of each run. Ignore tail remainders. Collapse identical position duplicates, reject conflicting duplicates, omit nonfinite positions.",
+    "prediction": "Last observed ground position plus 1..7 times the last displacement; supplied velocity columns and target positions are not model inputs.",
+    "aggregation": "Equal weight per window; ADE averages all seven future Euclidean distances and FDE uses the seventh."
+  },
+  "source": {
+    "url": "https://ethz.ch/content/dam/ethz/special-interest/itet/cvl/vision-dam/documents/ewap_dataset_light.tgz",
+    "archive_sha256": "3e057d7c8631c9b5ae638b0d74d454d7be567532a51cd5e06f0323bfe863ce98",
+    "opened_members_sha256": {
+      "ewap_dataset/README.txt": "6cb87573a951796dc95ca2550c405902fa85528a2ea85bce0474f059b3542bd1",
+      "ewap_dataset/seq_eth/info.txt": "34010c1c84cd2b1990529b1d7f1f556bc5cfed598216cd9e73ef06fdfa02971a",
+      "ewap_dataset/seq_eth/obsmat.txt": "d452ae2185ecb1164c2fdf31e75f6236f4c2ffc02c751a6b2ae921740cbc60d1"
+    }
+  },
+  "counts": {
+    "input_rows": 8908,
+    "nonfinite_position_rows": 0,
+    "identical_duplicate_rows": 0,
+    "unique_frame_person_points": 8908,
+    "people_in_annotations": 360,
+    "people_with_windows": 343,
+    "exact_six_frame_intervals": 8548,
+    "other_intervals_within_person": 0,
+    "continuous_runs": 360,
+    "unused_tail_points": 1456,
+    "scored_windows": 828,
+    "scored_future_positions": 5796
+  },
+  "last_two_constant_velocity": {
+    "ade_m": 0.4752505230399807,
+    "fde_m_at_2_8s": 0.8508171370506123
+  }
+}
