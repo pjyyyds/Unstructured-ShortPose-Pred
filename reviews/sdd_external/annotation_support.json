@@ -1,0 +1,4775 @@
+{
+  "scope": "All 60 recordings across eight source sites. No predictions or coordinates read for scoring.",
+  "nominal_clock": "Original 30 fps video. Count every phase (0,1,2) separately at stride three original frames.",
+  "definition": "For one person every tick must have lost=0 and generated=0. An occluded annotation is retained. Lengths 35/40/50 include 30 completely labeled future positions. Counts may overlap.",
+  "distribution": "All 60 annotations match both pinned distribution mirrors by Git blob identity. The Stanford download endpoint was unavailable during collection.",
+  "source_trees": [
+    {
+      "repository": "crowdbotp/OpenTraj",
+      "revision": "97ec1d5e1b579f26febeaa9083705952deac338a",
+      "prefix": "datasets/SDD/"
+    },
+    {
+      "repository": "flclain/StanfordDroneDataset",
+      "revision": "9179f3c0dd9ac0bd67a6223703d04a7577a9fb18",
+      "prefix": ""
+    }
+  ],
+  "totals": {
+    "all_pedestrian_rows": 5936065,
+    "in_view": 4094713,
+    "in_view_occluded": 255629,
+    "in_view_interpolated": 4019895,
+    "in_view_noninterpolated": 74818
+  },
+  "possible_noninterpolated_windows_sum_over_phases": {
+    "5": 0,
+    "10": 0,
+    "20": 0,
+    "35": 0,
+    "40": 0,
+    "50": 0
+  },
+  "recordings": {
+    "bookstore/video0/annotations.txt": {
+      "sha256": "58ec509091faa3e81f5d77c5ab43388ec3a8e7988f9a69952ac523c09799a2b4",
+      "git_blob": "c7e056bd7562b866a25e6adaea394666b2e4a8ff",
+      "counts": {
+        "all_pedestrian_rows": 247545,
+        "in_view": 200021,
+        "in_view_occluded": 1454,
+        "in_view_interpolated": 196747,
+        "in_view_noninterpolated": 3274
+      },
+      "tracks_in_view": 116,
+      "tracks_with_noninterpolated_labels": 116,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 66168,
+            "10": 65536,
+            "20": 64283,
+            "35": 62454,
+            "40": 61858,
+            "50": 60687
+          },
+          "1": {
+            "5": 66163,
+            "10": 65532,
+            "20": 64281,
+            "35": 62451,
+            "40": 61854,
+            "50": 60683
+          },
+          "2": {
+            "5": 66160,
+            "10": 65529,
+            "20": 64277,
+            "35": 62446,
+            "40": 61849,
+            "50": 60678
+          }
+        },
+        "maximum_consecutive": [
+          3611,
+          3612,
+          3612
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "bookstore/video1/annotations.txt": {
+      "sha256": "df79665a804fde25688add98197a6416506b90fad148a8cfc10acd09ddeaab24",
+      "git_blob": "56f8f8299cc32e622cc7b1aa2639a888ccdd6249",
+      "counts": {
+        "all_pedestrian_rows": 199662,
+        "in_view": 145057,
+        "in_view_occluded": 3823,
+        "in_view_interpolated": 143294,
+        "in_view_noninterpolated": 1763
+      },
+      "tracks_in_view": 167,
+      "tracks_with_noninterpolated_labels": 167,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 47677,
+            "10": 46839,
+            "20": 45197,
+            "35": 42864,
+            "40": 42107,
+            "50": 40653
+          },
+          "1": {
+            "5": 47673,
+            "10": 46836,
+            "20": 45192,
+            "35": 42859,
+            "40": 42102,
+            "50": 40649
+          },
+          "2": {
+            "5": 47668,
+            "10": 46831,
+            "20": 45190,
+            "35": 42860,
+            "40": 42105,
+            "50": 40651
+          }
+        },
+        "maximum_consecutive": [
+          2178,
+          2177,
+          2177
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          2,
+          2
+        ]
+      }
+    },
+    "bookstore/video2/annotations.txt": {
+      "sha256": "18a0f77bb6c0497f0dc9868131f25795204486a409f5913dc0fe002fd8687d7a",
+      "git_blob": "f8a1ed8d3698c1480f9b469c45b62423a126d62b",
+      "counts": {
+        "all_pedestrian_rows": 168562,
+        "in_view": 110764,
+        "in_view_occluded": 7859,
+        "in_view_interpolated": 108449,
+        "in_view_noninterpolated": 2315
+      },
+      "tracks_in_view": 144,
+      "tracks_with_noninterpolated_labels": 144,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 36327,
+            "10": 35603,
+            "20": 34210,
+            "35": 32208,
+            "40": 31572,
+            "50": 30317
+          },
+          "1": {
+            "5": 36320,
+            "10": 35597,
+            "20": 34203,
+            "35": 32203,
+            "40": 31567,
+            "50": 30312
+          },
+          "2": {
+            "5": 36304,
+            "10": 35585,
+            "20": 34192,
+            "35": 32193,
+            "40": 31556,
+            "50": 30301
+          }
+        },
+        "maximum_consecutive": [
+          3006,
+          3006,
+          3006
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "bookstore/video3/annotations.txt": {
+      "sha256": "456cc81d391067f2d6ca84966307230ee3496b8c370a954db0e73336e976749a",
+      "git_blob": "290ee3d7ea977d4781b2a278005d722f102f1e3c",
+      "counts": {
+        "all_pedestrian_rows": 170656,
+        "in_view": 113955,
+        "in_view_occluded": 15331,
+        "in_view_interpolated": 112230,
+        "in_view_noninterpolated": 1725
+      },
+      "tracks_in_view": 167,
+      "tracks_with_noninterpolated_labels": 167,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 37296,
+            "10": 36447,
+            "20": 34803,
+            "35": 32473,
+            "40": 31713,
+            "50": 30203
+          },
+          "1": {
+            "5": 37292,
+            "10": 36443,
+            "20": 34801,
+            "35": 32469,
+            "40": 31709,
+            "50": 30200
+          },
+          "2": {
+            "5": 37291,
+            "10": 36442,
+            "20": 34797,
+            "35": 32465,
+            "40": 31705,
+            "50": 30196
+          }
+        },
+        "maximum_consecutive": [
+          1178,
+          1177,
+          1177
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "bookstore/video4/annotations.txt": {
+      "sha256": "ee70a362716cf11192d24034bc3ffefb5b082e02d8bbb3a46d5711ff5ec0c311",
+      "git_blob": "bf2c4bf6319efdeed40c467e2362d323c90cb3b1",
+      "counts": {
+        "all_pedestrian_rows": 78906,
+        "in_view": 45420,
+        "in_view_occluded": 8006,
+        "in_view_interpolated": 44469,
+        "in_view_noninterpolated": 951
+      },
+      "tracks_in_view": 88,
+      "tracks_with_noninterpolated_labels": 88,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 14789,
+            "10": 14361,
+            "20": 13557,
+            "35": 12395,
+            "40": 12018,
+            "50": 11281
+          },
+          "1": {
+            "5": 14790,
+            "10": 14363,
+            "20": 13558,
+            "35": 12397,
+            "40": 12021,
+            "50": 11284
+          },
+          "2": {
+            "5": 14796,
+            "10": 14368,
+            "20": 13562,
+            "35": 12400,
+            "40": 12024,
+            "50": 11286
+          }
+        },
+        "maximum_consecutive": [
+          690,
+          690,
+          690
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "bookstore/video5/annotations.txt": {
+      "sha256": "aa1785a1b5990ca2141b11a547adc612b84c37a8476a6e5f0cf3108dce6320f0",
+      "git_blob": "1a32a47bdb01640a4e32bf2d31ba82357fc672a5",
+      "counts": {
+        "all_pedestrian_rows": 83576,
+        "in_view": 45345,
+        "in_view_occluded": 6027,
+        "in_view_interpolated": 44497,
+        "in_view_noninterpolated": 848
+      },
+      "tracks_in_view": 100,
+      "tracks_with_noninterpolated_labels": 100,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 14695,
+            "10": 14183,
+            "20": 13187,
+            "35": 11810,
+            "40": 11383,
+            "50": 10612
+          },
+          "1": {
+            "5": 14701,
+            "10": 14189,
+            "20": 13195,
+            "35": 11815,
+            "40": 11390,
+            "50": 10619
+          },
+          "2": {
+            "5": 14688,
+            "10": 14177,
+            "20": 13183,
+            "35": 11807,
+            "40": 11381,
+            "50": 10608
+          }
+        },
+        "maximum_consecutive": [
+          853,
+          853,
+          852
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          2,
+          1
+        ]
+      }
+    },
+    "bookstore/video6/annotations.txt": {
+      "sha256": "0bda18338c92774084eeef50ee541a9336623695dca2df7c767c6c2ca1d15d98",
+      "git_blob": "edfa02890cf3f9ea688759a6eb6a4defadfe44f7",
+      "counts": {
+        "all_pedestrian_rows": 92002,
+        "in_view": 55969,
+        "in_view_occluded": 6135,
+        "in_view_interpolated": 55005,
+        "in_view_noninterpolated": 964
+      },
+      "tracks_in_view": 102,
+      "tracks_with_noninterpolated_labels": 102,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 18224,
+            "10": 17686,
+            "20": 16635,
+            "35": 15105,
+            "40": 14620,
+            "50": 13670
+          },
+          "1": {
+            "5": 18222,
+            "10": 17683,
+            "20": 16633,
+            "35": 15103,
+            "40": 14616,
+            "50": 13665
+          },
+          "2": {
+            "5": 18215,
+            "10": 17677,
+            "20": 16626,
+            "35": 15099,
+            "40": 14613,
+            "50": 13662
+          }
+        },
+        "maximum_consecutive": [
+          842,
+          842,
+          842
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "coupa/video0/annotations.txt": {
+      "sha256": "251be246444e3a7045ff972411a0fdd918016c20d061d6ceb258c5d62ca605a2",
+      "git_blob": "6e43c0cb7a196c5d5e1af0751ff80fdd8a74effc",
+      "counts": {
+        "all_pedestrian_rows": 112202,
+        "in_view": 83413,
+        "in_view_occluded": 3374,
+        "in_view_interpolated": 82191,
+        "in_view_noninterpolated": 1222
+      },
+      "tracks_in_view": 79,
+      "tracks_with_noninterpolated_labels": 79,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 27474,
+            "10": 27054,
+            "20": 26219,
+            "35": 24988,
+            "40": 24597,
+            "50": 23824
+          },
+          "1": {
+            "5": 27468,
+            "10": 27048,
+            "20": 26214,
+            "35": 24984,
+            "40": 24592,
+            "50": 23819
+          },
+          "2": {
+            "5": 27463,
+            "10": 27043,
+            "20": 26209,
+            "35": 24978,
+            "40": 24586,
+            "50": 23813
+          }
+        },
+        "maximum_consecutive": [
+          3989,
+          3989,
+          3988
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          1,
+          2
+        ]
+      }
+    },
+    "coupa/video1/annotations.txt": {
+      "sha256": "4b05e94a8a1cdcf8dea91ef22f2ffe8dc7101a5b73b4cf83aeaa1d06f68e0327",
+      "git_blob": "7afbd9ad0abb52a0913752e7c5e601fac0fb93a0",
+      "counts": {
+        "all_pedestrian_rows": 88464,
+        "in_view": 61047,
+        "in_view_occluded": 3342,
+        "in_view_interpolated": 59639,
+        "in_view_noninterpolated": 1408
+      },
+      "tracks_in_view": 54,
+      "tracks_with_noninterpolated_labels": 54,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 20127,
+            "10": 19847,
+            "20": 19301,
+            "35": 18499,
+            "40": 18238,
+            "50": 17718
+          },
+          "1": {
+            "5": 20121,
+            "10": 19841,
+            "20": 19295,
+            "35": 18492,
+            "40": 18231,
+            "50": 17711
+          },
+          "2": {
+            "5": 20126,
+            "10": 19846,
+            "20": 19300,
+            "35": 18497,
+            "40": 18237,
+            "50": 17717
+          }
+        },
+        "maximum_consecutive": [
+          2839,
+          2839,
+          2839
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          3,
+          2
+        ]
+      }
+    },
+    "coupa/video2/annotations.txt": {
+      "sha256": "b610c7d203bbd43fb4618a33f8b875f119c3ef20b98d41bf896569e48c2c7e6f",
+      "git_blob": "30aabede834cd25926dbcb95c305905e73c07971",
+      "counts": {
+        "all_pedestrian_rows": 89848,
+        "in_view": 57554,
+        "in_view_occluded": 3082,
+        "in_view_interpolated": 56629,
+        "in_view_noninterpolated": 925
+      },
+      "tracks_in_view": 65,
+      "tracks_with_noninterpolated_labels": 65,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 18908,
+            "10": 18569,
+            "20": 17941,
+            "35": 17064,
+            "40": 16785,
+            "50": 16238
+          },
+          "1": {
+            "5": 18913,
+            "10": 18573,
+            "20": 17944,
+            "35": 17066,
+            "40": 16786,
+            "50": 16238
+          },
+          "2": {
+            "5": 18907,
+            "10": 18568,
+            "20": 17938,
+            "35": 17058,
+            "40": 16779,
+            "50": 16231
+          }
+        },
+        "maximum_consecutive": [
+          1552,
+          1552,
+          1553
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "coupa/video3/annotations.txt": {
+      "sha256": "abbda73f13a00114c66d4cdd63d09dd823cc56fec3296de9e2494e6680809f45",
+      "git_blob": "f70ea2cb1a4cd576008a78ff0e848ee05d71940d",
+      "counts": {
+        "all_pedestrian_rows": 194482,
+        "in_view": 159519,
+        "in_view_occluded": 2921,
+        "in_view_interpolated": 157765,
+        "in_view_noninterpolated": 1754
+      },
+      "tracks_in_view": 97,
+      "tracks_with_noninterpolated_labels": 97,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 52782,
+            "10": 52294,
+            "20": 51343,
+            "35": 49955,
+            "40": 49495,
+            "50": 48575
+          },
+          "1": {
+            "5": 52782,
+            "10": 52295,
+            "20": 51343,
+            "35": 49955,
+            "40": 49495,
+            "50": 48575
+          },
+          "2": {
+            "5": 52773,
+            "10": 52285,
+            "20": 51333,
+            "35": 49944,
+            "40": 49484,
+            "50": 48564
+          }
+        },
+        "maximum_consecutive": [
+          3989,
+          3989,
+          3988
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          1
+        ]
+      }
+    },
+    "deathCircle/video0/annotations.txt": {
+      "sha256": "f7b598bb4f19cc15dec0f63b2a46f9c3eed58457cb932c4841896f2a56a2898b",
+      "git_blob": "62ca1be3744b03801666225ca43d01065819d0de",
+      "counts": {
+        "all_pedestrian_rows": 283447,
+        "in_view": 172430,
+        "in_view_occluded": 20201,
+        "in_view_interpolated": 168959,
+        "in_view_noninterpolated": 3471
+      },
+      "tracks_in_view": 302,
+      "tracks_with_noninterpolated_labels": 302,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 56266,
+            "10": 54786,
+            "20": 51935,
+            "35": 47882,
+            "40": 46592,
+            "50": 44079
+          },
+          "1": {
+            "5": 56270,
+            "10": 54789,
+            "20": 51938,
+            "35": 47882,
+            "40": 46593,
+            "50": 44078
+          },
+          "2": {
+            "5": 56266,
+            "10": 54787,
+            "20": 51933,
+            "35": 47876,
+            "40": 46587,
+            "50": 44071
+          }
+        },
+        "maximum_consecutive": [
+          1036,
+          1036,
+          1037
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "deathCircle/video1/annotations.txt": {
+      "sha256": "3e54f06b06133fd1618216daec77218b6addda136ce099b83a81ac9b74627d39",
+      "git_blob": "2235b92e80c398748e09abffe4f51925987cf8cc",
+      "counts": {
+        "all_pedestrian_rows": 303319,
+        "in_view": 214735,
+        "in_view_occluded": 21722,
+        "in_view_interpolated": 210344,
+        "in_view_noninterpolated": 4391
+      },
+      "tracks_in_view": 358,
+      "tracks_with_noninterpolated_labels": 358,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 70133,
+            "10": 68332,
+            "20": 64764,
+            "35": 59694,
+            "40": 58059,
+            "50": 54845
+          },
+          "1": {
+            "5": 70104,
+            "10": 68305,
+            "20": 64737,
+            "35": 59679,
+            "40": 58042,
+            "50": 54830
+          },
+          "2": {
+            "5": 70118,
+            "10": 68317,
+            "20": 64751,
+            "35": 59686,
+            "40": 58050,
+            "50": 54838
+          }
+        },
+        "maximum_consecutive": [
+          1178,
+          1177,
+          1177
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          3,
+          3
+        ]
+      }
+    },
+    "deathCircle/video2/annotations.txt": {
+      "sha256": "13e13609aac8fae98ffcee07275a0bb6860a0a3402f66009f1fa807d7712d74f",
+      "git_blob": "04fde1c48d886ffb8b1447ead948b26898fe6ec2",
+      "counts": {
+        "all_pedestrian_rows": 7327,
+        "in_view": 6228,
+        "in_view_occluded": 1048,
+        "in_view_interpolated": 6049,
+        "in_view_noninterpolated": 179
+      },
+      "tracks_in_view": 17,
+      "tracks_with_noninterpolated_labels": 17,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 2012,
+            "10": 1927,
+            "20": 1757,
+            "35": 1502,
+            "40": 1422,
+            "50": 1262
+          },
+          "1": {
+            "5": 2013,
+            "10": 1928,
+            "20": 1758,
+            "35": 1503,
+            "40": 1423,
+            "50": 1263
+          },
+          "2": {
+            "5": 1997,
+            "10": 1912,
+            "20": 1742,
+            "35": 1488,
+            "40": 1408,
+            "50": 1248
+          }
+        },
+        "maximum_consecutive": [
+          144,
+          144,
+          143
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          2
+        ]
+      }
+    },
+    "deathCircle/video3/annotations.txt": {
+      "sha256": "06d8f7168e32912383eb6081985f7f510b978d23fc37ff854c10963e9db4415c",
+      "git_blob": "08de69b2a421d0f597ff15a64989c154a77463d7",
+      "counts": {
+        "all_pedestrian_rows": 197348,
+        "in_view": 118400,
+        "in_view_occluded": 11814,
+        "in_view_interpolated": 114878,
+        "in_view_noninterpolated": 3522
+      },
+      "tracks_in_view": 217,
+      "tracks_with_noninterpolated_labels": 217,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 38519,
+            "10": 37347,
+            "20": 35078,
+            "35": 31872,
+            "40": 30838,
+            "50": 28842
+          },
+          "1": {
+            "5": 38500,
+            "10": 37329,
+            "20": 35057,
+            "35": 31851,
+            "40": 30818,
+            "50": 28819
+          },
+          "2": {
+            "5": 38521,
+            "10": 37350,
+            "20": 35077,
+            "35": 31870,
+            "40": 30837,
+            "50": 28838
+          }
+        },
+        "maximum_consecutive": [
+          678,
+          677,
+          677
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          3
+        ]
+      }
+    },
+    "deathCircle/video4/annotations.txt": {
+      "sha256": "e399132399e43b4d32f1bda1740e73c3061293574e6f4b44841a286db384acaf",
+      "git_blob": "7f6194b10734704ce7359933bd1b5ae4b142242b",
+      "counts": {
+        "all_pedestrian_rows": 4520,
+        "in_view": 1984,
+        "in_view_occluded": 154,
+        "in_view_interpolated": 1942,
+        "in_view_noninterpolated": 42
+      },
+      "tracks_in_view": 10,
+      "tracks_with_noninterpolated_labels": 10,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 629,
+            "10": 593,
+            "20": 533,
+            "35": 443,
+            "40": 413,
+            "50": 360
+          },
+          "1": {
+            "5": 630,
+            "10": 594,
+            "20": 534,
+            "35": 444,
+            "40": 414,
+            "50": 361
+          },
+          "2": {
+            "5": 625,
+            "10": 589,
+            "20": 529,
+            "35": 439,
+            "40": 409,
+            "50": 357
+          }
+        },
+        "maximum_consecutive": [
+          151,
+          151,
+          150
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "gates/video0/annotations.txt": {
+      "sha256": "d40074700b88d63aa9c162c462311d8943a128e683bfe59d3f3d9d62ab42f096",
+      "git_blob": "8f0dab37a18dab5b4dfa56cf7032cff1e0fa5d4f",
+      "counts": {
+        "all_pedestrian_rows": 39118,
+        "in_view": 27680,
+        "in_view_occluded": 2168,
+        "in_view_interpolated": 27332,
+        "in_view_noninterpolated": 348
+      },
+      "tracks_in_view": 39,
+      "tracks_with_noninterpolated_labels": 39,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 9051,
+            "10": 8836,
+            "20": 8415,
+            "35": 7814,
+            "40": 7614,
+            "50": 7214
+          },
+          "1": {
+            "5": 9058,
+            "10": 8843,
+            "20": 8424,
+            "35": 7823,
+            "40": 7623,
+            "50": 7223
+          },
+          "2": {
+            "5": 9055,
+            "10": 8840,
+            "20": 8420,
+            "35": 7819,
+            "40": 7619,
+            "50": 7219
+          }
+        },
+        "maximum_consecutive": [
+          564,
+          564,
+          564
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "gates/video1/annotations.txt": {
+      "sha256": "2650aa68a65c772c6b76dc6e71f70399cd19009d4ee23e21f4ea206c2cb94d24",
+      "git_blob": "3823d20397246df05f6a47120d3a1673c459fcbe",
+      "counts": {
+        "all_pedestrian_rows": 105368,
+        "in_view": 72753,
+        "in_view_occluded": 6161,
+        "in_view_interpolated": 71746,
+        "in_view_noninterpolated": 1007
+      },
+      "tracks_in_view": 111,
+      "tracks_with_noninterpolated_labels": 111,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 23798,
+            "10": 23218,
+            "20": 22074,
+            "35": 20398,
+            "40": 19848,
+            "50": 18750
+          },
+          "1": {
+            "5": 23778,
+            "10": 23198,
+            "20": 22055,
+            "35": 20379,
+            "40": 19829,
+            "50": 18732
+          },
+          "2": {
+            "5": 23784,
+            "10": 23204,
+            "20": 22060,
+            "35": 20383,
+            "40": 19833,
+            "50": 18735
+          }
+        },
+        "maximum_consecutive": [
+          1321,
+          1321,
+          1320
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "gates/video2/annotations.txt": {
+      "sha256": "00a80fe546c83112ab15293caf3f4188edb943953026974aca14b11463ce59aa",
+      "git_blob": "b94af410b863cb11f2af1b9b299034363faaea9d",
+      "counts": {
+        "all_pedestrian_rows": 54662,
+        "in_view": 39724,
+        "in_view_occluded": 1251,
+        "in_view_interpolated": 39349,
+        "in_view_noninterpolated": 375
+      },
+      "tracks_in_view": 56,
+      "tracks_with_noninterpolated_labels": 56,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 13001,
+            "10": 12716,
+            "20": 12146,
+            "35": 11295,
+            "40": 11015,
+            "50": 10455
+          },
+          "1": {
+            "5": 13005,
+            "10": 12720,
+            "20": 12150,
+            "35": 11299,
+            "40": 11019,
+            "50": 10459
+          },
+          "2": {
+            "5": 13010,
+            "10": 12725,
+            "20": 12155,
+            "35": 11304,
+            "40": 11024,
+            "50": 10464
+          }
+        },
+        "maximum_consecutive": [
+          851,
+          852,
+          852
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "gates/video3/annotations.txt": {
+      "sha256": "e113877ab2ab5585e6a28b95c28f74cf973bde8b1919bce5261d6d99e3630567",
+      "git_blob": "eb29c0610e251e7658761f50580d2ee16062ddb1",
+      "counts": {
+        "all_pedestrian_rows": 139923,
+        "in_view": 83527,
+        "in_view_occluded": 17883,
+        "in_view_interpolated": 81268,
+        "in_view_noninterpolated": 2259
+      },
+      "tracks_in_view": 158,
+      "tracks_with_noninterpolated_labels": 158,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 27163,
+            "10": 26321,
+            "20": 24662,
+            "35": 22273,
+            "40": 21510,
+            "50": 20049
+          },
+          "1": {
+            "5": 27161,
+            "10": 26318,
+            "20": 24659,
+            "35": 22271,
+            "40": 21508,
+            "50": 20046
+          },
+          "2": {
+            "5": 27155,
+            "10": 26312,
+            "20": 24653,
+            "35": 22265,
+            "40": 21503,
+            "50": 20039
+          }
+        },
+        "maximum_consecutive": [
+          767,
+          766,
+          767
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "gates/video4/annotations.txt": {
+      "sha256": "c52476669b3789d17af30e4f0e316351158e451c027cea0366bcde16cdece92b",
+      "git_blob": "617f3f3c97b5107c16fd2753fa9a26be4c504a96",
+      "counts": {
+        "all_pedestrian_rows": 31140,
+        "in_view": 21913,
+        "in_view_occluded": 1995,
+        "in_view_interpolated": 21425,
+        "in_view_noninterpolated": 488
+      },
+      "tracks_in_view": 44,
+      "tracks_with_noninterpolated_labels": 44,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 7131,
+            "10": 6916,
+            "20": 6505,
+            "35": 5911,
+            "40": 5721,
+            "50": 5347
+          },
+          "1": {
+            "5": 7122,
+            "10": 6908,
+            "20": 6497,
+            "35": 5904,
+            "40": 5714,
+            "50": 5340
+          },
+          "2": {
+            "5": 7131,
+            "10": 6915,
+            "20": 6504,
+            "35": 5910,
+            "40": 5720,
+            "50": 5345
+          }
+        },
+        "maximum_consecutive": [
+          511,
+          510,
+          511
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "gates/video5/annotations.txt": {
+      "sha256": "2bd52643eb760408ad0285fba1fae2c0d9f09c235abc91c0ae2d6c9d50cf8d71",
+      "git_blob": "06d2689912c20cd99631540b52b5842952d5f4ba",
+      "counts": {
+        "all_pedestrian_rows": 16012,
+        "in_view": 9236,
+        "in_view_occluded": 0,
+        "in_view_interpolated": 9034,
+        "in_view_noninterpolated": 202
+      },
+      "tracks_in_view": 16,
+      "tracks_with_noninterpolated_labels": 16,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 3013,
+            "10": 2932,
+            "20": 2782,
+            "35": 2572,
+            "40": 2507,
+            "50": 2385
+          },
+          "1": {
+            "5": 3011,
+            "10": 2930,
+            "20": 2780,
+            "35": 2570,
+            "40": 2505,
+            "50": 2383
+          },
+          "2": {
+            "5": 3008,
+            "10": 2928,
+            "20": 2778,
+            "35": 2567,
+            "40": 2502,
+            "50": 2380
+          }
+        },
+        "maximum_consecutive": [
+          624,
+          623,
+          623
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "gates/video6/annotations.txt": {
+      "sha256": "f247a4255bbd25923b1379c2ee4aeaa7add6155398d6be1c58ffd7084ce6b3ce",
+      "git_blob": "40273c060634abac970cb24f33103fc978ca9732",
+      "counts": {
+        "all_pedestrian_rows": 12776,
+        "in_view": 6401,
+        "in_view_occluded": 4,
+        "in_view_interpolated": 6273,
+        "in_view_noninterpolated": 128
+      },
+      "tracks_in_view": 18,
+      "tracks_with_noninterpolated_labels": 18,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 2058,
+            "10": 1968,
+            "20": 1801,
+            "35": 1614,
+            "40": 1562,
+            "50": 1470
+          },
+          "1": {
+            "5": 2060,
+            "10": 1970,
+            "20": 1802,
+            "35": 1615,
+            "40": 1564,
+            "50": 1471
+          },
+          "2": {
+            "5": 2066,
+            "10": 1976,
+            "20": 1808,
+            "35": 1619,
+            "40": 1567,
+            "50": 1474
+          }
+        },
+        "maximum_consecutive": [
+          314,
+          313,
+          314
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "gates/video7/annotations.txt": {
+      "sha256": "807df1a5d4e76335fa168bf8687fdfd4c3484c546124b3d289d8dbaeb51085a0",
+      "git_blob": "857fc8b67a528e591ef0e2d04de8243adc07576f",
+      "counts": {
+        "all_pedestrian_rows": 12022,
+        "in_view": 6448,
+        "in_view_occluded": 365,
+        "in_view_interpolated": 6302,
+        "in_view_noninterpolated": 146
+      },
+      "tracks_in_view": 16,
+      "tracks_with_noninterpolated_labels": 16,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 2074,
+            "10": 1987,
+            "20": 1825,
+            "35": 1600,
+            "40": 1525,
+            "50": 1394
+          },
+          "1": {
+            "5": 2073,
+            "10": 1985,
+            "20": 1822,
+            "35": 1597,
+            "40": 1522,
+            "50": 1391
+          },
+          "2": {
+            "5": 2074,
+            "10": 1987,
+            "20": 1824,
+            "35": 1599,
+            "40": 1524,
+            "50": 1392
+          }
+        },
+        "maximum_consecutive": [
+          364,
+          364,
+          364
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          2,
+          2
+        ]
+      }
+    },
+    "gates/video8/annotations.txt": {
+      "sha256": "6b48fcd595067453a8069e2bf8a4dcdf2033c75e1c6e48f5d7854fe4fb04fd54",
+      "git_blob": "2b4078ae4156e1dc4625b887580cc6138d083824",
+      "counts": {
+        "all_pedestrian_rows": 34682,
+        "in_view": 24380,
+        "in_view_occluded": 466,
+        "in_view_interpolated": 24038,
+        "in_view_noninterpolated": 342
+      },
+      "tracks_in_view": 46,
+      "tracks_with_noninterpolated_labels": 46,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 7910,
+            "10": 7639,
+            "20": 7119,
+            "35": 6401,
+            "40": 6178,
+            "50": 5767
+          },
+          "1": {
+            "5": 7903,
+            "10": 7631,
+            "20": 7111,
+            "35": 6395,
+            "40": 6172,
+            "50": 5762
+          },
+          "2": {
+            "5": 7907,
+            "10": 7635,
+            "20": 7113,
+            "35": 6396,
+            "40": 6174,
+            "50": 5763
+          }
+        },
+        "maximum_consecutive": [
+          734,
+          734,
+          734
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "hyang/video0/annotations.txt": {
+      "sha256": "15d01aca774b672d4838f4b1364608bab27af75b1313ed63cc51b310cd3fa12d",
+      "git_blob": "a09db0e2bdee8228e9cf1fc55e38943e14f0d18f",
+      "counts": {
+        "all_pedestrian_rows": 225740,
+        "in_view": 162294,
+        "in_view_occluded": 890,
+        "in_view_interpolated": 158712,
+        "in_view_noninterpolated": 3582
+      },
+      "tracks_in_view": 168,
+      "tracks_with_noninterpolated_labels": 168,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 53404,
+            "10": 52528,
+            "20": 50810,
+            "35": 48319,
+            "40": 47509,
+            "50": 45902
+          },
+          "1": {
+            "5": 53383,
+            "10": 52507,
+            "20": 50788,
+            "35": 48300,
+            "40": 47490,
+            "50": 45884
+          },
+          "2": {
+            "5": 53389,
+            "10": 52514,
+            "20": 50795,
+            "35": 48308,
+            "40": 47497,
+            "50": 45891
+          }
+        },
+        "maximum_consecutive": [
+          1010,
+          1011,
+          1011
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "hyang/video1/annotations.txt": {
+      "sha256": "da09f7564c19226193f9350af5816c0eee1783a0af6c6718562140fff719c54a",
+      "git_blob": "835dba3089d5c9c248db4af6563c2c1e61a1f0bb",
+      "counts": {
+        "all_pedestrian_rows": 137724,
+        "in_view": 110674,
+        "in_view_occluded": 3168,
+        "in_view_interpolated": 108944,
+        "in_view_noninterpolated": 1730
+      },
+      "tracks_in_view": 98,
+      "tracks_with_noninterpolated_labels": 98,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 36501,
+            "10": 36015,
+            "20": 35063,
+            "35": 33651,
+            "40": 33181,
+            "50": 32266
+          },
+          "1": {
+            "5": 36484,
+            "10": 35998,
+            "20": 35047,
+            "35": 33636,
+            "40": 33166,
+            "50": 32250
+          },
+          "2": {
+            "5": 36503,
+            "10": 36017,
+            "20": 35065,
+            "35": 33654,
+            "40": 33184,
+            "50": 32269
+          }
+        },
+        "maximum_consecutive": [
+          2162,
+          2162,
+          2163
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          1
+        ]
+      }
+    },
+    "hyang/video10/annotations.txt": {
+      "sha256": "a8eed46ccc4cf64ec1e4899474d5fc89f1bd5b3be893be1beeb5573e9dc11afc",
+      "git_blob": "c849ccb548656b3b0ffa6c9d5d0a8d8128e27a66",
+      "counts": {
+        "all_pedestrian_rows": 81184,
+        "in_view": 55517,
+        "in_view_occluded": 6819,
+        "in_view_interpolated": 54434,
+        "in_view_noninterpolated": 1083
+      },
+      "tracks_in_view": 50,
+      "tracks_with_noninterpolated_labels": 50,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 18287,
+            "10": 18012,
+            "20": 17471,
+            "35": 16683,
+            "40": 16428,
+            "50": 15920
+          },
+          "1": {
+            "5": 18283,
+            "10": 18008,
+            "20": 17467,
+            "35": 16679,
+            "40": 16424,
+            "50": 15916
+          },
+          "2": {
+            "5": 18287,
+            "10": 18012,
+            "20": 17471,
+            "35": 16684,
+            "40": 16429,
+            "50": 15921
+          }
+        },
+        "maximum_consecutive": [
+          3143,
+          3142,
+          3143
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "hyang/video11/annotations.txt": {
+      "sha256": "f69a778718495119f62f2f4c172b7f53801862ab24fedddce885b1161a858d10",
+      "git_blob": "8eef521e32a1b3f0cce450e9b9178ef3fd6ed621",
+      "counts": {
+        "all_pedestrian_rows": 139748,
+        "in_view": 95251,
+        "in_view_occluded": 9629,
+        "in_view_interpolated": 93818,
+        "in_view_noninterpolated": 1433
+      },
+      "tracks_in_view": 133,
+      "tracks_with_noninterpolated_labels": 133,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 31204,
+            "10": 30513,
+            "20": 29140,
+            "35": 27133,
+            "40": 26473,
+            "50": 25194
+          },
+          "1": {
+            "5": 31191,
+            "10": 30499,
+            "20": 29126,
+            "35": 27118,
+            "40": 26458,
+            "50": 25181
+          },
+          "2": {
+            "5": 31186,
+            "10": 30495,
+            "20": 29122,
+            "35": 27114,
+            "40": 26453,
+            "50": 25176
+          }
+        },
+        "maximum_consecutive": [
+          1344,
+          1344,
+          1344
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          2
+        ]
+      }
+    },
+    "hyang/video12/annotations.txt": {
+      "sha256": "9c2af4cf771ac71431eb0702839a9429a4fe3dc482e950a5ba7df0ac084ca4a2",
+      "git_blob": "ec6ecb0c3b47548a8a96396f5abced1ed6c5d432",
+      "counts": {
+        "all_pedestrian_rows": 40460,
+        "in_view": 26388,
+        "in_view_occluded": 2317,
+        "in_view_interpolated": 25917,
+        "in_view_noninterpolated": 471
+      },
+      "tracks_in_view": 43,
+      "tracks_with_noninterpolated_labels": 43,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 8628,
+            "10": 8413,
+            "20": 7983,
+            "35": 7352,
+            "40": 7142,
+            "50": 6726
+          },
+          "1": {
+            "5": 8624,
+            "10": 8409,
+            "20": 7979,
+            "35": 7349,
+            "40": 7139,
+            "50": 6723
+          },
+          "2": {
+            "5": 8619,
+            "10": 8404,
+            "20": 7974,
+            "35": 7344,
+            "40": 7134,
+            "50": 6719
+          }
+        },
+        "maximum_consecutive": [
+          645,
+          645,
+          645
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "hyang/video13/annotations.txt": {
+      "sha256": "cfd8398b5a08b5279924f4f467fe1cdcd8a4e6abddda8ed9477a7d93574a9fdf",
+      "git_blob": "d27a97bf5a974a44624b458198760973215e6501",
+      "counts": {
+        "all_pedestrian_rows": 39272,
+        "in_view": 18050,
+        "in_view_occluded": 10084,
+        "in_view_interpolated": 17510,
+        "in_view_noninterpolated": 540
+      },
+      "tracks_in_view": 42,
+      "tracks_with_noninterpolated_labels": 42,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 5848,
+            "10": 5648,
+            "20": 5269,
+            "35": 4746,
+            "40": 4583,
+            "50": 4280
+          },
+          "1": {
+            "5": 5853,
+            "10": 5653,
+            "20": 5273,
+            "35": 4749,
+            "40": 4585,
+            "50": 4280
+          },
+          "2": {
+            "5": 5843,
+            "10": 5643,
+            "20": 5263,
+            "35": 4740,
+            "40": 4575,
+            "50": 4272
+          }
+        },
+        "maximum_consecutive": [
+          507,
+          507,
+          506
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          1
+        ]
+      }
+    },
+    "hyang/video14/annotations.txt": {
+      "sha256": "3ac70cee97692c4d0b20a9431d6c4627e7078093300b255bb196cfdde2a2d355",
+      "git_blob": "a9af374376ab8e264a92de21e0481c745ea0e661",
+      "counts": {
+        "all_pedestrian_rows": 29916,
+        "in_view": 20136,
+        "in_view_occluded": 474,
+        "in_view_interpolated": 19687,
+        "in_view_noninterpolated": 449
+      },
+      "tracks_in_view": 26,
+      "tracks_with_noninterpolated_labels": 26,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 6599,
+            "10": 6459,
+            "20": 6179,
+            "35": 5766,
+            "40": 5631,
+            "50": 5361
+          },
+          "1": {
+            "5": 6602,
+            "10": 6462,
+            "20": 6182,
+            "35": 5769,
+            "40": 5634,
+            "50": 5364
+          },
+          "2": {
+            "5": 6598,
+            "10": 6458,
+            "20": 6178,
+            "35": 5766,
+            "40": 5631,
+            "50": 5361
+          }
+        },
+        "maximum_consecutive": [
+          844,
+          844,
+          844
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "hyang/video2/annotations.txt": {
+      "sha256": "632df686f7f7a0b127f452a3a7c5fb73167f72fa38269f71baa382f6be80a2b0",
+      "git_blob": "cadf43f661baadcea80c49c49adfcaf1ad0e9dc9",
+      "counts": {
+        "all_pedestrian_rows": 162496,
+        "in_view": 129188,
+        "in_view_occluded": 3870,
+        "in_view_interpolated": 127331,
+        "in_view_noninterpolated": 1857
+      },
+      "tracks_in_view": 103,
+      "tracks_with_noninterpolated_labels": 103,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 42633,
+            "10": 42098,
+            "20": 41050,
+            "35": 39528,
+            "40": 39036,
+            "50": 38071
+          },
+          "1": {
+            "5": 42639,
+            "10": 42104,
+            "20": 41056,
+            "35": 39531,
+            "40": 39039,
+            "50": 38073
+          },
+          "2": {
+            "5": 42628,
+            "10": 42093,
+            "20": 41045,
+            "35": 39522,
+            "40": 39030,
+            "50": 38064
+          }
+        },
+        "maximum_consecutive": [
+          4091,
+          4091,
+          4090
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          3,
+          2
+        ]
+      }
+    },
+    "hyang/video3/annotations.txt": {
+      "sha256": "be77ab6ee52e08194894e66e59d9f14dddfa8e714cc72e5a3bf746266e4aa5dc",
+      "git_blob": "289747d656f0181ee78f50b3350a60508ba68e28",
+      "counts": {
+        "all_pedestrian_rows": 148492,
+        "in_view": 109702,
+        "in_view_occluded": 5420,
+        "in_view_interpolated": 107581,
+        "in_view_noninterpolated": 2121
+      },
+      "tracks_in_view": 136,
+      "tracks_with_noninterpolated_labels": 136,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 35984,
+            "10": 35274,
+            "20": 33856,
+            "35": 31745,
+            "40": 31048,
+            "50": 29677
+          },
+          "1": {
+            "5": 36002,
+            "10": 35292,
+            "20": 33874,
+            "35": 31763,
+            "40": 31065,
+            "50": 29696
+          },
+          "2": {
+            "5": 35984,
+            "10": 35274,
+            "20": 33856,
+            "35": 31745,
+            "40": 31047,
+            "50": 29677
+          }
+        },
+        "maximum_consecutive": [
+          846,
+          846,
+          847
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "hyang/video4/annotations.txt": {
+      "sha256": "790c2f0b77ffab8c33aeb41751551fceec831d02b88fc39e742da8c46bd4f182",
+      "git_blob": "9093cdf1f407e1dc83a3a47a9b7da4aef4807afd",
+      "counts": {
+        "all_pedestrian_rows": 346258,
+        "in_view": 262445,
+        "in_view_occluded": 2619,
+        "in_view_interpolated": 256322,
+        "in_view_noninterpolated": 6123
+      },
+      "tracks_in_view": 219,
+      "tracks_with_noninterpolated_labels": 219,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 86522,
+            "10": 85330,
+            "20": 82992,
+            "35": 79606,
+            "40": 78492,
+            "50": 76274
+          },
+          "1": {
+            "5": 86526,
+            "10": 85334,
+            "20": 82997,
+            "35": 79610,
+            "40": 78496,
+            "50": 76278
+          },
+          "2": {
+            "5": 86515,
+            "10": 85324,
+            "20": 82984,
+            "35": 79597,
+            "40": 78484,
+            "50": 76266
+          }
+        },
+        "maximum_consecutive": [
+          1282,
+          1281,
+          1281
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          2,
+          2
+        ]
+      }
+    },
+    "hyang/video5/annotations.txt": {
+      "sha256": "878ac1ff6a5095e4e311f18405f1d091f4061c8b7feda701eb8ea91bac37cdb2",
+      "git_blob": "ca93f92f7cf8705b71a7141b02fb6869a95b649f",
+      "counts": {
+        "all_pedestrian_rows": 134232,
+        "in_view": 100488,
+        "in_view_occluded": 1,
+        "in_view_interpolated": 98285,
+        "in_view_noninterpolated": 2203
+      },
+      "tracks_in_view": 84,
+      "tracks_with_noninterpolated_labels": 84,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 33142,
+            "10": 32692,
+            "20": 31792,
+            "35": 30452,
+            "40": 30009,
+            "50": 29142
+          },
+          "1": {
+            "5": 33133,
+            "10": 32683,
+            "20": 31783,
+            "35": 30444,
+            "40": 30002,
+            "50": 29135
+          },
+          "2": {
+            "5": 33129,
+            "10": 32679,
+            "20": 31779,
+            "35": 30439,
+            "40": 29996,
+            "50": 29131
+          }
+        },
+        "maximum_consecutive": [
+          3550,
+          3549,
+          3549
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          2,
+          3
+        ]
+      }
+    },
+    "hyang/video6/annotations.txt": {
+      "sha256": "feb916722ca76a50631e3684b978df6b1a0fb5326992b2947b3145330ff40ba5",
+      "git_blob": "5a4d3e7353ba626ffc769aaa862e3393432dc732",
+      "counts": {
+        "all_pedestrian_rows": 112864,
+        "in_view": 82962,
+        "in_view_occluded": 1266,
+        "in_view_interpolated": 81450,
+        "in_view_noninterpolated": 1512
+      },
+      "tracks_in_view": 80,
+      "tracks_with_noninterpolated_labels": 80,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 27321,
+            "10": 26916,
+            "20": 26107,
+            "35": 24914,
+            "40": 24524,
+            "50": 23745
+          },
+          "1": {
+            "5": 27324,
+            "10": 26919,
+            "20": 26110,
+            "35": 24917,
+            "40": 24527,
+            "50": 23747
+          },
+          "2": {
+            "5": 27313,
+            "10": 26908,
+            "20": 26099,
+            "35": 24906,
+            "40": 24516,
+            "50": 23737
+          }
+        },
+        "maximum_consecutive": [
+          1244,
+          1244,
+          1244
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "hyang/video7/annotations.txt": {
+      "sha256": "9378f9697e7f7643dc0459f8872366ea621e84b1ca4a8ae739da8cb612fc019e",
+      "git_blob": "f5b81b08a72bbdbd6151e270d97217ff4feb4c85",
+      "counts": {
+        "all_pedestrian_rows": 14652,
+        "in_view": 12996,
+        "in_view_occluded": 221,
+        "in_view_interpolated": 12810,
+        "in_view_noninterpolated": 186
+      },
+      "tracks_in_view": 28,
+      "tracks_with_noninterpolated_labels": 28,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 4235,
+            "10": 4095,
+            "20": 3815,
+            "35": 3413,
+            "40": 3283,
+            "50": 3023
+          },
+          "1": {
+            "5": 4212,
+            "10": 4072,
+            "20": 3792,
+            "35": 3392,
+            "40": 3262,
+            "50": 3002
+          },
+          "2": {
+            "5": 4211,
+            "10": 4071,
+            "20": 3791,
+            "35": 3389,
+            "40": 3259,
+            "50": 2999
+          }
+        },
+        "maximum_consecutive": [
+          192,
+          191,
+          191
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "hyang/video8/annotations.txt": {
+      "sha256": "7261c56536f8ce77bee3b03a340e25c8949685a4a6f21b57ed3d51ff44a538d9",
+      "git_blob": "dec577f30584e39f84ec5911926807da59b33363",
+      "counts": {
+        "all_pedestrian_rows": 5072,
+        "in_view": 3501,
+        "in_view_occluded": 262,
+        "in_view_interpolated": 3447,
+        "in_view_noninterpolated": 54
+      },
+      "tracks_in_view": 10,
+      "tracks_with_noninterpolated_labels": 10,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 1135,
+            "10": 1095,
+            "20": 1015,
+            "35": 903,
+            "40": 868,
+            "50": 798
+          },
+          "1": {
+            "5": 1129,
+            "10": 1089,
+            "20": 1009,
+            "35": 897,
+            "40": 862,
+            "50": 792
+          },
+          "2": {
+            "5": 1130,
+            "10": 1090,
+            "20": 1010,
+            "35": 898,
+            "40": 863,
+            "50": 793
+          }
+        },
+        "maximum_consecutive": [
+          192,
+          191,
+          191
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "hyang/video9/annotations.txt": {
+      "sha256": "4f5b894f892b8412f70d439599aee44ac8c097ac953594cd2dc6eea05454911b",
+      "git_blob": "fd475194bfee9b6159818fcd3def187c3d3ec3ce",
+      "counts": {
+        "all_pedestrian_rows": 2744,
+        "in_view": 546,
+        "in_view_occluded": 181,
+        "in_view_interpolated": 528,
+        "in_view_noninterpolated": 18
+      },
+      "tracks_in_view": 5,
+      "tracks_with_noninterpolated_labels": 5,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 165,
+            "10": 140,
+            "20": 100,
+            "35": 65,
+            "40": 59,
+            "50": 49
+          },
+          "1": {
+            "5": 160,
+            "10": 135,
+            "20": 97,
+            "35": 63,
+            "40": 58,
+            "50": 48
+          },
+          "2": {
+            "5": 161,
+            "10": 136,
+            "20": 98,
+            "35": 64,
+            "40": 59,
+            "50": 49
+          }
+        },
+        "maximum_consecutive": [
+          98,
+          97,
+          98
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "little/video0/annotations.txt": {
+      "sha256": "8da212a093d1c62103f163cfa3668fa446ffe967eed198e16f771657f1d3a9d8",
+      "git_blob": "4e3a01ce68921a6ef996427623771496ccc96c98",
+      "counts": {
+        "all_pedestrian_rows": 23626,
+        "in_view": 14338,
+        "in_view_occluded": 497,
+        "in_view_interpolated": 14047,
+        "in_view_noninterpolated": 291
+      },
+      "tracks_in_view": 26,
+      "tracks_with_noninterpolated_labels": 26,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 4682,
+            "10": 4562,
+            "20": 4322,
+            "35": 3962,
+            "40": 3842,
+            "50": 3607
+          },
+          "1": {
+            "5": 4680,
+            "10": 4560,
+            "20": 4320,
+            "35": 3960,
+            "40": 3840,
+            "50": 3606
+          },
+          "2": {
+            "5": 4684,
+            "10": 4564,
+            "20": 4324,
+            "35": 3964,
+            "40": 3844,
+            "50": 3610
+          }
+        },
+        "maximum_consecutive": [
+          506,
+          506,
+          506
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "little/video1/annotations.txt": {
+      "sha256": "12a38713a644192f1b238955567ba21e3666928bbc379725dbd6feb33a0b3a36",
+      "git_blob": "bd624577e81b7df4adf4b91159d43bca3fe4912e",
+      "counts": {
+        "all_pedestrian_rows": 52720,
+        "in_view": 29877,
+        "in_view_occluded": 477,
+        "in_view_interpolated": 29287,
+        "in_view_noninterpolated": 590
+      },
+      "tracks_in_view": 49,
+      "tracks_with_noninterpolated_labels": 49,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 9766,
+            "10": 9523,
+            "20": 9044,
+            "35": 8351,
+            "40": 8128,
+            "50": 7702
+          },
+          "1": {
+            "5": 9766,
+            "10": 9523,
+            "20": 9044,
+            "35": 8351,
+            "40": 8128,
+            "50": 7701
+          },
+          "2": {
+            "5": 9755,
+            "10": 9513,
+            "20": 9034,
+            "35": 8341,
+            "40": 8118,
+            "50": 7692
+          }
+        },
+        "maximum_consecutive": [
+          729,
+          729,
+          730
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "little/video2/annotations.txt": {
+      "sha256": "c4eb6e989af2bce5ba0af71f9a701c61fe8771bb28140b27ed1193cfa0a5d22a",
+      "git_blob": "c1b965062bf4ac9b7eec85f67836b971ea671714",
+      "counts": {
+        "all_pedestrian_rows": 40888,
+        "in_view": 11410,
+        "in_view_occluded": 3726,
+        "in_view_interpolated": 11137,
+        "in_view_noninterpolated": 273
+      },
+      "tracks_in_view": 57,
+      "tracks_with_noninterpolated_labels": 57,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 3564,
+            "10": 3293,
+            "20": 2886,
+            "35": 2460,
+            "40": 2340,
+            "50": 2118
+          },
+          "1": {
+            "5": 3567,
+            "10": 3295,
+            "20": 2887,
+            "35": 2462,
+            "40": 2343,
+            "50": 2121
+          },
+          "2": {
+            "5": 3563,
+            "10": 3291,
+            "20": 2885,
+            "35": 2459,
+            "40": 2341,
+            "50": 2119
+          }
+        },
+        "maximum_consecutive": [
+          347,
+          347,
+          347
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "little/video3/annotations.txt": {
+      "sha256": "d89abe3b6ea37103d979383b08aabadec6677863adaa4d66f943ba20c31b4f86",
+      "git_blob": "c6262495e658f3390de3da8ce28af488fb2c3411",
+      "counts": {
+        "all_pedestrian_rows": 136172,
+        "in_view": 90187,
+        "in_view_occluded": 3086,
+        "in_view_interpolated": 88091,
+        "in_view_noninterpolated": 2096
+      },
+      "tracks_in_view": 92,
+      "tracks_with_noninterpolated_labels": 92,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 29653,
+            "10": 29150,
+            "20": 28179,
+            "35": 26775,
+            "40": 26315,
+            "50": 25403
+          },
+          "1": {
+            "5": 29655,
+            "10": 29153,
+            "20": 28182,
+            "35": 26778,
+            "40": 26318,
+            "50": 25407
+          },
+          "2": {
+            "5": 29666,
+            "10": 29163,
+            "20": 28192,
+            "35": 26787,
+            "40": 26327,
+            "50": 25415
+          }
+        },
+        "maximum_consecutive": [
+          1236,
+          1235,
+          1236
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    },
+    "nexus/video0/annotations.txt": {
+      "sha256": "957f9994093c99fd38e920c83635b5ce7558f40248d7147b2b954cceaf4d625b",
+      "git_blob": "6df67685fa31bd84786cf6a50ac7d9c355c779a3",
+      "counts": {
+        "all_pedestrian_rows": 142287,
+        "in_view": 104549,
+        "in_view_occluded": 11364,
+        "in_view_interpolated": 102977,
+        "in_view_noninterpolated": 1572
+      },
+      "tracks_in_view": 114,
+      "tracks_with_noninterpolated_labels": 114,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 34356,
+            "10": 33756,
+            "20": 32578,
+            "35": 30847,
+            "40": 30274,
+            "50": 29148
+          },
+          "1": {
+            "5": 34357,
+            "10": 33756,
+            "20": 32576,
+            "35": 30845,
+            "40": 30272,
+            "50": 29146
+          },
+          "2": {
+            "5": 34352,
+            "10": 33751,
+            "20": 32571,
+            "35": 30840,
+            "40": 30267,
+            "50": 29141
+          }
+        },
+        "maximum_consecutive": [
+          838,
+          838,
+          838
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "nexus/video1/annotations.txt": {
+      "sha256": "64be87f723c1713464c587aeaf91e25aef0e29934025af30dae1e6db857dcd11",
+      "git_blob": "ec03a08a2b225eafff67fdeb0af84715345a70c6",
+      "counts": {
+        "all_pedestrian_rows": 234974,
+        "in_view": 168854,
+        "in_view_occluded": 17545,
+        "in_view_interpolated": 165466,
+        "in_view_noninterpolated": 3388
+      },
+      "tracks_in_view": 178,
+      "tracks_with_noninterpolated_labels": 178,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 55522,
+            "10": 54579,
+            "20": 52720,
+            "35": 49971,
+            "40": 49063,
+            "50": 47270
+          },
+          "1": {
+            "5": 55533,
+            "10": 54592,
+            "20": 52734,
+            "35": 49984,
+            "40": 49078,
+            "50": 47284
+          },
+          "2": {
+            "5": 55514,
+            "10": 54571,
+            "20": 52712,
+            "35": 49961,
+            "40": 49055,
+            "50": 47261
+          }
+        },
+        "maximum_consecutive": [
+          796,
+          795,
+          796
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    "nexus/video10/annotations.txt": {
+      "sha256": "ceb3637cfe2d5d921761d62040bfa213352ef58868760067fb0007b88fe883ab",
+      "git_blob": "b850de63e071eb79f45488d5702dbe6cc55a2746",
+      "counts": {
+        "all_pedestrian_rows": 54984,
+        "in_view": 36272,
+        "in_view_occluded": 998,
+        "in_view_interpolated": 35791,
+        "in_view_noninterpolated": 481
+      },
+      "tracks_in_view": 50,
+      "tracks_with_noninterpolated_labels": 50,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 11893,
+            "10": 11638,
+            "20": 11128,
+            "35": 10371,
+            "40": 10131,
+            "50": 9665
+          },
+          "1": {
+            "5": 11884,
+            "10": 11629,
+            "20": 11119,
+            "35": 10363,
+            "40": 10123,
+            "50": 9657
+          },
+          "2": {
+            "5": 11883,
+            "10": 11628,
+            "20": 11118,
+            "35": 10361,
+            "40": 10121,
+            "50": 9655
+          }
+        },
+        "maximum_consecutive": [
+          760,
+          759,
+          760
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "nexus/video11/annotations.txt": {
+      "sha256": "5b10fa6382aed6e33e0b3fd71ef1f58244fe2060060615d7e77115962e55d03e",
+      "git_blob": "e168fdd35d4a41bfc445bbf97e5722f10a635319",
+      "counts": {
+        "all_pedestrian_rows": 57848,
+        "in_view": 37221,
+        "in_view_occluded": 663,
+        "in_view_interpolated": 36605,
+        "in_view_noninterpolated": 616
+      },
+      "tracks_in_view": 49,
+      "tracks_with_noninterpolated_labels": 49,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 12201,
+            "10": 11947,
+            "20": 11464,
+            "35": 10760,
+            "40": 10530,
+            "50": 10090
+          },
+          "1": {
+            "5": 12201,
+            "10": 11947,
+            "20": 11465,
+            "35": 10761,
+            "40": 10532,
+            "50": 10092
+          },
+          "2": {
+            "5": 12206,
+            "10": 11951,
+            "20": 11468,
+            "35": 10764,
+            "40": 10535,
+            "50": 10094
+          }
+        },
+        "maximum_consecutive": [
+          590,
+          590,
+          589
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          2,
+          2
+        ]
+      }
+    },
+    "nexus/video2/annotations.txt": {
+      "sha256": "34a8ddd3fe7c2c36d6369aa6c3bb6c414e37aa66635df11d18232769057556fd",
+      "git_blob": "77e303317376f3440970583faebe52091ce95225",
+      "counts": {
+        "all_pedestrian_rows": 195432,
+        "in_view": 123737,
+        "in_view_occluded": 4004,
+        "in_view_interpolated": 121955,
+        "in_view_noninterpolated": 1782
+      },
+      "tracks_in_view": 181,
+      "tracks_with_noninterpolated_labels": 181,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 40479,
+            "10": 39549,
+            "20": 37779,
+            "35": 35268,
+            "40": 34467,
+            "50": 32888
+          },
+          "1": {
+            "5": 40479,
+            "10": 39551,
+            "20": 37780,
+            "35": 35266,
+            "40": 34467,
+            "50": 32889
+          },
+          "2": {
+            "5": 40478,
+            "10": 39552,
+            "20": 37782,
+            "35": 35266,
+            "40": 34466,
+            "50": 32888
+          }
+        },
+        "maximum_consecutive": [
+          597,
+          597,
+          597
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          2
+        ]
+      }
+    },
+    "nexus/video3/annotations.txt": {
+      "sha256": "790b5efbf072deb8db6591ddc25d8c07892d9f6b7d556e68db45133e0792553b",
+      "git_blob": "75e950ec399259be6886173fa160e87a0cf48f34",
+      "counts": {
+        "all_pedestrian_rows": 33444,
+        "in_view": 21425,
+        "in_view_occluded": 442,
+        "in_view_interpolated": 20903,
+        "in_view_noninterpolated": 522
+      },
+      "tracks_in_view": 40,
+      "tracks_with_noninterpolated_labels": 40,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 6977,
+            "10": 6772,
+            "20": 6373,
+            "35": 5833,
+            "40": 5653,
+            "50": 5300
+          },
+          "1": {
+            "5": 6971,
+            "10": 6766,
+            "20": 6371,
+            "35": 5831,
+            "40": 5651,
+            "50": 5299
+          },
+          "2": {
+            "5": 6983,
+            "10": 6778,
+            "20": 6382,
+            "35": 5842,
+            "40": 5662,
+            "50": 5311
+          }
+        },
+        "maximum_consecutive": [
+          331,
+          331,
+          331
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          1
+        ]
+      }
+    },
+    "nexus/video4/annotations.txt": {
+      "sha256": "2ac32619a61c44e248277cd4c8f19744bac3c53ae5ca851f93599c949accf5d8",
+      "git_blob": "0c726ab7c4b854b69766330523cde3d813c14e93",
+      "counts": {
+        "all_pedestrian_rows": 35640,
+        "in_view": 19533,
+        "in_view_occluded": 30,
+        "in_view_interpolated": 19173,
+        "in_view_noninterpolated": 360
+      },
+      "tracks_in_view": 47,
+      "tracks_with_noninterpolated_labels": 47,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 6312,
+            "10": 6087,
+            "20": 5680,
+            "35": 5122,
+            "40": 4952,
+            "50": 4612
+          },
+          "1": {
+            "5": 6324,
+            "10": 6100,
+            "20": 5691,
+            "35": 5132,
+            "40": 4962,
+            "50": 4622
+          },
+          "2": {
+            "5": 6327,
+            "10": 6103,
+            "20": 5690,
+            "35": 5131,
+            "40": 4961,
+            "50": 4621
+          }
+        },
+        "maximum_consecutive": [
+          333,
+          334,
+          334
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    "nexus/video5/annotations.txt": {
+      "sha256": "fafc23587384509d183965d2f4dc552fc01b8d846dfa11031fa38f69c5d9b370",
+      "git_blob": "7a8ac34416bc6a0fb1798354e30d222f85f93213",
+      "counts": {
+        "all_pedestrian_rows": 8192,
+        "in_view": 4554,
+        "in_view_occluded": 288,
+        "in_view_interpolated": 4431,
+        "in_view_noninterpolated": 123
+      },
+      "tracks_in_view": 16,
+      "tracks_with_noninterpolated_labels": 16,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 1451,
+            "10": 1371,
+            "20": 1227,
+            "35": 1031,
+            "40": 966,
+            "50": 836
+          },
+          "1": {
+            "5": 1451,
+            "10": 1371,
+            "20": 1227,
+            "35": 1030,
+            "40": 965,
+            "50": 835
+          },
+          "2": {
+            "5": 1460,
+            "10": 1380,
+            "20": 1235,
+            "35": 1038,
+            "40": 973,
+            "50": 843
+          }
+        },
+        "maximum_consecutive": [
+          187,
+          187,
+          188
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "nexus/video6/annotations.txt": {
+      "sha256": "bea1196f64580fecaf903d45e05e97c1bb66125e289928ddef94eaf30071a9c7",
+      "git_blob": "d0b5595579cc95e1f0b1d654661454660a2ad9cb",
+      "counts": {
+        "all_pedestrian_rows": 124912,
+        "in_view": 85906,
+        "in_view_occluded": 6010,
+        "in_view_interpolated": 84309,
+        "in_view_noninterpolated": 1597
+      },
+      "tracks_in_view": 95,
+      "tracks_with_noninterpolated_labels": 95,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 28240,
+            "10": 27738,
+            "20": 26749,
+            "35": 25304,
+            "40": 24829,
+            "50": 23879
+          },
+          "1": {
+            "5": 28217,
+            "10": 27716,
+            "20": 26727,
+            "35": 25282,
+            "40": 24807,
+            "50": 23857
+          },
+          "2": {
+            "5": 28229,
+            "10": 27728,
+            "20": 26739,
+            "35": 25294,
+            "40": 24819,
+            "50": 23869
+          }
+        },
+        "maximum_consecutive": [
+          1157,
+          1157,
+          1156
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "nexus/video7/annotations.txt": {
+      "sha256": "ca7ab9b44230f1bdbd782fbe05713e959330ea133e0d7da8abaf42c0bb469fc5",
+      "git_blob": "9893b5a00d1c9909b8a2a4bd9098e2984331c768",
+      "counts": {
+        "all_pedestrian_rows": 134760,
+        "in_view": 89890,
+        "in_view_occluded": 4992,
+        "in_view_interpolated": 88592,
+        "in_view_noninterpolated": 1298
+      },
+      "tracks_in_view": 120,
+      "tracks_with_noninterpolated_labels": 120,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 29472,
+            "10": 28872,
+            "20": 27716,
+            "35": 26035,
+            "40": 25485,
+            "50": 24390
+          },
+          "1": {
+            "5": 29474,
+            "10": 28875,
+            "20": 27718,
+            "35": 26037,
+            "40": 25487,
+            "50": 24393
+          },
+          "2": {
+            "5": 29463,
+            "10": 28865,
+            "20": 27708,
+            "35": 26027,
+            "40": 25477,
+            "50": 24383
+          }
+        },
+        "maximum_consecutive": [
+          653,
+          654,
+          653
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          2,
+          1,
+          2
+        ]
+      }
+    },
+    "nexus/video8/annotations.txt": {
+      "sha256": "cf04e8c93848d74ff34b8b979b425bf686e306b9b6a8ad7d09295f59ba5499ab",
+      "git_blob": "eb2f6f5acce54cc807e8343c4e5b1614d169afa1",
+      "counts": {
+        "all_pedestrian_rows": 139408,
+        "in_view": 83403,
+        "in_view_occluded": 3450,
+        "in_view_interpolated": 82085,
+        "in_view_noninterpolated": 1318
+      },
+      "tracks_in_view": 109,
+      "tracks_with_noninterpolated_labels": 109,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 27279,
+            "10": 26643,
+            "20": 25415,
+            "35": 23655,
+            "40": 23092,
+            "50": 21990
+          },
+          "1": {
+            "5": 27278,
+            "10": 26639,
+            "20": 25409,
+            "35": 23651,
+            "40": 23088,
+            "50": 21983
+          },
+          "2": {
+            "5": 27285,
+            "10": 26646,
+            "20": 25417,
+            "35": 23657,
+            "40": 23095,
+            "50": 21990
+          }
+        },
+        "maximum_consecutive": [
+          592,
+          592,
+          593
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          2,
+          2
+        ]
+      }
+    },
+    "nexus/video9/annotations.txt": {
+      "sha256": "3f0f9b69a1d6ac8090bb82636a044fc2134c4e6940718ef69792b75ce1845d0a",
+      "git_blob": "86aea26e66c71a18c961acb2bc32a7da40a62a2a",
+      "counts": {
+        "all_pedestrian_rows": 107896,
+        "in_view": 82742,
+        "in_view_occluded": 4250,
+        "in_view_interpolated": 81839,
+        "in_view_noninterpolated": 903
+      },
+      "tracks_in_view": 88,
+      "tracks_with_noninterpolated_labels": 88,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 27227,
+            "10": 26777,
+            "20": 25887,
+            "35": 24618,
+            "40": 24208,
+            "50": 23393
+          },
+          "1": {
+            "5": 27210,
+            "10": 26760,
+            "20": 25872,
+            "35": 24599,
+            "40": 24189,
+            "50": 23375
+          },
+          "2": {
+            "5": 27221,
+            "10": 26771,
+            "20": 25882,
+            "35": 24609,
+            "40": 24199,
+            "50": 23384
+          }
+        },
+        "maximum_consecutive": [
+          1459,
+          1459,
+          1459
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          3,
+          1
+        ]
+      }
+    },
+    "quad/video0/annotations.txt": {
+      "sha256": "5c28df1a53f51f783f39f358f41b6603e17d86fb352cd15ba96131464af53514",
+      "git_blob": "c3a705bccaa2eaffd084c521a6fe13984468c4a0",
+      "counts": {
+        "all_pedestrian_rows": 3054,
+        "in_view": 2536,
+        "in_view_occluded": 0,
+        "in_view_interpolated": 2521,
+        "in_view_noninterpolated": 15
+      },
+      "tracks_in_view": 6,
+      "tracks_with_noninterpolated_labels": 6,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 824,
+            "10": 794,
+            "20": 734,
+            "35": 644,
+            "40": 614,
+            "50": 554
+          },
+          "1": {
+            "5": 822,
+            "10": 792,
+            "20": 732,
+            "35": 642,
+            "40": 612,
+            "50": 552
+          },
+          "2": {
+            "5": 818,
+            "10": 788,
+            "20": 728,
+            "35": 638,
+            "40": 608,
+            "50": 548
+          }
+        },
+        "maximum_consecutive": [
+          170,
+          170,
+          169
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "quad/video1/annotations.txt": {
+      "sha256": "aabfce514109321ef641f21ab56245d1bef43a975cb6cc901362927fc84d9a64",
+      "git_blob": "34d912c9dd938c2f3a524d33de9656694ae07eb2",
+      "counts": {
+        "all_pedestrian_rows": 5117,
+        "in_view": 5089,
+        "in_view_occluded": 0,
+        "in_view_interpolated": 5020,
+        "in_view_noninterpolated": 69
+      },
+      "tracks_in_view": 13,
+      "tracks_with_noninterpolated_labels": 13,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 1651,
+            "10": 1601,
+            "20": 1501,
+            "35": 1351,
+            "40": 1301,
+            "50": 1201
+          },
+          "1": {
+            "5": 1650,
+            "10": 1600,
+            "20": 1500,
+            "35": 1350,
+            "40": 1300,
+            "50": 1200
+          },
+          "2": {
+            "5": 1641,
+            "10": 1591,
+            "20": 1491,
+            "35": 1341,
+            "40": 1291,
+            "50": 1191
+          }
+        },
+        "maximum_consecutive": [
+          170,
+          170,
+          169
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "quad/video2/annotations.txt": {
+      "sha256": "27603be364d8b14b739759388695dbf138e4e5fd0bdf2b27eea1fdf34fcab739",
+      "git_blob": "9744ccbf192490cf0a2b6f10c1f9d2f09717df3a",
+      "counts": {
+        "all_pedestrian_rows": 12216,
+        "in_view": 6701,
+        "in_view_occluded": 0,
+        "in_view_interpolated": 6646,
+        "in_view_noninterpolated": 55
+      },
+      "tracks_in_view": 19,
+      "tracks_with_noninterpolated_labels": 19,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 2162,
+            "10": 2067,
+            "20": 1896,
+            "35": 1677,
+            "40": 1607,
+            "50": 1467
+          },
+          "1": {
+            "5": 2160,
+            "10": 2065,
+            "20": 1896,
+            "35": 1677,
+            "40": 1607,
+            "50": 1467
+          },
+          "2": {
+            "5": 2147,
+            "10": 2052,
+            "20": 1883,
+            "35": 1665,
+            "40": 1595,
+            "50": 1455
+          }
+        },
+        "maximum_consecutive": [
+          170,
+          170,
+          169
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "quad/video3/annotations.txt": {
+      "sha256": "8715767873e2af1214d076211ee1f172eb8f90f3785f52f3f3dd341f1920b2b9",
+      "git_blob": "b7986ad66d8af0f45148b10deac7b3f277827cef",
+      "counts": {
+        "all_pedestrian_rows": 4072,
+        "in_view": 2448,
+        "in_view_occluded": 0,
+        "in_view_interpolated": 2390,
+        "in_view_noninterpolated": 58
+      },
+      "tracks_in_view": 8,
+      "tracks_with_noninterpolated_labels": 8,
+      "in_view_all_rows": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 785,
+            "10": 745,
+            "20": 665,
+            "35": 545,
+            "40": 508,
+            "50": 445
+          },
+          "1": {
+            "5": 785,
+            "10": 745,
+            "20": 665,
+            "35": 545,
+            "40": 508,
+            "50": 446
+          },
+          "2": {
+            "5": 779,
+            "10": 739,
+            "20": 659,
+            "35": 539,
+            "40": 503,
+            "50": 441
+          }
+        },
+        "maximum_consecutive": [
+          170,
+          170,
+          169
+        ]
+      },
+      "in_view_noninterpolated_only": {
+        "possible_overlapping_windows": {
+          "0": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "1": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          },
+          "2": {
+            "5": 0,
+            "10": 0,
+            "20": 0,
+            "35": 0,
+            "40": 0,
+            "50": 0
+          }
+        },
+        "maximum_consecutive": [
+          1,
+          1,
+          2
+        ]
+      }
+    }
+  }
+}
