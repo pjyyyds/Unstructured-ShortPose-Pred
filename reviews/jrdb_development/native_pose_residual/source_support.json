@@ -1,0 +1,67 @@
+{
+  "sites": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "motion_blocks_before_pose_join": 755,
+      "pose_windows": 91,
+      "recording_local_people": 21,
+      "historical_person_frames": 182,
+      "finite_joint_triplets": 6006,
+      "possible_joint_triplets": 6006,
+      "people_window_count_min_max": [
+        1,
+        27
+      ],
+      "native_odometry": {
+        "native_frames": 1730,
+        "max_horizontal_displacement_m": 0.0,
+        "max_3d_rotation_deg": 0.0
+      }
+    },
+    "huang-lane-2019-02-12_0": {
+      "motion_blocks_before_pose_join": 683,
+      "pose_windows": 42,
+      "recording_local_people": 25,
+      "historical_person_frames": 84,
+      "finite_joint_triplets": 2772,
+      "possible_joint_triplets": 2772,
+      "people_window_count_min_max": [
+        1,
+        3
+      ],
+      "native_odometry": {
+        "native_frames": 725,
+        "max_horizontal_displacement_m": 0.00020694732666015625,
+        "max_3d_rotation_deg": 0.000887924592110543
+      }
+    },
+    "tressider-2019-03-16_1": {
+      "motion_blocks_before_pose_join": 239,
+      "pose_windows": 5,
+      "recording_local_people": 1,
+      "historical_person_frames": 10,
+      "finite_joint_triplets": 330,
+      "possible_joint_triplets": 330,
+      "people_window_count_min_max": [
+        5,
+        5
+      ],
+      "native_odometry": {
+        "native_frames": 505,
+        "max_horizontal_displacement_m": 0.0002542734146118164,
+        "max_3d_rotation_deg": 0.0022949435612776964
+      }
+    }
+  },
+  "member_sha256": {
+    "jrdb/data/train/hewlett-packard-intersection-2019-01-24_0_shift_0.ndjson": "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818",
+    "labels_3d_keypoints/train/hewlett-packard-intersection-2019-01-24_0.json": "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45",
+    "odometry/train/hewlett-packard-intersection-2019-01-24_0.json": "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+    "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson": "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd",
+    "labels_3d_keypoints/train/huang-lane-2019-02-12_0.json": "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb",
+    "odometry/train/huang-lane-2019-02-12_0.json": "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+    "jrdb/data/train/tressider-2019-03-16_1_shift_0.ndjson": "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc",
+    "labels_3d_keypoints/train/tressider-2019-03-16_1.json": "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9",
+    "odometry/train/tressider-2019-03-16_1.json": "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+  },
+  "ordered_keys_sha256": "8a7bdd1223cece22fc2f622cc6a744040cd9e7458bc413108ba26727fe097d01"
+}
