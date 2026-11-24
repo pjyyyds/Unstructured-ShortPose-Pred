@@ -1,0 +1,233 @@
+{
+  "source": "https://github.com/dongfang-steven-yang/vci-dataset-dut/tree/80b8c746833664cd1e5244fccad79c7f2a7cbe31",
+  "cohort_keys_sha256": "02c44cf55e5ca8690dc1fe9ac9c076af44dc89f11629b8ccc9e725e49e4580ec",
+  "analysis": "Fixed 5 m square patches anchored at the upper left of each released stabilized ROI. A cell at a cropped boundary is counted even if partially visible. Occupancy uses only each enrolled pedestrian\u2019s current unfiltered point. To audit causal context, count same-cell author-tracked points of other pedestrians at strictly earlier frame times, and within the preceding 23 source frames (<=1 s); target ID always excluded. No future coordinate, forecast, score or fitted model is used. The original 3066 IDs were selected using future track completeness, and this remains a selection limitation.",
+  "interpretation": "One shared-space site with eleven separately stabilized camera references, per-clip pixel/metric ratios and ROI origins. No common georeferencing transform between those clips established; sum of nonempty cells counts clip-local cells, not unique geographical patches. Point occupancy is an empirical use trace, not a walkway, curb, lane marking or permanent traversability polygon. Full-video supplied GSOC background could incorporate future frames; a prospective map must use image frames available at or before the current prediction and omit the target\u2019s own future.",
+  "per_clip": {
+    "roundabout_01": {
+      "windows": 47,
+      "people": 33,
+      "roi_width_height_m": [
+        30.208632084771374,
+        26.48947888840505
+      ],
+      "possible_5m_grid_cells": 42,
+      "occupied_t0_cells": 12,
+      "patches_with_one_window": 5,
+      "patches_with_at_least_10_windows": 2,
+      "patches_with_at_least_3_different_people": 6,
+      "windows_in_top_1_patch": 10,
+      "windows_in_top_3_patches": 27,
+      "supported_normalized_4x4_bins": 6,
+      "all_past_other_id_same_cell": 43,
+      "previous_1s_other_id_same_cell": 43,
+      "decision_before_full_1s_prior_video": 24
+    },
+    "roundabout_02": {
+      "windows": 64,
+      "people": 45,
+      "roi_width_height_m": [
+        24.863871285326606,
+        25.903475659625975
+      ],
+      "possible_5m_grid_cells": 30,
+      "occupied_t0_cells": 8,
+      "patches_with_one_window": 2,
+      "patches_with_at_least_10_windows": 2,
+      "patches_with_at_least_3_different_people": 4,
+      "windows_in_top_1_patch": 26,
+      "windows_in_top_3_patches": 52,
+      "supported_normalized_4x4_bins": 7,
+      "all_past_other_id_same_cell": 62,
+      "previous_1s_other_id_same_cell": 61,
+      "decision_before_full_1s_prior_video": 21
+    },
+    "roundabout_03": {
+      "windows": 1876,
+      "people": 431,
+      "roi_width_height_m": [
+        46.11332501850231,
+        34.3452742103779
+      ],
+      "possible_5m_grid_cells": 70,
+      "occupied_t0_cells": 43,
+      "patches_with_one_window": 4,
+      "patches_with_at_least_10_windows": 30,
+      "patches_with_at_least_3_different_people": 39,
+      "windows_in_top_1_patch": 180,
+      "windows_in_top_3_patches": 462,
+      "supported_normalized_4x4_bins": 15,
+      "all_past_other_id_same_cell": 1868,
+      "previous_1s_other_id_same_cell": 1825,
+      "decision_before_full_1s_prior_video": 116
+    },
+    "roundabout_04": {
+      "windows": 331,
+      "people": 126,
+      "roi_width_height_m": [
+        57.27251494096693,
+        28.636257470483464
+      ],
+      "possible_5m_grid_cells": 72,
+      "occupied_t0_cells": 36,
+      "patches_with_one_window": 5,
+      "patches_with_at_least_10_windows": 14,
+      "patches_with_at_least_3_different_people": 27,
+      "windows_in_top_1_patch": 37,
+      "windows_in_top_3_patches": 96,
+      "supported_normalized_4x4_bins": 14,
+      "all_past_other_id_same_cell": 325,
+      "previous_1s_other_id_same_cell": 316,
+      "decision_before_full_1s_prior_video": 0
+    },
+    "roundabout_05": {
+      "windows": 510,
+      "people": 127,
+      "roi_width_height_m": [
+        66.28871570586023,
+        33.70759530664004
+      ],
+      "possible_5m_grid_cells": 98,
+      "occupied_t0_cells": 49,
+      "patches_with_one_window": 7,
+      "patches_with_at_least_10_windows": 18,
+      "patches_with_at_least_3_different_people": 32,
+      "windows_in_top_1_patch": 50,
+      "windows_in_top_3_patches": 142,
+      "supported_normalized_4x4_bins": 13,
+      "all_past_other_id_same_cell": 495,
+      "previous_1s_other_id_same_cell": 455,
+      "decision_before_full_1s_prior_video": 48
+    },
+    "roundabout_06": {
+      "windows": 15,
+      "people": 15,
+      "roi_width_height_m": [
+        33.069312429596806,
+        29.597468604967222
+      ],
+      "possible_5m_grid_cells": 42,
+      "occupied_t0_cells": 8,
+      "patches_with_one_window": 2,
+      "patches_with_at_least_10_windows": 0,
+      "patches_with_at_least_3_different_people": 1,
+      "windows_in_top_1_patch": 3,
+      "windows_in_top_3_patches": 7,
+      "supported_normalized_4x4_bins": 6,
+      "all_past_other_id_same_cell": 13,
+      "previous_1s_other_id_same_cell": 13,
+      "decision_before_full_1s_prior_video": 0
+    },
+    "roundabout_07": {
+      "windows": 100,
+      "people": 41,
+      "roi_width_height_m": [
+        47.38009529127781,
+        26.791290246522543
+      ],
+      "possible_5m_grid_cells": 60,
+      "occupied_t0_cells": 25,
+      "patches_with_one_window": 5,
+      "patches_with_at_least_10_windows": 3,
+      "patches_with_at_least_3_different_people": 15,
+      "windows_in_top_1_patch": 13,
+      "windows_in_top_3_patches": 34,
+      "supported_normalized_4x4_bins": 14,
+      "all_past_other_id_same_cell": 95,
+      "previous_1s_other_id_same_cell": 84,
+      "decision_before_full_1s_prior_video": 20
+    },
+    "roundabout_08": {
+      "windows": 5,
+      "people": 3,
+      "roi_width_height_m": [
+        24.825226777313308,
+        22.52185522065537
+      ],
+      "possible_5m_grid_cells": 25,
+      "occupied_t0_cells": 3,
+      "patches_with_one_window": 1,
+      "patches_with_at_least_10_windows": 0,
+      "patches_with_at_least_3_different_people": 0,
+      "windows_in_top_1_patch": 2,
+      "windows_in_top_3_patches": 5,
+      "supported_normalized_4x4_bins": 4,
+      "all_past_other_id_same_cell": 2,
+      "previous_1s_other_id_same_cell": 1,
+      "decision_before_full_1s_prior_video": 2
+    },
+    "roundabout_09": {
+      "windows": 21,
+      "people": 11,
+      "roi_width_height_m": [
+        34.33479876213658,
+        24.22133080992308
+      ],
+      "possible_5m_grid_cells": 35,
+      "occupied_t0_cells": 8,
+      "patches_with_one_window": 5,
+      "patches_with_at_least_10_windows": 0,
+      "patches_with_at_least_3_different_people": 3,
+      "windows_in_top_1_patch": 8,
+      "windows_in_top_3_patches": 16,
+      "supported_normalized_4x4_bins": 5,
+      "all_past_other_id_same_cell": 16,
+      "previous_1s_other_id_same_cell": 16,
+      "decision_before_full_1s_prior_video": 10
+    },
+    "roundabout_10": {
+      "windows": 46,
+      "people": 27,
+      "roi_width_height_m": [
+        64.8695363302956,
+        34.68188282234105
+      ],
+      "possible_5m_grid_cells": 91,
+      "occupied_t0_cells": 21,
+      "patches_with_one_window": 12,
+      "patches_with_at_least_10_windows": 0,
+      "patches_with_at_least_3_different_people": 4,
+      "windows_in_top_1_patch": 9,
+      "windows_in_top_3_patches": 21,
+      "supported_normalized_4x4_bins": 11,
+      "all_past_other_id_same_cell": 31,
+      "previous_1s_other_id_same_cell": 28,
+      "decision_before_full_1s_prior_video": 22
+    },
+    "roundabout_11": {
+      "windows": 51,
+      "people": 20,
+      "roi_width_height_m": [
+        50.948534020440114,
+        24.751291151833176
+      ],
+      "possible_5m_grid_cells": 55,
+      "occupied_t0_cells": 23,
+      "patches_with_one_window": 9,
+      "patches_with_at_least_10_windows": 0,
+      "patches_with_at_least_3_different_people": 5,
+      "windows_in_top_1_patch": 6,
+      "windows_in_top_3_patches": 15,
+      "supported_normalized_4x4_bins": 11,
+      "all_past_other_id_same_cell": 40,
+      "previous_1s_other_id_same_cell": 30,
+      "decision_before_full_1s_prior_video": 14
+    }
+  },
+  "sums_of_clip_local_counts": {
+    "windows": 3066,
+    "people": 879,
+    "possible_5m_grid_cells": 620,
+    "occupied_t0_cells": 236,
+    "patches_with_one_window": 57,
+    "patches_with_at_least_10_windows": 69,
+    "patches_with_at_least_3_different_people": 136,
+    "windows_in_top_1_patch": 344,
+    "windows_in_top_3_patches": 877,
+    "supported_normalized_4x4_bins": 106,
+    "all_past_other_id_same_cell": 2990,
+    "previous_1s_other_id_same_cell": 2872,
+    "decision_before_full_1s_prior_video": 277
+  },
+  "largest_clip_window_fraction": 0.6118721461187214
+}

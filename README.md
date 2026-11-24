@@ -23,6 +23,8 @@ python -m scripts.predict_five_frame_images detached.pt camera_input.json end2en
 
 ## Benchmark status
 
+Of 1,482 complete PINNS windows, 323 began at the pedestrian’s first sampled annotation in the clip and had cumulative five-frame movement below 0.5 m. Across five fixed seeds and four equally weighted sites, ADE was 0.3545 m for last-pair constant velocity, 0.4130 m for the motion network and 0.4388 m for the pose network. Adding the pose branch raised ADE by 25.78 mm (paired clip-bootstrap 95% interval 16.43 to 35.62 mm). Visibility before the first annotation is unknown. [Protocol](reviews/pinns_short_displacement/PROTOCOL.md) · [Subgroup metrics](reviews/pinns_short_displacement/short_displacement_scores.json) · [Independent verification](reviews/pinns_short_displacement/independent.json)
+
 The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training runs. In each version, 46 configurations use five seeds and four sensitivity settings use three. V2 reused the split on which V1 had already been inspected. JRDB now has a two-frame 2.5 Hz development comparison. Independent testing under the original five-frame 10 Hz protocol remains a separate requirement. Under the original proposal, the data do not establish A (improvement at all three window lengths) or B (improvement in both short-window quality groups). C applies to the comparisons without a net benefit, including M1 versus its implicit-gate control at five frames.
 
 - On PINNS at five frames, mean top-mode displacement error (ADE, lower is better) was 0.5295 m for the full model and 0.4856 m for the motion-only baseline. On JTA the corresponding errors were 1.8637 m and 1.6640 m.

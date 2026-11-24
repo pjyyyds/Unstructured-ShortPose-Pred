@@ -1,5 +1,5 @@
 """Frozen DUT real-person detection and bidirectional source-point association, without evaluating trajectory errors."""
-import argparse,concurrent.futures, csv, ctypes as ct,ctypes.util, hashlib, io,json,tempfile,urllib.request,zipfile,zlib
+import argparse,concurrent.futures, csv, ctypes as ct,ctypes.util, hashlib, io,json,os,tempfile,urllib.request,zipfile,zlib
 from pathlib import Path
 from collections import Counter,defaultdict
 import numpy as np
@@ -88,7 +88,11 @@ def collect(root,onnx,out,full):
     weights=FasterRCNN_ResNet50_FPN_V2_Weights.COCO_V1;assert weights.url=='https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_v2_coco-dd69338a.pth'
     net=fasterrcnn_resnet50_fpn_v2(weights=weights).eval()
     dst=Path(torch.hub.get_dir())/'checkpoints'/weights.url.rsplit('/',1)[-1];weightsha=sha(dst.read_bytes());assert weightsha.startswith('dd69338a')
-    dev=torch.device('cuda' if torch.cuda.is_available() else 'cpu');net.to(dev);torch.set_num_threads(2)
+    requested=os.environ.get('DUT_DETECTOR_DEVICE','auto').strip().lower()
+    if requested not in {'auto','cpu','cuda'}:raise ValueError('DUT_DETECTOR_DEVICE must be auto, cpu or cuda')
+    if requested=='cuda' and not torch.cuda.is_available():raise RuntimeError('DUT_DETECTOR_DEVICE=cuda but this Kaggle worker has no CUDA device')
+    dev=torch.device('cuda' if requested!='cpu' and torch.cuda.is_available() else 'cpu');net.to(dev);torch.set_num_threads(2)
+    runtime={'requested_detector_device':requested,'actual_detector_parameter_device':str(next(net.parameters()).device),'cuda_visible':torch.cuda.is_available(),'torch_cuda_version':torch.version.cuda,'gpu_model':torch.cuda.get_device_name(dev) if dev.type=='cuda' else None,'gpu_capability':list(torch.cuda.get_device_capability(dev)) if dev.type=='cuda' else None}
     pose=RTMPoseONNXExtractor(onnx_path=onnx,batch_size=16);assert pose.sess is not None
     # Explicitly label provider choice; identical graph/model SHA and source pixels; no fitting.
     stored={};cnt=Counter();all_box_count=0;checked_frames=0;tags=[]
@@ -126,7 +130,7 @@ def collect(root,onnx,out,full):
                 b[i,l],j[i,l]=stored[s,p,int(f)];matched[i,l]=True
     assert np.isfinite(j).all();hist=np.bincount(matched.sum(1),minlength=6).tolist()
     valid=(j[:,:,:,2]>=.2) & matched[:,:,None]
-    report={'mode':'all_windows' if full else 'prespecified_first_window_each_clip','windows':len(chosen),'source_historical_images':checked_frames,'requested_historical_person_observations':len(chosen)*5,'unique_person_frame_labels':dict(cnt),'detected_person_boxes_all_processed_frames':all_box_count,'matched_observations':int(matched.sum()),'matched_frames_per_window_0_to_5':hist,'frames_with_one_joint_at_or_above_0_2':int(valid.any(-1).sum()),'frames_with_9_joints_at_or_above_0_2':int((valid.sum(-1)>=9).sum()),'all_five_frames_at_least_9_joints':int((valid.sum(axis=-1)>=9).all(axis=1).sum()),'full_cohort_keys_sha256':coverage['key_manifest_sha256'],'score_protocol_sha256':sha((D/'motion_and_detector_freeze.json').read_bytes()),'detector_sha256':weightsha,'detector_url':weights.url,'device':str(dev),'torchvision':torchvision.__version__,'torch':str(torch.__version__),'onnxruntime':onnxruntime.__version__,'ort_providers':pose.sess.get_providers(),'onnx_sha256':MODEL_SHA,'script_sha256':sha(Path(__file__).read_bytes()),'scope':'No forecasting, no accepted person-frame has multiple matching released points or person detection boxes. A uniquely matched source point verifies geometric association only; 2D joints are estimates from top-down imagery.'}
+    report={'mode':'all_windows' if full else 'prespecified_first_window_each_clip','windows':len(chosen),'source_historical_images':checked_frames,'requested_historical_person_observations':len(chosen)*5,'unique_person_frame_labels':dict(cnt),'detected_person_boxes_all_processed_frames':all_box_count,'matched_observations':int(matched.sum()),'matched_frames_per_window_0_to_5':hist,'frames_with_one_joint_at_or_above_0_2':int(valid.any(-1).sum()),'frames_with_9_joints_at_or_above_0_2':int((valid.sum(-1)>=9).sum()),'all_five_frames_at_least_9_joints':int((valid.sum(axis=-1)>=9).all(axis=1).sum()),'full_cohort_keys_sha256':coverage['key_manifest_sha256'],'score_protocol_sha256':sha((D/'motion_and_detector_freeze.json').read_bytes()),'detector_sha256':weightsha,'detector_url':weights.url,'device':str(dev),'backend_identity':{**runtime,'rtmpose_selected_providers':pose.active_providers,'rtmpose_session_providers':pose.sess.get_providers()},'torchvision':torchvision.__version__,'torch':str(torch.__version__),'onnxruntime':onnxruntime.__version__,'ort_providers':pose.sess.get_providers(),'onnx_sha256':MODEL_SHA,'script_sha256':sha(Path(__file__).read_bytes()),'scope':'No forecasting, no accepted person-frame has multiple matching released points or person detection boxes. A uniquely matched source point verifies geometric association only; 2D joints are estimates from top-down imagery.'}
     with tempfile.TemporaryDirectory(dir=out.parent) as temp:
         tmp=Path(temp);np.savez_compressed(tmp/'private.npz',keys_json=np.array(json.dumps(final_keys)),source_frame_1based=fids,matched=matched,bbox=b,kpts=j,association_json=np.array(json.dumps(tags,separators=(',',':'))))
         m={'aggregate.json':json.dumps(report,indent=2).encode(),'private.npz':(tmp/'private.npz').read_bytes(),'source.py':Path(__file__).read_bytes()};m['sha256.json']=json.dumps({k:sha(v) for k,v in m.items()}).encode()
