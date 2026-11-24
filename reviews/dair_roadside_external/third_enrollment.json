@@ -1,0 +1,652 @@
+{
+  "source_commit": "c885c54af0c34bc515fa9ca8b5e8fda76a15462c",
+  "protocol_sha256": "f4e7a5d5e8627a63dc10bf9979f413dbbf6a3766d7cbc91865046bfce9d8aacb",
+  "source_metadata_and_labels_sha256": "73657a4ebd7f1c3887e12932350e20d99e490c25148af7f7437c3a2e0a675449",
+  "source_frames": 5655,
+  "source_unique_camera_clocks": 5655,
+  "pedestrian_rows": 6614,
+  "source_people": 146,
+  "windows": 54,
+  "distinct_sequence_people": 29,
+  "unique_past_images": 210,
+  "past_jpeg_compressed_bytes": 67272220,
+  "required_calibrations_compressed_bytes": 306104,
+  "rejected": [
+    [
+      "0025",
+      2859,
+      4937,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2051,
+      11180,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2051,
+      11343,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2060,
+      11203,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2068,
+      11317,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2072,
+      11187,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0060",
+      2086,
+      11306,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      1961,
+      11603,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      1962,
+      11606,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2198,
+      11472,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2198,
+      11507,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2198,
+      11584,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2198,
+      11619,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2203,
+      11472,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2203,
+      11507,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2203,
+      11542,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2203,
+      11584,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2205,
+      11472,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2205,
+      11507,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2205,
+      11542,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2205,
+      11584,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0062",
+      2205,
+      11619,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2099,
+      12303,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2100,
+      12292,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2101,
+      12233,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2101,
+      12303,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2105,
+      12233,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2105,
+      12291,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2105,
+      12375,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2105,
+      12410,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2107,
+      12277,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2110,
+      12233,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2113,
+      12289,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2113,
+      12345,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2113,
+      12380,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2115,
+      12245,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2116,
+      12307,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2116,
+      12377,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2118,
+      12233,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2118,
+      12303,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2124,
+      12283,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2125,
+      12233,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0066",
+      2125,
+      12385,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0072",
+      1803,
+      13405,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0072",
+      1803,
+      13440,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0072",
+      1803,
+      13475,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0077",
+      118,
+      13978,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0080",
+      81,
+      14238,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0080",
+      81,
+      14273,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0080",
+      81,
+      14308,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0084",
+      137,
+      14724,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0093",
+      871,
+      15912,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0093",
+      876,
+      15912,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0094",
+      991,
+      16059,
+      "measured timestamps outside nearest nominal grid"
+    ],
+    [
+      "0094",
+      996,
+      16059,
+      "measured timestamps outside nearest nominal grid"
+    ]
+  ],
+  "seqs": {
+    "0023": {
+      "intersection": "yizhuang10",
+      "frames": 162,
+      "pedestrian_rows": 44,
+      "pedestrian_ids": 5,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0025": {
+      "intersection": "yizhuang10",
+      "frames": 173,
+      "pedestrian_rows": 95,
+      "pedestrian_ids": 1,
+      "enrolled_ids": 1,
+      "windows": 1
+    },
+    "0029": {
+      "intersection": "yizhuang10",
+      "frames": 182,
+      "pedestrian_rows": 18,
+      "pedestrian_ids": 8,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0030": {
+      "intersection": "yizhuang10",
+      "frames": 151,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0032": {
+      "intersection": "yizhuang10",
+      "frames": 141,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0033": {
+      "intersection": "yizhuang10",
+      "frames": 192,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0034": {
+      "intersection": "yizhuang10",
+      "frames": 152,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0035": {
+      "intersection": "yizhuang10",
+      "frames": 120,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0036": {
+      "intersection": "yizhuang09",
+      "frames": 180,
+      "pedestrian_rows": 190,
+      "pedestrian_ids": 2,
+      "enrolled_ids": 1,
+      "windows": 5
+    },
+    "0037": {
+      "intersection": "yizhuang09",
+      "frames": 121,
+      "pedestrian_rows": 217,
+      "pedestrian_ids": 4,
+      "enrolled_ids": 1,
+      "windows": 2
+    },
+    "0040": {
+      "intersection": "yizhuang09",
+      "frames": 194,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0041": {
+      "intersection": "yizhuang09",
+      "frames": 170,
+      "pedestrian_rows": 22,
+      "pedestrian_ids": 2,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0047": {
+      "intersection": "yizhuang09",
+      "frames": 140,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0048": {
+      "intersection": "yizhuang09",
+      "frames": 180,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0049": {
+      "intersection": "yizhuang09",
+      "frames": 190,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0050": {
+      "intersection": "yizhuang09",
+      "frames": 171,
+      "pedestrian_rows": 5,
+      "pedestrian_ids": 1,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0054": {
+      "intersection": "yizhuang09",
+      "frames": 210,
+      "pedestrian_rows": 10,
+      "pedestrian_ids": 4,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0055": {
+      "intersection": "yizhuang09",
+      "frames": 200,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0056": {
+      "intersection": "yizhuang09",
+      "frames": 190,
+      "pedestrian_rows": 261,
+      "pedestrian_ids": 10,
+      "enrolled_ids": 2,
+      "windows": 6
+    },
+    "0057": {
+      "intersection": "yizhuang09",
+      "frames": 184,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0060": {
+      "intersection": "yizhuang16",
+      "frames": 219,
+      "pedestrian_rows": 929,
+      "pedestrian_ids": 9,
+      "enrolled_ids": 5,
+      "windows": 7
+    },
+    "0062": {
+      "intersection": "yizhuang16",
+      "frames": 195,
+      "pedestrian_rows": 698,
+      "pedestrian_ids": 6,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0066": {
+      "intersection": "yizhuang16",
+      "frames": 213,
+      "pedestrian_rows": 1872,
+      "pedestrian_ids": 19,
+      "enrolled_ids": 10,
+      "windows": 13
+    },
+    "0068": {
+      "intersection": "yizhuang16",
+      "frames": 154,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0070": {
+      "intersection": "yizhuang16",
+      "frames": 220,
+      "pedestrian_rows": 83,
+      "pedestrian_ids": 2,
+      "enrolled_ids": 1,
+      "windows": 1
+    },
+    "0072": {
+      "intersection": "yizhuang16",
+      "frames": 148,
+      "pedestrian_rows": 442,
+      "pedestrian_ids": 13,
+      "enrolled_ids": 1,
+      "windows": 1
+    },
+    "0077": {
+      "intersection": "yizhuang08",
+      "frames": 94,
+      "pedestrian_rows": 139,
+      "pedestrian_ids": 3,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0078": {
+      "intersection": "yizhuang08",
+      "frames": 43,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0079": {
+      "intersection": "yizhuang08",
+      "frames": 104,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0080": {
+      "intersection": "yizhuang08",
+      "frames": 150,
+      "pedestrian_rows": 140,
+      "pedestrian_ids": 2,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0081": {
+      "intersection": "yizhuang08",
+      "frames": 84,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0082": {
+      "intersection": "yizhuang08",
+      "frames": 159,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0084": {
+      "intersection": "yizhuang08",
+      "frames": 63,
+      "pedestrian_rows": 119,
+      "pedestrian_ids": 5,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0087": {
+      "intersection": "yizhuang08",
+      "frames": 22,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "enrolled_ids": 0,
+      "windows": 0
+    },
+    "0093": {
+      "intersection": "yizhuang13",
+      "frames": 182,
+      "pedestrian_rows": 534,
+      "pedestrian_ids": 10,
+      "enrolled_ids": 3,
+      "windows": 8
+    },
+    "0094": {
+      "intersection": "yizhuang13",
+      "frames": 202,
+      "pedestrian_rows": 796,
+      "pedestrian_ids": 40,
+      "enrolled_ids": 4,
+      "windows": 10
+    }
+  },
+  "keys_sha256": "7f5771e9cd540259b7a059bfef8794600cd563adf96d733e71503925b94b2c71",
+  "timing": {
+    "endpoint_s_min_median_max": [
+      2.958999,
+      2.98,
+      3.002001
+    ],
+    "history_s_min_median_max": [
+      0.379999,
+      0.4,
+      0.421
+    ],
+    "all_35_grid_1ms": 0,
+    "history_intervals_1ms": 31,
+    "endpoint_1ms": 6
+  }
+}

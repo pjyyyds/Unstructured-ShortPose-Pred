@@ -1,0 +1,122 @@
+{
+  "sources": {
+    "zip_metadata_bytes": 234358463,
+    "zip_images_bytes": 3560631820,
+    "metadata_central_sha256": "ebc52abdb00872e46676f7e04c3ce4a6c85949206ebf33358a5e2f990f883186",
+    "image_central_sha256": "9d3e248b520b5cd769df1916f6d0f82f0ac8eeb5853aa4082907a291db575f08",
+    "training_split_sha256": "0a59332221f3618639f34fb70678d03c5221ab80fd69f2cf41acffca0d8859fd",
+    "protocol_sha256": "7ed8a594190dd416edae7811e7b83e82ab12f29c323459d855656721470f2e9d",
+    "git_source_revision": "c885c54af0c34bc515fa9ca8b5e8fda76a15462c",
+    "public_split_url": "https://github.com/AIR-THU/DAIR-V2X/blob/c885c54af0c34bc515fa9ca8b5e8fda76a15462c/data/split_datas/cooperative-split-data-spd.json",
+    "public_full_folder": "https://drive.google.com/drive/folders/1AomWNJjy5KMmjrb0BHHUfcelhEN5zuWn"
+  },
+  "official_training_sequences": [
+    "0000",
+    "0001",
+    "0002",
+    "0004",
+    "0005",
+    "0008",
+    "0010",
+    "0016",
+    "0018",
+    "0022"
+  ],
+  "source_frames": 2179,
+  "unique_source_sensor_clocks": 2179,
+  "unique_past_images": 0,
+  "num_windows": 0,
+  "unique_sequence_local_people": 0,
+  "rejected_timing_or_overlap": [],
+  "per_sequence": {
+    "0000": {
+      "site": "yizhuang06",
+      "frames": 214,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0001": {
+      "site": "yizhuang06",
+      "frames": 212,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0002": {
+      "site": "yizhuang06",
+      "frames": 476,
+      "pedestrian_rows": 1,
+      "pedestrian_ids": 1,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0004": {
+      "site": "yizhuang06",
+      "frames": 227,
+      "pedestrian_rows": 1,
+      "pedestrian_ids": 1,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0005": {
+      "site": "yizhuang06",
+      "frames": 224,
+      "pedestrian_rows": 1,
+      "pedestrian_ids": 1,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0008": {
+      "site": "yizhuang06",
+      "frames": 213,
+      "pedestrian_rows": 13,
+      "pedestrian_ids": 6,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0010": {
+      "site": "yizhuang10",
+      "frames": 176,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0016": {
+      "site": "yizhuang10",
+      "frames": 145,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0018": {
+      "site": "yizhuang10",
+      "frames": 151,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    },
+    "0022": {
+      "site": "yizhuang10",
+      "frames": 141,
+      "pedestrian_rows": 0,
+      "pedestrian_ids": 0,
+      "windows": 0,
+      "enrolled_people": 0
+    }
+  },
+  "measurement": {
+    "history_span_s_min_median_max": null,
+    "endpoint_s_min_median_max": null,
+    "history_1ms": 0,
+    "endpoint_1ms": 0,
+    "grid_1ms": 0
+  },
+  "source_members_manifest_sha256": "4d80ae0e4914a48da01bd11801a30791f7e67e1a8a6f318f5b257196b3d8b8e6",
+  "source_named_members": 2180
+}
