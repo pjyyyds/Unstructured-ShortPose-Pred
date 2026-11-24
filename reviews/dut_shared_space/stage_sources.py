@@ -26,8 +26,21 @@ class Remote(io.RawIOBase):
             out+=self.cache[idx][pos-lo:pos-lo+n-len(out)]
         self.at+=n
         return out
+def author_tree():
+    """Fetch the immutable author tree on first use and check every Git member identity."""
+    path=D/'author_tree.json'
+    tree_id='b4bbe87e9b714cf9d2c571ab45ea4da6862049d1'
+    if path.is_file():tree=json.loads(path.read_bytes())
+    else:
+        u='https://api.github.com/repos/dongfang-steven-yang/vci-dataset-dut/git/trees/'+tree_id+'?recursive=1'
+        req=urllib.request.Request(u,headers={'User-Agent':'dut-shared-space-source-audit','Accept':'application/vnd.github+json'})
+        with urllib.request.urlopen(req,timeout=35) as r:tree=json.load(r)
+    entries=tree['tree'];digest=hashlib.sha256(json.dumps([(x['path'],x['type'],x['sha'],x.get('size')) for x in entries],separators=(',',':')).encode()).hexdigest()
+    if tree.get('truncated') or len(entries)!=349 or digest!='7b8792f59e66df28a2e99933816fe2ae0ca73fad805cad459313db07432add38':raise ValueError('Author Git tree is incomplete or different')
+    if not path.is_file():path.write_text(json.dumps(tree,indent=1)+'\n')
+    return {r['path']:r for r in entries}
 def stage_meta():
-    tree=json.loads((D/'author_tree.json').read_text())['tree'];lookup={r['path']:r for r in tree}
+    lookup=author_tree()
     wanted=[name for clip in CLIPS for name in ['data/trajectories/'+clip+'_traj_'+typ+'.csv' for typ in ('ped','veh')]+['data/ratios/'+clip+'_ratio_pixel2meter.txt','legacy/clips/rois/'+clip+'_roi']]
     def fetch(n):
         path=D/'private_source'/n;path.parent.mkdir(parents=True,exist_ok=True);b=path.read_bytes() if path.exists() else urllib.request.urlopen(BASE+n,timeout=40).read();meta=lookup[n]

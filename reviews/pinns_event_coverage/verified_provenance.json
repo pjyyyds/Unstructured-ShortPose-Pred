@@ -1,0 +1,11 @@
+{
+  "source_result_sha256": "ce3c5838f7ff16e8a71f9aa74f5256692d3997a26aa28283f3451e5ef2c9ebef",
+  "verifier_sha256": "805befa649030a8b2aa512c2246fd85428e073f60194b98e0cecff175f30ef71",
+  "complete_ground_truth_tracks": 1482,
+  "complete_candidate_tracks": 17784,
+  "independent_per_track_event_bits_equal": 96330,
+  "site_event_model_denominator_groups_exact": 120,
+  "numerical_recomputations": 1580,
+  "max_absolute_geometry_or_interval_difference": 2.220446049250313e-16,
+  "method": "Independent complete-track finite-difference velocities, three-frame causal means and sustained-velocity/relative-heading conditions. Compared all 120 site/event/model/truth-stratum counts and all prespecified intervals by direct index resampling, alongside 5-seed site-conditional geometric means."
+}

@@ -1,0 +1,168 @@
+{
+  "scope": "履行 87ccd84 的补充分析。按实际输入时长重新划档，只读取冻结历史、已有终态和返回误差。本次零次新拟合、零次新前向。",
+  "registered_protocol_commit": "87ccd84",
+  "protocol_sha256": "c8cc5ad6837e8eaa775c5fa9293ab08d2f855b88ea4bc58a4153b1785bbe6fa6",
+  "production_result_sha256": "8ac2b23b8550dc46574af580e7c8b6df5af2201637f3cbddc7dd15a247aff177",
+  "independent_verifier_sha256": "6a49172c7281c7853fc67e1f79fefc624027c4c432f5bcaf4d853dc45751ca1d",
+  "numpy": "2.5.4",
+  "torch": "2.10.0",
+  "records": {
+    "windows": 623,
+    "clips": 47,
+    "sites": 4,
+    "frozen_checkpoints": 240
+  },
+  "verification": {
+    "numeric_comparisons": 1320,
+    "maximum_absolute_difference": 4.440892098500626e-16
+  },
+  "source_check": {
+    "source_sha256": {
+      "cpu_T5.zip": "a4ff0e2ff8e7e625dca0dacc30b20e31c13d05e8418f09add2fe42801e02097a",
+      "cpu_T10.zip": "e37f246be983da20dd8ecce34dc66bbeeb1048b0d29ee3bc33c557e08e361aaa",
+      "matched_fusion_cpu_T5.zip": "cc5837725ac83009ec6d5256f2df76133e16f9e3cc6f6a573c9c5f55383233ae",
+      "matched_fusion_cpu_T10.zip": "35fafe3b55e8053f120b364a3c8fb798cb423a1871d9deec00fe397f32a2fff8",
+      "matched_same_worker_T20.zip": "c60f8c64c752784aa779b6ef3f30d0b87515a6668c729b39abc8c360d274c3ad",
+      "multiseed_s1024_all.zip": "207c0932252bdead2100744b03d672795a3d92718ee9e374a7dc72a2e4bfd47d",
+      "multiseed_s2025_all.zip": "18c506e5734bf95a6d64cc3356d3522f5160c23b8fabed9acf037963a35ae7d5",
+      "multiseed_s3407_all.zip": "3612dd4d81b269224aed5f64ab67235d0872fde40449aa4f4f87c384e5081d07",
+      "multiseed_s4096_all.zip": "c3c8bf80f3bc7d0b5b706dfb037eaa8772d2775a8b5927c45c25feefdf8c5668"
+    },
+    "checkpoint_counts": {
+      "from_saved_paths": 216,
+      "from_error_only_checkpoints": 24
+    },
+    "maximum_path_vs_stored_error_m": 1.6220292193835917e-06
+  },
+  "cohort_qc": {
+    "5": {
+      "operational_clear_partial_heavy": [
+        188,
+        283,
+        152
+      ],
+      "literal_0_1_2_3": [
+        35,
+        523,
+        65,
+        0
+      ]
+    },
+    "10": {
+      "operational_clear_partial_heavy": [
+        177,
+        294,
+        152
+      ],
+      "literal_0_1_2_3": [
+        30,
+        535,
+        58,
+        0
+      ]
+    },
+    "20": {
+      "operational_clear_partial_heavy": [
+        167,
+        325,
+        131
+      ],
+      "literal_0_1_2_3": [
+        34,
+        528,
+        61,
+        0
+      ]
+    }
+  },
+  "transitions": {
+    "5_to_10": {
+      "matrix": [
+        [
+          167,
+          21,
+          0
+        ],
+        [
+          10,
+          255,
+          18
+        ],
+        [
+          0,
+          18,
+          134
+        ]
+      ],
+      "changed": 67
+    },
+    "5_to_20": {
+      "matrix": [
+        [
+          154,
+          34,
+          0
+        ],
+        [
+          13,
+          247,
+          23
+        ],
+        [
+          0,
+          44,
+          108
+        ]
+      ],
+      "changed": 114
+    },
+    "10_to_20": {
+      "matrix": [
+        [
+          161,
+          16,
+          0
+        ],
+        [
+          6,
+          275,
+          13
+        ],
+        [
+          0,
+          34,
+          118
+        ]
+      ],
+      "changed": 69
+    }
+  },
+  "float_boundary_audit": {
+    "description": "T=10 有四窗的高度分量在旧预检的 float32 求和后从 >=.08 变为 <.08，其中一窗满足所有清晰条件而改变分档。按原实现分别取原始 float32 框高的双精度比例再求均值，最后转 float32 构成 q 后以 Python 阈值 >=.08 判定。修正后的复核与生产全表一致。每个框高为 69.12000274658203px，图高864px。",
+    "affected_stage": "T10",
+    "preliminary_counts": [
+      176,
+      295,
+      152
+    ],
+    "canonical_counts": [
+      177,
+      294,
+      152
+    ],
+    "valid_joints": 170,
+    "possible_joints": 170,
+    "sum_valid_confidence_f32": 106.79768371582031,
+    "q1": 1.0,
+    "q2": 0.6282216906547546,
+    "image_height": 864.0,
+    "sum_box_heights_f64": 691.2000274658203,
+    "normalized_mean_f64": 0.0800000031789144,
+    "canonical_q3_f32_as_double": 0.08000000566244125,
+    "alternate_q3_f32_as_double": 0.07999999821186066,
+    "canonical": "clear",
+    "alternate": "partial"
+  },
+  "statistical_scope": "四个已知地点、五个固定训练种子条件下，按站分层、以片段为重采样单元的 20,000 次百分位区间；若观察长度改变，分档和对应人群也可改变。",
+  "reproduction": "python verify.py INPUT_DIRECTORY PROJECT_ROOT output.json --compare PROJECT_ROOT/reviews/pinns_observation_quality/quality_scores.json"
+}
