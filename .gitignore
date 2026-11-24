@@ -1,0 +1,15 @@
+# Python & local caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.pydeps/
+
+# Large ephemeral raw downloads & binary caches (keep results/ JSONs & figures tracked!)
+data_cache/raw_tmp/
+data_cache/*.pkl
+data_cache/*.zip
+*.mp4
+
+# OS artifacts
+.DS_Store
