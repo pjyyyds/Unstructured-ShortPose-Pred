@@ -1,6 +1,7 @@
 """Leave one physical PINNS site out. Run python -m scripts.benchmark_heldout_sites DATA_ROOT."""
 import argparse
 from collections import defaultdict
+from dataclasses import dataclass
 import hashlib
 import json
 from pathlib import Path
@@ -17,7 +18,16 @@ WINDOW = HISTORY + T_FUT
 RIDGE_ALPHA = 1.0
 
 
-def clip_windows(label_path, calib):
+@dataclass
+class TrackWindow:
+    clip: str
+    person_id: int
+    t0: int
+    xy: np.ndarray  # Full 35-frame track, relative to the last history position.
+    fixed: int  # Ground-truth annotation on that history frame.
+
+
+def iter_clip_windows(label_path, calib):
     frames = _parse_pinns_label_file(
         label_path, _check_right_handed_homography(calib), calib["y_min"], calib["y_max"]
     )
@@ -30,23 +40,24 @@ def clip_windows(label_path, calib):
                     raise ValueError(f"Duplicate person {obj['id']} at frame {frame} in {label_path.name}")
                 xy = (obj["wx"], obj["wy"])
                 if np.isfinite(xy).all():
-                    positions[frame] = xy
+                    positions[frame] = (xy, obj["fixed"])
 
-    windows = []
-    used_tracks = 0
-    for positions in tracks.values():
-        start_count = len(windows)
+    for person_id, positions in tracks.items():
         times = np.array(sorted(positions))
         for run in np.split(times, np.flatnonzero(np.diff(times) != 1) + 1):
             for start in range(0, len(run) - WINDOW + 1, WINDOW):
                 indices = run[start : start + WINDOW]
-                xy = np.array([positions[t] for t in indices], dtype=np.float64)
-                windows.append(xy - xy[HISTORY - 1])
-        used_tracks += len(windows) > start_count
-    return windows, used_tracks
+                xy = np.array([positions[t][0] for t in indices], dtype=np.float64)
+                t0 = int(indices[HISTORY - 1])
+                yield TrackWindow(label_path.stem, person_id, t0, xy - xy[HISTORY - 1], positions[t0][1])
 
 
-def load_sites(root):
+def clip_windows(label_path, calib):
+    rows = list(iter_clip_windows(label_path, calib))
+    return [r.xy for r in rows], len({r.person_id for r in rows})
+
+
+def load_site_windows(root):
     members_path = root / "archive_members.txt"
     members = set(members_path.read_text().splitlines()) if members_path.exists() else None
     groups, counts, inputs = defaultdict(list), {}, set()
@@ -62,12 +73,12 @@ def load_sites(root):
         if not np.isclose(calib["fps"], 30):
             raise ValueError(f"Unexpected frame rate in {calib_file}")
         site = f"{calib['location']}_{calib['scene']}"
-        windows, tracks = clip_windows(labels, calib)
+        windows = list(iter_clip_windows(labels, calib))
         groups[site].extend(windows)
         entry = counts.setdefault(site, {"clips": 0, "clips_with_windows": 0, "clip_person_tracks_with_windows": 0})
         entry["clips"] += 1
         entry["clips_with_windows"] += int(bool(windows))
-        entry["clip_person_tracks_with_windows"] += tracks
+        entry["clip_person_tracks_with_windows"] += len({r.person_id for r in windows})
         inputs.update([labels, calib_file])
     if len(groups) != 4 or not all(groups.values()):
         raise ValueError("Expected four physical sites, each with complete person windows")
@@ -75,7 +86,12 @@ def load_sites(root):
     for path in sorted(inputs):
         digest.update(path.relative_to(root).as_posix().encode() + b"\0")
         digest.update(hashlib.sha256(path.read_bytes()).digest())
-    return {site: np.stack(windows) for site, windows in groups.items()}, counts, digest.hexdigest()
+    return dict(groups), counts, digest.hexdigest()
+
+
+def load_sites(root):
+    groups, counts, digest = load_site_windows(root)
+    return {site: np.stack([r.xy for r in rows]) for site, rows in groups.items()}, counts, digest
 
 
 def constant_velocity(history):

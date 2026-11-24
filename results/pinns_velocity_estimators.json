@@ -1,0 +1,971 @@
+{
+  "protocol": {
+    "task": "Three fixed, training-free motion estimators evaluated on each held-out site of the existing PINNS motion benchmark. All four sites were previously examined.",
+    "windows": "Five complete observations (0.4 s span), then 30 complete targets (3.0 s). Within each clip/person, split at missing or nonfinite frames and take consecutive, disjoint 35-frame blocks from each run's start. Drop short remainders.",
+    "coordinates": "Annotated pedestrian ground positions in metres, downsampled from 30 to 10 Hz without interpolation, with the project's calibration-based Y orientation.",
+    "estimators": {
+      "last_two": "Displacement between the last two observed positions divided by 0.1 s.",
+      "ols_five": "Ordinary least-squares slope per coordinate using all five observed positions.",
+      "median_four": "Coordinatewise median of four consecutive interframe velocities, averaging the two middle values on each axis."
+    },
+    "forecast": "All methods extrapolate at constant velocity from the last observed position. Forecasts use only the five observed positions and fixed 0.1 s spacing.",
+    "metrics": "Mean Euclidean distance across 30 targets (ADE) and at 3.0 s (FDE), in metres. Each window has equal weight within a clip or a site. The macro mean weights the four site means equally. Descriptive comparison without significance testing."
+  },
+  "verification": {
+    "reference_file": "pinns_heldout_sites.json",
+    "label_and_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "windows_from_reference_loader_with_clip_identity": 1482,
+    "ols_reference_checked": "ADE and FDE for each site and their four-site mean, absolute tolerance 1e-10 m."
+  },
+  "test_windows_total": 1482,
+  "macro": {
+    "last_two": {
+      "ade_m": 0.4838738237222939,
+      "fde_m": 1.1045585104032625
+    },
+    "ols_five": {
+      "ade_m": 0.5556918258065034,
+      "fde_m": 1.2103253936302685
+    },
+    "median_four": {
+      "ade_m": 0.5554705551694428,
+      "fde_m": 1.2104020048449464
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "clips_with_windows": 14,
+      "clip_person_tracks_with_windows": 240,
+      "metrics": {
+        "last_two": {
+          "ade_m": 0.947653896293486,
+          "fde_m": 1.9414660044131375
+        },
+        "ols_five": {
+          "ade_m": 1.159872577771962,
+          "fde_m": 2.298073118876918
+        },
+        "median_four": {
+          "ade_m": 1.1573322264936772,
+          "fde_m": 2.294465590698192
+        }
+      },
+      "by_clip": {
+        "america_crossroad_spring_daytime_sunny_1": {
+          "windows": 5,
+          "person_tracks_with_windows": 2,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.05725686765331572,
+              "fde_m": 0.1647554052527204
+            },
+            "ols_five": {
+              "ade_m": 0.05811789743453123,
+              "fde_m": 0.16065195934875193
+            },
+            "median_four": {
+              "ade_m": 0.06064944420190831,
+              "fde_m": 0.16981773407823608
+            }
+          }
+        },
+        "america_crossroad_spring_daytime_sunny_2": {
+          "windows": 10,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.22982465798013227,
+              "fde_m": 0.5359563549205515
+            },
+            "ols_five": {
+              "ade_m": 0.23720870326918225,
+              "fde_m": 0.5587794730453591
+            },
+            "median_four": {
+              "ade_m": 0.23949402118502594,
+              "fde_m": 0.5636346037854758
+            }
+          }
+        },
+        "america_crossroad_summer_daytime_sunny_0": {
+          "windows": 103,
+          "person_tracks_with_windows": 38,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.9848700088775348,
+              "fde_m": 2.0468307337024205
+            },
+            "ols_five": {
+              "ade_m": 1.2358773353837622,
+              "fde_m": 2.5240423240398124
+            },
+            "median_four": {
+              "ade_m": 1.2302557100469707,
+              "fde_m": 2.509201613027203
+            }
+          }
+        },
+        "america_crossroad_summer_daytime_sunny_1": {
+          "windows": 31,
+          "person_tracks_with_windows": 7,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.45308670736043055,
+              "fde_m": 1.090537685034584
+            },
+            "ols_five": {
+              "ade_m": 0.4787683508458528,
+              "fde_m": 1.1309473784855582
+            },
+            "median_four": {
+              "ade_m": 0.4647116585858211,
+              "fde_m": 1.107637541898455
+            }
+          }
+        },
+        "america_crossroad_summer_night_sunny_0": {
+          "windows": 15,
+          "person_tracks_with_windows": 5,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.487481560233029,
+              "fde_m": 1.085348788656536
+            },
+            "ols_five": {
+              "ade_m": 0.5099987689680632,
+              "fde_m": 1.1202042528232492
+            },
+            "median_four": {
+              "ade_m": 0.507910063501837,
+              "fde_m": 1.1118078602412362
+            }
+          }
+        },
+        "america_crossroad_summer_night_sunny_1": {
+          "windows": 8,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.8050324086828051,
+              "fde_m": 1.7023657182733125
+            },
+            "ols_five": {
+              "ade_m": 0.8087810087381506,
+              "fde_m": 1.7056168014894557
+            },
+            "median_four": {
+              "ade_m": 0.8061802022756213,
+              "fde_m": 1.7024807546222553
+            }
+          }
+        },
+        "america_crossroad_summer_nightfall_sunny_0": {
+          "windows": 104,
+          "person_tracks_with_windows": 28,
+          "metrics": {
+            "last_two": {
+              "ade_m": 1.1935129821888382,
+              "fde_m": 2.450747106009297
+            },
+            "ols_five": {
+              "ade_m": 1.4142052630062607,
+              "fde_m": 2.772948859424715
+            },
+            "median_four": {
+              "ade_m": 1.399411081711455,
+              "fde_m": 2.744391944922488
+            }
+          }
+        },
+        "america_crossroad_summer_nightfall_sunny_1": {
+          "windows": 390,
+          "person_tracks_with_windows": 120,
+          "metrics": {
+            "last_two": {
+              "ade_m": 1.1823000292127763,
+              "fde_m": 2.3595746195738068
+            },
+            "ols_five": {
+              "ade_m": 1.4869508166030185,
+              "fde_m": 2.876349100240233
+            },
+            "median_four": {
+              "ade_m": 1.4847743516242407,
+              "fde_m": 2.8751021704418447
+            }
+          }
+        },
+        "america_crossroad_winter_daytime_sunny_0": {
+          "windows": 14,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.29807811981018106,
+              "fde_m": 0.6273611635997222
+            },
+            "ols_five": {
+              "ade_m": 0.3180078556670035,
+              "fde_m": 0.6572745934736418
+            },
+            "median_four": {
+              "ade_m": 0.3092361043154678,
+              "fde_m": 0.6451484720239911
+            }
+          }
+        },
+        "america_crossroad_winter_daytime_sunny_1": {
+          "windows": 33,
+          "person_tracks_with_windows": 7,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.5123820280630035,
+              "fde_m": 1.1089033209295656
+            },
+            "ols_five": {
+              "ade_m": 0.5793326143729732,
+              "fde_m": 1.1736400602586867
+            },
+            "median_four": {
+              "ade_m": 0.6251379406026534,
+              "fde_m": 1.2650811121537273
+            }
+          }
+        },
+        "america_crossroad_winter_night_snow_0": {
+          "windows": 16,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.22701044182326283,
+              "fde_m": 0.5913296059550845
+            },
+            "ols_five": {
+              "ade_m": 0.24839558344597817,
+              "fde_m": 0.6224419412139419
+            },
+            "median_four": {
+              "ade_m": 0.23028945769642462,
+              "fde_m": 0.5958837723062094
+            }
+          }
+        },
+        "america_crossroad_winter_night_snow_1": {
+          "windows": 32,
+          "person_tracks_with_windows": 7,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.5286343328814709,
+              "fde_m": 1.243094792430314
+            },
+            "ols_five": {
+              "ade_m": 0.5715243426246204,
+              "fde_m": 1.2900215825648553
+            },
+            "median_four": {
+              "ade_m": 0.574340388637331,
+              "fde_m": 1.294679383125736
+            }
+          }
+        },
+        "america_crossroad_winter_nightfall_sunny_0": {
+          "windows": 6,
+          "person_tracks_with_windows": 2,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.1600998636578726,
+              "fde_m": 0.4049079910308755
+            },
+            "ols_five": {
+              "ade_m": 0.1708235776151791,
+              "fde_m": 0.431880655305497
+            },
+            "median_four": {
+              "ade_m": 0.1687759065139579,
+              "fde_m": 0.4271794254152257
+            }
+          }
+        },
+        "america_crossroad_winter_nightfall_sunny_1": {
+          "windows": 49,
+          "person_tracks_with_windows": 11,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.278533467235293,
+              "fde_m": 0.6401042061864307
+            },
+            "ols_five": {
+              "ade_m": 0.27938022593045597,
+              "fde_m": 0.6413681991548993
+            },
+            "median_four": {
+              "ade_m": 0.28282920273223094,
+              "fde_m": 0.6470137183091219
+            }
+          }
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "clips_with_windows": 9,
+      "clip_person_tracks_with_windows": 28,
+      "metrics": {
+        "last_two": {
+          "ade_m": 0.3703417251634734,
+          "fde_m": 0.9319507406765016
+        },
+        "ols_five": {
+          "ade_m": 0.4060032740471182,
+          "fde_m": 0.9606783946263743
+        },
+        "median_four": {
+          "ade_m": 0.4159662259945222,
+          "fde_m": 0.9779679910487064
+        }
+      },
+      "by_clip": {
+        "italy_park_spring_night_sunny_0": {
+          "windows": 3,
+          "person_tracks_with_windows": 1,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.10265462343650784,
+              "fde_m": 0.2648479314021803
+            },
+            "ols_five": {
+              "ade_m": 0.10318965023374622,
+              "fde_m": 0.2658325026465331
+            },
+            "median_four": {
+              "ade_m": 0.10317186159333404,
+              "fde_m": 0.26580221104720825
+            }
+          }
+        },
+        "italy_park_summer_daytime_sunny_0": {
+          "windows": 13,
+          "person_tracks_with_windows": 5,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.23087487318297448,
+              "fde_m": 0.7226915097589246
+            },
+            "ols_five": {
+              "ade_m": 0.27065578949681846,
+              "fde_m": 0.7249832860456623
+            },
+            "median_four": {
+              "ade_m": 0.26763624644619693,
+              "fde_m": 0.7226569987885819
+            }
+          }
+        },
+        "italy_park_summer_daytime_sunny_1": {
+          "windows": 5,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.9270281492808643,
+              "fde_m": 2.187495788404815
+            },
+            "ols_five": {
+              "ade_m": 0.9148840351655168,
+              "fde_m": 2.1607910227139446
+            },
+            "median_four": {
+              "ade_m": 0.9148301024242597,
+              "fde_m": 2.1606759193016263
+            }
+          }
+        },
+        "italy_park_summer_nightfall_sunny_0": {
+          "windows": 15,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.4753560935598455,
+              "fde_m": 1.2201244787830174
+            },
+            "ols_five": {
+              "ade_m": 0.611095607250438,
+              "fde_m": 1.3790947216766163
+            },
+            "median_four": {
+              "ade_m": 0.6432675996945065,
+              "fde_m": 1.436843854730332
+            }
+          }
+        },
+        "italy_park_summer_nightfall_sunny_1": {
+          "windows": 27,
+          "person_tracks_with_windows": 8,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.44153992621907906,
+              "fde_m": 1.0579228597384904
+            },
+            "ols_five": {
+              "ade_m": 0.46253996983504747,
+              "fde_m": 1.0682881500426744
+            },
+            "median_four": {
+              "ade_m": 0.4772144139854087,
+              "fde_m": 1.0914552692709547
+            }
+          }
+        },
+        "italy_park_winter_daytime_snow_0": {
+          "windows": 5,
+          "person_tracks_with_windows": 1,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.1849267554622765,
+              "fde_m": 0.6029471232864534
+            },
+            "ols_five": {
+              "ade_m": 0.186273838742734,
+              "fde_m": 0.6053927650748699
+            },
+            "median_four": {
+              "ade_m": 0.18626977904253247,
+              "fde_m": 0.6053890157443101
+            }
+          }
+        },
+        "italy_park_winter_daytime_snow_1": {
+          "windows": 4,
+          "person_tracks_with_windows": 2,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.343963358872192,
+              "fde_m": 0.8525144959551475
+            },
+            "ols_five": {
+              "ade_m": 0.32298179629095336,
+              "fde_m": 0.8009275970345633
+            },
+            "median_four": {
+              "ade_m": 0.32242249427442504,
+              "fde_m": 0.7988544059098908
+            }
+          }
+        },
+        "italy_park_winter_daytime_snow_2": {
+          "windows": 9,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.09938398820693087,
+              "fde_m": 0.23991642882601807
+            },
+            "ols_five": {
+              "ade_m": 0.10005841281989304,
+              "fde_m": 0.24124659324870987
+            },
+            "median_four": {
+              "ade_m": 0.10005798557761628,
+              "fde_m": 0.24124597372692572
+            }
+          }
+        },
+        "italy_park_winter_daytime_snow_3": {
+          "windows": 3,
+          "person_tracks_with_windows": 1,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.3057881425546359,
+              "fde_m": 0.569007999785997
+            },
+            "ols_five": {
+              "ade_m": 0.30764174713703196,
+              "fde_m": 0.579551793153353
+            },
+            "median_four": {
+              "ade_m": 0.3076205891018223,
+              "fde_m": 0.5794858256719375
+            }
+          }
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "clips_with_windows": 11,
+      "clip_person_tracks_with_windows": 117,
+      "metrics": {
+        "last_two": {
+          "ade_m": 0.2937423480694852,
+          "fde_m": 0.7186574902774941
+        },
+        "ols_five": {
+          "ade_m": 0.31507096725217537,
+          "fde_m": 0.7522684279959286
+        },
+        "median_four": {
+          "ade_m": 0.30764590838513545,
+          "fde_m": 0.7386342665655855
+        }
+      },
+      "by_clip": {
+        "japan_crossroad_summer_daytime_sunny_0": {
+          "windows": 28,
+          "person_tracks_with_windows": 12,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.33637468081606225,
+              "fde_m": 0.8686820540448537
+            },
+            "ols_five": {
+              "ade_m": 0.34355826349214613,
+              "fde_m": 0.878103726928792
+            },
+            "median_four": {
+              "ade_m": 0.3461687954596462,
+              "fde_m": 0.8830397721439506
+            }
+          }
+        },
+        "japan_crossroad_summer_daytime_sunny_1": {
+          "windows": 18,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.2879633420765939,
+              "fde_m": 0.6800292268781232
+            },
+            "ols_five": {
+              "ade_m": 0.3020350378042228,
+              "fde_m": 0.7069760381842797
+            },
+            "median_four": {
+              "ade_m": 0.3073322966720203,
+              "fde_m": 0.7163381901611247
+            }
+          }
+        },
+        "japan_crossroad_summer_morning_sunny_0": {
+          "windows": 4,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.23958473631345653,
+              "fde_m": 0.7969444934910458
+            },
+            "ols_five": {
+              "ade_m": 0.24116035567211336,
+              "fde_m": 0.7948629021265263
+            },
+            "median_four": {
+              "ade_m": 0.24115943847114416,
+              "fde_m": 0.794850425505907
+            }
+          }
+        },
+        "japan_crossroad_summer_morning_sunny_1": {
+          "windows": 9,
+          "person_tracks_with_windows": 6,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.3209115269407431,
+              "fde_m": 0.7249906321859529
+            },
+            "ols_five": {
+              "ade_m": 0.29536672746675285,
+              "fde_m": 0.6759486027897319
+            },
+            "median_four": {
+              "ade_m": 0.29601987852209655,
+              "fde_m": 0.676105068552997
+            }
+          }
+        },
+        "japan_crossroad_summer_night_sunny_0": {
+          "windows": 15,
+          "person_tracks_with_windows": 5,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.1675637294750992,
+              "fde_m": 0.4628782198587739
+            },
+            "ols_five": {
+              "ade_m": 0.165840201566012,
+              "fde_m": 0.45001248224296014
+            },
+            "median_four": {
+              "ade_m": 0.16621367661965405,
+              "fde_m": 0.4601114034256156
+            }
+          }
+        },
+        "japan_crossroad_summer_night_sunny_1": {
+          "windows": 8,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.4143044212862272,
+              "fde_m": 1.1011547329724407
+            },
+            "ols_five": {
+              "ade_m": 0.4154889970750536,
+              "fde_m": 1.100174333329286
+            },
+            "median_four": {
+              "ade_m": 0.4154844808485444,
+              "fde_m": 1.1001667181958532
+            }
+          }
+        },
+        "japan_crossroad_summer_night_sunny_2": {
+          "windows": 8,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.3066765911387654,
+              "fde_m": 0.7506010490864412
+            },
+            "ols_five": {
+              "ade_m": 0.3040763015677344,
+              "fde_m": 0.7425848854028392
+            },
+            "median_four": {
+              "ade_m": 0.3040752732782359,
+              "fde_m": 0.7425783496955296
+            }
+          }
+        },
+        "japan_crossroad_winter_daytime_sunny_0": {
+          "windows": 159,
+          "person_tracks_with_windows": 29,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.2848167028193236,
+              "fde_m": 0.6762939658962572
+            },
+            "ols_five": {
+              "ade_m": 0.2946880959185227,
+              "fde_m": 0.6865067118259595
+            },
+            "median_four": {
+              "ade_m": 0.29343225570206555,
+              "fde_m": 0.6829346051551322
+            }
+          }
+        },
+        "japan_crossroad_winter_daytime_sunny_1": {
+          "windows": 78,
+          "person_tracks_with_windows": 19,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.27364071796834943,
+              "fde_m": 0.677565976681472
+            },
+            "ols_five": {
+              "ade_m": 0.3163819301370717,
+              "fde_m": 0.7514104692401865
+            },
+            "median_four": {
+              "ade_m": 0.3259025057431055,
+              "fde_m": 0.7685139890751651
+            }
+          }
+        },
+        "japan_crossroad_winter_nightfall_sunny_0": {
+          "windows": 75,
+          "person_tracks_with_windows": 23,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.3272891481753081,
+              "fde_m": 0.8016067198446021
+            },
+            "ols_five": {
+              "ade_m": 0.36246267322183917,
+              "fde_m": 0.8614600389322896
+            },
+            "median_four": {
+              "ade_m": 0.3219467143449178,
+              "fde_m": 0.7871752802542034
+            }
+          }
+        },
+        "japan_crossroad_winter_nightfall_sunny_1": {
+          "windows": 30,
+          "person_tracks_with_windows": 9,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.2996832851196797,
+              "fde_m": 0.7308369412606688
+            },
+            "ols_five": {
+              "ade_m": 0.34898100395957715,
+              "fde_m": 0.8179383711606346
+            },
+            "median_four": {
+              "ade_m": 0.31925657620200304,
+              "fde_m": 0.7664661271097345
+            }
+          }
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "clips_with_windows": 13,
+      "clip_person_tracks_with_windows": 64,
+      "metrics": {
+        "last_two": {
+          "ade_m": 0.32375732536273116,
+          "fde_m": 0.8261598062459166
+        },
+        "ols_five": {
+          "ade_m": 0.34182048415475813,
+          "fde_m": 0.8302816330218529
+        },
+        "median_four": {
+          "ade_m": 0.34093785980443614,
+          "fde_m": 0.830540171067302
+        }
+      },
+      "by_clip": {
+        "thailand_street_summer_daytime_afterraining_0": {
+          "windows": 8,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.22254203256212143,
+              "fde_m": 0.6901022294201453
+            },
+            "ols_five": {
+              "ade_m": 0.22154048209220709,
+              "fde_m": 0.6745838541513216
+            },
+            "median_four": {
+              "ade_m": 0.22216424964008868,
+              "fde_m": 0.677095176658481
+            }
+          }
+        },
+        "thailand_street_summer_daytime_afterraining_1": {
+          "windows": 6,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.2793576959857849,
+              "fde_m": 0.7790154254471199
+            },
+            "ols_five": {
+              "ade_m": 0.2824517278226086,
+              "fde_m": 0.7839921212020887
+            },
+            "median_four": {
+              "ade_m": 0.2824366324864111,
+              "fde_m": 0.7839638176439848
+            }
+          }
+        },
+        "thailand_street_summer_night_sunny_0": {
+          "windows": 20,
+          "person_tracks_with_windows": 5,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.17588498727638774,
+              "fde_m": 0.5121707233163661
+            },
+            "ols_five": {
+              "ade_m": 0.18473467137190966,
+              "fde_m": 0.5104005630299104
+            },
+            "median_four": {
+              "ade_m": 0.17949906005826824,
+              "fde_m": 0.5145153345303021
+            }
+          }
+        },
+        "thailand_street_summer_night_sunny_1": {
+          "windows": 8,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.23837212889823026,
+              "fde_m": 0.562020654064806
+            },
+            "ols_five": {
+              "ade_m": 0.2526387509103683,
+              "fde_m": 0.5661035431226215
+            },
+            "median_four": {
+              "ade_m": 0.2524864255833653,
+              "fde_m": 0.5658087137351994
+            }
+          }
+        },
+        "thailand_street_summer_night_sunny_2": {
+          "windows": 2,
+          "person_tracks_with_windows": 1,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.37195031893139624,
+              "fde_m": 0.9363141577864562
+            },
+            "ols_five": {
+              "ade_m": 0.4374369122963627,
+              "fde_m": 0.9343447977152546
+            },
+            "median_four": {
+              "ade_m": 0.41945259094031784,
+              "fde_m": 0.912513457302032
+            }
+          }
+        },
+        "thailand_street_summer_nightfall_sunny_0": {
+          "windows": 17,
+          "person_tracks_with_windows": 12,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.30976859612522134,
+              "fde_m": 0.7629481520887836
+            },
+            "ols_five": {
+              "ade_m": 0.3454896268049395,
+              "fde_m": 0.8281174520816142
+            },
+            "median_four": {
+              "ade_m": 0.3451880801450667,
+              "fde_m": 0.8275294814377658
+            }
+          }
+        },
+        "thailand_street_summer_nightfall_sunny_1": {
+          "windows": 11,
+          "person_tracks_with_windows": 6,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.2966006553507735,
+              "fde_m": 0.6327601386568457
+            },
+            "ols_five": {
+              "ade_m": 0.3149853993753836,
+              "fde_m": 0.6615229445907699
+            },
+            "median_four": {
+              "ade_m": 0.31507000556941067,
+              "fde_m": 0.6616693217501255
+            }
+          }
+        },
+        "thailand_street_winter_daytime_sunny_0": {
+          "windows": 13,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.4113211674174649,
+              "fde_m": 1.1843216096695999
+            },
+            "ols_five": {
+              "ade_m": 0.4094094341278614,
+              "fde_m": 1.001587832243563
+            },
+            "median_four": {
+              "ade_m": 0.4185972946512554,
+              "fde_m": 1.0035488190702329
+            }
+          }
+        },
+        "thailand_street_winter_daytime_sunny_1": {
+          "windows": 5,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.28217535867514293,
+              "fde_m": 0.6486944536627097
+            },
+            "ols_five": {
+              "ade_m": 0.2958418607794674,
+              "fde_m": 0.6745971297165199
+            },
+            "median_four": {
+              "ade_m": 0.2958777125207292,
+              "fde_m": 0.6746761893027596
+            }
+          }
+        },
+        "thailand_street_winter_night_sunny_0": {
+          "windows": 9,
+          "person_tracks_with_windows": 3,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.30294330177468154,
+              "fde_m": 0.6989611425970542
+            },
+            "ols_five": {
+              "ade_m": 0.36484294376931603,
+              "fde_m": 0.779563399090145
+            },
+            "median_four": {
+              "ade_m": 0.37585909221409003,
+              "fde_m": 0.7990671697771146
+            }
+          }
+        },
+        "thailand_street_winter_night_sunny_1": {
+          "windows": 10,
+          "person_tracks_with_windows": 4,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.6049950333191815,
+              "fde_m": 1.4290720082311956
+            },
+            "ols_five": {
+              "ade_m": 0.5962432025397474,
+              "fde_m": 1.4043899516312397
+            },
+            "median_four": {
+              "ade_m": 0.5959822477337442,
+              "fde_m": 1.4040032087622343
+            }
+          }
+        },
+        "thailand_street_winter_nightfall_sunny_0": {
+          "windows": 24,
+          "person_tracks_with_windows": 10,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.45384492048130354,
+              "fde_m": 1.1245985036329307
+            },
+            "ols_five": {
+              "ade_m": 0.4572322702957043,
+              "fde_m": 1.127979136089258
+            },
+            "median_four": {
+              "ade_m": 0.47153072870978957,
+              "fde_m": 1.1565969135057323
+            }
+          }
+        },
+        "thailand_street_winter_nightfall_sunny_1": {
+          "windows": 17,
+          "person_tracks_with_windows": 5,
+          "metrics": {
+            "last_two": {
+              "ade_m": 0.23429973528919665,
+              "fde_m": 0.6455873398115384
+            },
+            "ols_five": {
+              "ade_m": 0.2856513610256236,
+              "fde_m": 0.7033086043496714
+            },
+            "median_four": {
+              "ade_m": 0.2532679281067354,
+              "fde_m": 0.6507550687057452
+            }
+          }
+        }
+      }
+    }
+  }
+}
