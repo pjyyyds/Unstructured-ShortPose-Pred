@@ -47,6 +47,7 @@ The five checked-in PNGs were generated with Matplotlib 3.9.4 at 300 DPI. The su
 ```bash
 export PINNS_ROOT="/path/to/extracted/PINNS"
 python3 -m scripts.audit_pinns_short_window "$PINNS_ROOT"
+python3 -m scripts.audit_pinns_type_input "$PINNS_ROOT"
 python3 -m scripts.cluster_pinns_errors
 python3 -m scripts.benchmark_heldout_sites "$PINNS_ROOT"
 python3 -m scripts.compare_pinns_velocity_estimators "$PINNS_ROOT"

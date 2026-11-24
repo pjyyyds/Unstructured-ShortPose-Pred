@@ -36,3 +36,5 @@ Kaggle 作业 373483765（版本 1，提交 a40fdd0）的神经模型数值发�
 JRDB 外部评测已检查输入可行性。Social-Transmotion 发布包的 JRDB 训练与验证样例为 2.5 Hz，有坐标和边界框，无关节置信度。其两个留出片段均列在 JRDB 官方原始训练划分内。本次只读取其文件名。做跨数据集姿态试验前，先在开发片段核对尺度、机器人自运动和关键点定义，并选定一致的观测及预测时域。[作者发布物](https://github.com/vita-epfl/social-transmotion/releases/tag/ckpt_data) · [JRDB 官方划分](https://github.com/JRDB-dataset/jrdb_toolkit/blob/main/traj_eval/convert_dataset_to_KITTI_tracking.py) · [姿态标注定义](https://jrdb.erc.monash.edu/dataset/pose)
 
 速度缩放备选已排除。在每折三个训练地点等权拟合一个全局减速系数后，四地等权 ADE 从末两帧原速的 0.4839 m 升至 0.6068 m，仅美国路口改善。保留负结果，以原速为对照。新模型的改进和参数选择使用开发数据，四地点结果继续作为探索性报告。[复现](results/pinns_velocity_scale.json)
+
+行人类型输入已完成逐窗复核。47 个源片段共 180,344 条行人记录，第 11 列 `fixed` 均为 −1，因此 `fixed == 1` 在这些行人记录上从未触发。单用末两帧观测速度与 0.20 m/s 阈值，可逐窗重建原测试集 497 个类型输入（122 个站立），以及四地留出集 1,482 个类型输入（189 个站立）。该结论描述类型编码，实时地面坐标的测量误差仍需另外评估。[分地点核对结果](results/pinns_type_input_audit.json)

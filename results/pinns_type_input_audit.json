@@ -1,0 +1,79 @@
+{
+  "label_and_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "rule": "Encode a pedestrian as standing if column 11 (fixed) equals 1 or a valid recent observed speed is below 0.20 m/s. Each audited window has complete five-frame position history.",
+  "source_labels": {
+    "source_clips": 47,
+    "pedestrian_rows": 180344,
+    "column_11_histogram": {
+      "-1": 180344
+    }
+  },
+  "archived_test": {
+    "all": {
+      "windows": 497,
+      "standing_by_model_rule": 122,
+      "standing_by_observed_speed": 122,
+      "different_type": 0
+    },
+    "by_site": {
+      "america_crossroad": {
+        "windows": 316,
+        "standing_by_model_rule": 106,
+        "standing_by_observed_speed": 106,
+        "different_type": 0
+      },
+      "italy_park": {
+        "windows": 20,
+        "standing_by_model_rule": 1,
+        "standing_by_observed_speed": 1,
+        "different_type": 0
+      },
+      "japan_crossroad": {
+        "windows": 150,
+        "standing_by_model_rule": 15,
+        "standing_by_observed_speed": 15,
+        "different_type": 0
+      },
+      "thailand_street": {
+        "windows": 11,
+        "standing_by_model_rule": 0,
+        "standing_by_observed_speed": 0,
+        "different_type": 0
+      }
+    }
+  },
+  "four_site_windows": {
+    "all": {
+      "windows": 1482,
+      "standing_by_model_rule": 189,
+      "standing_by_observed_speed": 189,
+      "different_type": 0
+    },
+    "by_site": {
+      "america_crossroad": {
+        "windows": 816,
+        "standing_by_model_rule": 95,
+        "standing_by_observed_speed": 95,
+        "different_type": 0
+      },
+      "italy_park": {
+        "windows": 84,
+        "standing_by_model_rule": 16,
+        "standing_by_observed_speed": 16,
+        "different_type": 0
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "standing_by_model_rule": 70,
+        "standing_by_observed_speed": 70,
+        "different_type": 0
+      },
+      "thailand_street": {
+        "windows": 150,
+        "standing_by_model_rule": 8,
+        "standing_by_observed_speed": 8,
+        "different_type": 0
+      }
+    }
+  }
+}
