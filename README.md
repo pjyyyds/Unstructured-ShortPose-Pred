@@ -67,3 +67,14 @@ python -m scripts.run_heldout_cloud --scratch-dir /tmp/shortpose_heldout_cache -
 ```
 
 The final archive is `shortpose_heldout.zip` in the output directory. On Colab, choose an output path under `/content`. The scratch directory keeps verified downloads and per-clip extraction checkpoints. Reusing the same scratch and output directories resumes completed clips and models.
+
+### Test sensitivity to a one-frame image offset
+
+After extracting the pilot's `shortpose_heldout.zip`, point `PILOT_DIR` at the directory containing `pose.npz` and `folds/`, and `RTMPOSE_ONNX` at the original RTMPose model. The first command re-extracts 2,985 person observations in three US videos one decoded video frame later. It checks sampled zero-offset batches against the frozen cache on the same ONNX execution providers. Choose a new output cache path.
+
+```bash
+python -m scripts.cache_pinns_frame_offset "$PINNS_ROOT" "$PILOT_DIR/pose.npz" "$RTMPOSE_ONNX" shifted_pose.npz
+python -m scripts.evaluate_pinns_frame_offset "$PINNS_ROOT" "$PILOT_DIR" shifted_pose.npz --output frame_offset_evaluation.json
+```
+
+The second command replays all four saved M1 checkpoints and verifies each window's archived errors. It then measures the test-input change on 597 US windows and reports the three clips individually, the US fold and the equal-site mean. Model weights stay fixed. Estimating the effect on training requires a separate refit.
