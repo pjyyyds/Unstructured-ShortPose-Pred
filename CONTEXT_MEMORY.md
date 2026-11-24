@@ -2,15 +2,17 @@
 
 > [!NOTE]
 > 本文档由 `context-memory-manager` 滚动维护，记录《短时姿态观测下的非结构化道路行人动作轨迹预测》核心规格、代码排雷记录、实证数据与算法演进决策。
-> 更新时间：2026-11-24 14:48
+> 更新时间：2026-11-24 16:27
 
 ---
 
 ## 1. 核心目标与硬性技术边界 (Core Objectives & Boundaries)
 
 - **课题定位**：面向无车道线、人车混行、近场遮挡的非结构化道路，仅利用 $t \le t_0$ 的地面历史与 2D 骨骼（$T \in \{5, 10, 20\}, \Delta t = 0.1\text{ s}$），预测未来 $T_f = 30$（$3.0\text{ s}$）的 $K=6$ 条地面候选轨迹 $\hat{\mathbf{Y}}$、模态概率 $\hat{\boldsymbol{\pi}} \in \Delta^5$ 及五类可观测动作概率 $\hat{\mathbf{p}}_{\text{act}} \in [0,1]^5$（绝不预测未来人体骨骼）。
-- **硬指标红线**：主干参数量 $< 2.5\text{ M}$（当前完整版 `Ours_Full` 实测仅 **`0.512 M`**）、$N=12$ 单次前向 $< 0.80\text{ GFLOPs}$（实测 $T=5$ 为 **`0.415 GFLOPs`**，$T=10$ 为 **`0.545 GFLOPs`**，$T=20$ 为 **`0.799 GFLOPs`**）；严禁跨帧线性插值；同机位切分强制 $\ge 6.0\text{ s}$ 物理时间隔离带。
-- **云端资源状态**：Kaggle (`pengjy25`, `GPU T4 x2` 双卡后台 Commit，零本机负载)；`PINNS`（`973 MB` 直链，实测共 47 段 10Hz 视频）与 `Social-Transmotion/JTA`（`306 MB` Release，原生 2.5Hz 共 3,604 样本）均已验证直连解析通过。
+- **硬指标红线**：主干参数量 $< 2.5\text{ M}$（V2 完整版 `Ours_Full` 实测仅 **`0.471 M` / `471,442`**）、$N=12$ 单次前向 $< 0.80\text{ GFLOPs}$（实测 $T=5$ 为 **`0.409 GFLOPs`**，$T=10$ 为 **`0.539 GFLOPs`**，$T=20$ 为 **`0.798 GFLOPs`**）；严禁跨帧线性插值；同机位切分强制 $\ge 6.0\text{ s}$ 物理时间隔离带。
+- **真实数据切分实证底座（100% 锁定）**：
+  - `PINNS`（4 国 47 段 10.0 Hz 高清监控）：共 `7,283` 条无泄漏滑窗样本（`train=5,686, val=1,100, test=497`），测试集三桶均衡（`Clear=111, Partial=252, Heavy=134`），五类动作全覆盖（有效动作 `277` 条：`Start=43, Stop=29, Turn-Left=25, Turn-Right=10, Maintain=178`）。
+  - `JTA`（原生 2.5 Hz 跨集遮挡/噪声验证）：共 `3,604` 条滑窗样本（`train=1,844, val=800, test=960`）。
 
 ---
 
@@ -28,16 +30,20 @@
 
 ---
 
-## 3. 论文级算法升级假设（待云端实证检验）
+## 3. 首轮 V1 实证诊断发现与 V2 数学演进（已归档 `results/v1_initial_diagnosis/`）
 
-除严格实现开题报告 `M0`–`M3` 及外部基线 `MCENET`/`HST`/`Social-Transmotion` 外，针对审稿高频质疑预埋两项微增量（共 `< 700` 参数）物理改进：
-- **`M1p` (`BPD-Gate`, 生物力学部位解耦质量门控)**：针对车顶露头等“下肢遮挡、头肩清晰”高频工况，分头肩导向、躯干、下肢步态三组独立评估质量并以 $\max(1, \sum g_r)$ 凸归一聚合，避免全局标量门控因下肢遮挡一刀切丢弃头肩转向先兆。
-- **`M3p` (`ACMC`, 动作运动学一致性模态校准)**：提取 $K=6$ 候选轨迹的 6 维可微物理摘要（初末速度差、横向转向正弦、曲率比）与预测动作概率做兼容度校准（保持 `stop_grad` 零梯度泄漏），提升短窗状态转换样本的首选模态 `ADE_1` 命中率。
+1. **V1 已证实的核心科学结论**：
+   - `M1` 在 `PINNS T=5` 显著优于等权拼接 `M1a`（`0.4896 vs 0.4950`, Holm $p=0.0374$），在 `JTA` 重度噪声桶相比 `M1a` 降低误差 **`-11.62%`**（`1.5176 vs 1.7171`, Holm $p=1.49\times 10^{-7}$，达 MPSES），且优于全部三项外部基线（`MCENET=0.5234`, `HST=0.5265`, `Social-Transmotion=0.5152`）；
+   - `M3`（`Stop-Grad`）将动作 `Macro-F1` 从端到端 `M3b` 的 `30.85%` 提升至 **`37.29%`**，`M3p`（`ACMC`）显著优于 `M3`（`0.5771 vs 0.5926`, Holm $p=8.61\times 10^{-5}$）。
+2. **V1 暴露的四项机制瓶颈与 V2 闭环改进（提交 `c5344f1`）**：
+   - **质量瓶颈能量均衡与去死区 `BPD-Gate`**：将 4 维 $\mathbf{q}$ 升维至 32 维与 32 维运动-姿态投影对等融合，引入可观测性包络 $\sqrt{q_1 q_2}(0.4+0.6q_4)$，并用生物力学凸权重 `(0.45, 0.30, 0.25)` 替代 $\max(1,\sum g_r)$ 死区分母；
+   - **自车恒等主干保护 + 空汇点（Null-Sink）`GATv2`**：引入可学习空汇点逻辑值使远距无冲突旁观者注意力自然衰减至零，配合训练期 `6 cm` 折线微扰消除固定路口坐标死记硬背（根治 V1 中 `minADE_6=0.33m` 不变但 `NLL` 升至 `1.72` 的模态重排序退化）；
+   - **去 `LayerNorm` 动作条件 + 距离软排序模态损失 + TorchScript C++ 融合循环**：消除截断动作概率微抖动放大，引入 $\text{softmax}(-\text{ADE}_k/0.15)$ 软排序监督与 C++ GRU 核函数融合以压缩 `Tesla T4` 推理延迟。
 
 ---
 
 ## 4. 核心文件索引与当前阶段 (Key Files & Active Stage)
 
-- **核心源码**：`src/data/`（特征/动作/折线/防泄漏切分）、`src/models/`（`M0–M3`、`M1p/M3p`、`Ext-1..3`）、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（13/13 通过）。
-- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（当前最新提交 `c7592de`）。
-- **云端执行通道**：Kaggle Notebook `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1a7fec47764`（`scriptVersionId=373370043`，正在 `GPU T4 x2` 双卡后台 Commit 运行 Suites A–E，本机保持零负载）。
+- **核心源码与测试**：`src/data/`、`src/models/`、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（`13/13` 通过）。
+- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（已备份 V1 全量结果与 V2 源码，提交 `c5344f1`）。
+- **云端执行通道**：Kaggle V2 任务 `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1cc0fd051f7`（`scriptVersionId=373403739`，已挂载 `extracted_samples_v1.pt` 秒级跳过视频提取，正在 `GPU T4 x2` 双卡运行全部 242 组实验）。
