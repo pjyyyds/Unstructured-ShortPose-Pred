@@ -1,0 +1,136 @@
+{
+  "scope": "四处各一张日间固定机位首帧，两套独立 AI 选段。数值描述可见像素边缘的位置与覆盖差异。没有第二位人类标注，也没有人工真值、物理量测或米制误差。",
+  "method": "每个可见折线单独按弧长分为等长单元，在每个单元中点取样；每个中点按其单元长度加权。目标是另一套线的全部有限线段（封闭端点），求到线段并集的精确欧氏最近距离。按来源总弧长计算经验分位数与各半径内弧长比例，间断处不补线，也不外推。远离另一套可见范围亦进入距离统计。",
+  "maximum_spacing_px": 0.25,
+  "cutoffs_px": [
+    3,
+    5,
+    10
+  ],
+  "images_wh": [
+    1536,
+    864
+  ],
+  "annotation_sha256": {
+    "first": "dc8a6c57727c4c58d3598c1f1551f8fd4e1fbfda47a3edf624599c64b20846bd",
+    "independent": "67f09740fd247105970779b18665e5cbe30bdeabd10f1734f61d2a1bd5c60aa1"
+  },
+  "sites": {
+    "america_crossroad": {
+      "clip": "america_crossroad_spring_daytime_sunny_1",
+      "source_image_sha256": "e36b509895647f7d4923f7e7d38a0057bea2e5123d4c2efd971450e0cdfcac51",
+      "independent_to_first": {
+        "source_strokes": 1,
+        "sample_points": 417,
+        "source_arc_length_px": 104.07328039116013,
+        "median_px": 0.7483565621256201,
+        "p90_px": 1.948453994722877,
+        "source_arc_fraction_within_px": {
+          "3": 0.9904076738609113,
+          "5": 1.0,
+          "10": 1.0
+        }
+      },
+      "first_to_independent": {
+        "source_strokes": 2,
+        "sample_points": 1002,
+        "source_arc_length_px": 250.0944864467668,
+        "median_px": 25.159630488677337,
+        "p90_px": 338.98125226456375,
+        "source_arc_fraction_within_px": {
+          "3": 0.41012874226012624,
+          "5": 0.4191096636234867,
+          "10": 0.43906726665317647
+        }
+      },
+      "visual_interpretation": "两套均包含远侧两车间的同一段路缘暗带。独立复核只画了这段。第一套另外标出了偏右的一段，且向左超过独立复核端点；单帧内偏右暗线在白色路面标记附近是否始终属于路缘较难确认。"
+    },
+    "italy_park": {
+      "clip": "italy_park_summer_daytime_sunny_0",
+      "source_image_sha256": "d52a52763b65ceaaa4ce7a1051ac4b2723c79dcab6d59d99863ebd2ed543fc11",
+      "independent_to_first": {
+        "source_strokes": 1,
+        "sample_points": 1932,
+        "source_arc_length_px": 482.8343840273211,
+        "median_px": 7.643344385327435,
+        "p90_px": 9.408322729171397,
+        "source_arc_fraction_within_px": {
+          "3": 0.0,
+          "5": 0.0,
+          "10": 0.9197722567287785
+        }
+      },
+      "first_to_independent": {
+        "source_strokes": 3,
+        "sample_points": 3052,
+        "source_arc_length_px": 762.601230083462,
+        "median_px": 8.644539305917885,
+        "p90_px": 539.4577783818157,
+        "source_arc_fraction_within_px": {
+          "3": 0.0,
+          "5": 0.0,
+          "10": 0.5840613528381363
+        }
+      },
+      "visual_interpretation": "共有前排停车位前方同一条弧形窄石带。独立折线取靠停放车辆的铺面接缝，第一套在共同横向范围较靠近画面下方、更靠前景一侧。可见石带有宽度，不能从该帧确认为抬升路缘的上下缘。第一套另有两个向右的可见分段。"
+    },
+    "japan_crossroad": {
+      "clip": "japan_crossroad_summer_daytime_sunny_0",
+      "source_image_sha256": "55c5c9293898711109d3c27f0eafc41b08ad067f3750cf031c40ca34fda12b5d",
+      "independent_to_first": {
+        "source_strokes": 2,
+        "sample_points": 391,
+        "source_arc_length_px": 97.66256189267122,
+        "median_px": 4.360586315137323,
+        "p90_px": 5.4413573399369675,
+        "source_arc_fraction_within_px": {
+          "3": 0.14078566441554716,
+          "5": 0.7469162475033642,
+          "10": 1.0
+        }
+      },
+      "first_to_independent": {
+        "source_strokes": 3,
+        "sample_points": 2443,
+        "source_arc_length_px": 610.2296590063727,
+        "median_px": 285.78763945406956,
+        "p90_px": 456.9823938124752,
+        "source_arc_fraction_within_px": {
+          "3": 0.02660623090557053,
+          "5": 0.128119234976055,
+          "10": 0.21080321409798197
+        }
+      },
+      "visual_interpretation": "共有右侧路口转角的人行道边缘。独立复核将横过画面的架空线附近断开，并沿略靠车道的一侧记录短段；第一套转弯段稍靠人行道一侧，延伸更远，另画了转角以右与远侧街角的边缘。单帧难以分别确认路缘石的顶缘与底缘。"
+    },
+    "thailand_street": {
+      "clip": "thailand_street_winter_daytime_sunny_0",
+      "source_image_sha256": "fa084e9eac86992a6c8552b38b2f1705f5dd9a4969a6e07748188b6bb33561b8",
+      "independent_to_first": {
+        "source_strokes": 1,
+        "sample_points": 502,
+        "source_arc_length_px": 125.43451762392671,
+        "median_px": 2.4655514181934155,
+        "p90_px": 5.954597477622526,
+        "source_arc_fraction_within_px": {
+          "3": 0.5796812749003987,
+          "5": 0.8266932270916336,
+          "10": 1.0
+        }
+      },
+      "first_to_independent": {
+        "source_strokes": 2,
+        "sample_points": 2380,
+        "source_arc_length_px": 594.763071422366,
+        "median_px": 82.54327835857131,
+        "p90_px": 316.6727185947812,
+        "source_arc_fraction_within_px": {
+          "3": 0.12693223759060035,
+          "5": 0.18241255335867737,
+          "10": 0.23831317454923973
+        }
+      },
+      "visual_interpretation": "共有红白涂装路缘近端斜段。独立复核记录其接触低侧路面的底缘。第一套折线经过斜段靠上的圆角后靠近底缘，且继续覆盖远侧与排水格栅旁的其他段。两套近端未全程分别取独立的上缘与下缘。"
+    }
+  }
+}

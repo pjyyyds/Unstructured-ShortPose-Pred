@@ -1,0 +1,207 @@
+{
+  "scope": "PINNS 四处各一张首帧的独立 AI 技术复核。复核者先单独选取每处最有把握的一个实体边缘，仅查看给定四张原始图像及同一图像的局部放大。",
+  "assessor": "独立 AI 技术复核；人工第二评阅人数量为 0。",
+  "coordinates": "原 PNG 像素，左上角为 (0,0)，x 向右、y 向下；每个内层数组是一段可见折线，相邻段之间不连接。坐标是视觉近似值。",
+  "generalization": "标注只适用于这一静帧的可见局部。仅供几何可解释性核验；采集不含轨迹误差、未来帧、已有边界标注或物理测量。",
+  "annotations": {
+    "america_crossroad": {
+      "source_frame": 0,
+      "source_png": "america_crossroad_spring_daytime_sunny_1_0.png",
+      "source_sha256": "e36b509895647f7d4923f7e7d38a0057bea2e5123d4c2efd971450e0cdfcac51",
+      "width": 1536,
+      "height": 864,
+      "semantic": "远侧行人区域朝向车道的路缘。",
+      "visible_extent": "画面左中，两辆车之间短而清晰的深色路缘唇，沿暗带中心取点。车辆遮挡处未延长。",
+      "polylines_xy": [
+        [
+          [
+            378,
+            530
+          ],
+          [
+            395,
+            530
+          ],
+          [
+            420,
+            531
+          ],
+          [
+            445,
+            532
+          ],
+          [
+            467,
+            532
+          ],
+          [
+            482,
+            533
+          ]
+        ]
+      ],
+      "visible_lengths_px": [
+        104.1
+      ]
+    },
+    "italy_park": {
+      "source_frame": 0,
+      "source_png": "italy_park_summer_daytime_sunny_0_0.png",
+      "source_sha256": "d52a52763b65ceaaa4ce7a1051ac4b2723c79dcab6d59d99863ebd2ed543fc11",
+      "width": 1536,
+      "height": 864,
+      "semantic": "前景停车位沥青与弧形窄石铺分隔带的铺面交界。",
+      "visible_extent": "取贴近前排车头的石带后缘；画面更靠下的白色漆线、停车位蓝线、花箱都排除。",
+      "polylines_xy": [
+        [
+          [
+            155,
+            735
+          ],
+          [
+            200,
+            743
+          ],
+          [
+            245,
+            752
+          ],
+          [
+            300,
+            761
+          ],
+          [
+            352,
+            769
+          ],
+          [
+            412,
+            776
+          ],
+          [
+            470,
+            782
+          ],
+          [
+            530,
+            786
+          ],
+          [
+            590,
+            788
+          ],
+          [
+            634,
+            789
+          ]
+        ]
+      ],
+      "visible_lengths_px": [
+        482.8
+      ]
+    },
+    "japan_crossroad": {
+      "source_frame": 0,
+      "source_png": "japan_crossroad_summer_daytime_sunny_0_0.png",
+      "source_sha256": "55c5c9293898711109d3c27f0eafc41b08ad067f3750cf031c40ca34fda12b5d",
+      "width": 1536,
+      "height": 864,
+      "semantic": "右上角人行道在路口转弯的路缘。",
+      "visible_extent": "取人行道外缘紧邻路缘石的暗缝；保留在水平架空线两侧可辨认的两小段，排除人行道内侧黄色触觉铺装和斑马线。",
+      "polylines_xy": [
+        [
+          [
+            1036,
+            338
+          ],
+          [
+            1035,
+            350
+          ],
+          [
+            1035,
+            363
+          ],
+          [
+            1035,
+            374
+          ],
+          [
+            1036,
+            378
+          ]
+        ],
+        [
+          [
+            1040,
+            394
+          ],
+          [
+            1043,
+            402
+          ],
+          [
+            1048,
+            411
+          ],
+          [
+            1053,
+            420
+          ],
+          [
+            1061,
+            430
+          ],
+          [
+            1072,
+            441
+          ]
+        ]
+      ],
+      "visible_lengths_px": [
+        40.2,
+        57.5
+      ]
+    },
+    "thailand_street": {
+      "source_frame": 0,
+      "source_png": "thailand_street_winter_daytime_sunny_0_0.png",
+      "source_sha256": "fa084e9eac86992a6c8552b38b2f1705f5dd9a4969a6e07748188b6bb33561b8",
+      "width": 1536,
+      "height": 864,
+      "semantic": "中央偏右人行平台转角处红白路缘的底缘。",
+      "visible_extent": "仅沿可辨认的路缘立面与较低车道接触线，止于排水格栅前。",
+      "polylines_xy": [
+        [
+          [
+            611,
+            460
+          ],
+          [
+            629,
+            474
+          ],
+          [
+            649,
+            490
+          ],
+          [
+            670,
+            507
+          ],
+          [
+            690,
+            522
+          ],
+          [
+            710,
+            537
+          ]
+        ]
+      ],
+      "visible_lengths_px": [
+        125.4
+      ]
+    }
+  }
+}

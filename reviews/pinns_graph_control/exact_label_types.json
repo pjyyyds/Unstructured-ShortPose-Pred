@@ -1,0 +1,38 @@
+{
+  "scope": "Literal column 2 from every nonempty original raw annotation row in all 47 PINNS clips, before resampling or treatment of ID, radius, or confidence. Each row had 12 columns.",
+  "author_format": "Object type (Person / Car)",
+  "official_source": "https://github.com/Songan-Lab/PINNS/blob/c4c4e6edd77b35a895424728a9875088ebcf19b8/README.md#L63-L78",
+  "source_labels_calibrations_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "all": {
+    "Car": 47555,
+    "Person": 180344
+  },
+  "by_site": {
+    "america_crossroad": {
+      "Car": 30851,
+      "Person": 98824
+    },
+    "italy_park": {
+      "Person": 10391,
+      "Car": 7599
+    },
+    "japan_crossroad": {
+      "Person": 51806,
+      "Car": 5900
+    },
+    "thailand_street": {
+      "Person": 19323,
+      "Car": 3205
+    }
+  },
+  "interpretation": "These labels do not support bicycle, scooter, motorcycle or transport mode distinctions inside the two published classes. Raw label absence does not establish street-level physical absence. Model reserved type rows 3/4 are not annotations.",
+  "independent_input_census": {
+    "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "windows": 1482,
+    "clips": 47,
+    "source_time_rule": "official frame = 3*k + 1; five source times at/preceding anchor; 35 complete target-person samples.",
+    "edges": 9962,
+    "source_typed_velocities_within_window": 9925,
+    "typed_slots_sha256": "8f3d6c78e5e4bc40091db485729774e9b53e5402e32f65a3091084c0226506b3"
+  }
+}
