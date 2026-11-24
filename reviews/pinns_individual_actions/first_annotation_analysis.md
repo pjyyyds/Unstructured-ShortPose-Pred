@@ -1,0 +1,7 @@
+# Secondary analysis of the available five-frame history
+
+This descriptive analysis was specified while the four-site joint-action job was running and before its forecast output was examined. The group definitions and the relative sizes of the two groups were already known from prior five-frame research. The primary comparison in preregistration.json remains the four-site, all-window detached-minus-end-to-end top-ranked ADE.
+
+Assign windows using only source annotation history. A window is in the first-sampled group when its first 10 Hz observation is the earliest sample of that tracked person in its clip. There are 449 such windows. The other 1,033 windows have at least 35 consecutive prior samples for that track. These categories encode annotation availability. Actual physical emergence, occlusion, and first visibility require distinct video evidence.
+
+Within each group report the four held-out site counts, number of positives among the five trajectory-derived events, equal-site top-mode ADE for each arm, and action-head metrics at their fixed probability threshold of 0.5. Report precision-recall average precision directly from the continuous scores, F1 at 0.5 and binary Brier for each event and head where support permits. Declare undefined statistics and the number of contributing sites. Retain existing full-window labels and site weights used for training. There is no refitting or threshold selection on either subgroup.
