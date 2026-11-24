@@ -1,0 +1,773 @@
+{
+  "protocol": {
+    "scope": "Five-fold whole-clip out-of-fold development at four previously examined PINNS sites. Official annotated positions/typed IDs for ego and neighbors; this is an oracle-tracking feature experiment on previously seen locations. No neural model, maps, pose, fixed/moving label, scene ID or image input. No test-set tuning.",
+    "windows": "Disjoint complete 35-frame blocks per clip/person at 10 Hz. Five past points span 0.4 s. Score 30 future steps through +3 s. Neighbor absence never removes a window. Synchronized clips or the same person across different clip IDs cannot be identified from these public annotations.",
+    "folds": "Same five previously frozen, site-stratified whole-clip folds as the action probes. Assignments depend only on site, clip name and window count. No event or residual enters allocation.",
+    "features": "Motion: eight ground coordinates of the first four observations relative to the fifth. For each of Person and Car within 10 m inclusive of ego at t0, availability adds log(1+count), presence and usable nearest-neighbor velocity. Nearest ranks use t0 distance then lowest numeric ID. Geometry adds nearest dx,dy,distance,dvx,dvy,closing speed. Relative velocity subtracts ego five-point OLS from the neighbor's OLS over its available points within those same five frames (minimum two points); positive closing means approaching. Missing entries and coincident-position radial speed are zero, with channel masks as above. All features in calibrated world axes. Actor classes and IDs are annotated.",
+    "fit": "CV uses the OLS velocity from five observed ego points. All three ridge models directly predict 30 xy residuals to that same CV. Warm-start, fitting on held-out clips, tuning, reweighting and clipping are absent. Training-only population standardization (SD <=1e-10 uses divisor 1), training mean residual as unpenalized intercept. Per coordinate, mean squared error plus 0.1 times squared coefficient norm; deterministic direct solve.",
+    "primary": "Motion + availability + geometry minus motion-only ridge, equal-weighting four fixed sites after window-weighted means within each site. ADE is primary; FDE and geometry increment over availability are secondary. Negative is less error. Report all OOF windows and prespecified neighbor-presence strata.",
+    "interpretation": "Neighbor counts, directions and distances may proxy site or traffic patterns. Differences cannot establish a causal social response. Each ridge is fitted separately, so its predictions can differ even on windows with no measured neighbor.",
+    "interval": "95% percentile intervals on paired primary ADE/FDE. With PCG64 seed 2026, jointly resample whole clips with replacement 20,000 times within each of the four fixed sites, preserving all clip windows; average the four site means equally. Conditional on realized OOF fits; shared training folds and possible cross-clip dependence are not modeled. Descriptive development uncertainty, not out-of-site generalization."
+  },
+  "identity": {
+    "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "clip_to_fold_sha256": "913707e55ffa19f0458d1540fe3e8c5044a6c4c02f847f75c2f0f1eded9b1c4b",
+    "script_sha256": "97875dea757e3788b8e86cd3c3c57b82a1869c977278382b6062bf5328332a7f",
+    "pilot_report_sha256_verified": "a0dc58b81ea8c1ee7a067c29e5ba6eeba22d58718f919368717c439b1f7ceca7",
+    "implementation_sha256": {
+      "scripts/benchmark_heldout_sites.py": "bca0ee4de9775adfa38a1de7a4a7e371c6860e8dcad7d841b44bf97adc76f9bd",
+      "scripts/evaluate_pinns_action_probes.py": "24e5a51d8679bccb193dd1e5260cd6c73d3dc8487f5e8f0ef559fb815c056fce",
+      "scripts/analyze_heldout_pairs.py": "d082666cdd7e50d6c32e938ca4f8366754a15209a4c8f9073a84567ceeb0a047",
+      "src/data/pinns_extractor.py": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+      "src/data/constants.py": "1586cd8dab2868a39bc0969de4408b2d11e23afd673ee4b8c1e229ce948029df"
+    }
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.1.3",
+    "opencv": "4.14.0"
+  },
+  "feature_dimensions": {
+    "motion": 8,
+    "motion_availability": 14,
+    "motion_neighbors": 26
+  },
+  "all": {
+    "windows": 1482,
+    "clips": 47,
+    "with_person": 1414,
+    "with_car": 747,
+    "with_both": 716,
+    "without_neighbor": 37,
+    "person_nearest_velocity": {
+      "valid_windows": 1410,
+      "share_of_present": 0.9971711456859972
+    },
+    "car_nearest_velocity": {
+      "valid_windows": 745,
+      "share_of_present": 0.9973226238286479
+    },
+    "means_m": {
+      "ols_five": {
+        "ade_m": 0.7880863893104139,
+        "fde_m": 1.6231085398108658
+      },
+      "motion": {
+        "ade_m": 0.813931960291089,
+        "fde_m": 1.6445597815009334
+      },
+      "motion_availability": {
+        "ade_m": 0.8171919564656249,
+        "fde_m": 1.6512126683398722
+      },
+      "motion_neighbors": {
+        "ade_m": 0.7803519416823993,
+        "fde_m": 1.5574734774052663
+      }
+    },
+    "paired_m": {
+      "motion_neighbors_minus_motion": {
+        "ade_m": -0.03358001860868865,
+        "fde_m": -0.08708630409566263
+      },
+      "motion_neighbors_minus_motion_availability": {
+        "ade_m": -0.036840014783223476,
+        "fde_m": -0.0937391909346026
+      },
+      "motion_availability_minus_motion": {
+        "ade_m": 0.003259996174534855,
+        "fde_m": 0.00665288683893998
+      }
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14,
+      "with_person": 780,
+      "with_car": 491,
+      "with_both": 468,
+      "without_neighbor": 13,
+      "person_nearest_velocity": {
+        "valid_windows": 776,
+        "share_of_present": 0.9948717948717949
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 491,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 1.1598725777719618,
+          "fde_m": 2.298073118876916
+        },
+        "motion": {
+          "ade_m": 0.9666396745729753,
+          "fde_m": 1.9049217056275898
+        },
+        "motion_availability": {
+          "ade_m": 0.9704170355538713,
+          "fde_m": 1.911892769212979
+        },
+        "motion_neighbors": {
+          "ade_m": 0.9256497182941477,
+          "fde_m": 1.7966089143924744
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.04098995627882654,
+          "fde_m": -0.1083127912351138
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.04476731725972269,
+          "fde_m": -0.11528385482050194
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.003777360980896155,
+          "fde_m": 0.006971063585388124
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9,
+      "with_person": 66,
+      "with_car": 56,
+      "with_both": 52,
+      "without_neighbor": 14,
+      "person_nearest_velocity": {
+        "valid_windows": 66,
+        "share_of_present": 1.0
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 56,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.40600327404711817,
+          "fde_m": 0.9606783946263742
+        },
+        "motion": {
+          "ade_m": 0.6225787346359798,
+          "fde_m": 1.317437992996044
+        },
+        "motion_availability": {
+          "ade_m": 0.6286333654641363,
+          "fde_m": 1.3245207014401732
+        },
+        "motion_neighbors": {
+          "ade_m": 0.5610740355084802,
+          "fde_m": 1.1919009480817753
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.06150469912749973,
+          "fde_m": -0.125537044914269
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.06755932995565621,
+          "fde_m": -0.13261975335839746
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.0060546308281565035,
+          "fde_m": 0.007082708444128452
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11,
+      "with_person": 422,
+      "with_car": 153,
+      "with_both": 150,
+      "without_neighbor": 7,
+      "person_nearest_velocity": {
+        "valid_windows": 422,
+        "share_of_present": 1.0
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 151,
+        "share_of_present": 0.9869281045751634
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.3150709672521753,
+          "fde_m": 0.7522684279959283
+        },
+        "motion": {
+          "ade_m": 0.5891456912055507,
+          "fde_m": 1.2610642410128108
+        },
+        "motion_availability": {
+          "ade_m": 0.5926705272995922,
+          "fde_m": 1.2703144874559582
+        },
+        "motion_neighbors": {
+          "ade_m": 0.5955339215951999,
+          "fde_m": 1.262049651981623
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": 0.006388230389649639,
+          "fde_m": 0.0009854109688130152
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": 0.0028633942956078637,
+          "fde_m": -0.0082648354743342
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.003524836094041778,
+          "fde_m": 0.009250246443147222
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13,
+      "with_person": 146,
+      "with_car": 47,
+      "with_both": 46,
+      "without_neighbor": 3,
+      "person_nearest_velocity": {
+        "valid_windows": 146,
+        "share_of_present": 1.0
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 47,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.3418204841547581,
+          "fde_m": 0.8302816330218525
+        },
+        "motion": {
+          "ade_m": 0.7377442559308367,
+          "fde_m": 1.5158462724204398
+        },
+        "motion_availability": {
+          "ade_m": 0.735862053184558,
+          "fde_m": 1.5130471819996796
+        },
+        "motion_neighbors": {
+          "ade_m": 0.6450035622230185,
+          "fde_m": 1.312117933836121
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.09274069370781816,
+          "fde_m": -0.20372833858431857
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.09085849096153953,
+          "fde_m": -0.20092924816355806
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": -0.0018822027462786516,
+          "fde_m": -0.0027990904207603816
+        }
+      }
+    }
+  },
+  "folds": {
+    "0": {
+      "windows": 491,
+      "clips": 11,
+      "with_person": 473,
+      "with_car": 324,
+      "with_both": 321,
+      "without_neighbor": 15,
+      "person_nearest_velocity": {
+        "valid_windows": 472,
+        "share_of_present": 0.9978858350951374
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 324,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 1.25367182211139,
+          "fde_m": 2.465782549478443
+        },
+        "motion": {
+          "ade_m": 0.9958021297595202,
+          "fde_m": 1.914977043230588
+        },
+        "motion_availability": {
+          "ade_m": 0.997648367886394,
+          "fde_m": 1.9209746865167798
+        },
+        "motion_neighbors": {
+          "ade_m": 0.9623988921500414,
+          "fde_m": 1.8364584909317863
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.03340323760947905,
+          "fde_m": -0.07851855229880093
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.03524947573635296,
+          "fde_m": -0.08451619558499344
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.001846238126873905,
+          "fde_m": 0.005997643286192649
+        }
+      }
+    },
+    "1": {
+      "windows": 225,
+      "clips": 8,
+      "with_person": 219,
+      "with_car": 91,
+      "with_both": 86,
+      "without_neighbor": 1,
+      "person_nearest_velocity": {
+        "valid_windows": 218,
+        "share_of_present": 0.9954337899543378
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 91,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.8471491339315433,
+          "fde_m": 1.742859306307731
+        },
+        "motion": {
+          "ade_m": 0.871880441391018,
+          "fde_m": 1.736142334101661
+        },
+        "motion_availability": {
+          "ade_m": 0.8696747706834337,
+          "fde_m": 1.7317662902213076
+        },
+        "motion_neighbors": {
+          "ade_m": 0.8096309610758473,
+          "fde_m": 1.579861226406432
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.06224948031517189,
+          "fde_m": -0.15628110769522793
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.060043809607587505,
+          "fde_m": -0.15190506381487615
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": -0.0022056707075844306,
+          "fde_m": -0.004376043880351989
+        }
+      }
+    },
+    "2": {
+      "windows": 229,
+      "clips": 8,
+      "with_person": 206,
+      "with_car": 60,
+      "with_both": 46,
+      "without_neighbor": 9,
+      "person_nearest_velocity": {
+        "valid_windows": 205,
+        "share_of_present": 0.9951456310679612
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 60,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.7331929256206425,
+          "fde_m": 1.5569570979614629
+        },
+        "motion": {
+          "ade_m": 0.739832197183891,
+          "fde_m": 1.5513410597366941
+        },
+        "motion_availability": {
+          "ade_m": 0.7430448233411773,
+          "fde_m": 1.5546198499228572
+        },
+        "motion_neighbors": {
+          "ade_m": 0.7023372648397398,
+          "fde_m": 1.443680029333119
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.03749493234415043,
+          "fde_m": -0.1076610304035751
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.04070755850143694,
+          "fde_m": -0.1109398205897373
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.003212626157286492,
+          "fde_m": 0.00327879018616214
+        }
+      }
+    },
+    "3": {
+      "windows": 310,
+      "clips": 9,
+      "with_person": 303,
+      "with_car": 160,
+      "with_both": 158,
+      "without_neighbor": 5,
+      "person_nearest_velocity": {
+        "valid_windows": 302,
+        "share_of_present": 0.9966996699669967
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 158,
+        "share_of_present": 0.9875
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.33611041551317744,
+          "fde_m": 0.7776243855943865
+        },
+        "motion": {
+          "ade_m": 0.6437834096959655,
+          "fde_m": 1.3893602539247325
+        },
+        "motion_availability": {
+          "ade_m": 0.6452237313506568,
+          "fde_m": 1.389953561950818
+        },
+        "motion_neighbors": {
+          "ade_m": 0.6020604392769039,
+          "fde_m": 1.2946752400727326
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.04172297041906176,
+          "fde_m": -0.09468501385200033
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.04316329207375332,
+          "fde_m": -0.09527832187808634
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.0014403216546915966,
+          "fde_m": 0.0005933080260860777
+        }
+      }
+    },
+    "4": {
+      "windows": 227,
+      "clips": 11,
+      "with_person": 213,
+      "with_car": 112,
+      "with_both": 105,
+      "without_neighbor": 7,
+      "person_nearest_velocity": {
+        "valid_windows": 213,
+        "share_of_present": 1.0
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 112,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.3950977990772291,
+          "fde_m": 0.9030728868683247
+        },
+        "motion": {
+          "ade_m": 0.6702237443419758,
+          "fde_m": 1.4114231779247586
+        },
+        "motion_availability": {
+          "ade_m": 0.6844920096133384,
+          "fde_m": 1.4421041333174893
+        },
+        "motion_neighbors": {
+          "ade_m": 0.6797479535746236,
+          "fde_m": 1.405523116237114
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": 0.009524209232647518,
+          "fde_m": -0.005900061687646136
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.0047440560387139955,
+          "fde_m": -0.03658101708037662
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.014268265271361512,
+          "fde_m": 0.030680955392730525
+        }
+      }
+    }
+  },
+  "strata": {
+    "none": {
+      "windows": 37,
+      "clips": 19,
+      "with_person": 0,
+      "with_car": 0,
+      "with_both": 0,
+      "without_neighbor": 37,
+      "person_nearest_velocity": {
+        "valid_windows": 0,
+        "share_of_present": null
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 0,
+        "share_of_present": null
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.42363601472259815,
+          "fde_m": 0.9849133615695455
+        },
+        "motion": {
+          "ade_m": 0.6388645867932993,
+          "fde_m": 1.435158542627849
+        },
+        "motion_availability": {
+          "ade_m": 0.6751113734518328,
+          "fde_m": 1.4846266889858062
+        },
+        "motion_neighbors": {
+          "ade_m": 0.5731344731792394,
+          "fde_m": 1.2683586813298107
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.06573011361405995,
+          "fde_m": -0.1667998612980383
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.10197690027259342,
+          "fde_m": -0.21626800765599538
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.03624678665853346,
+          "fde_m": 0.049468146357957134
+        }
+      }
+    },
+    "person_only": {
+      "windows": 698,
+      "clips": 37,
+      "with_person": 698,
+      "with_car": 0,
+      "with_both": 0,
+      "without_neighbor": 0,
+      "person_nearest_velocity": {
+        "valid_windows": 696,
+        "share_of_present": 0.997134670487106
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 0,
+        "share_of_present": null
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.8024292226733722,
+          "fde_m": 1.6644625299460514
+        },
+        "motion": {
+          "ade_m": 0.8076714590260224,
+          "fde_m": 1.6332322375165143
+        },
+        "motion_availability": {
+          "ade_m": 0.8069346673756302,
+          "fde_m": 1.6313246242359514
+        },
+        "motion_neighbors": {
+          "ade_m": 0.779097923766242,
+          "fde_m": 1.5510870897865745
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.02857353525978034,
+          "fde_m": -0.08214514772993813
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.027836743609389245,
+          "fde_m": -0.0802375344493751
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": -0.0007367916503910653,
+          "fde_m": -0.0019076132805630438
+        }
+      }
+    },
+    "car_only": {
+      "windows": 31,
+      "clips": 16,
+      "with_person": 0,
+      "with_car": 31,
+      "with_both": 0,
+      "without_neighbor": 0,
+      "person_nearest_velocity": {
+        "valid_windows": 0,
+        "share_of_present": null
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 31,
+        "share_of_present": 1.0
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.3454271229825976,
+          "fde_m": 0.7768227320973754
+        },
+        "motion": {
+          "ade_m": 0.5565517684583092,
+          "fde_m": 1.1851304139003793
+        },
+        "motion_availability": {
+          "ade_m": 0.5742709264711412,
+          "fde_m": 1.205512610844769
+        },
+        "motion_neighbors": {
+          "ade_m": 0.5414289213085538,
+          "fde_m": 1.121750969707193
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.015122847149755357,
+          "fde_m": -0.06337944419318615
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.03284200516258748,
+          "fde_m": -0.08376164113757613
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.017719158012832123,
+          "fde_m": 0.020382196944389967
+        }
+      }
+    },
+    "both": {
+      "windows": 716,
+      "clips": 37,
+      "with_person": 716,
+      "with_car": 716,
+      "with_both": 716,
+      "without_neighbor": 0,
+      "person_nearest_velocity": {
+        "valid_windows": 714,
+        "share_of_present": 0.9972067039106145
+      },
+      "car_nearest_velocity": {
+        "valid_windows": 714,
+        "share_of_present": 0.9972067039106145
+      },
+      "means_m": {
+        "ols_five": {
+          "ade_m": 0.8121028745458405,
+          "fde_m": 1.6524144008718753
+        },
+        "motion": {
+          "ade_m": 0.840225408125238,
+          "fde_m": 1.6863150635331199
+        },
+        "motion_availability": {
+          "ade_m": 0.8450510644071798,
+          "fde_m": 1.6985062965563344
+        },
+        "motion_neighbors": {
+          "ade_m": 0.8026270317266507,
+          "fde_m": 1.597504683761809
+        }
+      },
+      "paired_m": {
+        "motion_neighbors_minus_motion": {
+          "ade_m": -0.03759837639858546,
+          "fde_m": -0.08881037977131138
+        },
+        "motion_neighbors_minus_motion_availability": {
+          "ade_m": -0.04242403268052693,
+          "fde_m": -0.1010016127945258
+        },
+        "motion_availability_minus_motion": {
+          "ade_m": 0.004825656281941464,
+          "fde_m": 0.012191233023214454
+        }
+      }
+    }
+  },
+  "four_site_equal_means_m": {
+    "ols_five": {
+      "ade_m": 0.5556918258065033,
+      "fde_m": 1.2103253936302676
+    },
+    "motion": {
+      "ade_m": 0.7290270890863356,
+      "fde_m": 1.499817553014221
+    },
+    "motion_availability": {
+      "ade_m": 0.7318957453755395,
+      "fde_m": 1.5049437850271974
+    },
+    "motion_neighbors": {
+      "ade_m": 0.6818153094052115,
+      "fde_m": 1.3906693620729984
+    }
+  },
+  "four_site_equal_paired_m": {
+    "motion_neighbors_minus_motion": {
+      "ade_m": -0.047211779681123694,
+      "fde_m": -0.10914819094122209
+    },
+    "motion_neighbors_minus_motion_availability": {
+      "ade_m": -0.050080435970327644,
+      "fde_m": -0.11427442295419792
+    },
+    "motion_availability_minus_motion": {
+      "ade_m": 0.002868656289203946,
+      "fde_m": 0.005126232012975854
+    }
+  },
+  "primary_percentile_95_m": {
+    "ade_m": [
+      -0.07134324740917714,
+      -0.01924906290960733
+    ],
+    "fde_m": [
+      -0.16196329389220654,
+      -0.05467130324255033
+    ]
+  },
+  "bootstrap_replicates": 20000,
+  "source": {
+    "kaggle_version": 373577355,
+    "bundle_sha256": "2911372a75cec45f1f157f921f3d8d89304aeb16944b9fcfae8475c7a58404cc",
+    "raw_oof_report_sha256": "8cb7370870dfedcd85a5ddceb712161f56863c567c3f6ff5fee8c9577a318f2a",
+    "design_report_sha256": "13024ade8a21d30e1d8921f5aa25686f3f0dfd99adf799e13b8d63b46bfdd2b2"
+  },
+  "independent_verification": {
+    "verified_clip_count": 47,
+    "verified_oof_windows": 1482,
+    "max_abs_rebuilt_ols_diff_m": {
+      "ade_m": 1.0658141036401503e-14,
+      "fde_m": 1.4210854715202004e-14
+    },
+    "primary_bootstrap_replicates": 20000,
+    "scope": "Raw labels independently reproduce keys, support, folds and OLS per-window errors. Learned models supply archived per-window errors only. Their coefficients, scalers and predicted coordinates are absent. Pairing, reduction and cluster intervals were verified without refitting any model."
+  }
+}
