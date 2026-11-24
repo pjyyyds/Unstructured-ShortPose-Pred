@@ -1,0 +1,733 @@
+{
+  "registration_git": "86eeadd",
+  "protocol_sha256": "78ffdcfd4587399ad5d413d184a61ac08dd92642f8c69b86af6969e9d5a74480",
+  "script_sha256": "f5f4145278bf6dd9158acddee778411cbbe5144c41a787dc08a2b618dbf93071",
+  "primary_events": [
+    "start",
+    "stop"
+  ],
+  "secondary_events": [
+    "left",
+    "right",
+    "maintain"
+  ],
+  "seed": 42,
+  "input_sha256": {
+    "pinns_matched_histories.npz": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+    "anchored_six_candidates.zip": "388920f757f0f76d688f281e232d20f2c1afe4178e50771d6f9d0f6146f61748",
+    "reranked_modes.zip": "b24ac2bb1ad3d6742be2cbe16b927e42ef9a1a54a17ce2c08be3e92fa286b871"
+  },
+  "all_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "subgroup_keys_sha256": "198c634d9c5d447a14b05327ffd51d738962cf71a628dfcce571551e4e092684",
+  "ranking_indices_matched_against_separate_archive": 646,
+  "candidate_tracks_scored": 3876,
+  "label_paths_scored": 323,
+  "numpy_version": "2.0.2",
+  "counts": {
+    "pooled": {
+      "windows": 323,
+      "clips": 46,
+      "events": {
+        "start": {
+          "positive": 9,
+          "negative": 314,
+          "positive_clips": 5,
+          "negative_clips": 45,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 6,
+              "FP": 22
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 7,
+              "FP": 22
+            }
+          },
+          "neither_model_any6_true_positives_missed": 2
+        },
+        "stop": {
+          "positive": 15,
+          "negative": 308,
+          "positive_clips": 9,
+          "negative_clips": 46,
+          "M0": {
+            "top1": {
+              "TP": 2,
+              "FP": 2
+            },
+            "any6": {
+              "TP": 8,
+              "FP": 24
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 3,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 8,
+              "FP": 15
+            }
+          },
+          "neither_model_any6_true_positives_missed": 6
+        },
+        "left": {
+          "positive": 41,
+          "negative": 282,
+          "positive_clips": 21,
+          "negative_clips": 46,
+          "M0": {
+            "top1": {
+              "TP": 8,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 25,
+              "FP": 92
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 9,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 27,
+              "FP": 102
+            }
+          },
+          "neither_model_any6_true_positives_missed": 13
+        },
+        "right": {
+          "positive": 36,
+          "negative": 287,
+          "positive_clips": 12,
+          "negative_clips": 46,
+          "M0": {
+            "top1": {
+              "TP": 5,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 25,
+              "FP": 83
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 5,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 22,
+              "FP": 127
+            }
+          },
+          "neither_model_any6_true_positives_missed": 9
+        },
+        "maintain": {
+          "positive": 226,
+          "negative": 97,
+          "positive_clips": 45,
+          "negative_clips": 26,
+          "M0": {
+            "top1": {
+              "TP": 223,
+              "FP": 81
+            },
+            "any6": {
+              "TP": 226,
+              "FP": 93
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 224,
+              "FP": 80
+            },
+            "any6": {
+              "TP": 226,
+              "FP": 92
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        }
+      }
+    },
+    "america_crossroad": {
+      "windows": 146,
+      "clips": 14,
+      "events": {
+        "start": {
+          "positive": 3,
+          "negative": 143,
+          "positive_clips": 2,
+          "negative_clips": 14,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 0
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 1,
+              "FP": 0
+            }
+          },
+          "neither_model_any6_true_positives_missed": 2
+        },
+        "stop": {
+          "positive": 9,
+          "negative": 137,
+          "positive_clips": 5,
+          "negative_clips": 14,
+          "M0": {
+            "top1": {
+              "TP": 1,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 6,
+              "FP": 4
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 2,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 5,
+              "FP": 4
+            }
+          },
+          "neither_model_any6_true_positives_missed": 3
+        },
+        "left": {
+          "positive": 22,
+          "negative": 124,
+          "positive_clips": 6,
+          "negative_clips": 14,
+          "M0": {
+            "top1": {
+              "TP": 8,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 17,
+              "FP": 21
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 9,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 17,
+              "FP": 26
+            }
+          },
+          "neither_model_any6_true_positives_missed": 5
+        },
+        "right": {
+          "positive": 21,
+          "negative": 125,
+          "positive_clips": 5,
+          "negative_clips": 14,
+          "M0": {
+            "top1": {
+              "TP": 5,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 15,
+              "FP": 25
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 5,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 11,
+              "FP": 28
+            }
+          },
+          "neither_model_any6_true_positives_missed": 6
+        },
+        "maintain": {
+          "positive": 91,
+          "negative": 55,
+          "positive_clips": 14,
+          "negative_clips": 8,
+          "M0": {
+            "top1": {
+              "TP": 89,
+              "FP": 41
+            },
+            "any6": {
+              "TP": 91,
+              "FP": 51
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 89,
+              "FP": 39
+            },
+            "any6": {
+              "TP": 91,
+              "FP": 50
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 24,
+      "clips": 8,
+      "events": {
+        "start": {
+          "positive": 2,
+          "negative": 22,
+          "positive_clips": 1,
+          "negative_clips": 7,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 3
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 3
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "stop": {
+          "positive": 1,
+          "negative": 23,
+          "positive_clips": 1,
+          "negative_clips": 8,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 2
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 2
+            }
+          },
+          "neither_model_any6_true_positives_missed": 1
+        },
+        "left": {
+          "positive": 2,
+          "negative": 22,
+          "positive_clips": 2,
+          "negative_clips": 8,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 6
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 10
+            }
+          },
+          "neither_model_any6_true_positives_missed": 2
+        },
+        "right": {
+          "positive": 5,
+          "negative": 19,
+          "positive_clips": 2,
+          "negative_clips": 8,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 3,
+              "FP": 6
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 13
+            }
+          },
+          "neither_model_any6_true_positives_missed": 2
+        },
+        "maintain": {
+          "positive": 15,
+          "negative": 9,
+          "positive_clips": 7,
+          "negative_clips": 3,
+          "M0": {
+            "top1": {
+              "TP": 15,
+              "FP": 9
+            },
+            "any6": {
+              "TP": 15,
+              "FP": 9
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 15,
+              "FP": 9
+            },
+            "any6": {
+              "TP": 15,
+              "FP": 9
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 102,
+      "clips": 11,
+      "events": {
+        "start": {
+          "positive": 2,
+          "negative": 100,
+          "positive_clips": 1,
+          "negative_clips": 11,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 17
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 17
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "stop": {
+          "positive": 5,
+          "negative": 97,
+          "positive_clips": 3,
+          "negative_clips": 11,
+          "M0": {
+            "top1": {
+              "TP": 1,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 11
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 1,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 3,
+              "FP": 7
+            }
+          },
+          "neither_model_any6_true_positives_missed": 2
+        },
+        "left": {
+          "positive": 11,
+          "negative": 91,
+          "positive_clips": 7,
+          "negative_clips": 11,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 1
+            },
+            "any6": {
+              "TP": 4,
+              "FP": 32
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 4,
+              "FP": 32
+            }
+          },
+          "neither_model_any6_true_positives_missed": 6
+        },
+        "right": {
+          "positive": 9,
+          "negative": 93,
+          "positive_clips": 4,
+          "negative_clips": 11,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 6,
+              "FP": 39
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 8,
+              "FP": 73
+            }
+          },
+          "neither_model_any6_true_positives_missed": 1
+        },
+        "maintain": {
+          "positive": 78,
+          "negative": 24,
+          "positive_clips": 11,
+          "negative_clips": 9,
+          "M0": {
+            "top1": {
+              "TP": 77,
+              "FP": 22
+            },
+            "any6": {
+              "TP": 78,
+              "FP": 24
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 78,
+              "FP": 23
+            },
+            "any6": {
+              "TP": 78,
+              "FP": 24
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 51,
+      "clips": 13,
+      "events": {
+        "start": {
+          "positive": 2,
+          "negative": 49,
+          "positive_clips": 1,
+          "negative_clips": 13,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 2
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 2,
+              "FP": 2
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "stop": {
+          "positive": 0,
+          "negative": 51,
+          "positive_clips": 0,
+          "negative_clips": 13,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 7
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 0,
+              "FP": 2
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "left": {
+          "positive": 6,
+          "negative": 45,
+          "positive_clips": 6,
+          "negative_clips": 13,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 4,
+              "FP": 33
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 6,
+              "FP": 34
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "right": {
+          "positive": 1,
+          "negative": 50,
+          "positive_clips": 1,
+          "negative_clips": 13,
+          "M0": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 1,
+              "FP": 13
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 0,
+              "FP": 0
+            },
+            "any6": {
+              "TP": 1,
+              "FP": 13
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        },
+        "maintain": {
+          "positive": 42,
+          "negative": 9,
+          "positive_clips": 13,
+          "negative_clips": 6,
+          "M0": {
+            "top1": {
+              "TP": 42,
+              "FP": 9
+            },
+            "any6": {
+              "TP": 42,
+              "FP": 9
+            }
+          },
+          "M1": {
+            "top1": {
+              "TP": 42,
+              "FP": 9
+            },
+            "any6": {
+              "TP": 42,
+              "FP": 9
+            }
+          },
+          "neither_model_any6_true_positives_missed": 0
+        }
+      }
+    }
+  }
+}

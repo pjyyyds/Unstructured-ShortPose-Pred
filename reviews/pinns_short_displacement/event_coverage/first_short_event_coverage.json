@@ -1,0 +1,1207 @@
+{
+  "ordered_first_short_keys_sha256": "198c634d9c5d447a14b05327ffd51d738962cf71a628dfcce571551e4e092684",
+  "history_sha256": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+  "support": {
+    "pooled": {
+      "windows": 323,
+      "clips": 46,
+      "truth": {
+        "start": {
+          "positive": 9,
+          "positive_clips": 5,
+          "negative": 314,
+          "negative_clips": 45
+        },
+        "stop": {
+          "positive": 15,
+          "positive_clips": 9,
+          "negative": 308,
+          "negative_clips": 46
+        },
+        "left": {
+          "positive": 41,
+          "positive_clips": 21,
+          "negative": 282,
+          "negative_clips": 46
+        },
+        "right": {
+          "positive": 36,
+          "positive_clips": 12,
+          "negative": 287,
+          "negative_clips": 46
+        },
+        "maintain": {
+          "positive": 226,
+          "positive_clips": 45,
+          "negative": 97,
+          "negative_clips": 26
+        }
+      }
+    },
+    "america_crossroad": {
+      "windows": 146,
+      "clips": 14,
+      "truth": {
+        "start": {
+          "positive": 3,
+          "positive_clips": 2,
+          "negative": 143,
+          "negative_clips": 14
+        },
+        "stop": {
+          "positive": 9,
+          "positive_clips": 5,
+          "negative": 137,
+          "negative_clips": 14
+        },
+        "left": {
+          "positive": 22,
+          "positive_clips": 6,
+          "negative": 124,
+          "negative_clips": 14
+        },
+        "right": {
+          "positive": 21,
+          "positive_clips": 5,
+          "negative": 125,
+          "negative_clips": 14
+        },
+        "maintain": {
+          "positive": 91,
+          "positive_clips": 14,
+          "negative": 55,
+          "negative_clips": 8
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 24,
+      "clips": 8,
+      "truth": {
+        "start": {
+          "positive": 2,
+          "positive_clips": 1,
+          "negative": 22,
+          "negative_clips": 7
+        },
+        "stop": {
+          "positive": 1,
+          "positive_clips": 1,
+          "negative": 23,
+          "negative_clips": 8
+        },
+        "left": {
+          "positive": 2,
+          "positive_clips": 2,
+          "negative": 22,
+          "negative_clips": 8
+        },
+        "right": {
+          "positive": 5,
+          "positive_clips": 2,
+          "negative": 19,
+          "negative_clips": 8
+        },
+        "maintain": {
+          "positive": 15,
+          "positive_clips": 7,
+          "negative": 9,
+          "negative_clips": 3
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 102,
+      "clips": 11,
+      "truth": {
+        "start": {
+          "positive": 2,
+          "positive_clips": 1,
+          "negative": 100,
+          "negative_clips": 11
+        },
+        "stop": {
+          "positive": 5,
+          "positive_clips": 3,
+          "negative": 97,
+          "negative_clips": 11
+        },
+        "left": {
+          "positive": 11,
+          "positive_clips": 7,
+          "negative": 91,
+          "negative_clips": 11
+        },
+        "right": {
+          "positive": 9,
+          "positive_clips": 4,
+          "negative": 93,
+          "negative_clips": 11
+        },
+        "maintain": {
+          "positive": 78,
+          "positive_clips": 11,
+          "negative": 24,
+          "negative_clips": 9
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 51,
+      "clips": 13,
+      "truth": {
+        "start": {
+          "positive": 2,
+          "positive_clips": 1,
+          "negative": 49,
+          "negative_clips": 13
+        },
+        "stop": {
+          "positive": 0,
+          "positive_clips": 0,
+          "negative": 51,
+          "negative_clips": 13
+        },
+        "left": {
+          "positive": 6,
+          "positive_clips": 6,
+          "negative": 45,
+          "negative_clips": 13
+        },
+        "right": {
+          "positive": 1,
+          "positive_clips": 1,
+          "negative": 50,
+          "negative_clips": 13
+        },
+        "maintain": {
+          "positive": 42,
+          "positive_clips": 13,
+          "negative": 9,
+          "negative_clips": 6
+        }
+      }
+    }
+  },
+  "protocol_sha256": "78ffdcfd4587399ad5d413d184a61ac08dd92642f8c69b86af6969e9d5a74480",
+  "archive_sha256": "388920f757f0f76d688f281e232d20f2c1afe4178e50771d6f9d0f6146f61748",
+  "rerank_sha256": "b24ac2bb1ad3d6742be2cbe16b927e42ef9a1a54a17ce2c08be3e92fa286b871",
+  "weight_parent_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+  "seed": 42,
+  "models": [
+    "M0",
+    "M1"
+  ],
+  "results": {
+    "pooled": {
+      "start": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "tn": 314
+            },
+            "any_of_six": {
+              "tp": 6,
+              "fp": 22,
+              "fn": 3,
+              "tn": 292
+            },
+            "positive_with_candidate_but_top1_missed": 6
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "tn": 314
+            },
+            "any_of_six": {
+              "tp": 7,
+              "fp": 22,
+              "fn": 2,
+              "tn": 292
+            },
+            "positive_with_candidate_but_top1_missed": 7
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 2,
+          "M0_only": 0,
+          "M1_only": 1,
+          "both_with_candidate": 6
+        }
+      },
+      "stop": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 2,
+              "fp": 2,
+              "fn": 13,
+              "tn": 306
+            },
+            "any_of_six": {
+              "tp": 8,
+              "fp": 24,
+              "fn": 7,
+              "tn": 284
+            },
+            "positive_with_candidate_but_top1_missed": 6
+          },
+          "M1": {
+            "top1": {
+              "tp": 3,
+              "fp": 1,
+              "fn": 12,
+              "tn": 307
+            },
+            "any_of_six": {
+              "tp": 8,
+              "fp": 15,
+              "fn": 7,
+              "tn": 293
+            },
+            "positive_with_candidate_but_top1_missed": 5
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 6,
+          "M0_only": 1,
+          "M1_only": 1,
+          "both_with_candidate": 7
+        }
+      },
+      "left": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 8,
+              "fp": 1,
+              "fn": 33,
+              "tn": 281
+            },
+            "any_of_six": {
+              "tp": 25,
+              "fp": 92,
+              "fn": 16,
+              "tn": 190
+            },
+            "positive_with_candidate_but_top1_missed": 17
+          },
+          "M1": {
+            "top1": {
+              "tp": 9,
+              "fp": 0,
+              "fn": 32,
+              "tn": 282
+            },
+            "any_of_six": {
+              "tp": 27,
+              "fp": 102,
+              "fn": 14,
+              "tn": 180
+            },
+            "positive_with_candidate_but_top1_missed": 18
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 13,
+          "M0_only": 1,
+          "M1_only": 3,
+          "both_with_candidate": 24
+        }
+      },
+      "right": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 5,
+              "fp": 1,
+              "fn": 31,
+              "tn": 286
+            },
+            "any_of_six": {
+              "tp": 25,
+              "fp": 83,
+              "fn": 11,
+              "tn": 204
+            },
+            "positive_with_candidate_but_top1_missed": 20
+          },
+          "M1": {
+            "top1": {
+              "tp": 5,
+              "fp": 1,
+              "fn": 31,
+              "tn": 286
+            },
+            "any_of_six": {
+              "tp": 22,
+              "fp": 127,
+              "fn": 14,
+              "tn": 160
+            },
+            "positive_with_candidate_but_top1_missed": 17
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 9,
+          "M0_only": 5,
+          "M1_only": 2,
+          "both_with_candidate": 20
+        }
+      },
+      "maintain": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 223,
+              "fp": 81,
+              "fn": 3,
+              "tn": 16
+            },
+            "any_of_six": {
+              "tp": 226,
+              "fp": 93,
+              "fn": 0,
+              "tn": 4
+            },
+            "positive_with_candidate_but_top1_missed": 3
+          },
+          "M1": {
+            "top1": {
+              "tp": 224,
+              "fp": 80,
+              "fn": 2,
+              "tn": 17
+            },
+            "any_of_six": {
+              "tp": 226,
+              "fp": 92,
+              "fn": 0,
+              "tn": 5
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 226
+        }
+      }
+    },
+    "america_crossroad": {
+      "start": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 143
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 143
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "tn": 143
+            },
+            "any_of_six": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 2,
+              "tn": 143
+            },
+            "positive_with_candidate_but_top1_missed": 1
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 2,
+          "M0_only": 0,
+          "M1_only": 1,
+          "both_with_candidate": 0
+        }
+      },
+      "stop": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 1,
+              "fp": 1,
+              "fn": 8,
+              "tn": 136
+            },
+            "any_of_six": {
+              "tp": 6,
+              "fp": 4,
+              "fn": 3,
+              "tn": 133
+            },
+            "positive_with_candidate_but_top1_missed": 5
+          },
+          "M1": {
+            "top1": {
+              "tp": 2,
+              "fp": 1,
+              "fn": 7,
+              "tn": 136
+            },
+            "any_of_six": {
+              "tp": 5,
+              "fp": 4,
+              "fn": 4,
+              "tn": 133
+            },
+            "positive_with_candidate_but_top1_missed": 3
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 3,
+          "M0_only": 1,
+          "M1_only": 0,
+          "both_with_candidate": 5
+        }
+      },
+      "left": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 8,
+              "fp": 0,
+              "fn": 14,
+              "tn": 124
+            },
+            "any_of_six": {
+              "tp": 17,
+              "fp": 21,
+              "fn": 5,
+              "tn": 103
+            },
+            "positive_with_candidate_but_top1_missed": 9
+          },
+          "M1": {
+            "top1": {
+              "tp": 9,
+              "fp": 0,
+              "fn": 13,
+              "tn": 124
+            },
+            "any_of_six": {
+              "tp": 17,
+              "fp": 26,
+              "fn": 5,
+              "tn": 98
+            },
+            "positive_with_candidate_but_top1_missed": 8
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 5,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 17
+        }
+      },
+      "right": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 5,
+              "fp": 1,
+              "fn": 16,
+              "tn": 124
+            },
+            "any_of_six": {
+              "tp": 15,
+              "fp": 25,
+              "fn": 6,
+              "tn": 100
+            },
+            "positive_with_candidate_but_top1_missed": 10
+          },
+          "M1": {
+            "top1": {
+              "tp": 5,
+              "fp": 1,
+              "fn": 16,
+              "tn": 124
+            },
+            "any_of_six": {
+              "tp": 11,
+              "fp": 28,
+              "fn": 10,
+              "tn": 97
+            },
+            "positive_with_candidate_but_top1_missed": 6
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 6,
+          "M0_only": 4,
+          "M1_only": 0,
+          "both_with_candidate": 11
+        }
+      },
+      "maintain": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 89,
+              "fp": 41,
+              "fn": 2,
+              "tn": 14
+            },
+            "any_of_six": {
+              "tp": 91,
+              "fp": 51,
+              "fn": 0,
+              "tn": 4
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          },
+          "M1": {
+            "top1": {
+              "tp": 89,
+              "fp": 39,
+              "fn": 2,
+              "tn": 16
+            },
+            "any_of_six": {
+              "tp": 91,
+              "fp": 50,
+              "fn": 0,
+              "tn": 5
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 91
+        }
+      }
+    },
+    "italy_park": {
+      "start": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 22
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 3,
+              "fn": 0,
+              "tn": 19
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 22
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 3,
+              "fn": 0,
+              "tn": 19
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 2
+        }
+      },
+      "stop": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "tn": 23
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 1,
+              "tn": 21
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "tn": 23
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 1,
+              "tn": 21
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 1,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 0
+        }
+      },
+      "left": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 22
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 6,
+              "fn": 2,
+              "tn": 16
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 22
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 10,
+              "fn": 2,
+              "tn": 12
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 2,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 0
+        }
+      },
+      "right": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 5,
+              "tn": 19
+            },
+            "any_of_six": {
+              "tp": 3,
+              "fp": 6,
+              "fn": 2,
+              "tn": 13
+            },
+            "positive_with_candidate_but_top1_missed": 3
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 5,
+              "tn": 19
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 13,
+              "fn": 3,
+              "tn": 6
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 2,
+          "M0_only": 1,
+          "M1_only": 0,
+          "both_with_candidate": 2
+        }
+      },
+      "maintain": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 15,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "any_of_six": {
+              "tp": 15,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 15,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "any_of_six": {
+              "tp": 15,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 15
+        }
+      }
+    },
+    "japan_crossroad": {
+      "start": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 100
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 17,
+              "fn": 0,
+              "tn": 83
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 100
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 17,
+              "fn": 0,
+              "tn": 83
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 2
+        }
+      },
+      "stop": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 1,
+              "fp": 1,
+              "fn": 4,
+              "tn": 96
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 11,
+              "fn": 3,
+              "tn": 86
+            },
+            "positive_with_candidate_but_top1_missed": 1
+          },
+          "M1": {
+            "top1": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 4,
+              "tn": 97
+            },
+            "any_of_six": {
+              "tp": 3,
+              "fp": 7,
+              "fn": 2,
+              "tn": 90
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 2,
+          "M0_only": 0,
+          "M1_only": 1,
+          "both_with_candidate": 2
+        }
+      },
+      "left": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 11,
+              "tn": 90
+            },
+            "any_of_six": {
+              "tp": 4,
+              "fp": 32,
+              "fn": 7,
+              "tn": 59
+            },
+            "positive_with_candidate_but_top1_missed": 4
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 11,
+              "tn": 91
+            },
+            "any_of_six": {
+              "tp": 4,
+              "fp": 32,
+              "fn": 7,
+              "tn": 59
+            },
+            "positive_with_candidate_but_top1_missed": 4
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 6,
+          "M0_only": 1,
+          "M1_only": 1,
+          "both_with_candidate": 3
+        }
+      },
+      "right": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "tn": 93
+            },
+            "any_of_six": {
+              "tp": 6,
+              "fp": 39,
+              "fn": 3,
+              "tn": 54
+            },
+            "positive_with_candidate_but_top1_missed": 6
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "tn": 93
+            },
+            "any_of_six": {
+              "tp": 8,
+              "fp": 73,
+              "fn": 1,
+              "tn": 20
+            },
+            "positive_with_candidate_but_top1_missed": 8
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 1,
+          "M0_only": 0,
+          "M1_only": 2,
+          "both_with_candidate": 6
+        }
+      },
+      "maintain": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 77,
+              "fp": 22,
+              "fn": 1,
+              "tn": 2
+            },
+            "any_of_six": {
+              "tp": 78,
+              "fp": 24,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 1
+          },
+          "M1": {
+            "top1": {
+              "tp": 78,
+              "fp": 23,
+              "fn": 0,
+              "tn": 1
+            },
+            "any_of_six": {
+              "tp": 78,
+              "fp": 24,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 78
+        }
+      }
+    },
+    "thailand_street": {
+      "start": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 49
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 2,
+              "fn": 0,
+              "tn": 47
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "tn": 49
+            },
+            "any_of_six": {
+              "tp": 2,
+              "fp": 2,
+              "fn": 0,
+              "tn": 47
+            },
+            "positive_with_candidate_but_top1_missed": 2
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 2
+        }
+      },
+      "stop": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 51
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 7,
+              "fn": 0,
+              "tn": 44
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 51
+            },
+            "any_of_six": {
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "tn": 49
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 0
+        }
+      },
+      "left": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "tn": 45
+            },
+            "any_of_six": {
+              "tp": 4,
+              "fp": 33,
+              "fn": 2,
+              "tn": 12
+            },
+            "positive_with_candidate_but_top1_missed": 4
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "tn": 45
+            },
+            "any_of_six": {
+              "tp": 6,
+              "fp": 34,
+              "fn": 0,
+              "tn": 11
+            },
+            "positive_with_candidate_but_top1_missed": 6
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 2,
+          "both_with_candidate": 4
+        }
+      },
+      "right": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "tn": 50
+            },
+            "any_of_six": {
+              "tp": 1,
+              "fp": 13,
+              "fn": 0,
+              "tn": 37
+            },
+            "positive_with_candidate_but_top1_missed": 1
+          },
+          "M1": {
+            "top1": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "tn": 50
+            },
+            "any_of_six": {
+              "tp": 1,
+              "fp": 13,
+              "fn": 0,
+              "tn": 37
+            },
+            "positive_with_candidate_but_top1_missed": 1
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 1
+        }
+      },
+      "maintain": {
+        "models": {
+          "M0": {
+            "top1": {
+              "tp": 42,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "any_of_six": {
+              "tp": 42,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          },
+          "M1": {
+            "top1": {
+              "tp": 42,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "any_of_six": {
+              "tp": 42,
+              "fp": 9,
+              "fn": 0,
+              "tn": 0
+            },
+            "positive_with_candidate_but_top1_missed": 0
+          }
+        },
+        "paired_any_on_true_positives": {
+          "both_no_candidate": 0,
+          "M0_only": 0,
+          "M1_only": 0,
+          "both_with_candidate": 42
+        }
+      }
+    }
+  }
+}

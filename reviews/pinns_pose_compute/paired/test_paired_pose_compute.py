@@ -80,7 +80,7 @@ class TestAB(unittest.TestCase):
     @unittest.skipUnless(os.environ.get("SHORTPOSE_REPO"),"provide the frozen model repo for synthetic-forward tests")
     def test_actual_transform_with_synthetic_inputs(self):
         root=Path(os.environ["SHORTPOSE_REPO"])
-        baseline=os.environ["SHORTPOSE_LATENCY_RUNNER"]
+        baseline = os.environ.get("SHORTPOSE_LATENCY_RUNNER", str(root / "reviews/pinns_latency/measure_latency.py"))
         self.assertEqual(P.sha(Path(baseline).read_bytes()),P.RUNNER_SHA)
         self.assertEqual(P.sha((root/"src/models/pose_inference.py").read_bytes()),P.TRANSFORM_SHA)
         spec=importlib.util.spec_from_file_location("baseline",baseline)
