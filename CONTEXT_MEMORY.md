@@ -2,17 +2,15 @@
 
 > [!NOTE]
 > 本文档由 `context-memory-manager` 滚动维护，记录《短时姿态观测下的非结构化道路行人动作轨迹预测》核心规格、代码排雷记录、实证数据与算法演进决策。
-> 更新时间：2026-11-24 16:27
+> 更新时间：2026-11-24 17:48（全流程结项归档）
 
 ---
 
 ## 1. 核心目标与硬性技术边界 (Core Objectives & Boundaries)
 
 - **课题定位**：面向无车道线、人车混行、近场遮挡的非结构化道路，仅利用 $t \le t_0$ 的地面历史与 2D 骨骼（$T \in \{5, 10, 20\}, \Delta t = 0.1\text{ s}$），预测未来 $T_f = 30$（$3.0\text{ s}$）的 $K=6$ 条地面候选轨迹 $\hat{\mathbf{Y}}$、模态概率 $\hat{\boldsymbol{\pi}} \in \Delta^5$ 及五类可观测动作概率 $\hat{\mathbf{p}}_{\text{act}} \in [0,1]^5$（绝不预测未来人体骨骼）。
-- **硬指标红线**：主干参数量 $< 2.5\text{ M}$（V2 完整版 `Ours_Full` 实测仅 **`0.471 M` / `471,442`**）、$N=12$ 单次前向 $< 0.80\text{ GFLOPs}$（实测 $T=5$ 为 **`0.409 GFLOPs`**，$T=10$ 为 **`0.539 GFLOPs`**，$T=20$ 为 **`0.798 GFLOPs`**）；严禁跨帧线性插值；同机位切分强制 $\ge 6.0\text{ s}$ 物理时间隔离带。
-- **真实数据切分实证底座（100% 锁定）**：
-  - `PINNS`（4 国 47 段 10.0 Hz 高清监控）：共 `7,283` 条无泄漏滑窗样本（`train=5,686, val=1,100, test=497`），测试集三桶均衡（`Clear=111, Partial=252, Heavy=134`），五类动作全覆盖（有效动作 `277` 条：`Start=43, Stop=29, Turn-Left=25, Turn-Right=10, Maintain=178`）。
-  - `JTA`（原生 2.5 Hz 跨集遮挡/噪声验证）：共 `3,604` 条滑窗样本（`train=1,844, val=800, test=960`）。
+- **硬指标实测达成**：主干参数量 **`0.471 M`**（`471,442 < 2.5 M`）；$N=12$ 单次前向算力 **`0.409 / 0.539 / 0.798 GFLOPs`**（`< 0.80 GFLOPs`）；`NVIDIA Tesla T4` 12 人并发端到端延迟 **`14.49 ms`**（峰值显存 `31.49 MB`）；零跨帧插值，零物理时间重叠。
+- **真实数据切分底座**：`PINNS`（4 国 47 段 10.0 Hz 监控）共 `7,283` 条滑窗（`train=5,686, val=1,100, test=497`；测试集三桶 `111/252/134`，五类有效动作 `277` 条 `[43, 29, 25, 10, 178]`）；`JTA`（原生 2.5 Hz）共 `3,604` 条滑窗（`train=1,844, val=800, test=960`）。
 
 ---
 
@@ -42,8 +40,10 @@
 
 ---
 
-## 4. 核心文件索引与当前阶段 (Key Files & Active Stage)
+## 4. 最终实证结论与核心资产索引 (Final Empirical Conclusions & Deliverables)
 
-- **核心源码与测试**：`src/data/`、`src/models/`、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（`13/13` 通过）。
-- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（已备份 V1 全量结果与 V2 源码，提交 `c5344f1`）。
-- **云端执行通道**：Kaggle V2 任务 `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1cc0fd051f7`（`scriptVersionId=373403739`，已挂载 `extracted_samples_v1.pt` 秒级跳过视频提取，正在 `GPU T4 x2` 双卡运行全部 242 组实验）。
+- **V1 $\to$ V2 关键实证突破（合计 484 组云端 `Tesla T4 x2` 运行）**：
+  1. `M1` 习得单调质量门控（`Clear 0.135 -> Partial 0.116 -> Heavy 0.078`），彻底消除等权直拼 `M1a` 的显著负迁移（`PINNS`: `-2.95%`, Holm $p=4.91\times 10^{-8}$；`JTA` 重度噪声: **`-34.36%`**, Holm $p=8.62\times 10^{-24}$，达 MPSES），并在 `PINNS` 全三窗长（`0.4783 / 0.4660 / 0.4704 m`）全面超越 `MCENET`（`0.5518`）、`HST`（`0.5005`）与 `Social-Transmotion`（`0.5312`）。
+  2. 空汇点 `Null-Sink GATv2` + 自车恒等保护 + 软排序损失使 `M2`/`M3`/`Ours_Full` 较 V1 大降 **`-14.8% / -14.0% / -14.1%`**，`M2` 显著优于 `M2b`（Holm $p=0.00958$），`M2a` 获全表最优转换误差 `0.7078 m`，`Ours_Full` 在 `JTA`（`1.8637 m`）超越 `HST`（`2.0842`）与 `Social-Transmotion`（`1.8865`）。
+  3. `M3`（`Stop-Grad`）在两轮实验中动作 `Macro-F1` 均高出端到端 `M3b` 约 **`6.0~6.4` 个百分点**，并在 V2 同步改善轨迹精度与越界率。
+- **交付物路径**：论文 `paper/ShortPose_Unstructured_Pedestrian_Paper.md`、图表 `docs/figures/fig1..5.png`、报表 `results/EMPIRICAL_BENCHMARK_REPORT.md`（及 V1 归档 `results/v1_initial_diagnosis/`）、审查报告 `reviews/PROJECT_REVIEW_SUMMARY.md`、独立仓库 `https://github.com/pjyyyds/Unstructured-ShortPose-Pred`。

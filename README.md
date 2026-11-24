@@ -1,40 +1,43 @@
 # Unstructured-ShortPose-Pred
 
-**Unstructured Road Pedestrian Action & Trajectory Prediction under Short-Term Pose Observation**  
-*(短时姿态观测下的非结构化道路行人动作轨迹预测)*
+**Joint Pedestrian Action and Trajectory Prediction on Unstructured Roads under Short-Term Variable-Quality Pose Observation**  
+*短时姿态观测下的非结构化道路行人动作与轨迹联合预测*
 
 ---
 
-## Overview
+## Highlights
 
-This repository contains the modular PyTorch implementation, anti-leakage data pipeline, mathematical invariant test suite, and controlled multi-seed benchmark suite for short-horizon ($0.4\text{--}1.9\text{ s}$) pedestrian observable action and multimodal ground trajectory forecasting ($3.0\text{ s}$, $K=6$ modes) on non-channelized mixed-traffic roads (`PINNS` & `JTA` / `JRDB`).
-
-### Key Methodological Contributions
-1. **Explicit & Biomechanical Part-Decomposed Quality Gating (`M1` / `BPD-Gate` `M1p`)**: Suppresses noisy/occluded 2D skeleton negative transfer while preserving head-shoulder anticipatory turning cues when lower limbs are occluded by roadside vehicles or barriers, with exact bit-level identity fallback ($q_1 = 0 \Rightarrow g = 0, \mathbf{h}_p = \mathbf{0}$).
-2. **Non-Lane Local Polyline & Radial-Approaching Directed `GATv2` (`M2`)**: Encodes irregular physical boundaries/portals ($\mathbf{P}_{\text{env}} \in \mathbb{R}^{16 \times 10 \times 11}$, distinguishing unmapped scenes $m_{\text{map}}=0$ from open space $m_{\text{map}}=1$) alongside asymmetric vehicle-pedestrian radial approaching speed $v_{\text{rad}}$.
-3. **Stop-Gradient Observable Action Conditioning & Kinematic-Action Mode Calibration (`M3` / `ACMC` `M3p`)**: Predicts 5 observable dynamic events (`Start`, `Stop`, `Turn-Left`, `Turn-Right`, `Maintain` gated by label validity $m_{\text{act}}$), isolates continuous regression gradients via `stop_grad`, and calibrates Top-1 mode ranking (`ADE_1`, `NLL`, `Brier`).
+- **Ultra-Lightweight Edge Architecture**: **0.471 M** parameters (`< 2.5 M` budget), **0.409–0.798 GFLOPs** at $N=12$ concurrent targets (`< 0.80 GFLOPs` budget), **14.49 ms** end-to-end latency and **31.5 MB** peak VRAM on `NVIDIA Tesla T4` (**zero future skeleton prediction**).
+- **Core Algorithmic Modules**:
+  1. **Balanced Quality-Bottleneck & Biomechanical Part-Decomposed Gate (`M1` / `BPD-Gate`)**: Eliminates occluded-pose negative transfer (`-34.36%` error vs equal-weight pose concat on `JTA` Heavy, Holm $p = 8.62 \times 10^{-24}$) and beats `MCENET`, `HST`, and `Social-Transmotion` across all observation windows $T \in \{5, 10, 20\}$ on `PINNS`.
+  2. **Ego-Preserving Trunk & Null-Sink Directed GATv2 (`M2`)**: Couples $20\text{ m}$ non-lane local polylines with $10\text{ m}$ radial-approaching-speed ($v_{\text{rad}}$) heterogeneous graphs while allowing non-conflicting bystander attention to decay naturally via a learnable Null-Sink token (`-14.77%` error reduction from V1 to V2).
+  3. **Stop-Grad 5-Class Action Conditioning & Kinematic Mode Calibration (`M3` / `ACMC`)**: Preserves objective trajectory-derived action `Macro-F1` (`+5.96%` to `+6.44%` over end-to-end backprop) with TorchScript C++ fused rollout.
+- **Benchmark Calibration Discovery**: Identifies and corrects the ground-contact foot-anchor `(cx, y_bottom)` coordinate convention in `PINNS`, doubling `RTMPose-m` keypoint confidence (`0.20–0.29 -> 0.47–0.58`) across 47 multi-country roadside sequences (`7,283` zero-leakage windows).
 
 ---
 
 ## Repository Structure
 
 ```text
-Unstructured-ShortPose-Pred/
-├── CONTEXT_MEMORY.md              # Persistent architectural & audit log
 ├── src/
-│   ├── data/                      # 10Hz/2.5Hz extractors, 6.0s buffer splits, Eq.(3)-(5) builders
-│   ├── models/                    # Masked GRU, ST-GCN, BPD-Gate, Polyline+GATv2, ACMC, Baselines
-│   ├── losses/                    # Eq.(10) shared-winner Smooth-L1 + Mode CE + m_act BCE
-│   ├── metrics/                   # 3x3 bucket metrics & Shapiro-Wilk/Paired-t/Wilcoxon/Holm-Bonferroni
-│   └── engine/                    # Deterministic multi-seed trainer & latency profiler
-├── scripts/                       # Extraction, cloud/local orchestrators, 300-DPI figure plotter
-├── kaggle_jobs/                   # Self-contained cloud GPU notebook
-└── tests/
-    └── test_invariants.py         # 12-item mathematical, gradient, FLOPs (<0.8G), and smoke tests
+│   ├── data/        # Anti-leakage 6.0s splitter, PINNS 10Hz RTMPose-m extractor, JTA 2.5Hz builder
+│   ├── models/      # M0-M3, BPD-Gate (M1p), Null-Sink GATv2, Stop-Grad ACMC (M3p), MCENET/HST/Social-Transmotion
+│   ├── losses/      # Shared-winner Smooth-L1 + distance soft-ranked mode CE + m_act-masked BCE
+│   ├── metrics/     # 3x3 bucket metrics, Shapiro-Wilk -> Paired-t/Wilcoxon + Holm-Bonferroni tester
+│   └── engine/      # Deterministic multi-GPU 5-seed trainer & CUDA latency profiler
+├── scripts/         # Cloud GPU orchestrator, Kaggle notebook builder, 300-DPI figure & table generators
+├── tests/           # 13 rigorous mathematical invariant, zero-leakage, gradient & FLOPs unit tests
+├── results/         # V2 242-run 5-seed JSON/NPZ/Markdown tables + archived V1 diagnostic baseline
+├── checkpoints/     # Trained seed-42 PyTorch weights (M0, M1, M2, M3, Ours_Full)
+├── docs/figures/    # 5 publication-grade 300-DPI figures
+├── paper/           # Complete academic paper manuscript (ShortPose_Unstructured_Pedestrian_Paper.md)
+└── reviews/         # Executive morning review report (PROJECT_REVIEW_SUMMARY.md)
 ```
 
 ## Quick Verification
 
 ```bash
 PYTHONPATH=. python3 tests/test_invariants.py
+PYTHONPATH=. python3 scripts/plot_paper_figures.py results/master_experiment_report.json docs/figures
+PYTHONPATH=. python3 scripts/generate_manuscript_and_review.py results/master_experiment_report.json results/EMPIRICAL_BENCHMARK_REPORT.md
 ```
