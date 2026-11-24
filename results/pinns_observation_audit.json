@@ -1,0 +1,646 @@
+{
+  "label_and_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "definition": "Start is the first of the five model input observations. Earlier annotations refer to the same person ID within the same recording. A track start is an annotation event; physical visibility and prior occlusion require separate evidence.",
+  "archived_test": {
+    "all": {
+      "windows": 497,
+      "complete_five_frame_input": 497,
+      "any_observation_in_previous_15_samples": 496,
+      "all_previous_15_samples_observed": 487
+    },
+    "by_site": {
+      "america_crossroad": {
+        "windows": 316,
+        "complete_five_frame_input": 316,
+        "any_observation_in_previous_15_samples": 315,
+        "all_previous_15_samples_observed": 308
+      },
+      "italy_park": {
+        "windows": 20,
+        "complete_five_frame_input": 20,
+        "any_observation_in_previous_15_samples": 20,
+        "all_previous_15_samples_observed": 20
+      },
+      "japan_crossroad": {
+        "windows": 150,
+        "complete_five_frame_input": 150,
+        "any_observation_in_previous_15_samples": 150,
+        "all_previous_15_samples_observed": 148
+      },
+      "thailand_street": {
+        "windows": 11,
+        "complete_five_frame_input": 11,
+        "any_observation_in_previous_15_samples": 11,
+        "all_previous_15_samples_observed": 11
+      }
+    }
+  },
+  "four_site_windows": {
+    "all": {
+      "windows": 1482,
+      "at_start_of_contiguous_sampled_track": 449,
+      "at_first_sampled_label_for_id_in_clip": 449,
+      "at_first_raw_label_for_id_in_clip": 261,
+      "at_least_35_consecutive_prior_samples": 1033
+    },
+    "by_site": {
+      "america_crossroad": {
+        "windows": 816,
+        "at_start_of_contiguous_sampled_track": 240,
+        "at_first_sampled_label_for_id_in_clip": 240,
+        "at_first_raw_label_for_id_in_clip": 99,
+        "at_least_35_consecutive_prior_samples": 576
+      },
+      "italy_park": {
+        "windows": 84,
+        "at_start_of_contiguous_sampled_track": 28,
+        "at_first_sampled_label_for_id_in_clip": 28,
+        "at_first_raw_label_for_id_in_clip": 26,
+        "at_least_35_consecutive_prior_samples": 56
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "at_start_of_contiguous_sampled_track": 117,
+        "at_first_sampled_label_for_id_in_clip": 117,
+        "at_first_raw_label_for_id_in_clip": 82,
+        "at_least_35_consecutive_prior_samples": 315
+      },
+      "thailand_street": {
+        "windows": 150,
+        "at_start_of_contiguous_sampled_track": 64,
+        "at_first_sampled_label_for_id_in_clip": 64,
+        "at_first_raw_label_for_id_in_clip": 54,
+        "at_least_35_consecutive_prior_samples": 86
+      }
+    }
+  },
+  "video_indexing": {
+    "method": "Use all raw frame labels including frame zero. The frozen extractor associates label 1 with decoded frame 0 and samples every third frame. Header counts and labeling endpoints flag candidate offsets; annotation-to-pixel alignment requires an independent check.",
+    "clips": {
+      "america_crossroad_spring_daytime_sunny_1": {
+        "video_header_frames": 334,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 334,
+        "source_label_distinct_frame_numbers": 334,
+        "person_label_min": 3,
+        "person_label_max": 334,
+        "person_label_distinct_frame_numbers": 332,
+        "four_site_windows": 5,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_spring_daytime_sunny_2": {
+        "video_header_frames": 865,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 750,
+        "source_label_distinct_frame_numbers": 750,
+        "person_label_min": 1,
+        "person_label_max": 710,
+        "person_label_distinct_frame_numbers": 710,
+        "four_site_windows": 10,
+        "archived_test_windows": 1
+      },
+      "america_crossroad_summer_daytime_sunny_0": {
+        "video_header_frames": 1234,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 0,
+        "source_label_max_all_objects": 1233,
+        "source_label_distinct_frame_numbers": 1234,
+        "person_label_min": 0,
+        "person_label_max": 1233,
+        "person_label_distinct_frame_numbers": 1234,
+        "four_site_windows": 103,
+        "archived_test_windows": 40
+      },
+      "america_crossroad_summer_daytime_sunny_1": {
+        "video_header_frames": 987,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 924,
+        "source_label_distinct_frame_numbers": 924,
+        "person_label_min": 1,
+        "person_label_max": 916,
+        "person_label_distinct_frame_numbers": 916,
+        "four_site_windows": 31,
+        "archived_test_windows": 14
+      },
+      "america_crossroad_summer_night_sunny_0": {
+        "video_header_frames": 582,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 574,
+        "source_label_distinct_frame_numbers": 574,
+        "person_label_min": 10,
+        "person_label_max": 418,
+        "person_label_distinct_frame_numbers": 409,
+        "four_site_windows": 15,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_summer_night_sunny_1": {
+        "video_header_frames": 542,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 533,
+        "source_label_distinct_frame_numbers": 533,
+        "person_label_min": 1,
+        "person_label_max": 519,
+        "person_label_distinct_frame_numbers": 519,
+        "four_site_windows": 8,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_summer_nightfall_sunny_0": {
+        "video_header_frames": 962,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 0,
+        "source_label_max_all_objects": 962,
+        "source_label_distinct_frame_numbers": 963,
+        "person_label_min": 0,
+        "person_label_max": 961,
+        "person_label_distinct_frame_numbers": 962,
+        "four_site_windows": 104,
+        "archived_test_windows": 41
+      },
+      "america_crossroad_summer_nightfall_sunny_1": {
+        "video_header_frames": 1464,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 0,
+        "source_label_max_all_objects": 1463,
+        "source_label_distinct_frame_numbers": 1464,
+        "person_label_min": 0,
+        "person_label_max": 1463,
+        "person_label_distinct_frame_numbers": 1464,
+        "four_site_windows": 390,
+        "archived_test_windows": 187
+      },
+      "america_crossroad_winter_daytime_sunny_0": {
+        "video_header_frames": 824,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 824,
+        "source_label_distinct_frame_numbers": 824,
+        "person_label_min": 1,
+        "person_label_max": 804,
+        "person_label_distinct_frame_numbers": 804,
+        "four_site_windows": 14,
+        "archived_test_windows": 8
+      },
+      "america_crossroad_winter_daytime_sunny_1": {
+        "video_header_frames": 843,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 840,
+        "source_label_distinct_frame_numbers": 840,
+        "person_label_min": 1,
+        "person_label_max": 754,
+        "person_label_distinct_frame_numbers": 754,
+        "four_site_windows": 33,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_winter_night_snow_0": {
+        "video_header_frames": 599,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 590,
+        "source_label_distinct_frame_numbers": 590,
+        "person_label_min": 1,
+        "person_label_max": 541,
+        "person_label_distinct_frame_numbers": 541,
+        "four_site_windows": 16,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_winter_night_snow_1": {
+        "video_header_frames": 831,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 826,
+        "source_label_distinct_frame_numbers": 789,
+        "person_label_min": 79,
+        "person_label_max": 826,
+        "person_label_distinct_frame_numbers": 748,
+        "four_site_windows": 32,
+        "archived_test_windows": 21
+      },
+      "america_crossroad_winter_nightfall_sunny_0": {
+        "video_header_frames": 400,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 401,
+        "source_label_distinct_frame_numbers": 401,
+        "person_label_min": 1,
+        "person_label_max": 401,
+        "person_label_distinct_frame_numbers": 401,
+        "four_site_windows": 6,
+        "archived_test_windows": 0
+      },
+      "america_crossroad_winter_nightfall_sunny_1": {
+        "video_header_frames": 606,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 605,
+        "source_label_distinct_frame_numbers": 605,
+        "person_label_min": 1,
+        "person_label_max": 601,
+        "person_label_distinct_frame_numbers": 601,
+        "four_site_windows": 49,
+        "archived_test_windows": 4
+      },
+      "italy_park_spring_night_sunny_0": {
+        "video_header_frames": 415,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 57,
+        "source_label_max_all_objects": 415,
+        "source_label_distinct_frame_numbers": 359,
+        "person_label_min": 57,
+        "person_label_max": 415,
+        "person_label_distinct_frame_numbers": 359,
+        "four_site_windows": 3,
+        "archived_test_windows": 0
+      },
+      "italy_park_summer_daytime_sunny_0": {
+        "video_header_frames": 412,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 412,
+        "source_label_distinct_frame_numbers": 412,
+        "person_label_min": 1,
+        "person_label_max": 412,
+        "person_label_distinct_frame_numbers": 412,
+        "four_site_windows": 13,
+        "archived_test_windows": 0
+      },
+      "italy_park_summer_daytime_sunny_1": {
+        "video_header_frames": 381,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 362,
+        "source_label_distinct_frame_numbers": 362,
+        "person_label_min": 1,
+        "person_label_max": 324,
+        "person_label_distinct_frame_numbers": 324,
+        "four_site_windows": 5,
+        "archived_test_windows": 0
+      },
+      "italy_park_summer_nightfall_sunny_0": {
+        "video_header_frames": 526,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 519,
+        "source_label_distinct_frame_numbers": 519,
+        "person_label_min": 1,
+        "person_label_max": 519,
+        "person_label_distinct_frame_numbers": 519,
+        "four_site_windows": 15,
+        "archived_test_windows": 2
+      },
+      "italy_park_summer_nightfall_sunny_1": {
+        "video_header_frames": 615,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 597,
+        "source_label_distinct_frame_numbers": 597,
+        "person_label_min": 1,
+        "person_label_max": 569,
+        "person_label_distinct_frame_numbers": 569,
+        "four_site_windows": 27,
+        "archived_test_windows": 2
+      },
+      "italy_park_winter_daytime_snow_0": {
+        "video_header_frames": 665,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 665,
+        "source_label_distinct_frame_numbers": 665,
+        "person_label_min": 1,
+        "person_label_max": 585,
+        "person_label_distinct_frame_numbers": 585,
+        "four_site_windows": 5,
+        "archived_test_windows": 0
+      },
+      "italy_park_winter_daytime_snow_1": {
+        "video_header_frames": 351,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 300,
+        "source_label_distinct_frame_numbers": 300,
+        "person_label_min": 1,
+        "person_label_max": 295,
+        "person_label_distinct_frame_numbers": 295,
+        "four_site_windows": 4,
+        "archived_test_windows": 0
+      },
+      "italy_park_winter_daytime_snow_2": {
+        "video_header_frames": 347,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 347,
+        "source_label_distinct_frame_numbers": 347,
+        "person_label_min": 1,
+        "person_label_max": 347,
+        "person_label_distinct_frame_numbers": 347,
+        "four_site_windows": 9,
+        "archived_test_windows": 0
+      },
+      "italy_park_winter_daytime_snow_3": {
+        "video_header_frames": 441,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 410,
+        "source_label_distinct_frame_numbers": 410,
+        "person_label_min": 1,
+        "person_label_max": 410,
+        "person_label_distinct_frame_numbers": 410,
+        "four_site_windows": 3,
+        "archived_test_windows": 16
+      },
+      "japan_crossroad_summer_daytime_sunny_0": {
+        "video_header_frames": 752,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 703,
+        "source_label_distinct_frame_numbers": 703,
+        "person_label_min": 1,
+        "person_label_max": 703,
+        "person_label_distinct_frame_numbers": 703,
+        "four_site_windows": 28,
+        "archived_test_windows": 4
+      },
+      "japan_crossroad_summer_daytime_sunny_1": {
+        "video_header_frames": 618,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 615,
+        "source_label_distinct_frame_numbers": 615,
+        "person_label_min": 1,
+        "person_label_max": 587,
+        "person_label_distinct_frame_numbers": 587,
+        "four_site_windows": 18,
+        "archived_test_windows": 2
+      },
+      "japan_crossroad_summer_morning_sunny_0": {
+        "video_header_frames": 270,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 269,
+        "source_label_distinct_frame_numbers": 269,
+        "person_label_min": 1,
+        "person_label_max": 247,
+        "person_label_distinct_frame_numbers": 247,
+        "four_site_windows": 4,
+        "archived_test_windows": 0
+      },
+      "japan_crossroad_summer_morning_sunny_1": {
+        "video_header_frames": 273,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 273,
+        "source_label_distinct_frame_numbers": 273,
+        "person_label_min": 1,
+        "person_label_max": 273,
+        "person_label_distinct_frame_numbers": 273,
+        "four_site_windows": 9,
+        "archived_test_windows": 0
+      },
+      "japan_crossroad_summer_night_sunny_0": {
+        "video_header_frames": 403,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 388,
+        "source_label_distinct_frame_numbers": 388,
+        "person_label_min": 1,
+        "person_label_max": 388,
+        "person_label_distinct_frame_numbers": 388,
+        "four_site_windows": 15,
+        "archived_test_windows": 0
+      },
+      "japan_crossroad_summer_night_sunny_1": {
+        "video_header_frames": 418,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 407,
+        "source_label_distinct_frame_numbers": 407,
+        "person_label_min": 1,
+        "person_label_max": 407,
+        "person_label_distinct_frame_numbers": 407,
+        "four_site_windows": 8,
+        "archived_test_windows": 0
+      },
+      "japan_crossroad_summer_night_sunny_2": {
+        "video_header_frames": 267,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 265,
+        "source_label_distinct_frame_numbers": 265,
+        "person_label_min": 1,
+        "person_label_max": 258,
+        "person_label_distinct_frame_numbers": 258,
+        "four_site_windows": 8,
+        "archived_test_windows": 12
+      },
+      "japan_crossroad_winter_daytime_sunny_0": {
+        "video_header_frames": 1157,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 1157,
+        "source_label_distinct_frame_numbers": 1157,
+        "person_label_min": 1,
+        "person_label_max": 1157,
+        "person_label_distinct_frame_numbers": 1157,
+        "four_site_windows": 159,
+        "archived_test_windows": 102
+      },
+      "japan_crossroad_winter_daytime_sunny_1": {
+        "video_header_frames": 675,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 641,
+        "source_label_distinct_frame_numbers": 641,
+        "person_label_min": 1,
+        "person_label_max": 641,
+        "person_label_distinct_frame_numbers": 641,
+        "four_site_windows": 78,
+        "archived_test_windows": 13
+      },
+      "japan_crossroad_winter_nightfall_sunny_0": {
+        "video_header_frames": 656,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 656,
+        "source_label_distinct_frame_numbers": 656,
+        "person_label_min": 1,
+        "person_label_max": 656,
+        "person_label_distinct_frame_numbers": 656,
+        "four_site_windows": 75,
+        "archived_test_windows": 14
+      },
+      "japan_crossroad_winter_nightfall_sunny_1": {
+        "video_header_frames": 645,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 645,
+        "source_label_distinct_frame_numbers": 645,
+        "person_label_min": 1,
+        "person_label_max": 645,
+        "person_label_distinct_frame_numbers": 645,
+        "four_site_windows": 30,
+        "archived_test_windows": 3
+      },
+      "thailand_street_summer_daytime_afterraining_0": {
+        "video_header_frames": 285,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 273,
+        "source_label_distinct_frame_numbers": 273,
+        "person_label_min": 1,
+        "person_label_max": 273,
+        "person_label_distinct_frame_numbers": 273,
+        "four_site_windows": 8,
+        "archived_test_windows": 0
+      },
+      "thailand_street_summer_daytime_afterraining_1": {
+        "video_header_frames": 265,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 265,
+        "source_label_distinct_frame_numbers": 265,
+        "person_label_min": 1,
+        "person_label_max": 265,
+        "person_label_distinct_frame_numbers": 265,
+        "four_site_windows": 6,
+        "archived_test_windows": 0
+      },
+      "thailand_street_summer_night_sunny_0": {
+        "video_header_frames": 535,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 514,
+        "source_label_distinct_frame_numbers": 514,
+        "person_label_min": 1,
+        "person_label_max": 514,
+        "person_label_distinct_frame_numbers": 514,
+        "four_site_windows": 20,
+        "archived_test_windows": 0
+      },
+      "thailand_street_summer_night_sunny_1": {
+        "video_header_frames": 340,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 279,
+        "source_label_distinct_frame_numbers": 279,
+        "person_label_min": 1,
+        "person_label_max": 279,
+        "person_label_distinct_frame_numbers": 279,
+        "four_site_windows": 8,
+        "archived_test_windows": 0
+      },
+      "thailand_street_summer_night_sunny_2": {
+        "video_header_frames": 339,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 332,
+        "source_label_distinct_frame_numbers": 332,
+        "person_label_min": 1,
+        "person_label_max": 312,
+        "person_label_distinct_frame_numbers": 312,
+        "four_site_windows": 2,
+        "archived_test_windows": 8
+      },
+      "thailand_street_summer_nightfall_sunny_0": {
+        "video_header_frames": 332,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 309,
+        "source_label_distinct_frame_numbers": 309,
+        "person_label_min": 1,
+        "person_label_max": 309,
+        "person_label_distinct_frame_numbers": 309,
+        "four_site_windows": 17,
+        "archived_test_windows": 0
+      },
+      "thailand_street_summer_nightfall_sunny_1": {
+        "video_header_frames": 318,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 308,
+        "source_label_distinct_frame_numbers": 308,
+        "person_label_min": 1,
+        "person_label_max": 302,
+        "person_label_distinct_frame_numbers": 302,
+        "four_site_windows": 11,
+        "archived_test_windows": 0
+      },
+      "thailand_street_winter_daytime_sunny_0": {
+        "video_header_frames": 438,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 418,
+        "source_label_distinct_frame_numbers": 418,
+        "person_label_min": 1,
+        "person_label_max": 418,
+        "person_label_distinct_frame_numbers": 418,
+        "four_site_windows": 13,
+        "archived_test_windows": 0
+      },
+      "thailand_street_winter_daytime_sunny_1": {
+        "video_header_frames": 266,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 17,
+        "source_label_max_all_objects": 264,
+        "source_label_distinct_frame_numbers": 248,
+        "person_label_min": 17,
+        "person_label_max": 264,
+        "person_label_distinct_frame_numbers": 248,
+        "four_site_windows": 5,
+        "archived_test_windows": 0
+      },
+      "thailand_street_winter_night_sunny_0": {
+        "video_header_frames": 394,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 368,
+        "source_label_distinct_frame_numbers": 368,
+        "person_label_min": 1,
+        "person_label_max": 368,
+        "person_label_distinct_frame_numbers": 368,
+        "four_site_windows": 9,
+        "archived_test_windows": 0
+      },
+      "thailand_street_winter_night_sunny_1": {
+        "video_header_frames": 525,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 503,
+        "source_label_distinct_frame_numbers": 503,
+        "person_label_min": 87,
+        "person_label_max": 503,
+        "person_label_distinct_frame_numbers": 417,
+        "four_site_windows": 10,
+        "archived_test_windows": 2
+      },
+      "thailand_street_winter_nightfall_sunny_0": {
+        "video_header_frames": 383,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 382,
+        "source_label_distinct_frame_numbers": 382,
+        "person_label_min": 1,
+        "person_label_max": 382,
+        "person_label_distinct_frame_numbers": 382,
+        "four_site_windows": 24,
+        "archived_test_windows": 0
+      },
+      "thailand_street_winter_nightfall_sunny_1": {
+        "video_header_frames": 516,
+        "video_fps": 30.0,
+        "source_label_min_all_objects": 1,
+        "source_label_max_all_objects": 516,
+        "source_label_distinct_frame_numbers": 516,
+        "person_label_min": 1,
+        "person_label_max": 516,
+        "person_label_distinct_frame_numbers": 516,
+        "four_site_windows": 17,
+        "archived_test_windows": 1
+      }
+    }
+  }
+}

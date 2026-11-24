@@ -1,0 +1,66 @@
+{
+  "selection": "All and only source release jrdb/data/train/*_shift_0.ndjson stems. No held-out pose, trajectories or scores opened.",
+  "wheel_odometry_source": "https://storage.googleapis.com/gresearch/human_scene_transformer/odometry.zip",
+  "recordings": {
+    "bytes-cafe-2019-02-07_0": {
+      "odometry_frames": 1728,
+      "member_sha256": "375ac389fd0f96d2921c45995f663b2e0420b546c28cab4b91351ef9a310da3a",
+      "max_xy_translation_from_first_m": 4.448663249851456e-05,
+      "max_orientation_change_from_first_deg": 0.001693886914178584
+    },
+    "gates-basement-elevators-2019-01-17_1": {
+      "odometry_frames": 1011,
+      "member_sha256": "80ad0c8ea1e52e60c64a2437fe5d4420d24f8fe9c5061e77cc5dadb8b1e70fd0",
+      "max_xy_translation_from_first_m": 0.00026308634065215595,
+      "max_orientation_change_from_first_deg": 0.0
+    },
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "odometry_frames": 1730,
+      "member_sha256": "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+      "max_xy_translation_from_first_m": 0.0,
+      "max_orientation_change_from_first_deg": 0.0
+    },
+    "huang-lane-2019-02-12_0": {
+      "odometry_frames": 725,
+      "member_sha256": "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+      "max_xy_translation_from_first_m": 0.00020694732666015625,
+      "max_orientation_change_from_first_deg": 0.000887924592103879
+    },
+    "jordan-hall-2019-04-22_0": {
+      "odometry_frames": 1524,
+      "member_sha256": "c6809ffb9236f8f9800a9399a304fea3171b34c97d516c616669a26f8bb52ac5",
+      "max_xy_translation_from_first_m": 6.866455078125e-05,
+      "max_orientation_change_from_first_deg": 0.0
+    },
+    "packard-poster-session-2019-03-20_2": {
+      "odometry_frames": 1373,
+      "member_sha256": "e3e7ea9c4d6289b26c9cd8dce95e39aa000765fcf00b0691ee5e6102354f0ba8",
+      "max_xy_translation_from_first_m": 6.866455078125e-05,
+      "max_orientation_change_from_first_deg": 0.0025408303712967924
+    },
+    "stlc-111-2019-04-19_0": {
+      "odometry_frames": 1737,
+      "member_sha256": "d53e3792b92c640031940790c69050b907bcdb1145330d6570e16f8743760949",
+      "max_xy_translation_from_first_m": 3.0517578125e-05,
+      "max_orientation_change_from_first_deg": 0.002294942290665788
+    },
+    "svl-meeting-gates-2-2019-04-08_0": {
+      "odometry_frames": 868,
+      "member_sha256": "b758c37beba6095a87f7aa4a35d67420d9aa141a31f38ea6f8fe01c6b6bf8ebf",
+      "max_xy_translation_from_first_m": 0.0004836077574697551,
+      "max_orientation_change_from_first_deg": 0.003824905554235733
+    },
+    "svl-meeting-gates-2-2019-04-08_1": {
+      "odometry_frames": 873,
+      "member_sha256": "c459f52a9d6bddb08fc7abcf5966ce77252536a6f5e154a05582ac098de4514c",
+      "max_xy_translation_from_first_m": 0.0005418520012116836,
+      "max_orientation_change_from_first_deg": 0.00152996142122155
+    },
+    "tressider-2019-03-16_1": {
+      "odometry_frames": 505,
+      "member_sha256": "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40",
+      "max_xy_translation_from_first_m": 0.0002542734146118164,
+      "max_orientation_change_from_first_deg": 0.0022949435611626374
+    }
+  }
+}

@@ -20,6 +20,7 @@ The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training
 These analyses use existing public PINNS recordings. The original 484 training runs are archived separately.
 
 - Reconstructing the archived split produced all 497 windows. The saved M0 checkpoint reproduced its seed-42 cloud ADE/FDE within 0.000001 m. All five history positions are available in every window. Only 233 windows have a labeled position at 3.0 s. The archived FDE uses the last available future position in each window. M0 includes the moving/static target-type input. [Split reconstruction and results](results/pinns_motion_audit.json)
+- In 496 of the 497 archived windows, the same pedestrian had an annotation during the 15 sampling steps before the five-frame input. In the site-held-out cohort, 1,033 of 1,482 inputs followed at least 35 consecutive annotated steps. Three US clips use person frame numbers spanning 0 through the video frame count minus one, while the frozen extractor pairs label 1 with video frame 0. They contribute 597 of the 1,482 windows. [Track history and video index audit](results/pinns_observation_audit.json)
 - On the original split, constant velocity from the final two positions scored 0.5041 m ADE and the explicit pose gate (M1) scored 0.4783 m. The US site contributes 316 of 497 windows and is the only site where M1 improves on constant velocity. Giving all four sites equal weight yields 0.3897 m for constant velocity and 0.4288 m for M1. A paired bootstrap of 21 clips gives a window-weighted M1-minus-constant-velocity difference of −0.0258 m (95% percentile interval −0.1297 to +0.0713 m). [Cluster bootstrap](results/pinns_clip_bootstrap.json)
 - In a separate leave-one-site-out study, each person track contributed disjoint, complete five-history/30-future frame windows. Across 1,482 windows, five-point constant velocity and ridge regression trained on the other three sites had four-site macro ADE of 0.5557 and 0.7189 m. The pose networks still require evaluation with this protocol. [Fold definitions, counts and errors](results/pinns_heldout_sites.json)
 
@@ -48,6 +49,8 @@ The five checked-in PNGs were generated with Matplotlib 3.9.4 at 300 DPI. The su
 export PINNS_ROOT="/path/to/extracted/PINNS"
 python3 -m scripts.audit_pinns_short_window "$PINNS_ROOT"
 python3 -m scripts.audit_pinns_type_input "$PINNS_ROOT"
+python3 -m scripts.audit_pinns_observations "$PINNS_ROOT"
+python3 -m scripts.audit_pinns_projection "$PINNS_ROOT" --output results/pinns_projection_audit.json
 python3 -m scripts.cluster_pinns_errors
 python3 -m scripts.benchmark_heldout_sites "$PINNS_ROOT"
 python3 -m scripts.compare_pinns_velocity_estimators "$PINNS_ROOT"

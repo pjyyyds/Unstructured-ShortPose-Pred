@@ -1,0 +1,61 @@
+{
+  "development_recording": "stlc-111-2019-04-19_0",
+  "sources": {
+    "odometry": {
+      "url": "https://storage.googleapis.com/gresearch/human_scene_transformer/odometry.zip",
+      "member": "odometry/train/stlc-111-2019-04-19_0.json",
+      "uncompressed_bytes": 474345,
+      "member_sha256": "d53e3792b92c640031940790c69050b907bcdb1145330d6570e16f8743760949"
+    },
+    "tracks": {
+      "url": "https://github.com/vita-epfl/social-transmotion/releases/download/ckpt_data/releases.zip",
+      "member": "jrdb/data/train/stlc-111-2019-04-19_0_shift_0.ndjson",
+      "uncompressed_bytes": 1740415,
+      "member_sha256": "b226520bfa5a7ae471178ed201adfb042779b6b1abf3dbed9f68a6900c70ea60"
+    }
+  },
+  "all_odometry_frames": 1737,
+  "odometry_frame_range": [
+    0,
+    1736
+  ],
+  "odometry_gap_histogram": {
+    "1": 1736
+  },
+  "track_people": 111,
+  "unique_frame_person_positions": 8304,
+  "track_native_frame_range": [
+    0,
+    1734
+  ],
+  "track_distinct_frames": 290,
+  "track_frames_with_odometry": 290,
+  "track_scene_fps": [
+    2.5
+  ],
+  "sampled_frame_gap_histogram": {
+    "6": 289
+  },
+  "first_xyzw_quaternion": [
+    -0.0,
+    0.0,
+    0.9270724375450426,
+    -0.3748822422365361
+  ],
+  "first_xyz_position_m": [
+    -82.63733673095703,
+    -369.6794128417969,
+    0.0
+  ],
+  "max_relative_z_translation_m": 0.0,
+  "max_xy_translation_from_initial_m": 3.051757812500001e-05,
+  "max_full_orientation_change_deg": 0.00229494292602936,
+  "max_z_coupling_into_horizontal": 0.0,
+  "z_zero_plane_xy_odometry_correction_m_p50_p95_max": [
+    0.00021021002379296335,
+    0.0005551039172029902,
+    0.0011401823678035537
+  ],
+  "independent_original_box_check": null,
+  "interpretation": "The local odometry frame is anchored at frame 0. No geodetic map, raw RGB, retained test labels or forecast scores were used."
+}
