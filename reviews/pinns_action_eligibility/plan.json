@@ -1,0 +1,86 @@
+{
+  "source_kaggle": 373610725,
+  "source_archive_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+  "labels_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "five_frame_cohort_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "action_labeler_sha256": "4b1300c579377a6013355fb6920779ef56972781dd1b548a19f9f8f940af7646",
+  "driver_sha256": "6d66221b6beb7cf0d62078ea8223442dc0433481b2ba823ed4fbee5706733d2e",
+  "scope": "Post-hoc intervention proposed after prior poor stop recall; its scores on this intervention are unseen. Four previously examined sites and seed42; all outcomes reported.",
+  "primary": "Detached stop Brier: projected minus original, average windows per held-out site then sites equally. This deterministic restriction cannot worsen Brier with exact rule-derived labels.",
+  "secondary": "Start and stop Brier, confusion counts/recall/precision/F1 at >=0.5, original false positives removed, eligible support and score changes; all three heads per site, pooled counts, equal-site Brier, paired whole-clip intervals. Other classes, six trajectories, mode probabilities and selected mode are fixed.",
+  "transformation": "After the existing complete forecast, zero reported start probability unless v_pre<=0.20 m/s; zero stop probability unless v_pre>=0.60 m/s. Same original probabilities inside eligibility. No independent renormalization, threshold fitting, or feedback into the decoder.",
+  "speed": "Five ground positions at 0.1 s. Four interval velocity vectors. At the final three history frames average the preceding 2,3,3 available interval vectors, respectively; average the norms of those three vectors.",
+  "threshold": 0.5,
+  "arms": [
+    "auxiliary",
+    "end_to_end",
+    "detached"
+  ],
+  "source_fits": 16,
+  "scored_supervised_fits": 12,
+  "seed": 42,
+  "no_new_fits": true,
+  "interval": "20000 pairs of whole-clip draws by site, PCG64 2026, percentiles conditional on these sites/fits.",
+  "identities": {
+    "america_crossroad": {
+      "train_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "5138c8d34313d2443dd2501d41024793983973d75facc9d4aabbd13fbe33a19c",
+      "test_keys_sha256": "fe925bd2b94e094d8e75f407d5a87e9d1a9ebe575e7a49f6e8e415388c7157fb",
+      "windows": 816,
+      "clips": 14,
+      "eligible_start_stop": [
+        85,
+        644
+      ]
+    },
+    "italy_park": {
+      "train_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "9743e797dc3c21844379d1fd777a7d55f5425d9c56848c8fbcd207e5185aeb18",
+      "test_keys_sha256": "d1a55cb06eb6603487ef357dd43ef27c0679c30af6c05b0feb5e7a3799d07ec5",
+      "windows": 84,
+      "clips": 9,
+      "eligible_start_stop": [
+        16,
+        57
+      ]
+    },
+    "japan_crossroad": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_keys_sha256": "c53cab0ed205f9ad582163021f92583e0652a6b18eac5d599cf165033ca124ae",
+      "test_keys_sha256": "dd4cf28d80d4f42b4d9bcfbb6d6e6f2870e5ca6a1eb621454f0830f082fe6f20",
+      "windows": 432,
+      "clips": 11,
+      "eligible_start_stop": [
+        69,
+        314
+      ]
+    },
+    "thailand_street": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_keys_sha256": "d6a1b03ba46fcbfad203c85152320ac11eeb3b7b26402eec5f8142708da28fd5",
+      "test_keys_sha256": "96a8494222d1d7e9c5f3bc3720793614d8bbbab1bd3e98dad9c5dc0ebfd5a734",
+      "windows": 150,
+      "clips": 13,
+      "eligible_start_stop": [
+        8,
+        124
+      ]
+    }
+  }
+}
