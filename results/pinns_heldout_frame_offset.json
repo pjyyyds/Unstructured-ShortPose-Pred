@@ -1,0 +1,248 @@
+{
+  "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+  "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "ordered_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "original_pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "shifted_pose_sha256": "d29cfbc84d20d132baac47cabed15ad912263d82f88f3c7e968faa8fe33842db",
+  "m1_checkpoint_sha256": {
+    "america_crossroad": "8ce6d093d1dc34dda0f57da008464f1ca66c9ce7b4638347bfa33111f020026b",
+    "italy_park": "d73d488a7b37b98d5b2e786a402ca61c3d14c7c35fd00cba3dfd2e57796a832d",
+    "japan_crossroad": "0a2734ddbc1f5a1208552d0784fba6bc6ff0b56a40875d473295e0fd91fc46a1",
+    "thailand_street": "aeaf2b9a8ce966c65f22013604a14c051f3116a18ada7c97715782f41ae1452b"
+  },
+  "cloud_torch": "2.11.0+cu130",
+  "replay_device": "cpu",
+  "replay_torch": "2.10.0",
+  "frozen_replay_tolerance": {
+    "atol_m": 0.0002,
+    "rtol": 2e-05
+  },
+  "max_abs_frozen_replay_minus_saved_m": {
+    "america_crossroad": {
+      "ade_m": 9.064873059960732e-07,
+      "fde_m": 1.9073486328125e-06
+    },
+    "italy_park": {
+      "ade_m": 6.755193074359234e-07,
+      "fde_m": 1.2516975402832031e-06
+    },
+    "japan_crossroad": {
+      "ade_m": 6.491939226194177e-07,
+      "fde_m": 1.3113021850585938e-06
+    },
+    "thailand_street": {
+      "ade_m": 4.995769510296455e-07,
+      "fde_m": 9.5367431640625e-07
+    }
+  },
+  "original_pose_providers": [
+    "CUDAExecutionProvider",
+    "CPUExecutionProvider"
+  ],
+  "changed_keypoint_or_inference_frames": {
+    "america_crossroad_summer_daytime_sunny_0": 515,
+    "america_crossroad_summer_nightfall_sunny_0": 519,
+    "america_crossroad_summer_nightfall_sunny_1": 1949
+  },
+  "clips": {
+    "america_crossroad_summer_daytime_sunny_0": {
+      "windows": 103,
+      "frozen_replay_m": {
+        "ade_m": 0.8535129557747219,
+        "fde_m": 1.7238771381598075
+      },
+      "shifted_m": {
+        "ade_m": 0.8532469378032689,
+        "fde_m": 1.7234079671426885
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": -0.0002660179714533739,
+        "fde_m": -0.00046917101711902804
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_0": {
+      "windows": 104,
+      "frozen_replay_m": {
+        "ade_m": 0.8852511677211928,
+        "fde_m": 1.5981615233378341
+      },
+      "shifted_m": {
+        "ade_m": 0.8850792949534925,
+        "fde_m": 1.5978691487644727
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": -0.0001718727677003925,
+        "fde_m": -0.0002923745733614151
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_1": {
+      "windows": 390,
+      "frozen_replay_m": {
+        "ade_m": 1.002503608996895,
+        "fde_m": 1.893024250233355
+      },
+      "shifted_m": {
+        "ade_m": 1.0025079425805818,
+        "fde_m": 1.8930600416548073
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": 4.3335836878238294e-06,
+        "fde_m": 3.5791421452393895e-05
+      }
+    }
+  },
+  "three_clips_combined": {
+    "windows": 597,
+    "frozen_replay_m": {
+      "ade_m": 0.9563724680009875,
+      "fde_m": 1.8124750439675097
+    },
+    "shifted_m": {
+      "ade_m": 0.9562994621027241,
+      "fde_m": 1.812366546620732
+    },
+    "shifted_minus_frozen_m": {
+      "ade_m": -7.300589826178736e-05,
+      "fde_m": -0.00010849734677791196
+    }
+  },
+  "other_american_windows": {
+    "windows": 219,
+    "frozen_replay_m": {
+      "ade_m": 0.4381545610753345,
+      "fde_m": 0.9981947577469152
+    },
+    "shifted_m": {
+      "ade_m": 0.4381545610753345,
+      "fde_m": 0.9981947577469152
+    },
+    "shifted_minus_frozen_m": {
+      "ade_m": 0.0,
+      "fde_m": 0.0
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "frozen_replay_m": {
+        "ade_m": 0.8172919268040292,
+        "fde_m": 1.593936584798012
+      },
+      "shifted_m": {
+        "ade_m": 0.8172385144005201,
+        "fde_m": 1.5938572062244503
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": -5.3412403507704723e-05,
+        "fde_m": -7.937857356178118e-05
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "frozen_replay_m": {
+        "ade_m": 0.47760115585637275,
+        "fde_m": 1.069106407884863
+      },
+      "shifted_m": {
+        "ade_m": 0.47760115585637275,
+        "fde_m": 1.069106407884863
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": 0.0,
+        "fde_m": 0.0
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "frozen_replay_m": {
+        "ade_m": 0.4575389916819673,
+        "fde_m": 1.0019265714886219
+      },
+      "shifted_m": {
+        "ade_m": 0.4575389916819673,
+        "fde_m": 1.0019265714886219
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": 0.0,
+        "fde_m": 0.0
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "frozen_replay_m": {
+        "ade_m": 0.4327332309625733,
+        "fde_m": 0.9902840797789395
+      },
+      "shifted_m": {
+        "ade_m": 0.4327332309625733,
+        "fde_m": 0.9902840797789395
+      },
+      "shifted_minus_frozen_m": {
+        "ade_m": 0.0,
+        "fde_m": 0.0
+      }
+    }
+  },
+  "equal_site_mean": {
+    "frozen_replay_m": {
+      "ade_m": 0.5462913263262357,
+      "fde_m": 1.1638134109876093
+    },
+    "shifted_m": {
+      "ade_m": 0.5462779732253583,
+      "fde_m": 1.1637935663442187
+    },
+    "shifted_minus_frozen_m": {
+      "ade_m": -1.3353100876926181e-05,
+      "fde_m": -1.9844643390445296e-05
+    }
+  },
+  "comparison": "Same frozen seed-42 M1 models; shifted minus original-frame test-input errors in metres. Three American clips, +1 decoded frame (nominal 1/30 s). Other folds reuse original verified replay.",
+  "cloud_cuda_evaluation": {
+    "kaggle_version": 373565417,
+    "status": "failed original exact-equality assertion for untouched American test windows",
+    "diagnostic_max_abs_difference_m": null,
+    "cause": null
+  },
+  "cpu_evaluation": {
+    "status": "passed original evaluator and all untouched exact-equality checks",
+    "untouched_US_windows": 219,
+    "official_untouched_mode_flips": 0,
+    "untouched_trajectory_elements_changed": 0,
+    "unchanged_errors_with_only_selected_batch_peers_replaced": 219,
+    "unchanged_errors_with_single_window_replays": 219,
+    "archived_checkpoints_verified_M0_M1": 8
+  },
+  "alignment_checks": {
+    "all_window_ids_and_fold_memberships_match": true,
+    "windows": 1482,
+    "history_boxes_checked": 7410,
+    "hist_bbox_center_xy_max_abs_px": 0.0,
+    "hist_bbox_width_height_max_abs_px": 0.0,
+    "all_cached_history_ground_positions_equal": true
+  },
+  "changed_selected_pose_tensor_windows": 597,
+  "changed_selected_quality_tensor_windows": 597,
+  "original_frame_control": {
+    "batches": 9,
+    "crops": 68,
+    "max_xy_discrepancy_px": 0.0,
+    "max_confidence_discrepancy": 0.0,
+    "confidence_threshold_crossings": 0
+  },
+  "selected_window_sensitivity": {
+    "windows": 597,
+    "top_mode_changes": 0,
+    "ade": {
+      "median_abs_m": 0.0003525771200657002,
+      "p95_abs_m": 0.005057094966371832,
+      "max_abs_m": 0.01736011790732528
+    },
+    "fde": {
+      "median_abs_m": 0.0007388591766357422,
+      "p95_abs_m": 0.009997820854187009,
+      "max_abs_m": 0.03061056137084961
+    }
+  },
+  "scope": "Only test image selection changes. Original temporal alignment and the effect of retraining remain unresolved. Numerical sensitivity reported here applies to CPU replay with the genuine GPU-extracted cache."
+}

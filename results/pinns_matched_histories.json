@@ -1,0 +1,442 @@
+{
+  "protocol": {
+    "scope": "Coordinate-only selection audit at four previously examined sites; no model fit or pose inference.",
+    "anchor": "Verified seed-42 reference keys. Frames sampled at 10 Hz (raw annotation number 3*t+1). No interpolation. Each history ends at t0 and all three lengths share the exact person, t0 and complete 30 future points. Coordinates are meters relative to t0.",
+    "complete_matched": "All original anchors with 20 consecutive observations ending at t0.",
+    "strict_disjoint": "Among complete_matched only, keep earliest per clip/person, then the earliest t0 at least 50 steps after the previous retained anchor. The combined [t0-19,t0+30] interval contains 50 position labels (4.9 s endpoint span); independence across people or clips is not implied.",
+    "overlap": "At gap d=35, each pair shares 5 positions at T=10 and 15 at T=20: the earlier window's future overlaps the later window's history. Two 30-step scored futures are already disjoint at d>=30. Counts refer to same typed person within a clip.",
+    "selection": "The original 35-step tiling anchors the first window at the fifth point of each contiguous run. Full 20-frame eligibility preferentially retains people with longer continuous histories; greedy thinning further changes the weighting of long tracks. An annotated track start or an eligible anchor does not establish first emergence from occlusion. No pose or target error comparison is implied.",
+    "manifest": "In NPZ take the last T positions/mask from history_20_xy/history_20_mask, the same future_30_xy for all T, and the desired complete_20 or strict_disjoint_20 flag. The private manifest includes all base keys for attrition checks."
+  },
+  "identity": {
+    "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "script_sha256": "b3ec0dd5eeed8072498f8962f4f97361d88bd04834eed36b4c187b64d219ce18"
+  },
+  "complete_history_counts_within_frozen_five": {
+    "5": 1482,
+    "10": 1033,
+    "20": 1033
+  },
+  "cohorts": {
+    "frozen_five": {
+      "all": {
+        "windows": 1482,
+        "clips": 47,
+        "clip_person_tracks": 449,
+        "distinct_clip_anchor_times": 753,
+        "windows_sharing_clip_anchor_time_with_another_person": 1027,
+        "five_frame_history_starts_at_first_sampled_label_of_person": 449,
+        "mean_last_two_point_speed_mps": 0.9679105612039317,
+        "median_last_two_point_speed_mps": 0.926307378257869
+      },
+      "sites": {
+        "america_crossroad": {
+          "windows": 816,
+          "clips": 14,
+          "clip_person_tracks": 240,
+          "distinct_clip_anchor_times": 477,
+          "windows_sharing_clip_anchor_time_with_another_person": 506,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 240,
+          "mean_last_two_point_speed_mps": 1.076793887124702,
+          "median_last_two_point_speed_mps": 0.9984988733093283
+        },
+        "italy_park": {
+          "windows": 84,
+          "clips": 9,
+          "clip_person_tracks": 28,
+          "distinct_clip_anchor_times": 33,
+          "windows_sharing_clip_anchor_time_with_another_person": 67,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 28,
+          "mean_last_two_point_speed_mps": 0.7577583810027623,
+          "median_last_two_point_speed_mps": 0.8364427704604354
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "clips": 11,
+          "clip_person_tracks": 117,
+          "distinct_clip_anchor_times": 193,
+          "windows_sharing_clip_anchor_time_with_another_person": 318,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 117,
+          "mean_last_two_point_speed_mps": 0.8040159460931617,
+          "median_last_two_point_speed_mps": 0.8413768987719064
+        },
+        "thailand_street": {
+          "windows": 150,
+          "clips": 13,
+          "clip_person_tracks": 64,
+          "distinct_clip_anchor_times": 50,
+          "windows_sharing_clip_anchor_time_with_another_person": 136,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 64,
+          "mean_last_two_point_speed_mps": 0.9652869806266127,
+          "median_last_two_point_speed_mps": 0.9102702871973277
+        }
+      },
+      "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91"
+    },
+    "complete_matched": {
+      "all": {
+        "windows": 1033,
+        "clips": 47,
+        "clip_person_tracks": 375,
+        "distinct_clip_anchor_times": 557,
+        "windows_sharing_clip_anchor_time_with_another_person": 667,
+        "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+        "mean_last_two_point_speed_mps": 0.9660391246892132,
+        "median_last_two_point_speed_mps": 0.9302437220427752
+      },
+      "sites": {
+        "america_crossroad": {
+          "windows": 576,
+          "clips": 14,
+          "clip_person_tracks": 197,
+          "distinct_clip_anchor_times": 359,
+          "windows_sharing_clip_anchor_time_with_another_person": 318,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 1.072847938068929,
+          "median_last_two_point_speed_mps": 1.0122252520859032
+        },
+        "italy_park": {
+          "windows": 56,
+          "clips": 9,
+          "clip_person_tracks": 25,
+          "distinct_clip_anchor_times": 23,
+          "windows_sharing_clip_anchor_time_with_another_person": 44,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.7471484669599471,
+          "median_last_two_point_speed_mps": 0.8342289771459164
+        },
+        "japan_crossroad": {
+          "windows": 315,
+          "clips": 11,
+          "clip_person_tracks": 100,
+          "distinct_clip_anchor_times": 145,
+          "windows_sharing_clip_anchor_time_with_another_person": 227,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.8071070095717371,
+          "median_last_two_point_speed_mps": 0.8415004421270283
+        },
+        "thailand_street": {
+          "windows": 86,
+          "clips": 13,
+          "clip_person_tracks": 53,
+          "distinct_clip_anchor_times": 30,
+          "windows_sharing_clip_anchor_time_with_another_person": 78,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.9753369919930209,
+          "median_last_two_point_speed_mps": 0.9186227322221444
+        }
+      },
+      "ordered_window_ids_sha256": "501db2d7baa377095485b1ace7233a450d9489468337f2de67d3810d840e5d58"
+    },
+    "strict_disjoint": {
+      "all": {
+        "windows": 623,
+        "clips": 47,
+        "clip_person_tracks": 375,
+        "distinct_clip_anchor_times": 349,
+        "windows_sharing_clip_anchor_time_with_another_person": 378,
+        "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+        "mean_last_two_point_speed_mps": 0.9867827421759012,
+        "median_last_two_point_speed_mps": 0.9321480569094046
+      },
+      "sites": {
+        "america_crossroad": {
+          "windows": 342,
+          "clips": 14,
+          "clip_person_tracks": 197,
+          "distinct_clip_anchor_times": 228,
+          "windows_sharing_clip_anchor_time_with_another_person": 165,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 1.115201128998962,
+          "median_last_two_point_speed_mps": 1.0170497040197342
+        },
+        "italy_park": {
+          "windows": 32,
+          "clips": 9,
+          "clip_person_tracks": 25,
+          "distinct_clip_anchor_times": 13,
+          "windows_sharing_clip_anchor_time_with_another_person": 25,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.7192064987916847,
+          "median_last_two_point_speed_mps": 0.754586944072378
+        },
+        "japan_crossroad": {
+          "windows": 186,
+          "clips": 11,
+          "clip_person_tracks": 100,
+          "distinct_clip_anchor_times": 87,
+          "windows_sharing_clip_anchor_time_with_another_person": 130,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.8144993004947211,
+          "median_last_two_point_speed_mps": 0.850211137318198
+        },
+        "thailand_street": {
+          "windows": 63,
+          "clips": 13,
+          "clip_person_tracks": 53,
+          "distinct_clip_anchor_times": 21,
+          "windows_sharing_clip_anchor_time_with_another_person": 58,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.9342124508664996,
+          "median_last_two_point_speed_mps": 0.9016968316457631
+        }
+      },
+      "ordered_window_ids_sha256": "bc7427bde38a4daa442a48f011441bdace206d38ad17c8904e0037e104520e4f"
+    },
+    "removed_for_short_history": {
+      "all": {
+        "windows": 449,
+        "clips": 47,
+        "clip_person_tracks": 449,
+        "distinct_clip_anchor_times": 249,
+        "windows_sharing_clip_anchor_time_with_another_person": 270,
+        "five_frame_history_starts_at_first_sampled_label_of_person": 449,
+        "mean_last_two_point_speed_mps": 0.9722161155908006,
+        "median_last_two_point_speed_mps": 0.9121403400793096
+      },
+      "sites": {
+        "america_crossroad": {
+          "windows": 240,
+          "clips": 14,
+          "clip_person_tracks": 240,
+          "distinct_clip_anchor_times": 167,
+          "windows_sharing_clip_anchor_time_with_another_person": 105,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 240,
+          "mean_last_two_point_speed_mps": 1.0862641648585567,
+          "median_last_two_point_speed_mps": 0.9806872185924052
+        },
+        "italy_park": {
+          "windows": 28,
+          "clips": 9,
+          "clip_person_tracks": 28,
+          "distinct_clip_anchor_times": 10,
+          "windows_sharing_clip_anchor_time_with_another_person": 23,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 28,
+          "mean_last_two_point_speed_mps": 0.7789782090883924,
+          "median_last_two_point_speed_mps": 0.8420819340344545
+        },
+        "japan_crossroad": {
+          "windows": 117,
+          "clips": 11,
+          "clip_person_tracks": 117,
+          "distinct_clip_anchor_times": 52,
+          "windows_sharing_clip_anchor_time_with_another_person": 84,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 117,
+          "mean_last_two_point_speed_mps": 0.7956938521123819,
+          "median_last_two_point_speed_mps": 0.8308337721229203
+        },
+        "thailand_street": {
+          "windows": 64,
+          "clips": 13,
+          "clip_person_tracks": 64,
+          "distinct_clip_anchor_times": 20,
+          "windows_sharing_clip_anchor_time_with_another_person": 58,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 64,
+          "mean_last_two_point_speed_mps": 0.9517822778530021,
+          "median_last_two_point_speed_mps": 0.8982430021340894
+        }
+      },
+      "ordered_window_ids_sha256": "e35f6cb9cff4b2b1dce72f3dcf96e2fe449a4693516e8dba8d7f9c608c953af8"
+    },
+    "removed_for_50_step_overlap": {
+      "all": {
+        "windows": 410,
+        "clips": 36,
+        "clip_person_tracks": 266,
+        "distinct_clip_anchor_times": 235,
+        "windows_sharing_clip_anchor_time_with_another_person": 242,
+        "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+        "mean_last_two_point_speed_mps": 0.9345189449472454,
+        "median_last_two_point_speed_mps": 0.9284359058165393
+      },
+      "sites": {
+        "america_crossroad": {
+          "windows": 234,
+          "clips": 14,
+          "clip_person_tracks": 144,
+          "distinct_clip_anchor_times": 154,
+          "windows_sharing_clip_anchor_time_with_another_person": 113,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 1.010947120555804,
+          "median_last_two_point_speed_mps": 0.9952706542197185
+        },
+        "italy_park": {
+          "windows": 24,
+          "clips": 8,
+          "clip_person_tracks": 21,
+          "distinct_clip_anchor_times": 10,
+          "windows_sharing_clip_anchor_time_with_another_person": 19,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.7844044245176303,
+          "median_last_two_point_speed_mps": 0.859872161490886
+        },
+        "japan_crossroad": {
+          "windows": 129,
+          "clips": 8,
+          "clip_person_tracks": 78,
+          "distinct_clip_anchor_times": 62,
+          "windows_sharing_clip_anchor_time_with_another_person": 90,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 0.7964483575432484,
+          "median_last_two_point_speed_mps": 0.8355177420617473
+        },
+        "thailand_street": {
+          "windows": 23,
+          "clips": 6,
+          "clip_person_tracks": 23,
+          "distinct_clip_anchor_times": 9,
+          "windows_sharing_clip_anchor_time_with_another_person": 20,
+          "five_frame_history_starts_at_first_sampled_label_of_person": 0,
+          "mean_last_two_point_speed_mps": 1.0879824742091446,
+          "median_last_two_point_speed_mps": 0.9439689386838823
+        }
+      },
+      "ordered_window_ids_sha256": "7150bd209cf64c57800e0bc8455ce2619f988a01d3527aee2f7da852a644c0fa"
+    }
+  },
+  "timing": {
+    "frozen_five": {
+      "5": {
+        "same_track_overlapping_window_pairs": 0,
+        "windows_in_an_overlapping_pair": 0,
+        "shared_history_plus_future_steps_per_pair": {},
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 1033,
+        "adjacent_anchor_gap_min_steps": 35,
+        "adjacent_anchor_gap_35_pairs": 1033,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 0
+      }
+    },
+    "complete_matched": {
+      "5": {
+        "same_track_overlapping_window_pairs": 0,
+        "windows_in_an_overlapping_pair": 0,
+        "shared_history_plus_future_steps_per_pair": {},
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 658,
+        "adjacent_anchor_gap_min_steps": 35,
+        "adjacent_anchor_gap_35_pairs": 658,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 0
+      },
+      "10": {
+        "same_track_overlapping_window_pairs": 658,
+        "windows_in_an_overlapping_pair": 924,
+        "shared_history_plus_future_steps_per_pair": {
+          "5": 658
+        },
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 658,
+        "adjacent_anchor_gap_min_steps": 35,
+        "adjacent_anchor_gap_35_pairs": 658,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 0
+      },
+      "20": {
+        "same_track_overlapping_window_pairs": 658,
+        "windows_in_an_overlapping_pair": 924,
+        "shared_history_plus_future_steps_per_pair": {
+          "15": 658
+        },
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 658,
+        "adjacent_anchor_gap_min_steps": 35,
+        "adjacent_anchor_gap_35_pairs": 658,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 0
+      }
+    },
+    "strict_disjoint": {
+      "5": {
+        "same_track_overlapping_window_pairs": 0,
+        "windows_in_an_overlapping_pair": 0,
+        "shared_history_plus_future_steps_per_pair": {},
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 248,
+        "adjacent_anchor_gap_min_steps": 70,
+        "adjacent_anchor_gap_35_pairs": 0,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 248
+      },
+      "10": {
+        "same_track_overlapping_window_pairs": 0,
+        "windows_in_an_overlapping_pair": 0,
+        "shared_history_plus_future_steps_per_pair": {},
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 248,
+        "adjacent_anchor_gap_min_steps": 70,
+        "adjacent_anchor_gap_35_pairs": 0,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 248
+      },
+      "20": {
+        "same_track_overlapping_window_pairs": 0,
+        "windows_in_an_overlapping_pair": 0,
+        "shared_history_plus_future_steps_per_pair": {},
+        "pairs_with_overlapping_scored_futures": 0,
+        "adjacent_same_track_anchor_pairs": 248,
+        "adjacent_anchor_gap_min_steps": 70,
+        "adjacent_anchor_gap_35_pairs": 0,
+        "adjacent_anchor_gap_50_pairs": 0,
+        "adjacent_anchor_gap_70_pairs": 248
+      }
+    }
+  },
+  "inherited_anchor_phase": {
+    "all": {
+      "original_tracks_with_any_complete_20_plus_30_off_or_on_grid": 436,
+      "of_these_represented_on_frozen_grid": 375,
+      "complete_tracks_missed_by_frozen_anchor_phase": 61,
+      "delay_from_first_possible_to_first_retained_20_anchor_steps_by_track": {
+        "20": 375
+      }
+    },
+    "sites": {
+      "america_crossroad": {
+        "original_tracks_with_any_complete_20_plus_30_off_or_on_grid": 239,
+        "of_these_represented_on_frozen_grid": 197,
+        "complete_tracks_missed_by_frozen_anchor_phase": 42,
+        "delay_from_first_possible_to_first_retained_20_anchor_steps_by_track": {
+          "20": 197
+        }
+      },
+      "italy_park": {
+        "original_tracks_with_any_complete_20_plus_30_off_or_on_grid": 28,
+        "of_these_represented_on_frozen_grid": 25,
+        "complete_tracks_missed_by_frozen_anchor_phase": 3,
+        "delay_from_first_possible_to_first_retained_20_anchor_steps_by_track": {
+          "20": 25
+        }
+      },
+      "japan_crossroad": {
+        "original_tracks_with_any_complete_20_plus_30_off_or_on_grid": 108,
+        "of_these_represented_on_frozen_grid": 100,
+        "complete_tracks_missed_by_frozen_anchor_phase": 8,
+        "delay_from_first_possible_to_first_retained_20_anchor_steps_by_track": {
+          "20": 100
+        }
+      },
+      "thailand_street": {
+        "original_tracks_with_any_complete_20_plus_30_off_or_on_grid": 61,
+        "of_these_represented_on_frozen_grid": 53,
+        "complete_tracks_missed_by_frozen_anchor_phase": 8,
+        "delay_from_first_possible_to_first_retained_20_anchor_steps_by_track": {
+          "20": 53
+        }
+      }
+    }
+  },
+  "archived_v2_test": {
+    "windows_on_each_materialized_length": 497,
+    "clips": 21,
+    "complete_historical_positions_by_length": {
+      "5": 497,
+      "10": 495,
+      "20": 487
+    },
+    "complete_30_step_future": 233,
+    "valid_at_3s": 233,
+    "method": "Original V2 uses the same raw rows at T=5/10/20 and slices the last T frames with masks. The original window filter requires >=2 of the final 5 history points and >=15 of 30 future positions."
+  }
+}

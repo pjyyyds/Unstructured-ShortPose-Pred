@@ -1,0 +1,2381 @@
+{
+  "protocol": {
+    "scope": "Exploratory clip-grouped development cross-validation at four previously examined sites. Observable events in the next 30 frames (3 s), derived from historical and future ground tracks. Five one-vs-rest supervised probes per representation. No existing model weights are read or changed.",
+    "folds": "Five fixed folds. Process sites in ascending name order. Within each site sort whole clips by descending window count then ascending name. Place each clip in the fold with fewest windows from that site, then fewest windows overall, then fewest clips from that site, then lowest fold ID. No event labels, scores, threshold optimization or class balancing in the split.",
+    "features": "All models use the same 5 historical ground points: per-frame relative xy, vx, vy, speed, the event rule's mean pre-event speed and its start/stop eligibility flags. Last pose adds 17 relative joint xy and valid flags at t0. Ordered changes add four successive 17-joint signed xy differences and pair-validity flags. A pair needs a valid joint with the same root convention at both endpoints. Invalid differences are zero. Pose coordinates are normalized by the respective box heights. The pose increments include availability information and detector noise.",
+    "fit": "Same folds, unweighted samples, independent binary logistic models. Per-column mean and population SD estimated only on training windows; divisor 1 for zero SD. Fixed C=0.1, summed log loss plus ||w||\u00b2/(2C), unpenalized intercept. SciPy L-BFGS-B, maxiter=2000, ftol=1e-12, gtol=1e-8. A single-class training event predicts its training frequency (0 or 1). No fit selects hyperparameters.",
+    "metrics": "Each row receives one out-of-fold probability per event and representation. Window-pooled AP uses one threshold per unique score (ties grouped); F1 uses fixed >=0.5. Zero-positive evaluation events have null AP/F1, retain confusion counts and are excluded from that group's class macro. Fold and site metrics are descriptive. Each fold contains clips from every site.",
+    "history_eligible": "Within each event's eligible windows, score the same trained models and a constant baseline estimated only from eligible training rows in the respective fold. If none are eligible in training, use its overall training event frequency. Eligibility uses only the last three causal smoothed speeds: mean <=0.20 m/s for start, >=0.60 m/s for stop."
+  },
+  "design_only": false,
+  "verification": {
+    "labels_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "probe_script_sha256": "24e5a51d8679bccb193dd1e5260cd6c73d3dc8487f5e8f0ef559fb815c056fce",
+    "kaggle_version_id": 373571811,
+    "raw_output_zip_sha256": "71ac61da051449f8a85a59113b18af5ca3f651ea0d3402f7be65daf5de033e44",
+    "raw_output_json_sha256": "359b70bb86f9ca3a302ec148858f0e67f648602c2e7cc7488b4faf662ffac874",
+    "fold_assignment_sha256": "fbddba682fc9d4bceb27648400d1e2b1b6672743ad01fcf5c760058803759101",
+    "independent_oof_check": {
+      "unique_window_ids": 1482,
+      "clips": 47,
+      "clips_spanning_evaluation_folds": 0,
+      "clip_assignments_reproduced_from_counts": 47,
+      "windows_with_event_labels_reconstructed_from_raw_tracks": 1482,
+      "windows_with_history_eligibility_reconstructed": 1482,
+      "probability_values_checked": 22230,
+      "comparisons": 396,
+      "metric_abs_difference_max": 1.1102230246251565e-16,
+      "method": "Computed AP as average precision at the inclusive score threshold of each true positive, accounting for ties with exact fractions. Rebuilt threshold-0.5 confusion counts, AP and F1 within each fold, each site, pooled and the two eligible subsets. Rebuilt eligible prevalence from training folds only. The extracted JSON matches the ZIP member byte for byte."
+    }
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3",
+    "torch": "2.11.0+cpu",
+    "opencv": "4.14.0"
+  },
+  "feature_dimensions": {
+    "motion": 28,
+    "motion_last_pose": 79,
+    "motion_last_pose_ordered_changes": 283
+  },
+  "cohort": {
+    "windows": 1482,
+    "clips": 47,
+    "events": {
+      "start": {
+        "positive_windows": 49,
+        "positive_clips": 20
+      },
+      "stop": {
+        "positive_windows": 53,
+        "positive_clips": 15
+      },
+      "left": {
+        "positive_windows": 214,
+        "positive_clips": 33
+      },
+      "right": {
+        "positive_windows": 208,
+        "positive_clips": 22
+      },
+      "maintain": {
+        "positive_windows": 975,
+        "positive_clips": 47
+      }
+    }
+  },
+  "folds": {
+    "0": {
+      "training": {
+        "windows": 991,
+        "clips": 36,
+        "events": {
+          "start": {
+            "positive_windows": 30,
+            "positive_clips": 15
+          },
+          "stop": {
+            "positive_windows": 37,
+            "positive_clips": 13
+          },
+          "left": {
+            "positive_windows": 109,
+            "positive_clips": 25
+          },
+          "right": {
+            "positive_windows": 95,
+            "positive_clips": 18
+          },
+          "maintain": {
+            "positive_windows": 730,
+            "positive_clips": 36
+          }
+        }
+      },
+      "evaluation": {
+        "windows": 491,
+        "clips": 11,
+        "events": {
+          "start": {
+            "positive_windows": 19,
+            "positive_clips": 5
+          },
+          "stop": {
+            "positive_windows": 16,
+            "positive_clips": 2
+          },
+          "left": {
+            "positive_windows": 105,
+            "positive_clips": 8
+          },
+          "right": {
+            "positive_windows": 113,
+            "positive_clips": 4
+          },
+          "maintain": {
+            "positive_windows": 245,
+            "positive_clips": 11
+          }
+        }
+      },
+      "fits": {
+        "motion": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 22
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 34
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 43
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 39
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 48
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 31
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 42
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 65
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 58
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 71
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 46
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 51
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 75
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 71
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 96
+          }
+        }
+      },
+      "scores": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "f1": 0.0,
+              "ap": 0.3786756413025281
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 16,
+              "f1": 0.0,
+              "ap": 0.0464707415707811
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 105,
+              "f1": 0.0,
+              "ap": 0.38099656486330036
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 113,
+              "f1": 0.0,
+              "ap": 0.3221892357187782
+            },
+            "maintain": {
+              "predicted_positive": 482,
+              "tp": 244,
+              "fp": 238,
+              "fn": 1,
+              "f1": 0.671251719394773,
+              "ap": 0.5980832582392687
+            }
+          },
+          "macro_f1": 0.1342503438789546,
+          "mAP": 0.34528308833893123
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "f1": 0.0,
+              "ap": 0.4784971081905263
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 16,
+              "f1": 0.0,
+              "ap": 0.05068875766581317
+            },
+            "left": {
+              "predicted_positive": 6,
+              "tp": 2,
+              "fp": 4,
+              "fn": 103,
+              "f1": 0.036036036036036036,
+              "ap": 0.28225284832302855
+            },
+            "right": {
+              "predicted_positive": 6,
+              "tp": 3,
+              "fp": 3,
+              "fn": 110,
+              "f1": 0.05042016806722689,
+              "ap": 0.2738168502742635
+            },
+            "maintain": {
+              "predicted_positive": 459,
+              "tp": 234,
+              "fp": 225,
+              "fn": 11,
+              "f1": 0.6647727272727273,
+              "ap": 0.5576926673242167
+            }
+          },
+          "macro_f1": 0.15024578627519805,
+          "mAP": 0.32858964635556964
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "f1": 0.0,
+              "ap": 0.4582984657687901
+            },
+            "stop": {
+              "predicted_positive": 5,
+              "tp": 0,
+              "fp": 5,
+              "fn": 16,
+              "f1": 0.0,
+              "ap": 0.044914795044527764
+            },
+            "left": {
+              "predicted_positive": 20,
+              "tp": 7,
+              "fp": 13,
+              "fn": 98,
+              "f1": 0.112,
+              "ap": 0.2800044573661105
+            },
+            "right": {
+              "predicted_positive": 14,
+              "tp": 6,
+              "fp": 8,
+              "fn": 107,
+              "f1": 0.09448818897637795,
+              "ap": 0.26471867013969297
+            },
+            "maintain": {
+              "predicted_positive": 410,
+              "tp": 212,
+              "fp": 198,
+              "fn": 33,
+              "f1": 0.6473282442748092,
+              "ap": 0.544016492848253
+            }
+          },
+          "macro_f1": 0.1707632866502374,
+          "mAP": 0.31839057623347483
+        }
+      },
+      "evaluation_clip_counts_by_site": {
+        "america_crossroad": 1,
+        "italy_park": 3,
+        "japan_crossroad": 4,
+        "thailand_street": 3
+      }
+    },
+    "1": {
+      "training": {
+        "windows": 1257,
+        "clips": 39,
+        "events": {
+          "start": {
+            "positive_windows": 39,
+            "positive_clips": 16
+          },
+          "stop": {
+            "positive_windows": 41,
+            "positive_clips": 11
+          },
+          "left": {
+            "positive_windows": 177,
+            "positive_clips": 26
+          },
+          "right": {
+            "positive_windows": 181,
+            "positive_clips": 18
+          },
+          "maintain": {
+            "positive_windows": 830,
+            "positive_clips": 39
+          }
+        }
+      },
+      "evaluation": {
+        "windows": 225,
+        "clips": 8,
+        "events": {
+          "start": {
+            "positive_windows": 10,
+            "positive_clips": 4
+          },
+          "stop": {
+            "positive_windows": 12,
+            "positive_clips": 4
+          },
+          "left": {
+            "positive_windows": 37,
+            "positive_clips": 7
+          },
+          "right": {
+            "positive_windows": 27,
+            "positive_clips": 4
+          },
+          "maintain": {
+            "positive_windows": 145,
+            "positive_clips": 8
+          }
+        }
+      },
+      "fits": {
+        "motion": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 19
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 28
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 46
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 47
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 60
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 38
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 39
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 70
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 74
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 83
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 60
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 51
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 91
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 97
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 113
+          }
+        }
+      },
+      "scores": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 10,
+              "f1": 0.0,
+              "ap": 0.23484028853594072
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.09134530287838763
+            },
+            "left": {
+              "predicted_positive": 2,
+              "tp": 1,
+              "fp": 1,
+              "fn": 36,
+              "f1": 0.05128205128205128,
+              "ap": 0.2605773170089982
+            },
+            "right": {
+              "predicted_positive": 4,
+              "tp": 2,
+              "fp": 2,
+              "fn": 25,
+              "f1": 0.12903225806451613,
+              "ap": 0.23204294055345487
+            },
+            "maintain": {
+              "predicted_positive": 211,
+              "tp": 140,
+              "fp": 71,
+              "fn": 5,
+              "f1": 0.7865168539325843,
+              "ap": 0.7232411281439282
+            }
+          },
+          "macro_f1": 0.19336623265583036,
+          "mAP": 0.3084093954241419
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 8,
+              "f1": 0.3333333333333333,
+              "ap": 0.6520703705143065
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.13647822319479064
+            },
+            "left": {
+              "predicted_positive": 2,
+              "tp": 1,
+              "fp": 1,
+              "fn": 36,
+              "f1": 0.05128205128205128,
+              "ap": 0.28509730662172894
+            },
+            "right": {
+              "predicted_positive": 5,
+              "tp": 2,
+              "fp": 3,
+              "fn": 25,
+              "f1": 0.125,
+              "ap": 0.2958229365079364
+            },
+            "maintain": {
+              "predicted_positive": 197,
+              "tp": 131,
+              "fp": 66,
+              "fn": 14,
+              "f1": 0.7660818713450293,
+              "ap": 0.7152966414307662
+            }
+          },
+          "macro_f1": 0.25513945119208276,
+          "mAP": 0.41695309565390576
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 9,
+              "f1": 0.18181818181818182,
+              "ap": 0.7753654188948307
+            },
+            "stop": {
+              "predicted_positive": 2,
+              "tp": 0,
+              "fp": 2,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.06436790663360753
+            },
+            "left": {
+              "predicted_positive": 6,
+              "tp": 1,
+              "fp": 5,
+              "fn": 36,
+              "f1": 0.046511627906976744,
+              "ap": 0.20206614645436002
+            },
+            "right": {
+              "predicted_positive": 12,
+              "tp": 4,
+              "fp": 8,
+              "fn": 23,
+              "f1": 0.20512820512820512,
+              "ap": 0.24546801666799878
+            },
+            "maintain": {
+              "predicted_positive": 187,
+              "tp": 126,
+              "fp": 61,
+              "fn": 19,
+              "f1": 0.7590361445783133,
+              "ap": 0.7208198358287546
+            }
+          },
+          "macro_f1": 0.2384988318863354,
+          "mAP": 0.4016174648959104
+        }
+      },
+      "evaluation_clip_counts_by_site": {
+        "america_crossroad": 1,
+        "italy_park": 1,
+        "japan_crossroad": 4,
+        "thailand_street": 2
+      }
+    },
+    "2": {
+      "training": {
+        "windows": 1253,
+        "clips": 39,
+        "events": {
+          "start": {
+            "positive_windows": 47,
+            "positive_clips": 18
+          },
+          "stop": {
+            "positive_windows": 43,
+            "positive_clips": 13
+          },
+          "left": {
+            "positive_windows": 191,
+            "positive_clips": 29
+          },
+          "right": {
+            "positive_windows": 182,
+            "positive_clips": 18
+          },
+          "maintain": {
+            "positive_windows": 806,
+            "positive_clips": 39
+          }
+        }
+      },
+      "evaluation": {
+        "windows": 229,
+        "clips": 8,
+        "events": {
+          "start": {
+            "positive_windows": 2,
+            "positive_clips": 2
+          },
+          "stop": {
+            "positive_windows": 10,
+            "positive_clips": 2
+          },
+          "left": {
+            "positive_windows": 23,
+            "positive_clips": 4
+          },
+          "right": {
+            "positive_windows": 26,
+            "positive_clips": 4
+          },
+          "maintain": {
+            "positive_windows": 169,
+            "positive_clips": 8
+          }
+        }
+      },
+      "fits": {
+        "motion": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 23
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 32
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 52
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 54
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 58
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 38
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 48
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 74
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 71
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 86
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 51
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 60
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 93
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 88
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 110
+          }
+        }
+      },
+      "scores": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 0.10101010101010101
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 10,
+              "f1": 0.0,
+              "ap": 0.05999280569419611
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 23,
+              "f1": 0.0,
+              "ap": 0.15604852436845307
+            },
+            "right": {
+              "predicted_positive": 3,
+              "tp": 0,
+              "fp": 3,
+              "fn": 26,
+              "f1": 0.0,
+              "ap": 0.1710869394140423
+            },
+            "maintain": {
+              "predicted_positive": 214,
+              "tp": 159,
+              "fp": 55,
+              "fn": 10,
+              "f1": 0.8302872062663186,
+              "ap": 0.8350578379882885
+            }
+          },
+          "macro_f1": 0.16605744125326372,
+          "mAP": 0.2646392416950162
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 0.10101010101010101
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 10,
+              "f1": 0.0,
+              "ap": 0.12380956049904913
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 23,
+              "f1": 0.0,
+              "ap": 0.168518217433682
+            },
+            "right": {
+              "predicted_positive": 3,
+              "tp": 0,
+              "fp": 3,
+              "fn": 26,
+              "f1": 0.0,
+              "ap": 0.15996355803571305
+            },
+            "maintain": {
+              "predicted_positive": 206,
+              "tp": 154,
+              "fp": 52,
+              "fn": 15,
+              "f1": 0.8213333333333334,
+              "ap": 0.851484055367322
+            }
+          },
+          "macro_f1": 0.16426666666666667,
+          "mAP": 0.28095709846917344
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 0.11688311688311688
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 10,
+              "f1": 0.0,
+              "ap": 0.08297711469545013
+            },
+            "left": {
+              "predicted_positive": 12,
+              "tp": 1,
+              "fp": 11,
+              "fn": 22,
+              "f1": 0.05714285714285714,
+              "ap": 0.17336802728668732
+            },
+            "right": {
+              "predicted_positive": 7,
+              "tp": 0,
+              "fp": 7,
+              "fn": 26,
+              "f1": 0.0,
+              "ap": 0.1121593711919237
+            },
+            "maintain": {
+              "predicted_positive": 199,
+              "tp": 148,
+              "fp": 51,
+              "fn": 21,
+              "f1": 0.8043478260869565,
+              "ap": 0.8164448548713001
+            }
+          },
+          "macro_f1": 0.17229813664596275,
+          "mAP": 0.26036649698569564
+        }
+      },
+      "evaluation_clip_counts_by_site": {
+        "america_crossroad": 2,
+        "italy_park": 2,
+        "japan_crossroad": 1,
+        "thailand_street": 3
+      }
+    },
+    "3": {
+      "training": {
+        "windows": 1172,
+        "clips": 38,
+        "events": {
+          "start": {
+            "positive_windows": 36,
+            "positive_clips": 15
+          },
+          "stop": {
+            "positive_windows": 47,
+            "positive_clips": 12
+          },
+          "left": {
+            "positive_windows": 188,
+            "positive_clips": 26
+          },
+          "right": {
+            "positive_windows": 183,
+            "positive_clips": 17
+          },
+          "maintain": {
+            "positive_windows": 734,
+            "positive_clips": 38
+          }
+        }
+      },
+      "evaluation": {
+        "windows": 310,
+        "clips": 9,
+        "events": {
+          "start": {
+            "positive_windows": 13,
+            "positive_clips": 5
+          },
+          "stop": {
+            "positive_windows": 6,
+            "positive_clips": 3
+          },
+          "left": {
+            "positive_windows": 26,
+            "positive_clips": 7
+          },
+          "right": {
+            "positive_windows": 25,
+            "positive_clips": 5
+          },
+          "maintain": {
+            "positive_windows": 241,
+            "positive_clips": 9
+          }
+        }
+      },
+      "fits": {
+        "motion": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 20
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 30
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 43
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 49
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 57
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 34
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 44
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 72
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 71
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 83
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 50
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 63
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 98
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 94
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 109
+          }
+        }
+      },
+      "scores": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.2503773466167823
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "f1": 0.0,
+              "ap": 0.022733384434352064
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 26,
+              "f1": 0.0,
+              "ap": 0.17057984155232087
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 25,
+              "f1": 0.0,
+              "ap": 0.10060577505552917
+            },
+            "maintain": {
+              "predicted_positive": 301,
+              "tp": 233,
+              "fp": 68,
+              "fn": 8,
+              "f1": 0.8597785977859779,
+              "ap": 0.7947900119944902
+            }
+          },
+          "macro_f1": 0.17195571955719557,
+          "mAP": 0.26781727193069493
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 2,
+              "tp": 1,
+              "fp": 1,
+              "fn": 12,
+              "f1": 0.13333333333333333,
+              "ap": 0.29966768270138483
+            },
+            "stop": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 6,
+              "f1": 0.0,
+              "ap": 0.03003765332911653
+            },
+            "left": {
+              "predicted_positive": 3,
+              "tp": 1,
+              "fp": 2,
+              "fn": 25,
+              "f1": 0.06896551724137931,
+              "ap": 0.13917037590948578
+            },
+            "right": {
+              "predicted_positive": 5,
+              "tp": 0,
+              "fp": 5,
+              "fn": 25,
+              "f1": 0.0,
+              "ap": 0.09811339512972023
+            },
+            "maintain": {
+              "predicted_positive": 283,
+              "tp": 219,
+              "fp": 64,
+              "fn": 22,
+              "f1": 0.8358778625954199,
+              "ap": 0.7266430859139561
+            }
+          },
+          "macro_f1": 0.2076353426340265,
+          "mAP": 0.25872643859673267
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 5,
+              "tp": 2,
+              "fp": 3,
+              "fn": 11,
+              "f1": 0.2222222222222222,
+              "ap": 0.3505724344644202
+            },
+            "stop": {
+              "predicted_positive": 9,
+              "tp": 0,
+              "fp": 9,
+              "fn": 6,
+              "f1": 0.0,
+              "ap": 0.029346815256795052
+            },
+            "left": {
+              "predicted_positive": 18,
+              "tp": 4,
+              "fp": 14,
+              "fn": 22,
+              "f1": 0.18181818181818182,
+              "ap": 0.15645623893008476
+            },
+            "right": {
+              "predicted_positive": 16,
+              "tp": 1,
+              "fp": 15,
+              "fn": 24,
+              "f1": 0.04878048780487805,
+              "ap": 0.13663716608723045
+            },
+            "maintain": {
+              "predicted_positive": 234,
+              "tp": 181,
+              "fp": 53,
+              "fn": 60,
+              "f1": 0.7621052631578947,
+              "ap": 0.7560010519502209
+            }
+          },
+          "macro_f1": 0.24298523100063535,
+          "mAP": 0.2858027413377503
+        }
+      },
+      "evaluation_clip_counts_by_site": {
+        "america_crossroad": 4,
+        "italy_park": 1,
+        "japan_crossroad": 1,
+        "thailand_street": 3
+      }
+    },
+    "4": {
+      "training": {
+        "windows": 1255,
+        "clips": 36,
+        "events": {
+          "start": {
+            "positive_windows": 44,
+            "positive_clips": 16
+          },
+          "stop": {
+            "positive_windows": 44,
+            "positive_clips": 11
+          },
+          "left": {
+            "positive_windows": 191,
+            "positive_clips": 26
+          },
+          "right": {
+            "positive_windows": 191,
+            "positive_clips": 17
+          },
+          "maintain": {
+            "positive_windows": 800,
+            "positive_clips": 36
+          }
+        }
+      },
+      "evaluation": {
+        "windows": 227,
+        "clips": 11,
+        "events": {
+          "start": {
+            "positive_windows": 5,
+            "positive_clips": 4
+          },
+          "stop": {
+            "positive_windows": 9,
+            "positive_clips": 4
+          },
+          "left": {
+            "positive_windows": 23,
+            "positive_clips": 7
+          },
+          "right": {
+            "positive_windows": 17,
+            "positive_clips": 5
+          },
+          "maintain": {
+            "positive_windows": 175,
+            "positive_clips": 11
+          }
+        }
+      },
+      "fits": {
+        "motion": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 17
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 32
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 47
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 49
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 60
+          }
+        },
+        "motion_last_pose": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 44
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 46
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 72
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 70
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 87
+          }
+        },
+        "motion_last_pose_ordered_changes": {
+          "start": {
+            "fit": "L2 logistic",
+            "iterations": 47
+          },
+          "stop": {
+            "fit": "L2 logistic",
+            "iterations": 57
+          },
+          "left": {
+            "fit": "L2 logistic",
+            "iterations": 89
+          },
+          "right": {
+            "fit": "L2 logistic",
+            "iterations": 97
+          },
+          "maintain": {
+            "fit": "L2 logistic",
+            "iterations": 106
+          }
+        }
+      },
+      "scores": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 5,
+              "f1": 0.0,
+              "ap": 0.22826183104820874
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "f1": 0.0,
+              "ap": 0.04082990038885109
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 23,
+              "f1": 0.0,
+              "ap": 0.10329198483826459
+            },
+            "right": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 17,
+              "f1": 0.0,
+              "ap": 0.16197994738295626
+            },
+            "maintain": {
+              "predicted_positive": 223,
+              "tp": 171,
+              "fp": 52,
+              "fn": 4,
+              "f1": 0.8592964824120602,
+              "ap": 0.815755713095538
+            }
+          },
+          "macro_f1": 0.17185929648241205,
+          "mAP": 0.2700238753507637
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 5,
+              "f1": 0.0,
+              "ap": 0.39903680770553834
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "f1": 0.0,
+              "ap": 0.10790381140151412
+            },
+            "left": {
+              "predicted_positive": 3,
+              "tp": 1,
+              "fp": 2,
+              "fn": 22,
+              "f1": 0.07692307692307693,
+              "ap": 0.1028281584869466
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 17,
+              "f1": 0.0,
+              "ap": 0.10029153581537548
+            },
+            "maintain": {
+              "predicted_positive": 208,
+              "tp": 163,
+              "fp": 45,
+              "fn": 12,
+              "f1": 0.8511749347258486,
+              "ap": 0.7841585870028518
+            }
+          },
+          "macro_f1": 0.18561960232978508,
+          "mAP": 0.2988437800824453
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 4,
+              "tp": 1,
+              "fp": 3,
+              "fn": 4,
+              "f1": 0.2222222222222222,
+              "ap": 0.2687878787878788
+            },
+            "stop": {
+              "predicted_positive": 5,
+              "tp": 0,
+              "fp": 5,
+              "fn": 9,
+              "f1": 0.0,
+              "ap": 0.03494587520050038
+            },
+            "left": {
+              "predicted_positive": 13,
+              "tp": 1,
+              "fp": 12,
+              "fn": 22,
+              "f1": 0.05555555555555555,
+              "ap": 0.1030910539246058
+            },
+            "right": {
+              "predicted_positive": 12,
+              "tp": 2,
+              "fp": 10,
+              "fn": 15,
+              "f1": 0.13793103448275862,
+              "ap": 0.13816196452884114
+            },
+            "maintain": {
+              "predicted_positive": 190,
+              "tp": 147,
+              "fp": 43,
+              "fn": 28,
+              "f1": 0.8054794520547945,
+              "ap": 0.7694403369484766
+            }
+          },
+          "macro_f1": 0.24423765286306617,
+          "mAP": 0.2628854218780606
+        }
+      },
+      "evaluation_clip_counts_by_site": {
+        "america_crossroad": 6,
+        "italy_park": 2,
+        "japan_crossroad": 1,
+        "thailand_street": 2
+      }
+    }
+  },
+  "pooled": {
+    "windows": 1482,
+    "valid_windows": 1482,
+    "clips": 47,
+    "multilabel_windows": 17,
+    "classes": {
+      "start": {
+        "positive_windows": 49,
+        "clips_with_positives": 20
+      },
+      "stop": {
+        "positive_windows": 53,
+        "clips_with_positives": 15
+      },
+      "left": {
+        "positive_windows": 214,
+        "clips_with_positives": 33
+      },
+      "right": {
+        "positive_windows": 208,
+        "clips_with_positives": 22
+      },
+      "maintain": {
+        "positive_windows": 975,
+        "clips_with_positives": 47
+      }
+    },
+    "methods": {
+      "motion": {
+        "per_class": {
+          "start": {
+            "predicted_positive": 0,
+            "tp": 0,
+            "fp": 0,
+            "fn": 49,
+            "f1": 0.0,
+            "ap": 0.21312653358923422
+          },
+          "stop": {
+            "predicted_positive": 0,
+            "tp": 0,
+            "fp": 0,
+            "fn": 53,
+            "f1": 0.0,
+            "ap": 0.039074317816928245
+          },
+          "left": {
+            "predicted_positive": 2,
+            "tp": 1,
+            "fp": 1,
+            "fn": 213,
+            "f1": 0.009259259259259259,
+            "ap": 0.19040600577658323
+          },
+          "right": {
+            "predicted_positive": 8,
+            "tp": 2,
+            "fp": 6,
+            "fn": 206,
+            "f1": 0.018518518518518517,
+            "ap": 0.17317176371918572
+          },
+          "maintain": {
+            "predicted_positive": 1431,
+            "tp": 947,
+            "fp": 484,
+            "fn": 28,
+            "f1": 0.7871986699916874,
+            "ap": 0.6797934038186614
+          }
+        },
+        "macro_f1": 0.16299528955389303,
+        "mAP": 0.2591144049441185
+      },
+      "motion_last_pose": {
+        "per_class": {
+          "start": {
+            "predicted_positive": 4,
+            "tp": 3,
+            "fp": 1,
+            "fn": 46,
+            "f1": 0.11320754716981132,
+            "ap": 0.34394723147303263
+          },
+          "stop": {
+            "predicted_positive": 1,
+            "tp": 0,
+            "fp": 1,
+            "fn": 53,
+            "f1": 0.0,
+            "ap": 0.05349383451194743
+          },
+          "left": {
+            "predicted_positive": 14,
+            "tp": 5,
+            "fp": 9,
+            "fn": 209,
+            "f1": 0.043859649122807015,
+            "ap": 0.1865250522557738
+          },
+          "right": {
+            "predicted_positive": 19,
+            "tp": 5,
+            "fp": 14,
+            "fn": 203,
+            "f1": 0.04405286343612335,
+            "ap": 0.16956656913173163
+          },
+          "maintain": {
+            "predicted_positive": 1353,
+            "tp": 901,
+            "fp": 452,
+            "fn": 74,
+            "f1": 0.7740549828178694,
+            "ap": 0.6771228792103839
+          }
+        },
+        "macro_f1": 0.19503500850932223,
+        "mAP": 0.28613111331657387
+      },
+      "motion_last_pose_ordered_changes": {
+        "per_class": {
+          "start": {
+            "predicted_positive": 10,
+            "tp": 4,
+            "fp": 6,
+            "fn": 45,
+            "f1": 0.13559322033898305,
+            "ap": 0.3374563395028541
+          },
+          "stop": {
+            "predicted_positive": 21,
+            "tp": 0,
+            "fp": 21,
+            "fn": 53,
+            "f1": 0.0,
+            "ap": 0.03885060667061992
+          },
+          "left": {
+            "predicted_positive": 69,
+            "tp": 14,
+            "fp": 55,
+            "fn": 200,
+            "f1": 0.0989399293286219,
+            "ap": 0.1832694029415016
+          },
+          "right": {
+            "predicted_positive": 61,
+            "tp": 13,
+            "fp": 48,
+            "fn": 195,
+            "f1": 0.09665427509293681,
+            "ap": 0.1640465252041082
+          },
+          "maintain": {
+            "predicted_positive": 1220,
+            "tp": 814,
+            "fp": 406,
+            "fn": 161,
+            "f1": 0.7416856492027335,
+            "ap": 0.6798287118120153
+          }
+        },
+        "macro_f1": 0.21457461479265505,
+        "mAP": 0.28069031722621984
+      }
+    },
+    "increments": {
+      "motion_last_pose_minus_motion": {
+        "start": {
+          "ap": 0.1308206978837984,
+          "f1": 0.11320754716981132
+        },
+        "stop": {
+          "ap": 0.014419516695019188,
+          "f1": 0.0
+        },
+        "left": {
+          "ap": -0.0038809535208094437,
+          "f1": 0.034600389863547756
+        },
+        "right": {
+          "ap": -0.0036051945874540914,
+          "f1": 0.025534344917604833
+        },
+        "maintain": {
+          "ap": -0.002670524608277436,
+          "f1": -0.013143687173817975
+        }
+      },
+      "motion_last_pose_ordered_changes_minus_motion_last_pose": {
+        "start": {
+          "ap": -0.006490891970178547,
+          "f1": 0.022385673169171727
+        },
+        "stop": {
+          "ap": -0.014643227841327516,
+          "f1": 0.0
+        },
+        "left": {
+          "ap": -0.003255649314272191,
+          "f1": 0.05508028020581489
+        },
+        "right": {
+          "ap": -0.005520043927623425,
+          "f1": 0.05260141165681346
+        },
+        "maintain": {
+          "ap": 0.002705832601631375,
+          "f1": -0.03236933361513594
+        }
+      }
+    }
+  },
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "valid_windows": 816,
+      "clips": 14,
+      "multilabel_windows": 12,
+      "classes": {
+        "start": {
+          "positive_windows": 27,
+          "clips_with_positives": 8
+        },
+        "stop": {
+          "positive_windows": 35,
+          "clips_with_positives": 5
+        },
+        "left": {
+          "positive_windows": 152,
+          "clips_with_positives": 10
+        },
+        "right": {
+          "positive_windows": 156,
+          "clips_with_positives": 8
+        },
+        "maintain": {
+          "positive_windows": 458,
+          "clips_with_positives": 14
+        }
+      },
+      "methods": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 27,
+              "f1": 0.0,
+              "ap": 0.24200303391612973
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 35,
+              "f1": 0.0,
+              "ap": 0.04405381856758552
+            },
+            "left": {
+              "predicted_positive": 2,
+              "tp": 1,
+              "fp": 1,
+              "fn": 151,
+              "f1": 0.012987012987012988,
+              "ap": 0.24640232695797026
+            },
+            "right": {
+              "predicted_positive": 7,
+              "tp": 2,
+              "fp": 5,
+              "fn": 154,
+              "f1": 0.024539877300613498,
+              "ap": 0.21154595609589164
+            },
+            "maintain": {
+              "predicted_positive": 781,
+              "tp": 444,
+              "fp": 337,
+              "fn": 14,
+              "f1": 0.7167070217917676,
+              "ap": 0.5969652327131745
+            }
+          },
+          "macro_f1": 0.15084678241587882,
+          "mAP": 0.26819407365015036
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 27,
+              "f1": 0.0,
+              "ap": 0.298976976894787
+            },
+            "stop": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 35,
+              "f1": 0.0,
+              "ap": 0.057020199955665804
+            },
+            "left": {
+              "predicted_positive": 12,
+              "tp": 3,
+              "fp": 9,
+              "fn": 149,
+              "f1": 0.036585365853658534,
+              "ap": 0.23130430655093354
+            },
+            "right": {
+              "predicted_positive": 15,
+              "tp": 5,
+              "fp": 10,
+              "fn": 151,
+              "f1": 0.05847953216374269,
+              "ap": 0.20949446870043845
+            },
+            "maintain": {
+              "predicted_positive": 731,
+              "tp": 415,
+              "fp": 316,
+              "fn": 43,
+              "f1": 0.6980656013456686,
+              "ap": 0.5803594060991821
+            }
+          },
+          "macro_f1": 0.15862609987261397,
+          "mAP": 0.27543107164020136
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 4,
+              "tp": 1,
+              "fp": 3,
+              "fn": 26,
+              "f1": 0.06451612903225806,
+              "ap": 0.33952916886015017
+            },
+            "stop": {
+              "predicted_positive": 7,
+              "tp": 0,
+              "fp": 7,
+              "fn": 35,
+              "f1": 0.0,
+              "ap": 0.043734500491619144
+            },
+            "left": {
+              "predicted_positive": 35,
+              "tp": 9,
+              "fp": 26,
+              "fn": 143,
+              "f1": 0.0962566844919786,
+              "ap": 0.2269904851756915
+            },
+            "right": {
+              "predicted_positive": 35,
+              "tp": 11,
+              "fp": 24,
+              "fn": 145,
+              "f1": 0.11518324607329843,
+              "ap": 0.20844031902774798
+            },
+            "maintain": {
+              "predicted_positive": 651,
+              "tp": 368,
+              "fp": 283,
+              "fn": 90,
+              "f1": 0.6636609558160504,
+              "ap": 0.5596892054214712
+            }
+          },
+          "macro_f1": 0.1879234030827171,
+          "mAP": 0.27567673579533597
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 84,
+      "valid_windows": 84,
+      "clips": 9,
+      "multilabel_windows": 1,
+      "classes": {
+        "start": {
+          "positive_windows": 8,
+          "clips_with_positives": 5
+        },
+        "stop": {
+          "positive_windows": 3,
+          "clips_with_positives": 3
+        },
+        "left": {
+          "positive_windows": 4,
+          "clips_with_positives": 3
+        },
+        "right": {
+          "positive_windows": 13,
+          "clips_with_positives": 2
+        },
+        "maintain": {
+          "positive_windows": 57,
+          "clips_with_positives": 9
+        }
+      },
+      "methods": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "f1": 0.0,
+              "ap": 0.38244047619047616
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.054348783538572656
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "f1": 0.0,
+              "ap": 0.04498556998556999
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.4776080875009397
+            },
+            "maintain": {
+              "predicted_positive": 84,
+              "tp": 57,
+              "fp": 27,
+              "fn": 0,
+              "f1": 0.8085106382978723,
+              "ap": 0.733035036527832
+            }
+          },
+          "macro_f1": 0.16170212765957445,
+          "mAP": 0.3384835907486781
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 6,
+              "f1": 0.4,
+              "ap": 0.7047619047619047
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.06126984126984126
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "f1": 0.0,
+              "ap": 0.0741966893865628
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.39405270926836
+            },
+            "maintain": {
+              "predicted_positive": 75,
+              "tp": 53,
+              "fp": 22,
+              "fn": 4,
+              "f1": 0.803030303030303,
+              "ap": 0.6884616385448864
+            }
+          },
+          "macro_f1": 0.24060606060606063,
+          "mAP": 0.38454855664631105
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 6,
+              "f1": 0.4,
+              "ap": 0.6481359649122806
+            },
+            "stop": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.07020676691729323
+            },
+            "left": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "f1": 0.0,
+              "ap": 0.04010177666791261
+            },
+            "right": {
+              "predicted_positive": 4,
+              "tp": 1,
+              "fp": 3,
+              "fn": 12,
+              "f1": 0.11764705882352941,
+              "ap": 0.35679513809874924
+            },
+            "maintain": {
+              "predicted_positive": 75,
+              "tp": 53,
+              "fp": 22,
+              "fn": 4,
+              "f1": 0.803030303030303,
+              "ap": 0.6903372148001918
+            }
+          },
+          "macro_f1": 0.2641354723707665,
+          "mAP": 0.36111537227928553
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "valid_windows": 432,
+      "clips": 11,
+      "multilabel_windows": 4,
+      "classes": {
+        "start": {
+          "positive_windows": 12,
+          "clips_with_positives": 6
+        },
+        "stop": {
+          "positive_windows": 12,
+          "clips_with_positives": 5
+        },
+        "left": {
+          "positive_windows": 45,
+          "clips_with_positives": 9
+        },
+        "right": {
+          "positive_windows": 31,
+          "clips_with_positives": 6
+        },
+        "maintain": {
+          "positive_windows": 336,
+          "clips_with_positives": 11
+        }
+      },
+      "methods": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.21759380870576284
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.04398298272518243
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 45,
+              "f1": 0.0,
+              "ap": 0.1530407689758147
+            },
+            "right": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 31,
+              "f1": 0.0,
+              "ap": 0.1177883661769275
+            },
+            "maintain": {
+              "predicted_positive": 426,
+              "tp": 330,
+              "fp": 96,
+              "fn": 6,
+              "f1": 0.8661417322834646,
+              "ap": 0.8236890401634303
+            }
+          },
+          "macro_f1": 0.1732283464566929,
+          "mAP": 0.2712189933494235
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 2,
+              "tp": 1,
+              "fp": 1,
+              "fn": 11,
+              "f1": 0.14285714285714285,
+              "ap": 0.2844220927551261
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.07811252392110794
+            },
+            "left": {
+              "predicted_positive": 2,
+              "tp": 2,
+              "fp": 0,
+              "fn": 43,
+              "f1": 0.0851063829787234,
+              "ap": 0.15910370949195318
+            },
+            "right": {
+              "predicted_positive": 4,
+              "tp": 0,
+              "fp": 4,
+              "fn": 31,
+              "f1": 0.0,
+              "ap": 0.10054425570372205
+            },
+            "maintain": {
+              "predicted_positive": 404,
+              "tp": 315,
+              "fp": 89,
+              "fn": 21,
+              "f1": 0.8513513513513513,
+              "ap": 0.7666398622552024
+            }
+          },
+          "macro_f1": 0.21586297543744354,
+          "mAP": 0.2777644888254224
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 4,
+              "tp": 1,
+              "fp": 3,
+              "fn": 11,
+              "f1": 0.125,
+              "ap": 0.23915582248745565
+            },
+            "stop": {
+              "predicted_positive": 11,
+              "tp": 0,
+              "fp": 11,
+              "fn": 12,
+              "f1": 0.0,
+              "ap": 0.04415212847810651
+            },
+            "left": {
+              "predicted_positive": 28,
+              "tp": 5,
+              "fp": 23,
+              "fn": 40,
+              "f1": 0.136986301369863,
+              "ap": 0.1582921574226674
+            },
+            "right": {
+              "predicted_positive": 21,
+              "tp": 1,
+              "fp": 20,
+              "fn": 30,
+              "f1": 0.038461538461538464,
+              "ap": 0.1192146253179713
+            },
+            "maintain": {
+              "predicted_positive": 357,
+              "tp": 280,
+              "fp": 77,
+              "fn": 56,
+              "f1": 0.8080808080808081,
+              "ap": 0.8125516495145775
+            }
+          },
+          "macro_f1": 0.2217057295824419,
+          "mAP": 0.27467327664415564
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 150,
+      "valid_windows": 150,
+      "clips": 13,
+      "multilabel_windows": 0,
+      "classes": {
+        "start": {
+          "positive_windows": 2,
+          "clips_with_positives": 1
+        },
+        "stop": {
+          "positive_windows": 3,
+          "clips_with_positives": 2
+        },
+        "left": {
+          "positive_windows": 13,
+          "clips_with_positives": 11
+        },
+        "right": {
+          "positive_windows": 8,
+          "clips_with_positives": 6
+        },
+        "maintain": {
+          "positive_windows": 124,
+          "clips_with_positives": 13
+        }
+      },
+      "methods": {
+        "motion": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 0.5
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.02111990768674439
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.14878529512022948
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "f1": 0.0,
+              "ap": 0.0538758856350824
+            },
+            "maintain": {
+              "predicted_positive": 140,
+              "tp": 116,
+              "fp": 24,
+              "fn": 8,
+              "f1": 0.8787878787878788,
+              "ap": 0.8347556767303921
+            }
+          },
+          "macro_f1": 0.17575757575757575,
+          "mAP": 0.31170735303448965
+        },
+        "motion_last_pose": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 1.0
+            },
+            "stop": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.021121156711363942
+            },
+            "left": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.12517365862337335
+            },
+            "right": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "f1": 0.0,
+              "ap": 0.05964818230543708
+            },
+            "maintain": {
+              "predicted_positive": 143,
+              "tp": 118,
+              "fp": 25,
+              "fn": 6,
+              "f1": 0.8838951310861424,
+              "ap": 0.8580250951661649
+            }
+          },
+          "macro_f1": 0.17677902621722846,
+          "mAP": 0.41279361856126784
+        },
+        "motion_last_pose_ordered_changes": {
+          "per_class": {
+            "start": {
+              "predicted_positive": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "f1": 0.0,
+              "ap": 1.0
+            },
+            "stop": {
+              "predicted_positive": 2,
+              "tp": 0,
+              "fp": 2,
+              "fn": 3,
+              "f1": 0.0,
+              "ap": 0.028637362855977636
+            },
+            "left": {
+              "predicted_positive": 5,
+              "tp": 0,
+              "fp": 5,
+              "fn": 13,
+              "f1": 0.0,
+              "ap": 0.11669900852470705
+            },
+            "right": {
+              "predicted_positive": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 8,
+              "f1": 0.0,
+              "ap": 0.06585659409244415
+            },
+            "maintain": {
+              "predicted_positive": 137,
+              "tp": 113,
+              "fp": 24,
+              "fn": 11,
+              "f1": 0.8659003831417624,
+              "ap": 0.8680115020284247
+            }
+          },
+          "macro_f1": 0.1731800766283525,
+          "mAP": 0.4158408935003107
+        }
+      }
+    }
+  },
+  "history_eligible": {
+    "start": {
+      "windows": 178,
+      "clips": 28,
+      "positive_windows": 49,
+      "methods": {
+        "motion": {
+          "predicted_positive": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 49,
+          "f1": 0.0,
+          "ap": 0.21312653358923422
+        },
+        "motion_last_pose": {
+          "predicted_positive": 4,
+          "tp": 3,
+          "fp": 1,
+          "fn": 46,
+          "f1": 0.11320754716981132,
+          "ap": 0.3514958774027184
+        },
+        "motion_last_pose_ordered_changes": {
+          "predicted_positive": 9,
+          "tp": 4,
+          "fp": 5,
+          "fn": 45,
+          "f1": 0.13793103448275862,
+          "ap": 0.3583028773502122
+        },
+        "training_eligible_prevalence": {
+          "predicted_positive": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 49,
+          "f1": 0.0,
+          "ap": 0.22586319647513703
+        }
+      }
+    },
+    "stop": {
+      "windows": 1139,
+      "clips": 46,
+      "positive_windows": 53,
+      "methods": {
+        "motion": {
+          "predicted_positive": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 53,
+          "f1": 0.0,
+          "ap": 0.03938607078324474
+        },
+        "motion_last_pose": {
+          "predicted_positive": 1,
+          "tp": 0,
+          "fp": 1,
+          "fn": 53,
+          "f1": 0.0,
+          "ap": 0.0546075479746162
+        },
+        "motion_last_pose_ordered_changes": {
+          "predicted_positive": 21,
+          "tp": 0,
+          "fp": 21,
+          "fn": 53,
+          "f1": 0.0,
+          "ap": 0.04239311657873288
+        },
+        "training_eligible_prevalence": {
+          "predicted_positive": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 53,
+          "f1": 0.0,
+          "ap": 0.03857933549368911
+        }
+      }
+    }
+  }
+}

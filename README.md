@@ -28,11 +28,15 @@ On the same 1,482 complete windows, extrapolation from the last two observations
 
 A prespecified single-coefficient speed reduction fit on the three training locations raised four-site macro ADE/FDE to 0.6068/1.2338 m. It improved on unscaled two-point velocity only at the US location. [Coefficients and held-out errors](results/pinns_velocity_scale.json)
 
+The 40 reconstructed maps contained 400 contours extracted from bird’s-eye imagery and 25 convex hulls fitted to training pedestrians’ positions. All 497 original test windows had contour input, and 495 had a hull. The wall, planter, temporary-barrier and parked-vehicle channels were empty. In 618 training windows a scored future position matched a vertex of an available hull; 349 validation windows had a same-clip background image later than the prediction origin. Both counts were zero in test windows. The separate seed-42 M0/M1 site-held-out runs used no maps. [Map sources and timing by split](results/pinns_map_sources.json)
+
 The original scenario model received neighbors in 480 of 497 archived test windows. Its 2,724 directed edges comprised 2,444 pedestrian edges and 280 car edges. All edge tensors, masks and type vectors were reconstructed from observed data. The release distinguishes people and cars at source. [Input coverage and temporal reconstruction](results/pinns_neighbor_inputs.json)
 
 On the outdoor JRDB training recording Huang Lane, projecting 6,430 person positions into the panorama gave a median horizontal discrepancy of 8.53 pixels from the matching box center. HST supplied 33-joint 3D records for 554 of these person-frame pairs. The derived tracks run at 2.5 Hz and the joint records lack image-plane confidence. The planned 10 Hz RTMPose evaluation still requires suitable source frames and annotations. [Outdoor JRDB development check](reviews/jrdb_development/README.md)
 
-The five-frame action development probe fits three regularized logistic heads to motion, motion plus final-frame pose, and motion plus final-frame pose and observed joint changes. The five cross-validation folds group whole clips, with all four known locations represented in each fold. The program records held-out probabilities, class supports, AP and fixed-threshold F1. Run `python -m scripts.evaluate_pinns_action_probes "$PINNS_ROOT" "$PILOT_DIR/pose.npz" --output action_probes.json` from the repository root.
+Three linear action classifiers used five observed frames to anticipate events derived from the next 3 seconds of ground tracks. Five-fold development cross-validation kept each of the 47 videos in one evaluation fold and included all four previously examined locations in every fold. All comparisons used the same 1,482 windows, regularization and 0.5 decision threshold. With motion alone, with final-frame pose added, and with ordered joint changes also added, pooled start AP was 0.2131, 0.3439 and 0.3375. At the fixed threshold the models detected 0, 3 and 4 of 49 starts and missed all 53 stops. Adding ordered changes to final-frame pose also lowered pooled AP for both turn directions. These descriptive results concern trajectory-derived events at known sites. [Per-event scores, fold counts and independent verification](results/pinns_action_probes.json)
+
+Run `python -m scripts.evaluate_pinns_action_probes "$PINNS_ROOT" "$PILOT_DIR/pose.npz" --output action_probes.json` from the repository root to reproduce the out-of-fold probabilities.
 
 ## Project files
 
@@ -86,11 +90,14 @@ The runner writes `shortpose_heldout.zip` to the output directory. The scratch d
 
 ### Five-seed extension
 
-The extension reuses the eight verified seed-42 fits and schedules 32 more across the four sites, two models and seeds 1024, 2025, 3407 and 4096. The reported four-site results above use seed 42. Training requires a CUDA device and the pilot's PyTorch build (`2.11.0+cu130`). Supply the official label/calibration directory with its video inventory, the extracted seed-42 bundle containing `pose.npz` and `folds/`, and a separate writable output directory. The first command verifies the inputs on CPU. The second resumes matching checkpoints and writes `shortpose_heldout_five_seeds.zip` when all 40 fits are present. [Five-seed runner](scripts/run_heldout_seed_sensitivity.py)
+Kaggle completed all 32 additional fits for seeds 1024, 2025, 3407 and 4096. Independent CPU inference reproduced all 40 checkpoints on every held-out window to within 0.000004 m of the cloud errors. With sites and seeds weighted equally, M0 reached 0.5126/1.0977 m ADE/FDE and M1 reached 0.5375/1.1455 m. The mean paired difference was +0.0250/+0.0477 m. One of the five seeds favored M1. Across the five seeds, the mean ADE differences for the clear, partial and low-quality buckets were +0.0253, +0.0245 and +0.0227 m. [Per-seed paired results, conditional clip intervals and weight checks](results/pinns_heldout_five_seed_replay.json)
+
+The extension reuses the eight verified seed-42 fits. The reported four-site results above use seed 42. Training requires a CUDA device and the pilot's PyTorch build (`2.11.0+cu130`). Supply the official label/calibration directory with its video inventory, the extracted seed-42 bundle containing `pose.npz` and `folds/`, and a separate writable output directory. The first command verifies the inputs on CPU. The second resumes matching checkpoints and writes `shortpose_heldout_five_seeds.zip` when all 40 fits are present. [Five-seed runner](scripts/run_heldout_seed_sensitivity.py)
 
 ```bash
 python -m scripts.run_heldout_seed_sensitivity --data-root "$PINNS_ROOT" --pilot-dir "$PILOT_DIR" --check-only
 python -m scripts.run_heldout_seed_sensitivity --data-root "$PINNS_ROOT" --pilot-dir "$PILOT_DIR" --output-dir "$SEED_OUTPUT_DIR"
+python -m scripts.verify_heldout_five_seeds "$SEED_OUTPUT_DIR/shortpose_heldout_five_seeds.zip" "$PINNS_ROOT" "$PILOT_DIR" --output five_seed_replay.json
 ```
 
 ### Test sensitivity to a one-frame image offset
@@ -102,4 +109,4 @@ python -m scripts.cache_pinns_frame_offset "$PINNS_ROOT" "$PILOT_DIR/pose.npz" "
 python -m scripts.evaluate_pinns_frame_offset "$PINNS_ROOT" "$PILOT_DIR" shifted_pose.npz --output frame_offset_evaluation.json
 ```
 
-The second command replays all four saved M1 checkpoints and verifies each window's archived errors. It then measures the test-input change on 597 US windows and reports the three clips individually, the US fold and the equal-site mean. Model weights stay fixed. Estimating the effect on training requires a separate refit.
+Using the GPU-extracted shifted poses and the four frozen seed-42 M1 checkpoints, the CPU replay passed the original per-window checks. Across the 597 shifted US windows, mean ADE changed by −0.0000730 m and mean FDE by −0.0001085 m. The 95th percentile absolute per-window FDE change was 0.0100 m, with a maximum of 0.0306 m. All 219 other US windows produced exactly the same trajectories. Across the four equally weighted sites, the changes were −0.0000134 m and −0.0000198 m. The Kaggle CUDA replay stopped at the exact-equality check for the 219 untouched windows. Its maximum discrepancy and cause remain unknown. These results measure sensitivity to test image selection. Temporal alignment and the effect of refitting on shifted images remain open. [Frame-offset results and device checks](results/pinns_heldout_frame_offset.json)
