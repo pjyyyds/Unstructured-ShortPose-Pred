@@ -1,0 +1,167 @@
+{
+  "experiment": "individual_only_joint_actions_loso_seed42",
+  "freeze": "Registered before evaluating this experiment. Four physical development sites previously studied.",
+  "frozen_git_revision": "e8aafb53a74c0e0dcc10610ed9e74064c34bfaad",
+  "driver_sha256": "7adbdbab4d60d0336514a1d7e6c1335615b89a655f5bc01c71e7bed8cf39d492",
+  "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "data_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "truth_sha256": "80ac6319d32adcf8a3b2689458ab81467203ac1e72ce66d8e7fc383dca79299b",
+  "cohort": "Original 1,482 five-frame windows, 47 clips; disjoint 35-frame blocks within each clip/person; 10 Hz, 0.4 s observed span and all 30 future ground points through 3.0 s.",
+  "training": {
+    "seed": 42,
+    "epochs": 28,
+    "batch_size": 64,
+    "learning_rate": 0.002,
+    "min_lr_ratio": 0.05,
+    "weight_decay": 0.0001,
+    "gradient_clip": 2.0
+  },
+  "models": {
+    "no_head": "none",
+    "auxiliary": "aux_only",
+    "end_to_end": "e2e",
+    "detached": "stop_grad"
+  },
+  "inputs": [
+    "x_m",
+    "x_p",
+    "q_vec",
+    "ego_type_oh"
+  ],
+  "action_labels": [
+    "start",
+    "stop",
+    "left",
+    "right",
+    "maintain"
+  ],
+  "action_support": {
+    "by_class": [
+      49,
+      53,
+      214,
+      208,
+      975
+    ],
+    "valid_windows": 1482
+  },
+  "labels": "Unmodified five observable event rules applied to float64 label-derived history and future. Original window-level validity applies to all five classes. Targets and validity are only used for training loss and evaluation.",
+  "architecture": "Common quality-gated M1 individual motion/pose/ego type; maps and neighbor graph disabled in all arms. no_head has no action parameters and no head scores. Auxiliary fits the head but supplies zero action condition. End_to_end and detached use identical logit-to-trajectory bridge; only the latter detaches predicted action probabilities before the bridge. Shared backbone still receives trajectory and action supervision.",
+  "initialization": "All arms use identical seed-42 M1 backbone and common trajectory decoder state; supervised heads share initial values; conditional bridges share initial values. Same batches and backbone/decoder dropout stream; separate per-minibatch seed for head dropout (420000+epoch*10000+batch).",
+  "optimization": "Frozen 28-epoch final state, AdamW and cosine schedule. Uniform shuffle of training windows, permutation seed 49. JointPredictionLoss defaults: beta=.50, mode weight=.25, supervised BCE weight=.15. Fold-specific positive weights are the project dampened ratio computed exclusively from training labels. No validation/tuning/early stopping.",
+  "primary": "Detached minus end_to_end paired highest-probability ADE (metres), site means equally weighted; positive means greater error for detached. Report the difference regardless of sign.",
+  "action_calibration": "Companion measure is detached minus end_to_end mean binary Brier score on valid windows, equally weighting five classes then four sites. Sigmoid probabilities are used without post-hoc calibration.",
+  "secondary": "Exact 3s top1 FDE, per-class equal-score-group AP, F1 at >=0.5, class-macro and four-site macro; no positive class yields null F1/AP and is absent from that site macro. Auxiliary vs no_head trajectory, end_to_end vs auxiliary trajectory and action, and detached vs end_to_end trajectory and action. AP and F1 may be unstable for rare start and stop.",
+  "interval": "Primary ADE and companion Brier: 20,000 paired within-site whole-clip bootstrap draws, seed 2026; four sites equally weighted. Conditional on these trained models; descriptive, no seed or unseen-site inference.",
+  "folds": {
+    "america_crossroad": {
+      "train_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 666,
+      "test_windows": 816,
+      "train_ids_sha256": "5138c8d34313d2443dd2501d41024793983973d75facc9d4aabbd13fbe33a19c",
+      "test_ids_sha256": "fe925bd2b94e094d8e75f407d5a87e9d1a9ebe575e7a49f6e8e415388c7157fb",
+      "test_clips": 14,
+      "valid_test_windows": 816,
+      "test_positive_counts": [
+        27,
+        35,
+        152,
+        156,
+        458
+      ],
+      "training_positive_weights": [
+        5.295609474182129,
+        5.844475746154785,
+        3.0988988876342773,
+        3.406431198120117,
+        1.0
+      ]
+    },
+    "italy_park": {
+      "train_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 1398,
+      "test_windows": 84,
+      "train_ids_sha256": "9743e797dc3c21844379d1fd777a7d55f5425d9c56848c8fbcd207e5185aeb18",
+      "test_ids_sha256": "d1a55cb06eb6603487ef357dd43ef27c0679c30af6c05b0feb5e7a3799d07ec5",
+      "test_clips": 9,
+      "valid_test_windows": 84,
+      "test_positive_counts": [
+        8,
+        3,
+        4,
+        13,
+        57
+      ],
+      "training_positive_weights": [
+        5.6862406730651855,
+        5.143051624298096,
+        2.373830556869507,
+        2.4784786701202393,
+        1.0
+      ]
+    },
+    "japan_crossroad": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_windows": 1050,
+      "test_windows": 432,
+      "train_ids_sha256": "c53cab0ed205f9ad582163021f92583e0652a6b18eac5d599cf165033ca124ae",
+      "test_ids_sha256": "dd4cf28d80d4f42b4d9bcfbb6d6e6f2870e5ca6a1eb621454f0830f082fe6f20",
+      "test_clips": 11,
+      "valid_test_windows": 432,
+      "test_positive_counts": [
+        12,
+        12,
+        45,
+        31,
+        336
+      ],
+      "training_positive_weights": [
+        5.165676116943359,
+        4.903837203979492,
+        2.2777698040008545,
+        2.2158772945404053,
+        1.0
+      ]
+    },
+    "thailand_street": {
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_windows": 1332,
+      "test_windows": 150,
+      "train_ids_sha256": "d6a1b03ba46fcbfad203c85152320ac11eeb3b7b26402eec5f8142708da28fd5",
+      "test_ids_sha256": "96a8494222d1d7e9c5f3bc3720793614d8bbbab1bd3e98dad9c5dc0ebfd5a734",
+      "test_clips": 13,
+      "valid_test_windows": 150,
+      "test_positive_counts": [
+        2,
+        3,
+        13,
+        8,
+        124
+      ],
+      "training_positive_weights": [
+        5.176066875457764,
+        5.015661716461182,
+        2.3672685623168945,
+        2.3741979598999023,
+        1.0
+      ]
+    }
+  }
+}
