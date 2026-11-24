@@ -1,17 +1,25 @@
-# Complete Empirical Benchmark & Statistical Hypothesis Report
+# Pedestrian prediction benchmark
 
-- **Hardware**: `Tesla T4` (`x2`)
+**Full model and motion-only reference.** On PINNS at five frames their respective top-mode ADEs are **0.5295 m** and **0.4856 m**. On JTA they are **1.8637 m** and **1.6640 m**. Lower ADE is better.
 
-- **Dataset Diagnostics**: `{"pinns": {"total_samples": 7283, "num_sequences": 47, "split_counts": {"train": 5686, "val": 1100, "test": 497}, "leakage_check": "PASS: zero physical time overlap across train/val/test", "rtmpose_providers": ["CUDAExecutionProvider", "CPUExecutionProvider"], "bbox_is_topleft": false}, "jta": {"total_samples": 3604, "split_counts": {"train": 1844, "val": 800, "test": 960}, "fps": 2.5}, "pinns_test_buckets": {"Clear": 111, "Partial": 252, "Heavy": 134}, "pinns_test_valid_actions": 277, "pinns_test_action_pos_counts": [43, 29, 25, 10, 178]}`
+50 configurations, 242 training runs. 46 configurations used five seeds and 4 used three. Training hardware was 2 × Tesla T4. Trajectory entries with ± show the mean and sample standard deviation across training seeds.
 
-## 1. PINNS Short-Window (T=5 / 0.4s) Controlled Single-Factor Ablation & SOTA Table
+V2 was developed after inspection of V1 test results and reused the split. The archived V1 table uses older labels. In both versions, M1a adds equal-weight motion and available pose features, external baselines are local adaptations, and JTA models are trained on JTA.
+
+PINNS has 5,686/1,100/497 training/validation/test windows from four sites. JTA has 1,844/800/960 windows. JRDB and independent external validation remain open.
+
+The PINNS five-frame test groups contain 111 clear, 252 partial and 134 heavy windows. 277 windows have valid action labels. Positive labels for start, stop, left, right and maintain are [43, 29, 25, 10, 178].
+
+## 1. PINNS five-frame model comparisons
+
+The five observed frames span 0.4 s. The prediction horizon is 3.0 s. The quality groups are derived from observation features. Landmark localization accuracy requires separate ground truth.
 
 | Model Variant | Description | Params (M) | Overall ADE_1 (m) ↓ | Overall FDE_1 (m) ↓ | minADE_6 (m) ↓ | Clear ADE_1 ↓ | Partial ADE_1 ↓ | Heavy ADE_1 ↓ | Transition ADE_1 ↓ | Mode NLL ↓ | Action Macro-F1 ↑ |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | `M0` | Motion Only (Masked GRU) | 0.237 | 0.4856 ± 0.0186 | 1.0355 ± 0.0220 | 0.3114 ± 0.0087 | 0.4229 ± 0.0131 | 0.4822 ± 0.0255 | 0.5439 ± 0.0225 | 0.7224 ± 0.0092 | 1.4411 ± 0.0785 | — |
-| `M1a` | + Equal-Weight 2D Pose Concat | 0.293 | 0.4929 ± 0.0140 | 1.0527 ± 0.0160 | 0.3197 ± 0.0032 | 0.4369 ± 0.0260 | 0.4805 ± 0.0159 | 0.5624 ± 0.0185 | 0.7189 ± 0.0211 | 1.4443 ± 0.0682 | — |
+| `M1a` | Equal-weight sum of motion and available pose, then LayerNorm | 0.293 | 0.4929 ± 0.0140 | 1.0527 ± 0.0160 | 0.3197 ± 0.0032 | 0.4369 ± 0.0260 | 0.4805 ± 0.0159 | 0.5624 ± 0.0185 | 0.7189 ± 0.0211 | 1.4443 ± 0.0682 | — |
 | `M1b` | + Implicit Gate (No q-vector, Param-Matched) | 0.302 | 0.4755 ± 0.0123 | 1.0169 ± 0.0192 | 0.3117 ± 0.0077 | 0.4173 ± 0.0160 | 0.4690 ± 0.0070 | 0.5361 ± 0.0204 | 0.7226 ± 0.0295 | 1.4332 ± 0.0350 | — |
-| `M1` | + Explicit Quality Gate (q-vector, Eq. 6) | 0.302 | 0.4783 ± 0.0153 | 1.0249 ± 0.0276 | 0.3115 ± 0.0051 | 0.4169 ± 0.0237 | 0.4702 ± 0.0147 | 0.5443 ± 0.0141 | 0.7114 ± 0.0136 | 1.4459 ± 0.0249 | — |
+| `M1` | + Explicit quality gate (q-vector) | 0.302 | 0.4783 ± 0.0153 | 1.0249 ± 0.0276 | 0.3115 ± 0.0051 | 0.4169 ± 0.0237 | 0.4702 ± 0.0147 | 0.5443 ± 0.0141 | 0.7114 ± 0.0136 | 1.4459 ± 0.0249 | — |
 | `M1p` | + Biomechanical Part-Decomposed Gate (BPD-Gate) | 0.302 | 0.4822 ± 0.0122 | 1.0326 ± 0.0232 | 0.3141 ± 0.0065 | 0.4214 ± 0.0059 | 0.4803 ± 0.0141 | 0.5361 ± 0.0217 | 0.7086 ± 0.0271 | 1.4431 ± 0.0267 | — |
 | `M2a` | M1 + Non-Lane Local Polylines Only | 0.324 | 0.4959 ± 0.0151 | 1.0634 ± 0.0214 | 0.3255 ± 0.0079 | 0.4506 ± 0.0122 | 0.4876 ± 0.0158 | 0.5492 ± 0.0207 | 0.7078 ± 0.0156 | 1.5227 ± 0.0912 | — |
 | `M2b_norad` | M1 + Directed GATv2 (w/o v_rad) | 0.440 | 0.5073 ± 0.0209 | 1.0654 ± 0.0349 | 0.3183 ± 0.0134 | 0.4237 ± 0.0366 | 0.4987 ± 0.0122 | 0.5928 ± 0.0336 | 0.7240 ± 0.0229 | 1.5370 ± 0.0587 | — |
@@ -22,11 +30,11 @@
 | `M3` | M2 + Action Cond. Decoder (Stop-Grad) | 0.471 | 0.5094 ± 0.0082 | 1.0872 ± 0.0299 | 0.3183 ± 0.0118 | 0.4416 ± 0.0177 | 0.5032 ± 0.0112 | 0.5773 ± 0.0303 | 0.7372 ± 0.0258 | 1.5437 ± 0.0297 | 32.68% |
 | `M3p` | M3 + Kinematic-Action Mode Calibration (ACMC) | 0.471 | 0.5294 ± 0.0212 | 1.1182 ± 0.0492 | 0.3200 ± 0.0072 | 0.4543 ± 0.0367 | 0.5171 ± 0.0167 | 0.6148 ± 0.0321 | 0.7677 ± 0.0316 | 1.5552 ± 0.0533 | 33.04% |
 | `Ours_Full` | Ours Full (BPD-Gate + Map&GATv2 + ACMC) | 0.471 | 0.5295 ± 0.0096 | 1.1239 ± 0.0168 | 0.3193 ± 0.0080 | 0.4536 ± 0.0435 | 0.5154 ± 0.0134 | 0.6189 ± 0.0370 | 0.7722 ± 0.0273 | 1.5815 ± 0.0700 | 31.67% |
-| `Ext1_MCENET` | Ext-1: MCENET (ITSC'20) | 0.216 | 0.5518 ± 0.0250 | 1.1572 ± 0.0377 | 0.3434 ± 0.0053 | 0.4594 ± 0.0267 | 0.5401 ± 0.0267 | 0.6504 ± 0.0388 | 0.7625 ± 0.0305 | 1.3883 ± 0.0545 | — |
-| `Ext2_HST` | Ext-2: HST (IEEE RA-L'23) | 0.508 | 0.5005 ± 0.0062 | 1.0689 ± 0.0165 | 0.3221 ± 0.0044 | 0.4356 ± 0.0168 | 0.4896 ± 0.0161 | 0.5747 ± 0.0237 | 0.7252 ± 0.0192 | 1.3170 ± 0.0633 | — |
-| `Ext3_SocialTransmotion` | Ext-3: Social-Transmotion (ICLR'24) | 0.517 | 0.5312 ± 0.0275 | 1.1227 ± 0.0501 | 0.3273 ± 0.0145 | 0.4465 ± 0.0272 | 0.5206 ± 0.0233 | 0.6213 ± 0.0475 | 0.7730 ± 0.0255 | 1.5064 ± 0.0745 | — |
+| `Ext1_MCENET` | MCENET local adaptation | 0.216 | 0.5518 ± 0.0250 | 1.1572 ± 0.0377 | 0.3434 ± 0.0053 | 0.4594 ± 0.0267 | 0.5401 ± 0.0267 | 0.6504 ± 0.0388 | 0.7625 ± 0.0305 | 1.3883 ± 0.0545 | — |
+| `Ext2_HST` | HST local adaptation | 0.508 | 0.5005 ± 0.0062 | 1.0689 ± 0.0165 | 0.3221 ± 0.0044 | 0.4356 ± 0.0168 | 0.4896 ± 0.0161 | 0.5747 ± 0.0237 | 0.7252 ± 0.0192 | 1.3170 ± 0.0633 | — |
+| `Ext3_SocialTransmotion` | Social-Transmotion local adaptation | 0.517 | 0.5312 ± 0.0275 | 1.1227 ± 0.0501 | 0.3273 ± 0.0145 | 0.4465 ± 0.0272 | 0.5206 ± 0.0233 | 0.6213 ± 0.0475 | 0.7730 ± 0.0255 | 1.5064 ± 0.0745 | — |
 
-## 2. PINNS Multi-Window Scaling (T=5 / 10 / 20)
+## 2. PINNS across observation windows
 
 | Model | T=5 (0.4s) ADE_1 ↓ | T=5 FDE_1 ↓ | T=10 (0.9s) ADE_1 ↓ | T=10 FDE_1 ↓ | T=20 (1.9s) ADE_1 ↓ | T=20 FDE_1 ↓ |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -41,9 +49,11 @@
 | `M3` | 0.5094 ± 0.0082 | 1.0872 ± 0.0299 | 0.5183 ± 0.0185 | 1.1001 ± 0.0419 | 0.5016 ± 0.0250 | 1.0596 ± 0.0527 |
 | `Ours_Full` | 0.5295 ± 0.0096 | 1.1239 ± 0.0168 | 0.5169 ± 0.0138 | 1.0908 ± 0.0330 | 0.5178 ± 0.0232 | 1.0859 ± 0.0449 |
 
-## 3. Cross-Dataset Generalization on JTA (0.4s Short Window, Table 1 Occlusion/Noise Regimes)
+## 3. Within-dataset JTA evaluation with simulated pose corruption
 
-| Model | Overall ADE_1 (m) ↓ | Overall FDE_1 (m) ↓ | Clear ADE_1 ↓ | Partial (Vehicle Lower-Occl.) ADE_1 ↓ | Heavy (sigma=0.20) ADE_1 ↓ |
+Each model was trained on the JTA training split. Two observed frames span 0.4 s and the prediction horizon is 4.8 s. The tests apply synthetic lower-body occlusion or coordinate noise to the pose data.
+
+| Model | Overall ADE_1 (m) ↓ | Overall FDE_1 (m) ↓ | Clear ADE_1 ↓ | Partial (simulated lower-body occlusion) ADE_1 ↓ | Heavy (injected noise, sigma=0.20) ADE_1 ↓ |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | `M0` | 1.6640 ± 0.2544 | 3.6236 ± 0.5402 | 1.7748 ± 0.2485 | 1.6577 ± 0.2531 | 1.4397 ± 0.2749 |
 | `M1a` | 2.4730 ± 0.5632 | 5.2153 ± 1.1080 | 2.5710 ± 0.5330 | 2.4502 ± 0.5485 | 2.3063 ± 0.6559 |
@@ -55,11 +65,13 @@
 | `M3` | 1.9355 ± 0.3263 | 4.1722 ± 0.6268 | 2.0461 ± 0.3299 | 1.9230 ± 0.3318 | 1.7231 ± 0.3114 |
 | `Ours_Full` | 1.8637 ± 0.3046 | 3.9581 ± 0.6439 | 2.0011 ± 0.2992 | 1.8495 ± 0.3010 | 1.5972 ± 0.3423 |
 
-## 4. Pre-Registered Paired Statistical Tests (Shapiro-Wilk -> Paired-t/Wilcoxon + Holm-Bonferroni)
+## 4. Paired window-level tests and Holm-adjusted p values
+
+Differences use model minus reference. Negative ADE differences favor the model. Holm adjustment is within each family. Overlapping windows from one track or clip may be correlated. The reported p values do not account for that clustering. MPSES is an ADE reduction of at least 5% or 0.04 m.
 
 #### Research1_PoseQualityGate
 
-| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Abs Delta (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
+| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Model − reference (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | PINNS T=5 Overall: M1a vs M0 | 497 | 0.4929 | 0.4856 | +0.0073 | +1.50% | `wilcoxon` | 2.085e-03 | 2.085e-02 | **YES** | no |
 | PINNS T=5 Heavy: M1a vs M0 | 134 | 0.5624 | 0.5439 | +0.0185 | +3.41% | `wilcoxon` | 1.205e-02 | 7.231e-02 | **no** | no |
@@ -76,7 +88,7 @@
 
 #### Research2_MapAndHeteroGraph
 
-| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Abs Delta (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
+| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Model − reference (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | PINNS T=5: M2a(+Map) vs M1 | 497 | 0.4959 | 0.4783 | +0.0176 | +3.68% | `wilcoxon` | 5.278e-07 | 1.584e-06 | **YES** | no |
 | PINNS T=5: M2b(+GAT) vs M1 | 497 | 0.5266 | 0.4783 | +0.0483 | +10.10% | `wilcoxon` | 6.296e-14 | 3.778e-13 | **YES** | no |
@@ -87,7 +99,7 @@
 
 #### Research3_ActionAndBaselines
 
-| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Abs Delta (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
+| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Model − reference (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | PINNS T=5: M3a(AuxOnly) vs M2 | 497 | 0.5108 | 0.5055 | +0.0053 | +1.05% | `wilcoxon` | 3.980e-01 | 1.000e+00 | **no** | no |
 | PINNS T=5: M3b(Cond-E2E) vs M2 | 497 | 0.5122 | 0.5055 | +0.0066 | +1.31% | `wilcoxon` | 1.862e-02 | 1.490e-01 | **no** | no |
@@ -102,9 +114,9 @@
 | PINNS T=5: Ours_Full vs Ext2_HST | 497 | 0.5295 | 0.5005 | +0.0290 | +5.80% | `wilcoxon` | 5.952e-04 | 6.547e-03 | **YES** | no |
 | PINNS T=5: Ours_Full vs Ext3_SocialTransmotion | 497 | 0.5295 | 0.5312 | -0.0017 | -0.32% | `wilcoxon` | 4.052e-01 | 1.000e+00 | **no** | no |
 
-#### CrossDataset_JTA
+#### Within-dataset JTA
 
-| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Abs Delta (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
+| Hypothesis Comparison | N | Model ADE_1 | Ref ADE_1 | Model − reference (m) | Rel Change (%) | Test | Raw p | Holm-Adjusted p | Sig (<0.05) | MPSES |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | JTA 0.4s Overall: M1a vs M0 | 960 | 2.4730 | 1.6640 | +0.8090 | +48.62% | `wilcoxon` | 4.975e-127 | 2.985e-126 | **YES** | no |
 | JTA 0.4s Heavy(sigma=0.2): M1a vs M0 | 193 | 2.3063 | 1.4397 | +0.8666 | +60.20% | `wilcoxon` | 5.866e-29 | 2.346e-28 | **YES** | no |
@@ -114,9 +126,11 @@
 | JTA 0.4s Overall: Ours_Full vs Ext3_SocialTransmotion | 960 | 1.8637 | 1.8865 | -0.0228 | -1.21% | `paired_t` | 1.240e-01 | 1.240e-01 | **no** | no |
 
 
-## 5. Multi-Agent Real-Time Inference Latency & Memory Footprint
+## 5. Full predictor forward time and memory on one GPU
 
-| Window | Concurrent Agents N | Mean Latency (ms) on Tesla T4 | P50 (ms) | P95 (ms) | Peak VRAM (MB) |
+The timer starts with synthetic feature tensors already on the GPU. Each setting uses 25 warmups and 100 timed forwards. Video decoding, detection, pose extraction, tracking and feature preparation fall outside this measurement. Baseline latency was not timed.
+
+| Window | Batch size N | Mean Latency (ms) on Tesla T4 | P50 (ms) | P95 (ms) | Peak allocated memory (MiB) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | `T=5` | `N=1` | 14.724 | 14.248 | 17.215 | 28.48 |
 | `T=5` | `N=4` | 14.489 | 14.326 | 15.640 | 29.30 |
@@ -130,3 +144,15 @@
 | `T=20` | `N=4` | 15.429 | 15.283 | 16.314 | 32.49 |
 | `T=20` | `N=8` | 15.512 | 15.454 | 16.007 | 37.71 |
 | `T=20` | `N=12` | 16.006 | 15.647 | 16.774 | 41.08 |
+
+## 6. Action-label threshold sensitivity
+
+PINNS five-frame overall ADE for the full model. Speed and angle thresholds were scaled together. The default is recalculated from the same three seeds as the shifted thresholds. Individual seed values in the archive are rounded to six decimals.
+
+| Threshold scale | Seed 42 | Seed 1024 | Seed 2025 | Mean ADE (m) | SD (m) |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| 0.50× | 0.5100 | 0.5043 | 0.5100 | 0.5081 | 0.0033 |
+| 0.75× | 0.5417 | 0.5245 | 0.5165 | 0.5276 | 0.0129 |
+| 1.00× | 0.5317 | 0.5301 | 0.5431 | 0.5349 | 0.0071 |
+| 1.25× | 0.5164 | 0.5062 | 0.5219 | 0.5148 | 0.0080 |
+| 1.50× | 0.5515 | 0.5105 | 0.5633 | 0.5417 | 0.0277 |

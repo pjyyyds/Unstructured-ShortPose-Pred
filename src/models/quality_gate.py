@@ -65,7 +65,7 @@ class QualityGatedFusion(nn.Module):
                 rel_env = 1.0
             else:
                 q_emb = self.q_mlp(q_vec)
-                # Physical observability envelope sqrt(q1 * q2) * resolution factor prevents Heavy negative transfer
+                # Scale the learned gate by joint validity, confidence and frame availability.
                 rel_env = torch.sqrt((q_vec[:, 0:1] * q_vec[:, 1:2]).clamp(min=0.0)) * (0.4 + 0.6 * q_vec[:, 3:4])
             g = m_pose * rel_env * torch.sigmoid(self.gate_out(torch.cat([u_mp, q_emb], dim=-1)))
             return self.out_norm(h_m + g * safe_hp), g

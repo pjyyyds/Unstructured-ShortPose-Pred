@@ -1,0 +1,106 @@
+{
+  "protocol": {
+    "task": "Motion-only. Refit per held-out physical site. All four sites were seen by the wider project; no independent pose-network validation.",
+    "coordinates": "Annotated pedestrian ground positions in metres, downsampled from 30 to 10 Hz without interpolation, with the project's calibration-based Y orientation.",
+    "windows": "Five complete observations (0.4 s span), then 30 complete targets (3.0 s). Within each clip/person, split at missing or nonfinite frames and take consecutive, disjoint 35-frame blocks from each run's start. Drop short remainders.",
+    "constant_velocity": "Least-squares velocity from all five history positions; extrapolate from the last observed point.",
+    "ridge": "Eight coordinates of four observed positions relative to the last position predict 60 future coordinates. Z-score features and center targets using only the three training sites. Unpenalized intercept; fixed ridge alpha 1.0 on summed squared loss. No validation or tuning.",
+    "metrics": "Both models scored on the identical test windows. ADE is mean Euclidean distance over all 30 steps; FDE is distance at 3.0 s. Means within site weight windows equally; macro weights the four sites equally. No independence assumption or significance test.",
+    "numpy_version": "2.5.5",
+    "opencv_version": "5.1.0",
+    "label_and_calibration_digest_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801"
+  },
+  "test_windows_total": 1482,
+  "sites": {
+    "america_crossroad": {
+      "clips": 14,
+      "clips_with_windows": 14,
+      "clip_person_tracks_with_windows": 240,
+      "train_sites": [
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 666,
+      "test_windows": 816,
+      "constant_velocity": {
+        "ade_m": 1.159872577771962,
+        "fde_m": 2.298073118876918
+      },
+      "ridge": {
+        "ade_m": 0.9228054021800706,
+        "fde_m": 1.8582416895537912
+      }
+    },
+    "italy_park": {
+      "clips": 9,
+      "clips_with_windows": 9,
+      "clip_person_tracks_with_windows": 28,
+      "train_sites": [
+        "america_crossroad",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "train_windows": 1398,
+      "test_windows": 84,
+      "constant_velocity": {
+        "ade_m": 0.4060032740471182,
+        "fde_m": 0.9606783946263743
+      },
+      "ridge": {
+        "ade_m": 0.575839212108595,
+        "fde_m": 1.2585530128390896
+      }
+    },
+    "japan_crossroad": {
+      "clips": 11,
+      "clips_with_windows": 11,
+      "clip_person_tracks_with_windows": 117,
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "thailand_street"
+      ],
+      "train_windows": 1050,
+      "test_windows": 432,
+      "constant_velocity": {
+        "ade_m": 0.31507096725217537,
+        "fde_m": 0.7522684279959286
+      },
+      "ridge": {
+        "ade_m": 0.6015411963879828,
+        "fde_m": 1.3046655009059007
+      }
+    },
+    "thailand_street": {
+      "clips": 13,
+      "clips_with_windows": 13,
+      "clip_person_tracks_with_windows": 64,
+      "train_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad"
+      ],
+      "train_windows": 1332,
+      "test_windows": 150,
+      "constant_velocity": {
+        "ade_m": 0.34182048415475813,
+        "fde_m": 0.8302816330218529
+      },
+      "ridge": {
+        "ade_m": 0.7752604057649549,
+        "fde_m": 1.620446007709936
+      }
+    }
+  },
+  "macro": {
+    "constant_velocity": {
+      "ade_m": 0.5556918258065034,
+      "fde_m": 1.2103253936302685
+    },
+    "ridge": {
+      "ade_m": 0.7188615541104008,
+      "fde_m": 1.5104765527521795
+    }
+  }
+}

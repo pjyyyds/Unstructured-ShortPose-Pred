@@ -1,0 +1,866 @@
+{
+  "protocol": {
+    "experiment": "Post-hoc motion baselines on the existing V2 PINNS test split.",
+    "history_frames": 5,
+    "dt_s": 0.1,
+    "future_steps": 30,
+    "anchor_stride_at_10hz": 4,
+    "metric": "ADE across valid future positions. FDE at the last valid future position.",
+    "cv": "Last two valid ground positions in the five-frame input, divided by their elapsed time. Zero if unavailable.",
+    "learned_models": "Archived per-window top-1 errors averaged over five seeds. M0 seed 42 is separately replayed with motion features and its original static/moving ego type.",
+    "sites": "Location and scene combined, with seasonal/weather folders pooled. Empty sites have no test estimate.",
+    "comparison": "ade_minus_cv_m is model minus constant-velocity ADE, in metres. Lower is better."
+  },
+  "verification": {
+    "eligible_original_clips": 47,
+    "source_condition_folders": 22,
+    "clips_with_evaluated_windows": 21,
+    "seed42": {
+      "ade_m": {
+        "checkpoint_replay": 0.46304324,
+        "archive_seed42": 0.463043
+      },
+      "fde_m": {
+        "checkpoint_replay": 1.00177649,
+        "archive_seed42": 1.001777
+      }
+    },
+    "windows_with_all_five_history_frames": 497,
+    "windows_with_valid_future_at_3s": 233,
+    "windows_scored_at_earlier_last_valid_future": 264,
+    "transition_windows_checked": 99,
+    "m0_ade_seed42_vs_archived_five_seed_per_window_pearson": 0.971296,
+    "static_ego_type_windows": 122,
+    "velocity_unavailable_windows": 0
+  },
+  "overall": {
+    "windows": 497,
+    "models": {
+      "constant_velocity": {
+        "ade_m": 0.504146,
+        "fde_m": 1.128556,
+        "ade_minus_cv_m": 0.0
+      },
+      "stationary": {
+        "ade_m": 0.839889,
+        "fde_m": 1.597802,
+        "ade_minus_cv_m": 0.335743
+      },
+      "M0": {
+        "ade_m": 0.485562,
+        "fde_m": 1.035534,
+        "ade_minus_cv_m": -0.018584
+      },
+      "M1": {
+        "ade_m": 0.478297,
+        "fde_m": 1.024904,
+        "ade_minus_cv_m": -0.025849
+      },
+      "Ours_Full": {
+        "ade_m": 0.529501,
+        "fde_m": 1.123855,
+        "ade_minus_cv_m": 0.025355
+      }
+    }
+  },
+  "equal_site_weight_ade_m": {
+    "constant_velocity": 0.389665,
+    "stationary": 0.996095,
+    "M0": 0.438071,
+    "M1": 0.428767,
+    "Ours_Full": 0.445627
+  },
+  "equal_clip_weight_ade_m": {
+    "constant_velocity": 0.335703,
+    "stationary": 1.139318,
+    "M0": 0.382268,
+    "M1": 0.382275,
+    "Ours_Full": 0.416855
+  },
+  "by_site": {
+    "america_crossroad": {
+      "windows": 316,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.651733,
+          "fde_m": 1.428852,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.745597,
+          "fde_m": 1.397631,
+          "ade_minus_cv_m": 0.093864
+        },
+        "M0": {
+          "ade_m": 0.579354,
+          "fde_m": 1.212211,
+          "ade_minus_cv_m": -0.072379
+        },
+        "M1": {
+          "ade_m": 0.561849,
+          "fde_m": 1.180508,
+          "ade_minus_cv_m": -0.089884
+        },
+        "Ours_Full": {
+          "ade_m": 0.616109,
+          "fde_m": 1.283316,
+          "ade_minus_cv_m": -0.035624
+        }
+      }
+    },
+    "italy_park": {
+      "windows": 20,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.406853,
+          "fde_m": 0.956982,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.685013,
+          "fde_m": 1.249759,
+          "ade_minus_cv_m": 0.27816
+        },
+        "M0": {
+          "ade_m": 0.415739,
+          "fde_m": 0.90509,
+          "ade_minus_cv_m": 0.008886
+        },
+        "M1": {
+          "ade_m": 0.414181,
+          "fde_m": 0.910436,
+          "ade_minus_cv_m": 0.007328
+        },
+        "Ours_Full": {
+          "ade_m": 0.420568,
+          "fde_m": 0.891065,
+          "ade_minus_cv_m": 0.013715
+        }
+      }
+    },
+    "japan_crossroad": {
+      "windows": 150,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.222842,
+          "fde_m": 0.547938,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.007371,
+          "fde_m": 1.949821,
+          "ade_minus_cv_m": 0.784529
+        },
+        "M0": {
+          "ade_m": 0.299312,
+          "fde_m": 0.67102,
+          "ade_minus_cv_m": 0.07647
+        },
+        "M1": {
+          "ade_m": 0.314794,
+          "fde_m": 0.707627,
+          "ade_minus_cv_m": 0.091952
+        },
+        "Ours_Full": {
+          "ade_m": 0.373066,
+          "fde_m": 0.83185,
+          "ade_minus_cv_m": 0.150224
+        }
+      }
+    },
+    "thailand_street": {
+      "windows": 11,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.277232,
+          "fde_m": 0.731363,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.546402,
+          "fde_m": 3.180707,
+          "ade_minus_cv_m": 1.26917
+        },
+        "M0": {
+          "ade_m": 0.457877,
+          "fde_m": 1.167919,
+          "ade_minus_cv_m": 0.180645
+        },
+        "M1": {
+          "ade_m": 0.424242,
+          "fde_m": 1.089434,
+          "ade_minus_cv_m": 0.14701
+        },
+        "Ours_Full": {
+          "ade_m": 0.372766,
+          "fde_m": 0.9481,
+          "ade_minus_cv_m": 0.095534
+        }
+      }
+    }
+  },
+  "by_clip_with_test_anchors": {
+    "america_crossroad_spring_daytime_sunny_2": {
+      "windows": 1,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.361769,
+          "fde_m": 1.012838,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.793479,
+          "fde_m": 3.046859,
+          "ade_minus_cv_m": 1.43171
+        },
+        "M0": {
+          "ade_m": 0.299746,
+          "fde_m": 0.453618,
+          "ade_minus_cv_m": -0.062023
+        },
+        "M1": {
+          "ade_m": 0.340476,
+          "fde_m": 0.490715,
+          "ade_minus_cv_m": -0.021293
+        },
+        "Ours_Full": {
+          "ade_m": 0.406471,
+          "fde_m": 0.599779,
+          "ade_minus_cv_m": 0.044702
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_0": {
+      "windows": 40,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.819157,
+          "fde_m": 2.077539,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.79989,
+          "fde_m": 1.564528,
+          "ade_minus_cv_m": -0.019267
+        },
+        "M0": {
+          "ade_m": 0.610292,
+          "fde_m": 1.499326,
+          "ade_minus_cv_m": -0.208865
+        },
+        "M1": {
+          "ade_m": 0.57485,
+          "fde_m": 1.469112,
+          "ade_minus_cv_m": -0.244307
+        },
+        "Ours_Full": {
+          "ade_m": 0.702346,
+          "fde_m": 1.722503,
+          "ade_minus_cv_m": -0.116811
+        }
+      }
+    },
+    "america_crossroad_summer_daytime_sunny_1": {
+      "windows": 14,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.298447,
+          "fde_m": 0.932655,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.43281,
+          "fde_m": 3.013553,
+          "ade_minus_cv_m": 1.134363
+        },
+        "M0": {
+          "ade_m": 0.266652,
+          "fde_m": 0.811638,
+          "ade_minus_cv_m": -0.031795
+        },
+        "M1": {
+          "ade_m": 0.23314,
+          "fde_m": 0.719587,
+          "ade_minus_cv_m": -0.065307
+        },
+        "Ours_Full": {
+          "ade_m": 0.402907,
+          "fde_m": 1.131026,
+          "ade_minus_cv_m": 0.10446
+        }
+      }
+    },
+    "america_crossroad_summer_night_sunny_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "america_crossroad_summer_night_sunny_1": {
+      "windows": 0,
+      "models": {}
+    },
+    "america_crossroad_summer_nightfall_sunny_0": {
+      "windows": 41,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 1.218214,
+          "fde_m": 2.376235,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.967821,
+          "fde_m": 1.384623,
+          "ade_minus_cv_m": -0.250393
+        },
+        "M0": {
+          "ade_m": 0.884634,
+          "fde_m": 1.54433,
+          "ade_minus_cv_m": -0.33358
+        },
+        "M1": {
+          "ade_m": 0.870932,
+          "fde_m": 1.477056,
+          "ade_minus_cv_m": -0.347282
+        },
+        "Ours_Full": {
+          "ade_m": 0.96563,
+          "fde_m": 1.590826,
+          "ade_minus_cv_m": -0.252584
+        }
+      }
+    },
+    "america_crossroad_summer_nightfall_sunny_1": {
+      "windows": 187,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.557121,
+          "fde_m": 1.195898,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.459504,
+          "fde_m": 0.900197,
+          "ade_minus_cv_m": -0.097617
+        },
+        "M0": {
+          "ade_m": 0.53329,
+          "fde_m": 1.106136,
+          "ade_minus_cv_m": -0.023831
+        },
+        "M1": {
+          "ade_m": 0.52177,
+          "fde_m": 1.093629,
+          "ade_minus_cv_m": -0.035351
+        },
+        "Ours_Full": {
+          "ade_m": 0.552263,
+          "fde_m": 1.165384,
+          "ade_minus_cv_m": -0.004858
+        }
+      }
+    },
+    "america_crossroad_winter_daytime_sunny_0": {
+      "windows": 8,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.479292,
+          "fde_m": 0.86326,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 2.124989,
+          "fde_m": 3.958034,
+          "ade_minus_cv_m": 1.645697
+        },
+        "M0": {
+          "ade_m": 0.684251,
+          "fde_m": 1.37635,
+          "ade_minus_cv_m": 0.204959
+        },
+        "M1": {
+          "ade_m": 0.674342,
+          "fde_m": 1.369949,
+          "ade_minus_cv_m": 0.19505
+        },
+        "Ours_Full": {
+          "ade_m": 0.600826,
+          "fde_m": 1.14406,
+          "ade_minus_cv_m": 0.121534
+        }
+      }
+    },
+    "america_crossroad_winter_daytime_sunny_1": {
+      "windows": 0,
+      "models": {}
+    },
+    "america_crossroad_winter_night_snow_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "america_crossroad_winter_night_snow_1": {
+      "windows": 21,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.439676,
+          "fde_m": 1.094527,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.651896,
+          "fde_m": 3.21867,
+          "ade_minus_cv_m": 1.21222
+        },
+        "M0": {
+          "ade_m": 0.567375,
+          "fde_m": 1.295839,
+          "ade_minus_cv_m": 0.127699
+        },
+        "M1": {
+          "ade_m": 0.52701,
+          "fde_m": 1.185975,
+          "ade_minus_cv_m": 0.087334
+        },
+        "Ours_Full": {
+          "ade_m": 0.535077,
+          "fde_m": 1.14131,
+          "ade_minus_cv_m": 0.095401
+        }
+      }
+    },
+    "america_crossroad_winter_nightfall_sunny_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "america_crossroad_winter_nightfall_sunny_1": {
+      "windows": 4,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.361362,
+          "fde_m": 0.848966,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.115626,
+          "fde_m": 2.367733,
+          "ade_minus_cv_m": 0.754264
+        },
+        "M0": {
+          "ade_m": 0.311819,
+          "fde_m": 0.720212,
+          "ade_minus_cv_m": -0.049543
+        },
+        "M1": {
+          "ade_m": 0.301205,
+          "fde_m": 0.694565,
+          "ade_minus_cv_m": -0.060157
+        },
+        "Ours_Full": {
+          "ade_m": 0.410541,
+          "fde_m": 0.980762,
+          "ade_minus_cv_m": 0.049179
+        }
+      }
+    },
+    "italy_park_summer_daytime_sunny_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "italy_park_summer_nightfall_sunny_0": {
+      "windows": 2,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.207234,
+          "fde_m": 0.537688,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.785946,
+          "fde_m": 1.47388,
+          "ade_minus_cv_m": 0.578712
+        },
+        "M0": {
+          "ade_m": 0.21969,
+          "fde_m": 0.537213,
+          "ade_minus_cv_m": 0.012456
+        },
+        "M1": {
+          "ade_m": 0.203023,
+          "fde_m": 0.501052,
+          "ade_minus_cv_m": -0.004211
+        },
+        "Ours_Full": {
+          "ade_m": 0.32596,
+          "fde_m": 0.66237,
+          "ade_minus_cv_m": 0.118726
+        }
+      }
+    },
+    "italy_park_summer_nightfall_sunny_1": {
+      "windows": 2,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.069208,
+          "fde_m": 0.194477,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.753095,
+          "fde_m": 1.449591,
+          "ade_minus_cv_m": 0.683887
+        },
+        "M0": {
+          "ade_m": 0.124437,
+          "fde_m": 0.271395,
+          "ade_minus_cv_m": 0.055229
+        },
+        "M1": {
+          "ade_m": 0.144811,
+          "fde_m": 0.305183,
+          "ade_minus_cv_m": 0.075603
+        },
+        "Ours_Full": {
+          "ade_m": 0.133515,
+          "fde_m": 0.292784,
+          "ade_minus_cv_m": 0.064307
+        }
+      }
+    },
+    "italy_park_winter_daytime_snow_3": {
+      "windows": 16,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.474011,
+          "fde_m": 1.104707,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.663886,
+          "fde_m": 1.196764,
+          "ade_minus_cv_m": 0.189875
+        },
+        "M0": {
+          "ade_m": 0.476658,
+          "fde_m": 1.030287,
+          "ade_minus_cv_m": 0.002647
+        },
+        "M1": {
+          "ade_m": 0.474247,
+          "fde_m": 1.037266,
+          "ade_minus_cv_m": 0.000236
+        },
+        "Ours_Full": {
+          "ade_m": 0.468275,
+          "fde_m": 0.994437,
+          "ade_minus_cv_m": -0.005736
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_0": {
+      "windows": 4,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.256785,
+          "fde_m": 0.652798,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.794119,
+          "fde_m": 3.389748,
+          "ade_minus_cv_m": 1.537334
+        },
+        "M0": {
+          "ade_m": 0.637129,
+          "fde_m": 1.336815,
+          "ade_minus_cv_m": 0.380344
+        },
+        "M1": {
+          "ade_m": 0.825941,
+          "fde_m": 1.811259,
+          "ade_minus_cv_m": 0.569156
+        },
+        "Ours_Full": {
+          "ade_m": 0.739514,
+          "fde_m": 1.642355,
+          "ade_minus_cv_m": 0.482729
+        }
+      }
+    },
+    "japan_crossroad_summer_daytime_sunny_1": {
+      "windows": 2,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.090941,
+          "fde_m": 0.27569,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.061901,
+          "fde_m": 1.913951,
+          "ade_minus_cv_m": 0.97096
+        },
+        "M0": {
+          "ade_m": 0.169379,
+          "fde_m": 0.343928,
+          "ade_minus_cv_m": 0.078438
+        },
+        "M1": {
+          "ade_m": 0.146088,
+          "fde_m": 0.347506,
+          "ade_minus_cv_m": 0.055147
+        },
+        "Ours_Full": {
+          "ade_m": 0.155061,
+          "fde_m": 0.301751,
+          "ade_minus_cv_m": 0.06412
+        }
+      }
+    },
+    "japan_crossroad_summer_night_sunny_2": {
+      "windows": 12,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.205506,
+          "fde_m": 0.535372,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.884894,
+          "fde_m": 1.556836,
+          "ade_minus_cv_m": 0.679388
+        },
+        "M0": {
+          "ade_m": 0.248739,
+          "fde_m": 0.583701,
+          "ade_minus_cv_m": 0.043233
+        },
+        "M1": {
+          "ade_m": 0.233379,
+          "fde_m": 0.562612,
+          "ade_minus_cv_m": 0.027873
+        },
+        "Ours_Full": {
+          "ade_m": 0.325839,
+          "fde_m": 0.749911,
+          "ade_minus_cv_m": 0.120333
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_0": {
+      "windows": 102,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.256812,
+          "fde_m": 0.619567,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.052379,
+          "fde_m": 2.081777,
+          "ade_minus_cv_m": 0.795567
+        },
+        "M0": {
+          "ade_m": 0.328992,
+          "fde_m": 0.741632,
+          "ade_minus_cv_m": 0.07218
+        },
+        "M1": {
+          "ade_m": 0.34942,
+          "fde_m": 0.780316,
+          "ade_minus_cv_m": 0.092608
+        },
+        "Ours_Full": {
+          "ade_m": 0.40386,
+          "fde_m": 0.895282,
+          "ade_minus_cv_m": 0.147048
+        }
+      }
+    },
+    "japan_crossroad_winter_daytime_sunny_1": {
+      "windows": 13,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.036775,
+          "fde_m": 0.081919,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.672639,
+          "fde_m": 1.283035,
+          "ade_minus_cv_m": 0.635864
+        },
+        "M0": {
+          "ade_m": 0.089793,
+          "fde_m": 0.169861,
+          "ade_minus_cv_m": 0.053018
+        },
+        "M1": {
+          "ade_m": 0.106592,
+          "fde_m": 0.209999,
+          "ade_minus_cv_m": 0.069817
+        },
+        "Ours_Full": {
+          "ade_m": 0.171743,
+          "fde_m": 0.375539,
+          "ade_minus_cv_m": 0.134968
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_0": {
+      "windows": 14,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.162588,
+          "fde_m": 0.432108,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.922315,
+          "fde_m": 1.713003,
+          "ade_minus_cv_m": 0.759727
+        },
+        "M0": {
+          "ade_m": 0.236484,
+          "fde_m": 0.515141,
+          "ade_minus_cv_m": 0.073896
+        },
+        "M1": {
+          "ade_m": 0.196463,
+          "fde_m": 0.457598,
+          "ade_minus_cv_m": 0.033875
+        },
+        "Ours_Full": {
+          "ade_m": 0.326802,
+          "fde_m": 0.744335,
+          "ade_minus_cv_m": 0.164214
+        }
+      }
+    },
+    "japan_crossroad_winter_nightfall_sunny_1": {
+      "windows": 3,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.267364,
+          "fde_m": 0.764475,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 0.729074,
+          "fde_m": 1.133835,
+          "ade_minus_cv_m": 0.46171
+        },
+        "M0": {
+          "ade_m": 0.329769,
+          "fde_m": 0.84892,
+          "ade_minus_cv_m": 0.062405
+        },
+        "M1": {
+          "ade_m": 0.348517,
+          "fde_m": 0.908048,
+          "ade_minus_cv_m": 0.081153
+        },
+        "Ours_Full": {
+          "ade_m": 0.259989,
+          "fde_m": 0.661408,
+          "ade_minus_cv_m": -0.007375
+        }
+      }
+    },
+    "thailand_street_summer_night_sunny_2": {
+      "windows": 8,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.359578,
+          "fde_m": 0.953784,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.655901,
+          "fde_m": 3.484375,
+          "ade_minus_cv_m": 1.296323
+        },
+        "M0": {
+          "ade_m": 0.555737,
+          "fde_m": 1.481607,
+          "ade_minus_cv_m": 0.196159
+        },
+        "M1": {
+          "ade_m": 0.516723,
+          "fde_m": 1.38221,
+          "ade_minus_cv_m": 0.157145
+        },
+        "Ours_Full": {
+          "ade_m": 0.440107,
+          "fde_m": 1.174985,
+          "ade_minus_cv_m": 0.080529
+        }
+      }
+    },
+    "thailand_street_winter_daytime_sunny_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "thailand_street_winter_night_sunny_1": {
+      "windows": 2,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.045014,
+          "fde_m": 0.105782,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.159684,
+          "fde_m": 2.209707,
+          "ade_minus_cv_m": 1.11467
+        },
+        "M0": {
+          "ade_m": 0.137988,
+          "fde_m": 0.269732,
+          "ade_minus_cv_m": 0.092974
+        },
+        "M1": {
+          "ade_m": 0.094028,
+          "fde_m": 0.175979,
+          "ade_minus_cv_m": 0.049014
+        },
+        "Ours_Full": {
+          "ade_m": 0.15233,
+          "fde_m": 0.292566,
+          "ade_minus_cv_m": 0.107316
+        }
+      }
+    },
+    "thailand_street_winter_nightfall_sunny_0": {
+      "windows": 0,
+      "models": {}
+    },
+    "thailand_street_winter_nightfall_sunny_1": {
+      "windows": 1,
+      "models": {
+        "constant_velocity": {
+          "ade_m": 0.082908,
+          "fde_m": 0.203153,
+          "ade_minus_cv_m": 0.0
+        },
+        "stationary": {
+          "ade_m": 1.443839,
+          "fde_m": 2.69336,
+          "ade_minus_cv_m": 1.360931
+        },
+        "M0": {
+          "ade_m": 0.314773,
+          "fde_m": 0.454786,
+          "ade_minus_cv_m": 0.231865
+        },
+        "M1": {
+          "ade_m": 0.344821,
+          "fde_m": 0.574133,
+          "ade_minus_cv_m": 0.261913
+        },
+        "Ours_Full": {
+          "ade_m": 0.274905,
+          "fde_m": 0.444084,
+          "ade_minus_cv_m": 0.191997
+        }
+      }
+    }
+  }
+}

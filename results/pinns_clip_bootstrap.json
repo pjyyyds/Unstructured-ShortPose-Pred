@@ -1,0 +1,39 @@
+{
+  "source": "results/pinns_motion_audit.json",
+  "metric": "Five-frame PINNS top-mode ADE in metres, M1 minus constant velocity. Negative favors M1.",
+  "windows": 497,
+  "nonempty_clips": 21,
+  "observed_site_windows": {
+    "america_crossroad": 316,
+    "italy_park": 20,
+    "japan_crossroad": 150,
+    "thailand_street": 11
+  },
+  "method": {
+    "sampling": "Unstratified paired resampling of nonempty clips with replacement, each clip equally likely. Each replicate draws the original number of clips and retains every paired window inside each selected clip.",
+    "seed": 2026,
+    "generator": "NumPy PCG64, source clip names sorted lexicographically",
+    "replicates": 20000,
+    "interval": "2.5th and 97.5th percentiles of bootstrap estimates, linear interpolation.",
+    "input_precision": "Source clip/model means are rounded to six decimal places in metres."
+  },
+  "window_weighted_difference": {
+    "estimate_m": -0.025849,
+    "percentile_95_interval_m": [
+      -0.129726,
+      0.071309
+    ]
+  },
+  "equal_clip_difference": {
+    "estimate_m": 0.046572,
+    "percentile_95_interval_m": [
+      -0.025357,
+      0.123737
+    ]
+  },
+  "scope": [
+    "Post-hoc comparison on the original V2 split reused during development. M1's five-seed average is held fixed throughout.",
+    "The bootstrap approximates independent clips and retains dependence within clips. Correlation between clips from a shared site may remain.",
+    "The observations cover four fixed locations. The intervals describe clip resampling on this observed pool and do not estimate transfer to new sites."
+  ]
+}
