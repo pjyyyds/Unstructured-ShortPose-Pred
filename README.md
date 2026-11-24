@@ -5,6 +5,14 @@
 
 ---
 
+## Predict from five observations
+
+Run the CPU predictor with a five-frame held-out PINNS checkpoint and an observation JSON file. Use `python -m scripts.predict_five_frame_pedestrian M1.pt five_observations.json --output forecast.json` from the repository root. The inference entry uses NumPy and PyTorch. It accepts the original five-frame M0/M1 weights or a checkpoint from the registered individual joint-action experiment.
+
+Supply five ascending `timestamps_s` at 10 Hz and five measured, consistently oriented, metric `ground_xy_m` positions for one tracked person. Pose models also take `image_height_px` and five `pose_frames`. Each pose frame contains `bbox_center_xywh_px` (box centre x/y, width and height in original image pixels) and `keypoints_xyc` (17 COCO joints with image x/y and confidence). A null pose frame denotes missing image observations. A measured box may be provided with null keypoints when joint estimation is unavailable. Camera calibration and pixel-to-ground conversion are upstream of this entry.
+
+The output contains six future paths of 30 positions at 0.1 s intervals in the input ground coordinate frame, the six probabilities, the zero-based selected path and the last-pair constant-velocity reference. A checkpoint trained with an action head additionally returns five independent event probabilities for start, stop, left turn, right turn and maintain. These targets describe movement events derived from ground trajectories. The four sites have already participated in research development.
+
 ## Benchmark status
 
 The archived V1 and V2 Kaggle runs each cover 50 configurations and 242 training runs. In each version, 46 configurations use five seeds and four sensitivity settings use three. V2 reused the split on which V1 had already been inspected. Independent confirmation and the proposed JRDB evaluation are pending. Under the original proposal, the data do not establish A (improvement at all three window lengths) or B (improvement in both short-window quality groups). C applies to the comparisons without a net benefit, including M1 versus its implicit-gate control at five frames.
