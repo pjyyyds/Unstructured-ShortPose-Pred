@@ -12,8 +12,11 @@ except ImportError:
 
 from .actions import compute_action_labels
 from .constants import DT, NUM_JOINTS, T_FUT
+from .pinns_bev import SOURCE_LABEL, bev_to_track_xy
 from .scene_graph import build_local_polylines, build_neighbor_edges
 from .splits import temporal_buffer_split_indices, verify_zero_temporal_leakage
+
+VIDEO_DECODE_PROTOCOL = "pinns_declared_frames_and_required_pedestrian_images_v1"
 
 
 def _check_right_handed_homography(calib: Dict) -> bool:
@@ -155,13 +158,10 @@ def extract_static_bev_and_train_polylines(
     train_ped_pts: np.ndarray,
     parked_car_boxes: np.ndarray,
     flip_y: bool,
+    *, bev_convention: str = SOURCE_LABEL,
 ) -> List[Tuple[np.ndarray, np.ndarray]]:
     """Extract non-lane static physical polylines strictly from BEV background + train split only."""
     polylines: List[Tuple[np.ndarray, np.ndarray]] = []
-    x_min = float(calib.get("x_min", 0.0))
-    x_max = float(calib.get("x_max", 30.0))
-    y_min = float(calib.get("y_min", 0.0))
-    y_max = float(calib.get("y_max", 30.0))
 
     # 1. Extract prominent structural edges (curbs/walls/planters) from static BEV median background
     if bev_video_path is not None and bev_video_path.exists():
@@ -185,14 +185,11 @@ def extract_static_bev_and_train_polylines(
                 if cv2.arcLength(cnt, False) < 0.12 * max(bw, bh) or len(cnt) < 4:
                     continue
                 uv = cnt.reshape(-1, 2).astype(np.float32)
-                wx = x_min + (uv[:, 0] / max(bw - 1.0, 1.0)) * (x_max - x_min)
-                wy = y_min + (1.0 - uv[:, 1] / max(bh - 1.0, 1.0)) * (y_max - y_min)
-                if flip_y:
-                    wy = y_max - (wy - y_min)
+                xy = bev_to_track_xy(uv, bw, bh, calib, flip_y, bev_convention)
                 attr = np.zeros(8, dtype=np.float32)
                 attr[0] = 1.0  # Curb / sidewalk / structural edge
                 attr[7] = 1.0  # Tangent direction valid
-                polylines.append((np.stack([wx, wy], axis=-1), attr))
+                polylines.append((xy, attr))
 
     # 2. Stationary parked vehicle obstacle contours (ch 4 in attr_8)
     for cx, cy in parked_car_boxes[:6]:
@@ -273,6 +270,7 @@ def process_pinns_sequence(
     forced_split: Optional[str] = None,
     min_t0_guard: int = 0,
     override_polys: Optional[List[Tuple[np.ndarray, np.ndarray]]] = None,
+    *, bev_convention: str = SOURCE_LABEL,
 ) -> Tuple[List[Dict], Optional[bool]]:
     """Extract leakage-free 10Hz samples with real RTMPose 2D keypoints for one PINNS sequence."""
     flip_y = _check_right_handed_homography(calib)
@@ -295,10 +293,12 @@ def process_pinns_sequence(
             for fi in farr:
                 frame_to_split[int(fi)] = sp_name
 
-    cap = cv2.VideoCapture(str(ori_video_path))
-    img_h = float(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) or 864.0)
     pose_map: Dict[Tuple[int, int], Tuple[np.ndarray, np.ndarray]] = {}
-    target_f10_set = set(by_f10.keys())
+    pose_targets = {}
+    for f10, objects in by_f10.items():
+        peds = [o for o in objects if o["type"].lower().startswith("per")]
+        if peds:
+            pose_targets[f10] = peds
     buf_crops, buf_cnts, buf_scls, buf_meta = [], [], [], []
 
     def _flush_pose_buffer() -> None:
@@ -312,30 +312,43 @@ def process_pinns_sequence(
             pose_map[(f_k, p_id)] = (uvc_all[idx_m], bx)
         buf_crops.clear(); buf_cnts.clear(); buf_scls.clear(); buf_meta.clear()
 
-    raw_idx = 0
-    while True:
-        if not cap.grab():
-            break
-        if raw_idx % 3 == 0:
+    cap = cv2.VideoCapture(str(ori_video_path))
+    try:
+        if not cap.isOpened():
+            raise ValueError(f"{seq_stem}: cannot open original video at raw frame 0")
+        count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        img_h = float(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        if not np.isfinite(count) or count < 1 or count != int(count) or not np.isfinite(img_h) or img_h <= 0:
+            raise ValueError(f"{seq_stem}: invalid video metadata at raw frame 0 (frames={count}, height={img_h})")
+        frame_count = int(count)
+        missing_target = next((3 * f for f in sorted(pose_targets) if 3 * f >= frame_count), None)
+        if missing_target is not None:
+            raise ValueError(f"{seq_stem}: required raw frame {missing_target} exceeds video length {frame_count}")
+        for raw_idx in range(frame_count):
+            if not cap.grab():
+                raise ValueError(f"{seq_stem}: cannot grab raw frame {raw_idx} of {frame_count}")
             f10 = raw_idx // 3
-            if f10 in target_f10_set:
-                peds = [o for o in by_f10[f10] if o["type"].lower().startswith("per")]
-                if peds:
-                    ok, frame_bgr = cap.retrieve()
-                    if ok and frame_bgr is not None:
-                        boxes = np.array(
-                            [[p["ox"], p["oy"] - 0.5 * p["h"], p["w"], p["h"]] for p in peds],
-                            dtype=np.float32,
-                        )
-                        cr, ct, sc = pose_ext.warp_crops(frame_bgr, boxes)
-                        buf_crops.append(cr); buf_cnts.append(ct); buf_scls.append(sc)
-                        for idx_p, p in enumerate(peds):
-                            buf_meta.append((f10, p["id"], boxes[idx_p]))
-                        if sum(len(x) for x in buf_crops) >= 256:
-                            _flush_pose_buffer()
-        raw_idx += 1
-    _flush_pose_buffer()
-    cap.release()
+            if raw_idx % 3 or f10 not in pose_targets:
+                continue
+            ok, frame_bgr = cap.retrieve()
+            if not ok or frame_bgr is None or not frame_bgr.size:
+                raise ValueError(f"{seq_stem}: cannot decode required raw frame {raw_idx} (10 Hz frame {f10})")
+            peds = pose_targets[f10]
+            boxes = np.array(
+                [[p["ox"], p["oy"] - 0.5 * p["h"], p["w"], p["h"]] for p in peds],
+                dtype=np.float32,
+            )
+            cr, ct, sc = pose_ext.warp_crops(frame_bgr, boxes)
+            buf_crops.append(cr); buf_cnts.append(ct); buf_scls.append(sc)
+            for idx_p, p in enumerate(peds):
+                buf_meta.append((f10, p["id"], boxes[idx_p]))
+            if len(buf_meta) >= 256:
+                _flush_pose_buffer()
+        if cap.grab():
+            raise ValueError(f"{seq_stem}: unexpected raw frame {frame_count} beyond declared video length")
+        _flush_pose_buffer()
+    finally:
+        cap.release()
 
     if override_polys is not None:
         polys = override_polys
@@ -351,7 +364,7 @@ def process_pinns_sequence(
                         parked_pts.append([o["wx"], o["wy"]])
         ped_arr = np.array(train_ped_pts, dtype=np.float32) if train_ped_pts else np.zeros((0, 2), dtype=np.float32)
         pk_arr = np.unique(np.round(parked_pts, 1), axis=0) if parked_pts else np.zeros((0, 2), dtype=np.float32)
-        polys = extract_static_bev_and_train_polylines(bev_video_path, calib, ped_arr, pk_arr, flip_y)
+        polys = extract_static_bev_and_train_polylines(bev_video_path, calib, ped_arr, pk_arr, flip_y, bev_convention=bev_convention)
 
     return _assemble_sequence_windows(
         seq_stem, by_f10, pose_map, polys, frame_to_split, img_h, window_stride
@@ -381,7 +394,7 @@ def _assemble_sequence_windows(
         if not peds_t0:
             continue
 
-        # Precompute all objects' recent 5-frame state at t0 for neighbor graph
+        # The five graph observations run from t0-4 through t0.
         all_states = []
         for o in frame_objs:
             key = (o["type"], o["id"])
@@ -389,7 +402,7 @@ def _assemble_sequence_windows(
             obs_5 = sum(1 for k in range(t0 - 4, t0 + 1) if k in tf) / 5.0
             vel = np.zeros(2, dtype=np.float32)
             v_ok = 0.0
-            for back in range(1, 6):
+            for back in range(1, 5):
                 if (t0 - back) in tf:
                     prev = tf[t0 - back]
                     vel = np.array([o["wx"] - prev["wx"], o["wy"] - prev["wy"]], dtype=np.float32) / (back * DT)
@@ -466,6 +479,7 @@ def _assemble_sequence_windows(
             samples.append(
                 {
                     "seq_id": seq_stem,
+                    "person_id": int(oid),
                     "split": split_name,
                     "t0_frame_10hz": int(t0),
                     "img_h": float(img_h),

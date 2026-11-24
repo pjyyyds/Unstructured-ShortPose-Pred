@@ -1,17 +1,19 @@
 """Cloud GPU orchestrator for PINNS + JTA extraction, 5-seed ablations, and Holm-Bonferroni stats."""
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
+import hashlib
+from pathlib import Path, PurePosixPath
+from tempfile import NamedTemporaryFile
 from typing import Dict, List, Optional, Tuple
 import json
-import shutil
-import subprocess
 import time
-import urllib.request
 import zipfile
 import numpy as np
 import torch
 
+from scripts.run_heldout_cloud import download_zip, extract_member
+from src.data.pinns_bev import LEGACY_RASTER, SOURCE_LABEL, require_cache_convention
+from src.data.pinns_extractor import VIDEO_DECODE_PROTOCOL
 from src.data.constants import DT, FIXED_SEEDS, T_FUT
 from src.data.dataset_builder import materialize_window_split, process_pinns_root
 from src.data.jta_builder import process_jta_root
@@ -32,45 +34,39 @@ RTMPOSE_ONNX_URL = (
 
 
 def _download_verified_zip(url: str, dst_zip: Path, gdrive_id: Optional[str] = None) -> None:
+    sizes = {RTMPOSE_ONNX_URL: 50_799_818, PINNS_DIRECT_URL: 973_657_335, ST_RELEASE_URL: 305_870_808}
     dst_zip.parent.mkdir(parents=True, exist_ok=True)
-    if dst_zip.exists() and dst_zip.stat().st_size > 1024:
-        with open(dst_zip, "rb") as f:
-            if f.read(4) == b"PK\x03\x04":
-                return
-
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    try:
-        with urllib.request.urlopen(req, timeout=180) as resp, open(dst_zip, "wb") as out:
-            shutil.copyfileobj(resp, out, length=4 * 1024 * 1024)
-    except Exception as exc:
-        print(f"[WARN] Direct urllib download failed ({exc}), trying gdown fallback...")
-
-    valid = False
-    if dst_zip.exists() and dst_zip.stat().st_size > 1024:
-        with open(dst_zip, "rb") as f:
-            valid = f.read(4) == b"PK\x03\x04"
-
-    if not valid and gdrive_id is not None:
-        subprocess.run(["gdown", "--fuzzy", gdrive_id, "-O", str(dst_zip)], check=True)
-        with open(dst_zip, "rb") as f:
-            if f.read(4) != b"PK\x03\x04":
-                raise RuntimeError(f"Downloaded file {dst_zip} is not a valid ZIP archive!")
+    download_zip(url, dst_zip, sizes[url], drive_id=gdrive_id)
 
 
-def stage_and_extract_all_datasets(
-    scratch_dir: Path = Path("/tmp/shortpose_raw"),
-    cache_dir: Optional[Path] = None,
-) -> Tuple[List[Dict], List[Dict], Dict]:
-    """Download RTMPose-m ONNX, PINNS, and Social-Transmotion JTA into `/tmp`, extract, and cache."""
-    if cache_dir is None:
-        cache_dir = Path("/kaggle/working/cache") if Path("/kaggle/working").exists() else (scratch_dir / "cache")
-    cache_pt = cache_dir / "extracted_samples_v1.pt"
-    for cand in [cache_pt, *Path("/kaggle/input").rglob("extracted_samples_v1.pt")] if Path("/kaggle/input").exists() else [cache_pt]:
-        if cand.exists() and cand.stat().st_size > 1024:
-            print(f"[Stage 7] Loading pre-extracted cache from {cand}...", flush=True)
-            pkg = torch.load(cand, map_location="cpu", weights_only=False)
-            return pkg["pinns"], pkg["jta"], pkg["diag"]
+def cache_has_verified_video(diag: Dict, bev_convention: str) -> bool:
+    """Historical unversioned pose is usable only in an explicitly requested legacy run."""
+    require_cache_convention(diag, bev_convention)
+    return bev_convention == LEGACY_RASTER or diag["pinns"].get("video_decode_protocol") == VIDEO_DECODE_PROTOCOL
 
+
+def _unpack_verified_zip(archive: Path, destination: Path) -> None:
+    """Repair missing or corrupt members of the verified cloud archive on every entry."""
+    import fcntl
+
+    destination.mkdir(parents=True, exist_ok=True)
+    root = destination.resolve()
+    # extract_member uses one atomic .part file per destination. Serialize concurrent re-entry.
+    with (root / ".extraction.lock").open("a") as lock, zipfile.ZipFile(archive) as source:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        for entry in source.infolist():
+            relative = PurePosixPath(entry.filename)
+            target = root / relative
+            if relative.is_absolute() or ".." in relative.parts or not target.resolve().is_relative_to(root):
+                raise ValueError(f"Invalid path in {archive.name}: {entry.filename}")
+            if entry.is_dir():
+                target.mkdir(parents=True, exist_ok=True)
+            else:
+                extract_member(source, entry.filename, target)
+
+
+def stage_pinns_data(scratch_dir: Path, *, bev_convention: str = SOURCE_LABEL):
+    """Extract real PINNS samples only, without requiring JTA for a PINNS comparison."""
     scratch_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
 
@@ -78,34 +74,60 @@ def stage_and_extract_all_datasets(
     rtm_zip = scratch_dir / "rtmpose_m.zip"
     rtm_dir = scratch_dir / "rtmpose_m"
     _download_verified_zip(RTMPOSE_ONNX_URL, rtm_zip)
-    if not rtm_dir.exists():
-        with zipfile.ZipFile(rtm_zip, "r") as zf:
-            zf.extractall(rtm_dir)
+    _unpack_verified_zip(rtm_zip, rtm_dir)
     onnx_files = [p for p in rtm_dir.rglob("end2end.onnx") if "__macosx" not in str(p).lower()]
-    onnx_path = onnx_files[0] if onnx_files else None
+    if len(onnx_files) != 1:
+        raise ValueError("Expected exactly one RTMPose-m ONNX model")
+    onnx_path = onnx_files[0]
+    model_sha = hashlib.sha256(onnx_path.read_bytes()).hexdigest()
+    if model_sha != "5c0a4bf67953e6d2ac43ce15e77dc9d5d354ae18430a47d2c5963a7bc5683e3c":
+        raise ValueError("Unexpected RTMPose-m weights")
     print(f"[Stage 7] RTMPose ONNX ready: {onnx_path}", flush=True)
 
     # 2. PINNS real unstructured roadside dataset
     pinns_zip = scratch_dir / "pinns.zip"
     pinns_dir = scratch_dir / "pinns_unpacked"
     _download_verified_zip(PINNS_DIRECT_URL, pinns_zip, gdrive_id=PINNS_GDRIVE_ID)
-    if not (pinns_dir / "labels").exists():
-        with zipfile.ZipFile(pinns_zip, "r") as zf:
-            zf.extractall(pinns_dir)
+    _unpack_verified_zip(pinns_zip, pinns_dir)
     cand_roots = [pinns_dir] + [
         p.parent for p in pinns_dir.rglob("labels") if p.is_dir() and "__macosx" not in str(p).lower()
     ]
     pinns_root = next(p for p in cand_roots if (p / "labels").is_dir() and (p / "videos").is_dir())
-    pinns_samples, pinns_audit = process_pinns_root(pinns_root, onnx_path=onnx_path, window_stride=4)
+    pinns_samples, pinns_audit = process_pinns_root(
+        pinns_root, onnx_path=onnx_path, window_stride=4, bev_convention=bev_convention
+    )
     print(f"[Stage 7] PINNS extracted in {time.perf_counter()-t0:.1f}s: {pinns_audit}", flush=True)
+
+    pinns_audit["onnx_sha256"] = model_sha
+    return pinns_samples, pinns_audit
+
+
+def stage_and_extract_all_datasets(
+    scratch_dir: Path = Path("/tmp/shortpose_raw"),
+    cache_dir: Optional[Path] = None,
+    *, bev_convention: str = SOURCE_LABEL,
+) -> Tuple[List[Dict], List[Dict], Dict]:
+    """Download RTMPose-m ONNX, PINNS, and Social-Transmotion JTA into `/tmp`, extract, and cache."""
+    if cache_dir is None:
+        cache_dir = Path("/kaggle/working/cache") if Path("/kaggle/working").exists() else (scratch_dir / "cache")
+    cache_name = "extracted_samples_v1.pt" if bev_convention == LEGACY_RASTER else f"extracted_samples_{bev_convention}_with_person_id.pt"
+    cache_pt = cache_dir / cache_name
+    for cand in [cache_pt, *Path("/kaggle/input").rglob(cache_name)] if Path("/kaggle/input").exists() else [cache_pt]:
+        if cand.exists() and cand.stat().st_size > 1024:
+            print(f"[Stage 7] Loading pre-extracted cache from {cand}...", flush=True)
+            pkg = torch.load(cand, map_location="cpu", weights_only=False)
+            if cache_has_verified_video(pkg["diag"], bev_convention):
+                return pkg["pinns"], pkg["jta"], pkg["diag"]
+            print(f"Skipping {cand.name} without the current original-video decode check.", flush=True)
+            del pkg
+
+    pinns_samples, pinns_audit = stage_pinns_data(scratch_dir, bev_convention=bev_convention)
 
     # 3. Social-Transmotion JTA 2.5Hz benchmark
     st_zip = scratch_dir / "st_releases.zip"
     st_dir = scratch_dir / "st_unpacked"
     _download_verified_zip(ST_RELEASE_URL, st_zip)
-    if not (st_dir / "jta").exists():
-        with zipfile.ZipFile(st_zip, "r") as zf:
-            zf.extractall(st_dir)
+    _unpack_verified_zip(st_zip, st_dir)
     jta_data_roots = [
         p for p in st_dir.rglob("data") if p.is_dir() and "jta" in str(p).lower() and "__macosx" not in str(p).lower()
     ]
@@ -128,7 +150,9 @@ def stage_and_extract_all_datasets(
         "pinns_test_action_pos_counts": ya[ma].sum(axis=0).astype(int).tolist() if np.any(ma) else [0] * 5,
     }
     cache_dir.mkdir(parents=True, exist_ok=True)
-    torch.save({"pinns": pinns_samples, "jta": jta_samples, "diag": diag}, cache_pt)
+    with NamedTemporaryFile(dir=cache_dir, delete=False) as temp:
+        torch.save({"pinns": pinns_samples, "jta": jta_samples, "diag": diag}, temp)
+    Path(temp.name).replace(cache_pt)
     print(f"[Stage 7] Cached extracted datasets to {cache_pt} ({cache_pt.stat().st_size/1e6:.1f} MB)", flush=True)
     return pinns_samples, jta_samples, diag
 
@@ -299,8 +323,16 @@ def execute_suites_from_samples(
     out_dir: Path = Path("/kaggle/working"),
     epochs_pinns: int = 32,
     epochs_jta: int = 28,
+    *, bev_convention: str = SOURCE_LABEL,
 ) -> Path:
     """Materialize splits, execute Suites A-E across 5 seeds, compute stats, and zip results."""
+    if not cache_has_verified_video(diag, bev_convention):
+        raise ValueError("Rebuild the source_label input with the current original-video decode check.")
+    result_tag = bev_convention
+    if diag["pinns"].get("map_inputs") == "source_label_causal_image":
+        result_tag = "source_label_causal_image"
+    if bev_convention != LEGACY_RASTER:
+        out_dir = out_dir / result_tag
     res_dir = out_dir / "results"
     ckpt_dir = out_dir / "checkpoints"
     res_dir.mkdir(parents=True, exist_ok=True)
@@ -386,7 +418,8 @@ def execute_suites_from_samples(
     (res_dir / "master_experiment_report.json").write_text(json.dumps(master, indent=2))
     np.savez_compressed(res_dir / "paired_sample_errors.npz", **all_paired)
 
-    bundle_zip = out_dir / "unstructured_shortpose_v1_results.zip"
+    name = "v1" if bev_convention == LEGACY_RASTER else result_tag
+    bundle_zip = out_dir / f"unstructured_shortpose_{name}_results.zip"
     with zipfile.ZipFile(bundle_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for folder in (res_dir, ckpt_dir):
             for fp in sorted(folder.rglob("*")):

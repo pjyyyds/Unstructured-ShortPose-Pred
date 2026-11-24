@@ -16,6 +16,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from src.data.pinns_bev import LEGACY_RASTER
 from src.data.pinns_extractor import (
     _assemble_sequence_windows,
     _check_right_handed_homography,
@@ -32,7 +33,7 @@ CHANNELS = (
 )
 IMPLEMENTATION = (
     "src/data/pinns_extractor.py", "src/data/scene_graph.py",
-    "src/data/dataset_builder.py", "src/data/splits.py",
+    "src/data/dataset_builder.py", "src/data/splits.py", "src/data/pinns_bev.py",
 )
 
 
@@ -98,7 +99,9 @@ def build_map(frames, limits, bev_clip, condition, calibration, flip_y, bev_root
                     vehicles.append(xy)
     ped_xy = np.asarray([row[3] for row in pedestrians], dtype=np.float32).reshape(-1, 2)
     vehicle_xy = np.unique(np.round(vehicles, 1), axis=0) if vehicles else np.empty((0, 2))
-    polylines = extract_static_bev_and_train_polylines(bev_root / video, calibration, ped_xy, vehicle_xy, flip_y)
+    polylines = extract_static_bev_and_train_polylines(
+        bev_root / video, calibration, ped_xy, vehicle_xy, flip_y, bev_convention=LEGACY_RASTER
+    )
     vertices = {tuple(xy) for points, attrs in polylines if attrs[5] for xy in points}
     pool_frames = defaultdict(set)
     vertex_frames = defaultdict(set)

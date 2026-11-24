@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "opencv": "5.1.0",
+  "backends": [
+    "FFMPEG"
+  ],
+  "video_inventory_sha256": "703beaf58dc695a23a8523c40f81ff295a64e1df8ef6bf16d7ccb4b513ba555c",
+  "label_and_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "container_formats": [
+    {
+      "width_px": 1536,
+      "height_px": 864,
+      "fps": 30.0,
+      "clips": 47
+    }
+  ],
+  "all": {
+    "clips": 47,
+    "declared_frames": 26296,
+    "grabbed_within_declared_span": 26296,
+    "eof_at_declared_count": 47,
+    "requested_person_frames": 8274,
+    "retrieved_person_frames": 8274,
+    "matching_decoded_dimensions": 8274,
+    "person_frame_requests_outside_span": 0,
+    "early_grab_failures": 0,
+    "required_retrieve_failures": 0,
+    "unexpected_frames_after_declared_end": 0,
+    "decoded_size_mismatches": 0,
+    "clips_with_calibration_size_mismatch": 0,
+    "clips_with_calibration_fps_mismatch": 0
+  },
+  "by_site": {
+    "america_crossroad": {
+      "clips": 14,
+      "declared_frames": 11073,
+      "grabbed_within_declared_span": 11073,
+      "eof_at_declared_count": 14,
+      "requested_person_frames": 3470,
+      "retrieved_person_frames": 3470,
+      "matching_decoded_dimensions": 3470,
+      "person_frame_requests_outside_span": 0,
+      "early_grab_failures": 0,
+      "required_retrieve_failures": 0,
+      "unexpected_frames_after_declared_end": 0,
+      "decoded_size_mismatches": 0,
+      "clips_with_calibration_size_mismatch": 0,
+      "clips_with_calibration_fps_mismatch": 0
+    },
+    "italy_park": {
+      "clips": 9,
+      "declared_frames": 4153,
+      "grabbed_within_declared_span": 4153,
+      "eof_at_declared_count": 9,
+      "requested_person_frames": 1276,
+      "retrieved_person_frames": 1276,
+      "matching_decoded_dimensions": 1276,
+      "person_frame_requests_outside_span": 0,
+      "early_grab_failures": 0,
+      "required_retrieve_failures": 0,
+      "unexpected_frames_after_declared_end": 0,
+      "decoded_size_mismatches": 0,
+      "clips_with_calibration_size_mismatch": 0,
+      "clips_with_calibration_fps_mismatch": 0
+    },
+    "japan_crossroad": {
+      "clips": 11,
+      "declared_frames": 6134,
+      "grabbed_within_declared_span": 6134,
+      "eof_at_declared_count": 11,
+      "requested_person_frames": 1991,
+      "retrieved_person_frames": 1991,
+      "matching_decoded_dimensions": 1991,
+      "person_frame_requests_outside_span": 0,
+      "early_grab_failures": 0,
+      "required_retrieve_failures": 0,
+      "unexpected_frames_after_declared_end": 0,
+      "decoded_size_mismatches": 0,
+      "clips_with_calibration_size_mismatch": 0,
+      "clips_with_calibration_fps_mismatch": 0
+    },
+    "thailand_street": {
+      "clips": 13,
+      "declared_frames": 4936,
+      "grabbed_within_declared_span": 4936,
+      "eof_at_declared_count": 13,
+      "requested_person_frames": 1537,
+      "retrieved_person_frames": 1537,
+      "matching_decoded_dimensions": 1537,
+      "person_frame_requests_outside_span": 0,
+      "early_grab_failures": 0,
+      "required_retrieve_failures": 0,
+      "unexpected_frames_after_declared_end": 0,
+      "decoded_size_mismatches": 0,
+      "clips_with_calibration_size_mismatch": 0,
+      "clips_with_calibration_fps_mismatch": 0
+    }
+  }
+}

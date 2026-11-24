@@ -1,38 +1,45 @@
-"""Stage 8-9: Resumable incremental multi-seed experiment runner with auto-git checkpointing."""
+"""Stage 8-9: Resumable incremental multi-seed experiment runner with local result checkpoints."""
 
 from pathlib import Path
 import json
 import pickle
-import subprocess
 import time
 import numpy as np
 import torch
 
-from scripts.cloud_experiment_runner import build_statistical_tables, run_model_grid
+from scripts.cloud_experiment_runner import build_statistical_tables, cache_has_verified_video, run_model_grid
+from src.data.pinns_bev import CONVENTIONS, LEGACY_RASTER, SOURCE_LABEL
 from src.data.constants import DT, FIXED_SEEDS, T_FUT
 from src.data.dataset_builder import materialize_window_split
 from src.engine.trainer import benchmark_inference_latency
 
 
-def _git_checkpoint(proj_root: Path, msg: str) -> None:
-    try:
-        subprocess.run(["git", "-C", str(proj_root), "add", "results/", "CONTEXT_MEMORY.md"], check=False)
-        subprocess.run(["git", "-C", str(proj_root), "commit", "-m", msg], check=False)
-        subprocess.run(["git", "-C", str(proj_root), "push", "-u", "origin", "main"], timeout=15, check=False)
-    except Exception:
-        pass
-
-
-def main() -> None:
+def main(*, bev_convention=SOURCE_LABEL) -> None:
     proj_root = Path(__file__).resolve().parents[1]
-    pkl_path = proj_root / "data_cache" / "extracted_pinns_jta.pkl"
+    filename = "extracted_pinns_jta.pkl" if bev_convention == LEGACY_RASTER else f"extracted_pinns_jta_{bev_convention}.pkl"
+    pkl_path = proj_root / "data_cache" / filename
     res_dir = proj_root / "results"
     ckpt_dir = proj_root / "checkpoints"
+    if bev_convention != LEGACY_RASTER:
+        res_dir, ckpt_dir = res_dir / bev_convention, ckpt_dir / bev_convention
     res_dir.mkdir(parents=True, exist_ok=True)
     ckpt_dir.mkdir(parents=True, exist_ok=True)
 
     with open(pkl_path, "rb") as pf:
         bundle = pickle.load(pf)
+    if not cache_has_verified_video(bundle["diag"], bev_convention):
+        raise ValueError("Run Stage 7 to rebuild the source_label cache with the current original-video decode check.")
+    if bev_convention == SOURCE_LABEL:
+        marker = res_dir / "dataset_diagnostics.json"
+        if marker.exists():
+            if not cache_has_verified_video(json.loads(marker.read_text()), bev_convention):
+                raise ValueError("Existing results predate the original-video decode check. Use a fresh run directory.")
+        else:
+            resumable = [*res_dir.glob("suite_*.json"), *res_dir.glob("*.npz"), *ckpt_dir.glob("*.pt")]
+            if resumable:
+                raise ValueError("Missing BEV convention for existing results. Use a clean source_label run directory.")
+            marker.write_text(json.dumps(bundle["diag"], indent=2))
+
     pinns_samples = bundle["pinns"]
     jta_samples = bundle["jta"]
     diag = bundle["diag"]
@@ -73,7 +80,6 @@ def main() -> None:
         all_summaries.update(s_ab); all_paired.update(p_ab)
         ab_file.write_text(json.dumps(s_ab, indent=2))
         np.savez_compressed(paired_npz, **all_paired)
-        _git_checkpoint(proj_root, "exp(suite-AB): complete Research 1 & 2 5-seed results on PINNS")
 
     # 2. Suite CD
     cd_file = res_dir / "suite_CD.json"
@@ -91,7 +97,6 @@ def main() -> None:
         all_summaries.update(s_cd); all_paired.update(p_cd)
         cd_file.write_text(json.dumps(s_cd, indent=2))
         np.savez_compressed(paired_npz, **all_paired)
-        _git_checkpoint(proj_root, "exp(suite-CD): complete Research 3 & SOTA baselines 5-seed results on PINNS")
 
     # 3. Suite E (JTA + Sensitivity + Latency + Statistical Tables)
     tasks_jta = [
@@ -126,9 +131,11 @@ def main() -> None:
     }
     (res_dir / "master_experiment_report.json").write_text(json.dumps(master, indent=2))
     np.savez_compressed(paired_npz, **all_paired)
-    _git_checkpoint(proj_root, "exp(master): complete JTA cross-dataset, sensitivity, latency, and Holm-Bonferroni tables")
     print("ALL STAGE 8-9 SUITES FINISHED!", flush=True)
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--bev-convention", choices=CONVENTIONS, default=SOURCE_LABEL)
+    main(bev_convention=parser.parse_args().bev_convention)

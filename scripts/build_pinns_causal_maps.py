@@ -20,6 +20,8 @@ from src.data.pinns_extractor import (
     _check_right_handed_homography,
     _parse_pinns_label_file,
 )
+from src.data import pinns_bev
+from src.data.pinns_bev import CONVENTIONS, LEGACY_RASTER, SOURCE_LABEL, bev_to_track_xy
 from src.data.scene_graph import build_local_polylines
 from src.data.splits import assign_site_clip_splits
 
@@ -42,7 +44,7 @@ class Clip:
         return keyed_windows(self.label.stem, self.frames, self.triggers, self.calibration["v_size"])
 
 
-def edges_from_frames(video, selected, calib, flipped):
+def edges_from_frames(video, selected, calib, flipped, *, bev_convention=SOURCE_LABEL):
     """Same Canny recipe as the frozen implementation; read only the nominated source frames."""
     cap = cv2.VideoCapture(str(video))
     images = []
@@ -66,13 +68,10 @@ def edges_from_frames(video, selected, calib, flipped):
         if len(contour) < 4 or cv2.arcLength(contour, False) < 0.12 * max(height, width):
             continue
         uv = contour.reshape(-1, 2).astype(np.float32)
-        wx = calib["x_min"] + uv[:, 0] / (width - 1) * (calib["x_max"] - calib["x_min"])
-        wy = calib["y_min"] + (1 - uv[:, 1] / (height - 1)) * (calib["y_max"] - calib["y_min"])
-        if flipped:
-            wy = calib["y_max"] - (wy - calib["y_min"])
+        xy = bev_to_track_xy(uv, width, height, calib, flipped, bev_convention)
         attrs = np.zeros(8, dtype=np.float32)
         attrs[[0, 7]] = 1
-        result.append((np.stack([wx, wy], axis=-1), attrs))
+        result.append((xy, attrs))
     return result
 
 
@@ -152,7 +151,9 @@ def load_motion_windows(data_root):
     return windows
 
 
-def build(data_root, bev_root, destination):
+def build(data_root, bev_root, destination, *, bev_convention=SOURCE_LABEL):
+    if bev_convention not in CONVENTIONS:
+        raise ValueError(f"Unknown PINNS BEV convention: {bev_convention}")
     if destination.exists():
         raise FileExistsError(f"Use a new output directory: {destination}")
     cv2.setNumThreads(1)
@@ -178,7 +179,7 @@ def build(data_root, bev_root, destination):
         if len(set(raw)) != len(raw) or any(triggers[f // 3] != "train" for f in raw):
             raise ValueError(f"Invalid reference frame in {clip}")
         video = bev_root / "videos" / condition / "videos" / f"bev_{index}.mp4"
-        image_lines = edges_from_frames(video, raw, calib, flipped) if source else []
+        image_lines = edges_from_frames(video, raw, calib, flipped, bev_convention=bev_convention) if source else []
         reference = []
         for frame, objects in frames.items():
             if frame in reference_set:
@@ -223,7 +224,9 @@ def build(data_root, bev_root, destination):
         p_env_image=edge, p_env_hull=hull, m_map_image=edge[:, :, :, 10].any(axis=(1, 2)).astype(np.float32),
         m_map_hull=hull[:, :, :, 10].any(axis=(1, 2)).astype(np.float32),
     )
-    fields = {"protocol": "causal_same_clip_training_reference_v1", "counts": counts, "sources": manifest,
+    protocol = "causal_same_clip_training_reference_v1" if bev_convention == LEGACY_RASTER else "causal_same_clip_training_reference_v2_source_label"
+    fields = {"protocol": protocol, "bev_convention": bev_convention,
+              "bev_converter_sha256": digest(Path(pinns_bev.__file__)), "counts": counts, "sources": manifest,
               "script_sha256": digest(Path(__file__)), "npz_sha256": digest(destination / "maps.npz"),
               "opencv": cv2.__version__, "numpy": np.__version__}
     (destination / "manifest.json").write_text(json.dumps(fields, indent=2) + "\n")
@@ -235,5 +238,7 @@ if __name__ == "__main__":
     parser.add_argument("data_root", type=Path)
     parser.add_argument("bev_root", type=Path)
     parser.add_argument("destination", type=Path)
+    parser.add_argument("--bev-convention", choices=CONVENTIONS, default=SOURCE_LABEL,
+                        help="Use legacy_raster to reconstruct the original frozen Canny experiment.")
     args = parser.parse_args()
-    build(args.data_root, args.bev_root, args.destination)
+    build(args.data_root, args.bev_root, args.destination, bev_convention=args.bev_convention)

@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT))
 from reviews.pinns_graph_control.run_graph_control import graph, typed_frame
 from reviews.pinns_matched_multiseed.replay_helpers import CACHE_SHA
 from scripts.build_pinns_causal_maps import edges_from_frames
+from src.data.pinns_bev import LEGACY_RASTER
 from src.data.features import build_motion_features, build_pose_and_quality_features
 from src.data.pinns_extractor import _check_right_handed_homography, _parse_pinns_label_file
 from src.data.scene_graph import build_local_polylines
@@ -73,7 +74,7 @@ def write_inputs(cache_path, original_pose, metadata, bev_root, destination):
         # Frame zero of the official bird's-eye-view video precedes all 5/10/20 histories here.
         if tick - 19 <= 0:
             raise ValueError("Map frame must precede the earliest history")
-        polylines = edges_from_frames(bev_file, [0], calibration, flip)
+        polylines = edges_from_frames(bev_file, [0], calibration, flip, bev_convention=LEGACY_RASTER)
         counts = Counter()
         members = sorted(groups[clip, tick])
         if len(members) != len(set(person for person, _ in members)):

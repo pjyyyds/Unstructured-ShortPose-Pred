@@ -3,6 +3,7 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+import hashlib
 import json
 import time
 import numpy as np
@@ -11,8 +12,11 @@ import torch
 from .actions import compute_action_labels
 from .constants import DT, NUM_JOINTS, T_FUT
 from .features import build_motion_features, build_pose_and_quality_features
+from . import pinns_bev
+from .pinns_bev import CONVENTIONS, SOURCE_LABEL
 from .pinns_extractor import (
     RTMPoseONNXExtractor,
+    VIDEO_DECODE_PROTOCOL,
     _check_right_handed_homography,
     _parse_pinns_label_file,
     extract_static_bev_and_train_polylines,
@@ -22,7 +26,7 @@ from .scene_graph import build_neighbor_edges
 from .splits import assign_site_clip_splits, verify_zero_temporal_leakage
 
 
-def _build_site_train_polylines(train_entries: List[Tuple]) -> List[Tuple[np.ndarray, np.ndarray]]:
+def _build_site_train_polylines(train_entries: List[Tuple], bev_convention: str = SOURCE_LABEL) -> List[Tuple[np.ndarray, np.ndarray]]:
     """Build static BEV polylines for one camera site strictly from its train clips only."""
     if not train_entries:
         return []
@@ -40,16 +44,20 @@ def _build_site_train_polylines(train_entries: List[Tuple]) -> List[Tuple[np.nda
                     parked_pts.append([o["wx"], o["wy"]])
     ped_arr = np.array(train_ped_pts, dtype=np.float32) if train_ped_pts else np.zeros((0, 2), dtype=np.float32)
     pk_arr = np.unique(np.round(parked_pts, 1), axis=0) if parked_pts else np.zeros((0, 2), dtype=np.float32)
-    return extract_static_bev_and_train_polylines(first_bev, calib, ped_arr, pk_arr, flip_y)
+    return extract_static_bev_and_train_polylines(first_bev, calib, ped_arr, pk_arr, flip_y, bev_convention=bev_convention)
 
 
 def process_pinns_root(
     pinns_root: Path,
     onnx_path: Optional[Path] = None,
     window_stride: int = 3,
+    *, bev_convention: str = SOURCE_LABEL,
 ) -> Tuple[List[Dict], Dict]:
     """Process all PINNS sequences under `pinns_root` with stratified anti-leakage site splits."""
     import queue
+
+    if bev_convention not in CONVENTIONS:
+        raise ValueError(f"Unknown PINNS BEV convention: {bev_convention}")
 
     labels_dir = pinns_root / "labels"
     videos_dir = pinns_root / "videos"
@@ -78,7 +86,7 @@ def process_pinns_root(
         clip_map = assign_site_clip_splits([e[1] for e in entries])
         if clip_map:
             tr_entries = [e for e in entries if clip_map[e[1]][0] == "train"]
-            site_polys = _build_site_train_polylines(tr_entries)
+            site_polys = _build_site_train_polylines(tr_entries, bev_convention)
             for e in entries:
                 sp_name, guard = clip_map[e[1]]
                 jobs.append((*e, sp_name, guard, site_polys))
@@ -106,7 +114,7 @@ def process_pinns_root(
             samps, _ = process_pinns_sequence(
                 seq_stem=stem, lbl_path=lbl_f, ori_video_path=ori_f, bev_video_path=bev_f,
                 calib=cal, pose_ext=ext, window_stride=window_stride,
-                forced_split=f_sp, min_t0_guard=f_gd, override_polys=o_poly,
+                forced_split=f_sp, min_t0_guard=f_gd, override_polys=o_poly, bev_convention=bev_convention,
             )
             return idx_job, stem, samps
         finally:
@@ -131,6 +139,9 @@ def process_pinns_root(
 
     split_dist = {sp: sum(1 for s in all_samples if s["split"] == sp) for sp in ("train", "val", "test")}
     audit = {
+        "bev_convention": bev_convention,
+        "video_decode_protocol": VIDEO_DECODE_PROTOCOL,
+        "bev_converter_sha256": hashlib.sha256(Path(pinns_bev.__file__).read_bytes()).hexdigest(),
         "total_samples": len(all_samples),
         "num_sequences": len(seq_counts),
         "split_counts": split_dist,
