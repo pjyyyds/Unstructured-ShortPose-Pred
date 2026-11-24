@@ -1,0 +1,262 @@
+{
+  "identity": {
+    "schema": 1,
+    "sample_md5": "d2bf9579b127b74927150bd3666a034f",
+    "weights_archive_sha256": "0bf2745ab2d5ddcf5f5fbb5d330e6c6cc800625cec301f4c7105d031bdb49d2d",
+    "source_sha256": "e61a2310793e900c6188588c750e47c44e23fbf41f429fb94ccf8b2ea88fd094",
+    "m0_checkpoints_sha256": {
+      "america_crossroad": "b58e909e67ce3b94f34cf6c5933d1c75d39184207107cba17da79291bff6a743",
+      "italy_park": "39bdc069331a19d1480e00ce519ec7d8076ade70ddda75225ff914e75a200e84",
+      "japan_crossroad": "328c15620a68c7070fe82d0b742f7dfcb01fb22c9011ee022ae832ed249db4f4",
+      "thailand_street": "028204da29c49d1c4efd4fa3d071ce40218e77fdc4a4d228c28dd9956721e542"
+    },
+    "evaluator_sha256": "3f5dc9053c3b5d6f4cc5e7f946a5b0640431d29de37836a77461950d48f33a7f",
+    "cohort": {
+      "per_sequence": {
+        "0000_20230322_081506": {
+          "explicit_pedestrian_tracks": 3,
+          "tracks_with_windows": 3,
+          "windows": 39,
+          "master_ticks": 2231,
+          "master_gap_microseconds_min_max": [
+            40000,
+            40000
+          ],
+          "excluded_candidate_start_counts_in_guard_order": {
+            "incomplete_accepted_native_support": 596,
+            "overlaps_previously_retained": 655
+          }
+        },
+        "0001_20230523_105516": {
+          "explicit_pedestrian_tracks": 22,
+          "tracks_with_windows": 21,
+          "windows": 159,
+          "master_ticks": 3030,
+          "master_gap_microseconds_min_max": [
+            39965,
+            40009
+          ],
+          "excluded_candidate_start_counts_in_guard_order": {
+            "incomplete_accepted_native_support": 10120,
+            "overlaps_previously_retained": 2679
+          }
+        },
+        "0002_20230523_111106": {
+          "explicit_pedestrian_tracks": 22,
+          "tracks_with_windows": 22,
+          "windows": 163,
+          "master_ticks": 3021,
+          "master_gap_microseconds_min_max": [
+            39965,
+            40009
+          ],
+          "excluded_candidate_start_counts_in_guard_order": {
+            "incomplete_accepted_native_support": 10032,
+            "overlaps_previously_retained": 2741
+          }
+        },
+        "0003_20230523_111514": {
+          "explicit_pedestrian_tracks": 14,
+          "tracks_with_windows": 14,
+          "windows": 203,
+          "master_ticks": 2662,
+          "master_gap_microseconds_min_max": [
+            39965,
+            40009
+          ],
+          "excluded_candidate_start_counts_in_guard_order": {
+            "incomplete_accepted_native_support": 3603,
+            "overlaps_previously_retained": 3418
+          }
+        }
+      },
+      "all_windows": 564,
+      "ordered_window_keys_sha256": "8c2abd8c14d3a1bb0bb3d57ad5c9e85c6905d1736ea21caf98b8988a5fb45bf3",
+      "all_selected_timestamps_sha256": "a12432f9017201f7278052a93c40e628561bb12d4b6c85bd316bc047498d666e",
+      "distinct_track_window_keys": 564,
+      "all_source_ticks_per_window_accepted": 86,
+      "raw_timestamp_overlap_within_track": 0,
+      "all_timing_errors_us_min_max": [
+        -20000,
+        19997
+      ],
+      "mean_absolute_timing_error_us": 9714.615602836879,
+      "max_absolute_timing_error_us": 20000,
+      "exact_timestamps": 3485,
+      "selected_timestamps": 19740,
+      "history_span_us_min_max": [
+        399955,
+        400030
+      ],
+      "last_history_gap_us_min_max": [
+        80018,
+        120000
+      ],
+      "endpoint_after_anchor_us_min_max": [
+        3000000,
+        3000000
+      ]
+    }
+  },
+  "scores": {
+    "equal_four_demo_sequences_one_site": {
+      "america_crossroad": {
+        "ade_m": 0.3088377943933873,
+        "fde_m": 0.7063760677589146
+      },
+      "italy_park": {
+        "ade_m": 0.43065592537484926,
+        "fde_m": 0.9096231978164045
+      },
+      "japan_crossroad": {
+        "ade_m": 0.4573410706710093,
+        "fde_m": 1.0024567228869286
+      },
+      "thailand_street": {
+        "ade_m": 0.38071227764992227,
+        "fde_m": 0.8445237017549342
+      },
+      "actual_time_cv": {
+        "ade_m": 0.21994713540583366,
+        "fde_m": 0.5417928619223473
+      },
+      "M0_four_fixed_fold_mean_error": {
+        "ade_m": 0.3943867670222919,
+        "fde_m": 0.8657449225542954
+      }
+    },
+    "by_sequence": {
+      "0000_20230322_081506": {
+        "america_crossroad": {
+          "ade_m": 0.2731114511333295,
+          "fde_m": 0.6592701634350723
+        },
+        "italy_park": {
+          "ade_m": 0.34798544601349063,
+          "fde_m": 0.7230058211021608
+        },
+        "japan_crossroad": {
+          "ade_m": 0.34500360033014116,
+          "fde_m": 0.8069421274978134
+        },
+        "thailand_street": {
+          "ade_m": 0.30142813558421455,
+          "fde_m": 0.6851669101756875
+        },
+        "actual_time_cv": {
+          "ade_m": 0.19061813033693936,
+          "fde_m": 0.49190662805217417
+        },
+        "M0_four_fixed_fold_mean_error": {
+          "ade_m": 0.3168821582652939,
+          "fde_m": 0.7185962555526836
+        }
+      },
+      "0001_20230523_105516": {
+        "america_crossroad": {
+          "ade_m": 0.3208042632583231,
+          "fde_m": 0.7108156118456906
+        },
+        "italy_park": {
+          "ade_m": 0.5566128607817887,
+          "fde_m": 1.1527880475665269
+        },
+        "japan_crossroad": {
+          "ade_m": 0.5631022564066067,
+          "fde_m": 1.19859424812084
+        },
+        "thailand_street": {
+          "ade_m": 0.41286399105007276,
+          "fde_m": 0.911587533238792
+        },
+        "actual_time_cv": {
+          "ade_m": 0.20889237664693402,
+          "fde_m": 0.4921515217937843
+        },
+        "M0_four_fixed_fold_mean_error": {
+          "ade_m": 0.46334584287419767,
+          "fde_m": 0.9934463601929622
+        }
+      },
+      "0002_20230523_111106": {
+        "america_crossroad": {
+          "ade_m": 0.4179641261675654,
+          "fde_m": 0.9496597802626867
+        },
+        "italy_park": {
+          "ade_m": 0.547557386875446,
+          "fde_m": 1.1709882110472862
+        },
+        "japan_crossroad": {
+          "ade_m": 0.5973598091542215,
+          "fde_m": 1.2995745335426
+        },
+        "thailand_street": {
+          "ade_m": 0.5407319156605056,
+          "fde_m": 1.176196562193218
+        },
+        "actual_time_cv": {
+          "ade_m": 0.31176649044943344,
+          "fde_m": 0.7586697266862515
+        },
+        "M0_four_fixed_fold_mean_error": {
+          "ade_m": 0.5259033094644344,
+          "fde_m": 1.149104771761447
+        }
+      },
+      "0003_20230523_111514": {
+        "america_crossroad": {
+          "ade_m": 0.22347133701433106,
+          "fde_m": 0.5057587154922089
+        },
+        "italy_park": {
+          "ade_m": 0.2704680078286716,
+          "fde_m": 0.5917107115496444
+        },
+        "japan_crossroad": {
+          "ade_m": 0.3238986167930677,
+          "fde_m": 0.7047159823864607
+        },
+        "thailand_street": {
+          "ade_m": 0.2678250683048962,
+          "fde_m": 0.6051438014120395
+        },
+        "actual_time_cv": {
+          "ade_m": 0.16851154419002778,
+          "fde_m": 0.4244435711571795
+        },
+        "M0_four_fixed_fold_mean_error": {
+          "ade_m": 0.2714157574852417,
+          "fde_m": 0.6018323027100884
+        }
+      }
+    },
+    "pooled_windows": {
+      "america_crossroad": {
+        "ade_m": 0.3105532950913045,
+        "fde_m": 0.7024730178815053
+      },
+      "italy_park": {
+        "ade_m": 0.4365775477105474,
+        "fde_m": 0.9263809918995529
+      },
+      "japan_crossroad": {
+        "ade_m": 0.4718252966004555,
+        "fde_m": 1.0229347904530555
+      },
+      "thailand_street": {
+        "ade_m": 0.389909331530678,
+        "fde_m": 0.8621066641949611
+      },
+      "actual_time_cv": {
+        "ade_m": 0.22282584465219232,
+        "fde_m": 0.5447901788191712
+      },
+      "M0_four_fixed_fold_mean_error": {
+        "ade_m": 0.4022163677332465,
+        "fde_m": 0.8784738661072689
+      }
+    },
+    "runtime_device": "cpu"
+  }
+}
