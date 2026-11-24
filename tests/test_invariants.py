@@ -235,6 +235,24 @@ class TestMathematicalInvariants(unittest.TestCase):
             l_last = val
         self.assertLess(l_last, 0.65 * l_first)
 
+    def test_13_short_clip_and_stratified_site_splits(self) -> None:
+        from src.data.splits import assign_site_clip_splits
+
+        # Short 22s (220-frame) sequence must retain >=15 future steps in test!
+        sp_short = temporal_buffer_split_indices(np.arange(0, 220))
+        for k in ("train", "val", "test"):
+            self.assertGreater(len(sp_short[k]), 0, f"Empty {k} on 22s clip!")
+        self.assertLessEqual(int(sp_short["test"][0]), 220 - 15)
+
+        # Stratified 12-clip site split must assign all 3 splits with 60-step boundary guards
+        cmap = assign_site_clip_splits(list(range(1, 13)))
+        splits_seen = {v[0] for v in cmap.values()}
+        self.assertEqual(splits_seen, {"train", "val", "test"})
+        val_guards = [v[1] for _, v in sorted(cmap.items()) if v[0] == "val"]
+        test_guards = [v[1] for _, v in sorted(cmap.items()) if v[0] == "test"]
+        self.assertEqual(val_guards[0], 60)
+        self.assertEqual(test_guards[0], 60)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -29,14 +29,14 @@ PAYLOAD_B64 = "{b64_payload}"
 with tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD_B64)), mode='r:gz') as tf:
     tf.extractall(PROJ_DIR)
 
-subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'onnxruntime-gpu', 'gdown'], check=True)
+subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'onnx2torch', 'onnx', 'onnxruntime-gpu', 'gdown'], check=True)
 sys.path.insert(0, str(PROJ_DIR))
 os.environ['PYTHONPATH'] = str(PROJ_DIR)
 
 import torch
-print('PyTorch:', torch.__version__, 'CUDA available:', torch.cuda.is_available(), 'GPU count:', torch.cuda.device_count())
+print('PyTorch:', torch.__version__, 'CUDA available:', torch.cuda.is_available(), 'GPU count:', torch.cuda.device_count(), flush=True)
 for i in range(torch.cuda.device_count()):
-    print(f'  GPU {{i}}:', torch.cuda.get_device_name(i))
+    print(f'  GPU {{i}}:', torch.cuda.get_device_name(i), flush=True)
 
 subprocess.run([sys.executable, str(PROJ_DIR / 'tests/test_invariants.py')], check=True)
 """
@@ -46,7 +46,7 @@ from pathlib import Path
 from scripts.cloud_experiment_runner import stage_and_extract_all_datasets
 
 PINNS_SAMPLES, JTA_SAMPLES, DATASET_DIAG = stage_and_extract_all_datasets(Path('/tmp/shortpose_raw'))
-print('Dataset Diagnostics:', DATASET_DIAG)
+print('Dataset Diagnostics:', DATASET_DIAG, flush=True)
 """
 
     cell3 = """# Cell 3: Execute 5-seed controlled experiments (Suites A-E), Holm-Bonferroni stats, and export bundle

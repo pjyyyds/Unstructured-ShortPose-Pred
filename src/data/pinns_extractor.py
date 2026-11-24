@@ -41,38 +41,79 @@ class RTMPoseONNXExtractor:
     MEAN = np.array([123.675, 116.28, 103.53], dtype=np.float32)
     STD = np.array([58.395, 57.12, 57.375], dtype=np.float32)
 
-    def __init__(self, onnx_path: Optional[Path] = None, batch_size: int = 256) -> None:
+    def __init__(self, onnx_path: Optional[Path] = None, batch_size: int = 256, device_id: int = 0) -> None:
         self.batch_size = batch_size
         self.sess = None
+        self.torch_model = None
+        self.torch_dev = None
         if onnx_path is not None and Path(onnx_path).exists():
             import onnxruntime as ort
+            import torch
 
-            avail = ort.get_available_providers()
-            provs = [p for p in ("CUDAExecutionProvider", "CPUExecutionProvider") if p in avail]
-            self.sess = ort.InferenceSession(str(onnx_path), providers=provs or ["CPUExecutionProvider"])
-            self.in_name = self.sess.get_inputs()[0].name
-            self.active_providers = self.sess.get_providers()
+            cpu_opts = ort.SessionOptions()
+            cpu_opts.intra_op_num_threads = 2
+            cpu_sess = ort.InferenceSession(str(onnx_path), sess_options=cpu_opts, providers=["CPUExecutionProvider"])
+            self.in_name = cpu_sess.get_inputs()[0].name
+            test_x = np.zeros((2, 3, 256, 192), dtype=np.float32)
+            ref_sx, ref_sy = cpu_sess.run(None, {self.in_name: test_x})
+
+            if torch.cuda.is_available() and device_id < torch.cuda.device_count():
+                try:
+                    import onnx2torch
+
+                    dev = torch.device(f"cuda:{device_id}")
+                    tm = onnx2torch.convert(str(onnx_path)).to(dev).eval()
+                    with torch.no_grad():
+                        tx, ty = tm(torch.from_numpy(test_x).to(dev))
+                    err = max(
+                        float(np.max(np.abs(tx.cpu().numpy() - ref_sx))),
+                        float(np.max(np.abs(ty.cpu().numpy() - ref_sy))),
+                    )
+                    if err < 5e-2:
+                        self.torch_model = tm
+                        self.torch_dev = dev
+                        self.active_providers = [f"PyTorchCUDA:{device_id}"]
+                        return
+                except Exception as exc:
+                    print(f"[RTMPose] onnx2torch GPU path skipped ({exc}); trying ORT_ENABLE_BASIC...", flush=True)
+
+                try:
+                    g_opts = ort.SessionOptions()
+                    g_opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_BASIC
+                    g_provs = [
+                        ("CUDAExecutionProvider", {"device_id": str(device_id), "cudnn_conv_algo_search": "DEFAULT"}),
+                        "CPUExecutionProvider",
+                    ]
+                    gs = ort.InferenceSession(str(onnx_path), sess_options=g_opts, providers=g_provs)
+                    _ = gs.run(None, {self.in_name: test_x})
+                    self.sess = gs
+                    self.active_providers = gs.get_providers()
+                    return
+                except Exception as exc:
+                    print(f"[RTMPose] ORT CUDA warmup skipped ({exc}); using batched CPU.", flush=True)
+
+            self.sess = cpu_sess
+            self.active_providers = ["CPUExecutionProvider"]
         else:
             self.active_providers = ["MockFallback"]
 
-    def extract_crops(self, bgr_img: np.ndarray, boxes_cxcywh: np.ndarray) -> np.ndarray:
-        """Extract [N, 17, 3] (u, v, conf) in original image pixels for N boxes [cx, cy, w, h]."""
-        n = len(boxes_cxcywh)
-        if n == 0:
-            return np.zeros((0, NUM_JOINTS, 3), dtype=np.float32)
-        if self.sess is None:
-            # Deterministic synthetic pose only for unit tests when ONNX file is omitted
-            out = np.zeros((n, NUM_JOINTS, 3), dtype=np.float32)
-            for i, (cx, cy, bw, bh) in enumerate(boxes_cxcywh):
-                out[i, :, 0] = cx + np.linspace(-0.15, 0.15, NUM_JOINTS) * bw
-                out[i, :, 1] = cy + np.linspace(-0.40, 0.40, NUM_JOINTS) * bh
-                out[i, :, 2] = 0.85
-            return out
+    def _run_simcc(self, chunk: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+        if self.torch_model is not None:
+            import torch
 
+            with torch.no_grad():
+                tx, ty = self.torch_model(torch.from_numpy(chunk).to(self.torch_dev, non_blocking=True))
+            return tx.cpu().numpy(), ty.cpu().numpy()
+        return self.sess.run(None, {self.in_name: chunk})
+
+    def warp_crops(self, bgr_img: np.ndarray, boxes_cxcywh: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Warp N boxes [cx, cy, w, h] into normalized [N, 3, 256, 192] tensors plus centers & scales."""
+        n = len(boxes_cxcywh)
         crops = np.zeros((n, 3, 256, 192), dtype=np.float32)
         centers = np.zeros((n, 2), dtype=np.float32)
         scales = np.zeros((n, 2), dtype=np.float32)
         aspect = 192.0 / 256.0
+        dst_pts = np.array([[96.0, 128.0], [96.0, 0.0], [192.0, 128.0]], dtype=np.float32)
         for i, (cx, cy, bw, bh) in enumerate(boxes_cxcywh):
             w_pad = max(float(bw) * 1.25, 8.0)
             h_pad = max(float(bh) * 1.25, 8.0)
@@ -85,27 +126,45 @@ class RTMPoseONNXExtractor:
             src_pts = np.array(
                 [[cx, cy], [cx, cy - 0.5 * h_pad], [cx + 0.5 * w_pad, cy]], dtype=np.float32
             )
-            dst_pts = np.array([[96.0, 128.0], [96.0, 0.0], [192.0, 128.0]], dtype=np.float32)
             mat = cv2.getAffineTransform(src_pts, dst_pts)
             warped = cv2.warpAffine(bgr_img, mat, (192, 256), flags=cv2.INTER_LINEAR)
             rgb = cv2.cvtColor(warped, cv2.COLOR_BGR2RGB).astype(np.float32)
-            norm = (rgb - self.MEAN) / self.STD
-            crops[i] = np.transpose(norm, (2, 0, 1))
+            crops[i] = np.transpose((rgb - self.MEAN) / self.STD, (2, 0, 1))
+        return crops, centers, scales
+
+    def infer_warped_crops(self, crops: np.ndarray, centers: np.ndarray, scales: np.ndarray) -> np.ndarray:
+        """Run batched SimCC inference across [M, 3, 256, 192] crops collected across frames."""
+        n = len(crops)
+        if n == 0:
+            return np.zeros((0, NUM_JOINTS, 3), dtype=np.float32)
+        if self.sess is None and self.torch_model is None:
+            out = np.zeros((n, NUM_JOINTS, 3), dtype=np.float32)
+            for i in range(n):
+                out[i, :, 0] = centers[i, 0] + np.linspace(-0.12, 0.12, NUM_JOINTS) * scales[i, 0]
+                out[i, :, 1] = centers[i, 1] + np.linspace(-0.32, 0.32, NUM_JOINTS) * scales[i, 1]
+                out[i, :, 2] = 0.85
+            return out
 
         out_uvc = np.zeros((n, NUM_JOINTS, 3), dtype=np.float32)
         for s in range(0, n, self.batch_size):
             e = min(n, s + self.batch_size)
-            sx, sy = self.sess.run(None, {self.in_name: crops[s:e]})
-            px = np.argmax(sx, axis=-1).astype(np.float32) / 2.0  # [b, 17] in [0, 192)
-            py = np.argmax(sy, axis=-1).astype(np.float32) / 2.0  # [b, 17] in [0, 256)
+            sx, sy = self._run_simcc(crops[s:e])
+            px = np.argmax(sx, axis=-1).astype(np.float32) / 2.0
+            py = np.argmax(sy, axis=-1).astype(np.float32) / 2.0
             mx = np.amax(sx, axis=-1)
             my = np.amax(sy, axis=-1)
-            conf = np.where((mx > 0.0) & (my > 0.0), 0.5 * (mx + my), 0.0)
-            conf = np.clip(conf, 0.0, 1.0)
+            conf = np.clip(np.where((mx > 0.0) & (my > 0.0), 0.5 * (mx + my), 0.0), 0.0, 1.0)
             out_uvc[s:e, :, 0] = centers[s:e, 0:1] + (px - 96.0) / 192.0 * scales[s:e, 0:1]
             out_uvc[s:e, :, 1] = centers[s:e, 1:2] + (py - 128.0) / 256.0 * scales[s:e, 1:2]
             out_uvc[s:e, :, 2] = conf
         return out_uvc
+
+    def extract_crops(self, bgr_img: np.ndarray, boxes_cxcywh: np.ndarray) -> np.ndarray:
+        """Extract [N, 17, 3] (u, v, conf) in original image pixels for N boxes [cx, cy, w, h]."""
+        if len(boxes_cxcywh) == 0:
+            return np.zeros((0, NUM_JOINTS, 3), dtype=np.float32)
+        crops, centers, scales = self.warp_crops(bgr_img, boxes_cxcywh)
+        return self.infer_warped_crops(crops, centers, scales)
 
 
 def extract_static_bev_and_train_polylines(
@@ -229,26 +288,48 @@ def process_pinns_sequence(
     pose_ext: RTMPoseONNXExtractor,
     bbox_is_topleft: Optional[bool] = None,
     window_stride: int = 3,
+    forced_split: Optional[str] = None,
+    min_t0_guard: int = 0,
+    override_polys: Optional[List[Tuple[np.ndarray, np.ndarray]]] = None,
 ) -> Tuple[List[Dict], Optional[bool]]:
     """Extract leakage-free 10Hz samples with real RTMPose 2D keypoints for one PINNS sequence."""
     flip_y = _check_right_handed_homography(calib)
     y_min, y_max = float(calib.get("y_min", 0.0)), float(calib.get("y_max", 30.0))
     by_f10 = _parse_pinns_label_file(lbl_path, flip_y, y_min, y_max)
-    if len(by_f10) < 60:
+    if len(by_f10) < 40:
         return [], bbox_is_topleft
 
     all_f10 = np.array(sorted(by_f10.keys()), dtype=np.int64)
-    sp_frames = temporal_buffer_split_indices(all_f10, ratios=(0.70, 0.15, 0.15))
-    frame_to_split = {}
-    for sp_name, farr in sp_frames.items():
-        for fi in farr:
-            frame_to_split[int(fi)] = sp_name
+    frame_to_split: Dict[int, str] = {}
+    if forced_split is not None:
+        f_start = int(all_f10[0]) + int(min_t0_guard)
+        for fi in all_f10:
+            if int(fi) >= f_start:
+                frame_to_split[int(fi)] = forced_split
+        sp_frames = {"train": all_f10 if forced_split == "train" else np.zeros(0, dtype=np.int64)}
+    else:
+        sp_frames = temporal_buffer_split_indices(all_f10, ratios=(0.70, 0.15, 0.15))
+        for sp_name, farr in sp_frames.items():
+            for fi in farr:
+                frame_to_split[int(fi)] = sp_name
 
-    # Read 10Hz frames and run batched RTMPose on all Person boxes
     cap = cv2.VideoCapture(str(ori_video_path))
     img_h = float(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) or 864.0)
     pose_map: Dict[Tuple[int, int], Tuple[np.ndarray, np.ndarray]] = {}
     target_f10_set = set(by_f10.keys())
+    buf_crops, buf_cnts, buf_scls, buf_meta = [], [], [], []
+
+    def _flush_pose_buffer() -> None:
+        if not buf_crops:
+            return
+        c_arr = np.concatenate(buf_crops, axis=0)
+        ct_arr = np.concatenate(buf_cnts, axis=0)
+        sc_arr = np.concatenate(buf_scls, axis=0)
+        uvc_all = pose_ext.infer_warped_crops(c_arr, ct_arr, sc_arr)
+        for idx_m, (f_k, p_id, bx) in enumerate(buf_meta):
+            pose_map[(f_k, p_id)] = (uvc_all[idx_m], bx)
+        buf_crops.clear(); buf_cnts.clear(); buf_scls.clear(); buf_meta.clear()
+
     raw_idx = 0
     while True:
         if not cap.grab():
@@ -259,34 +340,36 @@ def process_pinns_sequence(
                 peds = [o for o in by_f10[f10] if o["type"].lower().startswith("per")]
                 if peds:
                     ok, frame_bgr = cap.retrieve()
-                    if not ok or frame_bgr is None:
-                        raw_idx += 1
-                        continue
-                    # Empirical audit on PINNS videos: (ox, oy) is ground-contact foot bottom-center (cx, y_bottom),
-                    # so true person bounding-box center is (ox, oy - 0.5 * h), keeping head & shoulders centered!
-                    boxes = np.array(
-                        [[p["ox"], p["oy"] - 0.5 * p["h"], p["w"], p["h"]] for p in peds],
-                        dtype=np.float32,
-                    )
-                    uvc = pose_ext.extract_crops(frame_bgr, boxes)
-                    for idx_p, p in enumerate(peds):
-                        pose_map[(f10, p["id"])] = (uvc[idx_p], boxes[idx_p])
+                    if ok and frame_bgr is not None:
+                        boxes = np.array(
+                            [[p["ox"], p["oy"] - 0.5 * p["h"], p["w"], p["h"]] for p in peds],
+                            dtype=np.float32,
+                        )
+                        cr, ct, sc = pose_ext.warp_crops(frame_bgr, boxes)
+                        buf_crops.append(cr); buf_cnts.append(ct); buf_scls.append(sc)
+                        for idx_p, p in enumerate(peds):
+                            buf_meta.append((f10, p["id"], boxes[idx_p]))
+                        if sum(len(x) for x in buf_crops) >= 256:
+                            _flush_pose_buffer()
         raw_idx += 1
+    _flush_pose_buffer()
     cap.release()
 
-    # Build static BEV polylines using ONLY train split pedestrian points + parked cars
-    train_max_f = int(sp_frames["train"][-1]) if len(sp_frames["train"]) > 0 else -1
-    train_ped_pts, parked_pts = [], []
-    for fi, objs in by_f10.items():
-        if fi <= train_max_f:
-            for o in objs:
-                if o["type"].lower().startswith("per"):
-                    train_ped_pts.append([o["wx"], o["wy"]])
-                elif o["fixed"] == 1:
-                    parked_pts.append([o["wx"], o["wy"]])
-    ped_arr = np.array(train_ped_pts, dtype=np.float32) if train_ped_pts else np.zeros((0, 2), dtype=np.float32)
-    pk_arr = np.unique(np.round(parked_pts, 1), axis=0) if parked_pts else np.zeros((0, 2), dtype=np.float32)
-    polys = extract_static_bev_and_train_polylines(bev_video_path, calib, ped_arr, pk_arr, flip_y)
+    if override_polys is not None:
+        polys = override_polys
+    else:
+        train_max_f = int(sp_frames["train"][-1]) if len(sp_frames["train"]) > 0 else -1
+        train_ped_pts, parked_pts = [], []
+        for fi, objs in by_f10.items():
+            if fi <= train_max_f:
+                for o in objs:
+                    if o["type"].lower().startswith("per"):
+                        train_ped_pts.append([o["wx"], o["wy"]])
+                    elif o["fixed"] == 1:
+                        parked_pts.append([o["wx"], o["wy"]])
+        ped_arr = np.array(train_ped_pts, dtype=np.float32) if train_ped_pts else np.zeros((0, 2), dtype=np.float32)
+        pk_arr = np.unique(np.round(parked_pts, 1), axis=0) if parked_pts else np.zeros((0, 2), dtype=np.float32)
+        polys = extract_static_bev_and_train_polylines(bev_video_path, calib, ped_arr, pk_arr, flip_y)
 
     return _assemble_sequence_windows(
         seq_stem, by_f10, pose_map, polys, frame_to_split, img_h, window_stride

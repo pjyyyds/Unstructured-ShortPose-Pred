@@ -1,17 +1,46 @@
 """Dataset root runners (PINNS 10Hz & JTA 2.5Hz) and T-window tensor materializer."""
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import json
+import time
 import numpy as np
 import torch
 
 from .actions import compute_action_labels
 from .constants import DT, NUM_JOINTS, T_FUT
 from .features import build_motion_features, build_pose_and_quality_features
-from .pinns_extractor import RTMPoseONNXExtractor, process_pinns_sequence
+from .pinns_extractor import (
+    RTMPoseONNXExtractor,
+    _check_right_handed_homography,
+    _parse_pinns_label_file,
+    extract_static_bev_and_train_polylines,
+    process_pinns_sequence,
+)
 from .scene_graph import build_neighbor_edges
-from .splits import verify_zero_temporal_leakage
+from .splits import assign_site_clip_splits, verify_zero_temporal_leakage
+
+
+def _build_site_train_polylines(train_entries: List[Tuple]) -> List[Tuple[np.ndarray, np.ndarray]]:
+    """Build static BEV polylines for one camera site strictly from its train clips only."""
+    if not train_entries:
+        return []
+    _, _, _, _, _, first_bev, calib = train_entries[0]
+    flip_y = _check_right_handed_homography(calib)
+    y_min, y_max = float(calib.get("y_min", 0.0)), float(calib.get("y_max", 30.0))
+    train_ped_pts, parked_pts = [], []
+    for _, _, _, lbl_file, _, _, _ in train_entries:
+        by_f10 = _parse_pinns_label_file(lbl_file, flip_y, y_min, y_max)
+        for objs in by_f10.values():
+            for o in objs:
+                if o["type"].lower().startswith("per"):
+                    train_ped_pts.append([o["wx"], o["wy"]])
+                elif o["fixed"] == 1:
+                    parked_pts.append([o["wx"], o["wy"]])
+    ped_arr = np.array(train_ped_pts, dtype=np.float32) if train_ped_pts else np.zeros((0, 2), dtype=np.float32)
+    pk_arr = np.unique(np.round(parked_pts, 1), axis=0) if parked_pts else np.zeros((0, 2), dtype=np.float32)
+    return extract_static_bev_and_train_polylines(first_bev, calib, ped_arr, pk_arr, flip_y)
 
 
 def process_pinns_root(
@@ -19,43 +48,82 @@ def process_pinns_root(
     onnx_path: Optional[Path] = None,
     window_stride: int = 3,
 ) -> Tuple[List[Dict], Dict]:
-    """Process all PINNS sequences under `pinns_root` and verify zero temporal leakage."""
+    """Process all PINNS sequences under `pinns_root` with stratified anti-leakage site splits."""
+    import queue
+
     labels_dir = pinns_root / "labels"
     videos_dir = pinns_root / "videos"
-    pose_ext = RTMPoseONNXExtractor(onnx_path=onnx_path, batch_size=256)
-
-    all_samples: List[Dict] = []
-    bbox_is_tl: Optional[bool] = None
-    seq_counts: Dict[str, int] = {}
+    by_site: Dict[str, List[Tuple]] = {}
 
     for lbl_file in sorted(labels_dir.glob("*.txt")):
-        if lbl_file.name.lower().startswith("readme"):
+        if lbl_file.name.lower().startswith("readme") or "_" not in lbl_file.stem:
             continue
         stem = lbl_file.stem
-        if "_" not in stem:
-            continue
-        scene_folder, vid_idx = stem.rsplit("_", 1)
+        scene_folder, vid_str = stem.rsplit("_", 1)
+        vid_num = int(vid_str) if vid_str.isdigit() else abs(hash(vid_str)) % 10000
         scene_path = videos_dir / scene_folder
-        ori_mp4 = scene_path / "videos" / f"ori_{vid_idx}.mp4"
-        bev_mp4 = scene_path / "videos" / f"bev_{vid_idx}.mp4"
+        ori_mp4 = scene_path / "videos" / f"ori_{vid_str}.mp4"
+        bev_mp4 = scene_path / "videos" / f"bev_{vid_str}.mp4"
         calib_file = scene_path / "calib.json"
         if not ori_mp4.exists() or not calib_file.exists():
             continue
-        with open(calib_file, "r", encoding="utf-8") as cf:
-            calib = json.load(cf)
-
-        seq_samps, bbox_is_tl = process_pinns_sequence(
-            seq_stem=stem,
-            lbl_path=lbl_file,
-            ori_video_path=ori_mp4,
-            bev_video_path=bev_mp4 if bev_mp4.exists() else None,
-            calib=calib,
-            pose_ext=pose_ext,
-            bbox_is_topleft=bbox_is_tl,
-            window_stride=window_stride,
+        calib = json.loads(calib_file.read_text(encoding="utf-8"))
+        by_site.setdefault(scene_folder, []).append(
+            (scene_folder, vid_num, stem, lbl_file, ori_mp4, bev_mp4 if bev_mp4.exists() else None, calib)
         )
-        seq_counts[stem] = len(seq_samps)
-        all_samples.extend(seq_samps)
+
+    jobs: List[Tuple] = []
+    for site, entries in sorted(by_site.items()):
+        entries.sort(key=lambda x: x[1])
+        clip_map = assign_site_clip_splits([e[1] for e in entries])
+        if clip_map:
+            tr_entries = [e for e in entries if clip_map[e[1]][0] == "train"]
+            site_polys = _build_site_train_polylines(tr_entries)
+            for e in entries:
+                sp_name, guard = clip_map[e[1]]
+                jobs.append((*e, sp_name, guard, site_polys))
+        else:
+            for e in entries:
+                jobs.append((*e, None, 0, None))
+
+    n_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 0
+    n_workers = max(1, min(2, n_gpus if n_gpus > 0 else (2 if onnx_path is not None else 1)))
+    ext_pool: "queue.Queue[RTMPoseONNXExtractor]" = queue.Queue()
+    active_provs: List[str] = []
+    for w in range(n_workers):
+        ext = RTMPoseONNXExtractor(onnx_path=onnx_path, batch_size=256, device_id=w)
+        if w == 0:
+            active_provs = ext.active_providers
+        ext_pool.put(ext)
+    print(f"[PINNS] Launching {len(jobs)} clips on {n_workers} worker(s), backend={active_provs}", flush=True)
+
+    t_p0 = time.perf_counter()
+
+    def _run_clip(idx_job: int, jb: Tuple) -> Tuple[int, str, List[Dict]]:
+        _, _, stem, lbl_f, ori_f, bev_f, cal, f_sp, f_gd, o_poly = jb
+        ext = ext_pool.get()
+        try:
+            samps, _ = process_pinns_sequence(
+                seq_stem=stem, lbl_path=lbl_f, ori_video_path=ori_f, bev_video_path=bev_f,
+                calib=cal, pose_ext=ext, window_stride=window_stride,
+                forced_split=f_sp, min_t0_guard=f_gd, override_polys=o_poly,
+            )
+            return idx_job, stem, samps
+        finally:
+            ext_pool.put(ext)
+
+    results_ordered: List[Tuple[int, str, List[Dict]]] = []
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        futs = [pool.submit(_run_clip, i, jb) for i, jb in enumerate(jobs)]
+        for done_n, fut in enumerate(as_completed(futs), 1):
+            idx_j, st_name, s_list = fut.result()
+            results_ordered.append((idx_j, st_name, s_list))
+            if done_n % 5 == 0 or done_n == len(jobs):
+                print(f"  [PINNS {done_n}/{len(jobs)}] last={st_name} ({len(s_list)} win) elapsed={time.perf_counter()-t_p0:.1f}s", flush=True)
+
+    results_ordered.sort(key=lambda x: x[0])
+    all_samples = [s for _, _, s_list in results_ordered for s in s_list]
+    seq_counts = {st_name: len(s_list) for _, st_name, s_list in results_ordered}
 
     leak_ok, leak_msg = verify_zero_temporal_leakage(all_samples, max_hist_steps=19, fut_steps=T_FUT)
     if not leak_ok:
@@ -67,8 +135,8 @@ def process_pinns_root(
         "num_sequences": len(seq_counts),
         "split_counts": split_dist,
         "leakage_check": leak_msg,
-        "rtmpose_providers": pose_ext.active_providers,
-        "bbox_is_topleft": bool(bbox_is_tl),
+        "rtmpose_providers": active_provs,
+        "bbox_is_topleft": False,
     }
     return all_samples, audit
 

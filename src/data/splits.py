@@ -24,17 +24,56 @@ def temporal_buffer_split_indices(
         return {"train": frames, "val": frames, "test": frames}
 
     t_min, t_max = int(frames[0]), int(frames[-1])
-    span = max(t_max - t_min, 1)
     # Buffer in 10Hz steps: max(buffer_sec, max_hist_sec + fut_sec + 1.1s) >= 60 steps (6.0s)
     buf_steps = int(np.ceil(max(buffer_sec, max_hist_sec + fut_sec + 1.1) / dt))
+    min_fut_steps = int(np.ceil(0.5 * fut_sec / dt))
 
-    cut1 = t_min + int(round(ratios[0] * span))
-    cut2 = cut1 + buf_steps + int(round(ratios[1] * max(span - 2 * buf_steps, 1)))
+    usable_hi = max(t_max - min_fut_steps, t_min + 3)
+    net_span = max(usable_hi - t_min - 2 * buf_steps, 3)
+    tr_span = max(1, int(round(ratios[0] * net_span)))
+    rem_ratio = ratios[1] / max(ratios[1] + ratios[2], 1e-6)
+    va_span = max(1, int(round(rem_ratio * max(net_span - tr_span, 2))))
+
+    cut1 = t_min + tr_span
+    cut2 = cut1 + buf_steps + va_span
 
     train_f = frames[frames <= cut1]
     val_f = frames[(frames >= cut1 + buf_steps) & (frames <= cut2)]
     test_f = frames[frames >= cut2 + buf_steps]
     return {"train": train_f, "val": val_f, "test": test_f}
+
+
+def assign_site_clip_splits(
+    clip_ids: Sequence[int],
+    ratios: Tuple[float, float, float] = (0.70, 0.15, 0.15),
+    boundary_guard_steps: int = 60,
+) -> Dict[int, Tuple[str, int]]:
+    """Assign chronological clips of one camera site to (split, min_t0_guard_steps).
+
+    Preserves all three splits across multi-clip sites while enforcing a 6.0s (60-step)
+    guard at split-transition clips in case consecutive clips came from one raw stream.
+    """
+    ordered = sorted({int(c) for c in clip_ids})
+    m = len(ordered)
+    if m < 3:
+        return {}
+    n_test = max(1, int(round(ratios[2] * m)))
+    n_val = max(1, int(round(ratios[1] * m)))
+    if n_val + n_test >= m:
+        n_val, n_test = 1, 1
+    n_train = m - n_val - n_test
+
+    mapping: Dict[int, Tuple[str, int]] = {}
+    for idx, cid in enumerate(ordered):
+        if idx < n_train:
+            mapping[cid] = ("train", 0)
+        elif idx < n_train + n_val:
+            guard = boundary_guard_steps if idx == n_train else 0
+            mapping[cid] = ("val", guard)
+        else:
+            guard = boundary_guard_steps if idx == n_train + n_val else 0
+            mapping[cid] = ("test", guard)
+    return mapping
 
 
 def verify_zero_temporal_leakage(

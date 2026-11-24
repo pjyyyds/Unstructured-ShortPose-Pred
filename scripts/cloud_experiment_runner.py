@@ -57,8 +57,20 @@ def _download_verified_zip(url: str, dst_zip: Path, gdrive_id: Optional[str] = N
                 raise RuntimeError(f"Downloaded file {dst_zip} is not a valid ZIP archive!")
 
 
-def stage_and_extract_all_datasets(scratch_dir: Path = Path("/tmp/shortpose_raw")) -> Tuple[List[Dict], List[Dict], Dict]:
-    """Download RTMPose-m ONNX, PINNS, and Social-Transmotion JTA into ephemeral `/tmp` and extract samples."""
+def stage_and_extract_all_datasets(
+    scratch_dir: Path = Path("/tmp/shortpose_raw"),
+    cache_dir: Optional[Path] = None,
+) -> Tuple[List[Dict], List[Dict], Dict]:
+    """Download RTMPose-m ONNX, PINNS, and Social-Transmotion JTA into `/tmp`, extract, and cache."""
+    if cache_dir is None:
+        cache_dir = Path("/kaggle/working/cache") if Path("/kaggle/working").exists() else (scratch_dir / "cache")
+    cache_pt = cache_dir / "extracted_samples_v1.pt"
+    for cand in [cache_pt, *Path("/kaggle/input").rglob("extracted_samples_v1.pt")] if Path("/kaggle/input").exists() else [cache_pt]:
+        if cand.exists() and cand.stat().st_size > 1024:
+            print(f"[Stage 7] Loading pre-extracted cache from {cand}...", flush=True)
+            pkg = torch.load(cand, map_location="cpu", weights_only=False)
+            return pkg["pinns"], pkg["jta"], pkg["diag"]
+
     scratch_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
 
@@ -71,7 +83,7 @@ def stage_and_extract_all_datasets(scratch_dir: Path = Path("/tmp/shortpose_raw"
             zf.extractall(rtm_dir)
     onnx_files = [p for p in rtm_dir.rglob("end2end.onnx") if "__macosx" not in str(p).lower()]
     onnx_path = onnx_files[0] if onnx_files else None
-    print(f"[Stage 7] RTMPose ONNX ready: {onnx_path}")
+    print(f"[Stage 7] RTMPose ONNX ready: {onnx_path}", flush=True)
 
     # 2. PINNS real unstructured roadside dataset
     pinns_zip = scratch_dir / "pinns.zip"
@@ -80,13 +92,12 @@ def stage_and_extract_all_datasets(scratch_dir: Path = Path("/tmp/shortpose_raw"
     if not (pinns_dir / "labels").exists():
         with zipfile.ZipFile(pinns_zip, "r") as zf:
             zf.extractall(pinns_dir)
-    # Locate directory containing `labels/` and `videos/` (exclude __MACOSX)
     cand_roots = [pinns_dir] + [
         p.parent for p in pinns_dir.rglob("labels") if p.is_dir() and "__macosx" not in str(p).lower()
     ]
     pinns_root = next(p for p in cand_roots if (p / "labels").is_dir() and (p / "videos").is_dir())
-    pinns_samples, pinns_audit = process_pinns_root(pinns_root, onnx_path=onnx_path, window_stride=5)
-    print(f"[Stage 7] PINNS extracted in {time.perf_counter()-t0:.1f}s: {pinns_audit}")
+    pinns_samples, pinns_audit = process_pinns_root(pinns_root, onnx_path=onnx_path, window_stride=4)
+    print(f"[Stage 7] PINNS extracted in {time.perf_counter()-t0:.1f}s: {pinns_audit}", flush=True)
 
     # 3. Social-Transmotion JTA 2.5Hz benchmark
     st_zip = scratch_dir / "st_releases.zip"
@@ -99,9 +110,8 @@ def stage_and_extract_all_datasets(scratch_dir: Path = Path("/tmp/shortpose_raw"
         p for p in st_dir.rglob("data") if p.is_dir() and "jta" in str(p).lower() and "__macosx" not in str(p).lower()
     ]
     jta_samples, jta_audit = process_jta_root(jta_data_roots[0], max_files_per_split=24, seed=42)
-    print(f"[Stage 7] JTA extracted: {jta_audit}")
+    print(f"[Stage 7] JTA extracted: {jta_audit}", flush=True)
 
-    # Summarize bucket & action distributions on PINNS T=5 test/all
     t5_test = materialize_window_split(pinns_samples, "test", t_obs=5, dt=DT)
     bk = t5_test["bucket"].numpy()
     ya = t5_test["y_act"].numpy()
@@ -117,6 +127,9 @@ def stage_and_extract_all_datasets(scratch_dir: Path = Path("/tmp/shortpose_raw"
         "pinns_test_valid_actions": int(np.sum(ma)),
         "pinns_test_action_pos_counts": ya[ma].sum(axis=0).astype(int).tolist() if np.any(ma) else [0] * 5,
     }
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    torch.save({"pinns": pinns_samples, "jta": jta_samples, "diag": diag}, cache_pt)
+    print(f"[Stage 7] Cached extracted datasets to {cache_pt} ({cache_pt.stat().st_size/1e6:.1f} MB)", flush=True)
     return pinns_samples, jta_samples, diag
 
 
@@ -184,7 +197,8 @@ def run_model_grid(
             if done_cnt % 10 == 0 or done_cnt == len(raw_jobs):
                 print(
                     f"  [Grid] {done_cnt}/{len(raw_jobs)} runs done ({time.perf_counter()-t_grid0:.1f}s) "
-                    f"last={tag}/s{sd} ADE1={res['test']['slices']['Overall']['ADE_1']:.4f}"
+                    f"last={tag}/s{sd} ADE1={res['test']['slices']['Overall']['ADE_1']:.4f}",
+                    flush=True,
                 )
 
     summaries: Dict[str, Dict] = {}
