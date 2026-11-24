@@ -1,0 +1,78 @@
+{
+  "ordered_keys_sha256": "6539eaf4eb4615493a2bad7dd453d8121fc7345097ed9742f544e37fe2c2f7d6",
+  "by_recording": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "ground_eligible_pre_greedy": 6456,
+      "last_pose_absent": 5452,
+      "last_pose_present_incomplete": 0,
+      "last_complete_history_incomplete": 281,
+      "all_five_complete": 723,
+      "selected": 123,
+      "recording_local_people": 31,
+      "people_window_minmax": [
+        1,
+        30
+      ]
+    },
+    "huang-lane-2019-02-12_0": {
+      "ground_eligible_pre_greedy": 5871,
+      "last_pose_absent": 5337,
+      "last_pose_present_incomplete": 0,
+      "last_complete_history_incomplete": 162,
+      "all_five_complete": 372,
+      "selected": 68,
+      "recording_local_people": 33,
+      "people_window_minmax": [
+        1,
+        5
+      ]
+    },
+    "tressider-2019-03-16_1": {
+      "ground_eligible_pre_greedy": 1990,
+      "last_pose_absent": 1929,
+      "last_pose_present_incomplete": 0,
+      "last_complete_history_incomplete": 14,
+      "all_five_complete": 47,
+      "selected": 6,
+      "recording_local_people": 1,
+      "people_window_minmax": [
+        6,
+        6
+      ]
+    }
+  },
+  "pose_offsets": [
+    -6,
+    -5,
+    -3,
+    -2,
+    0
+  ],
+  "future_offsets": [
+    6,
+    12,
+    18,
+    24,
+    30,
+    36,
+    42
+  ],
+  "image_timestamp_source": "nominal 15 Hz native file indices, no exposure timestamps",
+  "member_sha256": {
+    "tracks": [
+      "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818",
+      "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd",
+      "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc"
+    ],
+    "poses": [
+      "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45",
+      "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb",
+      "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9"
+    ],
+    "odom": [
+      "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+      "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+      "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+    ]
+  }
+}

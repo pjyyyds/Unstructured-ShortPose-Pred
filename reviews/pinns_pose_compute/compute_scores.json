@@ -1,0 +1,327 @@
+{
+  "checkpoint_sha256": "5069c5be520f2308dd190c01cd68427ba8bdb321d405fc963f5436e911d30689",
+  "torch": "2.10.0",
+  "input_source": "synthetic registered budget fixture",
+  "parameters": 471442,
+  "state_entries_identical": 161,
+  "by_history": {
+    "5": {
+      "batch_size": 12,
+      "saved_flops": 4230960,
+      "counts": {
+        "original": {
+          "default": {
+            "total": 409130496,
+            "by_op": {
+              "aten.addmm": 322231296,
+              "aten.mm": 33891840,
+              "aten.bmm": 7768320,
+              "aten.convolution": 45239040
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 414112788,
+            "by_op": {
+              "aten.addmm": 322231296,
+              "aten.add": 2859564,
+              "aten.mul": 2111628,
+              "aten.mm": 33891840,
+              "aten.bmm": 7768320,
+              "aten.convolution": 45239040,
+              "aten.sub": 11100
+            }
+          }
+        },
+        "optimized": {
+          "default": {
+            "total": 404899536,
+            "by_op": {
+              "aten.addmm": 322231296,
+              "aten.bmm": 3537360,
+              "aten.mm": 33891840,
+              "aten.convolution": 45239040
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 409881828,
+            "by_op": {
+              "aten.addmm": 322231296,
+              "aten.add": 2859564,
+              "aten.mul": 2111628,
+              "aten.bmm": 3537360,
+              "aten.mm": 33891840,
+              "aten.convolution": 45239040,
+              "aten.sub": 11100
+            }
+          }
+        }
+      },
+      "synthetic_output_check": {
+        "original_fixture": {
+          "max_abs": {
+            "trajs": 5.960464477539062e-07,
+            "mode_logits": 4.76837158203125e-07,
+            "mode_probs": 1.4901161193847656e-07,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 1.1920928955078125e-07,
+            "gate_weights": 1.4901161193847656e-08,
+            "nbr_attn": 2.9802322387695312e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "partial_pose": {
+          "max_abs": {
+            "trajs": 9.5367431640625e-07,
+            "mode_logits": 6.556510925292969e-07,
+            "mode_probs": 8.940696716308594e-08,
+            "act_logits": 4.76837158203125e-07,
+            "act_probs": 8.940696716308594e-08,
+            "gate_weights": 1.4901161193847656e-08,
+            "nbr_attn": 7.450580596923828e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "missing_pose": {
+          "max_abs": {
+            "trajs": 0.0,
+            "mode_logits": 0.0,
+            "mode_probs": 0.0,
+            "act_logits": 0.0,
+            "act_probs": 0.0,
+            "gate_weights": 0.0,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "empty_context": {
+          "max_abs": {
+            "trajs": 5.960464477539062e-07,
+            "mode_logits": 5.960464477539062e-07,
+            "mode_probs": 1.1920928955078125e-07,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 1.1920928955078125e-07,
+            "gate_weights": 1.4901161193847656e-08,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        }
+      }
+    },
+    "10": {
+      "batch_size": 12,
+      "saved_flops": 8461920,
+      "counts": {
+        "original": {
+          "default": {
+            "total": 538830336,
+            "by_op": {
+              "aten.addmm": 377642496,
+              "aten.mm": 55173120,
+              "aten.bmm": 15536640,
+              "aten.convolution": 90478080
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 545263068,
+            "by_op": {
+              "aten.addmm": 377642496,
+              "aten.add": 3365724,
+              "aten.mul": 3055908,
+              "aten.mm": 55173120,
+              "aten.bmm": 15536640,
+              "aten.convolution": 90478080,
+              "aten.sub": 11100
+            }
+          }
+        },
+        "optimized": {
+          "default": {
+            "total": 530368416,
+            "by_op": {
+              "aten.addmm": 377642496,
+              "aten.bmm": 7074720,
+              "aten.mm": 55173120,
+              "aten.convolution": 90478080
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 536801148,
+            "by_op": {
+              "aten.addmm": 377642496,
+              "aten.add": 3365724,
+              "aten.mul": 3055908,
+              "aten.bmm": 7074720,
+              "aten.mm": 55173120,
+              "aten.convolution": 90478080,
+              "aten.sub": 11100
+            }
+          }
+        }
+      },
+      "synthetic_output_check": {
+        "original_fixture": {
+          "max_abs": {
+            "trajs": 9.5367431640625e-07,
+            "mode_logits": 3.725290298461914e-07,
+            "mode_probs": 8.940696716308594e-08,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 1.7881393432617188e-07,
+            "gate_weights": 1.1175870895385742e-08,
+            "nbr_attn": 5.960464477539063e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "partial_pose": {
+          "max_abs": {
+            "trajs": 7.599592208862305e-07,
+            "mode_logits": 4.023313522338867e-07,
+            "mode_probs": 5.960464477539063e-08,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 1.4901161193847656e-07,
+            "gate_weights": 1.4901161193847656e-08,
+            "nbr_attn": 2.2351741790771484e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "missing_pose": {
+          "max_abs": {
+            "trajs": 0.0,
+            "mode_logits": 0.0,
+            "mode_probs": 0.0,
+            "act_logits": 0.0,
+            "act_probs": 0.0,
+            "gate_weights": 0.0,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "empty_context": {
+          "max_abs": {
+            "trajs": 4.76837158203125e-07,
+            "mode_logits": 7.152557373046875e-07,
+            "mode_probs": 8.940696716308594e-08,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 5.960464477539063e-08,
+            "gate_weights": 1.1175870895385742e-08,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        }
+      }
+    },
+    "20": {
+      "batch_size": 12,
+      "saved_flops": 16923840,
+      "counts": {
+        "original": {
+          "default": {
+            "total": 798230016,
+            "by_op": {
+              "aten.addmm": 488464896,
+              "aten.mm": 97735680,
+              "aten.bmm": 31073280,
+              "aten.convolution": 180956160
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 807563628,
+            "by_op": {
+              "aten.addmm": 488464896,
+              "aten.add": 4378044,
+              "aten.mul": 4944468,
+              "aten.mm": 97735680,
+              "aten.bmm": 31073280,
+              "aten.convolution": 180956160,
+              "aten.sub": 11100
+            }
+          }
+        },
+        "optimized": {
+          "default": {
+            "total": 781306176,
+            "by_op": {
+              "aten.addmm": 488464896,
+              "aten.bmm": 14149440,
+              "aten.mm": 97735680,
+              "aten.convolution": 180956160
+            }
+          },
+          "with_float_add_sub_mul": {
+            "total": 790639788,
+            "by_op": {
+              "aten.addmm": 488464896,
+              "aten.add": 4378044,
+              "aten.mul": 4944468,
+              "aten.bmm": 14149440,
+              "aten.mm": 97735680,
+              "aten.convolution": 180956160,
+              "aten.sub": 11100
+            }
+          }
+        }
+      },
+      "synthetic_output_check": {
+        "original_fixture": {
+          "max_abs": {
+            "trajs": 7.152557373046875e-07,
+            "mode_logits": 7.748603820800781e-07,
+            "mode_probs": 1.1920928955078125e-07,
+            "act_logits": 9.5367431640625e-07,
+            "act_probs": 8.940696716308594e-08,
+            "gate_weights": 9.313225746154785e-09,
+            "nbr_attn": 4.470348358154297e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "partial_pose": {
+          "max_abs": {
+            "trajs": 7.152557373046875e-07,
+            "mode_logits": 5.960464477539062e-07,
+            "mode_probs": 8.940696716308594e-08,
+            "act_logits": 4.76837158203125e-07,
+            "act_probs": 5.960464477539063e-08,
+            "gate_weights": 1.6763806343078613e-08,
+            "nbr_attn": 2.9802322387695312e-08
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "missing_pose": {
+          "max_abs": {
+            "trajs": 0.0,
+            "mode_logits": 0.0,
+            "mode_probs": 0.0,
+            "act_logits": 0.0,
+            "act_probs": 0.0,
+            "gate_weights": 0.0,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        },
+        "empty_context": {
+          "max_abs": {
+            "trajs": 4.76837158203125e-07,
+            "mode_logits": 4.76837158203125e-07,
+            "mode_probs": 7.450580596923828e-08,
+            "act_logits": 4.76837158203125e-07,
+            "act_probs": 1.1920928955078125e-07,
+            "gate_weights": 9.313225746154785e-09,
+            "nbr_attn": 0.0
+          },
+          "top1_changes": 0,
+          "windows": 12
+        }
+      }
+    }
+  }
+}

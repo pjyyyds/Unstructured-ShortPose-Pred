@@ -1,0 +1,149 @@
+{
+  "protocol_sha256": "b3f33a5b8a4216fb4240d4b3412145315a510d0bd4eaad21cce542de7137f52c",
+  "files_sha256": {
+    "sync_T5.npz": "f7a3205beb48279ec7b90941e4b9ac48211f5f2cafa530cd22e1321176b103e2",
+    "sync_T10.npz": "e3639b14c779b87f87e8b1a50d847735b7144df13400dffca5d578054a905681",
+    "sync_T20.npz": "95ff277dcd06253e30d7e70d97d2a0f219155a216d3fb9cd4085f69a6eb9996b"
+  },
+  "numpy": "2.5.5",
+  "opencv": "5.1.0",
+  "origin_rtmpose_sha256": "5c0a4bf67953e6d2ac43ce15e77dc9d5d354ae18430a47d2c5963a7bc5683e3c",
+  "matched_cache_sha256": "59e59e3dfa6a2b5583ce4c3fbcb010866e793a3595e43cf691dbefbfcddc64f1",
+  "original_pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "checkpoint_sha256": "5069c5be520f2308dd190c01cd68427ba8bdb321d405fc963f5436e911d30689",
+  "source_files_sha256_verified": {
+    "videos/america_crossroad_summer_nightfall_sunny/calib.json": "36c5f559ecc24af39d4117e9124cdf22f2298293ab96da737dc20d5cf73ba634",
+    "labels/america_crossroad_summer_nightfall_sunny_1.txt": "1111a8496fed32d93a3a66aeb9dbf01dabdb1d56dfc44dd4cce5b47587648567",
+    "videos/america_crossroad_summer_nightfall_sunny/videos/bev_1.mp4": "b57e0a56cb76fab74b9c56453de1e9e8f23dc26fe6e53ac8c3bec4ba953ae931",
+    "videos/japan_crossroad_winter_daytime_sunny/calib.json": "ac96e6926671e5f51932f4205f2dc167dcbe8b78da1e23c936b9de885da10f98",
+    "labels/japan_crossroad_winter_daytime_sunny_1.txt": "db216b16e8407aa2695ed74842060c1f14536b26d82323859681705af7b7609a",
+    "videos/japan_crossroad_winter_daytime_sunny/videos/bev_1.mp4": "a65870f7e7b5dc1833c690297239145314ea47800e9861660dc24dc407dbbc1a"
+  },
+  "original_camera_ticks_by_minimum_roster": {
+    "1": 753,
+    "4": 83,
+    "8": 26,
+    "12": 6
+  },
+  "matched_camera_ticks_by_minimum_roster": {
+    "1": 349,
+    "4": 35,
+    "8": 11,
+    "12": 2
+  },
+  "same_24_keys_in_all_three_durations": true,
+  "ten_model_inputs_plus_four_identity_arrays_only": true,
+  "max_absolute_differences": {
+    "boxes_20_from_source": 0.0,
+    "motion_20_from_source": 0.0,
+    "motion_5_source_and_old": 0.0,
+    "joints_5_match_parent": 0.0,
+    "boxes_5_match_parent": 0.0,
+    "inferred_5_match_parent": 0.0,
+    "x_m": 0.0,
+    "x_p": 2.384185791015625e-07,
+    "q_vec": 5.960464477539063e-08,
+    "q_part": 5.960464477539063e-08,
+    "ego_type_oh": 0.0,
+    "p_env": 0.0,
+    "m_map": 0.0,
+    "nbr_edges": 0.0,
+    "nbr_type_oh": 0.0,
+    "nbr_mask": 0.0
+  },
+  "scenes": [
+    {
+      "clip": "america_crossroad_summer_nightfall_sunny_1",
+      "tick": 39,
+      "first_history_tick": 20,
+      "first_last_source_label_number_20": [
+        61,
+        118
+      ],
+      "first_last_nominal_video_index_20": [
+        60,
+        117
+      ],
+      "source_camera_fps": 30.0,
+      "map_bev_frame": 0,
+      "map_frame_pixels_sha256": "aac01b667e65e04a808aa6f985bd1c2872eaa1d81119c5966d152eb35f2d2b98",
+      "native_video_bytes_match_pose_parent_sha256": "5737a95d4a2980a335b0ef71bc7723106d959bc6e80ed2ea3b748f4479eb52ba",
+      "first_person_source_label_number": 0,
+      "source_contours": 10,
+      "ground_y_flipped": false,
+      "active_neighbor_slots": 100,
+      "slots_with_velocity": 100,
+      "source_target_neighbor_types": {
+        "Person": 100
+      },
+      "source_background_neighbor_slots": 32,
+      "unique_background_ids": 6,
+      "nonempty_map_rows": 12,
+      "valid_map_polylines_across_rows": 66,
+      "pose_inferred_20": 240,
+      "joint_masks_by_T": {
+        "5": 1004,
+        "10": 2010,
+        "20": 4033
+      },
+      "ego_types": {
+        "0": 10,
+        "2": 2
+      },
+      "observed_source_types_t0": {
+        "Car": 3,
+        "Person": 19
+      },
+      "distinct_sampled_targets": 12
+    },
+    {
+      "clip": "japan_crossroad_winter_daytime_sunny_1",
+      "tick": 39,
+      "first_history_tick": 20,
+      "first_last_source_label_number_20": [
+        61,
+        118
+      ],
+      "first_last_nominal_video_index_20": [
+        60,
+        117
+      ],
+      "source_camera_fps": 30.0,
+      "map_bev_frame": 0,
+      "map_frame_pixels_sha256": "40af5d232ce431394cc2c88dd6582e77c8c519109bfd543afb256265c8dd461f",
+      "native_video_bytes_match_pose_parent_sha256": "b408f82b8df7e86d11ed779ba52d16adcaab8f86573fa9edbe1293706d5df676",
+      "first_person_source_label_number": 1,
+      "source_contours": 10,
+      "ground_y_flipped": false,
+      "active_neighbor_slots": 124,
+      "slots_with_velocity": 124,
+      "source_target_neighbor_types": {
+        "Person": 124
+      },
+      "source_background_neighbor_slots": 5,
+      "unique_background_ids": 2,
+      "nonempty_map_rows": 12,
+      "valid_map_polylines_across_rows": 108,
+      "pose_inferred_20": 240,
+      "joint_masks_by_T": {
+        "5": 989,
+        "10": 1941,
+        "20": 3731
+      },
+      "ego_types": {
+        "0": 11,
+        "2": 1
+      },
+      "observed_source_types_t0": {
+        "Person": 16
+      },
+      "distinct_sampled_targets": 12
+    }
+  ],
+  "limits": [
+    "Enrollment inherits complete future labels from the 623-window study; no future measurement contributes to any exported feature.",
+    "Native annotations use 3*t+1 per frozen loader and pose images use frame index 3*t; the selected American clip contains source label frame 0. A possible one-frame image/label shift remains.",
+    "BEV frame-zero Canny contours are image edges. Recomputed pixels depend on the decode and OpenCV stack.",
+    "No inference, latency measurement, or output prediction was performed."
+  ]
+}

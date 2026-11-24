@@ -1,0 +1,193 @@
+{
+  "status": "Coverage audit only; three previously used outdoor train sequences. No forecast or new test scene.",
+  "raw_member_sha256": {
+    "jrdb/data/train/hewlett-packard-intersection-2019-01-24_0_shift_0.ndjson": "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818",
+    "labels_3d_keypoints/train/hewlett-packard-intersection-2019-01-24_0.json": "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45",
+    "odometry/train/hewlett-packard-intersection-2019-01-24_0.json": "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+    "jrdb/data/train/huang-lane-2019-02-12_0_shift_0.ndjson": "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd",
+    "labels_3d_keypoints/train/huang-lane-2019-02-12_0.json": "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb",
+    "odometry/train/huang-lane-2019-02-12_0.json": "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+    "jrdb/data/train/tressider-2019-03-16_1_shift_0.ndjson": "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc",
+    "labels_3d_keypoints/train/tressider-2019-03-16_1.json": "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9",
+    "odometry/train/tressider-2019-03-16_1.json": "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+  },
+  "clocks": {
+    "raw_image_nominal_hz": 15,
+    "manual_2d_pose_nominal_hz": 7.5,
+    "official_upsampled_nominal_hz": 15,
+    "ground_derived_hz": 2.5,
+    "raw_frames_in_0_1s": "3/2",
+    "five_manual_poses_min_span_s": "8/15",
+    "nearby_five_real_hst_frame_offsets": [
+      -6,
+      -5,
+      -3,
+      -2,
+      0
+    ],
+    "nearby_intervals_seconds": [
+      "1/15",
+      "2/15",
+      "1/15",
+      "2/15"
+    ],
+    "nominal_3_seconds_in_raw_frames": 45,
+    "manual_box_flags_or_capture_ns_in_local_derivatives": false
+  },
+  "raw_readout_scope": "HST 33 body-relative 3D estimates per source ID, no original RGB, 2D joint confidence, raw measured box, or capture timestamps in these nine training members.",
+  "scenes": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "valid_ground_person_frames": 7089,
+      "distinct_ground_frames": 288,
+      "ground_frame_range": [
+        0,
+        1722
+      ],
+      "ground_modulo6": [
+        0
+      ],
+      "odometry_frame_range": [
+        0,
+        1729
+      ],
+      "odometry_frames": 1730,
+      "all33_finite_hst_person_frames": 6255,
+      "all_hst_person_frames": 6255,
+      "finite_hst_frame_range": [
+        0,
+        1725
+      ],
+      "hst_ground_person_frame_overlap": 1048,
+      "five_hst_frames_with_odom_any_anchor": {
+        "all_anchor_person_rows": 4547,
+        "people": 34,
+        "per_track_earliest_greedy_nonoverlapping": 774
+      },
+      "five_hst_with_final_ground_anchor": {
+        "all_anchor_person_rows": 753,
+        "people": 32,
+        "per_track_earliest_greedy_nonoverlapping": 417
+      },
+      "five_hst_with_both_endpoint_historic_ground": {
+        "all_anchor_person_rows": 753,
+        "people": 32,
+        "per_track_earliest_greedy_nonoverlapping": 417
+      },
+      "five_ground_positions_at_actual_five_hst_frames": 0,
+      "ground_endpoint_plus45_simultaneous_anchor": 0,
+      "five_hst_and_2_ground_history_and_seven_actual_future_steps": {
+        "all_anchor_person_rows": 723,
+        "people": 31,
+        "per_track_earliest_greedy_nonoverlapping": 123
+      },
+      "five_hst_and_2_ground_history_and_eight_actual_future_steps": {
+        "all_anchor_person_rows": 718,
+        "people": 30,
+        "per_track_earliest_greedy_nonoverlapping": 115
+      },
+      "official_measured_2d_and_ground_windows_certified": 0
+    },
+    "huang-lane-2019-02-12_0": {
+      "valid_ground_person_frames": 6430,
+      "distinct_ground_frames": 121,
+      "ground_frame_range": [
+        0,
+        720
+      ],
+      "ground_modulo6": [
+        0
+      ],
+      "odometry_frame_range": [
+        0,
+        724
+      ],
+      "odometry_frames": 725,
+      "all33_finite_hst_person_frames": 3320,
+      "all_hst_person_frames": 3320,
+      "finite_hst_frame_range": [
+        3,
+        720
+      ],
+      "hst_ground_person_frame_overlap": 554,
+      "five_hst_frames_with_odom_any_anchor": {
+        "all_anchor_person_rows": 2310,
+        "people": 36,
+        "per_track_earliest_greedy_nonoverlapping": 389
+      },
+      "five_hst_with_final_ground_anchor": {
+        "all_anchor_person_rows": 386,
+        "people": 33,
+        "per_track_earliest_greedy_nonoverlapping": 215
+      },
+      "five_hst_with_both_endpoint_historic_ground": {
+        "all_anchor_person_rows": 386,
+        "people": 33,
+        "per_track_earliest_greedy_nonoverlapping": 215
+      },
+      "five_ground_positions_at_actual_five_hst_frames": 0,
+      "ground_endpoint_plus45_simultaneous_anchor": 0,
+      "five_hst_and_2_ground_history_and_seven_actual_future_steps": {
+        "all_anchor_person_rows": 372,
+        "people": 33,
+        "per_track_earliest_greedy_nonoverlapping": 68
+      },
+      "five_hst_and_2_ground_history_and_eight_actual_future_steps": {
+        "all_anchor_person_rows": 369,
+        "people": 33,
+        "per_track_earliest_greedy_nonoverlapping": 63
+      },
+      "official_measured_2d_and_ground_windows_certified": 0
+    },
+    "tressider-2019-03-16_1": {
+      "valid_ground_person_frames": 2251,
+      "distinct_ground_frames": 84,
+      "ground_frame_range": [
+        0,
+        498
+      ],
+      "ground_modulo6": [
+        0
+      ],
+      "odometry_frame_range": [
+        0,
+        504
+      ],
+      "odometry_frames": 505,
+      "all33_finite_hst_person_frames": 399,
+      "all_hst_person_frames": 399,
+      "finite_hst_frame_range": [
+        47,
+        500
+      ],
+      "hst_ground_person_frame_overlap": 68,
+      "five_hst_frames_with_odom_any_anchor": {
+        "all_anchor_person_rows": 325,
+        "people": 2,
+        "per_track_earliest_greedy_nonoverlapping": 49
+      },
+      "five_hst_with_final_ground_anchor": {
+        "all_anchor_person_rows": 54,
+        "people": 1,
+        "per_track_earliest_greedy_nonoverlapping": 27
+      },
+      "five_hst_with_both_endpoint_historic_ground": {
+        "all_anchor_person_rows": 54,
+        "people": 1,
+        "per_track_earliest_greedy_nonoverlapping": 27
+      },
+      "five_ground_positions_at_actual_five_hst_frames": 0,
+      "ground_endpoint_plus45_simultaneous_anchor": 0,
+      "five_hst_and_2_ground_history_and_seven_actual_future_steps": {
+        "all_anchor_person_rows": 47,
+        "people": 1,
+        "per_track_earliest_greedy_nonoverlapping": 6
+      },
+      "five_hst_and_2_ground_history_and_eight_actual_future_steps": {
+        "all_anchor_person_rows": 46,
+        "people": 1,
+        "per_track_earliest_greedy_nonoverlapping": 5
+      },
+      "official_measured_2d_and_ground_windows_certified": 0
+    }
+  }
+}
