@@ -1,0 +1,682 @@
+{
+  "vehicle_slot_intervention": {
+    "addendum_sha256": "582c1b84b4de7343fcf51ecd8142780f84308548c394b552d11eebadad383305",
+    "all_slots_unchanged_on_ineligible_windows": true,
+    "first_11_unchanged_on_all_replacements": true,
+    "changed_clips": 5,
+    "overall": {
+      "swapped_windows": 810,
+      "inserted_car_with_historical_velocity": 810,
+      "original_windows_with_car": 392,
+      "radius_pool_windows_with_car": 1202,
+      "revised_windows_with_car": 1202,
+      "revised_person_edges": 33218,
+      "revised_car_edges": 1225,
+      "unchanged_windows": 2256
+    },
+    "per_clip": {
+      "roundabout_01": {
+        "swapped_windows": 17,
+        "inserted_car_with_historical_velocity": 17,
+        "original_windows_with_car": 21,
+        "radius_pool_windows_with_car": 38,
+        "revised_windows_with_car": 38,
+        "revised_person_edges": 523,
+        "revised_car_edges": 38,
+        "unchanged_windows": 30
+      },
+      "roundabout_02": {
+        "unchanged_windows": 34,
+        "original_windows_with_car": 2,
+        "radius_pool_windows_with_car": 32,
+        "revised_windows_with_car": 32,
+        "revised_person_edges": 736,
+        "revised_car_edges": 32,
+        "swapped_windows": 30,
+        "inserted_car_with_historical_velocity": 30
+      },
+      "roundabout_03": {
+        "unchanged_windows": 1258,
+        "original_windows_with_car": 155,
+        "radius_pool_windows_with_car": 773,
+        "revised_windows_with_car": 773,
+        "revised_person_edges": 21667,
+        "revised_car_edges": 778,
+        "swapped_windows": 618,
+        "inserted_car_with_historical_velocity": 618
+      },
+      "roundabout_04": {
+        "unchanged_windows": 267,
+        "original_windows_with_car": 28,
+        "radius_pool_windows_with_car": 92,
+        "revised_windows_with_car": 92,
+        "revised_person_edges": 3745,
+        "revised_car_edges": 92,
+        "swapped_windows": 64,
+        "inserted_car_with_historical_velocity": 64
+      },
+      "roundabout_05": {
+        "unchanged_windows": 429,
+        "original_windows_with_car": 92,
+        "radius_pool_windows_with_car": 173,
+        "revised_windows_with_car": 173,
+        "revised_person_edges": 5232,
+        "revised_car_edges": 176,
+        "swapped_windows": 81,
+        "inserted_car_with_historical_velocity": 81
+      },
+      "roundabout_06": {
+        "unchanged_windows": 15,
+        "original_windows_with_car": 3,
+        "radius_pool_windows_with_car": 3,
+        "revised_windows_with_car": 3,
+        "revised_person_edges": 100,
+        "revised_car_edges": 3
+      },
+      "roundabout_07": {
+        "unchanged_windows": 100,
+        "original_windows_with_car": 57,
+        "radius_pool_windows_with_car": 57,
+        "revised_windows_with_car": 57,
+        "revised_person_edges": 606,
+        "revised_car_edges": 72
+      },
+      "roundabout_08": {
+        "unchanged_windows": 5,
+        "original_windows_with_car": 3,
+        "radius_pool_windows_with_car": 3,
+        "revised_windows_with_car": 3,
+        "revised_person_edges": 12,
+        "revised_car_edges": 3
+      },
+      "roundabout_09": {
+        "unchanged_windows": 21,
+        "original_windows_with_car": 3,
+        "radius_pool_windows_with_car": 3,
+        "revised_windows_with_car": 3,
+        "revised_person_edges": 166,
+        "revised_car_edges": 3
+      },
+      "roundabout_10": {
+        "unchanged_windows": 46,
+        "original_windows_with_car": 11,
+        "radius_pool_windows_with_car": 11,
+        "revised_windows_with_car": 11,
+        "revised_person_edges": 217,
+        "revised_car_edges": 11
+      },
+      "roundabout_11": {
+        "unchanged_windows": 51,
+        "original_windows_with_car": 17,
+        "radius_pool_windows_with_car": 17,
+        "revised_windows_with_car": 17,
+        "revised_person_edges": 214,
+        "revised_car_edges": 17
+      }
+    },
+    "ordered_replacement_id_schema": "Compact JSON ordered five-element lists [clip,numeric_target_id,t0,numeric_new_car_id,numeric_old_person_id] for replaced windows only.",
+    "ordered_replacement_ids_sha256": "eece02bf94166402fdcbd76bc1b0f6110015701c0601b2876ce06b40c09e371e",
+    "ordered_revised_memberships_sha256": "debae7ed2c84b18fbb30a6a1256c6b72815372a425172410e85fe09fcbf54c57"
+  },
+  "cohort_sha256": "02c44cf55e5ca8690dc1fe9ac9c076af44dc89f11629b8ccc9e725e49e4580ec",
+  "protocol_sha256": "ccf260a40badfefafcf7e07438397d3d583863a157fb682b8b697b66ea7f2d36",
+  "counts_unit": "An edge is one window/neighbor at the final history frame. An actor may be counted more than once across windows. Membership is selected before querying any future observation. Distinct local IDs include source class.",
+  "ordered_memberships_sha256": "d19b13f40689219a6c9fd805f4f62fac7294621d94d0d958f078b9651f2db212",
+  "ordered_members_and_history_sha256": "fb856754e021f574f66635a4b80efa6a523eef36d7716cda8f31df232d27d4fa",
+  "digest_schema": "Canonical compact JSON outer list in the enrolled key order. Membership each [key, [[class,numeric_id],...]]. State each [key, [[class,numeric_id,presence_count,velocity_valid_int,type_code],...]].",
+  "per_clip": {
+    "roundabout_01": {
+      "windows": 47,
+      "pool": {
+        "Person": 923,
+        "Car": 49
+      },
+      "selected": {
+        "Person": 540,
+        "Car": 21
+      },
+      "removed_by_limit": {
+        "Person": 383,
+        "Car": 28
+      },
+      "support": {
+        "people_only": 26,
+        "mixed": 21,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "mixed": 38,
+        "people_only": 9,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 540,
+        "Car": 21
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 540,
+        "6": 21
+      },
+      "presence_frames_1_to_5": {
+        "5": 561
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 45,
+      "maximum_pool_size": 27,
+      "windows_people_displace_all_candidate_vehicles": 17,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 47
+    },
+    "roundabout_02": {
+      "windows": 64,
+      "pool": {
+        "Person": 1555,
+        "Car": 32
+      },
+      "selected": {
+        "Person": 766,
+        "Car": 2
+      },
+      "removed_by_limit": {
+        "Person": 789,
+        "Car": 30
+      },
+      "support": {
+        "people_only": 62,
+        "mixed": 2,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 32,
+        "mixed": 32,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 766,
+        "Car": 2
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 766,
+        "6": 2
+      },
+      "presence_frames_1_to_5": {
+        "5": 768
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 63,
+      "maximum_pool_size": 37,
+      "windows_people_displace_all_candidate_vehicles": 30,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 64
+    },
+    "roundabout_03": {
+      "windows": 1876,
+      "pool": {
+        "Person": 61701,
+        "Car": 915
+      },
+      "selected": {
+        "Person": 22285,
+        "Car": 160
+      },
+      "removed_by_limit": {
+        "Person": 39416,
+        "Car": 755
+      },
+      "support": {
+        "people_only": 1721,
+        "mixed": 155,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 1103,
+        "mixed": 773,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 22285,
+        "Car": 160
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 22150,
+        "6": 160,
+        "2": 135
+      },
+      "presence_frames_1_to_5": {
+        "5": 22445
+      },
+      "ego_actual_speed_below_0_2_windows": 12,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 1836,
+      "maximum_pool_size": 59,
+      "windows_people_displace_all_candidate_vehicles": 618,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 1876
+    },
+    "roundabout_04": {
+      "windows": 331,
+      "pool": {
+        "Person": 9842,
+        "Car": 92
+      },
+      "selected": {
+        "Person": 3809,
+        "Car": 28
+      },
+      "removed_by_limit": {
+        "Person": 6033,
+        "Car": 64
+      },
+      "support": {
+        "people_only": 303,
+        "mixed": 28,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 239,
+        "mixed": 92,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 3809,
+        "Car": 28
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 3808,
+        "6": 28,
+        "2": 1
+      },
+      "presence_frames_1_to_5": {
+        "5": 3825,
+        "2": 12
+      },
+      "ego_actual_speed_below_0_2_windows": 1,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 298,
+      "maximum_pool_size": 53,
+      "windows_people_displace_all_candidate_vehicles": 64,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 331
+    },
+    "roundabout_05": {
+      "windows": 510,
+      "pool": {
+        "Person": 8996,
+        "Car": 176
+      },
+      "selected": {
+        "Person": 5313,
+        "Car": 95
+      },
+      "removed_by_limit": {
+        "Person": 3683,
+        "Car": 81
+      },
+      "support": {
+        "people_only": 418,
+        "mixed": 92,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 337,
+        "mixed": 173,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 5313,
+        "Car": 95
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 5264,
+        "6": 95,
+        "2": 49
+      },
+      "presence_frames_1_to_5": {
+        "5": 5402,
+        "4": 2,
+        "3": 4
+      },
+      "ego_actual_speed_below_0_2_windows": 5,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 334,
+      "maximum_pool_size": 35,
+      "windows_people_displace_all_candidate_vehicles": 81,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 510
+    },
+    "roundabout_06": {
+      "windows": 15,
+      "pool": {
+        "Person": 100,
+        "Car": 3
+      },
+      "selected": {
+        "Person": 100,
+        "Car": 3
+      },
+      "removed_by_limit": {},
+      "support": {
+        "people_only": 12,
+        "mixed": 3,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 12,
+        "mixed": 3,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 100,
+        "Car": 3
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 100,
+        "6": 3
+      },
+      "presence_frames_1_to_5": {
+        "5": 103
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 0,
+      "maximum_pool_size": 11,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 15
+    },
+    "roundabout_07": {
+      "windows": 100,
+      "pool": {
+        "Person": 608,
+        "Car": 72
+      },
+      "selected": {
+        "Person": 606,
+        "Car": 72
+      },
+      "removed_by_limit": {
+        "Person": 2
+      },
+      "support": {
+        "people_only": 43,
+        "mixed": 56,
+        "cars_only": 1,
+        "empty": 0
+      },
+      "pool_support": {
+        "people_only": 43,
+        "mixed": 56,
+        "cars_only": 1,
+        "empty": 0
+      },
+      "velocity_valid": {
+        "Person": 602,
+        "Car": 72
+      },
+      "velocity_missing": {
+        "Person": 4
+      },
+      "neighbor_type_codes": {
+        "0": 606,
+        "6": 72
+      },
+      "presence_frames_1_to_5": {
+        "5": 673,
+        "1": 4,
+        "4": 1
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 2,
+      "maximum_pool_size": 13,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 100
+    },
+    "roundabout_08": {
+      "windows": 5,
+      "pool": {
+        "Person": 12,
+        "Car": 3
+      },
+      "selected": {
+        "Person": 12,
+        "Car": 3
+      },
+      "removed_by_limit": {},
+      "support": {
+        "people_only": 2,
+        "mixed": 3,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 2,
+        "mixed": 3,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 12,
+        "Car": 3
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 12,
+        "6": 3
+      },
+      "presence_frames_1_to_5": {
+        "5": 15
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 0,
+      "maximum_pool_size": 4,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 5
+    },
+    "roundabout_09": {
+      "windows": 21,
+      "pool": {
+        "Person": 166,
+        "Car": 3
+      },
+      "selected": {
+        "Person": 166,
+        "Car": 3
+      },
+      "removed_by_limit": {},
+      "support": {
+        "people_only": 17,
+        "mixed": 3,
+        "empty": 1,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 17,
+        "mixed": 3,
+        "empty": 1,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 166,
+        "Car": 3
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 166,
+        "6": 3
+      },
+      "presence_frames_1_to_5": {
+        "5": 169
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 0,
+      "maximum_pool_size": 11,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 21
+    },
+    "roundabout_10": {
+      "windows": 46,
+      "pool": {
+        "Person": 217,
+        "Car": 11
+      },
+      "selected": {
+        "Person": 217,
+        "Car": 11
+      },
+      "removed_by_limit": {},
+      "support": {
+        "people_only": 34,
+        "empty": 1,
+        "mixed": 11,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 34,
+        "empty": 1,
+        "mixed": 11,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 217,
+        "Car": 11
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 217,
+        "6": 11
+      },
+      "presence_frames_1_to_5": {
+        "5": 228
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 0,
+      "maximum_pool_size": 10,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 46
+    },
+    "roundabout_11": {
+      "windows": 51,
+      "pool": {
+        "Person": 214,
+        "Car": 17
+      },
+      "selected": {
+        "Person": 214,
+        "Car": 17
+      },
+      "removed_by_limit": {},
+      "support": {
+        "people_only": 34,
+        "mixed": 17,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "pool_support": {
+        "people_only": 34,
+        "mixed": 17,
+        "empty": 0,
+        "cars_only": 0
+      },
+      "velocity_valid": {
+        "Person": 214,
+        "Car": 17
+      },
+      "velocity_missing": {},
+      "neighbor_type_codes": {
+        "0": 214,
+        "6": 17
+      },
+      "presence_frames_1_to_5": {
+        "5": 231
+      },
+      "ego_actual_speed_below_0_2_windows": 0,
+      "coincident_candidates_excluded": 0,
+      "windows_above_12_candidates": 0,
+      "maximum_pool_size": 8,
+      "windows_people_displace_all_candidate_vehicles": 0,
+      "windows_vehicles_displace_all_candidate_people": 0,
+      "ego_history_5of5": 51
+    }
+  },
+  "overall": {
+    "windows": 3066,
+    "pool": {
+      "Person": 84334,
+      "Car": 1373
+    },
+    "selected": {
+      "Person": 34028,
+      "Car": 415
+    },
+    "removed_by_limit": {
+      "Person": 50306,
+      "Car": 958
+    },
+    "support": {
+      "people_only": 2672,
+      "mixed": 391,
+      "cars_only": 1,
+      "empty": 2
+    },
+    "pool_support": {
+      "mixed": 1201,
+      "people_only": 1862,
+      "cars_only": 1,
+      "empty": 2
+    },
+    "velocity_valid": {
+      "Person": 34024,
+      "Car": 415
+    },
+    "velocity_missing": {
+      "Person": 4
+    },
+    "neighbor_type_codes": {
+      "0": 33843,
+      "6": 415,
+      "2": 185
+    },
+    "presence_frames_1_to_5": {
+      "5": 34420,
+      "2": 12,
+      "4": 3,
+      "3": 4,
+      "1": 4
+    },
+    "ego_actual_speed_below_0_2_windows": 18,
+    "coincident_candidates_excluded": 0,
+    "windows_above_12_candidates": 2578,
+    "maximum_pool_size": 59,
+    "windows_people_displace_all_candidate_vehicles": 810,
+    "windows_vehicles_displace_all_candidate_people": 0,
+    "ego_history_5of5": 3066
+  }
+}

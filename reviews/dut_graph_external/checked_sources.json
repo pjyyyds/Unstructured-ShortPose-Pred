@@ -1,0 +1,44 @@
+{
+  "status": "All real history records and 12-state strict load verified locally, synthetic forward passed. No real external forward or scoring.",
+  "sha256": {
+    "PROTOCOL.md": "ccf260a40badfefafcf7e07438397d3d583863a157fb682b8b697b66ea7f2d36",
+    "HANDEDNESS_ADDENDUM.md": "4d8986e90f8668e888006d47a8d91a38dfe3adfab8605cc9678dc8f5afe0b79a",
+    "VEHICLE_SLOT_ADDENDUM.md": "582c1b84b4de7343fcf51ecd8142780f84308548c394b552d11eebadad383305",
+    "kaggle_cell.py": "076b8752fc5bc8138a504e4ed3adde0207e473a606fa963e604e7aea8c16defa",
+    "observed_graph.py": "e46ef23d8d92113fbf30d40a531ab9faf77e412c681da7733c651b1d116a5d5b",
+    "run_transfer.py": "18b05449ed9517747009e520891cd932c0f0e7f566cc17dd403f6c4ccd6f1242",
+    "test_transfer.py": "d2b5e78e507f2d35c6a712c930abadf012d7185e2ef98da0af875a821a66ae85",
+    "verify_return.py": "fa12215050439e5e1dedd8a35739a46e8a34be23224b6f04be54d1e4e2bbcead",
+    "historical_denominators.json": "e42610f96068eee8f64cdf78fb6a4ac5ffdfee3ef4022c823ce0769c6082af20",
+    "independent_history.json": "f972a54f7c88c1d23ae77149255bca7e33e5d4215ef92823ddb5b1a76086e3f0",
+    "check_history_independent.py": "dc1b14219c75aab79fe26485c44ac216e7dc212b40d7bd6662c45e0d9a7186b4",
+    "check_ready.py": "61802015f58232f48f7bd0eb16db315661d602cbc9cc187994ef6c60c3c94e94",
+    "README.md": "984ae10d7f864a4bc4d3d06e5061d9e53c615ee2ca302ccf1ed20645ac5d77f7"
+  },
+  "private_source_archive_sha256": "0b3e590b8d7cb2bf99670fd27d3bdbf2a40fa0e77bf29f7ac0423b73535589f8",
+  "groups": {
+    "empty": 2,
+    "person_only": 2672,
+    "car_only": 1,
+    "mixed": 391
+  },
+  "primary_vs_reserve": {
+    "changed_windows": 810,
+    "original_car_support": 392,
+    "intervention_car_support": 1202,
+    "changed_by_clip": {
+      "roundabout_01": 17,
+      "roundabout_02": 30,
+      "roundabout_03": 618,
+      "roundabout_04": 64,
+      "roundabout_05": 81,
+      "roundabout_06": 0,
+      "roundabout_07": 0,
+      "roundabout_08": 0,
+      "roundabout_09": 0,
+      "roundabout_10": 0,
+      "roundabout_11": 0
+    },
+    "replacement_identity_sha256": "3a38650b4e17e4024c8bec59a17376b46997cce3e2654574fc2df73ab01718ae"
+  }
+}

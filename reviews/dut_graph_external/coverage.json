@@ -1,0 +1,521 @@
+{
+  "protocol_sha256": "74b4b5c2ea3855f6e097e0bb583e653af8b84b217509dbe12279d9c06521f461",
+  "members": {
+    "vci-raw-dut/roundabout_01_roi.mp4": "284359cc698f3fb291e9b38401638bd1d6074ef4b19702804f946e17d4c5d802",
+    "data/trajectories/roundabout_01_traj_ped.csv": "5d03e4444713b2f9f6cc416444a13427a71c83e1c8831c906ef608b410fc2d03",
+    "data/trajectories/roundabout_01_traj_veh.csv": "31040133075ee3e7f0767d3c7ac2e40691e6eafa3a478dc50f73d19d8e5d4b28",
+    "data/ratios/roundabout_01_ratio_pixel2meter.txt": "adb9f2f32bbf185d546f0e4b7bd48b63295605086c692fc93acb50f84459f2c1",
+    "legacy/clips/rois/roundabout_01_roi": "ca5d5484c1620bea0e75412bce9d097659cf78c7686a573d68ce9c5fc8d4576a",
+    "vci-raw-dut/roundabout_02_roi.mp4": "50b908b7c8c96422a76947202109b07b3c1eda469e16dcbf8b36cd8e1a74a06e",
+    "data/trajectories/roundabout_02_traj_ped.csv": "266c0bc35693a36b9c0678243f460fff0a6114f1d8f3488c4f0dda945d4c5b90",
+    "data/trajectories/roundabout_02_traj_veh.csv": "9bee6be890ee39fff05b6e4e3757fbba49d4575432ad2110e261bc1caff9459a",
+    "data/ratios/roundabout_02_ratio_pixel2meter.txt": "29a1196526576aeac17c524af18478da6e0ef169933a80ecb4823fce615bb37a",
+    "legacy/clips/rois/roundabout_02_roi": "de5467422963efe014720a884622a75c3d5fcb9f76122ff7f9748677b134636f",
+    "vci-raw-dut/roundabout_03_roi.mp4": "e4d1640540d2f8f68164676185291003fb21ce9ff6b637d7c219e6bd25d1dbcd",
+    "data/trajectories/roundabout_03_traj_ped.csv": "bc858bfa08163a6cfa07498944b7cc29f808b71ad770ce308fda0bcba726c088",
+    "data/trajectories/roundabout_03_traj_veh.csv": "91913d8f8b1fc703e533610536a60ca8d795a271fe24d20802e2d9270fac089a",
+    "data/ratios/roundabout_03_ratio_pixel2meter.txt": "0ce3dc794a4a035ed8b97b17038746f06bd6e111cb49ea2fa46bf6d78c802161",
+    "legacy/clips/rois/roundabout_03_roi": "6b3d880de159757e47bca949b21b295f473f968796df637ed79ee5f929629462",
+    "vci-raw-dut/roundabout_04_roi.mp4": "47552e1012712f5b1c0a041350a529f910e96f72bd63805debf4d01c2eeffcdc",
+    "data/trajectories/roundabout_04_traj_ped.csv": "dc65890ff04c30c5ab0c84a67cee992875a7f05fe342ae42c4290a8e0d54432c",
+    "data/trajectories/roundabout_04_traj_veh.csv": "77f1ef6bd5ec6ce273c675d9b95dde0b603cf587ee448b9043b02b41e63a4fe6",
+    "data/ratios/roundabout_04_ratio_pixel2meter.txt": "43129afb2402c2d2f9cf034e74ac3a8bff315c8c052bcaaf8b12025f0ceb3ac3",
+    "legacy/clips/rois/roundabout_04_roi": "a284f64947154df8635340456ac4e6c4666839204544ee3ced83d76019d09cd5",
+    "vci-raw-dut/roundabout_05_roi.mp4": "8cebbf5d7ed045de3c7239fac8711d928a3afc1822655964053d018fd5c46b73",
+    "data/trajectories/roundabout_05_traj_ped.csv": "155aa87d7683535b28189972e6d486c4263dd40b685b6ee4c8bffa4c32470402",
+    "data/trajectories/roundabout_05_traj_veh.csv": "7511c7d287de434ddd0694d5706b596868e725e95c73b5217eca34faae6fcc61",
+    "data/ratios/roundabout_05_ratio_pixel2meter.txt": "8f0e57d3a7e4368fc18b6d50c9db65b1991a79030439b11b2d7e7017477636b2",
+    "legacy/clips/rois/roundabout_05_roi": "dd74b574afe1998dd71aade20396565b0ff7b5b3208c1c6610689aee6774121f",
+    "vci-raw-dut/roundabout_06_roi.mp4": "bf340badc58870ed2c17589a1f456cf05f4148b59ac69101208db8b7eb6a47ac",
+    "data/trajectories/roundabout_06_traj_ped.csv": "a6c89922a1e4309bb3a932ef63a6df72976bf0ff979063bab0d3ffb6b99e5b98",
+    "data/trajectories/roundabout_06_traj_veh.csv": "59bf37b016b850ef13d580705801fb34d29f6786095c650ddd39e68569740c0e",
+    "data/ratios/roundabout_06_ratio_pixel2meter.txt": "1e124812e94ec3331260ffa058f7114e41dcae4eb3f5358c0ac6017c5da00d83",
+    "legacy/clips/rois/roundabout_06_roi": "64db3b3edb8fe04ea882a9253d162128355b6963d422aad73f12533a07df8e6b",
+    "vci-raw-dut/roundabout_07_roi.mp4": "e93041b9849caacecd838fc1acd680fde69555f3ab72ba3fb770f4e8c0901b1b",
+    "data/trajectories/roundabout_07_traj_ped.csv": "8219b26be67a5ded0cc855e1c9ed9459b9f12601c1eab5e0f106f21f546fcb23",
+    "data/trajectories/roundabout_07_traj_veh.csv": "f96a5abad30741c2e4552e342c4376db173dd4a2d286da573249514d31a11298",
+    "data/ratios/roundabout_07_ratio_pixel2meter.txt": "4d00c2917e530777253cf68ebc1e55390af440eee40048a252e8a2b64ad32a34",
+    "legacy/clips/rois/roundabout_07_roi": "d908a6d624151ea3024d996dc0f9abbefd3707c58bce619977ae6c6b1eb96e73",
+    "vci-raw-dut/roundabout_08_roi.mp4": "a9ed4d2d124e3ed2aefaf890cb2e19dfa3e14bb4c2b1125067228d220421604d",
+    "data/trajectories/roundabout_08_traj_ped.csv": "9bee2696e3c9e10a0de353b83cdb411377747c186489564b51f6eeead5069799",
+    "data/trajectories/roundabout_08_traj_veh.csv": "f02424221cb2687e1a03fd78221a0bd578cf123e94682f9c1fe6ecf08953aba1",
+    "data/ratios/roundabout_08_ratio_pixel2meter.txt": "f4e1514f44e200f3c58da954581405378d4604e8137e3b5d850904899ed33285",
+    "legacy/clips/rois/roundabout_08_roi": "0bec8edb949ae20de10752c8a005a297c5d2e58b9a3cbfdc0b26216bfb829144",
+    "vci-raw-dut/roundabout_09_roi.mp4": "d9f147b25902d42aad86ac99a0717ad39b392015d55643820116d3b00bf81ca8",
+    "data/trajectories/roundabout_09_traj_ped.csv": "7f00e35b33360454436f855a63a9b3dddce106e96e51a06adb5147bdd37bb7c7",
+    "data/trajectories/roundabout_09_traj_veh.csv": "2a38a7488ee7b4f55027f61028594497e6a3fe9a8204b4ee65f186adb5620002",
+    "data/ratios/roundabout_09_ratio_pixel2meter.txt": "d86d59383136b2a3d5dcc838c75a6463516f78f93e9d5af31507c4eaaefdd669",
+    "legacy/clips/rois/roundabout_09_roi": "741a42f1cbb1bf692db512f4890b689ab19c2ad8d54bf81e9be776e4c5e8056d",
+    "vci-raw-dut/roundabout_10_roi.mp4": "e26c4f33d694ca1c88dd10937f1c9ef0aa2c780a49b7dfbaeac8ddffb8ca7635",
+    "data/trajectories/roundabout_10_traj_ped.csv": "1b20ff719e7009c22e91dc5cb615a98c076eda3f045fda1c049ec64092973eb2",
+    "data/trajectories/roundabout_10_traj_veh.csv": "96ab7c3bf22c06e5164d46a9c2901e0ba61adb6d900426c528599008d81e66c9",
+    "data/ratios/roundabout_10_ratio_pixel2meter.txt": "3f8e4a30aedb5a67e815a29d5ec1126bb42abaae2b76bba601686e9d7de958fa",
+    "legacy/clips/rois/roundabout_10_roi": "c58c0529534e9debdd87a5815805fbacc73fb397a8b5dd93ab4973b4bfc861bc",
+    "vci-raw-dut/roundabout_11_roi.mp4": "793620250069c20319616c50f173cae86ca8a2a3a813b2ed720b7619f09601c1",
+    "data/trajectories/roundabout_11_traj_ped.csv": "cb933702532980163dedf6828720f99e920c31a9e6eb57f74e2da1f6b1cae5a4",
+    "data/trajectories/roundabout_11_traj_veh.csv": "b5be57d602b0bade1c7f388466482e25e5ac68be41a3e008611448c1232e47b1",
+    "data/ratios/roundabout_11_ratio_pixel2meter.txt": "182f3f3f9132f53e0a7622f4ce2bbb6359c47e736fc4b5924ab2dca4d9e6d709",
+    "legacy/clips/rois/roundabout_11_roi": "1c61c303778f72a7cd10d8f4d5bffc7f43afa42276f9f944bfb10af94425f9e5"
+  },
+  "clips": [
+    {
+      "clip": "roundabout_01",
+      "video_sha256": "284359cc698f3fb291e9b38401638bd1d6074ef4b19702804f946e17d4c5d802",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        796,
+        698
+      ],
+      "roi_xywh": [
+        208,
+        294,
+        797,
+        699
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 167,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 5515,
+      "pedestrian_ids": 53,
+      "vehicle_rows": 181,
+      "vehicle_ids": 2,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 26.350084233085006,
+      "windows": 47,
+      "eligible_people": 33,
+      "history_span_range_s": [
+        0.4170837504170837,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.003003003003003,
+        3.0030030030030033
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_02",
+      "video_sha256": "50b908b7c8c96422a76947202109b07b3c1eda469e16dcbf8b36cd8e1a74a06e",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        574,
+        598
+      ],
+      "roi_xywh": [
+        313,
+        228,
+        575,
+        598
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 214,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 8013,
+      "pedestrian_ids": 66,
+      "vehicle_rows": 110,
+      "vehicle_ids": 1,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.08570509447359,
+      "windows": 64,
+      "eligible_people": 45,
+      "history_span_range_s": [
+        0.417083750417083,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.003003003003003,
+        3.0030030030030037
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_03",
+      "video_sha256": "e4d1640540d2f8f68164676185291003fb21ce9ff6b637d7c219e6bd25d1dbcd",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1058,
+        788
+      ],
+      "roi_xywh": [
+        310,
+        231,
+        1059,
+        789
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 1558,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 175923,
+      "pedestrian_ids": 456,
+      "vehicle_rows": 3099,
+      "vehicle_ids": 7,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 22.943476740735843,
+      "windows": 1876,
+      "eligible_people": 431,
+      "history_span_range_s": [
+        0.4170837504170777,
+        0.4170837504170848
+      ],
+      "endpoint_range_s": [
+        3.0030030030029984,
+        3.003003003003009
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_04",
+      "video_sha256": "47552e1012712f5b1c0a041350a529f910e96f72bd63805debf4d01c2eeffcdc",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1308,
+        654
+      ],
+      "roi_xywh": [
+        146,
+        267,
+        1309,
+        655
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 431,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 33255,
+      "pedestrian_ids": 155,
+      "vehicle_rows": 503,
+      "vehicle_ids": 2,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 22.838179907905353,
+      "windows": 331,
+      "eligible_people": 126,
+      "history_span_range_s": [
+        0.417083750417083,
+        0.4170837504170848
+      ],
+      "endpoint_range_s": [
+        3.003003003003002,
+        3.0030030030030037
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_05",
+      "video_sha256": "8cebbf5d7ed045de3c7239fac8711d928a3afc1822655964053d018fd5c46b73",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1530,
+        778
+      ],
+      "roi_xywh": [
+        154,
+        219,
+        1531,
+        778
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 862,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 48194,
+      "pedestrian_ids": 147,
+      "vehicle_rows": 1368,
+      "vehicle_ids": 4,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.080851449724815,
+      "windows": 510,
+      "eligible_people": 127,
+      "history_span_range_s": [
+        0.41708375041708123,
+        0.4170837504170848
+      ],
+      "endpoint_range_s": [
+        3.0030030030029984,
+        3.003003003003009
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_06",
+      "video_sha256": "bf340badc58870ed2c17589a1f456cf05f4148b59ac69101208db8b7eb6a47ac",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        762,
+        682
+      ],
+      "roi_xywh": [
+        247,
+        237,
+        763,
+        682
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 310,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 2101,
+      "pedestrian_ids": 16,
+      "vehicle_rows": 127,
+      "vehicle_ids": 1,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.042511138454007,
+      "windows": 15,
+      "eligible_people": 15,
+      "history_span_range_s": [
+        0.417083750417083,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.0030030030030037,
+        3.0030030030030037
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_07",
+      "video_sha256": "e93041b9849caacecd838fc1acd680fde69555f3ab72ba3fb770f4e8c0901b1b",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1100,
+        622
+      ],
+      "roi_xywh": [
+        313,
+        278,
+        1100,
+        623
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 622,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 10105,
+      "pedestrian_ids": 47,
+      "vehicle_rows": 1303,
+      "vehicle_ids": 4,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.21650037294245,
+      "windows": 100,
+      "eligible_people": 41,
+      "history_span_range_s": [
+        0.41708375041708123,
+        0.4170837504170848
+      ],
+      "endpoint_range_s": [
+        3.003003003003002,
+        3.0030030030030055
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_08",
+      "video_sha256": "a9ed4d2d124e3ed2aefaf890cb2e19dfa3e14bb4c2b1125067228d220421604d",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        582,
+        528
+      ],
+      "roi_xywh": [
+        300,
+        240,
+        583,
+        528
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 167,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 587,
+      "pedestrian_ids": 5,
+      "vehicle_rows": 88,
+      "vehicle_ids": 1,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.443894600466024,
+      "windows": 5,
+      "eligible_people": 3,
+      "history_span_range_s": [
+        0.4170837504170838,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.003003003003003,
+        3.0030030030030033
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_09",
+      "video_sha256": "d9f147b25902d42aad86ac99a0717ad39b392015d55643820116d3b00bf81ca8",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        808,
+        570
+      ],
+      "roi_xywh": [
+        611,
+        335,
+        808,
+        571
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 166,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 1937,
+      "pedestrian_ids": 15,
+      "vehicle_rows": 89,
+      "vehicle_ids": 1,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.53297613880408,
+      "windows": 21,
+      "eligible_people": 11,
+      "history_span_range_s": [
+        0.4170837504170838,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.003003003003003,
+        3.003003003003003
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_10",
+      "video_sha256": "e26c4f33d694ca1c88dd10937f1c9ef0aa2c780a49b7dfbaeac8ddffb8ca7635",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1530,
+        818
+      ],
+      "roi_xywh": [
+        274,
+        80,
+        1530,
+        819
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 238,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 5571,
+      "pedestrian_ids": 33,
+      "vehicle_rows": 287,
+      "vehicle_ids": 2,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.58580138772248,
+      "windows": 46,
+      "eligible_people": 27,
+      "history_span_range_s": [
+        0.417083750417083,
+        0.4170837504170839
+      ],
+      "endpoint_range_s": [
+        3.003003003003003,
+        3.0030030030030037
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    },
+    {
+      "clip": "roundabout_11",
+      "video_sha256": "793620250069c20319616c50f173cae86ca8a2a3a813b2ed720b7619f09601c1",
+      "presentation_clock": "MP4 stream presentation time; no independent exposure timestamps in source",
+      "frame_size": [
+        1198,
+        582
+      ],
+      "roi_xywh": [
+        436,
+        207,
+        1199,
+        582
+      ],
+      "codec": "mpeg4",
+      "frame_rate": "2997/125",
+      "time_base": "1/23976",
+      "frame_count": 334,
+      "pts_step_ticks": [
+        1000
+      ],
+      "ped_point_rows": 5080,
+      "pedestrian_ids": 26,
+      "vehicle_rows": 417,
+      "vehicle_ids": 2,
+      "tracked_points_outside_released_pixels": 0,
+      "pixels_per_metre": 23.513924846578956,
+      "windows": 51,
+      "eligible_people": 20,
+      "history_span_range_s": [
+        0.417083750417083,
+        0.4170837504170848
+      ],
+      "endpoint_range_s": [
+        3.003003003003002,
+        3.0030030030030037
+      ],
+      "history_intervals_within_1ms": 0,
+      "endpoint_within_1ms": 0,
+      "grid_35_within_1ms": 0
+    }
+  ],
+  "windows": 3066,
+  "clip_local_people": 879,
+  "source_people": 1019,
+  "ped_rows": 296281,
+  "total_video_frames": 5069,
+  "vehicles": 27,
+  "cameras": 1,
+  "key_manifest_sha256": "02c44cf55e5ca8690dc1fe9ac9c076af44dc89f11629b8ccc9e725e49e4580ec"
+}

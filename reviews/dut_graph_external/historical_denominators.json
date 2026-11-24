@@ -1,0 +1,475 @@
+{
+  "window_keys_sha256": "02c44cf55e5ca8690dc1fe9ac9c076af44dc89f11629b8ccc9e725e49e4580ec",
+  "structural_sha256": "55d8ada8f76e47c19b8106e9911f231d7139db47e8e8e7936cc60cbd2aa46b81",
+  "edge_float32_sha256": "a166f0306712383fbc60704cf2516952e0b1f152fe5cb176946ad32d37572b59",
+  "all": {
+    "windows": 3066,
+    "strata": {
+      "empty": 2,
+      "person_only": 2672,
+      "car_only": 1,
+      "mixed": 391
+    },
+    "precap_person_edges": 84334,
+    "precap_car_edges": 1373,
+    "precap_person_windows": 3063,
+    "precap_car_windows": 1202,
+    "near_coincident_excluded": 0,
+    "truncated_windows": 2578,
+    "edges_lost_to_cap": 51264,
+    "types": {
+      "0": 33843,
+      "2": 185,
+      "6": 415
+    },
+    "person": {
+      "kept_edges": 34028,
+      "windows_with_any": 3063,
+      "velocity_missing_edges": 4,
+      "distinct_lag_native_frames_and_edge_count": {
+        "3": 34024
+      }
+    },
+    "car": {
+      "kept_edges": 415,
+      "windows_with_any": 392,
+      "velocity_missing_edges": 0,
+      "distinct_lag_native_frames_and_edge_count": {
+        "3": 415
+      }
+    }
+  },
+  "by_clip": {
+    "roundabout_01": {
+      "windows": 47,
+      "strata": {
+        "empty": 0,
+        "person_only": 26,
+        "car_only": 0,
+        "mixed": 21
+      },
+      "precap_person_edges": 923,
+      "precap_car_edges": 49,
+      "precap_person_windows": 47,
+      "precap_car_windows": 38,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 45,
+      "edges_lost_to_cap": 411,
+      "types": {
+        "0": 540,
+        "2": 0,
+        "6": 21
+      },
+      "person": {
+        "kept_edges": 540,
+        "windows_with_any": 47,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 540
+        }
+      },
+      "car": {
+        "kept_edges": 21,
+        "windows_with_any": 21,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 21
+        }
+      }
+    },
+    "roundabout_02": {
+      "windows": 64,
+      "strata": {
+        "empty": 0,
+        "person_only": 62,
+        "car_only": 0,
+        "mixed": 2
+      },
+      "precap_person_edges": 1555,
+      "precap_car_edges": 32,
+      "precap_person_windows": 64,
+      "precap_car_windows": 32,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 63,
+      "edges_lost_to_cap": 819,
+      "types": {
+        "0": 766,
+        "2": 0,
+        "6": 2
+      },
+      "person": {
+        "kept_edges": 766,
+        "windows_with_any": 64,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 766
+        }
+      },
+      "car": {
+        "kept_edges": 2,
+        "windows_with_any": 2,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 2
+        }
+      }
+    },
+    "roundabout_03": {
+      "windows": 1876,
+      "strata": {
+        "empty": 0,
+        "person_only": 1721,
+        "car_only": 0,
+        "mixed": 155
+      },
+      "precap_person_edges": 61701,
+      "precap_car_edges": 915,
+      "precap_person_windows": 1876,
+      "precap_car_windows": 773,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 1836,
+      "edges_lost_to_cap": 40171,
+      "types": {
+        "0": 22150,
+        "2": 135,
+        "6": 160
+      },
+      "person": {
+        "kept_edges": 22285,
+        "windows_with_any": 1876,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 22285
+        }
+      },
+      "car": {
+        "kept_edges": 160,
+        "windows_with_any": 155,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 160
+        }
+      }
+    },
+    "roundabout_04": {
+      "windows": 331,
+      "strata": {
+        "empty": 0,
+        "person_only": 303,
+        "car_only": 0,
+        "mixed": 28
+      },
+      "precap_person_edges": 9842,
+      "precap_car_edges": 92,
+      "precap_person_windows": 331,
+      "precap_car_windows": 92,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 298,
+      "edges_lost_to_cap": 6097,
+      "types": {
+        "0": 3808,
+        "2": 1,
+        "6": 28
+      },
+      "person": {
+        "kept_edges": 3809,
+        "windows_with_any": 331,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 3809
+        }
+      },
+      "car": {
+        "kept_edges": 28,
+        "windows_with_any": 28,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 28
+        }
+      }
+    },
+    "roundabout_05": {
+      "windows": 510,
+      "strata": {
+        "empty": 0,
+        "person_only": 418,
+        "car_only": 0,
+        "mixed": 92
+      },
+      "precap_person_edges": 8996,
+      "precap_car_edges": 176,
+      "precap_person_windows": 510,
+      "precap_car_windows": 173,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 334,
+      "edges_lost_to_cap": 3764,
+      "types": {
+        "0": 5264,
+        "2": 49,
+        "6": 95
+      },
+      "person": {
+        "kept_edges": 5313,
+        "windows_with_any": 510,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 5313
+        }
+      },
+      "car": {
+        "kept_edges": 95,
+        "windows_with_any": 92,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 95
+        }
+      }
+    },
+    "roundabout_06": {
+      "windows": 15,
+      "strata": {
+        "empty": 0,
+        "person_only": 12,
+        "car_only": 0,
+        "mixed": 3
+      },
+      "precap_person_edges": 100,
+      "precap_car_edges": 3,
+      "precap_person_windows": 15,
+      "precap_car_windows": 3,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 0,
+      "edges_lost_to_cap": 0,
+      "types": {
+        "0": 100,
+        "2": 0,
+        "6": 3
+      },
+      "person": {
+        "kept_edges": 100,
+        "windows_with_any": 15,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 100
+        }
+      },
+      "car": {
+        "kept_edges": 3,
+        "windows_with_any": 3,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 3
+        }
+      }
+    },
+    "roundabout_07": {
+      "windows": 100,
+      "strata": {
+        "empty": 0,
+        "person_only": 43,
+        "car_only": 1,
+        "mixed": 56
+      },
+      "precap_person_edges": 608,
+      "precap_car_edges": 72,
+      "precap_person_windows": 99,
+      "precap_car_windows": 57,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 2,
+      "edges_lost_to_cap": 2,
+      "types": {
+        "0": 606,
+        "2": 0,
+        "6": 72
+      },
+      "person": {
+        "kept_edges": 606,
+        "windows_with_any": 99,
+        "velocity_missing_edges": 4,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 602
+        }
+      },
+      "car": {
+        "kept_edges": 72,
+        "windows_with_any": 57,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 72
+        }
+      }
+    },
+    "roundabout_08": {
+      "windows": 5,
+      "strata": {
+        "empty": 0,
+        "person_only": 2,
+        "car_only": 0,
+        "mixed": 3
+      },
+      "precap_person_edges": 12,
+      "precap_car_edges": 3,
+      "precap_person_windows": 5,
+      "precap_car_windows": 3,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 0,
+      "edges_lost_to_cap": 0,
+      "types": {
+        "0": 12,
+        "2": 0,
+        "6": 3
+      },
+      "person": {
+        "kept_edges": 12,
+        "windows_with_any": 5,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 12
+        }
+      },
+      "car": {
+        "kept_edges": 3,
+        "windows_with_any": 3,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 3
+        }
+      }
+    },
+    "roundabout_09": {
+      "windows": 21,
+      "strata": {
+        "empty": 1,
+        "person_only": 17,
+        "car_only": 0,
+        "mixed": 3
+      },
+      "precap_person_edges": 166,
+      "precap_car_edges": 3,
+      "precap_person_windows": 20,
+      "precap_car_windows": 3,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 0,
+      "edges_lost_to_cap": 0,
+      "types": {
+        "0": 166,
+        "2": 0,
+        "6": 3
+      },
+      "person": {
+        "kept_edges": 166,
+        "windows_with_any": 20,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 166
+        }
+      },
+      "car": {
+        "kept_edges": 3,
+        "windows_with_any": 3,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 3
+        }
+      }
+    },
+    "roundabout_10": {
+      "windows": 46,
+      "strata": {
+        "empty": 1,
+        "person_only": 34,
+        "car_only": 0,
+        "mixed": 11
+      },
+      "precap_person_edges": 217,
+      "precap_car_edges": 11,
+      "precap_person_windows": 45,
+      "precap_car_windows": 11,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 0,
+      "edges_lost_to_cap": 0,
+      "types": {
+        "0": 217,
+        "2": 0,
+        "6": 11
+      },
+      "person": {
+        "kept_edges": 217,
+        "windows_with_any": 45,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 217
+        }
+      },
+      "car": {
+        "kept_edges": 11,
+        "windows_with_any": 11,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 11
+        }
+      }
+    },
+    "roundabout_11": {
+      "windows": 51,
+      "strata": {
+        "empty": 0,
+        "person_only": 34,
+        "car_only": 0,
+        "mixed": 17
+      },
+      "precap_person_edges": 214,
+      "precap_car_edges": 17,
+      "precap_person_windows": 51,
+      "precap_car_windows": 17,
+      "near_coincident_excluded": 0,
+      "truncated_windows": 0,
+      "edges_lost_to_cap": 0,
+      "types": {
+        "0": 214,
+        "2": 0,
+        "6": 17
+      },
+      "person": {
+        "kept_edges": 214,
+        "windows_with_any": 51,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 214
+        }
+      },
+      "car": {
+        "kept_edges": 17,
+        "windows_with_any": 17,
+        "velocity_missing_edges": 0,
+        "distinct_lag_native_frames_and_edge_count": {
+          "3": 17
+        }
+      }
+    }
+  },
+  "target_history_native_frame_gaps": {
+    "2": 6132,
+    "3": 6132
+  },
+  "source_note": "Positions and typed identities from author track annotation. Original videos not redistributed. No future neighbor requirement.",
+  "vehicle_slot": {
+    "changed_windows": 810,
+    "original_car_support": 392,
+    "intervention_car_support": 1202,
+    "changed_by_clip": {
+      "roundabout_01": 17,
+      "roundabout_02": 30,
+      "roundabout_03": 618,
+      "roundabout_04": 64,
+      "roundabout_05": 81,
+      "roundabout_06": 0,
+      "roundabout_07": 0,
+      "roundabout_08": 0,
+      "roundabout_09": 0,
+      "roundabout_10": 0,
+      "roundabout_11": 0
+    },
+    "replacement_identity_sha256": "3a38650b4e17e4024c8bec59a17376b46997cce3e2654574fc2df73ab01718ae"
+  }
+}
