@@ -3,11 +3,12 @@ import argparse,hashlib,io,json,sys,zipfile
 from pathlib import Path
 import numpy as np
 import torch
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from verify_matched_cpu_fusion import forward
-from verify_matched_duration_weights import verify_sources, inputs, ids, id_hash, sha, measure, PROTOCOL
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from reviews.pinns_matched_multiseed.replay_helpers import (
+    PROTOCOL, forward, id_hash, ids, inputs, measure, sha, verify_sources,
+)
 from scripts.verify_heldout_bundle import parameter_digest
-from scripts.run_heldout_seed_sensitivity import json_digest
 
 SEEDS=(42,1024,2025,3407,4096)
 TS=(5,10,20)
@@ -18,47 +19,72 @@ FIELDS=('ade_m','fde_m')
 HERE=Path(__file__).resolve().parent
 
 
+def json_digest(value):
+    return sha(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
+
+
 def site_metric(x):
     return dict(zip(FIELDS,x.mean(0).tolist()))
 
 
-def load_42(work,cache,keys,groups):
-    result={}; provenance={}
-    file_map={'mixed_5_10':work/'matched_cpu_fusion_replayed.npz','same_worker_T20':work/'matched_same_worker_T20_replayed.npz'}
-    # These are the independent local forward products of the accepted seed-42 packs. Check all
-    # candidates against their truth, and all site-equal means against the reviewed reports.
-    ref_old=json.loads((work/'matched_cpu_three_durations_verified.json').read_text())
-    ref_20=json.loads((work/'matched_same_worker_T20_verified.json').read_text())
-    fusion_reference={}
-    for t,expected_sha in [(5,'cc5837725ac83009ec6d5256f2df76133e16f9e3cc6f6a573c9c5f55383233ae'),
-                           (10,'35fafe3b55e8053f120b364a3c8fb798cb423a1871d9deec00fe397f32a2fff8')]:
-        pack=work/f'matched_fusion_cpu_T{t}.zip'
-        assert sha(pack.read_bytes())==expected_sha
-        with zipfile.ZipFile(pack) as z:
-            fusion_reference[t]=json.loads(z.read('report.json'))['four_site_equal']
-    for key,path in file_map.items():
-        with np.load(path,allow_pickle=False) as z:
-            old=ids(z); order={k:i for i,k in enumerate(old)}
-            assert len(order)==len(old)==len(keys) and set(old)==set(keys)
-            take=[order[k] for k in keys]
-            truth=z['truth' if key=='same_worker_T20' else 'truth_xy'][take]
-            np.testing.assert_array_equal(truth,cache['xy'][:,20:].astype(np.float32))
-            for t in ((20,) if key=='same_worker_T20' else (5,10)):
-                for a in ARMS:
-                    stem=(f'T{t}_' if key=='mixed_5_10' else '')+a
-                    paths=z[stem+'_trajectories'][take];prob=z[stem+'_probabilities'][take]
-                    err=z[stem+'_errors'][take]
-                    np.testing.assert_allclose(measure(paths[np.arange(len(keys)),prob.argmax(1)],truth),err,atol=.0002,rtol=.00002)
-                    macro=site_metric(np.stack([err[i].mean(0) for i in groups.values()]))
-                    if key=='same_worker_T20':
-                        np.testing.assert_allclose(list(macro.values()),[ref_20['four_site_macro'][a][m] for m in FIELDS],atol=1e-10,rtol=0)
-                    elif a in ('M0','M1'):
-                        np.testing.assert_allclose(list(macro.values()),[ref_old['macro'][f'{a}_{t}'][m] for m in FIELDS],atol=1e-10,rtol=0)
-                    else:
-                        np.testing.assert_allclose(list(macro.values()),[fusion_reference[t][a][m] for m in FIELDS],atol=1e-10,rtol=0)
-                    result[t,a]=err
-        provenance[key]=sha(path.read_bytes())
-    return result,provenance
+def load_42(work, cache, keys, groups, features):
+    """Replay the original five downloaded seed-42 archives, without a private intermediate NPZ."""
+    published = json.loads((ROOT/'results/pinns_matched_same_worker_t20.json').read_text())
+    combined = (work/'matched_same_worker_T20.zip').read_bytes()
+    if sha(combined) != published['source']['bundle_sha256']:
+        raise ValueError('Wrong same-worker T20 seed-42 archive')
+    with zipfile.ZipFile(io.BytesIO(combined)) as outer:
+        assert outer.testzip() is None
+        embedded = {name: outer.read(name) for name in ('cpu_T20.zip', 'matched_fusion_cpu_T20.zip')}
+        for name, data in embedded.items():
+            assert sha(data) == published['source']['inner_sha256'][name]
+    rows, provenance = {}, {}
+    for t in TS:
+        for family, arms, name in [('base', ('M0','M1'), f'cpu_T{t}.zip'),
+                                   ('fusion', ('M1b','M1-concat'), f'matched_fusion_cpu_T{t}.zip')]:
+            data = embedded[name] if t == 20 else (work/name).read_bytes()
+            if t != 20:
+                assert sha(data) == published['previous_runs'][str(t)][family]['archive_sha256']
+            provenance[name] = sha(data)
+            with zipfile.ZipFile(io.BytesIO(data)) as z:
+                manifest = json.loads(z.read('sha256.json'))
+                assert z.testzip() is None and set(z.namelist()) == set(manifest)|{'sha256.json'}
+                assert len(z.namelist()) == len(set(z.namelist()))
+                assert all(sha(z.read(k)) == digest for k,digest in manifest.items())
+                fold = json.loads(z.read('fold_ids.json'))
+                for site,idx in groups.items():
+                    train_sites = sorted(set(groups)-{site})
+                    train_ids = [keys[i] for s in train_sites for i in groups[s]]
+                    test_ids = [keys[i] for i in idx]
+                    suffix = 'ids' if family == 'base' else 'keys'
+                    assert fold[site]['train_sites'] == train_sites
+                    assert list(map(tuple,fold[site]['train_'+suffix])) == train_ids
+                    assert list(map(tuple,fold[site]['test_'+suffix])) == test_ids
+                    for arm in arms:
+                        filename = (f'T{t}/' if family=='base' else '') + f'{site}/{arm}.pt'
+                        ck = torch.load(io.BytesIO(z.read(filename)), map_location='cpu', weights_only=True)
+                        meta = ck['identity']
+                        assert meta['protocol']==PROTOCOL and meta['duration']==t
+                        assert meta['train_ids_sha256']==id_hash(train_ids) and meta['test_ids_sha256']==id_hash(test_ids)
+                        assert meta.get('site',meta.get('held_site'))==site and meta.get('model',meta.get('variant'))==arm
+                        paths, probs = forward(arm,ck['model_state'],features[t],idx)
+                        truth = cache['xy'][idx,20:].astype(np.float32)
+                        errors = measure(paths[np.arange(len(idx)),probs.argmax(1)],truth)
+                        if family=='fusion':
+                            pred = ck['predictions']
+                            np.testing.assert_allclose(paths,pred['trajs'].numpy(),atol=.0002,rtol=.00002)
+                            np.testing.assert_allclose(probs,pred['probs'].numpy(),atol=.00002,rtol=.00002)
+                            saved = pred['errors'].numpy()
+                        else:
+                            saved = ck['errors'].numpy()
+                        np.testing.assert_allclose(errors,saved,atol=.0002,rtol=.00002)
+                        rows.setdefault((t,arm),np.full((len(keys),2),np.nan))[idx] = saved
+    old = json.loads((ROOT/'results/pinns_matched_cpu_fusion.json').read_text())
+    for (t,arm),errors in rows.items():
+        ref = published['four_site_macro'][arm] if t==20 else old['durations'][str(t)]['four_site_macro_m'][arm]
+        macro=np.stack([errors[i].mean(0) for i in groups.values()]).mean(0)
+        np.testing.assert_allclose(macro,[ref[k] for k in FIELDS],atol=1e-10,rtol=0)
+    return rows,provenance
 
 
 def read_package(p,cache,features,keys,groups):
@@ -117,16 +143,44 @@ def read_package(p,cache,features,keys,groups):
                           'worker_fingerprint':backend['worker_fingerprint'],'max_local_vs_cloud_abs':maximum,'torch':backend['torch']}
 
 
+def registered_primary(by, groups, clips):
+    """Five fixed paired fits, then whole-clip resampling within each fixed site."""
+    if set(by) != set(SEEDS) or any((5, 'M1') not in rows for rows in by.values()):
+        return None
+    per_seed = {str(seed): by[seed][5, 'M1'][:, 0] - by[seed][5, 'M0'][:, 0] for seed in SEEDS}
+    means = {seed: float(np.mean([values[idx].mean() for idx in groups.values()]))
+             for seed, values in per_seed.items()}
+    shared = np.stack(list(per_seed.values())).mean(0)
+    random = np.random.default_rng(2026)
+    draws = np.zeros(20000)
+    for idx in groups.values():
+        names, inverse = np.unique(clips[idx], return_inverse=True)
+        count = len(names)
+        weights = random.multinomial(count, np.full(count, 1/count), size=len(draws))
+        clip_totals = np.bincount(inverse, weights=shared[idx], minlength=count)
+        clip_sizes = np.bincount(inverse, minlength=count)
+        draws += (weights @ clip_totals) / (weights @ clip_sizes) / len(groups)
+    return {
+        'endpoint': 'T5 M1 minus M0 top-probability ADE (m)',
+        'seed_differences_m': means, 'seed_range_m': [min(means.values()), max(means.values())],
+        'four_site_five_seed_mean_m': float(np.mean(list(means.values()))),
+        'by_site_m': {site: float(shared[idx].mean()) for site,idx in groups.items()},
+        'paired_clip_percentile_95_m': np.percentile(draws, [2.5,97.5]).tolist(),
+        'scope': '20,000 whole-clip draws within the four fixed sites, RNG seed 2026. Five fitted seeds fixed.'
+    }
+
+
 def pool(work,packs):
     torch.set_num_threads(2)
-    cache,groups,keys=verify_sources(work/'matched_observations.npz',work/'pinns_matched_histories.npz')
+    with zipfile.ZipFile(work/'cpu_T5.zip') as z:
+        cache,groups,keys=verify_sources(z.read('matched_observations.npz'),work/'pinns_matched_histories.npz')
     feats={};bins=None
     for t in TS:
         feats[t],b=inputs(cache,t)
         if t==5:bins=b
     assert np.bincount(bins).tolist()==[188,283,152]
     by={};provenance={}
-    by[42],provenance['existing_42']=load_42(work,cache,keys,groups)
+    by[42],provenance['existing_42']=load_42(work,cache,keys,groups,feats)
     for package in packs:
         seed,vals,record=read_package(package,cache,feats,keys,groups)
         assert seed!=42,'Seed 42 already contributed; explicit replacement policy required for any subsequent repeat'
@@ -160,9 +214,12 @@ def pool(work,packs):
             summary[q]['durations'][str(t)]={'seed_means':means,'paired_by_seed':perseed,'five_seed_model_summary':model_summary or None,'five_seed_paired_summary':paired or None}
     return {'scope':'Equal site and within-site window weights. All duration models use one fixed T5 operational quality group per window; this describes joint confidence/scale rather than verified physical occlusion. Paired seed differences; old seed 42 counted once with the same-worker 20-frame rerun. Seed SD reports variability of the five specified fitted models.',
             'ingested_training_seeds':sorted(by),'source':provenance,
+            'registered_primary':registered_primary(by,groups,clips),
             'registered_secondary_sha256':sha((HERE/'quality_groups_plan.json').read_bytes()),'groups':summary}
 
 if __name__=='__main__':
+    if not __debug__:
+        raise RuntimeError('Verification requires Python without -O.')
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('work',type=Path);p.add_argument('output',type=Path);p.add_argument('bundles',nargs='*',type=Path)
     args=p.parse_args();result=pool(args.work,args.bundles);args.output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     print(result['ingested_training_seeds'],{k:v['windows'] for k,v in result['groups'].items()})
