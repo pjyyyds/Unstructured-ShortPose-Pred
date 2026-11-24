@@ -38,4 +38,5 @@
 ## 4. 核心文件索引与当前阶段 (Key Files & Active Stage)
 
 - **核心源码**：`src/data/`（特征/动作/折线/防泄漏切分）、`src/models/`（`M0–M3`、`M1p/M3p`、`Ext-1..3`）、`src/losses/losses.py`、`src/metrics/metrics_and_stats.py`、`tests/test_invariants.py`（12/12 通过）。
-- **当前推进**：进入 **Step 7（云端 Kaggle T4 真实数据集提取与离线特征缓存：`PINNS` + `JTA`）**。
+- **独立 GitHub 仓库**：`https://github.com/pjyyyds/Unstructured-ShortPose-Pred`（SSH 别名 `github-shortpose`，已开启自动里程碑推送）。
+- **云端执行通道**：Kaggle Notebook `https://www.kaggle.com/code/pengjy25/unstructured-shortpose-exp-v1`（通过 GitHub 外层直连导入，绕开跨域编辑子帧；`Version #2` 正在 `GPU T4 x2` 双卡后台 Commit 运行 Suites A–E，本机保持零负载）。
