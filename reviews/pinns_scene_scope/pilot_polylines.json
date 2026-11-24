@@ -1,0 +1,25 @@
+{
+  "source_frame_zero_based": 0,
+  "coordinate_system": "original 1536 x 864 image pixels, origin at upper left",
+  "annotation_method": "Single AI visual reviewer marked a limited set of visible ground-level boundaries on the first recorded frame of one daylight clip per site. Portions hidden behind occluders are omitted. No independent human validation.",
+  "clips": {
+    "america_crossroad_spring_daytime_sunny_1": [
+      {"label":"sidewalk_road_edge","points":[[726,536],[768,537],[813,539],[846,540]]},
+      {"label":"sidewalk_road_edge","points":[[348,531],[390,532],[433,532],[478,533]]}
+    ],
+    "italy_park_summer_daytime_sunny_0": [
+      {"label":"parking_pavement_edge","points":[[143,740],[237,758],[341,777],[445,787],[550,794],[588,795]]},
+      {"label":"parking_pavement_edge","points":[[812,797],[884,789],[935,783],[967,779]]},
+      {"label":"parking_pavement_edge","points":[[1092,759],[1152,749],[1208,734],[1245,723]]}
+    ],
+    "japan_crossroad_summer_daytime_sunny_0": [
+      {"label":"sidewalk_road_edge","points":[[1044,319],[1039,347],[1041,378],[1049,404],[1061,425],[1075,442],[1093,457],[1123,473],[1156,486],[1183,495]]},
+      {"label":"sidewalk_road_edge","points":[[1293,522],[1340,532],[1404,545],[1475,555],[1529,564]]},
+      {"label":"sidewalk_road_edge","points":[[534,337],[578,344],[618,350],[649,353]]}
+    ],
+    "thailand_street_winter_daytime_sunny_0": [
+      {"label":"sidewalk_road_edge","points":[[893,205],[861,231],[833,255],[800,284],[772,307],[747,327]]},
+      {"label":"sidewalk_road_edge","points":[[703,373],[670,395],[637,418],[611,438],[608,447],[635,473],[666,501],[700,527],[721,545],[771,552],[820,555],[853,555]]}
+    ]
+  }
+}

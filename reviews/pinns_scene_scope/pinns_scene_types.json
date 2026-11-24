@@ -1,0 +1,1459 @@
+{
+  "scope": "Post-hoc regrouping of the same four already studied LOSO development sites. The two crossed-road locations, one park and one street do not separately identify the effect of scene type, country, geometry, camera or traffic. Park and street labels describe acquisition sites; lane marking visibility has not been coded for each window.",
+  "source_paper": "https://arxiv.org/html/2605.25947v1",
+  "source_section": "Figures 7 and 8 (a\u2013d) and surrounding discussion.",
+  "units": "Fitted ground coordinates in metres; five real 10 Hz observations, complete 30-step 3s forecast. All trajectories scored by probability-selected mode; deterministic CV uses the last two ground points. People counts refer to (clip, person ID) tracks. Person identities across videos are not linked.",
+  "aggregation": "Mean windows within site. Equal site weights within each specified group. For existing M0/M1 first average the five fixed training seeds per window. Joint arms use a separate seed-42 individual-only experiment, with common motion/pose backbone. The no_head joint control is not the existing motion-only M0.",
+  "uncertainty": {
+    "draws": 20000,
+    "rng_seed": 2026,
+    "method": "Sample whole clips with replacement within each fixed site; identical draws across methods and metrics. Paired contrasts positive when first named method has larger error; point and percentile interval conditional on these fitted models, same fixed sites and test windows. No correction across descriptive comparisons."
+  },
+  "provenance": {
+    "window_ids_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "labels_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "reranked_paired_windows_sha256": "72c9fd39724dc50aefe2b4b766a84a8b70c236e6965c575dc3bf1937b786361e",
+    "joint_archive_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+    "old_model_seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "joint_model_seed": 42
+  },
+  "by_site": {
+    "america_crossroad": {
+      "city": "Wyoming, USA",
+      "windows": 816,
+      "clips": 14,
+      "within_clip_person_ids": 240,
+      "action_support": {
+        "valid_windows": 816,
+        "start_positive_windows": 27,
+        "stop_positive_windows": 35
+      },
+      "sites": [
+        "america_crossroad"
+      ],
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.8526000291659003,
+          "fde_m": 1.6535707182878412
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.8758061234733727,
+          "fde_m": 1.6956428224606317
+        },
+        "last_two_velocity": {
+          "ade_m": 0.9476538962934843,
+          "fde_m": 1.9414660044131353
+        },
+        "joint_no_head": {
+          "ade_m": 0.851961128252894,
+          "fde_m": 1.6391594352694245
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.8331932973996425,
+          "fde_m": 1.6013454371982019
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.8346660802558372,
+          "fde_m": 1.6225303898755508
+        },
+        "joint_detached": {
+          "ade_m": 0.7989331908287827,
+          "fde_m": 1.5417335755202841
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": -0.09505386712758723,
+            "fde_m": -0.2878952861252973
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.1551062309059479,
+              0.05783487393193921
+            ],
+            "fde_m": [
+              -0.45033633341736895,
+              0.10216518935138537
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": -0.07184777282011338,
+            "fde_m": -0.24582318195250624
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.13227516680109982,
+              0.0781027281276965
+            ],
+            "fde_m": [
+              -0.4063976153895642,
+              0.13846428312696585
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": -0.09569276804059114,
+            "fde_m": -0.3023065691437142
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.16539037002707135,
+              0.11572126499536747
+            ],
+            "fde_m": [
+              -0.48766763668638957,
+              0.21915365827388564
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": -0.11446059889384347,
+            "fde_m": -0.3401205672149375
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.17643462316671493,
+              0.03747130594629021
+            ],
+            "fde_m": [
+              -0.5027022140076749,
+              0.06093912386077713
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": -0.11298781603765033,
+            "fde_m": -0.3189356145375858
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.16960273157681144,
+              0.05103979453555691
+            ],
+            "fde_m": [
+              -0.47001997271974294,
+              0.08477597878471987
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": -0.1487207054647036,
+            "fde_m": -0.399732428892853
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.20503787617628713,
+              0.006111046944843807
+            ],
+            "fde_m": [
+              -0.5535914924463853,
+              -0.001283395447945585
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.02320609430747382,
+            "fde_m": 0.0420721041727908
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.01686399613145938,
+              0.03323717207088063
+            ],
+            "fde_m": [
+              0.03032520611268045,
+              0.06233469183672304
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.0187678308532523,
+            "fde_m": -0.03781399807122279
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.09657579343707255,
+              0.008386971483020733
+            ],
+            "fde_m": [
+              -0.1954759131179699,
+              0.017525250640234878
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": 0.0014727828561932504,
+            "fde_m": 0.021184952677351862
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.007269104085755497,
+              0.022177791740278095
+            ],
+            "fde_m": [
+              0.003589822714830501,
+              0.05504555732580678
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": -0.03573288942705337,
+            "fde_m": -0.08079681435526742
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.053614954731785264,
+              -0.02900540917920277
+            ],
+            "fde_m": [
+              -0.11110372171413015,
+              -0.06301317068024252
+            ]
+          }
+        }
+      }
+    },
+    "italy_park": {
+      "city": "Pistoia, Italy",
+      "windows": 84,
+      "clips": 9,
+      "within_clip_person_ids": 28,
+      "action_support": {
+        "valid_windows": 84,
+        "start_positive_windows": 8,
+        "stop_positive_windows": 3
+      },
+      "sites": [
+        "italy_park"
+      ],
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.41808410908269267,
+          "fde_m": 0.970436822095741
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.46058217510001176,
+          "fde_m": 1.0446771791474354
+        },
+        "last_two_velocity": {
+          "ade_m": 0.37034172516347347,
+          "fde_m": 0.9319507406765014
+        },
+        "joint_no_head": {
+          "ade_m": 0.4468200523866021,
+          "fde_m": 1.0127937223962895
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.434801370681335,
+          "fde_m": 0.9904942230111364
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.4077236069220684,
+          "fde_m": 0.94186850313868
+        },
+        "joint_detached": {
+          "ade_m": 0.4409826019463127,
+          "fde_m": 1.0021022785756728
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.04774238391921929,
+            "fde_m": 0.03848608141923879
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.009853603656378065,
+              0.09498671328349911
+            ],
+            "fde_m": [
+              -0.04884044837897528,
+              0.16688445099736615
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.09024044993653821,
+            "fde_m": 0.11272643847093367
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.053045472912589764,
+              0.13746436084015998
+            ],
+            "fde_m": [
+              0.027059059342442897,
+              0.24262430380267908
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.07647832722312863,
+            "fde_m": 0.08084298171978735
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.025247627963470447,
+              0.13814129784392748
+            ],
+            "fde_m": [
+              -0.03477063138864909,
+              0.21586551272485308
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": 0.06445964551786153,
+            "fde_m": 0.05854348233463448
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0179181257737178,
+              0.11312977781024813
+            ],
+            "fde_m": [
+              -0.04425084429508032,
+              0.19045109799583346
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": 0.03738188175859499,
+            "fde_m": 0.009917762462178287
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0019467270661067397,
+              0.07773351821636323
+            ],
+            "fde_m": [
+              -0.06977873441899952,
+              0.11236108095828559
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": 0.07064087678283945,
+            "fde_m": 0.07015153789917133
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.016537015150097242,
+              0.1386392609083066
+            ],
+            "fde_m": [
+              -0.05222344507568762,
+              0.24019268015120387
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.04249806601731894,
+            "fde_m": 0.07424035705169488
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0314847859757947,
+              0.05605121919905417
+            ],
+            "fde_m": [
+              0.053349590218456554,
+              0.1015700218145235
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.012018681705267084,
+            "fde_m": -0.022299499385152854
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.05296676535980293,
+              0.024444672445680177
+            ],
+            "fde_m": [
+              -0.11862461877087921,
+              0.05865747315254708
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.027077763759266554,
+            "fde_m": -0.04862571987245619
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.05060995259522095,
+              -0.005267374798761443
+            ],
+            "fde_m": [
+              -0.1044529221504791,
+              0.008894461073916341
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": 0.033258995024244446,
+            "fde_m": 0.06023377543699304
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0028496926703869717,
+              0.07466149892827995
+            ],
+            "fde_m": [
+              -0.0033049130736551046,
+              0.14825149624375347
+            ]
+          }
+        }
+      }
+    },
+    "japan_crossroad": {
+      "city": "Tokyo, Japan",
+      "windows": 432,
+      "clips": 11,
+      "within_clip_person_ids": 117,
+      "action_support": {
+        "valid_windows": 432,
+        "start_positive_windows": 12,
+        "stop_positive_windows": 12
+      },
+      "sites": [
+        "japan_crossroad"
+      ],
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.3914959399527133,
+          "fde_m": 0.8679210108310743
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.41811641501925184,
+          "fde_m": 0.9215997224811959
+        },
+        "last_two_velocity": {
+          "ade_m": 0.2937423480694851,
+          "fde_m": 0.718657490277494
+        },
+        "joint_no_head": {
+          "ade_m": 0.41233816043382343,
+          "fde_m": 0.9126274084050437
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.4075174233329543,
+          "fde_m": 0.9099563013965764
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.3979913246350282,
+          "fde_m": 0.8690631006898163
+        },
+        "joint_detached": {
+          "ade_m": 0.41239421090230327,
+          "fde_m": 0.9106340698454197
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.0977535918832279,
+            "fde_m": 0.1492635205535801
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0776120663693855,
+              0.13032945345869693
+            ],
+            "fde_m": [
+              0.10767635805182904,
+              0.20246565644961736
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.12437406694976677,
+            "fde_m": 0.2029422322037014
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.10626912945847054,
+              0.16331643973747373
+            ],
+            "fde_m": [
+              0.1688179947715731,
+              0.26881311068824854
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.11859581236433848,
+            "fde_m": 0.1939699181275485
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.09489708121804473,
+              0.164613442684998
+            ],
+            "fde_m": [
+              0.14702014369879404,
+              0.26147867451921775
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": 0.11377507526346935,
+            "fde_m": 0.19129881111908173
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0882999582901425,
+              0.16199529420458827
+            ],
+            "fde_m": [
+              0.14721520229650562,
+              0.2674071378146275
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": 0.1042489765655428,
+            "fde_m": 0.1504056104123219
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.08730198645423166,
+              0.1302056965475111
+            ],
+            "fde_m": [
+              0.10868962593189342,
+              0.1880197761087922
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": 0.11865186283281846,
+            "fde_m": 0.19197657956792555
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.09615463676286588,
+              0.1693493305654075
+            ],
+            "fde_m": [
+              0.144859339204634,
+              0.2752980831974105
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.02662047506653892,
+            "fde_m": 0.053678711650121474
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.020028518123825258,
+              0.04175712224428752
+            ],
+            "fde_m": [
+              0.03695225704752292,
+              0.08795221905357024
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.004820737100869233,
+            "fde_m": -0.0026711070084668655
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.011517053423681246,
+              0.005868173241611823
+            ],
+            "fde_m": [
+              -0.02093845551791223,
+              0.022715286405311137
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.009526098697926512,
+            "fde_m": -0.04089320070675982
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.03804878250915612,
+              0.005681548660248232
+            ],
+            "fde_m": [
+              -0.09852280720163481,
+              -0.008087610729618626
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": 0.014402886267275514,
+            "fde_m": 0.04157096915560379
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.001689828677810691,
+              0.042672998034320286
+            ],
+            "fde_m": [
+              0.01642972887512606,
+              0.09680355782271406
+            ]
+          }
+        }
+      }
+    },
+    "thailand_street": {
+      "city": "Surat Thani, Thailand",
+      "windows": 150,
+      "clips": 13,
+      "within_clip_person_ids": 64,
+      "action_support": {
+        "valid_windows": 150,
+        "start_positive_windows": 2,
+        "stop_positive_windows": 3
+      },
+      "sites": [
+        "thailand_street"
+      ],
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.3881840717209048,
+          "fde_m": 0.8990009181382792
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.3956818897669792,
+          "fde_m": 0.9198880449964288
+        },
+        "last_two_velocity": {
+          "ade_m": 0.32375732536273094,
+          "fde_m": 0.826159806245917
+        },
+        "joint_no_head": {
+          "ade_m": 0.6427171761334733,
+          "fde_m": 1.4030521454089047
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.3888286725652394,
+          "fde_m": 0.8969757597316501
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.386729387567981,
+          "fde_m": 0.904895219157208
+        },
+        "joint_detached": {
+          "ade_m": 0.3802865572004171,
+          "fde_m": 0.8876417887220236
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.06442674635817376,
+            "fde_m": 0.07284111189236238
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.037133819119006636,
+              0.0995507830087968
+            ],
+            "fde_m": [
+              0.007696626566832298,
+              0.1600708176313434
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.07192456440424808,
+            "fde_m": 0.09372823875051214
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.03510766489883526,
+              0.11445955214027924
+            ],
+            "fde_m": [
+              0.007692784262161489,
+              0.19904334076776817
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.31895985077074196,
+            "fde_m": 0.5768923391629878
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.18031240447584584,
+              0.447656897319571
+            ],
+            "fde_m": [
+              0.295796364311686,
+              0.8394175706448376
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": 0.06507134720250826,
+            "fde_m": 0.07081595348573379
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.024962485315006375,
+              0.10873915528287026
+            ],
+            "fde_m": [
+              -0.019127616767095724,
+              0.17183796920544978
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": 0.06297206220524988,
+            "fde_m": 0.07873541291129155
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.028814806436230356,
+              0.10875723800709439
+            ],
+            "fde_m": [
+              0.00121354901620861,
+              0.18445164893655303
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": 0.056529231837685726,
+            "fde_m": 0.061481982476107006
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.01799696742226188,
+              0.10785321773084244
+            ],
+            "fde_m": [
+              -0.01791639508170755,
+              0.1740593499086325
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.007497818046074277,
+            "fde_m": 0.02088712685814975
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.007353483593844254,
+              0.02009276668176844
+            ],
+            "fde_m": [
+              -0.01117108084743571,
+              0.0486899789904642
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.2538885035682339,
+            "fde_m": -0.5060763856772537
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.36037139726709844,
+              -0.13353353961990747
+            ],
+            "fde_m": [
+              -0.7164576838236072,
+              -0.26335655397862084
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.0020992849972583587,
+            "fde_m": 0.007919459425557782
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.03411876025653362,
+              0.03399751871506329
+            ],
+            "fde_m": [
+              -0.05089611589491899,
+              0.0746972046968958
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": -0.0064428303675641485,
+            "fde_m": -0.01725343043518455
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.019363926627646577,
+              0.010111429139496503
+            ],
+            "fde_m": [
+              -0.044891487486495,
+              0.013711931473510105
+            ]
+          }
+        }
+      }
+    }
+  },
+  "grouped": {
+    "park_and_street_two_site_equal": {
+      "sites": [
+        "italy_park",
+        "thailand_street"
+      ],
+      "windows": 234,
+      "clips": 22,
+      "within_clip_person_ids": 92,
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.4031340904017987,
+          "fde_m": 0.9347188701170102
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.4281320324334955,
+          "fde_m": 0.9822826120719321
+        },
+        "last_two_velocity": {
+          "ade_m": 0.3470495252631022,
+          "fde_m": 0.8790552734612092
+        },
+        "joint_no_head": {
+          "ade_m": 0.5447686142600378,
+          "fde_m": 1.207922933902597
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.4118150216232872,
+          "fde_m": 0.9437349913713933
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.3972264972450247,
+          "fde_m": 0.9233818611479441
+        },
+        "joint_detached": {
+          "ade_m": 0.4106345795733649,
+          "fde_m": 0.9448720336488482
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.05608456513869653,
+            "fde_m": 0.05566359665580058
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.03274048616938054,
+              0.08491338740579885
+            ],
+            "fde_m": [
+              0.0006535649266710671,
+              0.1311851995933072
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.08108250717039314,
+            "fde_m": 0.1032273386107229
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.05493240482698064,
+              0.11275578902816598
+            ],
+            "fde_m": [
+              0.04163197293962237,
+              0.18626508620398471
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.1977190889969353,
+            "fde_m": 0.32886766044138754
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.12401450058329745,
+              0.26908002331459696
+            ],
+            "fde_m": [
+              0.17670859172229672,
+              0.4775859544025764
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": 0.06476549636018489,
+            "fde_m": 0.06467971791018413
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.034276289623055636,
+              0.09767285388983124
+            ],
+            "fde_m": [
+              -0.0035863945815477792,
+              0.14629391521413967
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": 0.05017697198192243,
+            "fde_m": 0.04432658768673492
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.02534646207362597,
+              0.08034787836734564
+            ],
+            "fde_m": [
+              -0.012095479068784226,
+              0.11734272259928974
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": 0.0635850543102626,
+            "fde_m": 0.06581676018763917
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.03062230370846827,
+              0.10558220038482176
+            ],
+            "fde_m": [
+              -0.008464269038270623,
+              0.1665468960517888
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.02499794203169661,
+            "fde_m": 0.047563741954922314
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.015758691602432137,
+              0.034100525374824255
+            ],
+            "fde_m": [
+              0.028585550157670704,
+              0.06678890765336407
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.1329535926367505,
+            "fde_m": -0.26418794253120326
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.19084814568573377,
+              -0.07016401253025822
+            ],
+            "fde_m": [
+              -0.38163776187934706,
+              -0.13469737306881235
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.014588524378262456,
+            "fde_m": -0.020353130223449204
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.03444649867449638,
+              0.006298742831239024
+            ],
+            "fde_m": [
+              -0.0611832341548191,
+              0.02304664288793969
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": 0.013408082328340148,
+            "fde_m": 0.021490172500904247
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.0031399870974485747,
+              0.03537719092374664
+            ],
+            "fde_m": [
+              -0.012883702444762645,
+              0.06724695595644593
+            ]
+          }
+        }
+      }
+    },
+    "crossroads_two_site_equal": {
+      "sites": [
+        "america_crossroad",
+        "japan_crossroad"
+      ],
+      "windows": 1248,
+      "clips": 25,
+      "within_clip_person_ids": 357,
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.6220479845593068,
+          "fde_m": 1.2607458645594578
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.6469612692463123,
+          "fde_m": 1.3086212724709139
+        },
+        "last_two_velocity": {
+          "ade_m": 0.6206981221814847,
+          "fde_m": 1.3300617473453147
+        },
+        "joint_no_head": {
+          "ade_m": 0.6321496443433587,
+          "fde_m": 1.2758934218372342
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.6203553603662985,
+          "fde_m": 1.2556508692973891
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.6163287024454327,
+          "fde_m": 1.2457967452826835
+        },
+        "joint_detached": {
+          "ade_m": 0.605663700865543,
+          "fde_m": 1.2261838226828519
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.0013498623778203309,
+            "fde_m": -0.0693158827858586
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.03048029234045312,
+              0.07684796629020277
+            ],
+            "fde_m": [
+              -0.15351664340320056,
+              0.12340413449260035
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.026263147064826693,
+            "fde_m": -0.021440474874402426
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.005669827223182434,
+              0.10197871229161354
+            ],
+            "fde_m": [
+              -0.10395128927132678,
+              0.17054233875018535
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.011451522161873673,
+            "fde_m": -0.05416832550808284
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.02634643159901448,
+              0.1189401957144444
+            ],
+            "fde_m": [
+              -0.15110698053957697,
+              0.20708449101966858
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": -0.00034276181518706067,
+            "fde_m": -0.07441087804792788
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.034000774747752135,
+              0.07657934725868697
+            ],
+            "fde_m": [
+              -0.15892418814982343,
+              0.1267728459854326
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": -0.004369419736053766,
+            "fde_m": -0.08426500206263195
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.03444298859468256,
+              0.07679701005549658
+            ],
+            "fde_m": [
+              -0.16296719436136525,
+              0.11485515952622954
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": -0.015034421315942563,
+            "fde_m": -0.10387792466246372
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.04604848919864795,
+              0.06148979550774164
+            ],
+            "fde_m": [
+              -0.18559938623033012,
+              0.0930993797584462
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.02491328468700637,
+            "fde_m": 0.04787540791145614
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.020347831362748068,
+              0.03377110591990746
+            ],
+            "fde_m": [
+              0.0376808915423821,
+              0.0674800884145753
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.011794283977060768,
+            "fde_m": -0.02024255253984483
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.0507713479493205,
+              0.003181104399785351
+            ],
+            "fde_m": [
+              -0.09903749121798748,
+              0.012055038629034918
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.004026657920866631,
+            "fde_m": -0.00985412401470398
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.018504126931823323,
+              0.00907700401951986
+            ],
+            "fde_m": [
+              -0.03965715770953717,
+              0.013618401636695652
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": -0.010665001579888927,
+            "fde_m": -0.019612922599831814
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.021289912236871125,
+              0.00338834475757833
+            ],
+            "fde_m": [
+              -0.03893522522183326,
+              0.008334709139160925
+            ]
+          }
+        }
+      }
+    },
+    "all_four_sites_equal": {
+      "sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "windows": 1482,
+      "clips": 47,
+      "within_clip_person_ids": 449,
+      "means": {
+        "frozen_M0_five_seed_mean": {
+          "ade_m": 0.5125910374805528,
+          "fde_m": 1.0977323673382338
+        },
+        "frozen_M1_five_seed_mean": {
+          "ade_m": 0.5375466508399039,
+          "fde_m": 1.1454519422714229
+        },
+        "last_two_velocity": {
+          "ade_m": 0.4838738237222935,
+          "fde_m": 1.104558510403262
+        },
+        "joint_no_head": {
+          "ade_m": 0.5884591293016983,
+          "fde_m": 1.2419081778699157
+        },
+        "joint_auxiliary": {
+          "ade_m": 0.5160851909947928,
+          "fde_m": 1.0996929303343912
+        },
+        "joint_end_to_end": {
+          "ade_m": 0.5067775998452287,
+          "fde_m": 1.0845893032153138
+        },
+        "joint_detached": {
+          "ade_m": 0.508149140219454,
+          "fde_m": 1.08552792816585
+        }
+      },
+      "paired_contrasts": {
+        "frozen_M0_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.028717213758258427,
+            "fde_m": -0.006826143065029006
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.009176227450720815,
+              0.06704026332728534
+            ],
+            "fde_m": [
+              -0.055914002165745644,
+              0.09155519786352889
+            ]
+          }
+        },
+        "frozen_M1_five_seed_mean_minus_CV": {
+          "difference": {
+            "ade_m": 0.05367282711760992,
+            "fde_m": 0.04089343186816024
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.03334031066233315,
+              0.09318276303438025
+            ],
+            "fde_m": [
+              -0.009046344702416819,
+              0.14218942413419652
+            ]
+          }
+        },
+        "joint_no_head_minus_CV": {
+          "difference": {
+            "ade_m": 0.10458530557940449,
+            "fde_m": 0.13734966746665236
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.06351574007566547,
+              0.16642173529675824
+            ],
+            "fde_m": [
+              0.04789815031366315,
+              0.28177011908763755
+            ]
+          }
+        },
+        "joint_auxiliary_minus_CV": {
+          "difference": {
+            "ade_m": 0.03221136727249892,
+            "fde_m": -0.004865580068871878
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.010196660938757384,
+              0.0720229369361529
+            ],
+            "fde_m": [
+              -0.05793100360048666,
+              0.09819595439551557
+            ]
+          }
+        },
+        "joint_end_to_end_minus_CV": {
+          "difference": {
+            "ade_m": 0.022903776122934334,
+            "fde_m": -0.019969207187948514
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.0035528777512409348,
+              0.06450585029257594
+            ],
+            "fde_m": [
+              -0.0675686427883495,
+              0.08264864220483174
+            ]
+          }
+        },
+        "joint_detached_minus_CV": {
+          "difference": {
+            "ade_m": 0.024275316497160013,
+            "fde_m": -0.019030582237412275
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.001759405012602102,
+              0.06632442640498254
+            ],
+            "fde_m": [
+              -0.07317093124886591,
+              0.08687227130561759
+            ]
+          }
+        },
+        "frozen_M1_minus_M0_five_seed_mean": {
+          "difference": {
+            "ade_m": 0.024955613359351488,
+            "fde_m": 0.04771957493318923
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              0.01986472830264174,
+              0.031237776697306152
+            ],
+            "fde_m": [
+              0.0370768315236331,
+              0.06138168023738838
+            ]
+          }
+        },
+        "joint_auxiliary_minus_no_head": {
+          "difference": {
+            "ade_m": -0.07237393830690562,
+            "fde_m": -0.14221524753552406
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.10699883321231574,
+              -0.04031887586389107
+            ],
+            "fde_m": [
+              -0.2118605143327542,
+              -0.07592286349118836
+            ]
+          }
+        },
+        "joint_end_to_end_minus_auxiliary": {
+          "difference": {
+            "ade_m": -0.009307591149564544,
+            "fde_m": -0.015103627119076592
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.021397685938749345,
+              0.003157128585220215
+            ],
+            "fde_m": [
+              -0.04011769788174801,
+              0.010001171546076071
+            ]
+          }
+        },
+        "joint_detached_minus_end_to_end": {
+          "difference": {
+            "ade_m": 0.0013715403742256109,
+            "fde_m": 0.0009386249505362165
+          },
+          "paired_clip_95pct": {
+            "ade_m": [
+              -0.008504690174583754,
+              0.014250089746280808
+            ],
+            "fde_m": [
+              -0.018633036468966593,
+              0.027408217559003953
+            ]
+          }
+        }
+      }
+    }
+  }
+}

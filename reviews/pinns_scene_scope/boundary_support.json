@@ -1,0 +1,445 @@
+{
+  "scope": "Four actual daylight recordings. The first decoded frame is at 0 s for each. One AI reviewer traced selected visible, static edges. Distances reference the limited mapped segments only. Neither map completeness, independent metric accuracy, human agreement, obstruction nor forecast improvement is established.",
+  "annotation_sha256": "dc8a6c57727c4c58d3598c1f1551f8fd4e1fbfda47a3edf624599c64b20846bd",
+  "pose_cache_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+  "units": "Approximate ground metres in native annotation axes. Camera pixels pass through the supplied four-point homography, then y maps to y_min+y_max-y. Window centres are the actual released pedestrian ground positions at the end of the five historical observations.",
+  "sample_rule": "First lexicographic sunny daytime clip at each site in the 47-clip development corpus. No future frames, forecast errors, or other clips used for line placement.",
+  "sensitivity": "Nine common image translations (+/-3 pixels per axis), evaluated separately per clip. Sensitivity does not estimate labelling error.",
+  "windows": 59,
+  "within_m_count": {
+    "2": 11,
+    "5": 29
+  },
+  "clips": {
+    "america_crossroad_spring_daytime_sunny_1": {
+      "video_sha256": "20542df570e9d696fe577944d52a9c2d02748d5fd250a3c1bffb8066b66ccf02",
+      "calibration_sha256": "b1a76f0d526e34d50b9764b86d49b9550a9b58a2a3effc8f77de258844b12300",
+      "labels_sha256": "3b7fd36bf48b6d3eecedc53d73058f1f9081455fe83590dbe6fdebcf00e06533",
+      "source_frame_0based": 0,
+      "first_forecast_anchor_0based": 15,
+      "last_forecast_anchor_0based": 225,
+      "windows": 5,
+      "tracklets": 2,
+      "line_count": 2,
+      "vertex_count": 8,
+      "vertices_inside_control_point_convex_hull": 7,
+      "image_anchors_inside_control_point_convex_hull": 5,
+      "within_m_count": {
+        "2": 0,
+        "5": 0
+      },
+      "within_m_count_range_for_common_image_shift_of_up_to_3_pixels": {
+        "2": [
+          0,
+          0
+        ],
+        "5": [
+          0,
+          0
+        ]
+      },
+      "ground_lines_native_annotation_xy_m": [
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              18.917875,
+              13.082194
+            ],
+            [
+              18.947309,
+              14.411289
+            ],
+            [
+              18.829335,
+              15.867972
+            ],
+            [
+              18.819247,
+              16.851781
+            ]
+          ]
+        },
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              17.827472,
+              -0.585332
+            ],
+            [
+              17.884837,
+              1.249121
+            ],
+            [
+              18.125483,
+              2.842367
+            ],
+            [
+              18.19092,
+              4.649306
+            ]
+          ]
+        }
+      ],
+      "closest_annotated_edge_m_percentiles": {
+        "p25": 14.727940986316854,
+        "median": 14.727940986316854,
+        "p75": 16.40393155736513
+      },
+      "pixel_anchor_projection_to_released_xy_median_m": 1.726947833328297e-06
+    },
+    "italy_park_summer_daytime_sunny_0": {
+      "video_sha256": "071e6ab45360654863809a455dfe1f5a8de554537cf43db76b0dbf326f6d72af",
+      "calibration_sha256": "e1b5c18c11c76232f2c8dbce437859d47be0bccfdbc34cffe735c7c2bd608b36",
+      "labels_sha256": "499e4de7f6f6d015d5b29348a4fa077b4e2586c75366bea26bd346fa4564c8fb",
+      "source_frame_0based": 0,
+      "first_forecast_anchor_0based": 12,
+      "last_forecast_anchor_0based": 222,
+      "windows": 13,
+      "tracklets": 5,
+      "line_count": 3,
+      "vertex_count": 14,
+      "vertices_inside_control_point_convex_hull": 8,
+      "image_anchors_inside_control_point_convex_hull": 13,
+      "within_m_count": {
+        "2": 0,
+        "5": 2
+      },
+      "within_m_count_range_for_common_image_shift_of_up_to_3_pixels": {
+        "2": [
+          0,
+          0
+        ],
+        "5": [
+          2,
+          3
+        ]
+      },
+      "ground_lines_native_annotation_xy_m": [
+        {
+          "label": "parking_pavement_edge",
+          "points": [
+            [
+              30.50053,
+              30.321516
+            ],
+            [
+              32.487203,
+              29.689933
+            ],
+            [
+              34.42988,
+              29.053201
+            ],
+            [
+              35.9664,
+              28.363369
+            ],
+            [
+              37.375222,
+              27.657504
+            ],
+            [
+              37.843825,
+              27.38458
+            ]
+          ]
+        },
+        {
+          "label": "parking_pavement_edge",
+          "points": [
+            [
+              40.513849,
+              25.726739
+            ],
+            [
+              41.283433,
+              25.009538
+            ],
+            [
+              41.846273,
+              24.474363
+            ],
+            [
+              42.207254,
+              24.123483
+            ]
+          ]
+        },
+        {
+          "label": "parking_pavement_edge",
+          "points": [
+            [
+              43.681812,
+              22.538859
+            ],
+            [
+              44.452512,
+              21.696034
+            ],
+            [
+              45.219732,
+              20.639959
+            ],
+            [
+              45.770834,
+              19.837623
+            ]
+          ]
+        }
+      ],
+      "closest_annotated_edge_m_percentiles": {
+        "p25": 5.433499176856987,
+        "median": 6.025603103134028,
+        "p75": 7.231215943277231
+      },
+      "pixel_anchor_projection_to_released_xy_median_m": 1.4272223579804984e-06
+    },
+    "japan_crossroad_summer_daytime_sunny_0": {
+      "video_sha256": "d49357348d2c57d8ea60bbb3006845e7fb11fc9941a3d456e4b21c995290965a",
+      "calibration_sha256": "45838096d7bc7d9c853b6962b6ca04de3bff9a5b200e2073124f24f7c17fe618",
+      "labels_sha256": "c4edbe564e0f9fc6da139210c21fd6a7ae6873ea4c348159da455ddf236dcac2",
+      "source_frame_0based": 0,
+      "first_forecast_anchor_0based": 12,
+      "last_forecast_anchor_0based": 537,
+      "windows": 28,
+      "tracklets": 12,
+      "line_count": 3,
+      "vertex_count": 19,
+      "vertices_inside_control_point_convex_hull": 18,
+      "image_anchors_inside_control_point_convex_hull": 27,
+      "within_m_count": {
+        "2": 10,
+        "5": 24
+      },
+      "within_m_count_range_for_common_image_shift_of_up_to_3_pixels": {
+        "2": [
+          10,
+          11
+        ],
+        "5": [
+          23,
+          24
+        ]
+      },
+      "ground_lines_native_annotation_xy_m": [
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              17.88234,
+              9.365639
+            ],
+            [
+              18.140507,
+              10.579298
+            ],
+            [
+              18.583556,
+              11.753523
+            ],
+            [
+              19.076048,
+              12.613743
+            ],
+            [
+              19.577902,
+              13.220817
+            ],
+            [
+              20.062834,
+              13.653066
+            ],
+            [
+              20.60017,
+              13.970611
+            ],
+            [
+              21.389105,
+              14.20212
+            ],
+            [
+              22.198111,
+              14.30864
+            ],
+            [
+              22.836502,
+              14.344338
+            ]
+          ]
+        },
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              25.309354,
+              14.197031
+            ],
+            [
+              26.333987,
+              14.089756
+            ],
+            [
+              27.707826,
+              13.927389
+            ],
+            [
+              29.206966,
+              13.61781
+            ],
+            [
+              30.336989,
+              13.426194
+            ]
+          ]
+        },
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              6.158167,
+              15.382895
+            ],
+            [
+              7.324073,
+              15.182155
+            ],
+            [
+              8.367208,
+              14.988983
+            ],
+            [
+              9.133111,
+              14.785072
+            ]
+          ]
+        }
+      ],
+      "closest_annotated_edge_m_percentiles": {
+        "p25": 1.1933925126220846,
+        "median": 2.4871958311557316,
+        "p75": 3.542765626176054
+      },
+      "pixel_anchor_projection_to_released_xy_median_m": 8.325174241534311e-07
+    },
+    "thailand_street_winter_daytime_sunny_0": {
+      "video_sha256": "f1a9b56d7b70e7b4505885831f9dff29c6786d6b6bf38e8d6a1f90673da52bae",
+      "calibration_sha256": "f6fadeed8fe9294bac20e171ed79bc61036263e835389ba54d475e3a3e05e328",
+      "labels_sha256": "cbd6c0c658c0e10294e20be8d8328c77b13f4af6ba28d4fb88eb48d80606d8d4",
+      "source_frame_0based": 0,
+      "first_forecast_anchor_0based": 12,
+      "last_forecast_anchor_0based": 327,
+      "windows": 13,
+      "tracklets": 4,
+      "line_count": 2,
+      "vertex_count": 18,
+      "vertices_inside_control_point_convex_hull": 18,
+      "image_anchors_inside_control_point_convex_hull": 10,
+      "within_m_count": {
+        "2": 1,
+        "5": 3
+      },
+      "within_m_count_range_for_common_image_shift_of_up_to_3_pixels": {
+        "2": [
+          0,
+          1
+        ],
+        "5": [
+          2,
+          3
+        ]
+      },
+      "ground_lines_native_annotation_xy_m": [
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              23.547274,
+              5.847755
+            ],
+            [
+              20.466993,
+              5.869767
+            ],
+            [
+              18.07181,
+              5.909192
+            ],
+            [
+              15.620608,
+              5.960633
+            ],
+            [
+              13.943291,
+              5.972985
+            ],
+            [
+              12.642425,
+              5.97485
+            ]
+          ]
+        },
+        {
+          "label": "sidewalk_road_edge",
+          "points": [
+            [
+              10.14424,
+              6.120902
+            ],
+            [
+              9.089448,
+              6.060409
+            ],
+            [
+              8.092441,
+              6.01732
+            ],
+            [
+              7.307195,
+              6.007818
+            ],
+            [
+              7.001365,
+              6.082342
+            ],
+            [
+              6.288475,
+              6.586316
+            ],
+            [
+              5.60861,
+              7.086282
+            ],
+            [
+              5.056816,
+              7.54231
+            ],
+            [
+              4.698656,
+              7.814023
+            ],
+            [
+              4.68255,
+              8.212026
+            ],
+            [
+              4.751807,
+              8.571285
+            ],
+            [
+              4.842244,
+              8.800614
+            ]
+          ]
+        }
+      ],
+      "closest_annotated_edge_m_percentiles": {
+        "p25": 5.1934676150485375,
+        "median": 5.623830214520979,
+        "p75": 5.981795090889905
+      },
+      "pixel_anchor_projection_to_released_xy_median_m": 9.57582156720712e-07
+    }
+  }
+}
