@@ -32,9 +32,16 @@ def main() -> None:
     y_mot = [occ["regimes"][k]["o2_motion"]["fde_m"] for k in r_keys]
     y_raw = [occ["regimes"][k]["o2_raw_pose"]["fde_m"] for k in r_keys]
     y_bio = [occ["regimes"][k]["o2_bioeq_v2"]["fde_m"] for k in r_keys]
-    ax1.plot(x1, y_raw, "s--", color="#c26a4a", lw=2.0, ms=6.2, label="O(2) Raw-Pose (34-D kpts)")
+    y_raw_clipped = [min(v, 1.225) for v in y_raw]
+    ax1.plot(x1, y_raw_clipped, "s--", color="#c26a4a", lw=2.0, ms=6.2, label="O(2) Raw-Pose (34-D kpts)")
     ax1.plot(x1, y_mot, "o:", color="#64748b", lw=1.8, ms=5.5, label="O(2) Motion Backbone")
     ax1.plot(x1, y_bio, "*-", color="#0b4f4a", lw=2.5, ms=8.8, label="O(2) BioEq v2 (Gated 11-D)")
+    ax1.annotate(f"Off-scale: {y_raw[-1]:.2f} m\n(+{y_raw[-1]-y_bio[-1]:.2f} m explosion)",
+                 (x1[-1], 1.225), xytext=(-108, -28), textcoords="offset points",
+                 fontsize=8.0, fontweight="bold", color="#b91c1c",
+                 arrowprops=dict(arrowstyle="->", color="#b91c1c", lw=1.0),
+                 bbox=dict(boxstyle="round,pad=0.2", fc="#fef2f2", ec="#fecaca", lw=0.6))
+    ax1.set_ylim(1.015, 1.245)
     ax1.set_xticks(x1, r_lbls, fontsize=8.4)
     ax1.set_ylabel("Four-site equal 3.0 s FDE (m)", fontsize=9.4)
     ax1.set_title("(a) Graceful degradation under pose occlusion & noise (1,482 windows)", fontsize=10.4, fontweight="bold", loc="left", pad=7)
@@ -42,24 +49,31 @@ def main() -> None:
     ax1.spines["top"].set_visible(False); ax1.spines["right"].set_visible(False)
     ax1.legend(loc="best", fontsize=8.0, framealpha=0.95)
 
-    # Panel (b): Causal speed-stratum biomechanical gate & FDE reduction vs CV
+    # Panel (b): Multi-horizon step error crossover (0.5s..3.0s) & speed-regime gate decay
+    h_keys = ["0.5s", "1.0s", "1.5s", "2.0s", "2.5s", "3.0s"]
+    t_sec = np.array([0.5, 1.0, 1.5, 2.0, 2.5, 3.0])
+    cv_step = [hor["horizons"][k]["cv_last2"]["step_err_m"] for k in h_keys]
+    o2_step = [hor["horizons"][k]["o2_bioeq_v2_bayes"]["step_err_m"] for k in h_keys]
+    ax2.plot(t_sec, cv_step, "o--", color="#64748b", lw=1.9, ms=5.8, label="Last-2 Constant Velocity")
+    ax2.plot(t_sec, o2_step, "*-", color="#0b4f4a", lw=2.5, ms=8.8, label="O(2) BioEq-Act v2 (Bayesian)")
+    ax2.fill_between(t_sec, o2_step, cv_step, where=np.array(o2_step) <= np.array(cv_step), color="#2a9d8f", alpha=0.16)
+    ax2.annotate(f"-{(cv_step[-1]-o2_step[-1])*100:.1f} cm at 3.0s", (3.0, o2_step[-1]), xytext=(-76, 12),
+                 textcoords="offset points", fontsize=8.3, fontweight="bold", color="#0b4f4a",
+                 arrowprops=dict(arrowstyle="->", color="#0b4f4a", lw=0.9))
     s_keys = ["quasi_static_lt_0.25", "slow_transition_0.25_0.80", "normal_walk_0.80_1.40", "brisk_ge_1.40"]
-    s_lbls = ["Quasi-Static\n(<0.25 m/s)", "Slow Trans.\n(0.25-0.80)", "Normal Walk\n(0.80-1.40)", "Brisk\n(>=1.40 m/s)"]
-    x2 = np.arange(len(s_keys))
-    fde_gain_cm = [-hor["causal_speed_strata"][k]["paired_bioeq_minus_cv_cm"]["fde_cm"] for k in s_keys]
+    g_x = np.array([0.6, 1.3, 2.1, 2.85])
     gate_w = [hor["causal_speed_strata"][k]["mean_bio_gate_weight"] for k in s_keys]
-    bars2 = ax2.bar(x2 - 0.17, fde_gain_cm, width=0.34, color="#1b7f79", alpha=0.9, label="3.0s FDE reduction vs CV (cm)")
     ax2_t = ax2.twinx()
-    ax2_t.plot(x2 + 0.17, gate_w, "D-", color="#d97757", lw=2.1, ms=6.2, label="Mean biomech. gate weight")
-    ax2.axhline(0.0, color="#94a3b8", lw=0.8)
-    ax2.set_xticks(x2, s_lbls, fontsize=8.4)
-    ax2.set_ylabel("FDE gain vs Constant Velocity (cm, higher better)", fontsize=9.0, color="#0b4f4a")
-    ax2_t.set_ylabel("Causal biomech. gate g(v0, q)", fontsize=9.0, color="#c26a4a")
-    ax2.set_title("(b) Causal speed-regime stratification & biomech. gate", fontsize=10.4, fontweight="bold", loc="left", pad=7)
+    ax2_t.plot(g_x, gate_w, "D:", color="#c26a4a", lw=1.8, ms=5.6, label="Biomech. gate g(v0, q) across speed bins")
+    ax2.set_xticks(t_sec, h_keys, fontsize=8.8)
+    ax2.set_ylabel("Four-site equal horizon error (m)", fontsize=9.2, color="#0b4f4a")
+    ax2_t.set_ylabel("Mean biomech. gate weight g(v0, q)", fontsize=8.8, color="#c26a4a")
+    ax2_t.set_ylim(0.0, 0.21)
+    ax2.set_title("(b) Horizon crossover (1.0s-3.0s) & speed-regime gate decay", fontsize=10.4, fontweight="bold", loc="left", pad=7)
     ax2.grid(axis="y", color="#e2e8f0", lw=0.7)
     ax2.spines["top"].set_visible(False); ax2_t.spines["top"].set_visible(False)
     h1, l1 = ax2.get_legend_handles_labels(); h2, l2 = ax2_t.get_legend_handles_labels()
-    ax2.legend(h1 + h2, l1 + l2, loc="upper right", fontsize=7.8, framealpha=0.95)
+    ax2.legend(h1 + h2, l1 + l2, loc="upper left", fontsize=7.8, framealpha=0.95)
 
     # Panel (c): LOSO Split-Conformal 90% & 95% trajectory safety tube radii & empirical coverage
     c_keys = ["cv_single", "o2_top1_tube", "o2_union6_tube", "o2_union6_fde"]

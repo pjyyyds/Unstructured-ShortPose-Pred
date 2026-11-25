@@ -8,17 +8,30 @@ import zipfile
 
 
 def verify_zip_manifest(zip_path: Path) -> dict:
-    with zipfile.ZipFile(zip_path) as zf:
-        assert zf.testzip() is None, f"Corrupted zip: {zip_path}"
+    with zipfile.ZipFile(zip_path) as outer:
+        assert outer.testzip() is None, f"Corrupted zip: {zip_path}"
+        inner_zips = [n for n in outer.namelist() if n.endswith(".zip")]
+        if inner_zips:
+            import io
+            raw_inner = outer.read(inner_zips[0])
+            zf = zipfile.ZipFile(io.BytesIO(raw_inner))
+            assert zf.testzip() is None
+            arch_name = inner_zips[0]
+            arch_sha = hashlib.sha256(raw_inner).hexdigest()
+        else:
+            zf = outer
+            arch_name = zip_path.name
+            arch_sha = hashlib.sha256(zip_path.read_bytes()).hexdigest()
         manifest = json.loads(zf.read("sha256.json").decode())
         for name, exp_sha in manifest.items():
             got = hashlib.sha256(zf.read(name)).hexdigest()
             if got != exp_sha:
-                raise ValueError(f"SHA-256 mismatch in {zip_path.name}:{name}: {got} != {exp_sha}")
+                raise ValueError(f"SHA-256 mismatch in {arch_name}:{name}: {got} != {exp_sha}")
         rep = json.loads(zf.read("report.json").decode())
     return {
-        "archive_name": zip_path.name,
-        "archive_sha256": hashlib.sha256(zip_path.read_bytes()).hexdigest(),
+        "archive_name": arch_name,
+        "archive_sha256": arch_sha,
+        "outer_download_sha256": hashlib.sha256(zip_path.read_bytes()).hexdigest(),
         "manifest_sha256": manifest,
         "report": rep,
     }
