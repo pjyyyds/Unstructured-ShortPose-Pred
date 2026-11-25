@@ -30,3 +30,19 @@ print(aggregate["primary_test_paired_ade"])
 最终文件是该输出目录中的 `pinns_neural_image_geometry_pair.zip`。可公开的 `aggregate.json` 包含首选 ADE 配对差的区间、两种 FDE 的分子与有效分母、分站及分片汇总。`test_rows.npz` 含私有测试键、历史与未来掩码及实测轨迹，两份臂文件各自包含最佳验证权重、六条测试轨迹、全部候选概率及训练记录。整个 ZIP 应作为私有产物处理。
 
 入口在每臂完成后校验并原子保存。用同一输入、代码、配置和工作机重跑时，完整的臂直接复用；未完成的臂从原种子重启。归档校验失败会保留原文件并重建。工作机或输入身份不同的部分运行分开存放。
+
+
+## 返包后独立复算
+
+在仓库根目录运行。三个位置参数依次是待核的神经网络返包、原有几何岭回归的私有 Kaggle 返包、修正坐标后的冻结地图数组。
+
+```sh
+python -m reviews.pinns_map_axis_comparison.neural.verify_return \
+  pinns_neural_image_geometry_pair.zip pinns_causal_geometry_results.zip maps.npz \
+  --output accepted_aggregate.json
+python -m reviews.pinns_map_axis_comparison.neural.test_return
+```
+
+程序核对发布版本、模型权重张量的名称、形状和数值摘要、两臂报告的初始化与抽样摘要，以及七次验证记录选出的最优轮次。每个测试窗的目标、历史和未来掩码来自另一次已归档的 Kaggle 作业，地图可用位和逐点掩码另取自冻结地图。复算逐窗用六条已存候选和概率确定首选，再与外部真值比较，复核总体、逐地点、逐片的分母、误差与主要配对区间。训练日志里的初始化、采样、设备信息仍属于运行方报告。要证明返回权重确实产生这六条轨迹，还需在 Kaggle 用相同的姿态、运动和地图输入重放，核对全部候选及概率。正式结果需有对应 Kaggle 版本的来源记录。
+
+在原岭回归的 497 个测试窗和已保存预测上演练复算，可重得归档的 ADE 配对差 +0.02319382 m。另用 8 个合成窗口检验首选并列、缺帧、不同终点和地点权重。以上仅验证计分流程。修正坐标的 M2a 两臂仍待真实返包。[历史预测的独立对照](../followup_support/README.md)
