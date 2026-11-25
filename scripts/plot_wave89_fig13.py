@@ -59,7 +59,8 @@ def main() -> None:
     ax2.bar(x2, vals_b, width=0.56, color=cols_b)
     ax2.axhline(1.3166, color="#0f172a", ls=":", lw=1.5, label="2.5Hz Last-2 CV (1.3166 m)")
     for xi, vv in zip(x2, vals_b):
-        ax2.text(xi, vv + 0.018, f"{vv:.3f}", ha="center", va="bottom", fontsize=7.4, fontweight="bold", color="#1e293b")
+        ax2.text(xi, vv + 0.018, f"{vv:.3f}", ha="center", va="bottom", fontsize=7.4, fontweight="bold", color="#1e293b",
+                 bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.85))
     ax2.set_xticks(x2, lbls_b, fontsize=7.9)
     ax2.set_ylim(1.10, 2.16)
     ax2.set_ylabel("JTA 960-window 4.8 s ADE (m, lower better)", fontsize=9.2)
@@ -97,7 +98,8 @@ def main() -> None:
     ax4.bar(x4 + 0.25, o2_lat, width=0.24, color="#0b4f4a", label="Ours_O2_Full (20.7k, 10.5 MFLOPs)")
     ax4.axhline(25.0, color="#b91c1c", ls="--", lw=1.2, label="25 ms real-time budget")
     for xi, mv, pv in zip(x4 + 0.25, o2_lat, o2_p95):
-        ax4.text(xi, mv + 0.35, f"{mv:.2f} ms\n(P95 {pv:.2f})", ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0b4f4a")
+        ax4.text(xi, mv + 0.45, f"{mv:.2f} ms\n(P95 {pv:.2f})", ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0b4f4a",
+                 bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.88))
     ax4.set_xticks(x4, t_lbls, fontsize=8.6)
     ax4.set_ylim(0, 27.5)
     ax4.set_ylabel("Synchronized Tesla T4 wall-clock (ms)", fontsize=9.2)
