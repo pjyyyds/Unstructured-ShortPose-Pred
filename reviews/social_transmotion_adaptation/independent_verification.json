@@ -1,0 +1,99 @@
+{
+  "archive_sha256": "38f1777735602623006a27ebbe2c041c79d9339af89b3992d5912a8681dc7d94",
+  "version": 373628213,
+  "raw_labels_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+  "prior_keyed_windows_sha256": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+  "registered_plan_sha256": "a5e05cc917a96437d81ae2155db4c99deb836d8c7e2e65c5a280d3b92850eb51",
+  "source_revision": "7695ba335f7cba7f41660d0edc66a57cd52da08a",
+  "fit_count": 8,
+  "epochs_per_fit": 28,
+  "worker_device": "cpu",
+  "inference": "Stored test predictions compared against source labels; no model forwards.",
+  "sites": {
+    "america_crossroad": {
+      "windows": 816,
+      "clips": 14
+    },
+    "italy_park": {
+      "windows": 84,
+      "clips": 9
+    },
+    "japan_crossroad": {
+      "windows": 432,
+      "clips": 11
+    },
+    "thailand_street": {
+      "windows": 150,
+      "clips": 13
+    }
+  },
+  "checked_window_error_rows": 4446,
+  "common_initial_sha256": "12f510515bf47bdfd3bab898b7342842df5de66b08c30a0aae3654e392e91c58",
+  "max_absolute_stored_error_difference_m": 1.7763568394002505e-15,
+  "max_absolute_report_or_interval_difference_m": 1.6930901125533637e-15,
+  "official_aggregate_sha256": "c5a24d21764f057eabd772a28ce2b948194b89572c34eb3517a2311d72132625",
+  "four_site_equal": {
+    "traj_box": {
+      "ade_m": 0.6521936361318975,
+      "fde_m": 1.324416141498974
+    },
+    "traj": {
+      "ade_m": 0.5533855476726344,
+      "fde_m": 1.1239106036973385
+    },
+    "last_two": {
+      "ade_m": 0.4838738237222935,
+      "fde_m": 1.104558510403262
+    }
+  },
+  "paired_macro": {
+    "traj_box_minus_last_two": {
+      "delta": [
+        0.16831981240960403,
+        0.21985763109571188
+      ],
+      "interval95_m": {
+        "ade_m": [
+          0.12375251895687023,
+          0.22597071015455658
+        ],
+        "fde_m": [
+          0.12194446325437028,
+          0.3615304224321538
+        ]
+      }
+    },
+    "traj_minus_last_two": {
+      "delta": [
+        0.06951172395034089,
+        0.0193520932940765
+      ],
+      "interval95_m": {
+        "ade_m": [
+          0.04427428354900972,
+          0.09429797424779386
+        ],
+        "fde_m": [
+          -0.03985463031913858,
+          0.11029521575510443
+        ]
+      }
+    },
+    "traj_box_minus_traj": {
+      "delta": [
+        0.09880808845926314,
+        0.20050553780163538
+      ],
+      "interval95_m": {
+        "ade_m": [
+          0.06113395928317469,
+          0.14633639939523146
+        ],
+        "fde_m": [
+          0.129359228793314,
+          0.28478936583828923
+        ]
+      }
+    }
+  }
+}

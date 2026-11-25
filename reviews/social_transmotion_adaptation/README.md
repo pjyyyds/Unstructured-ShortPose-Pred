@@ -1,6 +1,6 @@
 # Social-Transmotion 作者代码的可运行范围
 
-作者 JRDB 模型在官方 9 帧输入形状下已用合成序列运行。PINNS 的 5 帧输入、30 步输出也已完成软件验证，需修改模型内部时间长度。后者可称“基于 Social-Transmotion 作者 JRDB 代码的 PINNS 单人适配”。两次均为随机初始化的 CPU 前向。尚未验证真实预训练权重的推理、训练完整性或任何预测分数。[作者仓库固定版本 7695ba3](https://github.com/vita-epfl/social-transmotion/tree/7695ba335f7cba7f41660d0edc66a57cd52da08a) · [ICLR 论文 §4.1–4.2](https://proceedings.iclr.cc/paper_files/paper/2024/file/a627810151be4d13f907ac898ff7e948-Paper-Conference.pdf)
+本研究将 Social-Transmotion 作者的 JRDB 实现在 PINNS 上适配为单目标、5 帧观测、30 步确定性预测。Kaggle 版本 373628213 在 CPU 上完成四地留出训练，耗时 4,612.0 秒。输入条件为仅地面轨迹、地面轨迹加二维框，均从种子 42 开始训练。作者原始 9 帧输入另用合成样本检查接口。[作者仓库固定版本 7695ba3](https://github.com/vita-epfl/social-transmotion/tree/7695ba335f7cba7f41660d0edc66a57cd52da08a) · [ICLR 论文 §4.1–4.2](https://proceedings.iclr.cc/paper_files/paper/2024/file/a627810151be4d13f907ac898ff7e948-Paper-Conference.pdf)
 
 ## 原版协议、发布物与许可
 
@@ -22,8 +22,24 @@
 
 作者 reader 要求邻人前 9 帧齐全，随后通过整段的最小相对距离筛选 6 m 内邻人，包含未来 12 帧；一个只在未来靠近的人可以进入当前观测的社交输入。直接复用该 loader 无法保证严格在线的邻人选择。此次单目标输入完全不选择邻人。若以后提供社交版本，须从五帧内的当前/已见人员构造候选，不以邻人未来完整性或未来距离筛人，单列这种协议变化。[作者场景和邻人筛选](https://github.com/vita-epfl/social-transmotion/blob/7695ba335f7cba7f41660d0edc66a57cd52da08a/utils/data.py#L7-L21) · [距离与完整性函数](https://github.com/vita-epfl/social-transmotion/blob/7695ba335f7cba7f41660d0edc66a57cd52da08a/utils/data.py#L66-L90)
 
+## PINNS 四地点结果
+
+四折合计 1,482 个完整窗口。美国、意大利、日本和泰国分别贡献 816/14、84/9、432/11、150/13 个窗口/片段。各折只用其余三地训练 28 轮，输出一条地面轨迹。先在每地计算窗等权 ADE 和 3 秒末步 FDE，再对四地等权。轨迹加框为 **0.6522 / 1.3244 m**，仅轨迹为 **0.5534 / 1.1239 m**，末两点匀速为 **0.4839 / 1.1046 m**。[计分前协议](PROTOCOL.md) · [Kaggle 原始聚合](scores.json)
+
+预设主比较是轨迹加框减匀速。ADE 增加 0.1683 m（95% 配对区间 0.1238 至 0.2260），FDE 增加 0.2199 m（0.1219 至 0.3615）。仅轨迹减匀速的 ADE、FDE 分别为 +0.0695 m（0.0443 至 0.0943）、+0.0194 m（−0.0399 至 0.1103）。轨迹加框减仅轨迹的两项差分别为 +0.0988 m（0.0611 至 0.1463）、+0.2005 m（0.1294 至 0.2848）。美国片段中，轨迹加框的 ADE 为 0.9018 m，低于匀速的 0.9477 m；另外三地均高于匀速。区间来自固定四地点内的 20,000 次整片配对重采样，只涵盖这八次拟合和这些已用于开发的地点。[逐地与配对结果](scores.json)
+
 ## 复核步骤
 
-运行 inspect_release.py 可复查 ZIP 目录。官方仓库的原始工作副本保存在 source/，未修改。令 PYTHONPATH 包含本项目及已有依赖，运行以下命令可复查合成前向和真实窗口输入。程序不提供训练或真实预测入口。
+从仓库根目录执行。使用 PINNS 的原始标签、对应标定与归档成员清单。第一条命令重建逐窗历史及评分目标。第二条读取私有 Kaggle 原始返包，并将复算聚合写入指定位置。
 
-    python check_protocol.py --metadata ../pinns_metadata --pose ../loso_artifacts/pose.npz
+```bash
+python -m scripts.audit_pinns_matched_histories /path/to/PINNS \
+  --output /tmp/matched_summary.json --manifest /tmp/matched_histories.npz
+python -m reviews.social_transmotion_adaptation.verify_return \
+  /path/to/social_transmotion_pinns.zip /path/to/PINNS \
+  /tmp/matched_histories.npz /tmp/social_transmotion_verification.json
+```
+
+复核脚本对照协议、8 个检查点的训练记录、留出键和两份独立重建的观测及未来坐标，从归档的确定性预测重算了三种方法共 4,446 行 ADE/FDE。另按原种子重建每个逐地和四地点等权区间。逐窗误差最大绝对差为 1.78×10⁻¹⁵ m，各级汇总及区间最大绝对差为 1.70×10⁻¹⁵ m。这次复核使用归档预测，未执行模型前向；原标签、逐人预测和权重保留在私有环境。[复核脚本](verify_return.py) · [独立聚合与来源摘要](independent_verification.json)
+
+作者发布包的目录与许可记录见 [release_inventory.json](release_inventory.json)。若要另做作者模型的接口检查，可将固定作者版本的 `model_jrdb.py` 路径传给 `check_protocol.py --source`，并用 `--output` 指向临时结果。
