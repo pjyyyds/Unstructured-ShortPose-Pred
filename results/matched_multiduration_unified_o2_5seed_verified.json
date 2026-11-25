@@ -1,0 +1,94 @@
+{
+  "archive_name": "matched_multiduration_unified_o2_5seed.zip",
+  "archive_sha256": "ccc1f11c0020dec99c262eb604af3e723a8b13e72ea2fefa80b278418f51c87f",
+  "outer_download_sha256": "acd76ad80d9bd9f1993421d3f0de194a7d5a46bef74d7d8db482fb1606c1c9e1",
+  "manifest_sha256": {
+    "report.json": "13fd1557baf934fdfaef7c34a9de26ba240e7c3ed7229518ef3bc1177139bc63"
+  },
+  "report": {
+    "windows": 623,
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "durations": {
+      "5": {
+        "traj_site_equal": {
+          "ade_m": 0.476597537902204,
+          "fde_m": 1.096121340537592,
+          "bayes_ade_m": 0.47088561963163483,
+          "bayes_fde_m": 1.069730043814413,
+          "minfde6_m": 0.740457315410889
+        },
+        "action_eligible_site_equal": {
+          "macro_ap": 0.4086134427116273,
+          "macro_f1": 0.30119387060123143,
+          "mean_brier": 0.13626509107014556
+        }
+      },
+      "10": {
+        "traj_site_equal": {
+          "ade_m": 0.49135450119912016,
+          "fde_m": 1.1210641074194045,
+          "bayes_ade_m": 0.47465168427780097,
+          "bayes_fde_m": 1.0773155923113853,
+          "minfde6_m": 0.7259063358130182
+        },
+        "action_eligible_site_equal": {
+          "macro_ap": 0.42879782333801253,
+          "macro_f1": 0.334028130810345,
+          "mean_brier": 0.13545620689745164
+        },
+        "paired_bayes_minus_T5": {
+          "mean": {
+            "ade_m": 0.0037660646461660607,
+            "fde_m": 0.007585548496972601
+          },
+          "ci95": {
+            "ade_m": [
+              -0.0076512985254267975,
+              0.012700683989966613
+            ],
+            "fde_m": [
+              -0.015864000856194996,
+              0.027395893808171357
+            ]
+          }
+        }
+      },
+      "20": {
+        "traj_site_equal": {
+          "ade_m": 0.49050886467829924,
+          "fde_m": 1.115223436833689,
+          "bayes_ade_m": 0.4681259549619853,
+          "bayes_fde_m": 1.0637290172815541,
+          "minfde6_m": 0.6859712784852916
+        },
+        "action_eligible_site_equal": {
+          "macro_ap": 0.4348853735991371,
+          "macro_f1": 0.3613181544771027,
+          "mean_brier": 0.13258044249551812
+        },
+        "paired_bayes_minus_T5": {
+          "mean": {
+            "ade_m": -0.0027596646696495214,
+            "fde_m": -0.006001026532858896
+          },
+          "ci95": {
+            "ade_m": [
+              -0.025977018586038857,
+              0.010851348507069949
+            ],
+            "fde_m": [
+              -0.0567606364959793,
+              0.024946686186978186
+            ]
+          }
+        }
+      }
+    }
+  }
+}

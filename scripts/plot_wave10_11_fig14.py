@@ -60,26 +60,31 @@ def main() -> None:
     ax2.plot(x2, [1.1035, 1.1035, 1.1035], "k:", lw=1.6, label="Last-2 CV 3.0s FDE (1.1035 m)")
     ax2.plot(x2, bay_fde, "*-", color="#0b4f4a", lw=2.5, ms=9.0, label="Ours_O2_Full Bayesian FDE (m)")
     ax2.plot(x2, mfde6, "D--", color="#2a9d8f", lw=1.9, ms=6.2, label="Ours_O2_Full minFDE_6 (m)")
+    bbox_w = {"boxstyle": "round,pad=0.16", "fc": "white", "ec": "none", "alpha": 0.88}
     for xi, fv in zip(x2, bay_fde):
-        ax2.annotate(f"{fv:.4f} m", (xi, fv), xytext=(0, 9), textcoords="offset points",
-                     ha="center", fontsize=8.0, fontweight="bold", color="#0b4f4a")
+        ax2.annotate(f"{fv:.4f} m", (xi, fv), xytext=(0, -15), textcoords="offset points",
+                     ha="center", fontsize=7.8, fontweight="bold", color="#0b4f4a", bbox=bbox_w)
+    for xi, mv in zip(x2, mfde6):
+        ax2.annotate(f"{mv:.4f} m", (xi, mv), xytext=(0, 8), textcoords="offset points",
+                     ha="center", fontsize=7.6, fontweight="bold", color="#2a9d8f", bbox=bbox_w)
 
     ax2_t = ax2.twinx()
     ax2_t.plot(x2, act_ap, "s-", color="#c26a4a", lw=2.1, ms=6.4, label="5-Class Action Macro-AP")
     for xi, av in zip(x2, act_ap):
-        ax2_t.annotate(f"{av:.4f} AP", (xi, av), xytext=(0, -14), textcoords="offset points",
-                       ha="center", fontsize=8.0, fontweight="bold", color="#c26a4a")
+        ax2_t.annotate(f"{av:.4f} AP", (xi, av), xytext=(0, 8), textcoords="offset points",
+                       ha="center", fontsize=7.8, fontweight="bold", color="#c26a4a", bbox=bbox_w)
 
+    ax2.set_xlim(-0.26, 2.26)
     ax2.set_xticks(x2, d_lbls, fontsize=9.0)
-    ax2.set_ylim(0.65, 1.16)
-    ax2_t.set_ylim(min(act_ap) - 0.04, max(act_ap) + 0.05)
+    ax2.set_ylim(0.64, 1.155)
+    ax2_t.set_ylim(0.375, 0.485)
     ax2.set_ylabel("Four-site equal 3.0 s FDE / minFDE_6 (m)", fontsize=9.2, color="#0b4f4a")
     ax2_t.set_ylabel("Five-class eligible Macro-AP", fontsize=9.2, color="#c26a4a")
     ax2.set_title("(b) 623 matched windows: Ours_O2_Full T=5,10,20 scaling", fontsize=10.5, fontweight="bold", loc="left", pad=7)
     ax2.grid(axis="y", color="#e2e8f0", lw=0.7)
     ax2.spines["top"].set_visible(False); ax2_t.spines["top"].set_visible(False)
     h1, l1 = ax2.get_legend_handles_labels(); h2, l2 = ax2_t.get_legend_handles_labels()
-    ax2.legend(h1 + h2, l1 + l2, loc="center right", fontsize=7.6, framealpha=0.95)
+    ax2.legend(h1 + h2, l1 + l2, loc="upper left", bbox_to_anchor=(0.01, 0.76), fontsize=7.5, framealpha=0.95)
 
     fig.tight_layout(pad=1.6)
     out = root / "docs/figures/fig14_table1_apple_to_apple_and_multiduration_full.png"
