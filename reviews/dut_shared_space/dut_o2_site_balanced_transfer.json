@@ -1,0 +1,291 @@
+{
+  "windows": 3066,
+  "ridge_g_mot_by_fold": {
+    "america_crossroad": 0.375,
+    "italy_park": 0.25,
+    "japan_crossroad": 0.25,
+    "thailand_street": 0.25
+  },
+  "angles": {
+    "0": {
+      "cv_measured": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.4616552305250734,
+          "fde_m": 0.9326140860066245
+        },
+        "person_equal": {
+          "ade_m": 0.46616111462768184,
+          "fde_m": 0.9440498663222625
+        },
+        "clip_equal": {
+          "ade_m": 0.4952163529434122,
+          "fde_m": 1.0004678326460663
+        }
+      },
+      "o2_ridge_clock_aware": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5022779500611352,
+          "fde_m": 1.0136323117941308
+        },
+        "person_equal": {
+          "ade_m": 0.5081427416966003,
+          "fde_m": 1.0273386699190352
+        },
+        "clip_equal": {
+          "ade_m": 0.5309202573030277,
+          "fde_m": 1.0677732386403262
+        }
+      },
+      "bioeq_v2_site_balanced_top1": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5992299285663674,
+          "fde_m": 1.2376112008328006
+        },
+        "person_equal": {
+          "ade_m": 0.6130042506104866,
+          "fde_m": 1.2662527035941278
+        },
+        "clip_equal": {
+          "ade_m": 0.6218237611775074,
+          "fde_m": 1.2670963601148018
+        }
+      },
+      "bioeq_v2_site_balanced_bayes": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5761233727011715,
+          "fde_m": 1.1853634607301005
+        },
+        "person_equal": {
+          "ade_m": 0.5897870229830736,
+          "fde_m": 1.2152444048546154
+        },
+        "clip_equal": {
+          "ade_m": 0.6032703568405767,
+          "fde_m": 1.2263648893774737
+        }
+      }
+    },
+    "90": {
+      "cv_measured": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.4616552305250734,
+          "fde_m": 0.9326140860066245
+        },
+        "person_equal": {
+          "ade_m": 0.46616111462768184,
+          "fde_m": 0.9440498663222625
+        },
+        "clip_equal": {
+          "ade_m": 0.4952163529434122,
+          "fde_m": 1.0004678326460663
+        }
+      },
+      "o2_ridge_clock_aware": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5022779500611352,
+          "fde_m": 1.0136323117941308
+        },
+        "person_equal": {
+          "ade_m": 0.5081427416966003,
+          "fde_m": 1.0273386699190352
+        },
+        "clip_equal": {
+          "ade_m": 0.5309202573030277,
+          "fde_m": 1.0677732386403262
+        }
+      },
+      "bioeq_v2_site_balanced_top1": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5992299285663674,
+          "fde_m": 1.2376112008328006
+        },
+        "person_equal": {
+          "ade_m": 0.6130042506104866,
+          "fde_m": 1.2662527035941278
+        },
+        "clip_equal": {
+          "ade_m": 0.6218237611775074,
+          "fde_m": 1.2670963601148018
+        }
+      },
+      "bioeq_v2_site_balanced_bayes": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5761233727011715,
+          "fde_m": 1.1853634607301005
+        },
+        "person_equal": {
+          "ade_m": 0.5897870229830737,
+          "fde_m": 1.2152444048546154
+        },
+        "clip_equal": {
+          "ade_m": 0.6032703568405767,
+          "fde_m": 1.2263648893774737
+        }
+      }
+    },
+    "180": {
+      "cv_measured": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.4616552305250734,
+          "fde_m": 0.9326140860066245
+        },
+        "person_equal": {
+          "ade_m": 0.46616111462768184,
+          "fde_m": 0.9440498663222625
+        },
+        "clip_equal": {
+          "ade_m": 0.4952163529434122,
+          "fde_m": 1.0004678326460663
+        }
+      },
+      "o2_ridge_clock_aware": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5022779500611352,
+          "fde_m": 1.0136323117941308
+        },
+        "person_equal": {
+          "ade_m": 0.5081427416966003,
+          "fde_m": 1.0273386699190352
+        },
+        "clip_equal": {
+          "ade_m": 0.5309202573030277,
+          "fde_m": 1.0677732386403262
+        }
+      },
+      "bioeq_v2_site_balanced_top1": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5992299285663674,
+          "fde_m": 1.2376112008328006
+        },
+        "person_equal": {
+          "ade_m": 0.6130042506104866,
+          "fde_m": 1.2662527035941278
+        },
+        "clip_equal": {
+          "ade_m": 0.6218237611775074,
+          "fde_m": 1.2670963601148018
+        }
+      },
+      "bioeq_v2_site_balanced_bayes": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5761233727011715,
+          "fde_m": 1.1853634607301005
+        },
+        "person_equal": {
+          "ade_m": 0.5897870229830736,
+          "fde_m": 1.2152444048546154
+        },
+        "clip_equal": {
+          "ade_m": 0.6032703568405767,
+          "fde_m": 1.2263648893774737
+        }
+      }
+    },
+    "270": {
+      "cv_measured": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.4616552305250734,
+          "fde_m": 0.9326140860066245
+        },
+        "person_equal": {
+          "ade_m": 0.46616111462768184,
+          "fde_m": 0.9440498663222625
+        },
+        "clip_equal": {
+          "ade_m": 0.4952163529434122,
+          "fde_m": 1.0004678326460663
+        }
+      },
+      "o2_ridge_clock_aware": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5022779500611352,
+          "fde_m": 1.0136323117941308
+        },
+        "person_equal": {
+          "ade_m": 0.5081427416966003,
+          "fde_m": 1.0273386699190352
+        },
+        "clip_equal": {
+          "ade_m": 0.5309202573030277,
+          "fde_m": 1.0677732386403262
+        }
+      },
+      "bioeq_v2_site_balanced_top1": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5992299285663674,
+          "fde_m": 1.2376112008328006
+        },
+        "person_equal": {
+          "ade_m": 0.6130042506104866,
+          "fde_m": 1.2662527035941278
+        },
+        "clip_equal": {
+          "ade_m": 0.6218237611775074,
+          "fde_m": 1.2670963601148018
+        }
+      },
+      "bioeq_v2_site_balanced_bayes": {
+        "windows": 3066,
+        "people": 879,
+        "clips": 11,
+        "window_equal": {
+          "ade_m": 0.5761233727011715,
+          "fde_m": 1.1853634607301005
+        },
+        "person_equal": {
+          "ade_m": 0.5897870229830737,
+          "fde_m": 1.2152444048546154
+        },
+        "clip_equal": {
+          "ade_m": 0.6032703568405767,
+          "fde_m": 1.2263648893774737
+        }
+      }
+    }
+  }
+}

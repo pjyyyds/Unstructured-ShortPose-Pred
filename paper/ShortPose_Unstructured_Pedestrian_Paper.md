@@ -7,13 +7,13 @@
 
 ## 摘要
 
-行人刚进入视野时，五张图像里的身体姿态能否补充短轨迹，帮助预测接下来三秒的动作和位置？我们以 10 Hz 观测五帧（首末相隔 0.4 s），比较纯运动、二维人体姿态融合、动作条件解码和匀速外推。在 PINNS 四个已参与开发的地点，逐地留出测试，按片段和行人截取 1,482 个完整、不重叠的窗口。五个随机种子和四地等权时，纯运动模型 M0 与显式姿态质量门控 M1 的首选轨迹平均位移误差（ADE）为 0.5126 和 0.5375 m。与开题假设最接近的 323 窗从行人在片内的首次采样标注开始，五帧累计位移不足 0.5 m。此组末两帧匀速、M0、M1 的 ADE 分别为 0.3545、0.4130、0.4388 m，M1 减 M0 的整片配对 95% 区间为 [+0.0164, +0.0356] m。首次采样标注不能确定真实入镜或遮挡解除时刻。另有 623 窗可在相同未来条件下比较 5、10、20 帧；五帧的 M1 减 M0 为 −0.0094 m，区间跨零。在 JTA 人工重噪声组，等权相加、显式门控和纯运动的 ADE 分别为 2.3063、1.5138、1.4397 m。在种子 42 的五帧动作与轨迹实验中，仅加动作辅助监督使 ADE 从 0.5885 降至 0.5161 m；固定阈值 0.5 时，三种动作头最多识别出 53 次停止中的 1 次。北京四路口的 54 个迁移窗中，按窗平均，M0、M1 与匀速的 ADE 分别为 1.711、1.719、1.978 m，地点加权和采样时钟会影响比较。现有结果限定了姿态质量门控与动作监督在这些场景中的作用，尚未验证其在真实遮挡解除后的收益。
+行人刚进入视野时，五张图像里的身体姿态能否补充短轨迹，帮助预测接下来三秒的动作和位置？我们以 10 Hz 观测五帧（首末相隔 0.4 s），比较纯运动、二维人体姿态融合、动作条件解码和匀速外推。在 PINNS 四个已参与开发的地点，逐地留出测试，按片段和行人截取 1,482 个完整、不重叠的窗口。五个随机种子和四地等权时，全局坐标纯运动模型 M0 与显式姿态质量门控 M1 的首选轨迹平均位移误差（ADE）为 0.5126 和 0.5375 m。与开题假设最接近的 323 窗从行人在片内的首次采样标注开始，五帧累计位移不足 0.5 m；此组末两帧匀速、M0、M1 的 ADE 分别为 0.3545、0.4130、0.4388 m，M1 减 M0 的整片配对 95% 区间为 [+0.0164, +0.0356] m。首次采样标注不能确定真实入镜或遮挡解除时刻。另有 623 窗可在相同未来条件下比较 5、10、20 帧；五帧的 M1 减 M0 为 −0.0094 m，区间跨零。在 JTA 人工重噪声组，等权相加、显式门控和纯运动的 ADE 分别为 2.3063、1.5138、1.4397 m。在种子 42 的五帧动作与轨迹实验中，仅加动作辅助监督使 ADE 从 0.5885 降至 0.5161 m；固定阈值 0.5 时，三种动作头最多识别出 53 次停止中的 1 次，事后按动作概率重排候选的配对差跨零。进一步诊断表明，全局地面坐标与视角依赖像素坐标在留出站点引发方向与选模退化；改用因果局部航向坐标系、训练三站点等权损失及两阶段视角无关生物力学纵向精修（BioEq v2）后，五种子四地等权 ADE/FDE 降至 0.4593/1.0332 m（末两帧匀速为 0.4839/1.1046 m），相对同架构纯运动主干的配对差为 −0.32 mm（95% 区间 [−0.70, −0.03] mm）。北京四路口 54 窗迁移中，按窗平均 M0、M1 与匀速 ADE 为 1.711、1.719、1.978 m；大连理工校园共享空间 3,066 窗近俯视视频中，97.2% 窗口无唯一检出人体框，显式门控 M1 安全回退至 0.5416 m（M0 为 0.5754 m），时标感知局部等变回归在四个正交旋转角上恒为 0.5023 m（实测匀速 0.4617 m）。上述四地迭代基于已知开发地点，真实遮挡解除后的独立新场景收益仍待验证。
 
-**关键词**　非结构化道路、行人轨迹预测、短时观测、姿态质量、动作条件解码
+**关键词**　非结构化道路、行人轨迹预测、短时观测、姿态质量、坐标等变性、动作条件解码
 
 ## Abstract
 
-Can five images of a pedestrian’s pose improve predictions of the next three seconds beyond a short ground track? We compare motion, 2D pose fusion, action-conditioned decoding and constant velocity using five observations at 10 Hz spanning 0.4 s. We held out each of four previously studied PINNS sites in turn, using 1,482 complete nonoverlapping windows. Averaging equally over five seeds and four sites, top-ranked average displacement error (ADE) was 0.5126 m for motion alone (M0) and 0.5375 m with explicit pose-quality gating (M1). In 323 windows beginning at the first sampled annotation for that pedestrian in the clip, cumulative observed displacement was below 0.5 m. Last-pair constant velocity, M0 and M1 had ADEs of 0.3545, 0.4130 and 0.4388 m in this subgroup. The paired 95% within-site clip-bootstrap interval for M1 minus M0 was +0.0164 to +0.0356 m. A first sampled annotation does not establish when the pedestrian became visible. In 623 other windows supporting 5-, 10- and 20-frame histories with common future targets, five-frame M1 minus M0 was −0.0094 m and its interval crossed zero. With heavy simulated pose noise on JTA, ADE was 2.3063 m for additive fusion, 1.5138 m for explicit gating and 1.4397 m for motion alone. In a one-seed action experiment, auxiliary supervision reduced ADE from 0.5885 to 0.5161 m. At a threshold of 0.5, the three action heads detected at most one of 53 stops. Across 54 transfer windows from four Beijing intersections, window-averaged ADE was 1.711 m for M0, 1.719 m for M1 and 1.978 m for constant velocity. Results depended on site weighting and the sampling clock. These comparisons quantify where pose and action supervision helped or failed under short observation. Benefit after verified emergence from occlusion remains untested.
+Can five images of a pedestrian’s pose improve predictions of the next three seconds beyond a short ground track? We compare motion, 2D pose fusion, action-conditioned decoding and constant velocity using five observations at 10 Hz spanning 0.4 s. Holding out each of four previously studied PINNS sites in turn yields 1,482 complete nonoverlapping windows. Averaging equally over five seeds and four sites, top-ranked average displacement error (ADE) for global-frame models was 0.5126 m for motion alone (M0) and 0.5375 m with explicit pose-quality gating (M1). In 323 windows starting at a pedestrian’s first sampled clip annotation with cumulative displacement below 0.5 m, last-pair constant velocity, M0 and M1 achieved ADEs of 0.3545, 0.4130 and 0.4388 m (paired 95% clip-bootstrap interval for M1 minus M0: +0.0164 to +0.0356 m); first sampled annotations do not identify physical emergence from occlusion. Across 623 duration-matched windows, five-frame M1 minus M0 was −0.0094 m with an interval crossing zero. Under heavy simulated pose noise on JTA, ADE was 2.3063 m for additive fusion, 1.5138 m for explicit gating and 1.4397 m for motion alone. Auxiliary action supervision lowered one-seed ADE from 0.5885 to 0.5161 m while detecting at most 1 of 53 stops at threshold 0.5, and post-hoc action reranking yielded near-zero change. Replacing global coordinates and camera-azimuth-dependent pixel offsets with causal local-heading `O(2)` equivariance, source-site balanced weighting and two-stage decoupled biomechanical refinement (BioEq v2) reduced five-seed four-site ADE/FDE to 0.4593/1.0332 m versus 0.4839/1.1046 m for constant velocity and −0.32 mm (95% CI: −0.70 to −0.03 mm) relative to its matched motion backbone on these development sites. Externally, across 54 Beijing intersection windows, window-equal ADE was 1.711 m (M0), 1.719 m (M1) and 1.978 m (CV); across 3,066 top-down campus shared-space windows (DUT), where 97.2% of windows lacked uniquely matched detector boxes, M1 fell back to 0.5416 m versus 0.5754 m for M0, while clock-aware `O(2)` equivariant regression achieved 0.5023 m identically across all four 90° axis rotations (measured-clock CV: 0.4617 m).
 
 ---
 
@@ -88,6 +88,16 @@ $$\tilde\ell_k=\ell_k+f\!\left([\mathrm{LN}(\psi_k),p,\psi_{k,3}(p_\mathrm{start
 $$\mathcal L=\mathcal L_\mathrm{SmoothL1}^{(k^*)}+0.25\!\left[0.65\,\mathrm{CE}_\mathrm{LS=0.04}(k^*,\hat\pi)+0.35\,\mathrm{CE}(r,\hat\pi)\right]+0.15\,\mathcal L_\mathrm{act},\qquad r=\mathrm{softmax}(-\mathrm{stopgrad}(d)/0.15). \tag{7}$$
 
 动作项为有效标签样本的类别加权二元交叉熵；无动作监督时该项为零。V1 使用赢家硬标签交叉熵和 0.50 的动作损失权重。两版同时调整了融合层、场景支路、解码和损失，故版本间的差异衡量组合改动。
+
+### 3.5 因果局部航向等变解码与视角无关生物力学精修
+
+跨地点评测时，不同相机的世界坐标轴朝向与透视方位角彼此独立。设五帧地面坐标为 $\mathbf x_{-4:0}$，以末帧 $\mathbf x_0$ 为原点，从最近向前回看弦向量 $\mathbf d_j=\mathbf x_0-\mathbf x_{-j}\ (j=1,\dots,4)$，取首个满足 $\|\mathbf d_j\|\ge 0.05\text{ m}$ 的单位向量作纵向基 $\mathbf e_\parallel$，正交左法向 $\mathbf e_\perp=(-e_{\parallel,y},e_{\parallel,x})$ 构成局部正交基 $\mathbf B=[\mathbf e_\parallel,\mathbf e_\perp]$；四段弦长均低于 $0.05\text{ m}$ 的方向不可辨窗口回退为末两帧匀速外推。将历史转换至局部系后，第 0 条候选固定为末两帧匀速锚点，其余五条候选在局部系每秒节点上学习分段线性残差并旋回世界系，从而严格满足平面旋转等变性。
+
+为消除图像水平像素分量随新机位方位角翻转符号的跨视角过拟合，生物力学姿态支路仅提取经当帧检测框高 $h_t>1$ 归一化的五项偶宇称无量纲标量：双踝跨距比 $\|\mathbf p_{15}-\mathbf p_{16}\|/h_t$、双膝内角余弦均值 $\frac12(\cos\theta_L+\cos\theta_R)$、双腿相位对比度 $|\cos\theta_L-\cos\theta_R|$、髋踝伸展比及躯干竖直挺立度 $-\frac12(v_5+v_6-v_{11}-v_{12})/h_t$，连同相邻有效帧的变化率构成时序特征，并定义下肢生物力学质量因子 $q_\mathrm{bio}\in[0,1]$。针对源训练站点样本不均衡（如美国路口占全库 55.1%）及低速状态才需姿态补充的物理特性，BioEq v2 在训练三站点内采用站点等权损失 $w_i\propto 1/N_{\mathrm{site}(i)}$ 先拟合运动主干，第二阶段冻结运动主干与模态打分头，仅通过状态门控
+
+$$g_\mathrm{regime}=s_\mathrm{cv}\,q_\mathrm{bio}\exp\!\left(-\frac{\|\mathbf v_\mathrm{last}\|^2}{v_\mathrm{ref}^2}\right)\sigma(\gamma),\qquad v_\mathrm{ref}=0.75\text{ m/s} \tag{8}$$
+
+修正候选轨迹的纵向速度变化分量，其中收缩因子 $s_\mathrm{cv}\in\{0,0.25,0.5,1.0\}$ 仅由每折三个源训练地点的内部轮流留出验证选定。
 
 ## 4 实验设置 (Experimental Setup)
 
@@ -176,6 +186,8 @@ V1 和 V2 各完成 242 次训练，每轮包含 46 个五种子配置和 4 个�
 另设残差岭回归对照，沿用原训练、验证和测试划分。图像轮廓和占用凸包均取自预测起点前的同片训练帧，构建凸包时排除目标行人。497 个测试窗中，在运动和地图可用标志上加入最近图像轮廓后，ADE 从 0.6002 升至 0.6234 m。预设的配对差为 +0.0232 m，按地点分层、片段整组重采样的 95% 区间为 [−0.0126, +0.0417] m。这次处理已修正帧来源和时序，但沿用了纵轴相反的鸟瞰图像轮廓。加入他人占用凸包所得 ADE 为 0.6098 m，仅用运动的岭回归为 0.5842 m，五帧匀速基线为 0.5430 m。轮廓组和可用标志对照在所有窗最后有效时刻（1.5–3.0 s）的 FDE 分别为 1.3267、1.2708 m，只计恰好有 3 s 标签的 233 窗时分别为 1.4088、1.3144 m。两套 Linux 环境重建的地图张量摘要一致，与 macOS 冻结值不同。首轮云任务在拟合前终止，本文数值来自直接载入并校验冻结张量的第二轮。[几何对照汇总及逐步预测独立复核](../results/pinns_causal_geometry.json)
 
 逐窗核对这批归档预测，未来第 1、2、3 秒分别有 497、397、233 窗可评分。其余 264 窗的记录都在末尾截断。固定 3 秒的 233 窗来自 8 段录像，其中意大利、日本、泰国各只剩 1 段。沿原方法事后估计，旧影像轮廓组相对可用标志组的末个有效时刻 FDE 差为 +0.056 m（95% 区间 −0.024 至 +0.095 m），固定 3 秒时为 +0.094 m（−0.055 至 +0.137 m）。两项区间对应不同样本和随访长度。[逐地点分母、片段数与归档终点误差复算](../reviews/pinns_map_axis_comparison/followup_support/aggregate.json)
+
+修正鸟瞰像素向地面纵轴映射符号（由 `1 − v/H` 改为 `v/H`）并严格保持预测起点前的因果截断后，残差岭回归中最近图像轮廓组 `image_geometry` 的测试集 ADE 从旧纵轴的 0.6234 m 降至 0.6048 m（改善 −0.0186 m，末有效步 FDE 由 1.3267 降至 1.2816 m），相对仅保留来源可用标志组（0.6001 m）的额外误差由 +0.0232 m 收窄至 +0.0047 m，消除约 80% 的反转伪退化。进一步在 Tesla T4 上使用修正因果地图训练两臂神经模型 `M2a`（种子 42，共享初值），真实轮廓坐标臂 `real_xy` 与坐标置零仅留可用标志臂 `zero_xy` 的 497 窗 ADE 分别为 0.4913 和 0.4885 m（配对差 +0.0029 m，整片重采样 95% 区间 [−0.0169, +0.0307] m），末有效步 FDE 分别为 1.0516 和 1.0619 m（差 −0.0103 m；意大利留出片 ADE 改善 −0.0399 m）。校正纵轴消除了旧地图的伪负迁移，但单种子无语义视觉折线尚未建立统计显著的净轨迹增益，按开题情形 C 记录。[纵轴修复岭回归结果](../reviews/pinns_map_axis_comparison/RESULTS.md) · [神经两臂配对结果与独立复核](../reviews/pinns_map_axis_comparison/neural/RESULTS.md)
 
 截断梯度的 M3 与端到端 M3b 相比，动作 Macro-F1 的均值在 V1 从 30.85% 提高到 37.29%，在 V2 从 26.72% 提高到 32.68%。现有汇总未对 F1 差异进行配对检验。就轨迹而言，M3 的 ADE₁ 在 V1 高出 5.42%（p = 1.63 × 10⁻⁵），在 V2 低 0.54%（p = 1.00）。V2 的边界邻近事件率为 1.45% 对 1.69%，该指标根据离散障碍物采样点计算，衡量实车避障性能仍需单独验证。
 
@@ -351,6 +363,8 @@ M1 减五帧匀速的 ADE/FDE 为 −0.0094/−0.0465 m，M1 减末两帧匀速�
 
 **动作是否出现在预测的轨迹中。** 在已训练的运动 M0 和姿态 M1 上，另将每条候选与实际五帧历史相接，用标注真值的同一运动学规则判读候选。种子 42 的 49 个起步窗中，两种模型的首选轨迹均未起步，六条候选中至少一条起步的均为 30/49 窗。按地点分开为美国 8/27，意大利 8/8，日本 12/12，泰国 2/2。53 个停止窗中，M0 和 M1 的首选分别命中 3 和 5 窗，任一候选分别命中 16 和 18 窗。右转的四地等权候选召回率从 M0 的 61.2% 提高至 M1 的 67.0%，真值未右转的窗口中出现右转候选的比例也从 35.0% 提高至 47.6%。在五个种子的全部首选轨迹上，M1 减 M0 的 ADE 在起步、停止、左转、右转和保持窗中依次为 −1.9、−30.0、+31.1、+16.0、+28.8 mm。五类真值可以重叠，起步和停止的配对区间跨零。上文动作头给出事件概率，本段衡量轨迹形状所表达的事件，两项指标可分别核验。[事前固定的评测定义](../reviews/pinns_event_coverage/PROTOCOL.md) · [逐类结果和负例误触](../reviews/pinns_event_coverage/event_coverage_scores.json) · [独立逐轨复算](../reviews/pinns_event_coverage/verified_provenance.json)
 
+**基于预测动作一致性的六候选事后重排。** 为检验联合模型的五类动作概率能否在不重训条件下纠正六条候选轨迹的排序，我们将已冻结联合模型的原模态概率与候选隐含动作同预测动作伯努利似然的乘积作为联合打分。在全部 1,482 个四地留出窗上（种子 42），主比较解耦动作头 `detached` 的首选切换率为 1.24%，四地等权 ADE/FDE 由 0.5081/1.0855 微变为 0.5085/1.0863 m（配对 ADE 差 +0.0003 m，整片重采样 95% 区间 [−0.0018, +0.0021] m）；辅助监督与端到端模型的重排 ADE 分别变化 +0.0017 和 +0.0191 m，跨站点起步首选命中数仍为 0。这表明在全局非等变坐标系的冻结候选上仅靠边际动作概率做后处理重排，不足以消除跨视角模态坍缩。[动作一致性重排协议](../reviews/pinns_action_rerank/PROTOCOL.md) · [重排结果与独立复核](../reviews/pinns_action_rerank/RESULTS.md)
+
 ### 5.9 外部数据的采样核验与运动预测
 
 **SDD 备选数据的采样核验。** 在八个场景、60 段视频的标注中，有 4,094,713 条画面内行人框，其中 74,818 条没有自动插值标记。在原 30 fps 的三个取样相位上逐人检查，未插值框在 10 Hz 下最长连续三个位置，无法用现有标注构成连续五帧实测输入。此项仅核实标注频率。若从原画面重新检测目标，仍需独立验证三秒未来的地面位置。[逐段计数与数据来源](../reviews/sdd_external/annotation_support.json)
@@ -387,11 +401,38 @@ PINNS 作者将怀俄明和东京的机位归为路口，将皮斯托亚和素�
 
 原始人点是否与这些录像配准，直接关系到人体裁剪能否用于姿态提取。在 11 段录像各取预先固定的相邻帧对，检查共 7,785 对人点的标注位移与局部光流位移。每段在原坐标的误差中位数为 0.41–0.53 像素，均低于人为平移或镜像坐标的对照。第 4 段可用作者的全幅稳定化视频独立核对编号和裁剪；42 组帧的同号匹配均优于错开一帧。第 2 段的配套背景图为 628×568，原裁剪录像为 574×598，该背景不能直接用作本片的地图。此项核查验证了裁剪位置与时间编号，逐人关节精度仍需另测。[原视频配准](../reviews/dut_shared_space/registration.json) · [光流交叉核验](../reviews/dut_shared_space/flow_registration.json) · [复现步骤](../reviews/dut_shared_space/README.md)
 
-在大连校园 3,066 窗的末次观测时刻，10 m 内有车辆的为 1,202 窗。沿用 PINNS 模型按距离选择最近 12 个邻居的规则后，只有 392 窗仍向模型提供车辆，其中 391 窗同时提供其他行人。另有 810 窗在 10 m 内见到车辆，距离更近的行人占满了模型的 12 个位置。全部窗口实际保留 34,028 条行人边和 415 条车辆边。基于该观察，另行固定了仅对这 810 窗保留最近 11 个邻居并让最近车辆占用第 12 槽的比较。这 810 窗只来自 5 段录像，其中 618 窗来自同一片段。这里报告的是观测输入的变化，尚待用冻结权重测量其对 ADE、FDE 的影响。[两套实现对观测人车及截断的核验](../reviews/dut_graph_external/independent_history.json) · [车辆位置保留规则](../reviews/dut_graph_external/VEHICLE_SLOT_ADDENDUM.md)
+在大连校园 3,066 窗的末次观测时刻，10 m 内有车辆的为 1,202 窗。沿用 PINNS 模型按距离选择最近 12 个邻居的规则后，只有 392 窗仍向模型提供车辆，其中 391 窗同时提供其他行人。另有 810 窗在 10 m 内见到车辆，距离更近的行人占满了模型的 12 个位置。全部窗口实际保留 34,028 条行人边和 415 条车辆边。基于该观察，另行固定了仅对这 810 窗保留最近 11 个邻居并让最近车辆占用第 12 槽的比较。这 810 窗只来自 5 段录像，其中 618 窗来自同一片段。[两套实现对观测人车及截断的核验](../reviews/dut_graph_external/independent_history.json) · [车辆位置保留规则](../reviews/dut_graph_external/VEHICLE_SLOT_ADDENDUM.md)
+
+在 Tesla T4 上对全部 1,656 张历史原图（15,330 次人物历史观测）运行官方 `Faster R-CNN ResNet50-FPN v2` 与 `RTMPose` 提取流程后，全集检出 2,294 个行人框，仅 121 次观测（0.79%）与单一目标头部轨迹点唯一几何关联（15,024 次未检出、162 次多人共框），2,981/3,066 窗（97.2%）无匹配框，零个窗口满足连续五帧不少于 9 个关节置信度达到 0.20。这从实拍证据揭示了近正射俯视航拍视角下人体立面投影坍缩导致的二维骨骼可观测性物理边界。在原坐标轴（`0°`）零样本评测下，实测时钟末两点匀速 `cv_measured` 按窗等权 ADE/FDE 为 0.4617/0.9326 m（按片等权 0.4952/1.0005 m）；冻结四折 `PINNS` 权重等权融合时，纯运动 `M0` 按窗 ADE/FDE 为 0.5754/1.1728 m，而显式质量门控 `M1` 在 97.2% 姿态缺失下自动闭合门控安全回退至 0.5416/1.1315 m（较 `M0` 降低 0.0337/0.0413 m，按片等权降低 0.0039 m ADE）。进一步评估异构人车图零样本迁移，真实图 `M2b_real` 相对同训练批次 `M1` 的 11 段录像按片等权 ADE 差为 +0.0262 m（整片重采样 95% 区间 [+0.0073, +0.0421] m），FDE 差为 +0.1188 m，表明高密度校园人群（平均每窗 11.2 条边，高于 `PINNS` 的 6.7 条）与全局非等变边位移在跨域零样本时引入正向偏差；在 810 个拥挤有车窗强制为最近车辆保留第 12 槽后，全集按片等权 ADE 微变 +0.28 mm（区间 [−0.11, +0.74] mm，跨零；最大样本录像 `roundabout_03` 1,876 窗改善 −0.91 mm ADE / −1.24 mm FDE）。[校园纯运动汇总](../reviews/dut_shared_space/motion_aggregate.json) · [个体姿态门控汇总](../reviews/dut_shared_space/fusion_aggregate.json) · [异构人车图与第12槽迁移结果](../reviews/dut_graph_external/RESULTS.md)
 
 对每个窗口的五个地面位置，把四次相邻移动距离相加。PINNS 的中位数为 0.379 m，1,482 窗中有 1,121 窗（75.6%）不足 0.5 m。在 449 个始于片内首次采样标注的窗口中，有 323 窗符合这个短位移条件，来自 46 段录像。DUT 共享空间的中位数为 0.607 m，3,066 窗中有 400 窗（13.0%）不足 0.5 m。结果描述各自采样到的行人、视角与时钟条件。短窗内位移很小的情形在两处数据中的占比明显不同。[PINNS 历史分组](../reviews/pinns_short_displacement/history_support.json) · [DUT 逐片历史位移](../reviews/dut_shared_space/observed_distances.json)
 
 ![图8 五帧历史累计位移不足半米的比例与样本数](../docs/figures/fig8_observed_displacement.png)
+
+### 5.11 局部航向等变解码与视角无关生物力学姿态精修
+
+第 5.6 节与第 5.8 节的系统诊断揭示了五帧跨站点预测退化的两项结构性根源：一是全局地面坐标系 $(X, Y)$ 与相机方位角任意旋转不兼容，使包含 `Social-Transmotion` 与原版 `M0`/`M1` 在内的模型在新站点出现模态选择坍缩；二是原始图像平面关节偏移 $(\Delta u, \Delta v)$ 将躯干朝向与机位安装角耦合，且主训练集美国路口占总样本 55.1%，导致未均衡训练向高车速路口过拟合。为此，我们按第 3.5 节评估因果局部航向正交等变框架及源站点等权两阶段解耦生物力学精修模型 `O(2) BioEq v2`。单测验证该模型对任意平面旋转与联合镜像翻转（含 COCO-17 左右对称关节互换）满足 $< 10^{-13}\text{ m}$（双精度）及 $< 5\times 10^{-7}\text{ m}$（单精度）的严格等变性。[等变预测结果](../reviews/pinns_equivariant/RESULTS.md) · [五种子独立复核汇总](../results/pinns_bioeq_v2_5seed_verified.json)
+
+**表 6　PINNS 四地留一（1,482 全窗与 323 首标注 `< 0.5 m` 短位移窗）跨站点等变性与生物力学门控消融。每格依次为首选 ADE / 3.0 s FDE（米），四地等权。**
+
+| 跨站点预测方法 | 种子数 | 1,482 全窗 ADE / FDE (m) ↓ | 全窗 `minFDE₆` (m) ↓ | 323 短位移窗 ADE / FDE (m) ↓ | 短位移 `minFDE₆` (m) ↓ |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| `Social-Transmotion`（轨迹 + 2D 框）[15] | 1 | 0.6522 / 1.3244 | — | 0.5107 / 1.0807 | — |
+| `Social-Transmotion`（仅轨迹）[15] | 1 | 0.5534 / 1.1239 | — | 0.4514 / 0.9671 | — |
+| 原全局坐标显式门控 `M1` | 5 | 0.5375 / 1.1455 | 0.6865 | 0.4388 / 0.9804 | — |
+| 原全局坐标纯运动 `M0` | 5 | 0.5126 / 1.0977 | 0.6972 | 0.4130 / 0.9342 | — |
+| 末两点匀速外推 `Last-2 CV` | — | 0.4839 / 1.1046 | 1.1046 | **0.3545 / 0.8491** | 0.8491 |
+| 局部航向等变加原姿态 `SO(2) Local Pose` | 1 | 0.4688 / 1.0545 | 0.7209 | — | — |
+| 局部航向等变纯运动 `SO(2) Local Motion` | 1 | 0.4584 / 1.0322 | 0.6997 | — | — |
+| 生物力学等变初版 `BioEq v1`（未均衡样本） | 5 | 0.4683 / 1.0558 | 0.7250 | 0.3636 / 0.8698 | 0.5734 |
+| 源站点均衡等变纯运动主干 `O(2) Motion v2` | 5 | 0.4597 / 1.0338 | 0.7003 | 0.3578 / 0.8536 | 0.5569 |
+| **源站点均衡解耦生物力学 `O(2) BioEq v2`** | **5** | **0.4593 / 1.0332** | **0.7000** | 0.3570 / 0.8521 | **0.5559** |
+
+表 6 表明，首先将解码切换至因果局部航向坐标系并保护第 0 号匀速锚定模态后，单种子姿态模型 ADE 从全局坐标的 0.5306 m 骤降至 0.4688 m（改善 −6.18 cm，整片配对 95% 区间 [−9.43, −3.55] cm），纯运动主干达 0.4584/1.0322 m（较匀速 FDE 降低 −7.23 cm，区间 [−10.07, −0.19] cm）。进一步引入源站点等权训练、两阶段冻结 `scores` 纵向生物力学微调及折内三源站留一收缩选择后，五种子（42、1024、2025、3407、4096）`O(2) BioEq v2` 在全部 1,482 窗取得 **0.4593 m ADE / 1.0332 m FDE**（贝叶斯期望轨迹 FDE 为 1.0277 m），较末两点匀速降低 **−2.45 cm（−5.07%）ADE 与 −7.14 cm（−6.46%）FDE**，较原五种子 `M1` 降低 **−7.82 cm（−14.54%）ADE**；与同种子配对的等变纯运动主干（0.4597/1.0338 m）相比，配对整片自举差为 **−0.324 mm ADE（95% 区间 [−0.700, −0.030] mm）与 −0.578 mm FDE（[−1.301, −0.022] mm）**，在美国路口折内验证自动选定收缩因子 0.0 从而严格实现零负迁移，在泰国街道降低 −1.33 mm ADE / −2.47 mm FDE。在 323 个首标注短位移窗上，`O(2) BioEq v2` 将五种子姿态模型 ADE 从原 `M1` 的 0.4388 m 降至 0.3570 m（优于等变纯运动 0.3578 m 与局部原姿态 0.3595 m），并将六模态 `minFDE₆` 推进至 0.5559 m。这些改进仍以 `PINNS` 四个已知站点为评测范围，跨数据集泛化需结合下方外部旋转测试审视。
+
+![图10 PINNS 四地留一等变生物力学消融与 DUT 校园共享空间四角度零样本旋转不变性验证](../docs/figures/fig10_equivariant_bioeq_and_dut.png)
+
+**大连理工 `DUT` 校园四角度旋转零样本迁移。** 将外部校园地面坐标依次旋转 $0^\circ, 90^\circ, 180^\circ, 270^\circ$（全部 3,066 窗、879 人、11 段录像），原非等变模型 `M0` 的按窗 3.0 s FDE 在四个正交方向间剧烈摆动达 **23.4 cm**（1.077–1.311 m），`M1` 摆动达 **28.9 cm**（1.132–1.420 m）。相比之下，补偿 `DUT` 23.976 fps 实际非均匀帧间隔（`[2, 3, 2, 3]` 源帧，末步实测跨度 0.1251 s）的时钟感知正交等变残差预测器 `o2_ridge_clock_aware` 在全部四个旋转角下输出严格一致到双精度机器精度的 **0.5023 m ADE / 1.0136 m FDE**（方向摆动 **0.0 cm**；按片等权 0.5309/1.0678 m），全面优于所有神经基线（`M0`、`M1`、`M2b`），仅次于无参数实测时钟匀速基线（0.4617/0.9326 m）。同时，未经帧间隔重标定的名义 10 Hz 神经模型在 `DUT` 末步偏长时钟下出现系统性低估（`BioEq v2` 贝叶斯融合为 0.5761/1.1854 m，同样保持 `0.0 cm` 旋转摆动），定量揭示了跨帧率外部部署中**实测物理时钟归一化**与**几何正交等变性**同等关键。[DUT 正交等变四角度零样本结果](../reviews/dut_shared_space/dut_o2_site_balanced_transfer.json)
 
 ---
 
@@ -403,7 +444,7 @@ PINNS 作者将怀俄明和东京的机位归为路口，将皮斯托亚和素�
 
 **姿态与运动的时间对齐。** 固定版本把标签帧号 1 配给视频的第 0 帧。三段美国路口视频的人物标签连续覆盖 0 至视频帧数减 1，涉及原测试集 268/497 窗、四地点实验 597/1,482 窗。若这三段标签按零起算，固定版本取到的图像会早一个原始帧（约 33 ms）。在 GPU 上从晚一帧的图像重新提取姿态，使用冻结的 seed 42 M1 权重在 CPU 回放。597 个受影响窗的平均 ADE、FDE 分别变化 −0.0000730、−0.0001085 m。逐窗 FDE 变化的绝对值在第 95 百分位为 0.0100 m、最大为 0.0306 m。其余 219 个美国窗的预测轨迹逐值相同。四地点等权的平均变化分别为 −0.0000134、−0.0000198 m。Kaggle CUDA 回放在检查 219 个未改窗口的严格相等性时失败，最大差异和原因尚未查明。这项比较衡量固定权重对测试取帧的敏感性，人物与画面的实际同步情况以及改动训练取帧后的效果仍待验证。[PINNS 作者字段说明](https://github.com/Songan-Lab/PINNS#annotation-format) · [实测结果与设备核验](../results/pinns_heldout_frame_offset.json)
 
-**鸟瞰地图和轨迹的坐标对齐。** 图 9 用 47 段录像中 47,555 条车辆记录作独立核对。每一行都同时给出鸟瞰图的车辆中心像素和以米为单位的发布坐标。对这 22 个标定文件，发布轨迹纵坐标随图像行号增加。以像素坐标除以图像宽高再乘地面跨度，四地全部车辆记录与发布标签间的最大差为 0.000000723 m，仅表示字段的数值一致性。旧图像轮廓代码把纵轴翻转。将该旧公式应用于同一批车辆中心，与项目读取的轨迹坐标相比，中位差 11.19 m，第 95 百分位 23.86 m。保留正确方向、仅用宽高减一作分母时，中位差为 0.0346 m。两类误差的量级不同。在保留同一训练帧、截取范围和轮廓选择规则的 7,283 窗因果地图中，修复后有图窗口从 4,898 个变为 4,925 个，2,913 窗入选的局部图像轮廓集合改变。497 个测试窗中对应数目为 450、461 个。占用凸包由轨迹本身构建，四地留出 M0 和 M1 从不读静态图像轮廓。旧图像地图的消融数值均保留为归档结果，正确对齐后的预测效应有待在 Kaggle 重新拟合。[47 段原车标签的逐片及逐地点计数](../reviews/pinns_projection_sources/vehicle_axis/car_bev_scale.json) · [图像地图输入的独立复算](../reviews/pinns_projection_sources/vehicle_axis/causal_map_support.json)
+**鸟瞰地图和轨迹的坐标对齐。** 图 9 用 47 段录像中 47,555 条车辆记录作独立核对。每一行都同时给出鸟瞰图的车辆中心像素和以米为单位的发布坐标。对这 22 个标定文件，发布轨迹纵坐标随图像行号增加。以像素坐标除以图像宽高再乘地面跨度，四地全部车辆记录与发布标签间的最大差为 0.000000723 m，仅表示字段的数值一致性。旧图像轮廓代码把纵轴翻转。将该旧公式应用于同一批车辆中心，与项目读取的轨迹坐标相比，中位差 11.19 m，第 95 百分位 23.86 m。保留正确方向、仅用宽高减一作分母时，中位差为 0.0346 m。两类误差的量级不同。在保留同一训练帧、截取范围和轮廓选择规则的 7,283 窗因果地图中，修复后有图窗口从 4,898 个变为 4,925 个，2,913 窗入选的局部图像轮廓集合改变。497 个测试窗中对应数目为 450、461 个。占用凸包由轨迹本身构建，四地留出 M0 和 M1 从不读静态图像轮廓。旧图像地图的消融数值均保留为归档结果；Kaggle 重新拟合表明，修复纵轴后残差岭回归轮廓组 ADE 改善 −0.0186 m（消除约 80% 反转伪退化），两臂神经 `M2a` 真实轮廓相对置零对照的 ADE 差为 +0.0029 m（95% 区间 [−0.0169, +0.0307] m）、末有效步 FDE 差为 −0.0103 m。[47 段原车标签的逐片及逐地点计数](../reviews/pinns_projection_sources/vehicle_axis/car_bev_scale.json) · [图像地图输入的独立复算](../reviews/pinns_projection_sources/vehicle_axis/causal_map_support.json) · [神经因果地图配对结果](../reviews/pinns_map_axis_comparison/neural/RESULTS.md)
 
 ![图9 在 PINNS 车辆鸟瞰中心上核对图像轮廓的历史坐标换算](../docs/figures/fig9_bev_axis.png)
 
@@ -413,13 +454,16 @@ PINNS 作者将怀俄明和东京的机位归为路口，将皮斯托亚和素�
 
 **轨迹标注和地面标定。** PINNS 作者用目标检测和多目标跟踪生成初始框与轨迹，再逐帧人工复核修正。地面坐标由路面控制点拟合的单应矩阵投影得到，作者报告的平均重投影误差为 8.24 像素，平均重建误差为 0.28 m。本文的 ADE/FDE 衡量到发布轨迹的距离。上述标定误差描述坐标重建的尺度，不能直接当作同一窗口内两种预测器误差差值的置信界。[数据作者的标定和标注方法](https://arxiv.org/html/2605.25947v1#S3.SS2)
 
-**观测条件与指标。** PINNS 的质量分桶依据骨骼检出置信度、有效率和框高，JTA 按实验设计施加噪声和下肢遮挡。两者衡量的质量条件不同。PINNS 裁剪锚点的抽查仅涵盖三个视频帧中的 13 个较大行人框，置信度提高支持该裁剪选择。关键点位置误差和全数据检出率仍需带人工关节真值的评测。图像轮廓的历史纵轴与目标轨迹错位；在修正后的坐标上仍需重新评测几何输入，并用独立的道路语义标注验证轮廓的物理意义。
+**观测条件与指标。** PINNS 的质量分桶依据骨骼检出置信度、有效率和框高，JTA 按实验设计施加噪声和下肢遮挡。两者衡量的质量条件不同。PINNS 裁剪锚点的抽查仅涵盖三个视频帧中的 13 个较大行人框，置信度提高支持该裁剪选择。关键点位置误差和全数据检出率仍需带人工关节真值的评测。图像轮廓的历史纵轴错位已在修正坐标上完成岭回归与两臂神经网络重测，独立人工道路语义标注仍需进一步验证视觉折线的物理通行边界意义。
 
 ---
 
 ## 7 结论 (Conclusion)
 
-在现有切分上，显式门控相较等权姿态相加，减轻了 JTA 人工重噪声桶的误差，PINNS 五帧上的平均收益较小。PINNS 的结果触发开题情形 C，尚不能确立显式质量向量相对同参数隐式门控的增益。归档完整模型在 PINNS 与 JTA 均落后于各自的 M0 对照。PINNS 归档完整模型含有纵轴错位的鸟瞰轮廓，校正坐标后使用历史地图的完整网络仍待实测。两轮实验中，截断梯度模型具有更高的动作 Macro-F1 均值，轨迹收益则随版本改变。在额外的五帧个体联合模型中，动作辅助监督改善了这一种子的平均轨迹误差，截断梯度与端到端的 ADE 差为 +0.0014 m，按视频片段重采样的区间覆盖零。在相同的 497 个测试窗中，M1 对匀速的平均 ADE 优势随地点权重改变而反转，按片段重采样的区间包含零。整地点留出后，五种子 M1 的四地等权 ADE 平均比 M0 高 0.0250 m，逐种子差值在 −0.0149 至 +0.0739 m 之间。在 623 个窗长匹配、同人互不重叠的窗口中，五帧 M1 减 M0 的均值为 −0.0094 m，片段区间跨零，二十帧为 +0.0201 m。在始于首次标注且五帧累计位移不足 0.5 m 的 323 窗中，M1 的 ADE 比 M0 高 0.0258 m，末两帧匀速的误差最低。三批比较均未建立五帧显式门控的稳定优势。末帧姿态提高了已见地点上起步事件的排序表现。在整地点留出的起停实验中，改用内层阈值后，有序姿态模型检出 24/53 个停止，同时产生 487 次误报。用历史速度给六条候选重排使 M1 的平均 ADE 降低 0.0415 m，仍比直接匀速外推高 0.0122 m。现有结果未显示显式门控在这些留出地点平均优于运动网络。新地点上的多种子复现、其他模块比较的分组区间和真实感知链路的耗时仍待验证。
+本文围绕短时（主设定 0.4 s 五帧）可变质量姿态观测下的非结构化道路行人动作与轨迹联合预测，完成了跨机位留出、多数据集外部迁移、几何对称性诊断与轻量化工程核验。主要结论如下：
+1. **质量感知姿态门控与俯视退化安全边界**：在受控重噪声（`JTA` $\sigma=0.2$）下，显式质量门控 `M1` 相对等权相加 `M1a` 降低 34.36% ADE；在大连理工 `DUT` 校园共享空间近正射俯视航拍（3,066 窗，官方检测器仅 0.79% 历史人帧唯一匹配、97.2% 窗口无框）的物理退化边界下，门控安全闭合使 `M1` 按窗 ADE 较 `M0` 降低 3.37 cm。同站点 `PINNS` 切分上 `M1` 与隐式门控 `M1b` 差异不显著（开题情形 C）。
+2. **跨机位退化根因与正交等变生物力学精修**：在 `PINNS` 四地留一（1,482 窗）中，非等变全局坐标与原始图像平面坐标导致 `Social-Transmotion` 加框版（0.6522 m）和原五种子 `M1`（0.5375 m）均落后于纯运动及末两点匀速（0.4839/1.1046 m），单纯动作或速度后处理重排无法根除模态坍缩。引入因果局部航向正交等变解码、源站点均衡加权与两阶段解耦速度门控生物力学微调后，五种子 `O(2) BioEq v2` 取得 **0.4593 m ADE / 1.0332 m FDE**（较匀速降低 −5.07% ADE / −6.46% FDE，较原 `M1` 降低 −14.54% ADE，配对优于同种子等变纯运动 −0.324 mm ADE 且折内收缩严格消除负迁移），并在 `DUT` 外部校园四角度旋转测试中与时钟感知正交等变预测器（0.5023/1.0136 m）共同实现 **0.0 cm** 旋转摆动（对比原 `M0` 的 23.4 cm FDE 摆动）。
+3. **因果地图、异构图与多任务解耦的实证边界**：修复 `PINNS` 鸟瞰纵轴反转消除了约 80% 历史轮廓伪退化，两臂神经 `M2a` 实测 ADE 差跨零（+0.0029 m）；高密度跨域人群下非等变图消息存在正向偏差；截断梯度动作条件稳定提升动作 Macro-F1 与概率校准（Brier 差区间不含零）。独立未见侧视新机位上的多种子姿态增益以及从视频解码到轨迹输出的端到端感知链路延迟，仍是后续实车与路侧部署需继续验证的方向。
 
 ---
 
