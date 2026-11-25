@@ -57,8 +57,8 @@ def main() -> None:
     ax2.plot(t_sec, cv_step, "o--", color="#64748b", lw=1.9, ms=5.8, label="Last-2 Constant Velocity")
     ax2.plot(t_sec, o2_step, "*-", color="#0b4f4a", lw=2.5, ms=8.8, label="O(2) BioEq-Act v2 (Bayesian)")
     ax2.fill_between(t_sec, o2_step, cv_step, where=np.array(o2_step) <= np.array(cv_step), color="#2a9d8f", alpha=0.16)
-    ax2.annotate(f"-{(cv_step[-1]-o2_step[-1])*100:.1f} cm at 3.0s", (3.0, o2_step[-1]), xytext=(-76, 12),
-                 textcoords="offset points", fontsize=8.3, fontweight="bold", color="#0b4f4a",
+    ax2.annotate(f"-{(cv_step[-1]-o2_step[-1])*100:.1f} cm at 3.0s", (3.0, o2_step[-1]), xytext=(-108, 4),
+                 textcoords="offset points", fontsize=8.2, fontweight="bold", color="#0b4f4a",
                  arrowprops=dict(arrowstyle="->", color="#0b4f4a", lw=0.9))
     s_keys = ["quasi_static_lt_0.25", "slow_transition_0.25_0.80", "normal_walk_0.80_1.40", "brisk_ge_1.40"]
     g_x = np.array([0.6, 1.3, 2.1, 2.85])
@@ -100,12 +100,14 @@ def main() -> None:
     x4 = np.arange(len(ax_keys))
     m2b_arch = [0.5625, 0.7289, 0.7131, 0.7518, 0.6251]
     cv_dut = [gr["dut_zero_shot_5seed_transfer"]["axes"][k]["cv_measured"]["ade_m"] for k in ax_keys]
+    o2_ng = [gr["dut_zero_shot_5seed_transfer"]["axes"][k]["o2_no_graph_bayes"]["ade_m"] for k in ax_keys]
     o2_gr = [gr["dut_zero_shot_5seed_transfer"]["axes"][k]["o2_nullsink_real_bayes"]["ade_m"] for k in ax_keys]
     ax4.plot(x4, m2b_arch, "s--", color="#c26a4a", lw=2.0, ms=6.2, label="Archived Global M2b Graph (18.9 cm swing)")
-    ax4.plot(x4, cv_dut, "k:", lw=1.7, label=f"Measured-Clock CV ({cv_dut[0]:.4f} m)")
-    ax4.plot(x4, o2_gr, "*-", color="#0b4f4a", lw=2.6, ms=9.0, label=f"O(2) Null-Sink Graph ({o2_gr[0]:.4f} m, 0.0 cm swing)")
+    ax4.plot(x4, o2_ng, "o:", color="#64748b", lw=1.7, ms=5.2, label=f"O(2) Base No-Graph ({o2_ng[0]:.4f} m, 0.0 cm swing)")
+    ax4.plot(x4, o2_gr, "*-", color="#0b4f4a", lw=2.6, ms=9.0, label=f"O(2) Null-Sink Graph ({o2_gr[0]:.4f} m, -7.0 mm)")
+    ax4.plot(x4, cv_dut, "k:", lw=1.6, label=f"Measured-Clock CV ({cv_dut[0]:.4f} m)")
     ax4.set_xticks(x4, ax_lbls, fontsize=8.8)
-    ax4.set_ylim(min(o2_gr) - 0.04, 0.79)
+    ax4.set_ylim(0.470, 0.805)
     ax4.set_ylabel("DUT 11-clip equal ADE (m, 3,066 windows)", fontsize=9.2)
     ax4.set_title("(d) Zero-shot 5-axis O(2) ped-vehicle graph transfer on DUT", fontsize=10.4, fontweight="bold", loc="left", pad=7)
     ax4.grid(axis="y", color="#e2e8f0", lw=0.7)

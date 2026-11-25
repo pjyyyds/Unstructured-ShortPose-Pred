@@ -1,0 +1,66 @@
+{
+  "archive_name": "pinns_conformal_and_events_5seed.zip",
+  "archive_sha256": "7b65239de019e6bc4cb2ff7fed7c1668a7dffbd91083cb4e784c18a1e92dc579",
+  "outer_download_sha256": "26c7dd28d88031f3ee972be4b5afa342f037d246b84544b442f1b8b143b87a94",
+  "manifest_sha256": {
+    "report.json": "ec046725d74afb0eb79c83c399833e1eedff4505520bb0300cb8b779317e4b4b"
+  },
+  "report": {
+    "windows": 1482,
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "mode_calibration_site_equal_5seed": {
+      "nll": 1.6208725794364809,
+      "brier": 0.7764286616607909,
+      "oracle_hit_rate": 0.3875401104886399
+    },
+    "archived_global_M1_reference": {
+      "nll": 1.5175,
+      "brier": 0.7346,
+      "oracle_hit_rate": 0.3539
+    },
+    "split_conformal_loso": {
+      "90": {
+        "cv_single": {
+          "mean_radius_m": 4.144605535245874,
+          "empirical_site_equal_coverage": 0.928921568627451
+        },
+        "o2_top1_tube": {
+          "mean_radius_m": 3.5160075427613604,
+          "empirical_site_equal_coverage": 0.9176421568627451
+        },
+        "o2_union6_tube": {
+          "mean_radius_m": 2.6760297033278735,
+          "empirical_site_equal_coverage": 0.9379404372860256
+        },
+        "o2_union6_fde": {
+          "mean_radius_m": 2.4899940197226966,
+          "empirical_site_equal_coverage": 0.9446886865857452
+        }
+      },
+      "95": {
+        "cv_single": {
+          "mean_radius_m": 6.550313888178584,
+          "empirical_site_equal_coverage": 0.9635416666666666
+        },
+        "o2_top1_tube": {
+          "mean_radius_m": 5.4152549986194005,
+          "empirical_site_equal_coverage": 0.9584286492374728
+        },
+        "o2_union6_tube": {
+          "mean_radius_m": 4.5548073942425535,
+          "empirical_site_equal_coverage": 0.9632965686274509
+        },
+        "o2_union6_fde": {
+          "mean_radius_m": 4.439543603446575,
+          "empirical_site_equal_coverage": 0.9675857843137254
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "archive_name": "o2_hetero_graph_pinns_and_dut_5seed.zip",
+  "archive_sha256": "23f35efab8a30fd08f4cac68c68b39a42a652724619cd18e076903a5c4d0dc3a",
+  "outer_download_sha256": "d64d219c0cac41ec4ec57332b67700308ae8cdfa68215427cedfcf97b08553b1",
+  "manifest_sha256": {
+    "report.json": "76cd7628f6a834d241c8dc5584319a221face17eefc5cd36d9744823a5215468"
+  },
+  "report": {
+    "pinns_windows": 1482,
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "selected_graph_scales": {
+      "42": {
+        "america_crossroad": 0.75,
+        "italy_park": 0.25,
+        "japan_crossroad": 0.25,
+        "thailand_street": 0.25
+      },
+      "1024": {
+        "america_crossroad": 0.25,
+        "italy_park": 0.25,
+        "japan_crossroad": 1.0,
+        "thailand_street": 0.25
+      },
+      "2025": {
+        "america_crossroad": 0.25,
+        "italy_park": 0.25,
+        "japan_crossroad": 0.25,
+        "thailand_street": 0.5
+      },
+      "3407": {
+        "america_crossroad": 0.0,
+        "italy_park": 0.25,
+        "japan_crossroad": 0.0,
+        "thailand_street": 0.0
+      },
+      "4096": {
+        "america_crossroad": 0.0,
+        "italy_park": 0.0,
+        "japan_crossroad": 0.5,
+        "thailand_street": 0.5
+      }
+    },
+    "pinns_5seed_site_equal": {
+      "no_graph": {
+        "ade_m": 0.4593489450351377,
+        "fde_m": 1.0289829124404741,
+        "bayes_ade_m": 0.45896111818796637,
+        "bayes_fde_m": 1.0179812746058057
+      },
+      "real": {
+        "ade_m": 0.45823663652083435,
+        "fde_m": 1.0252218156458341,
+        "bayes_ade_m": 0.4559386715436466,
+        "bayes_fde_m": 1.0085028092944135
+      },
+      "empty": {
+        "ade_m": 0.4593489450351377,
+        "fde_m": 1.0289829124404741,
+        "bayes_ade_m": 0.45896111818796637,
+        "bayes_fde_m": 1.0179812746058057
+      },
+      "drop_car": {
+        "ade_m": 0.45744663190511947,
+        "fde_m": 1.0238737245569496,
+        "bayes_ade_m": 0.4554832368038796,
+        "bayes_fde_m": 1.0079885069189045
+      },
+      "drop_ped": {
+        "ade_m": 0.46091408672426326,
+        "fde_m": 1.0327309245847867,
+        "bayes_ade_m": 0.45987299219456235,
+        "bayes_fde_m": 1.0186486458674904
+      }
+    },
+    "pinns_paired_contrasts": {
+      "real_minus_no_graph": {
+        "mean": {
+          "ade_m": -0.001112308514302893,
+          "fde_m": -0.003761096794639984
+        },
+        "ci95": {
+          "ade_m": [
+            -0.0029284442721936774,
+            0.00203880088649423
+          ],
+          "fde_m": [
+            -0.008196522578250064,
+            0.004064983059947146
+          ]
+        }
+      },
+      "real_minus_empty": {
+        "mean": {
+          "ade_m": -0.001112308514302893,
+          "fde_m": -0.003761096794639984
+        },
+        "ci95": {
+          "ade_m": [
+            -0.0029284442721936774,
+            0.00203880088649423
+          ],
+          "fde_m": [
+            -0.008196522578250064,
+            0.004064983059947146
+          ]
+        }
+      },
+      "empty_minus_no_graph": {
+        "mean": {
+          "ade_m": 0.0,
+          "fde_m": 0.0
+        },
+        "ci95": {
+          "ade_m": [
+            0.0,
+            0.0
+          ],
+          "fde_m": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "drop_car_minus_real": {
+        "mean": {
+          "ade_m": -0.0007900046157147873,
+          "fde_m": -0.0013480910888848028
+        },
+        "ci95": {
+          "ade_m": [
+            -0.0015198428434782536,
+            -0.00031591424308570574
+          ],
+          "fde_m": [
+            -0.0030915835607686895,
+            8.164493525775703e-05
+          ]
+        }
+      },
+      "drop_ped_minus_real": {
+        "mean": {
+          "ade_m": 0.002677450203428354,
+          "fde_m": 0.007509108938952007
+        },
+        "ci95": {
+          "ade_m": [
+            -0.002114341605152454,
+            0.005938568775247026
+          ],
+          "fde_m": [
+            -0.0024241317844192582,
+            0.014064155870405118
+          ]
+        }
+      }
+    },
+    "dut_zero_shot_5seed_transfer": {
+      "windows": 3066,
+      "max_five_axis_ade_swing_m": 7.418405889580981e-10,
+      "axes": {
+        "0": {
+          "cv_measured": {
+            "ade_m": 0.4952163529434122,
+            "fde_m": 1.0004678326460663
+          },
+          "o2_no_graph_bayes": {
+            "ade_m": 0.6237388597670637,
+            "fde_m": 1.2936964122600114
+          },
+          "o2_nullsink_real_bayes": {
+            "ade_m": 0.6167447281614612,
+            "fde_m": 1.2795504944691358
+          },
+          "o2_reserve_slot12_car_affected_810": {
+            "ade_m": 0.001278694437465282,
+            "fde_m": 0.003629685522715479
+          }
+        },
+        "90": {
+          "cv_measured": {
+            "ade_m": 0.4952163529434122,
+            "fde_m": 1.0004678326460663
+          },
+          "o2_no_graph_bayes": {
+            "ade_m": 0.6237388597670637,
+            "fde_m": 1.2936964122600114
+          },
+          "o2_nullsink_real_bayes": {
+            "ade_m": 0.6167447281614612,
+            "fde_m": 1.2795504944691358
+          }
+        },
+        "180": {
+          "cv_measured": {
+            "ade_m": 0.4952163529434122,
+            "fde_m": 1.0004678326460663
+          },
+          "o2_no_graph_bayes": {
+            "ade_m": 0.6237388597670637,
+            "fde_m": 1.2936964122600114
+          },
+          "o2_nullsink_real_bayes": {
+            "ade_m": 0.6167447281614612,
+            "fde_m": 1.2795504944691358
+          }
+        },
+        "270": {
+          "cv_measured": {
+            "ade_m": 0.4952163529434122,
+            "fde_m": 1.0004678326460663
+          },
+          "o2_no_graph_bayes": {
+            "ade_m": 0.6237388597670637,
+            "fde_m": 1.2936964122600114
+          },
+          "o2_nullsink_real_bayes": {
+            "ade_m": 0.6167447281614612,
+            "fde_m": 1.2795504944691358
+          }
+        },
+        "mirror_y": {
+          "cv_measured": {
+            "ade_m": 0.4952163529434122,
+            "fde_m": 1.0004678326460663
+          },
+          "o2_no_graph_bayes": {
+            "ade_m": 0.6237388598200545,
+            "fde_m": 1.2936964121567667
+          },
+          "o2_nullsink_real_bayes": {
+            "ade_m": 0.6167447289033018,
+            "fde_m": 1.2795504955840828
+          }
+        }
+      }
+    }
+  }
+}
