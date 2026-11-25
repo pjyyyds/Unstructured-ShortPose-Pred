@@ -1,0 +1,16 @@
+{
+  "archive_sha256": "698c6c28bf46b6c2ca30d1e270d44499378e92071e2efd61ac431863b23563c2",
+  "protocol_sha256": "1baef784110b6cc70a4f61a2aeba371191a4c314516524b61fde7198b1390a9b",
+  "test_windows": 497,
+  "exact_3s_windows": 233,
+  "primary_test_paired_ade": {
+    "estimate_m": 0.002897423209567789,
+    "clip_bootstrap_percentile_95_m": [
+      -0.016873233649582327,
+      0.03072806547478068
+    ],
+    "replicates": 20000,
+    "seed": 2026
+  },
+  "scope": "Stored predictions, checkpoint digests, reported selection, and independently sourced targets and map masks. No model forward or retraining."
+}
