@@ -1,0 +1,1368 @@
+{
+  "scope": "PINNS four previously used locations, five observed points, one training seed, no external score. Coordinate changes keep image-derived inputs fixed. All 1482 windows retained in all four arms.",
+  "plan": {
+    "protocol_sha256": "2dd4e77f5023088cfdede6cce026c1fe52b757c0d370d025329fe3e48427bac5",
+    "implementation_checks_sha256": "aef4256dc3a6e52a8d2ce594bb415ad750418554788864ea9973749412ca75e8",
+    "source_sha256": {
+      "equivariant_model.py": "707369992216fa6cf1544b3a60d754cf1381796ebd404e7f1de82bd625bcc428",
+      "run_equivariant.py": "bdeda07aaaad3a10f1d3b0df1d660da39c5a4158b5c4c1e539d5a6e8cf773086",
+      "test_equivariance.py": "7503f5a989e8e531f7fef23143e0830be10760045547788df6719fe35907ed25"
+    },
+    "source_revision": "66fb39d2de3df280ac831a4b5a0c0f095f1a0779",
+    "canonical_reader_sha256": {
+      "src/data/features.py": "d2f351fcd75ce8241604743d2d1b18a8db4f41eba76cf6fb64a49393faad7cea",
+      "src/data/constants.py": "1586cd8dab2868a39bc0969de4408b2d11e23afd673ee4b8c1e229ce948029df",
+      "src/data/pinns_extractor.py": "26521a7284675d38b2cf60806ea303327834e8a65e5bf80fd92933651fc29d9b",
+      "scripts/benchmark_heldout_sites.py": "bca0ee4de9775adfa38a1de7a4a7e371c6860e8dcad7d841b44bf97adc76f9bd",
+      "scripts/train_pinns_heldout_sites.py": "216bef79c3a2f56e42ec031caac02efdf724c67d877823a48f140d9a610fbffb",
+      "scripts/verify_heldout_bundle.py": "852d9108870aa8dcc161a76e6e2309d7a791f6513f869a1b631da24a6dbdaad5",
+      "scripts/run_heldout_seed_sensitivity.py": "e894ca8228f69e0f768ff80cc00ad7d240903c3c3a013e577f5603b0f242bf8d",
+      "scripts/stage_pinns_metadata.py": "2d9d040580301eea9d9298a477dce1209734e0656ca48292831eda7521ce5c7a"
+    },
+    "label_calibration_sha256": "0b276b34ab1b01dae91f67c56bfaea5cc931511b05b4fc1c92686a891e6f6801",
+    "pose_sha256": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "ordered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+    "folds_sha256": "497ffa7a1d9714137b492ce974b1958a51378100c50a644662628c50cee6bb06",
+    "observed_support": {
+      "america_crossroad": {
+        "windows": 816,
+        "clips": 14,
+        "heading_identifiable": 747,
+        "degenerate": 69,
+        "tracks": 240
+      },
+      "italy_park": {
+        "windows": 84,
+        "clips": 9,
+        "heading_identifiable": 69,
+        "degenerate": 15,
+        "tracks": 28
+      },
+      "japan_crossroad": {
+        "windows": 432,
+        "clips": 11,
+        "heading_identifiable": 369,
+        "degenerate": 63,
+        "tracks": 117
+      },
+      "thailand_street": {
+        "windows": 150,
+        "clips": 13,
+        "heading_identifiable": 144,
+        "degenerate": 6,
+        "tracks": 64
+      }
+    },
+    "seed": 42,
+    "same_initial_state_sha256": "817258d75ad0967bf8edd74397c204c188a7f8209f1d6108e26890079962ea47",
+    "architectures": {
+      "global_motion": [
+        false,
+        false
+      ],
+      "global_pose": [
+        false,
+        true
+      ],
+      "local_motion": [
+        true,
+        false
+      ],
+      "local_pose": [
+        true,
+        true
+      ]
+    },
+    "shared_initial_npz_sha256": "b1ff904b3cf9b28b146c55a50dbbc5e69a2bd56d1eabf8e41b68208b7a73cd80",
+    "parameters_allocated_in_every_arm": 19596,
+    "axes_from_history_only": true
+  },
+  "models": {
+    "all": {
+      "by_site": {
+        "america_crossroad": {
+          "windows": 816,
+          "tracks": 240,
+          "clips": 14,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.929497568179604,
+              "fde_m": 1.8959511814542696,
+              "minade6_m": 0.697096299390251,
+              "minfde6_m": 1.3070114349648332,
+              "mode0_selected": 0.35294117647058826,
+              "distinct_mean_pair_m": 0.52506054787716
+            },
+            "global_pose": {
+              "ade_m": 0.9191846647419706,
+              "fde_m": 1.866806075608244,
+              "minade6_m": 0.6977725232930201,
+              "minfde6_m": 1.318084528624275,
+              "mode0_selected": 0.29411764705882354,
+              "distinct_mean_pair_m": 0.5262786213123035
+            },
+            "local_motion": {
+              "ade_m": 0.8279975738317902,
+              "fde_m": 1.6768904215512594,
+              "minade6_m": 0.6468430674330079,
+              "minfde6_m": 1.218494787353374,
+              "mode0_selected": 0.45955882352941174,
+              "distinct_mean_pair_m": 0.5476461728593757
+            },
+            "local_pose": {
+              "ade_m": 0.8611985207803459,
+              "fde_m": 1.7348037711834903,
+              "minade6_m": 0.6785341981175469,
+              "minfde6_m": 1.2966949884360996,
+              "mode0_selected": 0.36151960784313725,
+              "distinct_mean_pair_m": 0.4880788420090708
+            },
+            "last_two_cv": {
+              "ade_m": 0.9476538962934843,
+              "fde_m": 1.9414660044131353,
+              "minade6_m": 0.9476538962934843,
+              "minfde6_m": 1.9414660044131353,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 84,
+          "tracks": 28,
+          "clips": 9,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.37581784404934104,
+              "fde_m": 0.9172868029087556,
+              "minade6_m": 0.2891344728011777,
+              "minfde6_m": 0.6900258198154265,
+              "mode0_selected": 0.6428571428571429,
+              "distinct_mean_pair_m": 0.7804369692236736
+            },
+            "global_pose": {
+              "ade_m": 0.3913106601699581,
+              "fde_m": 0.9286487909749055,
+              "minade6_m": 0.2891525219061369,
+              "minfde6_m": 0.6888832395366563,
+              "mode0_selected": 0.75,
+              "distinct_mean_pair_m": 0.8931417618399214
+            },
+            "local_motion": {
+              "ade_m": 0.36676269491865565,
+              "fde_m": 0.8920904388893055,
+              "minade6_m": 0.2507235912881636,
+              "minfde6_m": 0.6032224072174266,
+              "mode0_selected": 0.8214285714285714,
+              "distinct_mean_pair_m": 0.7667920028542496
+            },
+            "local_pose": {
+              "ade_m": 0.3665535668342764,
+              "fde_m": 0.9007995338975945,
+              "minade6_m": 0.26116299684174993,
+              "minfde6_m": 0.6436801105043015,
+              "mode0_selected": 0.8809523809523809,
+              "distinct_mean_pair_m": 0.8690585265394363
+            },
+            "last_two_cv": {
+              "ade_m": 0.37034172516347347,
+              "fde_m": 0.9319507406765014,
+              "minade6_m": 0.37034172516347347,
+              "minfde6_m": 0.9319507406765014,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "tracks": 117,
+          "clips": 11,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.3326020763986893,
+              "fde_m": 0.7816940163569223,
+              "minade6_m": 0.21596318281040716,
+              "minfde6_m": 0.47858148947131846,
+              "mode0_selected": 0.5046296296296297,
+              "distinct_mean_pair_m": 0.9515205115175843
+            },
+            "global_pose": {
+              "ade_m": 0.44278739524054295,
+              "fde_m": 0.9884715777924074,
+              "minade6_m": 0.21486305515370815,
+              "minfde6_m": 0.487313696905396,
+              "mode0_selected": 0.4305555555555556,
+              "distinct_mean_pair_m": 1.1285090567476095
+            },
+            "local_motion": {
+              "ade_m": 0.30582120190837414,
+              "fde_m": 0.7330803449971265,
+              "minade6_m": 0.2149410470059878,
+              "minfde6_m": 0.4911296319489238,
+              "mode0_selected": 0.8888888888888888,
+              "distinct_mean_pair_m": 0.9213064795324889
+            },
+            "local_pose": {
+              "ade_m": 0.3288990203088129,
+              "fde_m": 0.774864247605241,
+              "minade6_m": 0.2172028080974324,
+              "minfde6_m": 0.5042367478088932,
+              "mode0_selected": 0.5833333333333334,
+              "distinct_mean_pair_m": 0.9762691833712576
+            },
+            "last_two_cv": {
+              "ade_m": 0.29374234806948507,
+              "fde_m": 0.718657490277494,
+              "minade6_m": 0.29374234806948507,
+              "minfde6_m": 0.718657490277494,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 150,
+          "tracks": 64,
+          "clips": 13,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.4022161980307669,
+              "fde_m": 0.9592167696048978,
+              "minade6_m": 0.2277222388044591,
+              "minfde6_m": 0.5050519824993817,
+              "mode0_selected": 0.5066666666666667,
+              "distinct_mean_pair_m": 1.081282618909872
+            },
+            "global_pose": {
+              "ade_m": 0.369251999137098,
+              "fde_m": 0.8769733071501528,
+              "minade6_m": 0.22127512188419568,
+              "minfde6_m": 0.4962565032997095,
+              "mode0_selected": 0.08,
+              "distinct_mean_pair_m": 1.0298919737230714
+            },
+            "local_motion": {
+              "ade_m": 0.33309459304366756,
+              "fde_m": 0.8267835836386229,
+              "minade6_m": 0.2328721689124291,
+              "minfde6_m": 0.5125841984131179,
+              "mode0_selected": 0.8133333333333334,
+              "distinct_mean_pair_m": 1.0121599693260452
+            },
+            "local_pose": {
+              "ade_m": 0.3187013507262289,
+              "fde_m": 0.8073411555828907,
+              "minade6_m": 0.21657729754369343,
+              "minfde6_m": 0.501021248760199,
+              "mode0_selected": 0.6066666666666667,
+              "distinct_mean_pair_m": 0.9063931914790023
+            },
+            "last_two_cv": {
+              "ade_m": 0.323757325362731,
+              "fde_m": 0.826159806245917,
+              "minade6_m": 0.323757325362731,
+              "minfde6_m": 0.826159806245917,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        }
+      },
+      "contributing_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "site_equal": {
+        "global_motion": {
+          "ade_m": 0.5100334216646003,
+          "fde_m": 1.1385371925812113,
+          "minade6_m": 0.35747904845157374,
+          "minfde6_m": 0.74516768168774,
+          "mode0_selected": 0.5017736539060069,
+          "distinct_mean_pair_m": 0.8345751618820725
+        },
+        "global_pose": {
+          "ade_m": 0.5306336798223924,
+          "fde_m": 1.1652249378814274,
+          "minade6_m": 0.3557658055592652,
+          "minfde6_m": 0.7476344920915092,
+          "mode0_selected": 0.3886683006535948,
+          "distinct_mean_pair_m": 0.8944553534057265
+        },
+        "local_motion": {
+          "ade_m": 0.4584190159256219,
+          "fde_m": 1.0322111972690786,
+          "minade6_m": 0.3363449686598971,
+          "minfde6_m": 0.7063577562332105,
+          "mode0_selected": 0.7458024042950513,
+          "distinct_mean_pair_m": 0.8119761561430399
+        },
+        "local_pose": {
+          "ade_m": 0.46883811466241604,
+          "fde_m": 1.054452177067304,
+          "minade6_m": 0.34336932515010565,
+          "minfde6_m": 0.7364082738773734,
+          "mode0_selected": 0.6081179971988795,
+          "distinct_mean_pair_m": 0.8099499358496918
+        },
+        "last_two_cv": {
+          "ade_m": 0.4838738237222935,
+          "fde_m": 1.104558510403262,
+          "minade6_m": 0.4838738237222935,
+          "minfde6_m": 1.104558510403262,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        }
+      }
+    },
+    "identifiable": {
+      "by_site": {
+        "america_crossroad": {
+          "windows": 747,
+          "tracks": 238,
+          "clips": 14,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.9982057333275568,
+              "fde_m": 2.033200100804427,
+              "minade6_m": 0.7443376806741264,
+              "minfde6_m": 1.389860297410344,
+              "mode0_selected": 0.2931726907630522,
+              "distinct_mean_pair_m": 0.5735601165565765
+            },
+            "global_pose": {
+              "ade_m": 0.986940232383636,
+              "fde_m": 2.001362876747725,
+              "minade6_m": 0.7450763670257465,
+              "minfde6_m": 1.401956206949975,
+              "mode0_selected": 0.2289156626506024,
+              "distinct_mean_pair_m": 0.5748907027989821
+            },
+            "local_motion": {
+              "ade_m": 0.8873302374938002,
+              "fde_m": 1.793904812878248,
+              "minade6_m": 0.68944258391762,
+              "minfde6_m": 1.2931674132725246,
+              "mode0_selected": 0.40963855421686746,
+              "distinct_mean_pair_m": 0.5982319639267075
+            },
+            "local_pose": {
+              "ade_m": 0.923597938578166,
+              "fde_m": 1.857167588380122,
+              "minade6_m": 0.72406100779792,
+              "minfde6_m": 1.3785909261018476,
+              "mode0_selected": 0.30254350736278446,
+              "distinct_mean_pair_m": 0.5331624298251697
+            },
+            "last_two_cv": {
+              "ade_m": 1.0180391519901084,
+              "fde_m": 2.0829191041972446,
+              "minade6_m": 1.0180391519901084,
+              "minfde6_m": 2.0829191041972446,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 69,
+          "tracks": 26,
+          "clips": 9,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.40787485963501496,
+              "fde_m": 0.9609634636550953,
+              "minade6_m": 0.3023472772459465,
+              "minfde6_m": 0.6842979190197379,
+              "mode0_selected": 0.5652173913043478,
+              "distinct_mean_pair_m": 0.9500971799244722
+            },
+            "global_pose": {
+              "ade_m": 0.4267356792601139,
+              "fde_m": 0.97479544912693,
+              "minade6_m": 0.3023692500693751,
+              "minfde6_m": 0.682906951723844,
+              "mode0_selected": 0.6956521739130435,
+              "distinct_mean_pair_m": 1.0873030144138174
+            },
+            "local_motion": {
+              "ade_m": 0.3968511998237458,
+              "fde_m": 0.9302896291966342,
+              "minade6_m": 0.25558620409966837,
+              "minfde6_m": 0.5786241993352166,
+              "mode0_selected": 0.782608695652174,
+              "distinct_mean_pair_m": 0.933485916518217
+            },
+            "local_pose": {
+              "ade_m": 0.39659660911232747,
+              "fde_m": 0.9408920057284645,
+              "minade6_m": 0.26829504564316475,
+              "minfde6_m": 0.6278770555105426,
+              "mode0_selected": 0.855072463768116,
+              "distinct_mean_pair_m": 1.0579842931784442
+            },
+            "last_two_cv": {
+              "ade_m": 0.4012082801217847,
+              "fde_m": 0.9788152139810468,
+              "minade6_m": 0.4012082801217847,
+              "minfde6_m": 0.9788152139810468,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 369,
+          "tracks": 112,
+          "clips": 11,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.3663122921003469,
+              "fde_m": 0.8526402472060288,
+              "minade6_m": 0.22975944107016333,
+              "minfde6_m": 0.49777680109605366,
+              "mode0_selected": 0.42005420054200543,
+              "distinct_mean_pair_m": 1.1139752329961963
+            },
+            "global_pose": {
+              "ade_m": 0.49530973854934646,
+              "fde_m": 1.0947212947402554,
+              "minade6_m": 0.22847148674036935,
+              "minfde6_m": 0.507999873213998,
+              "mode0_selected": 0.3333333333333333,
+              "distinct_mean_pair_m": 1.3211813347289085
+            },
+            "local_motion": {
+              "ade_m": 0.3349590731848563,
+              "fde_m": 0.795726680736024,
+              "minade6_m": 0.22856279427474552,
+              "minfde6_m": 0.5124673093625183,
+              "mode0_selected": 0.8699186991869918,
+              "distinct_mean_pair_m": 1.0786027077453528
+            },
+            "local_pose": {
+              "ade_m": 0.3619770069219552,
+              "fde_m": 0.8446444203747924,
+              "minade6_m": 0.2312107096988758,
+              "minfde6_m": 0.5278122254912629,
+              "mode0_selected": 0.5121951219512195,
+              "distinct_mean_pair_m": 1.1429492878492773
+            },
+            "last_two_cv": {
+              "ade_m": 0.3208179760076203,
+              "fde_m": 0.7788413874057223,
+              "minade6_m": 0.3208179760076203,
+              "minfde6_m": 0.7788413874057223,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 144,
+          "tracks": 64,
+          "clips": 13,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.4102642624263994,
+              "fde_m": 0.9733635532761998,
+              "minade6_m": 0.22849972156566217,
+              "minfde6_m": 0.5002752333746207,
+              "mode0_selected": 0.4861111111111111,
+              "distinct_mean_pair_m": 1.1263360613644502
+            },
+            "global_pose": {
+              "ade_m": 0.3759265552454944,
+              "fde_m": 0.8876932798858408,
+              "minade6_m": 0.2217839747737211,
+              "minfde6_m": 0.49111327587496206,
+              "mode0_selected": 0.041666666666666664,
+              "distinct_mean_pair_m": 1.072804139294866
+            },
+            "local_motion": {
+              "ade_m": 0.33826259056483754,
+              "fde_m": 0.8354123178946637,
+              "minade6_m": 0.23386423209479756,
+              "minfde6_m": 0.5081212916180958,
+              "mode0_selected": 0.8055555555555556,
+              "distinct_mean_pair_m": 1.0543333013812972
+            },
+            "local_pose": {
+              "ade_m": 0.32326962981750573,
+              "fde_m": 0.8151597886699423,
+              "minade6_m": 0.21689040775236457,
+              "minfde6_m": 0.4960765523963054,
+              "mode0_selected": 0.5902777777777778,
+              "distinct_mean_pair_m": 0.944159574457294
+            },
+            "last_two_cv": {
+              "ade_m": 0.3285362700638621,
+              "fde_m": 0.8347625497772616,
+              "minade6_m": 0.3285362700638621,
+              "minfde6_m": 0.8347625497772616,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        }
+      },
+      "contributing_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "site_equal": {
+        "global_motion": {
+          "ade_m": 0.5456642868723295,
+          "fde_m": 1.2050418412354378,
+          "minade6_m": 0.3762360301389746,
+          "minfde6_m": 0.7680525627251891,
+          "mode0_selected": 0.4411388484301291,
+          "distinct_mean_pair_m": 0.9409921477104238
+        },
+        "global_pose": {
+          "ade_m": 0.5712280513596476,
+          "fde_m": 1.2396432251251879,
+          "minade6_m": 0.37442526965230305,
+          "minfde6_m": 0.7709940769406947,
+          "mode0_selected": 0.32489195914091146,
+          "distinct_mean_pair_m": 1.0140447978091436
+        },
+        "local_motion": {
+          "ade_m": 0.48935077526681,
+          "fde_m": 1.0888333601763924,
+          "minade6_m": 0.35186395359670786,
+          "minfde6_m": 0.7230950533970888,
+          "mode0_selected": 0.7169303761528971,
+          "distinct_mean_pair_m": 0.9161634723928938
+        },
+        "local_pose": {
+          "ade_m": 0.5013602961074886,
+          "fde_m": 1.1144659507883303,
+          "minade6_m": 0.36011429272308126,
+          "minfde6_m": 0.7575891898749897,
+          "mode0_selected": 0.5650222177149744,
+          "distinct_mean_pair_m": 0.9195638963275463
+        },
+        "last_two_cv": {
+          "ade_m": 0.5171504195458438,
+          "fde_m": 1.1688345638403188,
+          "minade6_m": 0.5171504195458438,
+          "minfde6_m": 1.1688345638403188,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        }
+      }
+    },
+    "degenerate": {
+      "by_site": {
+        "america_crossroad": {
+          "windows": 69,
+          "tracks": 42,
+          "clips": 9,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.18565699766481353,
+              "fde_m": 0.4100824458808268,
+              "minade6_m": 0.18565699766481353,
+              "minfde6_m": 0.4100824458808268,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "global_pose": {
+              "ade_m": 0.18565699766481353,
+              "fde_m": 0.4100824458808268,
+              "minade6_m": 0.18565699766481353,
+              "minfde6_m": 0.4100824458808268,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_motion": {
+              "ade_m": 0.18565699766481353,
+              "fde_m": 0.4100824458808268,
+              "minade6_m": 0.18565699766481353,
+              "minfde6_m": 0.4100824458808268,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_pose": {
+              "ade_m": 0.18565699766481353,
+              "fde_m": 0.4100824458808268,
+              "minade6_m": 0.18565699766481353,
+              "minfde6_m": 0.4100824458808268,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "last_two_cv": {
+              "ade_m": 0.18565699766481353,
+              "fde_m": 0.4100824458808268,
+              "minade6_m": 0.18565699766481353,
+              "minfde6_m": 0.4100824458808268,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 15,
+          "tracks": 10,
+          "clips": 6,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.22835557235524154,
+              "fde_m": 0.7163741634755934,
+              "minade6_m": 0.22835557235524154,
+              "minfde6_m": 0.7163741634755934,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "global_pose": {
+              "ade_m": 0.22835557235524154,
+              "fde_m": 0.7163741634755934,
+              "minade6_m": 0.22835557235524154,
+              "minfde6_m": 0.7163741634755934,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_motion": {
+              "ade_m": 0.22835557235524154,
+              "fde_m": 0.7163741634755934,
+              "minade6_m": 0.22835557235524154,
+              "minfde6_m": 0.7163741634755934,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_pose": {
+              "ade_m": 0.22835557235524154,
+              "fde_m": 0.7163741634755934,
+              "minade6_m": 0.22835557235524154,
+              "minfde6_m": 0.7163741634755934,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "last_two_cv": {
+              "ade_m": 0.22835557235524154,
+              "fde_m": 0.7163741634755934,
+              "minade6_m": 0.22835557235524154,
+              "minfde6_m": 0.7163741634755934,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 63,
+          "tracks": 23,
+          "clips": 8,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.13515652728897892,
+              "fde_m": 0.3661518070978703,
+              "minade6_m": 0.13515652728897892,
+              "minfde6_m": 0.3661518070978703,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "global_pose": {
+              "ade_m": 0.13515652728897892,
+              "fde_m": 0.3661518070978703,
+              "minade6_m": 0.13515652728897892,
+              "minfde6_m": 0.3661518070978703,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_motion": {
+              "ade_m": 0.13515652728897892,
+              "fde_m": 0.3661518070978703,
+              "minade6_m": 0.13515652728897892,
+              "minfde6_m": 0.3661518070978703,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_pose": {
+              "ade_m": 0.13515652728897892,
+              "fde_m": 0.3661518070978703,
+              "minade6_m": 0.13515652728897892,
+              "minfde6_m": 0.3661518070978703,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "last_two_cv": {
+              "ade_m": 0.13515652728897892,
+              "fde_m": 0.3661518070978703,
+              "minade6_m": 0.13515652728897892,
+              "minfde6_m": 0.3661518070978703,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 6,
+          "tracks": 5,
+          "clips": 4,
+          "metrics": {
+            "global_motion": {
+              "ade_m": 0.20906265253558579,
+              "fde_m": 0.6196939614936463,
+              "minade6_m": 0.20906265253558579,
+              "minfde6_m": 0.6196939614936463,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "global_pose": {
+              "ade_m": 0.20906265253558579,
+              "fde_m": 0.6196939614936463,
+              "minade6_m": 0.20906265253558579,
+              "minfde6_m": 0.6196939614936463,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_motion": {
+              "ade_m": 0.20906265253558579,
+              "fde_m": 0.6196939614936463,
+              "minade6_m": 0.20906265253558579,
+              "minfde6_m": 0.6196939614936463,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "local_pose": {
+              "ade_m": 0.20906265253558579,
+              "fde_m": 0.6196939614936463,
+              "minade6_m": 0.20906265253558579,
+              "minfde6_m": 0.6196939614936463,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            },
+            "last_two_cv": {
+              "ade_m": 0.20906265253558579,
+              "fde_m": 0.6196939614936463,
+              "minade6_m": 0.20906265253558579,
+              "minfde6_m": 0.6196939614936463,
+              "mode0_selected": 1.0,
+              "distinct_mean_pair_m": 0.0
+            }
+          }
+        }
+      },
+      "contributing_sites": [
+        "america_crossroad",
+        "italy_park",
+        "japan_crossroad",
+        "thailand_street"
+      ],
+      "site_equal": {
+        "global_motion": {
+          "ade_m": 0.18955793746115493,
+          "fde_m": 0.5280755944869842,
+          "minade6_m": 0.18955793746115493,
+          "minfde6_m": 0.5280755944869842,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        },
+        "global_pose": {
+          "ade_m": 0.18955793746115493,
+          "fde_m": 0.5280755944869842,
+          "minade6_m": 0.18955793746115493,
+          "minfde6_m": 0.5280755944869842,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        },
+        "local_motion": {
+          "ade_m": 0.18955793746115493,
+          "fde_m": 0.5280755944869842,
+          "minade6_m": 0.18955793746115493,
+          "minfde6_m": 0.5280755944869842,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        },
+        "local_pose": {
+          "ade_m": 0.18955793746115493,
+          "fde_m": 0.5280755944869842,
+          "minade6_m": 0.18955793746115493,
+          "minfde6_m": 0.5280755944869842,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        },
+        "last_two_cv": {
+          "ade_m": 0.18955793746115493,
+          "fde_m": 0.5280755944869842,
+          "minade6_m": 0.18955793746115493,
+          "minfde6_m": 0.5280755944869842,
+          "mode0_selected": 1.0,
+          "distinct_mean_pair_m": 0.0
+        }
+      }
+    }
+  },
+  "paired": {
+    "local_pose_minus_local_motion": {
+      "mean": {
+        "ade_m": 0.010419098736793964,
+        "fde_m": 0.02224097979822559
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.0008839582870581447,
+          0.021836992058274888
+        ],
+        "fde_m": [
+          -0.0014329620441236811,
+          0.04692970635781056
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": 0.033200946948554896,
+          "fde_m": 0.05791334963223137
+        },
+        "italy_park": {
+          "ade_m": -0.00020912808437924358,
+          "fde_m": 0.008709095008289152
+        },
+        "japan_crossroad": {
+          "ade_m": 0.02307781840043889,
+          "fde_m": 0.04178390260811418
+        },
+        "thailand_street": {
+          "ade_m": -0.014393242317438684,
+          "fde_m": -0.019442428055732337
+        }
+      }
+    },
+    "local_pose_minus_global_pose": {
+      "mean": {
+        "ade_m": -0.06179556515997632,
+        "fde_m": -0.11077276081412356
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.09430038647893389,
+          -0.035498502260228555
+        ],
+        "fde_m": [
+          -0.16697799825732793,
+          -0.062072573889989414
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.057986143961624936,
+          "fde_m": -0.1320023044247547
+        },
+        "italy_park": {
+          "ade_m": -0.02475709333568178,
+          "fde_m": -0.02784925707731106
+        },
+        "japan_crossroad": {
+          "ade_m": -0.11388837493172951,
+          "fde_m": -0.21360733018716632
+        },
+        "thailand_street": {
+          "ade_m": -0.05055064841086902,
+          "fde_m": -0.06963215156726214
+        }
+      }
+    },
+    "local_motion_minus_global_motion": {
+      "mean": {
+        "ade_m": -0.05161440573897837,
+        "fde_m": -0.10632599531213263
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.0720810885822984,
+          -0.033716849448515024
+        ],
+        "fde_m": [
+          -0.1463309723572208,
+          -0.06926187613872432
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.10149999434781372,
+          "fde_m": -0.21906075990300963
+        },
+        "italy_park": {
+          "ade_m": -0.00905514913068551,
+          "fde_m": -0.025196364019450187
+        },
+        "japan_crossroad": {
+          "ade_m": -0.026780874490315035,
+          "fde_m": -0.048613671359795614
+        },
+        "thailand_street": {
+          "ade_m": -0.06912160498709917,
+          "fde_m": -0.13243318596627507
+        }
+      }
+    },
+    "global_pose_minus_global_motion": {
+      "mean": {
+        "ade_m": 0.02060025815779192,
+        "fde_m": 0.026687745300216524
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.005379108831302528,
+          0.05249497142940389
+        ],
+        "fde_m": [
+          -0.022449235347282197,
+          0.08720017353255101
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.010312903437633919,
+          "fde_m": -0.029145105846023613
+        },
+        "italy_park": {
+          "ade_m": 0.015492816120617033,
+          "fde_m": 0.011361988066150033
+        },
+        "japan_crossroad": {
+          "ade_m": 0.11018531884185344,
+          "fde_m": 0.2067775614354849
+        },
+        "thailand_street": {
+          "ade_m": -0.03296419889366887,
+          "fde_m": -0.08224346245474523
+        }
+      }
+    },
+    "global_motion_minus_last_two_cv": {
+      "mean": {
+        "ade_m": 0.026159597942306562,
+        "fde_m": 0.033978682177948555
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          0.007963439387122136,
+          0.05831303814897795
+        ],
+        "fde_m": [
+          -0.005331064368875357,
+          0.1041081540635995
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.01815632811388118,
+          "fde_m": -0.04551482295886938
+        },
+        "italy_park": {
+          "ade_m": 0.005476118885867737,
+          "fde_m": -0.014663937767745952
+        },
+        "japan_crossroad": {
+          "ade_m": 0.038859728329204084,
+          "fde_m": 0.06303652607942824
+        },
+        "thailand_street": {
+          "ade_m": 0.07845887266803561,
+          "fde_m": 0.13305696335898132
+        }
+      }
+    },
+    "global_pose_minus_last_two_cv": {
+      "mean": {
+        "ade_m": 0.046759856100098474,
+        "fde_m": 0.06066642747816511
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          0.022917740170356905,
+          0.08703638294081929
+        ],
+        "fde_m": [
+          0.015280092559431533,
+          0.13869533064060707
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.028469231551515133,
+          "fde_m": -0.07465992880489296
+        },
+        "italy_park": {
+          "ade_m": 0.02096893500648477,
+          "fde_m": -0.00330194970159593
+        },
+        "japan_crossroad": {
+          "ade_m": 0.1490450471710575,
+          "fde_m": 0.26981408751491326
+        },
+        "thailand_street": {
+          "ade_m": 0.045494673774366785,
+          "fde_m": 0.050813500904236066
+        }
+      }
+    },
+    "local_motion_minus_last_two_cv": {
+      "mean": {
+        "ade_m": -0.025454807796671773,
+        "fde_m": -0.07234731313418409
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.03756695007129528,
+          0.005703310628885301
+        ],
+        "fde_m": [
+          -0.10070065888519465,
+          -0.001924444435420586
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.11965632246169482,
+          "fde_m": -0.26457558286187904
+        },
+        "italy_park": {
+          "ade_m": -0.0035790302448177706,
+          "fde_m": -0.03986030178719614
+        },
+        "japan_crossroad": {
+          "ade_m": 0.012078853838889056,
+          "fde_m": 0.01442285471963261
+        },
+        "thailand_street": {
+          "ade_m": 0.009337267680936442,
+          "fde_m": 0.0006237773927062083
+        }
+      }
+    },
+    "local_pose_minus_last_two_cv": {
+      "mean": {
+        "ade_m": -0.015035709059877823,
+        "fde_m": -0.05010633333595845
+      },
+      "paired_clip_95": {
+        "ade_m": [
+          -0.02638770975147873,
+          0.00937241719504517
+        ],
+        "fde_m": [
+          -0.07709515384855296,
+          0.0076947813637540845
+        ]
+      },
+      "by_site": {
+        "america_crossroad": {
+          "ade_m": -0.08645537551313998,
+          "fde_m": -0.2066622332296475
+        },
+        "italy_park": {
+          "ade_m": -0.003788158329197014,
+          "fde_m": -0.031151206778906988
+        },
+        "japan_crossroad": {
+          "ade_m": 0.03515667223932794,
+          "fde_m": 0.05620675732774679
+        },
+        "thailand_street": {
+          "ade_m": -0.005055974636502238,
+          "fde_m": -0.01881865066302612
+        }
+      }
+    }
+  },
+  "ground_coordinate_tests": {
+    "america_crossroad": {
+      "global_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 1.4623757192641769,
+          "max_probability_error": 0.24830469489097595,
+          "top_mode_changes": 182
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 2.8218446969985695,
+          "max_probability_error": 0.4437175989151001,
+          "top_mode_changes": 400
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 3.5207068998271716,
+          "max_probability_error": 0.46176427602767944,
+          "top_mode_changes": 445
+        }
+      },
+      "global_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 2.31066655136455,
+          "max_probability_error": 0.26917368173599243,
+          "top_mode_changes": 154
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.439266562461853,
+          "max_probability_error": 0.38335293531417847,
+          "top_mode_changes": 269
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 3.40786185624928,
+          "max_probability_error": 0.3848433494567871,
+          "top_mode_changes": 338
+        }
+      },
+      "local_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 4.263256414560601e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.907985046680551e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 4.085620730620576e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      },
+      "local_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 4.085620730620576e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.552713678800501e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 3.907985046680551e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      }
+    },
+    "italy_park": {
+      "global_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 3.0157517552252004,
+          "max_probability_error": 0.12081518769264221,
+          "top_mode_changes": 11
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 7.801545858383179,
+          "max_probability_error": 0.21570762991905212,
+          "top_mode_changes": 42
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 6.026416637802821,
+          "max_probability_error": 0.17524562776088715,
+          "top_mode_changes": 32
+        }
+      },
+      "global_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 3.7793477747531288,
+          "max_probability_error": 0.1206435114145279,
+          "top_mode_changes": 14
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 7.170681834220886,
+          "max_probability_error": 0.31561920046806335,
+          "top_mode_changes": 23
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 8.184585689996503,
+          "max_probability_error": 0.21170836687088013,
+          "top_mode_changes": 27
+        }
+      },
+      "local_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 3.907985046680551e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.552713678800501e-15,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 4.796163466380676e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      },
+      "local_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 3.907985046680551e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.552713678800501e-15,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 4.796163466380676e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      }
+    },
+    "japan_crossroad": {
+      "global_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 5.0119531966258,
+          "max_probability_error": 0.2835954427719116,
+          "top_mode_changes": 128
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 8.284705400466919,
+          "max_probability_error": 0.49425309896469116,
+          "top_mode_changes": 200
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 9.997357592718771,
+          "max_probability_error": 0.37268367409706116,
+          "top_mode_changes": 121
+        }
+      },
+      "global_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 6.637871944309097,
+          "max_probability_error": 0.35521605610847473,
+          "top_mode_changes": 78
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 12.089972496032715,
+          "max_probability_error": 0.5425164699554443,
+          "top_mode_changes": 140
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 13.963602088095529,
+          "max_probability_error": 0.6566160917282104,
+          "top_mode_changes": 228
+        }
+      },
+      "local_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 6.572520305780927e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 4.440892098500626e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 5.3290705182007514e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      },
+      "local_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 6.572520305780927e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 6.039613253960852e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 5.684341886080802e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      }
+    },
+    "thailand_street": {
+      "global_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 2.58541057276814,
+          "max_probability_error": 0.24904084205627441,
+          "top_mode_changes": 45
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 5.675927110016346,
+          "max_probability_error": 0.41811758279800415,
+          "top_mode_changes": 72
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 8.26097155260237,
+          "max_probability_error": 0.26803016662597656,
+          "top_mode_changes": 106
+        }
+      },
+      "global_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 3.0344573861929938,
+          "max_probability_error": 0.17909109592437744,
+          "top_mode_changes": 19
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 6.387336730957031,
+          "max_probability_error": 0.4350525140762329,
+          "top_mode_changes": 50
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 9.77525901313551,
+          "max_probability_error": 0.4665505290031433,
+          "top_mode_changes": 71
+        }
+      },
+      "local_motion": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 5.5067062021407764e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 3.9968028886505635e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 4.263256414560601e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      },
+      "local_pose": {
+        "37": {
+          "max_mode_indexed_coordinate_error_m": 5.5067062021407764e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "90": {
+          "max_mode_indexed_coordinate_error_m": 4.085620730620576e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        },
+        "173": {
+          "max_mode_indexed_coordinate_error_m": 4.263256414560601e-14,
+          "max_probability_error": 0.0,
+          "top_mode_changes": 0
+        }
+      }
+    }
+  },
+  "software": {
+    "numpy": "2.1.3",
+    "torch": "2.11.0+cpu",
+    "python": "3.13.18 (main, Oct 26 2026, 15:28:15) [GCC 13.3.0]",
+    "cpu": "AMD EPYC 7B12",
+    "threads": 4,
+    "deterministic": true
+  },
+  "primary": "local_pose_minus_local_motion top-probability ADE",
+  "fits": 16
+}

@@ -1,0 +1,4061 @@
+{
+  "protocol_sha256": "85e873537eb09f508b85df64de323d0d994236a64615bc2703d151ec9fb021e3",
+  "source_archive_sha256": "b84eaaadcaab4518ded15c83e9d746030e03693e89dfe9e23b15ef2f1fc8587e",
+  "registered_keys_sha256": "f5ee511a54ad818499d3dde6213f7f3b49332943ff2fc93d93aed87d316dbb91",
+  "input_histories": "caa8f0959f28f2d69a6f16cc9df115ab6222d0b6eb3297edd575615fef81b94c",
+  "observed_windows": 1482,
+  "sites": {
+    "america_crossroad": 816,
+    "italy_park": 84,
+    "japan_crossroad": 432,
+    "thailand_street": 150
+  },
+  "labels": [
+    "start",
+    "stop",
+    "left",
+    "right",
+    "maintain"
+  ],
+  "units": "m, except dimensionless fractions/probabilities and counts",
+  "primary": "detached reranked minus original four-site top-path ADE; conditional paired whole-clip interval. Only one seed.",
+  "selection_scope": "Only history, six fixed candidates, original mode probabilities and four qualified action marginals. No new fit, network forward or probability calibration.",
+  "max_rebuilt_vs_saved_top1_error_m": 8.881784197001252e-16,
+  "paired_private_sha256": "b26e39332fa41275b48e2e17e7fd081555e1b56772a696b73931900924506d95",
+  "arms": {
+    "no_head": {
+      "sites_and_pooled": {
+        "pooled": {
+          "windows": 1482,
+          "clips": 47,
+          "original": {
+            "ade_m": 0.6796699236047706,
+            "fde_m": 1.3679768111359343
+          },
+          "reranked": {
+            "ade_m": 0.6796699236047706,
+            "fde_m": 1.3679768111359343
+          },
+          "cv": {
+            "ade_m": 0.6611704303473445,
+            "fde_m": 1.4149150681143354
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.41825210969122306,
+            "fde_m": 0.7813618429375796
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              301,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              216,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              816,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              149
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 49,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 49,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.02040816326530612,
+                "reranked_rate": 0.02040816326530612
+              },
+              "negative": {
+                "windows": 1433,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 129,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 53,
+                "original_event": 6,
+                "reranked_event": 6,
+                "any_mode_event": 18,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.11320754716981132,
+                "reranked_rate": 0.11320754716981132
+              },
+              "negative": {
+                "windows": 1429,
+                "original_event": 9,
+                "reranked_event": 9,
+                "any_mode_event": 114,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.006298110566829951,
+                "reranked_rate": 0.006298110566829951
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 214,
+                "original_event": 52,
+                "reranked_event": 52,
+                "any_mode_event": 122,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.24299065420560748,
+                "reranked_rate": 0.24299065420560748
+              },
+              "negative": {
+                "windows": 1268,
+                "original_event": 38,
+                "reranked_event": 38,
+                "any_mode_event": 477,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.02996845425867508,
+                "reranked_rate": 0.02996845425867508
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 208,
+                "original_event": 29,
+                "reranked_event": 29,
+                "any_mode_event": 133,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.13942307692307693,
+                "reranked_rate": 0.13942307692307693
+              },
+              "negative": {
+                "windows": 1274,
+                "original_event": 15,
+                "reranked_event": 15,
+                "any_mode_event": 518,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.011773940345368918,
+                "reranked_rate": 0.011773940345368918
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 975,
+                "original_event": 923,
+                "reranked_event": 923,
+                "any_mode_event": 974,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9466666666666667,
+                "reranked_rate": 0.9466666666666667
+              },
+              "negative": {
+                "windows": 507,
+                "original_event": 409,
+                "reranked_event": 409,
+                "any_mode_event": 491,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.8067061143984221,
+                "reranked_rate": 0.8067061143984221
+              }
+            }
+          }
+        },
+        "america_crossroad": {
+          "windows": 816,
+          "clips": 14,
+          "original": {
+            "ade_m": 0.851961128252894,
+            "fde_m": 1.6391594352694245
+          },
+          "reranked": {
+            "ade_m": 0.851961128252894,
+            "fde_m": 1.6391594352694245
+          },
+          "cv": {
+            "ade_m": 0.9476538962432385,
+            "fde_m": 1.941466005193391
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.5485949379943132,
+            "fde_m": 0.9713760667765946
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              816,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 27,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 27,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.037037037037037035,
+                "reranked_rate": 0.037037037037037035
+              },
+              "negative": {
+                "windows": 789,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 58,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 35,
+                "original_event": 5,
+                "reranked_event": 5,
+                "any_mode_event": 10,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.14285714285714285,
+                "reranked_rate": 0.14285714285714285
+              },
+              "negative": {
+                "windows": 781,
+                "original_event": 7,
+                "reranked_event": 7,
+                "any_mode_event": 39,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.008962868117797696,
+                "reranked_rate": 0.008962868117797696
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 152,
+                "original_event": 44,
+                "reranked_event": 44,
+                "any_mode_event": 91,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.2894736842105263,
+                "reranked_rate": 0.2894736842105263
+              },
+              "negative": {
+                "windows": 664,
+                "original_event": 3,
+                "reranked_event": 3,
+                "any_mode_event": 230,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.004518072289156626,
+                "reranked_rate": 0.004518072289156626
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 156,
+                "original_event": 27,
+                "reranked_event": 27,
+                "any_mode_event": 98,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.17307692307692307,
+                "reranked_rate": 0.17307692307692307
+              },
+              "negative": {
+                "windows": 660,
+                "original_event": 8,
+                "reranked_event": 8,
+                "any_mode_event": 276,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.012121212121212121,
+                "reranked_rate": 0.012121212121212121
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 458,
+                "original_event": 443,
+                "reranked_event": 443,
+                "any_mode_event": 458,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9672489082969432,
+                "reranked_rate": 0.9672489082969432
+              },
+              "negative": {
+                "windows": 358,
+                "original_event": 278,
+                "reranked_event": 278,
+                "any_mode_event": 343,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.776536312849162,
+                "reranked_rate": 0.776536312849162
+              }
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 84,
+          "clips": 9,
+          "original": {
+            "ade_m": 0.4468200523866021,
+            "fde_m": 1.0127937223962895
+          },
+          "reranked": {
+            "ade_m": 0.4468200523866021,
+            "fde_m": 1.0127937223962895
+          },
+          "cv": {
+            "ade_m": 0.3703417260001086,
+            "fde_m": 0.9319507432849343
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.28409111696499945,
+            "fde_m": 0.5944125269849445
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              82,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 8,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 76,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 81,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 11,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 4,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 80,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0125,
+                "reranked_rate": 0.0125
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 71,
+                "original_event": 3,
+                "reranked_event": 3,
+                "any_mode_event": 15,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.04225352112676056,
+                "reranked_rate": 0.04225352112676056
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 57,
+                "original_event": 54,
+                "reranked_event": 54,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9473684210526315,
+                "reranked_rate": 0.9473684210526315
+              },
+              "negative": {
+                "windows": 27,
+                "original_event": 25,
+                "reranked_event": 25,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9259259259259259,
+                "reranked_rate": 0.9259259259259259
+              }
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "clips": 11,
+          "original": {
+            "ade_m": 0.41233816043382343,
+            "fde_m": 0.9126274084050437
+          },
+          "reranked": {
+            "ade_m": 0.41233816043382343,
+            "fde_m": 0.9126274084050437
+          },
+          "cv": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2521053610236285,
+            "fde_m": 0.5295740102773975
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              298,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              134,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 12,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 12,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 12,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 7,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.08333333333333333,
+                "reranked_rate": 0.08333333333333333
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 58,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.002380952380952381,
+                "reranked_rate": 0.002380952380952381
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 45,
+                "original_event": 3,
+                "reranked_event": 3,
+                "any_mode_event": 21,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.06666666666666667,
+                "reranked_rate": 0.06666666666666667
+              },
+              "negative": {
+                "windows": 387,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 115,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.002583979328165375,
+                "reranked_rate": 0.002583979328165375
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 31,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 23,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 401,
+                "original_event": 2,
+                "reranked_event": 2,
+                "any_mode_event": 191,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.004987531172069825,
+                "reranked_rate": 0.004987531172069825
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 336,
+                "original_event": 333,
+                "reranked_event": 333,
+                "any_mode_event": 335,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9910714285714286,
+                "reranked_rate": 0.9910714285714286
+              },
+              "negative": {
+                "windows": 96,
+                "original_event": 91,
+                "reranked_event": 91,
+                "any_mode_event": 96,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9479166666666666,
+                "reranked_rate": 0.9479166666666666
+              }
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 150,
+          "clips": 13,
+          "original": {
+            "ade_m": 0.6427171761334733,
+            "fde_m": 1.4030521454089047
+          },
+          "reranked": {
+            "ade_m": 0.6427171761334733,
+            "fde_m": 1.4030521454089047
+          },
+          "cv": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785622
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2628199158117686,
+            "fde_m": 0.5775250402481252
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              149
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 2,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 2,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 148,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 0,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 147,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.006802721088435374,
+                "reranked_rate": 0.006802721088435374
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 13,
+                "original_event": 5,
+                "reranked_event": 5,
+                "any_mode_event": 9,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.38461538461538464,
+                "reranked_rate": 0.38461538461538464
+              },
+              "negative": {
+                "windows": 137,
+                "original_event": 33,
+                "reranked_event": 33,
+                "any_mode_event": 106,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.24087591240875914,
+                "reranked_rate": 0.24087591240875914
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 8,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 4,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.125,
+                "reranked_rate": 0.125
+              },
+              "negative": {
+                "windows": 142,
+                "original_event": 2,
+                "reranked_event": 2,
+                "any_mode_event": 36,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.014084507042253521,
+                "reranked_rate": 0.014084507042253521
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 124,
+                "original_event": 93,
+                "reranked_event": 93,
+                "any_mode_event": 124,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.75,
+                "reranked_rate": 0.75
+              },
+              "negative": {
+                "windows": 26,
+                "original_event": 15,
+                "reranked_event": 15,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.5769230769230769,
+                "reranked_rate": 0.5769230769230769
+              }
+            }
+          }
+        }
+      },
+      "four_site_m": {
+        "original": {
+          "ade_m": 0.5884591293016983,
+          "fde_m": 1.2419081778699157
+        },
+        "reranked": {
+          "ade_m": 0.5884591293016983,
+          "fde_m": 1.2419081778699157
+        },
+        "direct_cv": {
+          "ade_m": 0.48387382427755443,
+          "fde_m": 1.1045585126825768
+        },
+        "reranked_minus_original": {
+          "ade_m": 0.0,
+          "fde_m": 0.0
+        },
+        "reranked_minus_CV": {
+          "ade_m": 0.10458530502414408,
+          "fde_m": 0.13734966518733738
+        },
+        "original_minus_CV": {
+          "ade_m": 0.10458530502414408,
+          "fde_m": 0.13734966518733738
+        },
+        "entire_unchanged_candidate_set_oracle": {
+          "ade_m": 0.33690283294867746,
+          "fde_m": 0.6682219110717654
+        }
+      },
+      "four_site_switch_fraction": 0.0,
+      "four_site_original_probability_before_after": [
+        0.3507988990039918,
+        0.3507988990039918
+      ],
+      "four_site_event_rates": {
+        "start": {
+          "positive": {
+            "original_rate": 0.009259259259259259,
+            "reranked_rate": 0.009259259259259259
+          },
+          "negative": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          }
+        },
+        "stop": {
+          "positive": {
+            "original_rate": 0.05654761904761904,
+            "reranked_rate": 0.05654761904761904
+          },
+          "negative": {
+            "original_rate": 0.004536635396796363,
+            "reranked_rate": 0.004536635396796363
+          }
+        },
+        "left": {
+          "positive": {
+            "original_rate": 0.1851889338731444,
+            "reranked_rate": 0.1851889338731444
+          },
+          "negative": {
+            "original_rate": 0.06511949100652029,
+            "reranked_rate": 0.06511949100652029
+          }
+        },
+        "right": {
+          "positive": {
+            "original_rate": 0.09375,
+            "reranked_rate": 0.09375
+          },
+          "negative": {
+            "original_rate": 0.018361692865574007,
+            "reranked_rate": 0.018361692865574007
+          }
+        },
+        "maintain": {
+          "positive": {
+            "original_rate": 0.9139221894802508,
+            "reranked_rate": 0.9139221894802508
+          },
+          "negative": {
+            "original_rate": 0.8068254955912078,
+            "reranked_rate": 0.8068254955912078
+          }
+        }
+      }
+    },
+    "auxiliary": {
+      "sites_and_pooled": {
+        "pooled": {
+          "windows": 1482,
+          "clips": 47,
+          "original": {
+            "ade_m": 0.6415525462752777,
+            "fde_m": 1.2938912804654104
+          },
+          "reranked": {
+            "ade_m": 0.6424309602739914,
+            "fde_m": 1.2957422876636477
+          },
+          "cv": {
+            "ade_m": 0.6611704303473445,
+            "fde_m": 1.4149150681143354
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.41562243888279904,
+            "fde_m": 0.7730779240299247
+          },
+          "switched": 10,
+          "mode_changes_original_row_new_column": [
+            [
+              364,
+              0,
+              0,
+              0,
+              0,
+              4
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              35,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              816,
+              0
+            ],
+            [
+              1,
+              0,
+              5,
+              0,
+              0,
+              257
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 49,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 49,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 1433,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 129,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 53,
+                "original_event": 3,
+                "reranked_event": 3,
+                "any_mode_event": 17,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.05660377358490566,
+                "reranked_rate": 0.05660377358490566
+              },
+              "negative": {
+                "windows": 1429,
+                "original_event": 4,
+                "reranked_event": 4,
+                "any_mode_event": 69,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0027991602519244225,
+                "reranked_rate": 0.0027991602519244225
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 214,
+                "original_event": 40,
+                "reranked_event": 40,
+                "any_mode_event": 139,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.18691588785046728,
+                "reranked_rate": 0.18691588785046728
+              },
+              "negative": {
+                "windows": 1268,
+                "original_event": 2,
+                "reranked_event": 5,
+                "any_mode_event": 475,
+                "event_gained": 3,
+                "event_lost": 0,
+                "original_rate": 0.0015772870662460567,
+                "reranked_rate": 0.003943217665615142
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 208,
+                "original_event": 26,
+                "reranked_event": 26,
+                "any_mode_event": 125,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.125,
+                "reranked_rate": 0.125
+              },
+              "negative": {
+                "windows": 1274,
+                "original_event": 6,
+                "reranked_event": 9,
+                "any_mode_event": 497,
+                "event_gained": 4,
+                "event_lost": 1,
+                "original_rate": 0.004709576138147566,
+                "reranked_rate": 0.00706436420722135
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 975,
+                "original_event": 967,
+                "reranked_event": 962,
+                "any_mode_event": 975,
+                "event_gained": 1,
+                "event_lost": 6,
+                "original_rate": 0.9917948717948718,
+                "reranked_rate": 0.9866666666666667
+              },
+              "negative": {
+                "windows": 507,
+                "original_event": 434,
+                "reranked_event": 433,
+                "any_mode_event": 488,
+                "event_gained": 1,
+                "event_lost": 2,
+                "original_rate": 0.8560157790927022,
+                "reranked_rate": 0.854043392504931
+              }
+            }
+          }
+        },
+        "america_crossroad": {
+          "windows": 816,
+          "clips": 14,
+          "original": {
+            "ade_m": 0.8331932973996425,
+            "fde_m": 1.6013454371982019
+          },
+          "reranked": {
+            "ade_m": 0.8331932973996425,
+            "fde_m": 1.6013454371982019
+          },
+          "cv": {
+            "ade_m": 0.9476538962432385,
+            "fde_m": 1.941466005193391
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.5458157584421928,
+            "fde_m": 0.9636433451996986
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              816,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 27,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 27,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 789,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 58,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 35,
+                "original_event": 2,
+                "reranked_event": 2,
+                "any_mode_event": 11,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.05714285714285714,
+                "reranked_rate": 0.05714285714285714
+              },
+              "negative": {
+                "windows": 781,
+                "original_event": 4,
+                "reranked_event": 4,
+                "any_mode_event": 21,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.005121638924455826,
+                "reranked_rate": 0.005121638924455826
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 152,
+                "original_event": 34,
+                "reranked_event": 34,
+                "any_mode_event": 101,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.2236842105263158,
+                "reranked_rate": 0.2236842105263158
+              },
+              "negative": {
+                "windows": 664,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 227,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 156,
+                "original_event": 24,
+                "reranked_event": 24,
+                "any_mode_event": 84,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.15384615384615385,
+                "reranked_rate": 0.15384615384615385
+              },
+              "negative": {
+                "windows": 660,
+                "original_event": 5,
+                "reranked_event": 5,
+                "any_mode_event": 212,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.007575757575757576,
+                "reranked_rate": 0.007575757575757576
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 458,
+                "original_event": 452,
+                "reranked_event": 452,
+                "any_mode_event": 458,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9868995633187773,
+                "reranked_rate": 0.9868995633187773
+              },
+              "negative": {
+                "windows": 358,
+                "original_event": 295,
+                "reranked_event": 295,
+                "any_mode_event": 340,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.8240223463687151,
+                "reranked_rate": 0.8240223463687151
+              }
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 84,
+          "clips": 9,
+          "original": {
+            "ade_m": 0.434801370681335,
+            "fde_m": 0.9904942230111364
+          },
+          "reranked": {
+            "ade_m": 0.434801370681335,
+            "fde_m": 0.9904942230111364
+          },
+          "cv": {
+            "ade_m": 0.3703417260001086,
+            "fde_m": 0.9319507432849343
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2866937504433344,
+            "fde_m": 0.597119217235162
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              35,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              49
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 8,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 76,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 81,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 4,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 80,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 21,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 71,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 23,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 57,
+                "original_event": 57,
+                "reranked_event": 57,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 1.0,
+                "reranked_rate": 1.0
+              },
+              "negative": {
+                "windows": 27,
+                "original_event": 26,
+                "reranked_event": 26,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9629629629629629,
+                "reranked_rate": 0.9629629629629629
+              }
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "clips": 11,
+          "original": {
+            "ade_m": 0.4075174233329543,
+            "fde_m": 0.9099563013965764
+          },
+          "reranked": {
+            "ade_m": 0.4084000208798076,
+            "fde_m": 0.9122203908331777
+          },
+          "cv": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.24874098988341053,
+            "fde_m": 0.5236111623268597
+          },
+          "switched": 9,
+          "mode_changes_original_row_new_column": [
+            [
+              217,
+              0,
+              0,
+              0,
+              0,
+              3
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              5,
+              0,
+              0,
+              206
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 12,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 12,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 12,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 5,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.08333333333333333,
+                "reranked_rate": 0.08333333333333333
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 35,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 45,
+                "original_event": 5,
+                "reranked_event": 5,
+                "any_mode_event": 28,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.1111111111111111,
+                "reranked_rate": 0.1111111111111111
+              },
+              "negative": {
+                "windows": 387,
+                "original_event": 1,
+                "reranked_event": 3,
+                "any_mode_event": 119,
+                "event_gained": 2,
+                "event_lost": 0,
+                "original_rate": 0.002583979328165375,
+                "reranked_rate": 0.007751937984496124
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 31,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 29,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 401,
+                "original_event": 1,
+                "reranked_event": 4,
+                "any_mode_event": 227,
+                "event_gained": 4,
+                "event_lost": 1,
+                "original_rate": 0.0024937655860349127,
+                "reranked_rate": 0.00997506234413965
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 336,
+                "original_event": 335,
+                "reranked_event": 331,
+                "any_mode_event": 336,
+                "event_gained": 1,
+                "event_lost": 5,
+                "original_rate": 0.9970238095238095,
+                "reranked_rate": 0.9851190476190477
+              },
+              "negative": {
+                "windows": 96,
+                "original_event": 89,
+                "reranked_event": 88,
+                "any_mode_event": 96,
+                "event_gained": 1,
+                "event_lost": 2,
+                "original_rate": 0.9270833333333334,
+                "reranked_rate": 0.9166666666666666
+              }
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 150,
+          "clips": 13,
+          "original": {
+            "ade_m": 0.3888286725652394,
+            "fde_m": 0.8969757597316501
+          },
+          "reranked": {
+            "ade_m": 0.3949655219375924,
+            "fde_m": 0.9087431332728232
+          },
+          "cv": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785622
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.26018941912404153,
+            "fde_m": 0.5534031823762442
+          },
+          "switched": 1,
+          "mode_changes_original_row_new_column": [
+            [
+              147,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 2,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 2,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 148,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 0,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 147,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 7,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 9,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 137,
+                "original_event": 1,
+                "reranked_event": 2,
+                "any_mode_event": 108,
+                "event_gained": 1,
+                "event_lost": 0,
+                "original_rate": 0.0072992700729927005,
+                "reranked_rate": 0.014598540145985401
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 8,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 4,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.125,
+                "reranked_rate": 0.125
+              },
+              "negative": {
+                "windows": 142,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 35,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 124,
+                "original_event": 123,
+                "reranked_event": 122,
+                "any_mode_event": 124,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.9919354838709677,
+                "reranked_rate": 0.9838709677419355
+              },
+              "negative": {
+                "windows": 26,
+                "original_event": 24,
+                "reranked_event": 24,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9230769230769231,
+                "reranked_rate": 0.9230769230769231
+              }
+            }
+          }
+        }
+      },
+      "four_site_m": {
+        "original": {
+          "ade_m": 0.5160851909947928,
+          "fde_m": 1.0996929303343912
+        },
+        "reranked": {
+          "ade_m": 0.5178400527245943,
+          "fde_m": 1.1032007960788348
+        },
+        "direct_cv": {
+          "ade_m": 0.48387382427755443,
+          "fde_m": 1.1045585126825768
+        },
+        "reranked_minus_original": {
+          "ade_m": 0.0017548617298015407,
+          "fde_m": 0.0035078657444436354
+        },
+        "reranked_minus_CV": {
+          "ade_m": 0.033966228447039976,
+          "fde_m": -0.0013577166037428354
+        },
+        "original_minus_CV": {
+          "ade_m": 0.03221136671723843,
+          "fde_m": -0.004865582348186497
+        },
+        "entire_unchanged_candidate_set_oracle": {
+          "ade_m": 0.3353599794732448,
+          "fde_m": 0.6594442267844911
+        }
+      },
+      "four_site_switch_fraction": 0.006875,
+      "four_site_original_probability_before_after": [
+        0.38911957412711184,
+        0.3889690348122546
+      ],
+      "four_site_event_rates": {
+        "start": {
+          "positive": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          },
+          "negative": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          }
+        },
+        "stop": {
+          "positive": {
+            "original_rate": 0.03511904761904762,
+            "reranked_rate": 0.03511904761904762
+          },
+          "negative": {
+            "original_rate": 0.0012804097311139564,
+            "reranked_rate": 0.0012804097311139564
+          }
+        },
+        "left": {
+          "positive": {
+            "original_rate": 0.10292959964012595,
+            "reranked_rate": 0.10292959964012595
+          },
+          "negative": {
+            "original_rate": 0.002470812350289519,
+            "reranked_rate": 0.005587619532620381
+          }
+        },
+        "right": {
+          "positive": {
+            "original_rate": 0.0889423076923077,
+            "reranked_rate": 0.0889423076923077
+          },
+          "negative": {
+            "original_rate": 0.0025173807904481224,
+            "reranked_rate": 0.004387704979974307
+          }
+        },
+        "maintain": {
+          "positive": {
+            "original_rate": 0.9939647141783887,
+            "reranked_rate": 0.9889723946699401
+          },
+          "negative": {
+            "original_rate": 0.9092863914354836,
+            "reranked_rate": 0.9066822247688169
+          }
+        }
+      }
+    },
+    "end_to_end": {
+      "sites_and_pooled": {
+        "pooled": {
+          "windows": 1482,
+          "clips": 47,
+          "original": {
+            "ade_m": 0.6378393824883581,
+            "fde_m": 1.2916810356097699
+          },
+          "reranked": {
+            "ade_m": 0.6564905545891058,
+            "fde_m": 1.324839723801564
+          },
+          "cv": {
+            "ade_m": 0.6611704303473445,
+            "fde_m": 1.4149150681143354
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.4386415827191946,
+            "fde_m": 0.8107168541968937
+          },
+          "switched": 98,
+          "mode_changes_original_row_new_column": [
+            [
+              135,
+              0,
+              0,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              57,
+              0,
+              2,
+              0
+            ],
+            [
+              3,
+              1,
+              56,
+              890,
+              17,
+              1
+            ],
+            [
+              15,
+              0,
+              0,
+              0,
+              302,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 49,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 32,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 1433,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 72,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 53,
+                "original_event": 3,
+                "reranked_event": 0,
+                "any_mode_event": 14,
+                "event_gained": 0,
+                "event_lost": 3,
+                "original_rate": 0.05660377358490566,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 1429,
+                "original_event": 2,
+                "reranked_event": 0,
+                "any_mode_event": 62,
+                "event_gained": 0,
+                "event_lost": 2,
+                "original_rate": 0.0013995801259622112,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 214,
+                "original_event": 29,
+                "reranked_event": 16,
+                "any_mode_event": 120,
+                "event_gained": 0,
+                "event_lost": 13,
+                "original_rate": 0.13551401869158877,
+                "reranked_rate": 0.07476635514018691
+              },
+              "negative": {
+                "windows": 1268,
+                "original_event": 7,
+                "reranked_event": 17,
+                "any_mode_event": 338,
+                "event_gained": 10,
+                "event_lost": 0,
+                "original_rate": 0.005520504731861199,
+                "reranked_rate": 0.013406940063091483
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 208,
+                "original_event": 29,
+                "reranked_event": 37,
+                "any_mode_event": 120,
+                "event_gained": 21,
+                "event_lost": 13,
+                "original_rate": 0.13942307692307693,
+                "reranked_rate": 0.1778846153846154
+              },
+              "negative": {
+                "windows": 1274,
+                "original_event": 9,
+                "reranked_event": 33,
+                "any_mode_event": 369,
+                "event_gained": 30,
+                "event_lost": 6,
+                "original_rate": 0.00706436420722135,
+                "reranked_rate": 0.025902668759811617
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 975,
+                "original_event": 962,
+                "reranked_event": 932,
+                "any_mode_event": 974,
+                "event_gained": 5,
+                "event_lost": 35,
+                "original_rate": 0.9866666666666667,
+                "reranked_rate": 0.9558974358974359
+              },
+              "negative": {
+                "windows": 507,
+                "original_event": 441,
+                "reranked_event": 447,
+                "any_mode_event": 489,
+                "event_gained": 32,
+                "event_lost": 26,
+                "original_rate": 0.8698224852071006,
+                "reranked_rate": 0.8816568047337278
+              }
+            }
+          }
+        },
+        "america_crossroad": {
+          "windows": 816,
+          "clips": 14,
+          "original": {
+            "ade_m": 0.8346660802558372,
+            "fde_m": 1.6225303898755508
+          },
+          "reranked": {
+            "ade_m": 0.8575732717117684,
+            "fde_m": 1.661812552504399
+          },
+          "cv": {
+            "ade_m": 0.9476538962432385,
+            "fde_m": 1.941466005193391
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.5831097511989158,
+            "fde_m": 1.0243091879970212
+          },
+          "switched": 78,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              1,
+              56,
+              738,
+              17,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 27,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 10,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 789,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 35,
+                "original_event": 2,
+                "reranked_event": 0,
+                "any_mode_event": 10,
+                "event_gained": 0,
+                "event_lost": 2,
+                "original_rate": 0.05714285714285714,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 781,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 19,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.0012804097311139564,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 152,
+                "original_event": 26,
+                "reranked_event": 14,
+                "any_mode_event": 89,
+                "event_gained": 0,
+                "event_lost": 12,
+                "original_rate": 0.17105263157894737,
+                "reranked_rate": 0.09210526315789473
+              },
+              "negative": {
+                "windows": 664,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 125,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 156,
+                "original_event": 27,
+                "reranked_event": 35,
+                "any_mode_event": 82,
+                "event_gained": 21,
+                "event_lost": 13,
+                "original_rate": 0.17307692307692307,
+                "reranked_rate": 0.22435897435897437
+              },
+              "negative": {
+                "windows": 660,
+                "original_event": 4,
+                "reranked_event": 27,
+                "any_mode_event": 117,
+                "event_gained": 26,
+                "event_lost": 3,
+                "original_rate": 0.006060606060606061,
+                "reranked_rate": 0.04090909090909091
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 458,
+                "original_event": 456,
+                "reranked_event": 437,
+                "any_mode_event": 458,
+                "event_gained": 2,
+                "event_lost": 21,
+                "original_rate": 0.9956331877729258,
+                "reranked_rate": 0.9541484716157205
+              },
+              "negative": {
+                "windows": 358,
+                "original_event": 300,
+                "reranked_event": 303,
+                "any_mode_event": 341,
+                "event_gained": 29,
+                "event_lost": 26,
+                "original_rate": 0.8379888268156425,
+                "reranked_rate": 0.8463687150837989
+              }
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 84,
+          "clips": 9,
+          "original": {
+            "ade_m": 0.4077236069220684,
+            "fde_m": 0.94186850313868
+          },
+          "reranked": {
+            "ade_m": 0.4072140890256314,
+            "fde_m": 0.9309489124735849
+          },
+          "cv": {
+            "ade_m": 0.3703417260001086,
+            "fde_m": 0.9319507432849343
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.27119072371375763,
+            "fde_m": 0.5733481991014375
+          },
+          "switched": 2,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              57,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              23,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 8,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 76,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 81,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 7,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 4,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 80,
+                "original_event": 0,
+                "reranked_event": 1,
+                "any_mode_event": 24,
+                "event_gained": 1,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0125
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 71,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 17,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.014084507042253521,
+                "reranked_rate": 0.0
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 57,
+                "original_event": 56,
+                "reranked_event": 56,
+                "any_mode_event": 57,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.9824561403508771,
+                "reranked_rate": 0.9824561403508771
+              },
+              "negative": {
+                "windows": 27,
+                "original_event": 26,
+                "reranked_event": 26,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9629629629629629,
+                "reranked_rate": 0.9629629629629629
+              }
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "clips": 11,
+          "original": {
+            "ade_m": 0.3979913246350282,
+            "fde_m": 0.8690631006898163
+          },
+          "reranked": {
+            "ade_m": 0.4011897004845548,
+            "fde_m": 0.8771892313080564
+          },
+          "cv": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2567567317168387,
+            "fde_m": 0.5326089121513556
+          },
+          "switched": 10,
+          "mode_changes_original_row_new_column": [
+            [
+              135,
+              0,
+              0,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              129,
+              0,
+              0
+            ],
+            [
+              7,
+              0,
+              0,
+              0,
+              158,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 12,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 12,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 12,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 3,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.08333333333333333,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 30,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.002380952380952381,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 45,
+                "original_event": 2,
+                "reranked_event": 1,
+                "any_mode_event": 22,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.044444444444444446,
+                "reranked_rate": 0.022222222222222223
+              },
+              "negative": {
+                "windows": 387,
+                "original_event": 5,
+                "reranked_event": 7,
+                "any_mode_event": 98,
+                "event_gained": 2,
+                "event_lost": 0,
+                "original_rate": 0.012919896640826873,
+                "reranked_rate": 0.01808785529715762
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 31,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 401,
+                "original_event": 3,
+                "reranked_event": 6,
+                "any_mode_event": 194,
+                "event_gained": 4,
+                "event_lost": 1,
+                "original_rate": 0.007481296758104738,
+                "reranked_rate": 0.014962593516209476
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 336,
+                "original_event": 329,
+                "reranked_event": 324,
+                "any_mode_event": 335,
+                "event_gained": 1,
+                "event_lost": 6,
+                "original_rate": 0.9791666666666666,
+                "reranked_rate": 0.9642857142857143
+              },
+              "negative": {
+                "windows": 96,
+                "original_event": 91,
+                "reranked_event": 94,
+                "any_mode_event": 96,
+                "event_gained": 3,
+                "event_lost": 0,
+                "original_rate": 0.9479166666666666,
+                "reranked_rate": 0.9791666666666666
+              }
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 150,
+          "clips": 13,
+          "original": {
+            "ade_m": 0.386729387567981,
+            "fde_m": 0.904895219157208
+          },
+          "reranked": {
+            "ade_m": 0.4374618539784697,
+            "fde_m": 1.0015198083831185
+          },
+          "cv": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785622
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2703355981193394,
+            "fde_m": 0.5826518782688168
+          },
+          "switched": 8,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              142,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 2,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 2,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 148,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 0,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 147,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 137,
+                "original_event": 2,
+                "reranked_event": 9,
+                "any_mode_event": 91,
+                "event_gained": 7,
+                "event_lost": 0,
+                "original_rate": 0.014598540145985401,
+                "reranked_rate": 0.06569343065693431
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 8,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 4,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.125,
+                "reranked_rate": 0.125
+              },
+              "negative": {
+                "windows": 142,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 41,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.007042253521126761,
+                "reranked_rate": 0.0
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 124,
+                "original_event": 121,
+                "reranked_event": 115,
+                "any_mode_event": 124,
+                "event_gained": 1,
+                "event_lost": 7,
+                "original_rate": 0.9758064516129032,
+                "reranked_rate": 0.9274193548387096
+              },
+              "negative": {
+                "windows": 26,
+                "original_event": 24,
+                "reranked_event": 24,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9230769230769231,
+                "reranked_rate": 0.9230769230769231
+              }
+            }
+          }
+        }
+      },
+      "four_site_m": {
+        "original": {
+          "ade_m": 0.5067775998452287,
+          "fde_m": 1.0845893032153138
+        },
+        "reranked": {
+          "ade_m": 0.5258597288001061,
+          "fde_m": 1.1178676261672897
+        },
+        "direct_cv": {
+          "ade_m": 0.48387382427755443,
+          "fde_m": 1.1045585126825768
+        },
+        "reranked_minus_original": {
+          "ade_m": 0.019082128954877542,
+          "fde_m": 0.03327832295197571
+        },
+        "reranked_minus_CV": {
+          "ade_m": 0.04198590452255143,
+          "fde_m": 0.013309113484712538
+        },
+        "original_minus_CV": {
+          "ade_m": 0.022903775567673895,
+          "fde_m": -0.019969209467262956
+        },
+        "entire_unchanged_candidate_set_oracle": {
+          "ade_m": 0.3453482011872129,
+          "fde_m": 0.6782295443796578
+        }
+      },
+      "four_site_switch_fraction": 0.04896981014628073,
+      "four_site_original_probability_before_after": [
+        0.28463229851170835,
+        0.283802514689871
+      ],
+      "four_site_event_rates": {
+        "start": {
+          "positive": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          },
+          "negative": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          }
+        },
+        "stop": {
+          "positive": {
+            "original_rate": 0.03511904761904762,
+            "reranked_rate": 0.0
+          },
+          "negative": {
+            "original_rate": 0.0009153405280165844,
+            "reranked_rate": 0.0
+          }
+        },
+        "left": {
+          "positive": {
+            "original_rate": 0.07310503823661718,
+            "reranked_rate": 0.04781264057579847
+          },
+          "negative": {
+            "original_rate": 0.006879609196703069,
+            "reranked_rate": 0.024070321488522985
+          }
+        },
+        "right": {
+          "positive": {
+            "original_rate": 0.09375,
+            "reranked_rate": 0.10657051282051283
+          },
+          "negative": {
+            "original_rate": 0.008667165845522769,
+            "reranked_rate": 0.013967921106325096
+          }
+        },
+        "maintain": {
+          "positive": {
+            "original_rate": 0.9832656116008431,
+            "reranked_rate": 0.9570774202727553
+          },
+          "negative": {
+            "original_rate": 0.9179863448805488,
+            "reranked_rate": 0.9278938169475879
+          }
+        }
+      }
+    },
+    "detached": {
+      "sites_and_pooled": {
+        "pooled": {
+          "windows": 1482,
+          "clips": 47,
+          "original": {
+            "ade_m": 0.6235960222467166,
+            "fde_m": 1.2609793356993475
+          },
+          "reranked": {
+            "ade_m": 0.6236416127537511,
+            "fde_m": 1.2612983219016305
+          },
+          "cv": {
+            "ade_m": 0.6611704303473445,
+            "fde_m": 1.4149150681143354
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.4342528208875188,
+            "fde_m": 0.8054400934961073
+          },
+          "switched": 12,
+          "mode_changes_original_row_new_column": [
+            [
+              1129,
+              0,
+              1,
+              0,
+              3,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              84,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              103,
+              0
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              0,
+              154
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 49,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 49,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 1433,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 129,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 53,
+                "original_event": 3,
+                "reranked_event": 2,
+                "any_mode_event": 18,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.05660377358490566,
+                "reranked_rate": 0.03773584905660377
+              },
+              "negative": {
+                "windows": 1429,
+                "original_event": 6,
+                "reranked_event": 4,
+                "any_mode_event": 93,
+                "event_gained": 0,
+                "event_lost": 2,
+                "original_rate": 0.004198740377886634,
+                "reranked_rate": 0.0027991602519244225
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 214,
+                "original_event": 35,
+                "reranked_event": 37,
+                "any_mode_event": 130,
+                "event_gained": 2,
+                "event_lost": 0,
+                "original_rate": 0.16355140186915887,
+                "reranked_rate": 0.17289719626168223
+              },
+              "negative": {
+                "windows": 1268,
+                "original_event": 2,
+                "reranked_event": 4,
+                "any_mode_event": 461,
+                "event_gained": 3,
+                "event_lost": 1,
+                "original_rate": 0.0015772870662460567,
+                "reranked_rate": 0.0031545741324921135
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 208,
+                "original_event": 24,
+                "reranked_event": 24,
+                "any_mode_event": 129,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.11538461538461539,
+                "reranked_rate": 0.11538461538461539
+              },
+              "negative": {
+                "windows": 1274,
+                "original_event": 10,
+                "reranked_event": 10,
+                "any_mode_event": 472,
+                "event_gained": 2,
+                "event_lost": 2,
+                "original_rate": 0.007849293563579277,
+                "reranked_rate": 0.007849293563579277
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 975,
+                "original_event": 961,
+                "reranked_event": 961,
+                "any_mode_event": 975,
+                "event_gained": 2,
+                "event_lost": 2,
+                "original_rate": 0.9856410256410256,
+                "reranked_rate": 0.9856410256410256
+              },
+              "negative": {
+                "windows": 507,
+                "original_event": 441,
+                "reranked_event": 440,
+                "any_mode_event": 487,
+                "event_gained": 2,
+                "event_lost": 3,
+                "original_rate": 0.8698224852071006,
+                "reranked_rate": 0.8678500986193294
+              }
+            }
+          }
+        },
+        "america_crossroad": {
+          "windows": 816,
+          "clips": 14,
+          "original": {
+            "ade_m": 0.7989331908287827,
+            "fde_m": 1.5417335755202841
+          },
+          "reranked": {
+            "ade_m": 0.7989331908287827,
+            "fde_m": 1.5417335755202841
+          },
+          "cv": {
+            "ade_m": 0.9476538962432385,
+            "fde_m": 1.941466005193391
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.5739958625616549,
+            "fde_m": 1.0002509319962383
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              816,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 27,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 27,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 789,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 58,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 35,
+                "original_event": 2,
+                "reranked_event": 2,
+                "any_mode_event": 9,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.05714285714285714,
+                "reranked_rate": 0.05714285714285714
+              },
+              "negative": {
+                "windows": 781,
+                "original_event": 4,
+                "reranked_event": 4,
+                "any_mode_event": 21,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.005121638924455826,
+                "reranked_rate": 0.005121638924455826
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 152,
+                "original_event": 31,
+                "reranked_event": 31,
+                "any_mode_event": 101,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.20394736842105263,
+                "reranked_rate": 0.20394736842105263
+              },
+              "negative": {
+                "windows": 664,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 238,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 156,
+                "original_event": 22,
+                "reranked_event": 22,
+                "any_mode_event": 88,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.14102564102564102,
+                "reranked_rate": 0.14102564102564102
+              },
+              "negative": {
+                "windows": 660,
+                "original_event": 4,
+                "reranked_event": 4,
+                "any_mode_event": 200,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.006060606060606061,
+                "reranked_rate": 0.006060606060606061
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 458,
+                "original_event": 452,
+                "reranked_event": 452,
+                "any_mode_event": 458,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9868995633187773,
+                "reranked_rate": 0.9868995633187773
+              },
+              "negative": {
+                "windows": 358,
+                "original_event": 301,
+                "reranked_event": 301,
+                "any_mode_event": 340,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.840782122905028,
+                "reranked_rate": 0.840782122905028
+              }
+            }
+          }
+        },
+        "italy_park": {
+          "windows": 84,
+          "clips": 9,
+          "original": {
+            "ade_m": 0.4409826019463127,
+            "fde_m": 1.0021022785756728
+          },
+          "reranked": {
+            "ade_m": 0.4409826019463127,
+            "fde_m": 1.0021022785756728
+          },
+          "cv": {
+            "ade_m": 0.3703417260001086,
+            "fde_m": 0.9319507432849343
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.28351858697393595,
+            "fde_m": 0.6304060357237107
+          },
+          "switched": 0,
+          "mode_changes_original_row_new_column": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              84,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 8,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 76,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 2,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 81,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 9,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 4,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 1,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 80,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 20,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 13,
+                "original_event": 1,
+                "reranked_event": 1,
+                "any_mode_event": 10,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.07692307692307693,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 71,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 36,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 57,
+                "original_event": 57,
+                "reranked_event": 57,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 1.0,
+                "reranked_rate": 1.0
+              },
+              "negative": {
+                "windows": 27,
+                "original_event": 26,
+                "reranked_event": 26,
+                "any_mode_event": 26,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.9629629629629629,
+                "reranked_rate": 0.9629629629629629
+              }
+            }
+          }
+        },
+        "japan_crossroad": {
+          "windows": 432,
+          "clips": 11,
+          "original": {
+            "ade_m": 0.41239421090230327,
+            "fde_m": 0.9106340698454197
+          },
+          "reranked": {
+            "ade_m": 0.4119402296957346,
+            "fde_m": 0.910773261797294
+          },
+          "cv": {
+            "ade_m": 0.2937423483200088,
+            "fde_m": 0.7186574926734197
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.25644774987623387,
+            "fde_m": 0.544517934479435
+          },
+          "switched": 7,
+          "mode_changes_original_row_new_column": [
+            [
+              239,
+              0,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              32,
+              0
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              0,
+              154
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 12,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 12,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 57,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 12,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 7,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.08333333333333333,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 420,
+                "original_event": 2,
+                "reranked_event": 0,
+                "any_mode_event": 55,
+                "event_gained": 0,
+                "event_lost": 2,
+                "original_rate": 0.004761904761904762,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 45,
+                "original_event": 4,
+                "reranked_event": 5,
+                "any_mode_event": 20,
+                "event_gained": 1,
+                "event_lost": 0,
+                "original_rate": 0.08888888888888889,
+                "reranked_rate": 0.1111111111111111
+              },
+              "negative": {
+                "windows": 387,
+                "original_event": 2,
+                "reranked_event": 2,
+                "any_mode_event": 108,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.00516795865633075,
+                "reranked_rate": 0.00516795865633075
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 31,
+                "original_event": 0,
+                "reranked_event": 1,
+                "any_mode_event": 25,
+                "event_gained": 1,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.03225806451612903
+              },
+              "negative": {
+                "windows": 401,
+                "original_event": 3,
+                "reranked_event": 5,
+                "any_mode_event": 174,
+                "event_gained": 2,
+                "event_lost": 0,
+                "original_rate": 0.007481296758104738,
+                "reranked_rate": 0.012468827930174564
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 336,
+                "original_event": 331,
+                "reranked_event": 331,
+                "any_mode_event": 336,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.9851190476190477,
+                "reranked_rate": 0.9851190476190477
+              },
+              "negative": {
+                "windows": 96,
+                "original_event": 89,
+                "reranked_event": 88,
+                "any_mode_event": 95,
+                "event_gained": 1,
+                "event_lost": 2,
+                "original_rate": 0.9270833333333334,
+                "reranked_rate": 0.9166666666666666
+              }
+            }
+          }
+        },
+        "thailand_street": {
+          "windows": 150,
+          "clips": 13,
+          "original": {
+            "ade_m": 0.3802865572004171,
+            "fde_m": 0.8876417887220236
+          },
+          "reranked": {
+            "ade_m": 0.3820444572848353,
+            "fde_m": 0.8903924995791834
+          },
+          "cv": {
+            "ade_m": 0.32375732654686196,
+            "fde_m": 0.8261598095785622
+          },
+          "minADE_and_independent_minFDE": {
+            "ade_m": 0.2705404496843265,
+            "fde_m": 0.5951440223759509
+          },
+          "switched": 5,
+          "mode_changes_original_row_new_column": [
+            [
+              74,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              71,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "event_counts": {
+            "start": {
+              "positive": {
+                "windows": 2,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 2,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 148,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "stop": {
+              "positive": {
+                "windows": 3,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 0,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 147,
+                "original_event": 0,
+                "reranked_event": 0,
+                "any_mode_event": 8,
+                "event_gained": 0,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.0
+              }
+            },
+            "left": {
+              "positive": {
+                "windows": 13,
+                "original_event": 0,
+                "reranked_event": 1,
+                "any_mode_event": 8,
+                "event_gained": 1,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.07692307692307693
+              },
+              "negative": {
+                "windows": 137,
+                "original_event": 0,
+                "reranked_event": 2,
+                "any_mode_event": 95,
+                "event_gained": 2,
+                "event_lost": 0,
+                "original_rate": 0.0,
+                "reranked_rate": 0.014598540145985401
+              }
+            },
+            "right": {
+              "positive": {
+                "windows": 8,
+                "original_event": 1,
+                "reranked_event": 0,
+                "any_mode_event": 6,
+                "event_gained": 0,
+                "event_lost": 1,
+                "original_rate": 0.125,
+                "reranked_rate": 0.0
+              },
+              "negative": {
+                "windows": 142,
+                "original_event": 3,
+                "reranked_event": 1,
+                "any_mode_event": 62,
+                "event_gained": 0,
+                "event_lost": 2,
+                "original_rate": 0.02112676056338028,
+                "reranked_rate": 0.007042253521126761
+              }
+            },
+            "maintain": {
+              "positive": {
+                "windows": 124,
+                "original_event": 121,
+                "reranked_event": 121,
+                "any_mode_event": 124,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.9758064516129032,
+                "reranked_rate": 0.9758064516129032
+              },
+              "negative": {
+                "windows": 26,
+                "original_event": 25,
+                "reranked_event": 25,
+                "any_mode_event": 26,
+                "event_gained": 1,
+                "event_lost": 1,
+                "original_rate": 0.9615384615384616,
+                "reranked_rate": 0.9615384615384616
+              }
+            }
+          }
+        }
+      },
+      "four_site_m": {
+        "original": {
+          "ade_m": 0.508149140219454,
+          "fde_m": 1.08552792816585
+        },
+        "reranked": {
+          "ade_m": 0.5084751199389164,
+          "fde_m": 1.0862504038681087
+        },
+        "direct_cv": {
+          "ade_m": 0.48387382427755443,
+          "fde_m": 1.1045585126825768
+        },
+        "reranked_minus_original": {
+          "ade_m": 0.00032597971946244665,
+          "fde_m": 0.0007224757022585065
+        },
+        "reranked_minus_CV": {
+          "ade_m": 0.02460129566136192,
+          "fde_m": -0.018308108814468288
+        },
+        "original_minus_CV": {
+          "ade_m": 0.024275315941899467,
+          "fde_m": -0.019030584516726786
+        },
+        "entire_unchanged_candidate_set_oracle": {
+          "ade_m": 0.3461256622740378,
+          "fde_m": 0.6925797311438336
+        }
+      },
+      "four_site_switch_fraction": 0.012384259259259258,
+      "four_site_original_probability_before_after": [
+        0.3743808232851609,
+        0.3740676986919516
+      ],
+      "four_site_event_rates": {
+        "start": {
+          "positive": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          },
+          "negative": {
+            "original_rate": 0.0,
+            "reranked_rate": 0.0
+          }
+        },
+        "stop": {
+          "positive": {
+            "original_rate": 0.03511904761904762,
+            "reranked_rate": 0.014285714285714285
+          },
+          "negative": {
+            "original_rate": 0.002470885921590147,
+            "reranked_rate": 0.0012804097311139564
+          }
+        },
+        "left": {
+          "positive": {
+            "original_rate": 0.07320906432748538,
+            "reranked_rate": 0.09799538911381016
+          },
+          "negative": {
+            "original_rate": 0.0012919896640826874,
+            "reranked_rate": 0.004941624700579038
+          }
+        },
+        "right": {
+          "positive": {
+            "original_rate": 0.08573717948717949,
+            "reranked_rate": 0.06255169561621174
+          },
+          "negative": {
+            "original_rate": 0.00866716584552277,
+            "reranked_rate": 0.006392921877976847
+          }
+        },
+        "maintain": {
+          "positive": {
+            "original_rate": 0.986956265637682,
+            "reranked_rate": 0.986956265637682
+          },
+          "negative": {
+            "original_rate": 0.9230917201849465,
+            "reranked_rate": 0.9204875535182798
+          }
+        }
+      },
+      "primary_paired_clip_interval_m": {
+        "ade_m": [
+          -0.001780917035076495,
+          0.002125826425199636
+        ],
+        "fde_m": [
+          -0.0036550094284274423,
+          0.00453195355857062
+        ]
+      }
+    }
+  }
+}
