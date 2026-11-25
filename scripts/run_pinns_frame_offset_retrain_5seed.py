@@ -33,8 +33,10 @@ def stage_three_us_videos_and_model(scratch: Path) -> tuple[Path, Path]:
     download_zip(PINNS_URL, pinns, 973657335, DRIVE_ID)
     download_zip(MODEL_URL, model_zip, 50799818)
     ds = scratch / "pinns_subset"
+    ds.mkdir(parents=True, exist_ok=True)
     wanted_mp4 = {f"videos/{c.rsplit('_', 1)[0]}/videos/ori_{c.rsplit('_', 1)[1]}.mp4" for c in CLIPS}
     with zipfile.ZipFile(pinns) as arc:
+        (ds / "archive_members.txt").write_text("\n".join(arc.namelist()) + "\n", encoding="utf-8")
         for name in arc.namelist():
             if re.fullmatch(r"labels/[A-Za-z0-9_]+_[0-9]+\.txt", name) or name.endswith("/calib.json") or name in wanted_mp4:
                 extract_member(arc, name, ds / name)
