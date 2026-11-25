@@ -185,7 +185,7 @@ def _fit_base_and_graph(seed: int, data: dict, tr_ids: np.ndarray) -> tuple[O2Nu
     base = O2BioEqJointForecaster(pose_mode="bio_pose", action_mode="none")
     for n, p in base.named_parameters():
         p.requires_grad = not (n.startswith("bio_") or n == "gate_logit")
-    w_tr = make_site_weights(data["site"][tr_ids], torch.device("cpu"))
+    w_tr = make_site_weights(data["site"], tr_ids)
     hist, truth = data["history"][tr_ids], data["truth"][tr_ids]
     bseq, qbio = data["bio_seq"][tr_ids], data["q_bio"][tr_ids]
     edg, car, msk = data["edges"][tr_ids], data["is_car"][tr_ids], data["nbr_mask"][tr_ids]

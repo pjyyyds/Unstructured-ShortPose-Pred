@@ -69,6 +69,29 @@ class TestWave6O2GraphAndRobustness(unittest.TestCase):
         q90 = conformal_quantile(np.arange(1, 100, dtype=np.float64), 0.10)
         self.assertEqual(q90, 90.0)
 
+    def test_fit_and_eval_graph_pipeline_smoke(self) -> None:
+        from scripts.run_o2_hetero_graph_pinns_and_dut import _fit_base_and_graph, eval_pinns_rows, select_graph_scale
+        torch.manual_seed(3)
+        data = {
+            "site": np.array(["s1"] * 4 + ["s2"] * 4 + ["s3"] * 4 + ["s4"] * 4, dtype="<U24"),
+            "clip": np.array([f"c{i // 2}" for i in range(16)], dtype=str),
+            "history": torch.randn(16, 5, 2, dtype=torch.float64) * 0.2,
+            "truth": torch.randn(16, 30, 2, dtype=torch.float64) * 0.5,
+            "bio_seq": torch.randn(16, 5, 11),
+            "q_bio": torch.rand(16),
+            "edges": torch.randn(16, 12, 9),
+            "is_car": (torch.rand(16, 12) > 0.5).float(),
+            "nbr_mask": (torch.rand(16, 12) > 0.3).float(),
+        }
+        data["history"][:, -1] = 0.0
+        tr_ids = np.arange(12)
+        te_ids = np.arange(12, 16)
+        gn, bsc = _fit_base_and_graph(42, data, tr_ids)
+        gsc = select_graph_scale(42, data, tr_ids)
+        res = eval_pinns_rows(gn, data, te_ids, bsc, gsc, "real")
+        self.assertEqual(res.shape, (4, 4))
+        self.assertTrue(np.isfinite(res).all())
+
 
 if __name__ == "__main__":
     unittest.main()
