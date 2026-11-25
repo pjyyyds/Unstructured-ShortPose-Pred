@@ -31,12 +31,54 @@ SPLIT_URL = "https://raw.githubusercontent.com/AIR-THU/DAIR-V2X/c885c54af0c34bc5
 SPLIT_SHA = "0a59332221f3618639f34fb70678d03c5221ab80fd69f2cf41acffca0d8859fd"
 
 
+RESILIENT_SPAN = '''
+_LOCAL_ZIPS = {}
+def _ensure_local_zip(volume, fid, size):
+    zp = BASE / f"{volume}_full.zip"
+    if not (zp.is_file() and zp.stat().st_size == size):
+        import subprocess, sys
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "gdown"], check=True)
+        subprocess.run([sys.executable, "-m", "gdown", f"https://drive.google.com/uc?id={fid}", "-O", str(zp)], check=True)
+        assert zp.stat().st_size == size, (zp.stat().st_size, size)
+    _LOCAL_ZIPS[volume] = zp
+    return zp
+
+def span(volume, lo, hi):
+    fid, size = VOLUMES[volume]
+    if not 0 <= lo <= hi < size:
+        raise ValueError("range")
+    if volume in _LOCAL_ZIPS:
+        with _LOCAL_ZIPS[volume].open("rb") as fh:
+            fh.seek(lo)
+            return fh.read(hi - lo + 1)
+    uri = "https://drive.usercontent.google.com/download?id=" + fid + "&confirm=t"
+    for n in range(5):
+        try:
+            req = urllib.request.Request(uri, headers={"Range": f"bytes={lo}-{hi}", "Accept-Encoding": "identity", "User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                if resp.status == 206 and resp.headers.get("Content-Range") == f"bytes {lo}-{hi}/{size}":
+                    blob = resp.read(hi - lo + 2)
+                    if len(blob) == hi - lo + 1:
+                        return blob
+        except OSError:
+            pass
+        time.sleep(1.5 * (n + 1))
+    zp = _ensure_local_zip(volume, fid, size)
+    with zp.open("rb") as fh:
+        fh.seek(lo)
+        return fh.read(hi - lo + 1)
+'''
+
+
 def stage_dair_54(repo_root: Path, work_dir: Path, onnx_path: Path) -> dict:
     src_dir = repo_root / "reviews" / "dair_roadside_external"
     exp_dir = work_dir / "dair_exp"
     exp_dir.mkdir(parents=True, exist_ok=True)
     for fname in ("full_range.py", "third_coverage.py", "third_cohort_freeze.json", "expansion_freeze.txt"):
         shutil.copy2(src_dir / fname, exp_dir / fname)
+    fr_txt = (exp_dir / "full_range.py").read_text().replace("max_workers=10", "max_workers=2").replace("max_workers=5", "max_workers=2")
+    fr_txt = fr_txt.split("if __name__=='__main__':")[0] + "\n" + RESILIENT_SPAN + "\n"
+    (exp_dir / "full_range.py").write_text(fr_txt)
     raw_split = urllib.request.urlopen(SPLIT_URL, timeout=60).read()
     if hashlib.sha256(raw_split).hexdigest() != SPLIT_SHA:
         raise ValueError("Unexpected DAIR-V2X split SHA-256")
@@ -200,6 +242,22 @@ def main() -> None:
 
     torch.set_num_threads(4)
     repo_root = Path(__file__).resolve().parents[1]
+    with tempfile.TemporaryDirectory(prefix="dair_o2_") as tmp:
+        tmp_p = Path(tmp)
+        onnx_p = args.onnx
+        if onnx_p is None or not onnx_p.is_file():
+            mzip = tmp_p / "rtmpose.zip"
+            download_zip(MODEL_URL, mzip, 50799818)
+            with zipfile.ZipFile(mzip) as zf:
+                cand = [n for n in zf.namelist() if Path(n).name == "end2end.onnx" and "__MACOSX" not in Path(n).parts]
+                blob = zf.read(cand[0])
+                if hashlib.sha256(blob).hexdigest() != MODEL_SHA:
+                    raise ValueError("RTMPose ONNX SHA-256 mismatch")
+                onnx_p = tmp_p / "end2end.onnx"
+                onnx_p.write_bytes(blob)
+        dair = stage_dair_54(repo_root, tmp_p, onnx_p)
+        print("Staged all 54 DAIR-V2X roadside windows and RTMPose keypoints", flush=True)
+
     tensors, idx_by_site, keys, _ = prepare_cohort(args.pinns_metadata, args.pose_npz)
     site_arr = np.empty(len(keys), dtype="<U24")
     for s, ids in idx_by_site.items():
@@ -225,21 +283,6 @@ def main() -> None:
             tr_ids = np.flatnonzero(site_arr != s)
             ensemble.append(fit_motion_and_bio(seed, 5, pinns_data, tr_ids))
         print(f"Fitted PINNS 4-fold O(2) BioEq for seed={seed}", flush=True)
-
-    with tempfile.TemporaryDirectory(prefix="dair_o2_") as tmp:
-        tmp_p = Path(tmp)
-        onnx_p = args.onnx
-        if onnx_p is None or not onnx_p.is_file():
-            mzip = tmp_p / "rtmpose.zip"
-            download_zip(MODEL_URL, mzip, 50799818)
-            with zipfile.ZipFile(mzip) as zf:
-                cand = [n for n in zf.namelist() if Path(n).name == "end2end.onnx" and "__MACOSX" not in Path(n).parts]
-                blob = zf.read(cand[0])
-                if hashlib.sha256(blob).hexdigest() != MODEL_SHA:
-                    raise ValueError("RTMPose ONNX SHA-256 mismatch")
-                onnx_p = tmp_p / "end2end.onnx"
-                onnx_p.write_bytes(blob)
-        dair = stage_dair_54(repo_root, tmp_p, onnx_p)
 
     all_m = np.ones(len(dair["actors"]), dtype=bool)
     strict_m = np.max(np.abs(np.diff(dair["ts_us"][:, :5], axis=1) - 100000), axis=1) <= 1000

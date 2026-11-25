@@ -1,0 +1,217 @@
+{
+  "archive_sha256": "b5a65fbbd3c18029ca8779d946c7efc8bf5b9d6d54277b0d3671622b89ff49ad",
+  "kaggle_script_version_id": 373989788,
+  "hardware": {
+    "selected_torch_device": "cuda:0",
+    "device_name": "Tesla T4",
+    "compute_capability": [
+      7,
+      5
+    ],
+    "total_memory_bytes": 15636037632,
+    "architecture": "x86_64",
+    "system": "Linux",
+    "kernel": "6.18.55+",
+    "python": "3.13.16",
+    "pytorch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "cudnn": 92700,
+    "device_tree_model": null,
+    "device_tree_compatible": null,
+    "tegra_release": null,
+    "proposal_budget": null
+  },
+  "runner_sha256": "8409a475f81d494a023aa6c341c8b4d4b7c3150c500cb8aadebba148c8ea8084",
+  "protocol_sha256": "933949fa5a8df237f785027499a18da55bb43966d4191dfc16d4c2d30fa51bda",
+  "cells_verified_from_raw_100_repeats": 72,
+  "key_cells": {
+    "T5_N1": {
+      "two_scene_equal": {
+        "wall_mean_ms": 12.294907069999999,
+        "wall_median_ms": 12.10385875,
+        "wall_p95_ms": 13.578868974999999,
+        "cuda_event_mean_ms": 12.171322560310363,
+        "cuda_event_p95_ms": 13.003981733322142
+      },
+      "by_site": {
+        "japan_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 12.366873059999998,
+            "median_ms": 12.1833545,
+            "p95_ms": 13.58457865,
+            "min_ms": 11.664203,
+            "max_ms": 14.57275
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 12.252311401367187,
+            "median_ms": 12.119088172912598,
+            "p95_ms": 13.22732172012329,
+            "min_ms": 11.616191864013672,
+            "max_ms": 14.785440444946289
+          }
+        },
+        "america_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 12.22294108,
+            "median_ms": 12.024363000000001,
+            "p95_ms": 13.5731593,
+            "min_ms": 11.571911,
+            "max_ms": 14.74222
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 12.09033371925354,
+            "median_ms": 12.008944034576416,
+            "p95_ms": 12.780641746520995,
+            "min_ms": 11.355168342590332,
+            "max_ms": 13.543423652648926
+          }
+        }
+      }
+    },
+    "T5_N12": {
+      "two_scene_equal": {
+        "wall_mean_ms": 14.76242298,
+        "wall_median_ms": 14.7424735,
+        "wall_p95_ms": 15.962732975000002,
+        "cuda_event_mean_ms": 14.350951962471008,
+        "cuda_event_p95_ms": 15.43581473827362
+      },
+      "by_site": {
+        "japan_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 15.024952410000001,
+            "median_ms": 14.93411,
+            "p95_ms": 16.12478485,
+            "min_ms": 14.108584,
+            "max_ms": 16.818035
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 14.852847318649292,
+            "median_ms": 14.788864135742188,
+            "p95_ms": 16.037013149261476,
+            "min_ms": 13.883711814880371,
+            "max_ms": 16.330047607421875
+          }
+        },
+        "america_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 14.49989355,
+            "median_ms": 14.550837,
+            "p95_ms": 15.8006811,
+            "min_ms": 13.083318,
+            "max_ms": 18.597545
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 13.849056606292725,
+            "median_ms": 13.687183856964111,
+            "p95_ms": 14.834616327285767,
+            "min_ms": 13.012991905212402,
+            "max_ms": 15.632384300231934
+          }
+        }
+      }
+    },
+    "T10_N12": {
+      "two_scene_equal": {
+        "wall_mean_ms": 13.997964455,
+        "wall_median_ms": 13.883291250000001,
+        "wall_p95_ms": 14.99553705,
+        "cuda_event_mean_ms": 13.882838234901428,
+        "cuda_event_p95_ms": 14.925497722625732
+      },
+      "by_site": {
+        "america_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 13.97185278,
+            "median_ms": 13.897801000000001,
+            "p95_ms": 14.981112,
+            "min_ms": 13.169792,
+            "max_ms": 16.42104
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 13.803149147033691,
+            "median_ms": 13.637648105621338,
+            "p95_ms": 14.656613063812253,
+            "min_ms": 12.996607780456543,
+            "max_ms": 17.307231903076172
+          }
+        },
+        "japan_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 14.02407613,
+            "median_ms": 13.8687815,
+            "p95_ms": 15.009962100000001,
+            "min_ms": 13.017239,
+            "max_ms": 16.708358
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 13.962527322769166,
+            "median_ms": 13.83892822265625,
+            "p95_ms": 15.194382381439208,
+            "min_ms": 13.04371166229248,
+            "max_ms": 16.533567428588867
+          }
+        }
+      }
+    },
+    "T20_N12": {
+      "two_scene_equal": {
+        "wall_mean_ms": 15.063276079999998,
+        "wall_median_ms": 14.93226,
+        "wall_p95_ms": 16.193951475,
+        "cuda_event_mean_ms": 15.069872326850891,
+        "cuda_event_p95_ms": 16.18230700492859
+      },
+      "by_site": {
+        "america_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 14.962601309999998,
+            "median_ms": 14.81284,
+            "p95_ms": 16.0365732,
+            "min_ms": 14.166815,
+            "max_ms": 17.346055
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 15.075801277160645,
+            "median_ms": 15.001967906951904,
+            "p95_ms": 16.086632823944093,
+            "min_ms": 14.17420768737793,
+            "max_ms": 16.804128646850586
+          }
+        },
+        "japan_crossroad": {
+          "synchronized_host_wall": {
+            "count": 100,
+            "mean_ms": 15.163950849999999,
+            "median_ms": 15.05168,
+            "p95_ms": 16.351329749999998,
+            "min_ms": 13.956263,
+            "max_ms": 17.093134
+          },
+          "cuda_event_stream": {
+            "count": 100,
+            "mean_ms": 15.063943376541138,
+            "median_ms": 14.899791717529297,
+            "p95_ms": 16.277981185913085,
+            "min_ms": 14.159872055053711,
+            "max_ms": 19.47292709350586
+          }
+        }
+      }
+    }
+  }
+}

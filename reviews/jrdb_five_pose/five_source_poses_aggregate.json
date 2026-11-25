@@ -1,0 +1,595 @@
+{
+  "by_recording": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "windows": 123,
+      "people": 31,
+      "models": {
+        "motion": {
+          "window_equal_within_recording": {
+            "ade_m": 0.2737645807913525,
+            "fde_m": 0.5346739089705655
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.5971484857665196,
+            "fde_m": 1.143985105443113
+          }
+        },
+        "last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.3102650261001666,
+            "fde_m": 0.5963856849869033
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.5815425930205945,
+            "fde_m": 1.1115000475731007
+          }
+        },
+        "first_last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.3353260770006402,
+            "fde_m": 0.6367599913730083
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.6012943405342528,
+            "fde_m": 1.1503331527056722
+          }
+        },
+        "five_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.3591749010747606,
+            "fde_m": 0.6833140933438785
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.6034869776364806,
+            "fde_m": 1.1403770999277574
+          }
+        },
+        "last_two_cv": {
+          "window_equal_within_recording": {
+            "ade_m": 0.23030769657265637,
+            "fde_m": 0.45807640317511417
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.5878109872565807,
+            "fde_m": 1.1362943613143797
+          }
+        }
+      }
+    },
+    "huang-lane-2019-02-12_0": {
+      "windows": 68,
+      "people": 33,
+      "models": {
+        "motion": {
+          "window_equal_within_recording": {
+            "ade_m": 0.2857878608987,
+            "fde_m": 0.5335971169690369
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.25829723389200115,
+            "fde_m": 0.47548562264872896
+          }
+        },
+        "last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.30870128811713426,
+            "fde_m": 0.583330465130033
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.2761129444954826,
+            "fde_m": 0.5209495994178746
+          }
+        },
+        "first_last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.3586883951178642,
+            "fde_m": 0.670449570575624
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.3157965903677897,
+            "fde_m": 0.5736052941701433
+          }
+        },
+        "five_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.41805501836129094,
+            "fde_m": 0.8495124803589506
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.38145034034331265,
+            "fde_m": 0.7860855702258273
+          }
+        },
+        "last_two_cv": {
+          "window_equal_within_recording": {
+            "ade_m": 0.28751567575595116,
+            "fde_m": 0.5411814455374051
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.2546926483814018,
+            "fde_m": 0.470958459752993
+          }
+        }
+      }
+    },
+    "tressider-2019-03-16_1": {
+      "windows": 6,
+      "people": 1,
+      "models": {
+        "motion": {
+          "window_equal_within_recording": {
+            "ade_m": 0.0992039154231848,
+            "fde_m": 0.1816282278642208
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.0992039154231848,
+            "fde_m": 0.1816282278642208
+          }
+        },
+        "last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.0906619435281328,
+            "fde_m": 0.18066727703403226
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.0906619435281328,
+            "fde_m": 0.18066727703403226
+          }
+        },
+        "first_last_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.10375445830421383,
+            "fde_m": 0.20976281409693764
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.10375445830421383,
+            "fde_m": 0.20976281409693764
+          }
+        },
+        "five_pose": {
+          "window_equal_within_recording": {
+            "ade_m": 0.1725432045177967,
+            "fde_m": 0.3505784010154858
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.1725432045177967,
+            "fde_m": 0.3505784010154858
+          }
+        },
+        "last_two_cv": {
+          "window_equal_within_recording": {
+            "ade_m": 0.09620106392422832,
+            "fde_m": 0.18034256626953604
+          },
+          "person_equal_within_recording": {
+            "ade_m": 0.09620106392422832,
+            "fde_m": 0.18034256626953604
+          }
+        }
+      }
+    }
+  },
+  "three_recording_equal": {
+    "window_equal_within_recording": {
+      "models": {
+        "motion": {
+          "ade_m": 0.2195854523710791,
+          "fde_m": 0.41663308460127435
+        },
+        "last_pose": {
+          "ade_m": 0.23654275258181123,
+          "fde_m": 0.4534611423836562
+        },
+        "first_last_pose": {
+          "ade_m": 0.26592297680757276,
+          "fde_m": 0.5056574586818567
+        },
+        "five_pose": {
+          "ade_m": 0.3165910413179494,
+          "fde_m": 0.6278016582394382
+        },
+        "last_two_cv": {
+          "ade_m": 0.20467481208427862,
+          "fde_m": 0.3932001383273518
+        }
+      },
+      "paired": {
+        "five_pose_minus_first_last_pose": {
+          "mean": {
+            "ade_m": 0.05066806451037664,
+            "fde_m": 0.12214419955758149
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.03678172087750607,
+              0.06493549398479903
+            ],
+            "fde_m": [
+              0.09127226011374008,
+              0.15312945023215147
+            ]
+          }
+        },
+        "five_pose_minus_motion": {
+          "mean": {
+            "ade_m": 0.09700558894687031,
+            "fde_m": 0.21116857363816388
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.07307561705237912,
+              0.11404336307122671
+            ],
+            "fde_m": [
+              0.15992574528845682,
+              0.24979160177794868
+            ]
+          }
+        },
+        "last_pose_minus_motion": {
+          "mean": {
+            "ade_m": 0.016957300210732135,
+            "fde_m": 0.03682805778238185
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.0032802538552863165,
+              0.024912470225163807
+            ],
+            "fde_m": [
+              0.008223309012397843,
+              0.05356151067908945
+            ]
+          }
+        },
+        "first_last_pose_minus_last_pose": {
+          "mean": {
+            "ade_m": 0.02938022422576153,
+            "fde_m": 0.05219631629820054
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.01855234711344002,
+              0.03931354353588776
+            ],
+            "fde_m": [
+              0.030388791559399043,
+              0.07285962774881488
+            ]
+          }
+        },
+        "motion_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.014910640286800475,
+            "fde_m": 0.02343294627392256
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.00031787955751466786,
+              0.02193025852888335
+            ],
+            "fde_m": [
+              -0.005438002542225621,
+              0.038811859749273876
+            ]
+          }
+        },
+        "last_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.03186794049753261,
+            "fde_m": 0.06026100405630441
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.007149750515559045,
+              0.04287647243799275
+            ],
+            "fde_m": [
+              0.00906356870567172,
+              0.08442859930299193
+            ]
+          }
+        },
+        "first_last_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.06124816472329414,
+            "fde_m": 0.11245732035450495
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.03317011693501267,
+              0.07461442875936941
+            ],
+            "fde_m": [
+              0.059191626506627626,
+              0.13921878601944257
+            ]
+          }
+        },
+        "five_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.11191622923367078,
+            "fde_m": 0.23460151991208644
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.07926377802119595,
+              0.13141343925985838
+            ],
+            "fde_m": [
+              0.16639529402616973,
+              0.2781600042117867
+            ]
+          }
+        }
+      }
+    },
+    "person_equal_within_recording": {
+      "models": {
+        "motion": {
+          "ade_m": 0.3182165450272352,
+          "fde_m": 0.6003663186520208
+        },
+        "last_pose": {
+          "ade_m": 0.31610582701473666,
+          "fde_m": 0.6043723080083359
+        },
+        "first_last_pose": {
+          "ade_m": 0.34028179640208545,
+          "fde_m": 0.6445670869909177
+        },
+        "five_pose": {
+          "ade_m": 0.38582684083253,
+          "fde_m": 0.7590136903896901
+        },
+        "last_two_cv": {
+          "ade_m": 0.3129015665207369,
+          "fde_m": 0.5958651291123028
+        }
+      },
+      "paired": {
+        "five_pose_minus_first_last_pose": {
+          "mean": {
+            "ade_m": 0.04554504443044455,
+            "fde_m": 0.11444660339877244
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.02301911519153372,
+              0.06838060898196438
+            ],
+            "fde_m": [
+              0.06945743159141375,
+              0.16026448962635612
+            ]
+          }
+        },
+        "five_pose_minus_motion": {
+          "mean": {
+            "ade_m": 0.06761029580529482,
+            "fde_m": 0.1586473717376693
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.03544937282223581,
+              0.09761382456909559
+            ],
+            "fde_m": [
+              0.09464966443457712,
+              0.22109006818728244
+            ]
+          }
+        },
+        "last_pose_minus_motion": {
+          "mean": {
+            "ade_m": -0.0021107180124985137,
+            "fde_m": 0.004005989356315021
+          },
+          "paired_person_95": {
+            "ade_m": [
+              -0.01946556815810851,
+              0.014402876149122586
+            ],
+            "fde_m": [
+              -0.027600183507198693,
+              0.034260970691996975
+            ]
+          }
+        },
+        "first_last_pose_minus_last_pose": {
+          "mean": {
+            "ade_m": 0.024175969387348784,
+            "fde_m": 0.040194778982581836
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.01317845292933134,
+              0.03508381345730748
+            ],
+            "fde_m": [
+              0.016131560179490075,
+              0.06453399285760875
+            ]
+          }
+        },
+        "motion_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.005314978506498258,
+            "fde_m": 0.004501189539718009
+          },
+          "paired_person_95": {
+            "ade_m": [
+              -0.011144117433713926,
+              0.02234601086138286
+            ],
+            "fde_m": [
+              -0.0320062687361224,
+              0.04316725477641359
+            ]
+          }
+        },
+        "last_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.0032042604939997443,
+            "fde_m": 0.00850717889603303
+          },
+          "paired_person_95": {
+            "ade_m": [
+              -0.01376465417639023,
+              0.019937896680552215
+            ],
+            "fde_m": [
+              -0.026724582131034937,
+              0.042953394902938584
+            ]
+          }
+        },
+        "first_last_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.027380229881348528,
+            "fde_m": 0.048701957878614865
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.009415083659398176,
+              0.045594575119776694
+            ],
+            "fde_m": [
+              0.011507987035617577,
+              0.0851898240950395
+            ]
+          }
+        },
+        "five_pose_minus_last_two_cv": {
+          "mean": {
+            "ade_m": 0.07292527431179308,
+            "fde_m": 0.1631485612773873
+          },
+          "paired_person_95": {
+            "ade_m": [
+              0.04645608569527647,
+              0.09970567899668867
+            ],
+            "fde_m": [
+              0.10906475293801994,
+              0.21959815204781838
+            ]
+          }
+        }
+      }
+    }
+  },
+  "scope": "Three previous development recordings. HST 33 raw-ID 3D pose estimates, two ST historical centres, seven future centres through 2.8 s. No independent ST scale proof.",
+  "primary": "five_pose_minus_first_last_pose ADE, window-equal within each recording",
+  "folds": {
+    "hewlett-packard-intersection-2019-01-24_0": {
+      "train": [
+        "huang-lane-2019-02-12_0",
+        "tressider-2019-03-16_1"
+      ],
+      "train_windows": 74,
+      "test_windows": 123
+    },
+    "huang-lane-2019-02-12_0": {
+      "train": [
+        "hewlett-packard-intersection-2019-01-24_0",
+        "tressider-2019-03-16_1"
+      ],
+      "train_windows": 129,
+      "test_windows": 68
+    },
+    "tressider-2019-03-16_1": {
+      "train": [
+        "hewlett-packard-intersection-2019-01-24_0",
+        "huang-lane-2019-02-12_0"
+      ],
+      "train_windows": 191,
+      "test_windows": 6
+    }
+  },
+  "support": {
+    "ordered_keys_sha256": "6539eaf4eb4615493a2bad7dd453d8121fc7345097ed9742f544e37fe2c2f7d6",
+    "by_recording": {
+      "hewlett-packard-intersection-2019-01-24_0": {
+        "ground_eligible_pre_greedy": 6456,
+        "last_pose_absent": 5452,
+        "last_pose_present_incomplete": 0,
+        "last_complete_history_incomplete": 281,
+        "all_five_complete": 723,
+        "selected": 123,
+        "recording_local_people": 31,
+        "people_window_minmax": [
+          1,
+          30
+        ]
+      },
+      "huang-lane-2019-02-12_0": {
+        "ground_eligible_pre_greedy": 5871,
+        "last_pose_absent": 5337,
+        "last_pose_present_incomplete": 0,
+        "last_complete_history_incomplete": 162,
+        "all_five_complete": 372,
+        "selected": 68,
+        "recording_local_people": 33,
+        "people_window_minmax": [
+          1,
+          5
+        ]
+      },
+      "tressider-2019-03-16_1": {
+        "ground_eligible_pre_greedy": 1990,
+        "last_pose_absent": 1929,
+        "last_pose_present_incomplete": 0,
+        "last_complete_history_incomplete": 14,
+        "all_five_complete": 47,
+        "selected": 6,
+        "recording_local_people": 1,
+        "people_window_minmax": [
+          6,
+          6
+        ]
+      }
+    },
+    "pose_offsets": [
+      -6,
+      -5,
+      -3,
+      -2,
+      0
+    ],
+    "future_offsets": [
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42
+    ],
+    "image_timestamp_source": "nominal 15 Hz native file indices, no exposure timestamps",
+    "member_sha256": {
+      "tracks": [
+        "29adfca6b4bfcf886d2832217d65b2eb7530c9cd4b9a15edfa94b476f1b1e818",
+        "682752cfae6a08771d3547f233023b0d8d444346303baed2d103ce57b027affd",
+        "d0da8c09a5593a8491ca825449d77547a64d5f3ecd35f185906b5ef5a64b76bc"
+      ],
+      "poses": [
+        "5db2360f7e0507dab0d7eaf734ce8f2d942253028b555d90c19d282d4b245e45",
+        "51eb289d6f2ca68d83a5da7d5845e5eb8df7ff89d698b682f8261ba458b682cb",
+        "b728921be8fb6b6a4de6ac410558c219ff344a13a2f40205ae446757c2a124b9"
+      ],
+      "odom": [
+        "25ba8073598b743de7e47f04ab09ed4b8ccc254eecc996d411fb31465e92b80d",
+        "9f028bcf79854e581148ae8cfeef62ec5df19930839856586d4d6a754c014c8d",
+        "b66ba960bb8be864aa1dc9e04c9b05c8e15e785cf5f400600ccc9151cb0e4c40"
+      ]
+    }
+  },
+  "alpha": 1.0,
+  "protocol_sha256": "ea139fde2942c2e9847cd58165230374db36fff1b0378c94f145c32922740d6f",
+  "software": {
+    "python": "3.13.18 (main, Oct 26 2026, 15:28:15) [GCC 13.3.0]",
+    "numpy": "2.1.3",
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39"
+  }
+}

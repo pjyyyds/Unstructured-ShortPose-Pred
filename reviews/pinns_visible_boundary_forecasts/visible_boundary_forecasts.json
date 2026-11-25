@@ -1,0 +1,2153 @@
+{
+  "protocol_sha256": "b435feb70bfe2f2f0876d80beeac38a85d4b6a988974b97a1e2737f57936a22c",
+  "runner_sha256": "b95c6e44f14821e193f48fc6360c58f8fe31feaea3025557aa8efee129b6ab94",
+  "input_manifest": {
+    "protocol": "b435feb70bfe2f2f0876d80beeac38a85d4b6a988974b97a1e2737f57936a22c",
+    "observations_and_candidates": "d336ce061b5f5e8f7873f59f562505efd2588fccaa7de689cf3e5196127f2c22",
+    "sealed_targets": "ec70bc700df671632809b547ccea99cb2a1c888c9a84924f68f58c947f76585e",
+    "frozen_pose": "b493a47536664ddb4fd66603c1bbf6b2c2e33f553520382027b3ae96b53447d0",
+    "frozen_M1_weights_by_held_site": {
+      "america_crossroad": "8ce6d093d1dc34dda0f57da008464f1ca66c9ce7b4638347bfa33111f020026b",
+      "italy_park": "d73d488a7b37b98d5b2e786a402ca61c3d14c7c35fd00cba3dfd2e57796a832d",
+      "japan_crossroad": "0a2734ddbc1f5a1208552d0784fba6bc6ff0b56a40875d473295e0fd91fc46a1",
+      "thailand_street": "aeaf2b9a8ce966c65f22013604a14c051f3116a18ada7c97715782f41ae1452b"
+    },
+    "first_map": "dc8a6c57727c4c58d3598c1f1551f8fd4e1fbfda47a3edf624599c64b20846bd",
+    "independent_map": "67f09740fd247105970779b18665e5cbe30bdeabd10f1734f61d2a1bd5c60aa1",
+    "registered_source": "fe04dbf6eba310736a2260d5a3536a5eecd848162e60be6d4f1d25d44769e5fb",
+    "labels_and_calibration": {
+      "america_crossroad_spring_daytime_sunny_1": {
+        "calibration_sha256": "b1a76f0d526e34d50b9764b86d49b9550a9b58a2a3effc8f77de258844b12300",
+        "labels_sha256": "3b7fd36bf48b6d3eecedc53d73058f1f9081455fe83590dbe6fdebcf00e06533"
+      },
+      "italy_park_summer_daytime_sunny_0": {
+        "calibration_sha256": "e1b5c18c11c76232f2c8dbce437859d47be0bccfdbc34cffe735c7c2bd608b36",
+        "labels_sha256": "499e4de7f6f6d015d5b29348a4fa077b4e2586c75366bea26bd346fa4564c8fb"
+      },
+      "japan_crossroad_summer_daytime_sunny_0": {
+        "calibration_sha256": "45838096d7bc7d9c853b6962b6ca04de3bff9a5b200e2073124f24f7c17fe618",
+        "labels_sha256": "c4edbe564e0f9fc6da139210c21fd6a7ae6873ea4c348159da455ddf236dcac2"
+      },
+      "thailand_street_winter_daytime_sunny_0": {
+        "calibration_sha256": "f6fadeed8fe9294bac20e171ed79bc61036263e835389ba54d475e3a3e05e328",
+        "labels_sha256": "cbd6c0c658c0e10294e20be8d8328c77b13f4af6ba28d4fb88eb48d80606d8d4"
+      }
+    },
+    "window_count": 59
+  },
+  "locked_choices_sha256": "1587c2dd548fa91d5c12b400ef1ce6a44799fa28127c9e485322cb5702cc2005",
+  "scope": "Four previously studied clips, one per site; no fitting, no sampling intervals. Unavailable geometry retains the original top choice. Strict geometric crossing is permitted and only descriptive.",
+  "historical_support": {
+    "scope": "Pre-outcome historical-support and frozen-mode audit. Distances are approximate ground metres; moving angle is unsigned from tangent. No future paths opened.",
+    "protocol_sha256": "b435feb70bfe2f2f0876d80beeac38a85d4b6a988974b97a1e2737f57936a22c",
+    "all": {
+      "first": {
+        "windows": 59,
+        "supported": 7,
+        "fallback": 52,
+        "reasons": {
+          "beyond_5m": 26,
+          "insufficient_visible_arc": 22,
+          "supported": 7,
+          "anchor_outside_control_hull": 4
+        },
+        "nearest_finite_edge_m": {
+          "min": 0.4408340825962319,
+          "median": 5.037722081453472,
+          "p90": 8.29034237052969,
+          "max": 18.910486045221624
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.9378381820442105,
+          "p90": 1.5248994818618318,
+          "max": 2.3635194272948135
+        },
+        "supported_motion_angle_count": 7,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 6.038192957087306,
+          "median": 43.21382070389506,
+          "p90": 69.53693344958492,
+          "max": 84.84658833910969
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.04459162242368859,
+            "median": 0.14253791454623208,
+            "p90": 0.3163290988593722,
+            "max": 0.39615752481621874
+          },
+          "full_velocity": {
+            "min": 0.14279368512793714,
+            "median": 0.22278542498480272,
+            "p90": 0.34067300567812936,
+            "max": 0.37947995079332314
+          },
+          "tangent": {
+            "min": 0.08768977531028259,
+            "median": 0.19499841774428522,
+            "p90": 0.2977772839115342,
+            "max": 0.3109122249308754
+          }
+        },
+        "changed_from_probability": {
+          "normal": 5,
+          "full_velocity": 6,
+          "tangent": 4
+        }
+      },
+      "independent": {
+        "windows": 59,
+        "supported": 1,
+        "fallback": 58,
+        "reasons": {
+          "beyond_5m": 46,
+          "insufficient_visible_arc": 8,
+          "anchor_outside_control_hull": 4,
+          "supported": 1
+        },
+        "nearest_finite_edge_m": {
+          "min": 0.30244088281949805,
+          "median": 12.255041685933028,
+          "p90": 19.69854830505144,
+          "max": 28.28835368813191
+        },
+        "speed_m_s": {
+          "min": 0.0,
+          "median": 0.9378381820442105,
+          "p90": 1.5248994818618318,
+          "max": 2.3635194272948135
+        },
+        "supported_motion_angle_count": 1,
+        "supported_unoriented_motion_angle_degrees": {
+          "min": 19.42360722523181,
+          "median": 19.42360722523181,
+          "p90": 19.42360722523181,
+          "max": 19.42360722523181
+        },
+        "supported_score_span_m": {
+          "normal": {
+            "min": 0.268363393467402,
+            "median": 0.268363393467402,
+            "p90": 0.268363393467402,
+            "max": 0.268363393467402
+          },
+          "full_velocity": {
+            "min": 0.22010060573608015,
+            "median": 0.22010060573608015,
+            "p90": 0.22010060573608015,
+            "max": 0.22010060573608015
+          },
+          "tangent": {
+            "min": 0.12319325962196927,
+            "median": 0.12319325962196927,
+            "p90": 0.12319325962196927,
+            "max": 0.12319325962196927
+          }
+        },
+        "changed_from_probability": {
+          "normal": 1,
+          "full_velocity": 1,
+          "tangent": 0
+        }
+      },
+      "map_comparison": {
+        "both_supported": 1,
+        "first_only": 6,
+        "independent_only": 0,
+        "neither": 52,
+        "same_normal_mode_if_both": 1
+      }
+    },
+    "by_clip": {
+      "america_crossroad_spring_daytime_sunny_1": {
+        "first": {
+          "windows": 5,
+          "supported": 0,
+          "fallback": 5,
+          "reasons": {
+            "beyond_5m": 5
+          },
+          "nearest_finite_edge_m": {
+            "min": 14.727940986316911,
+            "median": 14.727940986316911,
+            "p90": 17.907864250079054,
+            "max": 18.910486045221624
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 0.0,
+            "p90": 1.2544041966457902,
+            "max": 1.3939392835055784
+          },
+          "supported_motion_angle_count": 0,
+          "supported_unoriented_motion_angle_degrees": null,
+          "supported_score_span_m": {
+            "normal": null,
+            "full_velocity": null,
+            "tangent": null
+          },
+          "changed_from_probability": {
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          }
+        },
+        "independent": {
+          "windows": 5,
+          "supported": 0,
+          "fallback": 5,
+          "reasons": {
+            "beyond_5m": 5
+          },
+          "nearest_finite_edge_m": {
+            "min": 16.124336968194577,
+            "median": 16.124336968194577,
+            "p90": 26.795771723235408,
+            "max": 28.28835368813191
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 0.0,
+            "p90": 1.2544041966457902,
+            "max": 1.3939392835055784
+          },
+          "supported_motion_angle_count": 0,
+          "supported_unoriented_motion_angle_degrees": null,
+          "supported_score_span_m": {
+            "normal": null,
+            "full_velocity": null,
+            "tangent": null
+          },
+          "changed_from_probability": {
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          }
+        },
+        "map_comparison": {
+          "both_supported": 0,
+          "first_only": 0,
+          "independent_only": 0,
+          "neither": 5,
+          "same_normal_mode_if_both": 0
+        }
+      },
+      "italy_park_summer_daytime_sunny_0": {
+        "first": {
+          "windows": 13,
+          "supported": 1,
+          "fallback": 12,
+          "reasons": {
+            "beyond_5m": 11,
+            "insufficient_visible_arc": 1,
+            "supported": 1
+          },
+          "nearest_finite_edge_m": {
+            "min": 4.266008889719602,
+            "median": 6.025603103134054,
+            "p90": 7.7535703262466615,
+            "max": 10.17589305468722
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 0.8698804801810479,
+            "p90": 1.2033496678002789,
+            "max": 1.2669737942435761
+          },
+          "supported_motion_angle_count": 1,
+          "supported_unoriented_motion_angle_degrees": {
+            "min": 43.21382070389506,
+            "median": 43.21382070389506,
+            "p90": 43.21382070389506,
+            "max": 43.21382070389506
+          },
+          "supported_score_span_m": {
+            "normal": {
+              "min": 0.04459162242368859,
+              "median": 0.04459162242368859,
+              "p90": 0.04459162242368859,
+              "max": 0.04459162242368859
+            },
+            "full_velocity": {
+              "min": 0.3148017089346668,
+              "median": 0.3148017089346668,
+              "p90": 0.3148017089346668,
+              "max": 0.3148017089346668
+            },
+            "tangent": {
+              "min": 0.3109122249308754,
+              "median": 0.3109122249308754,
+              "p90": 0.3109122249308754,
+              "max": 0.3109122249308754
+            }
+          },
+          "changed_from_probability": {
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          }
+        },
+        "independent": {
+          "windows": 13,
+          "supported": 0,
+          "fallback": 13,
+          "reasons": {
+            "beyond_5m": 13
+          },
+          "nearest_finite_edge_m": {
+            "min": 7.144021547897292,
+            "median": 11.46347683311752,
+            "p90": 14.088872770869715,
+            "max": 14.298924595233057
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 0.8698804801810479,
+            "p90": 1.2033496678002789,
+            "max": 1.2669737942435761
+          },
+          "supported_motion_angle_count": 0,
+          "supported_unoriented_motion_angle_degrees": null,
+          "supported_score_span_m": {
+            "normal": null,
+            "full_velocity": null,
+            "tangent": null
+          },
+          "changed_from_probability": {
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          }
+        },
+        "map_comparison": {
+          "both_supported": 0,
+          "first_only": 1,
+          "independent_only": 0,
+          "neither": 12,
+          "same_normal_mode_if_both": 0
+        }
+      },
+      "japan_crossroad_summer_daytime_sunny_0": {
+        "first": {
+          "windows": 28,
+          "supported": 4,
+          "fallback": 24,
+          "reasons": {
+            "insufficient_visible_arc": 20,
+            "supported": 4,
+            "anchor_outside_control_hull": 1,
+            "beyond_5m": 3
+          },
+          "nearest_finite_edge_m": {
+            "min": 0.4408340825962319,
+            "median": 2.487195831155735,
+            "p90": 5.330684013683478,
+            "max": 6.696043124337458
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 1.0309964600461798,
+            "p90": 1.6574614753758514,
+            "max": 2.3635194272948135
+          },
+          "supported_motion_angle_count": 4,
+          "supported_unoriented_motion_angle_degrees": {
+            "min": 17.122664051587574,
+            "median": 43.90845058525898,
+            "p90": 55.25759579747181,
+            "max": 59.3304968565684
+          },
+          "supported_score_span_m": {
+            "normal": {
+              "min": 0.08324886551273343,
+              "median": 0.23967508790807796,
+              "p90": 0.3562433118377955,
+              "max": 0.39615752481621874
+            },
+            "full_velocity": {
+              "min": 0.22010060573608015,
+              "median": 0.2556501213834166,
+              "p90": 0.35219041088993536,
+              "max": 0.37947995079332314
+            },
+            "tangent": {
+              "min": 0.12964010101175294,
+              "median": 0.21851036547077432,
+              "p90": 0.27492115355489377,
+              "max": 0.28902065656530673
+            }
+          },
+          "changed_from_probability": {
+            "normal": 4,
+            "full_velocity": 4,
+            "tangent": 3
+          }
+        },
+        "independent": {
+          "windows": 28,
+          "supported": 1,
+          "fallback": 27,
+          "reasons": {
+            "beyond_5m": 18,
+            "insufficient_visible_arc": 8,
+            "anchor_outside_control_hull": 1,
+            "supported": 1
+          },
+          "nearest_finite_edge_m": {
+            "min": 0.30244088281949805,
+            "median": 8.703565322097646,
+            "p90": 15.743500223365015,
+            "max": 18.06497925992913
+          },
+          "speed_m_s": {
+            "min": 0.0,
+            "median": 1.0309964600461798,
+            "p90": 1.6574614753758514,
+            "max": 2.3635194272948135
+          },
+          "supported_motion_angle_count": 1,
+          "supported_unoriented_motion_angle_degrees": {
+            "min": 19.42360722523181,
+            "median": 19.42360722523181,
+            "p90": 19.42360722523181,
+            "max": 19.42360722523181
+          },
+          "supported_score_span_m": {
+            "normal": {
+              "min": 0.268363393467402,
+              "median": 0.268363393467402,
+              "p90": 0.268363393467402,
+              "max": 0.268363393467402
+            },
+            "full_velocity": {
+              "min": 0.22010060573608015,
+              "median": 0.22010060573608015,
+              "p90": 0.22010060573608015,
+              "max": 0.22010060573608015
+            },
+            "tangent": {
+              "min": 0.12319325962196927,
+              "median": 0.12319325962196927,
+              "p90": 0.12319325962196927,
+              "max": 0.12319325962196927
+            }
+          },
+          "changed_from_probability": {
+            "normal": 1,
+            "full_velocity": 1,
+            "tangent": 0
+          }
+        },
+        "map_comparison": {
+          "both_supported": 1,
+          "first_only": 3,
+          "independent_only": 0,
+          "neither": 24,
+          "same_normal_mode_if_both": 1
+        }
+      },
+      "thailand_street_winter_daytime_sunny_0": {
+        "first": {
+          "windows": 13,
+          "supported": 2,
+          "fallback": 11,
+          "reasons": {
+            "beyond_5m": 7,
+            "supported": 2,
+            "insufficient_visible_arc": 1,
+            "anchor_outside_control_hull": 3
+          },
+          "nearest_finite_edge_m": {
+            "min": 1.944393186919153,
+            "median": 5.62383021452099,
+            "p90": 6.099934758788586,
+            "max": 6.439758885252098
+          },
+          "speed_m_s": {
+            "min": 0.22935623754326517,
+            "median": 0.6226459907523577,
+            "p90": 1.4754241533994177,
+            "max": 1.5576824821830504
+          },
+          "supported_motion_angle_count": 2,
+          "supported_unoriented_motion_angle_degrees": {
+            "min": 6.038192957087306,
+            "median": 45.442390648098495,
+            "p90": 76.96574880090745,
+            "max": 84.84658833910969
+          },
+          "supported_score_span_m": {
+            "normal": {
+              "min": 0.12958943679439341,
+              "median": 0.13606367567031274,
+              "p90": 0.1412430667710482,
+              "max": 0.14253791454623208
+            },
+            "full_velocity": {
+              "min": 0.14279368512793714,
+              "median": 0.1433715943438133,
+              "p90": 0.1438339217165142,
+              "max": 0.14394950355968944
+            },
+            "tangent": {
+              "min": 0.08768977531028259,
+              "median": 0.09968676244242165,
+              "p90": 0.10928435214813291,
+              "max": 0.11168374957456072
+            }
+          },
+          "changed_from_probability": {
+            "normal": 1,
+            "full_velocity": 2,
+            "tangent": 1
+          }
+        },
+        "independent": {
+          "windows": 13,
+          "supported": 0,
+          "fallback": 13,
+          "reasons": {
+            "beyond_5m": 10,
+            "anchor_outside_control_hull": 3
+          },
+          "nearest_finite_edge_m": {
+            "min": 10.368656789415343,
+            "median": 18.316237904532525,
+            "p90": 21.078257425030035,
+            "max": 21.400627733645777
+          },
+          "speed_m_s": {
+            "min": 0.22935623754326517,
+            "median": 0.6226459907523577,
+            "p90": 1.4754241533994177,
+            "max": 1.5576824821830504
+          },
+          "supported_motion_angle_count": 0,
+          "supported_unoriented_motion_angle_degrees": null,
+          "supported_score_span_m": {
+            "normal": null,
+            "full_velocity": null,
+            "tangent": null
+          },
+          "changed_from_probability": {
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          }
+        },
+        "map_comparison": {
+          "both_supported": 0,
+          "first_only": 2,
+          "independent_only": 0,
+          "neither": 11,
+          "same_normal_mode_if_both": 0
+        }
+      }
+    }
+  },
+  "readers": {
+    "first": {
+      "scores": {
+        "all_including_fallback": {
+          "windows": 59,
+          "contributing_clips": 4,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "tracks": 2,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "normal": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "full_velocity": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "tangent": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 5,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "normal": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "full_velocity": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "tangent": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "tracks": 12,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.7924478120924932,
+                  "fde_m": 1.6764273036406985
+                },
+                "normal": {
+                  "ade_m": 0.7944727342155413,
+                  "fde_m": 1.687659599532635
+                },
+                "full_velocity": {
+                  "ade_m": 0.7700316367425984,
+                  "fde_m": 1.6475414992727693
+                },
+                "tangent": {
+                  "ade_m": 0.783163093317569,
+                  "fde_m": 1.6712083495085301
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.002024922123048108,
+                  "fde_m": 0.01123229589193635
+                },
+                "full_velocity": {
+                  "ade_m": 0.024441097472942902,
+                  "fde_m": 0.040118100259865286
+                },
+                "tangent": {
+                  "ade_m": 0.01130964089797236,
+                  "fde_m": 0.016451250024104542
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 4,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "normal": {
+                  "ade_m": 0.4273521472838047,
+                  "fde_m": 1.1560296905365564
+                },
+                "full_velocity": {
+                  "ade_m": 0.40772813737820984,
+                  "fde_m": 1.086905077028532
+                },
+                "tangent": {
+                  "ade_m": 0.38159680106889504,
+                  "fde_m": 1.0234220725629746
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.02613133630931478,
+                  "fde_m": 0.06348300446555741
+                },
+                "full_velocity": {
+                  "ade_m": 0.019624009905594837,
+                  "fde_m": 0.06912461350802426
+                },
+                "tangent": {
+                  "ade_m": 0.04575534621490962,
+                  "fde_m": 0.13260761797358167
+                }
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.41570767700858763,
+              "fde_m": 0.9933579669796702
+            },
+            "normal": {
+              "ade_m": 0.42274674161667836,
+              "fde_m": 1.0120367920690436
+            },
+            "full_velocity": {
+              "ade_m": 0.4117304647720439,
+              "fde_m": 0.9847261136270713
+            },
+            "tangent": {
+              "ade_m": 0.4084804948384579,
+              "fde_m": 0.974772075069622
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.007039064608090722,
+              "fde_m": 0.01867882508937344
+            },
+            "full_velocity": {
+              "ade_m": 0.011016276844634434,
+              "fde_m": 0.027310678441972387
+            },
+            "tangent": {
+              "ade_m": 0.014266246778220495,
+              "fde_m": 0.037264716999421556
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.006718732058753206,
+              "fde_m": 0.019318361746211255
+            },
+            "full_velocity": {
+              "ade_m": 0.0159230992883921,
+              "fde_m": 0.03426994547255158
+            },
+            "tangent": {
+              "ade_m": 0.015448973659950018,
+              "fde_m": 0.037026000581889644
+            }
+          }
+        },
+        "supported": {
+          "windows": 7,
+          "contributing_clips": 3,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 1,
+              "tracks": 1,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.3613441193696398,
+                  "fde_m": 0.863030671408064
+                },
+                "normal": {
+                  "ade_m": 0.3613441193696398,
+                  "fde_m": 0.863030671408064
+                },
+                "full_velocity": {
+                  "ade_m": 0.3613441193696398,
+                  "fde_m": 0.863030671408064
+                },
+                "tangent": {
+                  "ade_m": 0.3613441193696398,
+                  "fde_m": 0.863030671408064
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 4,
+              "tracks": 3,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.8092039512134097,
+                  "fde_m": 1.595684079121311
+                },
+                "normal": {
+                  "ade_m": 0.8233784060747463,
+                  "fde_m": 1.6743101503648652
+                },
+                "full_velocity": {
+                  "ade_m": 0.652290723764146,
+                  "fde_m": 1.3934834485458083
+                },
+                "tangent": {
+                  "ade_m": 0.7442109197889399,
+                  "fde_m": 1.5591514001961335
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.014174454861336755,
+                  "fde_m": 0.07862607124355445
+                },
+                "full_velocity": {
+                  "ade_m": 0.17108768231060031,
+                  "fde_m": 0.280826701819057
+                },
+                "tangent": {
+                  "ade_m": 0.07916748628580653,
+                  "fde_m": 0.11515875016873178
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 2,
+              "tracks": 2,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.8303697917872709,
+                  "fde_m": 2.5219961193301774
+                },
+                "normal": {
+                  "ade_m": 1.000223477797817,
+                  "fde_m": 2.9346356483563008
+                },
+                "full_velocity": {
+                  "ade_m": 0.8726674134114505,
+                  "fde_m": 2.485325660554143
+                },
+                "tangent": {
+                  "ade_m": 0.7028137274009044,
+                  "fde_m": 2.07268613152802
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.16985368601054607,
+                  "fde_m": 0.4126395290261231
+                },
+                "full_velocity": {
+                  "ade_m": 0.12755606438636644,
+                  "fde_m": 0.4493099878021577
+                },
+                "tangent": {
+                  "ade_m": 0.29740975039691253,
+                  "fde_m": 0.8619495168282808
+                }
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.6669726207901068,
+              "fde_m": 1.660236956619851
+            },
+            "normal": {
+              "ade_m": 0.7283153344140677,
+              "fde_m": 1.8239921567097432
+            },
+            "full_velocity": {
+              "ade_m": 0.6287674188484121,
+              "fde_m": 1.5806132601693383
+            },
+            "tangent": {
+              "ade_m": 0.6027895888531614,
+              "fde_m": 1.4982894010440724
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.06134271362396094,
+              "fde_m": 0.16375520008989253
+            },
+            "full_velocity": {
+              "ade_m": 0.09954791556565558,
+              "fde_m": 0.2433788965404049
+            },
+            "tangent": {
+              "ade_m": 0.12552574556090634,
+              "fde_m": 0.32570275566567086
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.056629313066634164,
+              "fde_m": 0.16282619186092345
+            },
+            "full_velocity": {
+              "ade_m": 0.1342089797164477,
+              "fde_m": 0.28884668326864904
+            },
+            "tangent": {
+              "ade_m": 0.1302127779910073,
+              "fde_m": 0.3120762906187841
+            }
+          }
+        },
+        "unsupported": {
+          "windows": 52,
+          "contributing_clips": 4,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "tracks": 2,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "normal": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "full_velocity": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "tangent": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 12,
+              "tracks": 5,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.3359375214859394,
+                  "fde_m": 0.8577740065997578
+                },
+                "normal": {
+                  "ade_m": 0.3359375214859394,
+                  "fde_m": 0.8577740065997578
+                },
+                "full_velocity": {
+                  "ade_m": 0.3359375214859394,
+                  "fde_m": 0.8577740065997578
+                },
+                "tangent": {
+                  "ade_m": 0.3359375214859394,
+                  "fde_m": 0.8577740065997578
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 24,
+              "tracks": 12,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.7896551222390071,
+                  "fde_m": 1.6898845077272628
+                },
+                "normal": {
+                  "ade_m": 0.7896551222390071,
+                  "fde_m": 1.6898845077272628
+                },
+                "full_velocity": {
+                  "ade_m": 0.7896551222390071,
+                  "fde_m": 1.6898845077272628
+                },
+                "tangent": {
+                  "ade_m": 0.7896551222390071,
+                  "fde_m": 1.6898845077272628
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 11,
+              "tracks": 4,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.3231937235539843,
+                  "fde_m": 0.8326467891147845
+                },
+                "normal": {
+                  "ade_m": 0.3231937235539843,
+                  "fde_m": 0.8326467891147845
+                },
+                "full_velocity": {
+                  "ade_m": 0.3231937235539843,
+                  "fde_m": 0.8326467891147845
+                },
+                "tangent": {
+                  "ade_m": 0.3231937235539843,
+                  "fde_m": 0.8326467891147845
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.39501414426924936,
+              "fde_m": 0.9316462040544058
+            },
+            "normal": {
+              "ade_m": 0.39501414426924936,
+              "fde_m": 0.9316462040544058
+            },
+            "full_velocity": {
+              "ade_m": 0.39501414426924936,
+              "fde_m": 0.9316462040544058
+            },
+            "tangent": {
+              "ade_m": 0.39501414426924936,
+              "fde_m": 0.9316462040544058
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "full_velocity": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "tangent": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "full_velocity": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "tangent": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            }
+          }
+        },
+        "both_maps_supported": {
+          "windows": 1,
+          "contributing_clips": 1,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 1,
+              "tracks": 1,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                },
+                "normal": {
+                  "ade_m": 1.034796861091,
+                  "fde_m": 2.3844059168244884
+                },
+                "full_velocity": {
+                  "ade_m": 0.09663146464198252,
+                  "fde_m": 0.1453394060594668
+                },
+                "tangent": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                },
+                "full_velocity": {
+                  "ade_m": 0.9381653964490175,
+                  "fde_m": 2.2390665107650216
+                },
+                "tangent": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            },
+            "normal": {
+              "ade_m": 1.034796861091,
+              "fde_m": 2.3844059168244884
+            },
+            "full_velocity": {
+              "ade_m": 0.09663146464198252,
+              "fde_m": 0.1453394060594668
+            },
+            "tangent": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          }
+        }
+      },
+      "strict_intersections": {
+        "all_drawn_segments": {
+          "all": {
+            "windows": 59,
+            "truth": 3,
+            "mixed_candidates": 6,
+            "probability": 3,
+            "normal": 3,
+            "full_velocity": 2,
+            "tangent": 2
+          },
+          "supported": {
+            "windows": 7,
+            "truth": 3,
+            "mixed_candidates": 4,
+            "probability": 3,
+            "normal": 3,
+            "full_velocity": 2,
+            "tangent": 2
+          },
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "truth": 2,
+              "mixed_candidates": 5,
+              "probability": 2,
+              "normal": 2,
+              "full_velocity": 1,
+              "tangent": 1
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 1,
+              "mixed_candidates": 1,
+              "probability": 1,
+              "normal": 1,
+              "full_velocity": 1,
+              "tangent": 1
+            }
+          }
+        },
+        "segments_inside_calibration_hull": {
+          "all": {
+            "windows": 59,
+            "truth": 3,
+            "mixed_candidates": 6,
+            "probability": 3,
+            "normal": 3,
+            "full_velocity": 2,
+            "tangent": 2
+          },
+          "supported": {
+            "windows": 7,
+            "truth": 3,
+            "mixed_candidates": 4,
+            "probability": 3,
+            "normal": 3,
+            "full_velocity": 2,
+            "tangent": 2
+          },
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "truth": 2,
+              "mixed_candidates": 5,
+              "probability": 2,
+              "normal": 2,
+              "full_velocity": 1,
+              "tangent": 1
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 1,
+              "mixed_candidates": 1,
+              "probability": 1,
+              "normal": 1,
+              "full_velocity": 1,
+              "tangent": 1
+            }
+          }
+        }
+      }
+    },
+    "independent": {
+      "scores": {
+        "all_including_fallback": {
+          "windows": 59,
+          "contributing_clips": 4,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "tracks": 2,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "normal": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "full_velocity": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "tangent": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 5,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "normal": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "full_velocity": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "tangent": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "tracks": 12,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.7924478120924932,
+                  "fde_m": 1.6764273036406985
+                },
+                "normal": {
+                  "ade_m": 0.8128222625335589,
+                  "fde_m": 1.7327271145036887
+                },
+                "full_velocity": {
+                  "ade_m": 0.7793163555175227,
+                  "fde_m": 1.6527604534049376
+                },
+                "tangent": {
+                  "ade_m": 0.7924478120924932,
+                  "fde_m": 1.6764273036406985
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0203744504410658,
+                  "fde_m": 0.056299810862990025
+                },
+                "full_velocity": {
+                  "ade_m": 0.03350590701603634,
+                  "fde_m": 0.07996666109875077
+                },
+                "tangent": {
+                  "ade_m": 0.0203744504410658,
+                  "fde_m": 0.056299810862990025
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 4,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "normal": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "full_velocity": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "tangent": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.41570767700858763,
+              "fde_m": 0.9933579669796702
+            },
+            "normal": {
+              "ade_m": 0.42080128961885405,
+              "fde_m": 1.0074329196954177
+            },
+            "full_velocity": {
+              "ade_m": 0.412424812864845,
+              "fde_m": 0.98744125442073
+            },
+            "tangent": {
+              "ade_m": 0.41570767700858763,
+              "fde_m": 0.9933579669796702
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.00509361261026645,
+              "fde_m": 0.014074952715747506
+            },
+            "full_velocity": {
+              "ade_m": 0.008376476754009085,
+              "fde_m": 0.01999166527468769
+            },
+            "tangent": {
+              "ade_m": 0.00509361261026645,
+              "fde_m": 0.014074952715747506
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.009669230717793938,
+              "fde_m": 0.026718554307859674
+            },
+            "full_velocity": {
+              "ade_m": 0.015901108414390127,
+              "fde_m": 0.03795027984347494
+            },
+            "tangent": {
+              "ade_m": 0.009669230717793938,
+              "fde_m": 0.026718554307859674
+            }
+          }
+        },
+        "supported": {
+          "windows": 1,
+          "contributing_clips": 1,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 1,
+              "tracks": 1,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                },
+                "normal": {
+                  "ade_m": 1.034796861091,
+                  "fde_m": 2.3844059168244884
+                },
+                "full_velocity": {
+                  "ade_m": 0.09663146464198252,
+                  "fde_m": 0.1453394060594668
+                },
+                "tangent": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                },
+                "full_velocity": {
+                  "ade_m": 0.9381653964490175,
+                  "fde_m": 2.2390665107650216
+                },
+                "tangent": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            },
+            "normal": {
+              "ade_m": 1.034796861091,
+              "fde_m": 2.3844059168244884
+            },
+            "full_velocity": {
+              "ade_m": 0.09663146464198252,
+              "fde_m": 0.1453394060594668
+            },
+            "tangent": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          }
+        },
+        "unsupported": {
+          "windows": 58,
+          "contributing_clips": 4,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "tracks": 2,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "normal": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "full_velocity": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                },
+                "tangent": {
+                  "ade_m": 0.13127020979806642,
+                  "fde_m": 0.3462795127758177
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 5,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "normal": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "full_velocity": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                },
+                "tangent": {
+                  "ade_m": 0.337891875169301,
+                  "fde_m": 0.8581783654311661
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 27,
+              "tracks": 12,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.8046009811055056,
+                  "fde_m": 1.7085908625658812
+                },
+                "normal": {
+                  "ade_m": 0.8046009811055056,
+                  "fde_m": 1.7085908625658812
+                },
+                "full_velocity": {
+                  "ade_m": 0.8046009811055056,
+                  "fde_m": 1.7085908625658812
+                },
+                "tangent": {
+                  "ade_m": 0.8046009811055056,
+                  "fde_m": 1.7085908625658812
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "tracks": 4,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "normal": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "full_velocity": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                },
+                "tangent": {
+                  "ade_m": 0.4012208109744899,
+                  "fde_m": 1.092546686070999
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "full_velocity": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                },
+                "tangent": {
+                  "ade_m": 0.0,
+                  "fde_m": 0.0
+                }
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.41874596926184077,
+              "fde_m": 1.001398856710966
+            },
+            "normal": {
+              "ade_m": 0.41874596926184077,
+              "fde_m": 1.001398856710966
+            },
+            "full_velocity": {
+              "ade_m": 0.41874596926184077,
+              "fde_m": 1.001398856710966
+            },
+            "tangent": {
+              "ade_m": 0.41874596926184077,
+              "fde_m": 1.001398856710966
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "full_velocity": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "tangent": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "full_velocity": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            },
+            "tangent": {
+              "ade_m": 0.0,
+              "fde_m": 0.0
+            }
+          }
+        },
+        "both_maps_supported": {
+          "windows": 1,
+          "contributing_clips": 1,
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 1,
+              "tracks": 1,
+              "scores": {
+                "probability": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                },
+                "normal": {
+                  "ade_m": 1.034796861091,
+                  "fde_m": 2.3844059168244884
+                },
+                "full_velocity": {
+                  "ade_m": 0.09663146464198252,
+                  "fde_m": 0.1453394060594668
+                },
+                "tangent": {
+                  "ade_m": 0.4643122487411578,
+                  "fde_m": 0.8080112126607678
+                }
+              },
+              "normal_minus": {
+                "probability": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                },
+                "full_velocity": {
+                  "ade_m": 0.9381653964490175,
+                  "fde_m": 2.2390665107650216
+                },
+                "tangent": {
+                  "ade_m": 0.5704846123498424,
+                  "fde_m": 1.5763947041637207
+                }
+              }
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 0,
+              "tracks": 0,
+              "scores": {
+                "probability": null,
+                "normal": null,
+                "full_velocity": null,
+                "tangent": null
+              },
+              "normal_minus": {
+                "probability": null,
+                "full_velocity": null,
+                "tangent": null
+              }
+            }
+          },
+          "contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            },
+            "normal": {
+              "ade_m": 1.034796861091,
+              "fde_m": 2.3844059168244884
+            },
+            "full_velocity": {
+              "ade_m": 0.09663146464198252,
+              "fde_m": 0.1453394060594668
+            },
+            "tangent": {
+              "ade_m": 0.4643122487411578,
+              "fde_m": 0.8080112126607678
+            }
+          },
+          "normal_minus_contributing_clip_equal": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          },
+          "pooled_normal_minus_by_window": {
+            "probability": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            },
+            "full_velocity": {
+              "ade_m": 0.9381653964490175,
+              "fde_m": 2.2390665107650216
+            },
+            "tangent": {
+              "ade_m": 0.5704846123498424,
+              "fde_m": 1.5763947041637207
+            }
+          }
+        }
+      },
+      "strict_intersections": {
+        "all_drawn_segments": {
+          "all": {
+            "windows": 59,
+            "truth": 1,
+            "mixed_candidates": 3,
+            "probability": 1,
+            "normal": 1,
+            "full_velocity": 1,
+            "tangent": 1
+          },
+          "supported": {
+            "windows": 1,
+            "truth": 0,
+            "mixed_candidates": 1,
+            "probability": 0,
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          },
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "truth": 1,
+              "mixed_candidates": 3,
+              "probability": 1,
+              "normal": 1,
+              "full_velocity": 1,
+              "tangent": 1
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            }
+          }
+        },
+        "segments_inside_calibration_hull": {
+          "all": {
+            "windows": 59,
+            "truth": 1,
+            "mixed_candidates": 3,
+            "probability": 1,
+            "normal": 1,
+            "full_velocity": 1,
+            "tangent": 1
+          },
+          "supported": {
+            "windows": 1,
+            "truth": 0,
+            "mixed_candidates": 1,
+            "probability": 0,
+            "normal": 0,
+            "full_velocity": 0,
+            "tangent": 0
+          },
+          "by_clip": {
+            "america_crossroad_spring_daytime_sunny_1": {
+              "windows": 5,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "italy_park_summer_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            },
+            "japan_crossroad_summer_daytime_sunny_0": {
+              "windows": 28,
+              "truth": 1,
+              "mixed_candidates": 3,
+              "probability": 1,
+              "normal": 1,
+              "full_velocity": 1,
+              "tangent": 1
+            },
+            "thailand_street_winter_daytime_sunny_0": {
+              "windows": 13,
+              "truth": 0,
+              "mixed_candidates": 0,
+              "probability": 0,
+              "normal": 0,
+              "full_velocity": 0,
+              "tangent": 0
+            }
+          }
+        }
+      }
+    }
+  }
+}
