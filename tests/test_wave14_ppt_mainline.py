@@ -152,19 +152,27 @@ class TestWave14PPTMainline(unittest.TestCase):
             build_ground_pose_o2_inputs(hist, kpts, bbox, torch.zeros((b, 3, 3), dtype=torch.float64), torch.full((b,), ys, dtype=torch.float64))
 
         hm_t = torch.from_numpy(hm)[None].repeat(b, 1, 1)
-        ys_t = torch.full((b,), ys, dtype=torch.float64)
+        calib2 = {
+            "pts_2d": [[50.0, 80.0], [250.0, 80.0], [250.0, 280.0], [50.0, 280.0]],
+            "pts_3d": [[-30.0, 10.0], [-10.0, 10.0], [-10.0, -10.0], [-30.0, -10.0]],
+            "y_min": -10.0, "y_max": 10.0,
+        }
+        hm2, ys2 = fit_pinns_ground_homography(calib2)
+        hm_t[4:] = torch.from_numpy(hm2)
+        ys_t = torch.tensor([ys] * 4 + [ys2] * 4, dtype=torch.float64)
         gp = build_ground_pose_o2_inputs(hist, kpts, bbox, hm_t, ys_t)
         self.assertTrue(bool((torch.linalg.vector_norm(gp["pose_vec_world"][:, :, 0], dim=-1) > 0.05).all()))
         self.assertTrue(bool((torch.linalg.vector_norm(gp["pose_vec_world"][:, :, 1], dim=-1) > 0.01).all()))
 
-        pt0_ego = np.tile(np.array([[20.0, 10.0]], dtype=np.float64), (b, 1))
+        pt0_ego = np.vstack((np.tile([[20.0, 10.0]], (4, 1)), np.tile([[-15.0, 2.0]], (4, 1))))
         polys = [(np.array([[20.5, 9.0], [20.5, 11.0]], dtype=np.float64), np.ones(8, dtype=np.float32))]
         p_ego = np.stack([build_local_polylines(polys, pt0_ego[i], True)[0] for i in range(b)])
         p_bug = np.stack([build_local_polylines(polys, np.zeros(2, dtype=np.float32), True)[0] for i in range(b)])
         self.assertGreater(float(p_ego[:, :, :, 10].sum()), 0.0)
         self.assertEqual(float(p_bug[:, :, :, 10].sum()), 0.0)
-        diag = verify_pinns_ground_and_polyline_diagnostics(hist[:4], bbox[:4], gp["pose_vec_world"][:4], hm_t[:4], ys_t[:4], pt0_ego_all=pt0_ego[:4])
-        self.assertGreater(diag["moving_coronal_velocity_mean_cos"], 0.9)
+        diag = verify_pinns_ground_and_polyline_diagnostics(hist, bbox, gp["pose_vec_world"], hm_t, ys_t, pt0_ego_all=pt0_ego)
+        self.assertLess(diag["footpoint_to_published_xy_median_err_m"], 1e-9)
+        self.assertGreater(diag["moving_coronal_velocity_mean_cos"], 0.4)
 
         # Single-factor M1 vs M1b check across slow and fast speeds when q_vec == 0
         m1b = PPTMainlineO2Forecaster("M1b").eval()

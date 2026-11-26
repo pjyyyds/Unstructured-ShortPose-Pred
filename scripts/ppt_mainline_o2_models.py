@@ -36,7 +36,7 @@ def fit_pinns_ground_homography(calib: dict) -> tuple[np.ndarray, float]:
 def _map_uv_torch(uv: torch.Tensor, h_mat: torch.Tensor, y_sum: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
     ones = torch.ones((*uv.shape[:-1], 1), dtype=uv.dtype, device=uv.device)
     hom = torch.cat((uv, ones), dim=-1)
-    raw = torch.einsum("...k,bjk->...j", hom, h_mat)
+    raw = torch.einsum("b...k,bjk->b...j", hom, h_mat)
     ok = raw[..., 2].abs() > 1e-6
     xy = raw[..., :2] / torch.where(ok[..., None], raw[..., 2:3], 1.0)
     y_ref = y_sum.view(len(h_mat), *([1] * (xy.ndim - 2)))
