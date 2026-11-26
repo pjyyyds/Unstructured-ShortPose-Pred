@@ -90,6 +90,7 @@ def _panel_cd(ax_c, ax_d, cb: dict) -> None:
             ax.errorbar(m_cm, yi + 0.14, xerr=[[m_cm - lo_c], [hi_c - m_cm]], fmt="o", color="#0b4f4a", lw=1.8, ms=5.2, capsize=2.8, label="21-Clip Cluster 95% CI" if yi == 0 else None)
             ax.errorbar(m_cm, yi - 0.14, xerr=[[m_cm - lo_p], [hi_p - m_cm]], fmt="s", color="#c26a4a", lw=1.6, ms=4.8, capsize=2.8, label="Person-Track Cluster 95% CI" if yi == 0 else None)
         ax.set_yticks(yc, [l for _, l in present], fontsize=8.3)
+        ax.set_ylim(-1.25, len(present) - 0.35)
         ax.set_xlabel("Ours_O2_Full(Bayes) minus baseline ADE (cm, <0 wins)", fontsize=8.8)
         ax.set_title(ttl, fontsize=10.0, fontweight="bold", loc="left", pad=7)
         ax.grid(axis="x", color="#e2e8f0", lw=0.7)

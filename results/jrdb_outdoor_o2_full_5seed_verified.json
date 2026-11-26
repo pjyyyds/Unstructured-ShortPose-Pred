@@ -1,0 +1,301 @@
+{
+  "archive_name": "jrdb_outdoor_o2_full_5seed.zip",
+  "archive_sha256": "c2fce439f6c2eee8676ec99dcd911cca2205ddab0519743731b755e2f6863b06",
+  "outer_download_sha256": "600ab44ee53dc19aae6dfd45694495000bad1a192030aa1d1a6f7972b7e5e452",
+  "manifest_sha256": {
+    "report.json": "b222309fa8f351a21c8415e123f378ca049f72f4fdb8aed5d1b0222e8823bee5"
+  },
+  "report": {
+    "study": "JRDB 1,677 outdoor 2.5 Hz zero-shot evaluation of 5-seed Ours_O2_Full + Null-Sink Graph",
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "jrdb_outdoor_1677": {
+      "n_windows": 1677,
+      "windows_with_10m_neighbors": 1456,
+      "five_axis_max_ade_swing_m": 5.306199923893473e-11,
+      "by_transform": {
+        "0deg": {
+          "last_two_cv": {
+            "scene_equal_ade_m": 0.36609161607978186,
+            "scene_equal_fde_m": 0.71815110192709,
+            "scene_equal_min_fde6_m": 0.71815110192709,
+            "pooled_ade_m": 0.3711138487083282,
+            "pooled_fde_m": 0.731104584709801
+          },
+          "no_graph_bayes": {
+            "scene_equal_ade_m": 0.8756680900368168,
+            "scene_equal_fde_m": 1.6451712751628393,
+            "scene_equal_min_fde6_m": 0.5228349850688597,
+            "pooled_ade_m": 0.9689577023750021,
+            "pooled_fde_m": 1.8167072393512511
+          },
+          "graph_bayes": {
+            "scene_equal_ade_m": 0.8796959247520624,
+            "scene_equal_fde_m": 1.6516327902859242,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9740539975823552,
+            "pooled_fde_m": 1.824961588338702
+          },
+          "graph_top1": {
+            "scene_equal_ade_m": 0.8699286748804115,
+            "scene_equal_fde_m": 1.6461779799472833,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9635129635346181,
+            "pooled_fde_m": 1.8198206698355164
+          }
+        },
+        "90deg": {
+          "last_two_cv": {
+            "scene_equal_ade_m": 0.36609161607978186,
+            "scene_equal_fde_m": 0.71815110192709,
+            "scene_equal_min_fde6_m": 0.71815110192709,
+            "pooled_ade_m": 0.3711138487083282,
+            "pooled_fde_m": 0.731104584709801
+          },
+          "no_graph_bayes": {
+            "scene_equal_ade_m": 0.8756680900368168,
+            "scene_equal_fde_m": 1.6451712751628393,
+            "scene_equal_min_fde6_m": 0.5228349850688597,
+            "pooled_ade_m": 0.9689577023750021,
+            "pooled_fde_m": 1.8167072393512511
+          },
+          "graph_bayes": {
+            "scene_equal_ade_m": 0.8796959247520624,
+            "scene_equal_fde_m": 1.6516327902859242,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9740539975823552,
+            "pooled_fde_m": 1.824961588338702
+          },
+          "graph_top1": {
+            "scene_equal_ade_m": 0.8699286748804115,
+            "scene_equal_fde_m": 1.6461779799472833,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9635129635346181,
+            "pooled_fde_m": 1.8198206698355164
+          }
+        },
+        "180deg": {
+          "last_two_cv": {
+            "scene_equal_ade_m": 0.36609161607978186,
+            "scene_equal_fde_m": 0.71815110192709,
+            "scene_equal_min_fde6_m": 0.71815110192709,
+            "pooled_ade_m": 0.3711138487083282,
+            "pooled_fde_m": 0.731104584709801
+          },
+          "no_graph_bayes": {
+            "scene_equal_ade_m": 0.8756680900368168,
+            "scene_equal_fde_m": 1.6451712751628393,
+            "scene_equal_min_fde6_m": 0.5228349850688597,
+            "pooled_ade_m": 0.9689577023750021,
+            "pooled_fde_m": 1.8167072393512511
+          },
+          "graph_bayes": {
+            "scene_equal_ade_m": 0.8796959247520624,
+            "scene_equal_fde_m": 1.6516327902859242,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9740539975823552,
+            "pooled_fde_m": 1.824961588338702
+          },
+          "graph_top1": {
+            "scene_equal_ade_m": 0.8699286748804115,
+            "scene_equal_fde_m": 1.6461779799472833,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9635129635346181,
+            "pooled_fde_m": 1.8198206698355164
+          }
+        },
+        "270deg": {
+          "last_two_cv": {
+            "scene_equal_ade_m": 0.36609161607978186,
+            "scene_equal_fde_m": 0.71815110192709,
+            "scene_equal_min_fde6_m": 0.71815110192709,
+            "pooled_ade_m": 0.3711138487083282,
+            "pooled_fde_m": 0.731104584709801
+          },
+          "no_graph_bayes": {
+            "scene_equal_ade_m": 0.8756680900368168,
+            "scene_equal_fde_m": 1.6451712751628393,
+            "scene_equal_min_fde6_m": 0.5228349850688597,
+            "pooled_ade_m": 0.9689577023750021,
+            "pooled_fde_m": 1.8167072393512511
+          },
+          "graph_bayes": {
+            "scene_equal_ade_m": 0.8796959247520624,
+            "scene_equal_fde_m": 1.6516327902859242,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9740539975823552,
+            "pooled_fde_m": 1.824961588338702
+          },
+          "graph_top1": {
+            "scene_equal_ade_m": 0.8699286748804115,
+            "scene_equal_fde_m": 1.6461779799472833,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9635129635346181,
+            "pooled_fde_m": 1.8198206698355164
+          }
+        },
+        "mirror_y": {
+          "last_two_cv": {
+            "scene_equal_ade_m": 0.36609161607978186,
+            "scene_equal_fde_m": 0.71815110192709,
+            "scene_equal_min_fde6_m": 0.71815110192709,
+            "pooled_ade_m": 0.3711138487083282,
+            "pooled_fde_m": 0.731104584709801
+          },
+          "no_graph_bayes": {
+            "scene_equal_ade_m": 0.8756680900368168,
+            "scene_equal_fde_m": 1.6451712751628393,
+            "scene_equal_min_fde6_m": 0.5228349850688597,
+            "pooled_ade_m": 0.9689577023750021,
+            "pooled_fde_m": 1.8167072393512511
+          },
+          "graph_bayes": {
+            "scene_equal_ade_m": 0.8796959249179023,
+            "scene_equal_fde_m": 1.651632790500998,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9740539975292932,
+            "pooled_fde_m": 1.8249615882042454
+          },
+          "graph_top1": {
+            "scene_equal_ade_m": 0.8698436402451227,
+            "scene_equal_fde_m": 1.6460078336508142,
+            "scene_equal_min_fde6_m": 0.5211872397349314,
+            "pooled_ade_m": 0.9634272565571711,
+            "pooled_fde_m": 1.8196543432259586
+          }
+        }
+      },
+      "by_scene_0deg": {
+        "hewlett-packard-intersection-2019-01-24_0": {
+          "last_two_cv": {
+            "ade_m": 0.4420678980065918,
+            "fde_m": 0.8777627943488439
+          },
+          "no_graph_bayes": {
+            "ade_m": 1.344326782748653,
+            "fde_m": 2.506760399744546
+          },
+          "graph_bayes": {
+            "ade_m": 1.3542928562819465,
+            "fde_m": 2.5242600604766148
+          },
+          "graph_top1": {
+            "ade_m": 1.347800587734485,
+            "fde_m": 2.5292107900663297
+          }
+        },
+        "huang-lane-2019-02-12_0": {
+          "last_two_cv": {
+            "ade_m": 0.29676396437671504,
+            "fde_m": 0.581582086920292
+          },
+          "no_graph_bayes": {
+            "ade_m": 0.6833680775409371,
+            "fde_m": 1.2917609680903301
+          },
+          "graph_bayes": {
+            "ade_m": 0.6845303199479655,
+            "fde_m": 1.2921659500068974
+          },
+          "graph_top1": {
+            "ade_m": 0.6680344069533902,
+            "fde_m": 1.2758037928327322
+          }
+        },
+        "tressider-2019-03-16_1": {
+          "last_two_cv": {
+            "ade_m": 0.35944298585603884,
+            "fde_m": 0.6951084245121337
+          },
+          "no_graph_bayes": {
+            "ade_m": 0.5993094098208601,
+            "fde_m": 1.1369924576536417
+          },
+          "graph_bayes": {
+            "ade_m": 0.6002645980262747,
+            "fde_m": 1.1384723603742604
+          },
+          "graph_top1": {
+            "ade_m": 0.5939510299533595,
+            "fde_m": 1.1335193569427882
+          }
+        }
+      },
+      "paired_person_bootstrap_ci_0deg": {
+        "graph_bayes_minus_cv": {
+          "window_equal": {
+            "mean": {
+              "ade_m": 0.6029401488740278,
+              "fde_m": 1.0938570036289004
+            },
+            "ci95": {
+              "ade_m": [
+                0.43307715569825933,
+                0.795404577750841
+              ],
+              "fde_m": [
+                0.7919108357881742,
+                1.4371132909420508
+              ]
+            }
+          },
+          "person_equal": {
+            "mean": {
+              "ade_m": 0.9569952781158575,
+              "fde_m": 1.7253016798017364
+            },
+            "ci95": {
+              "ade_m": [
+                0.6828378420367673,
+                1.251976156568375
+              ],
+              "fde_m": [
+                1.2381742343847786,
+                2.2478286977927455
+              ]
+            }
+          }
+        },
+        "graph_minus_nograph": {
+          "window_equal": {
+            "mean": {
+              "ade_m": 0.005096295207353082,
+              "fde_m": 0.008254348987450862
+            },
+            "ci95": {
+              "ade_m": [
+                0.002549072837406192,
+                0.00794434370026604
+              ],
+              "fde_m": [
+                0.003737229205218926,
+                0.013357103114774838
+              ]
+            }
+          },
+          "person_equal": {
+            "mean": {
+              "ade_m": 0.00881723604111092,
+              "fde_m": 0.014736515743302153
+            },
+            "ci95": {
+              "ade_m": [
+                0.004876966602220606,
+                0.013132329826913008
+              ],
+              "fde_m": [
+                0.007739924323170303,
+                0.022355103347275335
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

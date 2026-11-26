@@ -1,0 +1,2115 @@
+{
+  "archive_name": "table1_cluster_bootstrap_o2_full_5seed.zip",
+  "archive_sha256": "3b08601bcd67996149bc3020355d22a348c3b0210756e078641e75c0c9d316d5",
+  "outer_download_sha256": "895a7a221af8cbfd2ac275ac6c703bea03bfcb8ffe8300ca67132137bf4b8556",
+  "manifest_sha256": {
+    "report.json": "11afa842554b54683db63cac47b624bf6169fc140e7225dcd853d98adebd0cdc"
+  },
+  "report": {
+    "study": "Table 1/2 497-window whole-clip & whole-person clustered bootstrap CIs for Ours_O2_Full",
+    "n_clips": 21,
+    "n_person_tracks": 85,
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "durations": {
+      "T5": {
+        "four_site_equal_ours_o2_full": {
+          "top1_ade_m": 0.3867732104931252,
+          "bayes_ade_m": 0.3738730413490178
+        },
+        "clustered_comparisons": {
+          "M0": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.021265793494093858,
+                "ci95_ade_m": [
+                  -0.04951765122859016,
+                  0.01731636257821158
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": 0.011183490693165633,
+                "ci95_ade_m": [
+                  -0.06341645405475213,
+                  0.11058861603665841
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05485031621123651
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.021265793494093858,
+                "ci95_ade_m": [
+                  -0.04472045925085471,
+                  0.0038901206527806485
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.007662469535662403,
+                "ci95_ade_m": [
+                  -0.040660095542257614,
+                  0.03564019796778997
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05485031621123651
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04895830898445777,
+                "ci95_ade_m": [
+                  -0.07438362631657938,
+                  -0.019394953049560668
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.015320635427403499,
+                "ci95_ade_m": [
+                  -0.07333039262551731,
+                  0.06016764904197507
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.06775048535534395
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04895830898445777,
+                "ci95_ade_m": [
+                  -0.07302823587445917,
+                  -0.02587921145611773
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.038464205334156634,
+                "ci95_ade_m": [
+                  -0.06676670240889285,
+                  -0.005091786654846129
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06775048535534395
+            }
+          },
+          "M1": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.03172077588540727,
+                "ci95_ade_m": [
+                  -0.06553080414380077,
+                  0.004380092274456865
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.010445144009953214,
+                "ci95_ade_m": [
+                  -0.08854508431285024,
+                  0.07987575998204668
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.054360653879247045
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.03172077588540727,
+                "ci95_ade_m": [
+                  -0.060060354773891864,
+                  -0.0017164714605407453
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.024462983771268758,
+                "ci95_ade_m": [
+                  -0.05938697080329029,
+                  0.018554015100816723
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.054360653879247045
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.05941329137577117,
+                "ci95_ade_m": [
+                  -0.09016438475495708,
+                  -0.030232552522038367
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.036949270130522335,
+                "ci95_ade_m": [
+                  -0.09784628178838066,
+                  0.029603645405242775
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.06726082302335447
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.05941329137577117,
+                "ci95_ade_m": [
+                  -0.0897649842536448,
+                  -0.03164088445314792
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05526471956976299,
+                "ci95_ade_m": [
+                  -0.08721546802012207,
+                  -0.020588344709612925
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06726082302335447
+            }
+          },
+          "M1p": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.012274750283441025,
+                "ci95_ade_m": [
+                  -0.05146753984454154,
+                  0.03202548885071902
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": 0.011820061216185373,
+                "ci95_ade_m": [
+                  -0.05891675908943363,
+                  0.10341622582690703
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.043191196711100374
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.012274750283441025,
+                "ci95_ade_m": [
+                  -0.03733922661815282,
+                  0.01568904734484664
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0022116868784222664,
+                "ci95_ade_m": [
+                  -0.03539078194556364,
+                  0.04051598518800985
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.043191196711100374
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.03996726577380494,
+                "ci95_ade_m": [
+                  -0.07110828783306648,
+                  -0.009323244157089008
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.014684064904383771,
+                "ci95_ade_m": [
+                  -0.06759614215467243,
+                  0.052062913521151034
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.0560913658552078
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.03996726577380494,
+                "ci95_ade_m": [
+                  -0.06272330190334964,
+                  -0.016976714339917272
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0330134226769165,
+                "ci95_ade_m": [
+                  -0.05906348045324493,
+                  -0.0016000428528812085
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.0560913658552078
+            }
+          },
+          "M2": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04919712638763201,
+                "ci95_ade_m": [
+                  -0.07743823041398729,
+                  -0.01561956458916653
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.03443015168938021,
+                "ci95_ade_m": [
+                  -0.11332726982010101,
+                  0.05333207901517245
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04961647606319347
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04919712638763201,
+                "ci95_ade_m": [
+                  -0.07605240067970605,
+                  -0.02176313792432422
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04173713025739288,
+                "ci95_ade_m": [
+                  -0.07641787611135559,
+                  0.0014814355048793284
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04961647606319347
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.07688964187799592,
+                "ci95_ade_m": [
+                  -0.10292252941377127,
+                  -0.05125204963246446
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06093427780994933,
+                "ci95_ade_m": [
+                  -0.12232012194403818,
+                  0.0036171262408700336
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.06251664520730091
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.07688964187799592,
+                "ci95_ade_m": [
+                  -0.10330549667400421,
+                  -0.05210561645308129
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07253886605588711,
+                "ci95_ade_m": [
+                  -0.1008977013318094,
+                  -0.040447990899050844
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06251664520730091
+            }
+          },
+          "M3": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.06102336473949596,
+                "ci95_ade_m": [
+                  -0.11317973899221072,
+                  -0.016926137474585226
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05346337172789382,
+                "ci95_ade_m": [
+                  -0.14928553263503386,
+                  0.04652899621211853
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.054322267423663986
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.06102336473949596,
+                "ci95_ade_m": [
+                  -0.09262989953701907,
+                  -0.029303347770158025
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05040116217304485,
+                "ci95_ade_m": [
+                  -0.09160092935293815,
+                  -0.002875440208201613
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.054322267423663986
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.08871588022985989,
+                "ci95_ade_m": [
+                  -0.13096715160498962,
+                  -0.0559642421929603
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07996749784846295,
+                "ci95_ade_m": [
+                  -0.15823519243673342,
+                  -0.003153105578052107
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06722243656777141
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.08871588022985989,
+                "ci95_ade_m": [
+                  -0.11744564549523907,
+                  -0.06186364796627666
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.08120289797153905,
+                "ci95_ade_m": [
+                  -0.11418145835062497,
+                  -0.04530490271701476
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06722243656777141
+            }
+          },
+          "Ours_Full": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.0738029058601193,
+                "ci95_ade_m": [
+                  -0.12942324481333567,
+                  -0.03223895350077624
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06866517830276234,
+                "ci95_ade_m": [
+                  -0.15538685201215138,
+                  0.032046491483830306
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.08860573388182268
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.0738029058601193,
+                "ci95_ade_m": [
+                  -0.10548533010373332,
+                  -0.04215171157563073
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06987731207199496,
+                "ci95_ade_m": [
+                  -0.11054311905166281,
+                  -0.021009641973494864
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.08860573388182268
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.1014954213504832,
+                "ci95_ade_m": [
+                  -0.14713115554983525,
+                  -0.06509938218309229
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.09516930442333146,
+                "ci95_ade_m": [
+                  -0.16251993016587135,
+                  -0.018519353320537116
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1015059030259301
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.1014954213504832,
+                "ci95_ade_m": [
+                  -0.13144203808870406,
+                  -0.07273792181871475
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.10067904787048916,
+                "ci95_ade_m": [
+                  -0.13327469308774448,
+                  -0.06349902110585602
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1015059030259301
+            }
+          },
+          "Ext1_MCENET": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.1327260080700061,
+                "ci95_ade_m": [
+                  -0.23520638760100945,
+                  -0.06490667628899642
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.16197553581492458,
+                "ci95_ade_m": [
+                  -0.2707444577560129,
+                  -0.0644296651189871
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.16584522080379352
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.1327260080700061,
+                "ci95_ade_m": [
+                  -0.18163863881505343,
+                  -0.08964200051570549
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.14209608370551177,
+                "ci95_ade_m": [
+                  -0.19189080264896075,
+                  -0.08882748485734314
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.16584522080379352
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.16041852356037,
+                "ci95_ade_m": [
+                  -0.2510748375622723,
+                  -0.09552171074534241
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.18847966193549373,
+                "ci95_ade_m": [
+                  -0.2819628930423352,
+                  -0.10913613309470334
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1787453899479009
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.16041852356037,
+                "ci95_ade_m": [
+                  -0.20797081464921233,
+                  -0.11869766269152512
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.17289781950400596,
+                "ci95_ade_m": [
+                  -0.2182520499032484,
+                  -0.12810150276715615
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1787453899479009
+            }
+          },
+          "Ext2_HST": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.05440363519790605,
+                "ci95_ade_m": [
+                  -0.10212536291853751,
+                  -0.014666921309453598
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.020522204667227543,
+                "ci95_ade_m": [
+                  -0.09418049954617712,
+                  0.07644413578588787
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.11444759731983917
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.05440363519790605,
+                "ci95_ade_m": [
+                  -0.0836259328986205,
+                  -0.024057145601754856
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.047805494860678026,
+                "ci95_ade_m": [
+                  -0.08254838197554719,
+                  -0.005512037633532674
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.11444759731983917
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.08209615068826998,
+                "ci95_ade_m": [
+                  -0.12372596076979407,
+                  -0.04691332968265988
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04702633078779668,
+                "ci95_ade_m": [
+                  -0.10971104249908507,
+                  0.027887324993273063
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.1273477664639466
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.08209615068826998,
+                "ci95_ade_m": [
+                  -0.11236253607791871,
+                  -0.052729454624462616
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07860723065917223,
+                "ci95_ade_m": [
+                  -0.11194002260889069,
+                  -0.042547010508610206
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1273477664639466
+            }
+          },
+          "Ext3_SocialTransmotion": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.07151040564492507,
+                "ci95_ade_m": [
+                  -0.1428546864555149,
+                  -0.026331995969177697
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0356177487895316,
+                "ci95_ade_m": [
+                  -0.09674340091861222,
+                  0.05569745666319225
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.08838841237874376
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.07151040564492507,
+                "ci95_ade_m": [
+                  -0.1058192324469915,
+                  -0.039760828122118064
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.064165534587725,
+                "ci95_ade_m": [
+                  -0.10078452313973708,
+                  -0.018583946685933796
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.08838841237874376
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.09920292113528897,
+                "ci95_ade_m": [
+                  -0.15884389895519935,
+                  -0.05805642585559527
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.062121874910100724,
+                "ci95_ade_m": [
+                  -0.10882087202342268,
+                  0.005113563979482498
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.1012885815228512
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.09920292113528897,
+                "ci95_ade_m": [
+                  -0.1302244876314037,
+                  -0.07105726116919599
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.09496727038621923,
+                "ci95_ade_m": [
+                  -0.12526818091572547,
+                  -0.05954579854820403
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.1012885815228512
+            }
+          }
+        }
+      },
+      "T10": {
+        "four_site_equal_ours_o2_full": {
+          "top1_ade_m": 0.37854240351693236,
+          "bayes_ade_m": 0.36834555053460666
+        },
+        "clustered_comparisons": {
+          "M0": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.0179452845312183,
+                "ci95_ade_m": [
+                  -0.05029986142615289,
+                  0.023498978802789245
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.011542108442384258,
+                "ci95_ade_m": [
+                  -0.06652806684677133,
+                  0.04996056138527756
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05007103612127005
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.0179452845312183,
+                "ci95_ade_m": [
+                  -0.04338096632003001,
+                  0.011426456620347252
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.013848138760555578,
+                "ci95_ade_m": [
+                  -0.041895593225260916,
+                  0.022473123631842173
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05007103612127005
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04803442257143814,
+                "ci95_ade_m": [
+                  -0.07363395288132903,
+                  -0.01476046383149711
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.028934771244841943,
+                "ci95_ade_m": [
+                  -0.07309859093215282,
+                  0.02030601985630555
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.06026788910359576
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04803442257143814,
+                "ci95_ade_m": [
+                  -0.07125785649483903,
+                  -0.024242437405850026
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04379047877115039,
+                "ci95_ade_m": [
+                  -0.06985774642770408,
+                  -0.013055661719498677
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06026788910359576
+            }
+          },
+          "M1": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.010681567171943716,
+                "ci95_ade_m": [
+                  -0.049200258099724586,
+                  0.030682610196375935
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.012851535188031525,
+                "ci95_ade_m": [
+                  -0.06952094363320965,
+                  0.04586583415589682
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.03752755024510408
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.010681567171943716,
+                "ci95_ade_m": [
+                  -0.03556987512894108,
+                  0.01702785738938049
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.005571029426156197,
+                "ci95_ade_m": [
+                  -0.03365171950037852,
+                  0.031074630970080695
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.03752755024510408
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04077070521216356,
+                "ci95_ade_m": [
+                  -0.07352084475935128,
+                  -0.0063305566172861165
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.030244197990489212,
+                "ci95_ade_m": [
+                  -0.07462860457749919,
+                  0.015662248526646175
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.047724403227429796
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04077070521216356,
+                "ci95_ade_m": [
+                  -0.0650176573627206,
+                  -0.017188182049409653
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.035513369436751006,
+                "ci95_ade_m": [
+                  -0.06089816477423482,
+                  -0.004719108515798784
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.047724403227429796
+            }
+          },
+          "M1p": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.017868276233827154,
+                "ci95_ade_m": [
+                  -0.03871094454937086,
+                  0.010866787692009265
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.010245411782595639,
+                "ci95_ade_m": [
+                  -0.052484524370204705,
+                  0.039817861406316456
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.0400581658403324
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.017868276233827154,
+                "ci95_ade_m": [
+                  -0.041483529715095065,
+                  0.007083311540610525
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.014228784335964327,
+                "ci95_ade_m": [
+                  -0.0384877445611189,
+                  0.017112691314329284
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.0400581658403324
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.047957414274047,
+                "ci95_ade_m": [
+                  -0.07004697827954583,
+                  -0.020295473796603396
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.027638074585053324,
+                "ci95_ade_m": [
+                  -0.061027216368264685,
+                  0.010667929979294334
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05025501882265811
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.047957414274047,
+                "ci95_ade_m": [
+                  -0.07312569627222291,
+                  -0.024778688886248824
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04417112434655914,
+                "ci95_ade_m": [
+                  -0.0675413452826655,
+                  -0.017463697236770173
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05025501882265811
+            }
+          },
+          "M3": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.054821609307540424,
+                "ci95_ade_m": [
+                  -0.08171394817930946,
+                  -0.031578840100054434
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.058637120684105856,
+                "ci95_ade_m": [
+                  -0.1266004853129271,
+                  0.004447522776761326
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.049686715952803565
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.054821609307540424,
+                "ci95_ade_m": [
+                  -0.08247277067670201,
+                  -0.027484181451421112
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05471409348543976,
+                "ci95_ade_m": [
+                  -0.08697582693020726,
+                  -0.016178123834776792
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.049686715952803565
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.08491074734776026,
+                "ci95_ade_m": [
+                  -0.11331968920255789,
+                  -0.05912708864136959
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07602978348656356,
+                "ci95_ade_m": [
+                  -0.1332814387815284,
+                  -0.024111731858562004
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05988356893512928
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.08491074734776026,
+                "ci95_ade_m": [
+                  -0.11175923287516516,
+                  -0.05947474724136123
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.08465643349603458,
+                "ci95_ade_m": [
+                  -0.1128430940669734,
+                  -0.052264401669976854
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05988356893512928
+            }
+          },
+          "Ours_Full": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.07009103696931984,
+                "ci95_ade_m": [
+                  -0.11683949796932329,
+                  -0.03687236910485026
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0844082903126274,
+                "ci95_ade_m": [
+                  -0.16586263905418316,
+                  -0.0206118742790402
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06775623667539038
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.07009103696931984,
+                "ci95_ade_m": [
+                  -0.1072181692394241,
+                  -0.036793953507074206
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07264016218168365,
+                "ci95_ade_m": [
+                  -0.11116052885830051,
+                  -0.03212913495698934
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06775623667539038
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.10018017500953968,
+                "ci95_ade_m": [
+                  -0.15415374684214359,
+                  -0.06312979960378522
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.10180095311508508,
+                "ci95_ade_m": [
+                  -0.17350623310503183,
+                  -0.045186798251766976
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07795308965771611
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.10018017500953968,
+                "ci95_ade_m": [
+                  -0.14269981548815333,
+                  -0.06553826584503482
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.10258250219227846,
+                "ci95_ade_m": [
+                  -0.14202503417093132,
+                  -0.06496244163485901
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07795308965771611
+            }
+          },
+          "Ext1_MCENET": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.1324903116448541,
+                "ci95_ade_m": [
+                  -0.22327823115927078,
+                  -0.07588082363348339
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.20673518994839626,
+                "ci95_ade_m": [
+                  -0.33159385558382276,
+                  -0.1068000498091095
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.14470641823488206
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.1324903116448541,
+                "ci95_ade_m": [
+                  -0.18595522394786593,
+                  -0.0874279067671851
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.1449335576233764,
+                "ci95_ade_m": [
+                  -0.19759037098778506,
+                  -0.09321138375186173
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.14470641823488206
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.1625794496850739,
+                "ci95_ade_m": [
+                  -0.24306498269136895,
+                  -0.10719567284124862
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.22412785275085398,
+                "ci95_ade_m": [
+                  -0.3406591864591936,
+                  -0.12904325538170092
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.15490327121720776
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.1625794496850739,
+                "ci95_ade_m": [
+                  -0.21637299039992425,
+                  -0.11720709775363991
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.17487589763397118,
+                "ci95_ade_m": [
+                  -0.22426919568800005,
+                  -0.12739491275737455
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.15490327121720776
+            }
+          },
+          "Ext2_HST": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04781257259334443,
+                "ci95_ade_m": [
+                  -0.0943175241135621,
+                  -0.0142154568805168
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.046365816167583784,
+                "ci95_ade_m": [
+                  -0.09446514593685755,
+                  0.009240659397217833
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.08213345420087874
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04781257259334443,
+                "ci95_ade_m": [
+                  -0.07154198165739808,
+                  -0.023516158312196056
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04771260502564389,
+                "ci95_ade_m": [
+                  -0.07729997561381685,
+                  -0.010403262898800126
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.08213345420087874
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.07790171063356427,
+                "ci95_ade_m": [
+                  -0.11617415652334691,
+                  -0.04573538742024629
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06375847897004147,
+                "ci95_ade_m": [
+                  -0.1033731229963379,
+                  -0.018945598906472932
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.09233030718320445
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.07790171063356427,
+                "ci95_ade_m": [
+                  -0.10136824025893029,
+                  -0.05480967364725066
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07765494503623868,
+                "ci95_ade_m": [
+                  -0.10536033275619255,
+                  -0.04516599072237783
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.09233030718320445
+            }
+          },
+          "Ext3_SocialTransmotion": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.055615541065395666,
+                "ci95_ade_m": [
+                  -0.10334189540963469,
+                  -0.021324708234626528
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05235225951764056,
+                "ci95_ade_m": [
+                  -0.09594520994821619,
+                  0.004640620990382929
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.08338792543492893
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.055615541065395666,
+                "ci95_ade_m": [
+                  -0.07987891945275281,
+                  -0.03176198101790708
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05552169685029889,
+                "ci95_ade_m": [
+                  -0.08606160471502577,
+                  -0.017763631248240527
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.08338792543492893
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.08570467910561551,
+                "ci95_ade_m": [
+                  -0.12751176545101225,
+                  -0.05105600517439653
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06974492232009824,
+                "ci95_ade_m": [
+                  -0.10589299682842014,
+                  -0.024520266218513484
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.09358477841725463
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.08570467910561551,
+                "ci95_ade_m": [
+                  -0.11188213261811512,
+                  -0.061450929794485146
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0854640368608937,
+                "ci95_ade_m": [
+                  -0.11409480694064851,
+                  -0.05283040720800779
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.09358477841725463
+            }
+          }
+        }
+      },
+      "T20": {
+        "four_site_equal_ours_o2_full": {
+          "top1_ade_m": 0.38366147966533565,
+          "bayes_ade_m": 0.3682045092830316
+        },
+        "clustered_comparisons": {
+          "M0": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.023613355781259063,
+                "ci95_ade_m": [
+                  -0.054579612058690136,
+                  0.0031991668491649274
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.024319460944860736,
+                "ci95_ade_m": [
+                  -0.0555367424223781,
+                  0.008699120688196092
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04869702646291231
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.023613355781259063,
+                "ci95_ade_m": [
+                  -0.050890500538527235,
+                  0.003227507952684436
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.019970799238183436,
+                "ci95_ade_m": [
+                  -0.04951710580734627,
+                  0.01762190440625558
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04869702646291231
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.05205489164779345,
+                "ci95_ade_m": [
+                  -0.08496504822734796,
+                  -0.02469106037120335
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.044198112608657907,
+                "ci95_ade_m": [
+                  -0.07249714881281445,
+                  -0.014939952272620958
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06415399684521625
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.05205489164779345,
+                "ci95_ade_m": [
+                  -0.07713084684951545,
+                  -0.028926689723422418
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04849239865986821,
+                "ci95_ade_m": [
+                  -0.07475602734565998,
+                  -0.01741957922830947
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06415399684521625
+            }
+          },
+          "M1": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.005609550394182227,
+                "ci95_ade_m": [
+                  -0.03984423571710053,
+                  0.03052002117409081
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.025814145025900858,
+                "ci95_ade_m": [
+                  -0.07407588663373858,
+                  0.01598013169905399
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04138749005205229
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.005609550394182227,
+                "ci95_ade_m": [
+                  -0.036714323777286,
+                  0.026384929139979297
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0024760035179715438,
+                "ci95_ade_m": [
+                  -0.03482741733650387,
+                  0.03644106542090651
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.04138749005205229
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.03405108626071661,
+                "ci95_ade_m": [
+                  -0.06692460617998253,
+                  -0.006182308898539297
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04569279668969803,
+                "ci95_ade_m": [
+                  -0.09067901011196194,
+                  -0.007338042320591229
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05684446043435623
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.03405108626071661,
+                "ci95_ade_m": [
+                  -0.06050449124604372,
+                  -0.008527636959733556
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.030997602939656307,
+                "ci95_ade_m": [
+                  -0.05834658643710704,
+                  0.000693528795782205
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.05684446043435623
+            }
+          },
+          "M1p": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.020037800150365676,
+                "ci95_ade_m": [
+                  -0.05000361084373895,
+                  0.009983057844637936
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.03161663761088585,
+                "ci95_ade_m": [
+                  -0.08387038631150094,
+                  0.014436904645425035
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.03839870947614096
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.020037800150365676,
+                "ci95_ade_m": [
+                  -0.05231817027166948,
+                  0.011779227422743297
+                ],
+                "strictly_negative": false
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.016381532500662235,
+                "ci95_ade_m": [
+                  -0.050078978043587734,
+                  0.02509811792606737
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.03839870947614096
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.048479336016900056,
+                "ci95_ade_m": [
+                  -0.08254980123188956,
+                  -0.020630090424119753
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05149528927468302,
+                "ci95_ade_m": [
+                  -0.10148674952630263,
+                  -0.008148141996411408
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.053855679858444895
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.048479336016900056,
+                "ci95_ade_m": [
+                  -0.07767824651477519,
+                  -0.021324640734153587
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04490313192234701,
+                "ci95_ade_m": [
+                  -0.07458973636091767,
+                  -0.009914147802909546
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.053855679858444895
+            }
+          },
+          "M3": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.06893744513739528,
+                "ci95_ade_m": [
+                  -0.09531241445807273,
+                  -0.040496193884930934
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0818034342973076,
+                "ci95_ade_m": [
+                  -0.16214940501903788,
+                  -0.025817138419477303
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06233305326180831
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.06893744513739528,
+                "ci95_ade_m": [
+                  -0.1065667427857632,
+                  -0.030322064859034947
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.06513751035090395,
+                "ci95_ade_m": [
+                  -0.10544657670425839,
+                  -0.018945405784146534
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.06233305326180831
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.09737898100392967,
+                "ci95_ade_m": [
+                  -0.127377804258414,
+                  -0.06992488217607953
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.10168208596110477,
+                "ci95_ade_m": [
+                  -0.18071743937482873,
+                  -0.04794239711910464
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07779002364411224
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.09737898100392967,
+                "ci95_ade_m": [
+                  -0.13167655403246165,
+                  -0.06475010471382356
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.09365910977258875,
+                "ci95_ade_m": [
+                  -0.12973849716309319,
+                  -0.05490191275979417
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07779002364411224
+            }
+          },
+          "Ours_Full": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.06897869966695028,
+                "ci95_ade_m": [
+                  -0.09501010797774646,
+                  -0.04960493166200992
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0855576462429496,
+                "ci95_ade_m": [
+                  -0.14798040288640418,
+                  -0.038051667853221345
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05553818850000862
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.06897869966695028,
+                "ci95_ade_m": [
+                  -0.10423265500182241,
+                  -0.03585167142878639
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0625211467041039,
+                "ci95_ade_m": [
+                  -0.10073136473426901,
+                  -0.017586850027978315
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05553818850000862
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.09742023553348468,
+                "ci95_ade_m": [
+                  -0.13396608453985945,
+                  -0.07177058715774141
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.10543629790674679,
+                "ci95_ade_m": [
+                  -0.1682925444079553,
+                  -0.05709192248858225
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07099515888231255
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.09742023553348468,
+                "ci95_ade_m": [
+                  -0.13209663440052977,
+                  -0.06672512567418153
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0910427461257887,
+                "ci95_ade_m": [
+                  -0.1257201993452583,
+                  -0.05282710499987642
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07099515888231255
+            }
+          },
+          "Ext1_MCENET": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.11748847786953048,
+                "ci95_ade_m": [
+                  -0.1950716817210679,
+                  -0.06883080195665625
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.18776054705287196,
+                "ci95_ade_m": [
+                  -0.3006198140741474,
+                  -0.09595103852426932
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.13108078426648204
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.11748847786953048,
+                "ci95_ade_m": [
+                  -0.1662026556715556,
+                  -0.0737680096009045
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.13361049422723012,
+                "ci95_ade_m": [
+                  -0.1843399240264738,
+                  -0.08021498733425428
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.13108078426648204
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.14593001373606485,
+                "ci95_ade_m": [
+                  -0.21920051606041738,
+                  -0.09634237942126377
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.2076391987166691,
+                "ci95_ade_m": [
+                  -0.32101882070184096,
+                  -0.11531786319500206
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.14653775464878596
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.14593001373606485,
+                "ci95_ade_m": [
+                  -0.19438995292110262,
+                  -0.10393594424270054
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.16213209364891487,
+                "ci95_ade_m": [
+                  -0.20934300485344143,
+                  -0.11429144236864534
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.14653775464878596
+            }
+          },
+          "Ext2_HST": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.061859579156677336,
+                "ci95_ade_m": [
+                  -0.09590819383579645,
+                  -0.02995581354118702
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.051513852005366366,
+                "ci95_ade_m": [
+                  -0.08874709675491334,
+                  -0.013206012141912983
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05497698903302232
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.061859579156677336,
+                "ci95_ade_m": [
+                  -0.09240300571154565,
+                  -0.03262212989995449
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.05541005956654173,
+                "ci95_ade_m": [
+                  -0.0908386447386015,
+                  -0.0099023921789487
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.05497698903302232
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.09030111502321173,
+                "ci95_ade_m": [
+                  -0.12855678399388235,
+                  -0.056364412561722546
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.07139250366916354,
+                "ci95_ade_m": [
+                  -0.10928241525064357,
+                  -0.03282244098349044
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07043395941532625
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.09030111502321173,
+                "ci95_ade_m": [
+                  -0.1216355234783684,
+                  -0.061308003061936116
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.08393165898822648,
+                "ci95_ade_m": [
+                  -0.11829290220126586,
+                  -0.04387274304235292
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.07043395941532625
+            }
+          },
+          "Ext3_SocialTransmotion": {
+            "top1_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.04771698377942992,
+                "ci95_ade_m": [
+                  -0.08980055164210006,
+                  -0.014803242110887568
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.028661472739773347,
+                "ci95_ade_m": [
+                  -0.06036220275894225,
+                  0.0021846889116824064
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.028534465771061574
+            },
+            "top1_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.04771698377942992,
+                "ci95_ade_m": [
+                  -0.0783929071344364,
+                  -0.019222553595381383
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.040352297044692044,
+                "ci95_ade_m": [
+                  -0.07805867452780849,
+                  0.004390413538689289
+                ],
+                "strictly_negative": false
+              },
+              "four_site_equal_mean_ade_m": -0.028534465771061574
+            },
+            "bayes_clip_cluster": {
+              "n_clusters": 21,
+              "window_weighted": {
+                "mean_ade_m": -0.07615851964596432,
+                "ci95_ade_m": [
+                  -0.1198905218558815,
+                  -0.03874750869425861
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.04854012440357052,
+                "ci95_ade_m": [
+                  -0.07936191981138771,
+                  -0.01937815738116642
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.04399143615336552
+            },
+            "bayes_person_cluster": {
+              "n_clusters": 85,
+              "window_weighted": {
+                "mean_ade_m": -0.07615851964596432,
+                "ci95_ade_m": [
+                  -0.10661608494647522,
+                  -0.04996253603890909
+                ],
+                "strictly_negative": true
+              },
+              "cluster_equal": {
+                "mean_ade_m": -0.0688738964663768,
+                "ci95_ade_m": [
+                  -0.10253987176880625,
+                  -0.03083967822767723
+                ],
+                "strictly_negative": true
+              },
+              "four_site_equal_mean_ade_m": -0.04399143615336552
+            }
+          }
+        }
+      }
+    },
+    "pinns_audit": {
+      "bev_convention": "source_label",
+      "video_decode_protocol": "pinns_declared_frames_and_required_pedestrian_images_v1",
+      "bev_converter_sha256": "c481af901ce4f0ac2176df515c65993e5e70ae330d93991b3d464e8fec58e532",
+      "total_samples": 7283,
+      "num_sequences": 47,
+      "split_counts": {
+        "train": 5686,
+        "val": 1100,
+        "test": 497
+      },
+      "leakage_check": "PASS: zero physical time overlap across train/val/test",
+      "rtmpose_providers": [
+        "CUDAExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "bbox_is_topleft": false,
+      "onnx_sha256": "5c0a4bf67953e6d2ac43ce15e77dc9d5d354ae18430a47d2c5963a7bc5683e3c"
+    }
+  }
+}
