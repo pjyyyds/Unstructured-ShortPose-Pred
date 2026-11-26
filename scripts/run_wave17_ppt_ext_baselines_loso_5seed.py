@@ -387,7 +387,8 @@ def run_jrdb_ext_lolo(repo_root: Path, device: torch.device) -> tuple[dict, dict
                 top_s[nm][si, te_ids], min_s[nm][si, te_ids] = te_top, te_min
             o2_mods = _fit_fast_o2_ref(seed, data["location"], gd, tr_ids, "M3a", 512, (45, 28, 28, 30), (2.5e-3, 1.5e-3, 1.8e-3, 1.5e-3), (0, 12, 21, 30), device)
             for r_nm, arm in (("O2_M2b_ref", "M2b"), ("O2_M3a_ref", "M3a")):
-                top_s[r_nm][si, te_ids], min_s[r_nm][si, te_ids] = _eval_gd(o2_mods[arm], gd, truth_np, te_ids, device)
+                m7, _ = _eval_gd(o2_mods[arm], gd, truth_np, te_ids, device)
+                top_s[r_nm][si, te_ids], min_s[r_nm][si, te_ids] = m7[:, :2], m7[:, 2:4]
         print(f"[W17-EXT JRDB] seed={seed} MCENET={top_s['Ext1_MCENET'][si].mean(0)[0]:.4f} ST_Fr={top_s['Ext3_SocialTransmotion_Frenet'][si].mean(0)[0]:.4f} O2_M3a={top_s['O2_M3a_ref'][si].mean(0)[0]:.4f}", flush=True)
 
     tm = {nm: v.mean(0) for nm, v in top_s.items()}
