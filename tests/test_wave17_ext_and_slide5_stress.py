@@ -104,7 +104,7 @@ class TestWave17ExtAndSlide5Stress(unittest.TestCase):
             res_p, _ = s5.evaluate_dataset_matrix("pinns", sites, clips, True, hist, truth, truth.numpy(), packs, qb, obs_dt, fut_s, 8, 1, 1, torch.device("cpu"))
             self.assertIn("ade_m", res_p["train_test_matrix"]["VarQTrain"]["Test_Jitter020"]["M1_minus_M1a"]["ci95"])
             res_j, _ = s5.evaluate_dataset_matrix("jrdb", sites, clips, False, hist, truth, truth.numpy(), packs, qb, obs_dt, fut_s, 8, 1, 1, torch.device("cpu"))
-            self.assertIn("location_equal", res_j["train_test_matrix"]["CleanTrain"]["Test_Jitter020"]["M1_minus_M1a"])
+            self.assertIsNotNone(res_j["train_test_matrix"]["CleanTrain"]["Test_Jitter020"]["M1_minus_M1a"]["location_equal"]["ci95"])
             ci = paired_site_clip_ci(np.zeros((n, 2)), sites, clips)
             self.assertEqual(ci["mean"]["ade_m"], 0.0)
         finally:

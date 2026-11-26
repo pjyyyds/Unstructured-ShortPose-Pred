@@ -410,11 +410,11 @@ def run_jrdb_ext_lolo(repo_root: Path, device: torch.device) -> tuple[dict, dict
     for nm, _, _ in EXT_SPECS:
         d_m3 = tm["O2_M3a_ref"] - tm[nm]
         d_cv = tm[nm] - cv_err
-        comps[f"O2_M3a_minus_{nm}_all"] = {"location_equal": _loc_bootstrap_ci(d_m3, all_m, data["location"]), **fast_person_bootstrap_ci(d_m3, all_m, data["actors"])}
-        comps[f"{nm}_minus_CV_all"] = {"location_equal": _loc_bootstrap_ci(d_cv, all_m, data["location"]), **fast_person_bootstrap_ci(d_cv, all_m, data["actors"])}
+        comps[f"O2_M3a_minus_{nm}_all"] = {"location_equal": _loc_bootstrap_ci(d_m3[all_m], data["location"][all_m]), **fast_person_bootstrap_ci(d_m3, all_m, data["actors"])}
+        comps[f"{nm}_minus_CV_all"] = {"location_equal": _loc_bootstrap_ci(d_cv[all_m], data["location"][all_m]), **fast_person_bootstrap_ci(d_cv, all_m, data["actors"])}
     for b_nm in ("Ext1_MCENET", "Ext2_HST", "Ext3_SocialTransmotion"):
         df = tm[f"{b_nm}_Frenet"] - tm[b_nm]
-        comps[f"{b_nm}_Frenet_minus_Raw"] = {"location_equal": _loc_bootstrap_ci(df, all_m, data["location"]), **fast_person_bootstrap_ci(df, all_m, data["actors"])}
+        comps[f"{b_nm}_Frenet_minus_Raw"] = {"location_equal": _loc_bootstrap_ci(df[all_m], data["location"][all_m]), **fast_person_bootstrap_ci(df, all_m, data["actors"])}
     npz = {f"jrdb_{nm}_top1": tm[nm] for nm in names} | {f"jrdb_{nm}_min6": mm[nm] for nm in names}
     return {"n_windows": n, "n_locations": len(locs), "strata": strata_out, "paired_comparisons": comps}, npz
 

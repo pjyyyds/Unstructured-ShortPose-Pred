@@ -247,7 +247,7 @@ def evaluate_dataset_matrix(
     def _pair_ci(diff_2d: np.ndarray, mask: np.ndarray) -> dict:
         if is_pinns:
             return paired_site_clip_ci(diff_2d[mask], grp_arr[mask], unit_arr[mask])
-        return {"location_equal": _loc_bootstrap_ci(diff_2d, mask, grp_arr), **fast_person_bootstrap_ci(diff_2d, mask, unit_arr)}
+        return {"location_equal": _loc_bootstrap_ci(diff_2d[mask], grp_arr[mask]), **fast_person_bootstrap_ci(diff_2d, mask, unit_arr)}
 
     all_m = np.ones(n, dtype=bool)
     matrix_out: dict[str, dict] = {}
