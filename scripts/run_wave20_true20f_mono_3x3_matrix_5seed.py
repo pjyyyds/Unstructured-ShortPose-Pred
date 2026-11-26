@@ -5,6 +5,8 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import subprocess
+import sys
 import zipfile
 
 import numpy as np
@@ -132,9 +134,19 @@ def main() -> None:
     ap.add_argument("--meta-dir", type=Path, required=True)
     ap.add_argument("--pose-npz", type=Path, required=True)
     ap.add_argument("--matched-obs-npz", type=Path, required=True)
+    ap.add_argument("--scratch-dir", type=Path, default=Path("/tmp/w20_true20f_scratch"))
     ap.add_argument("--zip-path", type=Path, required=True)
     ap.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
     args = ap.parse_args()
+
+    if not args.matched_obs_npz.exists():
+        from scripts.run_heldout_cloud import pip_install, stage
+        from scripts.run_pinns_matched_durations import collect
+        probe = subprocess.run([sys.executable, "-c", "import onnxruntime as ort; raise SystemExit('CUDAExecutionProvider' not in ort.get_available_providers())"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if probe.returncode:
+            pip_install("onnxruntime-gpu")
+        ds_dir, onnx_p = stage(args.scratch_dir)
+        collect(ds_dir, onnx_p, args.pose_npz, args.matched_obs_npz)
 
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     data = load_matched_623_rc1_20frame(args.matched_npz, args.meta_dir, args.pose_npz, args.matched_obs_npz)
