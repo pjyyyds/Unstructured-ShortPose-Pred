@@ -30,21 +30,20 @@ def main() -> None:
     mcenet = [ref_full["PINNS_T5_Ext1_MCENET"]["slices"][b]["ADE_1_mean"] for b in buckets]
     st_mod = [ref_full["PINNS_T5_Ext3_SocialTransmotion"]["slices"][b]["ADE_1_mean"] for b in buckets]
     old_full = [ref_full["PINNS_T5_Ours_Full"]["slices"][b]["ADE_1_mean"] for b in buckets]
-    m0_ref = [ref_full["PINNS_T5_M0"]["slices"][b]["ADE_1_mean"] for b in buckets]
+    m1p_ref = [ref_full["PINNS_T5_M1p"]["slices"][b]["ADE_1_mean"] for b in buckets]
     o2_top = [t1["durations"]["T5"]["slices"][b]["ADE_1"] for b in buckets]
-    o2_bay = [t1["durations"]["T5"]["slices"][b]["Bayes_ADE"] for b in buckets]
 
-    ax1.bar(x1 - 0.30, mcenet, width=0.14, color="#cbd5e1", label="MCENET")
-    ax1.bar(x1 - 0.15, st_mod, width=0.14, color="#c26a4a", label="Social-Transmotion")
-    ax1.bar(x1 + 0.00, old_full, width=0.14, color="#94a3b8", label="Archived Ours_Full (471k)")
-    ax1.bar(x1 + 0.15, m0_ref, width=0.14, color="#64748b", label="Global M0")
-    ax1.bar(x1 + 0.30, o2_bay, width=0.14, color="#0b4f4a", label="Ours_O2_Full Bayes (20.7k)")
-    for xi, bv in zip(x1 + 0.30, o2_bay):
-        ax1.text(xi, bv + 0.012, f"{bv:.3f}", ha="center", va="bottom", fontsize=7.0, fontweight="bold", color="#0b4f4a")
+    ax1.bar(x1 - 0.30, mcenet, width=0.14, color="#cbd5e1", label="MCENET (Top-1)")
+    ax1.bar(x1 - 0.15, st_mod, width=0.14, color="#c26a4a", label="Social-Transmotion (Top-1)")
+    ax1.bar(x1 + 0.00, old_full, width=0.14, color="#94a3b8", label="Archived Ours_Full (Top-1)")
+    ax1.bar(x1 + 0.15, m1p_ref, width=0.14, color="#64748b", label="Global M1p (Top-1)")
+    ax1.bar(x1 + 0.30, o2_top, width=0.14, color="#0b4f4a", label="Ours_O2_Full (Top-1, 20.7k)")
+    for xi, tv in zip(x1 + 0.30, o2_top):
+        ax1.text(xi, tv + 0.012, f"{tv:.3f}", ha="center", va="bottom", fontsize=7.0, fontweight="bold", color="#0b4f4a")
     ax1.set_xticks(x1, b_lbls, fontsize=8.5)
     ax1.set_ylim(0.32, max(max(old_full), max(mcenet)) * 1.13)
-    ax1.set_ylabel("Table 1 test split 3.0 s ADE (m, lower better)", fontsize=9.3)
-    ax1.set_title("(a) Apple-to-apple Table 1 PINNS benchmark (5 seeds)", fontsize=10.5, fontweight="bold", loc="left", pad=7)
+    ax1.set_ylabel("Table 1 test split Top-1 ADE (m, lower better)", fontsize=9.3)
+    ax1.set_title("(a) Same-decoder Top-1 Table 1 PINNS benchmark (5 seeds)", fontsize=10.3, fontweight="bold", loc="left", pad=7)
     ax1.grid(axis="y", color="#e2e8f0", lw=0.7)
     ax1.spines["top"].set_visible(False); ax1.spines["right"].set_visible(False)
     ax1.legend(loc="upper left", fontsize=7.7, framealpha=0.95)

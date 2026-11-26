@@ -11,26 +11,27 @@ import numpy as np
 def _panel_ab(ax_a, ax_b, emg: dict) -> None:
     st = emg["emergence_strata"]
     keys = ["first_contiguous_449", "first_raw_261", "first_short_323", "prior_35_1033"]
-    lbls = ["First Contig.\n(n=449)", "New Entry\n(n=261)", "Short <0.5m\n(n=323)", "Prior >=3.5s\n(n=1033)"]
+    lbls = ["First Sampled\n(n=449)", "First Raw Label\n(n=261)", "First+<0.5m\n(n=323)", "Prior >=35\n(n=1033)"]
     xa = np.arange(len(keys))
-    cv_v = [st[k]["models"]["cv"]["site_equal_fde_m"] for k in keys]
-    pad_v = [st[k]["models"]["naive_pad_t20_bayes"]["site_equal_fde_m"] for k in keys]
-    u0_v = [st[k]["models"]["u0_bayes"]["site_equal_fde_m"] for k in keys]
-    fl_v = [st[k]["models"]["full_bayes"]["site_equal_fde_m"] for k in keys]
+    cv_v = [st[k]["models"]["cv"]["site_equal_ade_m"] for k in keys]
+    pad_v = [st[k]["models"]["naive_pad_t20_bayes"]["site_equal_ade_m"] for k in keys]
+    u0_v = [st[k]["models"]["u0_bayes"]["site_equal_ade_m"] for k in keys]
+    fl_v = [st[k]["models"]["full_bayes"]["site_equal_ade_m"] for k in keys]
 
     ax_a.bar(xa - 0.27, cv_v, width=0.18, color="#cbd5e1", label="Last-2 CV")
-    ax_a.bar(xa - 0.09, pad_v, width=0.18, color="#c26a4a", label="Naive T=20 Pad")
-    ax_a.bar(xa + 0.09, u0_v, width=0.18, color="#64748b", label="U0 Motion")
-    ax_a.bar(xa + 0.27, fl_v, width=0.18, color="#0b4f4a", label="Native T=5 Ours_O2_Full")
-    for xi, v in zip(xa + 0.27, fl_v):
-        ax_a.text(xi, v + 0.012, f"{v:.3f}", ha="center", va="bottom", fontsize=7.0, fontweight="bold", color="#0b4f4a")
-    ax_a.set_xticks(xa, lbls, fontsize=8.3)
-    ax_a.set_ylim(min(fl_v) * 0.86, max(max(cv_v), max(pad_v)) * 1.13)
-    ax_a.set_ylabel("Four-site equal 3.0 s FDE (m)", fontsize=9.0)
-    ax_a.set_title("(a) Track-emergence vs long-history strata (5 seeds)", fontsize=10.2, fontweight="bold", loc="left", pad=7)
+    ax_a.bar(xa - 0.09, pad_v, width=0.18, color="#c26a4a", label="First-Frame Pad T=20")
+    ax_a.bar(xa + 0.09, u0_v, width=0.18, color="#64748b", label="U0 Motion (No Pose)")
+    ax_a.bar(xa + 0.27, fl_v, width=0.18, color="#0b4f4a", label="T=5 Ours_O2_Full")
+    for xi, cv_i, fl_i in zip(xa, cv_v, fl_v):
+        ax_a.text(xi - 0.27, cv_i + 0.008, f"{cv_i:.3f}", ha="center", va="bottom", fontsize=6.6, color="#475569")
+        ax_a.text(xi + 0.27, fl_i + 0.008, f"{fl_i:.3f}", ha="center", va="bottom", fontsize=6.8, fontweight="bold", color="#0b4f4a")
+    ax_a.set_xticks(xa, lbls, fontsize=8.2)
+    ax_a.set_ylim(0.28, max(pad_v) * 1.25)
+    ax_a.set_ylabel("Four-site equal 3.0 s ADE (m, lower better)", fontsize=9.0)
+    ax_a.set_title("(a) First-annotation & <0.5m subgroups (CV wins <0.5m)", fontsize=10.0, fontweight="bold", loc="left", pad=7)
     ax_a.grid(axis="y", color="#e2e8f0", lw=0.7)
     ax_a.spines["top"].set_visible(False); ax_a.spines["right"].set_visible(False)
-    ax_a.legend(loc="upper left", fontsize=7.4, framealpha=0.95)
+    ax_a.legend(loc="upper right", ncol=2, fontsize=7.2, framealpha=0.95)
 
     sn = emg["action_threshold_sensitivity"]
     sc_keys = ["scale_0.50x", "scale_0.75x", "scale_1.00x", "scale_1.25x", "scale_1.50x"]
