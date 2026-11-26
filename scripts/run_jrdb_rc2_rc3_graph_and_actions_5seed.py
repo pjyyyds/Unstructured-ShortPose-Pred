@@ -12,8 +12,33 @@ import numpy as np
 import torch
 
 from scripts.ppt_mainline_o2_models import PPTMainlineO2Forecaster
-from scripts.run_dair_o2_bioeq_external import SEEDS, person_bootstrap_ci
+from scripts.run_dair_o2_bioeq_external import SEEDS
 from scripts.run_jrdb_outdoor_o2_full_5seed import _jrdb_edges
+
+
+def fast_person_bootstrap_ci(diff: np.ndarray, mask: np.ndarray, actors: np.ndarray, seed: int = 2026, n_boot: int = 20000) -> dict:
+    ids = np.flatnonzero(mask)
+    uniq, inv = np.unique(actors[ids], return_inverse=True)
+    k = len(uniq)
+    d_sub = diff[ids].astype(np.float64)
+    cnts = np.bincount(inv, minlength=k).astype(np.float64)[:, None]
+    sums = np.column_stack([np.bincount(inv, weights=d_sub[:, j], minlength=k) for j in range(2)])
+    means = sums / cnts
+    pt_w, pt_p = d_sub.mean(axis=0), means.mean(axis=0)
+    rng = np.random.default_rng(seed)
+    dw = np.empty((n_boot, 2), dtype=np.float64)
+    dp = np.empty((n_boot, 2), dtype=np.float64)
+    for s in range(0, n_boot, 2000):
+        e = min(n_boot, s + 2000)
+        idx = rng.integers(0, k, size=(e - s, k))
+        dw[s:e] = sums[idx].sum(axis=1) / cnts[idx].sum(axis=1)
+        dp[s:e] = means[idx].mean(axis=1)
+    lw, hw = np.percentile(dw, [2.5, 97.5], axis=0)
+    lp, hp = np.percentile(dp, [2.5, 97.5], axis=0)
+    return {
+        "window_equal": {"mean": {"ade_m": float(pt_w[0]), "fde_m": float(pt_w[1])}, "ci95": {"ade_m": [float(lw[0]), float(hw[0])], "fde_m": [float(lw[1]), float(hw[1])]}},
+        "person_equal": {"mean": {"ade_m": float(pt_p[0]), "fde_m": float(pt_p[1])}, "ci95": {"ade_m": [float(lp[0]), float(hp[0])], "fde_m": [float(lp[1]), float(hp[1])]}},
+    }
 from scripts.run_jrdb_rc1_pose_quality_and_initiation_5seed import (
     FUTURE_STEPS,
     OUTDOOR_SCENES,
@@ -283,7 +308,7 @@ def main() -> None:
         st_out[sn] = {
             "n_windows": int(sm.sum()), "models": md,
             "paired_top1_location_ci": {cn: _loc_bootstrap_ci(mean_m[ma][sm, :2] - mean_m[mb][sm, :2], sub_l) for cn, ma, mb in contrasts},
-            "paired_top1_person_ci": {cn: person_bootstrap_ci(mean_m[ma][:, :2] - mean_m[mb][:, :2], sm, act_arr) for cn, ma, mb in contrasts},
+            "paired_top1_person_ci": {cn: fast_person_bootstrap_ci(mean_m[ma][:, :2] - mean_m[mb][:, :2], sm, act_arr) for cn, ma, mb in contrasts},
         }
 
     ya_np, va_np = data["y_act"].numpy(), data["valid_act"].numpy()
