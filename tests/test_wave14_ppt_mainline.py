@@ -102,6 +102,13 @@ class TestWave14PPTMainline(unittest.TestCase):
         self.assertIn("within_site_clip_split_fixed_3site_predictor", conf)
         self.assertIn("cross_site_12pair_fixed_2site_predictor_no_retrain", conf)
 
+        from scripts.run_ppt_rc1_3x3_duration_quality_matrix import eval_rc1_dur, fit_rc1_dur_fold
+        h20 = torch.from_numpy(rng.normal(0.0, 0.25, size=(n_p, 20, 2))); h20[:, -1] = 0.0
+        d3x3 = {**data_p, "hist20": h20}
+        m_d10 = fit_rc1_dur_fold(42, d3x3, 10, np.arange(48), torch.device("cpu"))
+        ev10 = eval_rc1_dur(m_d10["M1"], d3x3, 10, np.arange(48, n_p), torch.device("cpu"))
+        self.assertEqual(ev10.shape, (16, 7))
+
 
 if __name__ == "__main__":
     unittest.main()
