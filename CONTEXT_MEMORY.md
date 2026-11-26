@@ -35,4 +35,4 @@
 ---
 
 ## 5. 下一步行动清单 (Next Steps)
-- [ ] 跟进并回收 **Wave 19** 云端双卡作业 `w19_gpu1_dut_imptc_and_unified_clean_chain`（`scriptVersionId=374513273`，`GPU T4 x2`，已通过 `6,930/7,410` 地面朝向与 `2.24 µm` 足底重投影运行期硬断言进入稳定训练态）：完成后执行双层 SHA-256 核验，更新 `DUT (3,066)` / `IMPTC (564)` 跨基准因果冲突门控与零重训共形安全指标，以及 `PINNS + JRDB` 统一修复链 `U_M0 -> U_M1_mono -> U_M2b_mono_conflict -> U_M3_mono_conflict + Platt 重排` 终局表与图 20。
+- [ ] 跟进并回收当前并发运行的两路 **Wave 19** 双卡作业（共 4 张 `Tesla T4`，`0` 草稿会话）：（1）`w19_gpu1_dut_imptc_and_unified_clean_chain`（`374513273`，已跑完 `PINNS` 第 4 个种子 `3407`）；（2）`w19_gpu2_boundary_and_adaptive_conformal`（`374521294`，含最低可用像素框高/关节有效率边界审计与 `12/72` 配对零重训局部加权分裂共形校准）。完成后执行双层 SHA-256 核验、绘制 300-DPI 图 20 并更新中英文手稿与 20 页答辩映射表。
