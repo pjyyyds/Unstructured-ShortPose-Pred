@@ -114,10 +114,73 @@ class TestWave14PPTMainline(unittest.TestCase):
 
         from scripts.run_ppt_rc1_3x3_duration_quality_matrix import eval_rc1_dur, fit_rc1_dur_fold
         h20 = torch.from_numpy(rng.normal(0.0, 0.25, size=(n_p, 20, 2))); h20[:, -1] = 0.0
-        d3x3 = {**data_p, "hist20": h20}
+        d3x3 = {
+            "site": sites, "clip": clips, "hist20": h20, "truth": tp,
+            "per_dur": {
+                10: {
+                    "bio_even": torch.zeros((n_p, 10, 11)), "pose_vec_world": torch.zeros((n_p, 10, 2, 2)),
+                    "signed_knee": torch.zeros((n_p, 10, 1)), "quality": torch.full((n_p, 4), 0.7), "m_pose": torch.ones(n_p),
+                }
+            },
+        }
         m_d10 = fit_rc1_dur_fold(42, d3x3, 10, np.arange(48), torch.device("cpu"))
         ev10 = eval_rc1_dur(m_d10["M1"], d3x3, 10, np.arange(48, n_p), torch.device("cpu"))
         self.assertEqual(ev10.shape, (16, 7))
+
+    def test_homography_ego_polylines_and_unconfounded_gate(self) -> None:
+        from scripts.ppt_mainline_o2_models import fit_pinns_ground_homography, verify_pinns_ground_and_polyline_diagnostics
+        from src.data.scene_graph import build_local_polylines
+
+        calib = {
+            "pts_2d": [[100.0, 100.0], [300.0, 100.0], [300.0, 300.0], [100.0, 300.0]],
+            "pts_3d": [[10.0, 20.0], [30.0, 20.0], [30.0, 0.0], [10.0, 0.0]],
+            "y_min": 0.0, "y_max": 20.0,
+        }
+        hm, ys = fit_pinns_ground_homography(calib)
+        self.assertEqual(hm.shape, (3, 3))
+        b = 8
+        hist = torch.linspace(-0.4, 0.0, 5, dtype=torch.float64)[None, :, None].repeat(b, 1, 2)
+        hist[:, :, 0] = 0.0  # Moving along +Y (towards camera: increasing v)
+        kpts = torch.zeros((b, 5, 17, 3), dtype=torch.float32); kpts[..., 2] = 0.9
+        bbox = torch.tensor([[[200.0, 165.0, 30.0, 70.0]] * 5] * b, dtype=torch.float32)  # foot at (200, 200) -> world (20, 10)
+        # Half samples face +Y (du > 0), half face +X (du == 0, dv != 0)
+        kpts[:4, :, 5, :2] = torch.tensor([205.5, 145.0]); kpts[:4, :, 6, :2] = torch.tensor([197.5, 145.0])
+        kpts[4:, :, 5, :2] = torch.tensor([202.5, 142.0]); kpts[4:, :, 6, :2] = torch.tensor([200.5, 148.0])
+        kpts[:, :, 11, :2] = torch.tensor([201.0, 170.0]); kpts[:, :, 12, :2] = torch.tensor([199.0, 170.0])
+
+        with self.assertRaises(ValueError):
+            build_ground_pose_o2_inputs(hist, kpts, bbox, torch.zeros((b, 3, 3), dtype=torch.float64), torch.full((b,), ys, dtype=torch.float64))
+
+        hm_t = torch.from_numpy(hm)[None].repeat(b, 1, 1)
+        ys_t = torch.full((b,), ys, dtype=torch.float64)
+        gp = build_ground_pose_o2_inputs(hist, kpts, bbox, hm_t, ys_t)
+        self.assertTrue(bool((torch.linalg.vector_norm(gp["pose_vec_world"][:, :, 0], dim=-1) > 0.05).all()))
+        self.assertTrue(bool((torch.linalg.vector_norm(gp["pose_vec_world"][:, :, 1], dim=-1) > 0.01).all()))
+
+        pt0_ego = np.tile(np.array([[20.0, 10.0]], dtype=np.float64), (b, 1))
+        polys = [(np.array([[20.5, 9.0], [20.5, 11.0]], dtype=np.float64), np.ones(8, dtype=np.float32))]
+        p_ego = np.stack([build_local_polylines(polys, pt0_ego[i], True)[0] for i in range(b)])
+        p_bug = np.stack([build_local_polylines(polys, np.zeros(2, dtype=np.float32), True)[0] for i in range(b)])
+        self.assertGreater(float(p_ego[:, :, :, 10].sum()), 0.0)
+        self.assertEqual(float(p_bug[:, :, :, 10].sum()), 0.0)
+        diag = verify_pinns_ground_and_polyline_diagnostics(hist[:4], bbox[:4], gp["pose_vec_world"][:4], hm_t[:4], ys_t[:4], pt0_ego_all=pt0_ego[:4])
+        self.assertGreater(diag["moving_coronal_velocity_mean_cos"], 0.9)
+
+        # Single-factor M1 vs M1b check across slow and fast speeds when q_vec == 0
+        m1b = PPTMainlineO2Forecaster("M1b").eval()
+        m1 = PPTMainlineO2Forecaster("M1").eval()
+        m1.load_state_dict(m1b.state_dict())
+        with torch.no_grad():
+            m1.gate_with_q[0].weight.zero_()
+            m1.gate_with_q[0].weight[:, :72].copy_(m1b.gate_no_q[0].weight)
+            m1.gate_with_q[0].bias.copy_(m1b.gate_no_q[0].bias)
+            m1.gate_with_q[2].weight.copy_(m1b.gate_no_q[2].weight)
+            m1.gate_with_q[2].bias.copy_(m1b.gate_no_q[2].bias)
+        hist_fast = hist.clone(); hist_fast[0] *= 6.0  # 2.4 m in 0.4 s = 6.0 m/s
+        ob = m1b(hist_fast, gp["bio_even"], gp["pose_vec_world"], gp["signed_knee"], torch.zeros((b, 4)), gp["m_pose"])
+        oq = m1(hist_fast, gp["bio_even"], gp["pose_vec_world"], gp["signed_knee"], torch.zeros((b, 4)), gp["m_pose"])
+        self.assertLess(float((ob["gate"] - oq["gate"]).abs().max()), 1e-6)
+        self.assertLess(float((ob["paths"] - oq["paths"]).abs().max()), 1e-9)
 
 
 if __name__ == "__main__":

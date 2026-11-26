@@ -1,6 +1,10 @@
 """PPT Slide 7-13 O(2)-equivariant M0-M3 model family, ground-pose features, and crossing metric."""
 from __future__ import annotations
 
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 import numpy as np
 import torch
 from torch import nn
@@ -13,6 +17,20 @@ PPT_ARMS = (
     "M2a", "M2b_no_vrad", "M2b", "M2",
     "M3a", "M3b", "M3",
 )
+
+
+def fit_pinns_ground_homography(calib: dict) -> tuple[np.ndarray, float]:
+    """Fit verified 3x3 image-to-ground homography H and y_sum = y_min + y_max from PINNS calib.json."""
+    if cv2 is None:
+        raise RuntimeError("OpenCV (cv2) is required to fit 3x3 ground homography")
+    pts_2d = np.asarray(calib.get("pts_2d", []), dtype=np.float64)
+    pts_3d = np.asarray(calib.get("pts_3d", []), dtype=np.float64)
+    if pts_2d.shape != (4, 2) or pts_3d.shape != (4, 2):
+        raise ValueError(f"Expected 4x2 pts_2d/pts_3d in calib, got {pts_2d.shape} and {pts_3d.shape}")
+    h_mat, _ = cv2.findHomography(pts_2d, pts_3d, method=0)
+    if h_mat is None or h_mat.shape != (3, 3) or not np.isfinite(h_mat).all() or abs(float(np.linalg.det(h_mat))) <= 1e-12:
+        raise ValueError("Degenerate or singular 3x3 ground homography fitted from calibration points")
+    return h_mat.astype(np.float64), float(calib["y_min"]) + float(calib["y_max"])
 
 
 def _map_uv_torch(uv: torch.Tensor, h_mat: torch.Tensor, y_sum: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -59,29 +77,41 @@ def build_ground_pose_o2_inputs(
     f_coronal = history.new_zeros((bsz, t_obs, 2))
     f_lean = history.new_zeros((bsz, t_obs, 2))
     if h_mats is not None and y_sums is not None:
-        v_foot = torch.where(
-            good[:, :, 15] & good[:, :, 16],
-            0.5 * (kp[:, :, 15, 1] + kp[:, :, 16, 1]),
-            bb[:, :, 1] + 0.5 * bb[:, :, 3],
-        )
-        sh_ok = good[:, :, 5] & good[:, :, 6] & f_ok
-        hp_ok = good[:, :, 11] & good[:, :, 12] & f_ok
-        g_lsh, ok_ls = _map_uv_torch(torch.stack((kp[:, :, 5, 0], v_foot), dim=-1), h_mats, y_sums)
-        g_rsh, ok_rs = _map_uv_torch(torch.stack((kp[:, :, 6, 0], v_foot), dim=-1), h_mats, y_sums)
-        g_lhp, ok_lh = _map_uv_torch(torch.stack((kp[:, :, 11, 0], v_foot), dim=-1), h_mats, y_sums)
-        g_rhp, ok_rh = _map_uv_torch(torch.stack((kp[:, :, 12, 0], v_foot), dim=-1), h_mats, y_sums)
+        hm64, ys64 = h_mats.double(), y_sums.double()
+        if hm64.ndim != 3 or hm64.shape[1:] != (3, 3) or not bool((torch.linalg.det(hm64).abs() > 1e-12).all()):
+            raise ValueError("build_ground_pose_o2_inputs requires non-singular (B, 3, 3) homography matrices")
+        v_bbox_foot = bb[:, :, 1] + 0.5 * bb[:, :, 3]
+        ank_ok = good[:, :, 15] & good[:, :, 16] & f_ok
+        v_foot = torch.where(ank_ok, 0.5 * (kp[:, :, 15, 1] + kp[:, :, 16, 1]), v_bbox_foot)
+        uv_foot = torch.stack((bb[:, :, 0], v_foot), dim=-1)
+        p0, ok0 = _map_uv_torch(uv_foot, hm64, ys64)
+        pu, oku = _map_uv_torch(uv_foot + uv_foot.new_tensor([2.0, 0.0]), hm64, ys64)
+        pv, okv = _map_uv_torch(uv_foot + uv_foot.new_tensor([0.0, 2.0]), hm64, ys64)
+        du_g, dv_g = pu - p0, pv - p0
+        s_hand = torch.where(du_g[..., 0] * dv_g[..., 1] - du_g[..., 1] * dv_g[..., 0] >= 0.0, 1.0, -1.0)
+
+        sh_ok = good[:, :, 5] & good[:, :, 6] & f_ok & ok0 & oku & okv
+        hp_ok = good[:, :, 11] & good[:, :, 12] & f_ok & ok0 & oku & okv
+        duv_sh = 0.5 * (kp[:, :, 5, :2] - kp[:, :, 6, :2])
+        duv_hp = 0.5 * (kp[:, :, 11, :2] - kp[:, :, 12, :2])
+        g_lsh, ok_ls = _map_uv_torch(uv_foot + duv_sh, hm64, ys64)
+        g_rsh, ok_rs = _map_uv_torch(uv_foot - duv_sh, hm64, ys64)
+        g_lhp, ok_lh = _map_uv_torch(uv_foot + duv_hp, hm64, ys64)
+        g_rhp, ok_rh = _map_uv_torch(uv_foot - duv_hp, hm64, ys64)
 
         d_sh = g_lsh - g_rsh
         ok_cor_s = sh_ok & ok_ls & ok_rs & (torch.linalg.vector_norm(d_sh, dim=-1) <= 1.2)
         d_hp = g_lhp - g_rhp
         ok_cor_h = hp_ok & ok_lh & ok_rh & (torch.linalg.vector_norm(d_hp, dim=-1) <= 1.2)
         d_lr = torch.where(ok_cor_s[..., None], d_sh, torch.where(ok_cor_h[..., None], d_hp, 0.0))
-        # Rotate (Left - Right) by -90 deg clockwise -> anatomical forward O(2) ground vector
-        f_coronal = torch.stack((d_lr[..., 1], -d_lr[..., 0]), dim=-1)
+        f_coronal = s_hand[..., None] * torch.stack((-d_lr[..., 1], d_lr[..., 0]), dim=-1)
 
-        sh_mid, hp_mid = 0.5 * (g_lsh + g_rsh), 0.5 * (g_lhp + g_rhp)
-        lean = sh_mid - hp_mid
-        ok_ln = ok_cor_s & ok_cor_h & (torch.linalg.vector_norm(lean, dim=-1) <= 0.8)
+        u_sh_mid = 0.5 * (kp[:, :, 5, 0] + kp[:, :, 6, 0])
+        u_hp_mid = 0.5 * (kp[:, :, 11, 0] + kp[:, :, 12, 0])
+        g_shm, ok_sm = _map_uv_torch(torch.stack((u_sh_mid, v_foot), dim=-1), hm64, ys64)
+        g_hpm, ok_hm = _map_uv_torch(torch.stack((u_hp_mid, v_foot), dim=-1), hm64, ys64)
+        lean = g_shm - g_hpm
+        ok_ln = sh_ok & hp_ok & ok_sm & ok_hm & (torch.linalg.vector_norm(lean, dim=-1) <= 0.8)
         f_lean = torch.where(ok_ln[..., None], lean, 0.0)
 
     pose_vec_world = torch.stack((f_coronal, f_lean), dim=2)  # (B, T, 2, 2)
@@ -239,7 +269,7 @@ class PPTMainlineO2Forecaster(nn.Module):
         fut_times_s: torch.Tensor | None = None,
     ) -> dict[str, torch.Tensor]:
         bsz, t_obs, _ = history.shape
-        use_p_bkp = self.use_pose and (self.arm not in ("M1a",)) and (m_pose is not None)
+        use_p_bkp = self.use_pose and (m_pose is not None)
         pvw_masked = (pose_vec_world * m_pose[:, None, None, None].to(pose_vec_world.dtype)) if (pose_vec_world is not None and m_pose is not None) else None
         origin, basis, valid = local_frenet_with_pose(history, pvw_masked, use_pose_backup=use_p_bkp)
         body = (history - origin) @ basis
@@ -273,7 +303,7 @@ class PPTMainlineO2Forecaster(nn.Module):
                 gate = m_pose * torch.sigmoid(self.gate_no_q(torch.cat((ce0, hp_even), dim=-1)).squeeze(-1))
             else:
                 qv = q_vec if q_vec is not None else last_v.new_zeros((bsz, 4))
-                gate = m_pose * torch.sigmoid(self.gate_with_q(torch.cat((ce0, hp_even, qv), dim=-1)).squeeze(-1)) * torch.exp(-((last_v / self.v_ref) ** 2))
+                gate = m_pose * torch.sigmoid(self.gate_with_q(torch.cat((ce0, hp_even, qv), dim=-1)).squeeze(-1))
             ctx_pos = ctx_pos + gate[:, None] * self.pose_proj(hp_pos)
             ctx_neg = ctx_neg + gate[:, None] * self.pose_proj(hp_neg)
 
@@ -310,7 +340,7 @@ class PPTMainlineO2Forecaster(nn.Module):
         else:
             d_even, d_odd, d_pos, d_neg = ctx_even, ctx_odd, ctx_pos, ctx_neg
 
-        low_damp = torch.tanh((disp_all / 0.25).clamp_min(0.05) + 0.5 * gate)[:, None, None]
+        low_damp = torch.tanh((disp_all / 0.25).clamp_min(0.05))[:, None, None]
         c_dx = low_damp * self.central_dx(d_even).view(bsz, 3, 3)
         c_dy = low_damp * self.central_dy(d_odd).view(bsz, 3, 3)
         p_pos = low_damp * self.pair_knots(d_pos).view(bsz, 3, 2)
@@ -334,3 +364,61 @@ class PPTMainlineO2Forecaster(nn.Module):
         world = torch.einsum("bkts,bws->bktw", delta, basis)
         cv = origin + ((history[:, -1:] - history[:, -2:-1]) / dt_step[:, -1:, None]) * t_sec[:, :, None]
         return {"paths": torch.cat((cv[:, None], cv[:, None] + world), dim=1), "logits": logits, "act_logits": act_logits, "valid": valid, "gate": gate}
+
+
+def verify_pinns_ground_and_polyline_diagnostics(
+    history: torch.Tensor,
+    bbox: torch.Tensor,
+    pose_vec_world: torch.Tensor,
+    h_mats: torch.Tensor,
+    y_sums: torch.Tensor,
+    pt0_ego_all: np.ndarray | None = None,
+    p_env: np.ndarray | None = None,
+    p_env_bug_origin: np.ndarray | None = None,
+) -> dict[str, float | int]:
+    """Hard runtime assertions preventing zeroed ground vectors or mis-centered 20 m polylines."""
+    pvw = pose_vec_world.detach().cpu().numpy()
+    fc_norm = np.linalg.norm(pvw[:, :, 0], axis=-1)
+    fl_norm = np.linalg.norm(pvw[:, :, 1], axis=-1)
+    total_pf = int(fc_norm.size)
+    nz_fc = int((fc_norm > 1e-6).sum())
+    nz_fl = int((fl_norm > 1e-6).sum())
+    med_fc = float(np.median(fc_norm[fc_norm > 1e-6])) if nz_fc > 0 else 0.0
+    if nz_fc < max(5, int(0.30 * total_pf)) or not (0.05 <= med_fc <= 0.90):
+        raise RuntimeError(f"Ground coronal vector check failed: nz_fc={nz_fc}/{total_pf}, med_fc={med_fc:.4f} m")
+    if nz_fl < max(3, int(0.10 * total_pf)):
+        raise RuntimeError(f"Ground lean vector check failed: nz_fl={nz_fl}/{total_pf}")
+
+    hist_np = history.detach().cpu().numpy()
+    disp = hist_np[:, -1] - hist_np[:, 0]
+    dn = np.linalg.norm(disp, axis=-1)
+    fn_last = fc_norm[:, -1]
+    mv = (dn >= 0.30) & (fn_last >= 0.08)
+    mean_cos = float(np.mean(np.sum(disp[mv] * pvw[mv, -1, 0], axis=-1) / (dn[mv] * fn_last[mv]))) if mv.any() else 0.0
+    if mv.sum() >= 30 and mean_cos <= 0.05:
+        raise RuntimeError(f"Ground coronal facing orientation failed velocity alignment check: mean_cos={mean_cos:.4f}")
+
+    diag: dict[str, float | int] = {
+        "total_person_frames": total_pf,
+        "nonzero_f_coronal_frames": nz_fc,
+        "nonzero_f_lean_frames": nz_fl,
+        "median_nonzero_f_coronal_norm_m": med_fc,
+        "moving_coronal_velocity_mean_cos": mean_cos,
+    }
+    if pt0_ego_all is not None:
+        bb_last = bbox[:, -1].double()
+        uv_last = torch.stack((bb_last[:, 0], bb_last[:, 1] + 0.5 * bb_last[:, 3]), dim=-1)
+        proj_xy, _ = _map_uv_torch(uv_last, h_mats.double(), y_sums.double())
+        foot_err = np.linalg.norm(proj_xy.cpu().numpy() - pt0_ego_all, axis=-1)
+        med_foot_err = float(np.median(foot_err))
+        med_ego_norm = float(np.median(np.linalg.norm(pt0_ego_all, axis=-1)))
+        if med_foot_err > 0.05 or med_ego_norm < 15.0:
+            raise RuntimeError(f"Ego world calibration check failed: med_foot_err={med_foot_err:.6f} m, med_ego_norm={med_ego_norm:.3f} m")
+        diag["footpoint_to_published_xy_median_err_m"] = med_foot_err
+        diag["median_pt0_ego_world_norm_m"] = med_ego_norm
+    if p_env is not None and p_env_bug_origin is not None:
+        changed = int(np.any(np.abs(p_env - p_env_bug_origin) > 1e-5, axis=(1, 2, 3)).sum())
+        if changed < 500:
+            raise RuntimeError(f"Expected >500 map windows to differ from world-(0,0) center, got {changed}")
+        diag["windows_changed_vs_origin_00_bug"] = changed
+    return diag

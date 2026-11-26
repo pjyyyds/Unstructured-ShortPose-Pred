@@ -17,7 +17,9 @@ from scripts.ppt_mainline_o2_models import (
     PPT_ARMS,
     PPTMainlineO2Forecaster,
     build_ground_pose_o2_inputs,
+    fit_pinns_ground_homography,
     polyline_crossing_rate_np,
+    verify_pinns_ground_and_polyline_diagnostics,
 )
 from scripts.run_emergence_and_action_sensitivity import build_emergence_masks
 from scripts.run_pinns_bioeq_v2_benchmark import make_site_weights
@@ -28,7 +30,7 @@ from scripts.run_pinns_o2_joint_actions_5seed import ACTIONS, SEEDS
 from scripts.run_unified_o2_full_gpu_benchmark import load_unified_cohort
 from src.data.features import assign_quality_bucket
 from src.data.pinns_causal_input import MAP_SHA256
-from src.data.pinns_extractor import _check_right_handed_homography
+from src.data.pinns_extractor import _check_right_handed_homography, _parse_pinns_label_file
 from src.data.scene_graph import build_local_polylines
 from src.models.bioeq_o2_joint import o2_joint_loss
 
@@ -54,18 +56,13 @@ def load_ppt_cohort_with_causal_maps(
 
     h_mats = np.zeros((n, 3, 3), dtype=np.float64)
     y_sums = np.zeros(n, dtype=np.float64)
-    for c in sorted({r.clip for r in rows}):
-        calib = json.loads((meta_dir / "videos" / c.rsplit("_", 1)[0] / "calib.json").read_text())
-        hm = _check_right_handed_homography(calib)
-        ys = float(calib["y_min"] + calib["y_max"])
-        for i in [ idx for idx, r in enumerate(rows) if r.clip == c ]:
-            h_mats[i] = hm
-            y_sums[i] = ys
-    from src.data.pinns_extractor import _parse_pinns_label_file
-
     clip_snaps: dict[str, dict] = {}
     for c in sorted({r.clip for r in rows}):
         calib = json.loads((meta_dir / "videos" / c.rsplit("_", 1)[0] / "calib.json").read_text())
+        hm, ys = fit_pinns_ground_homography(calib)
+        for i in [idx for idx, r in enumerate(rows) if r.clip == c]:
+            h_mats[i] = hm
+            y_sums[i] = ys
         parsed = _parse_pinns_label_file(
             meta_dir / "labels" / f"{c}.txt",
             _check_right_handed_homography(calib),
@@ -73,11 +70,13 @@ def load_ppt_cohort_with_causal_maps(
             calib["y_max"],
         )
         clip_snaps[c] = {
-            t: {int(o["id"]): np.array([o["wx"], o["wy"]], dtype=np.float32) for o in v if o["type"] == "Person"}
+            t: {int(o["id"]): np.array([o["wx"], o["wy"]], dtype=np.float64) for o in v if o["type"] == "Person"}
             for t, v in parsed.items()
         }
 
+    pt0_ego_all = np.stack([clip_snaps[r.clip][int(r.t0)][int(r.person_id)] for r in rows], axis=0)
     p_env_arr = np.zeros((n, 16, 10, 11), dtype=np.float32)
+    p_env_bug00 = np.zeros((n, 16, 10, 11), dtype=np.float32)
     m_map_arr = np.zeros(n, dtype=np.float32)
     with np.load(io.BytesIO(raw_map), allow_pickle=False) as md:
         m_clips = md["clip"].tolist()
@@ -106,13 +105,18 @@ def load_ppt_cohort_with_causal_maps(
             for pk in range(lk.shape[0]):
                 valid_pt = lk[pk, :, 10] > 0.5
                 if valid_pt.sum() >= 2:
-                    w_xy = lk[pk, valid_pt, 0:2] + pt0_ref[None, :]
+                    w_xy = lk[pk, valid_pt, 0:2].astype(np.float64) + pt0_ref[None, :]
                     polys.append((w_xy, lk[pk, 0, 2:10]))
-            p_env_arr[i], m_map_arr[i] = build_local_polylines(polys, r.xy[4], map_available=True)
+            p_env_arr[i], m_map_arr[i] = build_local_polylines(polys, pt0_ego_all[i], map_available=True)
+            p_env_bug00[i], _ = build_local_polylines(polys, np.zeros(2, dtype=np.float32), map_available=True)
 
-    gp = build_ground_pose_o2_inputs(
-        base["history"], kpts, bbox, torch.from_numpy(h_mats), torch.from_numpy(y_sums)
+    hm_t, ys_t = torch.from_numpy(h_mats), torch.from_numpy(y_sums)
+    gp = build_ground_pose_o2_inputs(base["history"], kpts, bbox, hm_t, ys_t)
+    coord_diag = verify_pinns_ground_and_polyline_diagnostics(
+        base["history"], bbox, gp["pose_vec_world"], hm_t, ys_t,
+        pt0_ego_all=pt0_ego_all, p_env=p_env_arr, p_env_bug_origin=p_env_bug00,
     )
+    print("Verified PINNS ground & polyline diagnostics:", json.dumps(coord_diag), flush=True)
     q_np = base["quality"].numpy()
     q_buckets = np.array([assign_quality_bucket(q_np[i]) for i in range(n)], dtype=int)
     emg_masks = build_emergence_masks(meta_dir, base)
@@ -121,6 +125,7 @@ def load_ppt_cohort_with_causal_maps(
         **gp,
         "p_env": torch.from_numpy(p_env_arr),
         "m_map": torch.from_numpy(m_map_arr),
+        "coord_diag": coord_diag,
         "q_buckets": q_buckets,
         "strata": {
             **emg_masks,
@@ -421,13 +426,19 @@ def main() -> None:
     conf = evaluate_fixed_predictor_conformal(m3_tubes, cv_tube, data, list(args.seeds), device)
     print("Finished fixed-predictor split-conformal evaluation", flush=True)
 
+    truth_cross_all = polyline_crossing_rate_np(truth_np, data["p_env"].numpy())
+    map_mask = data["m_map"].numpy() > 0.5
+    truth_cross_map = polyline_crossing_rate_np(truth_np[map_mask], data["p_env"].numpy()[map_mask]) if map_mask.any() else 0.0
     report = {
-        "experiment": "ppt_mainline_o2_m0_m3_and_fixed_conformal",
+        "experiment": "ppt_mainline_o2_m0_m3_and_fixed_conformal_v3_corrected",
         "device": torch.cuda.get_device_name(0) if device.type == "cuda" else "cpu",
         "n_windows": n,
         "seeds": list(args.seeds),
+        "coordinate_diagnostics": data["coord_diag"],
+        "truth_polyline_crossing_rate_all": truth_cross_all,
+        "truth_polyline_crossing_rate_map_eligible": truth_cross_map,
         "param_counts": {a: sum(p.numel() for p in PPTMainlineO2Forecaster(a).parameters()) for a in PPT_ARMS},
-        "map_available_windows": int((data["m_map"].numpy() > 0.5).sum()),
+        "map_available_windows": int(map_mask.sum()),
         "nonempty_polyline_windows": int((data["p_env"].numpy()[:, :, :, 10].sum(axis=(1, 2)) > 0).sum()),
         "strata": by_stratum,
         "action_5class_fixed05": act_summary,
