@@ -8,44 +8,45 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def _panel_ab(ax_a, ax_b, dg: dict, jr: dict, ext12: dict, jta: dict, dut: dict) -> None:
-    d_nb = dg["dair_neighbor_graph"]["by_transform"]["0deg"]
+def _panel_ab(ax_a, ax_b, jr: dict, ext12: dict, dut: dict) -> None:
+    d_0 = ext12["dair_v2x_54"]["by_transform"]["0deg"]
     j_nb = jr["jrdb_outdoor_1677"]["by_transform"]["0deg"]
     im = ext12["imptc_564"]["by_transform"]["0deg"]
+    du = dut["dut_zero_shot_5seed_transfer"]["axes"]["0"]
 
-    # Panel (a): DAIR-V2X (51 unambiguous & 31 strict) + JRDB (1,677 outdoor) + IMPTC (564) no-graph vs O(2) graph
-    cats = ["DAIR Unambig.\n(n=51)", "DAIR Strict\n(n=31)", "IMPTC DE\n(n=564)", "JRDB Outdoor\n(n=1,677)"]
+    # Panel (a): External 10m O(2) Null-Sink Neighbor Graph across DUT (3,066), IMPTC (564), & JRDB (1,677) + DAIR (31)
+    cats = ["DUT Campus\n(n=3,066)", "IMPTC DE\n(n=564)", "JRDB Outdoor\n(n=1,677)", "DAIR Strict\n(n=31)"]
     xa = np.arange(4)
     cv_v = [
-        ext12["dair_v2x_54"]["by_transform"]["0deg"]["all_54"]["cv_measured"]["ade_m"],
-        ext12["dair_v2x_54"]["by_transform"]["0deg"]["strict_31"]["cv_measured"]["ade_m"],
+        du["cv_measured"]["ade_m"],
         im["actual_time_cv"]["seq_equal_ade_m"],
         j_nb["last_two_cv"]["scene_equal_ade_m"],
+        d_0["strict_31"]["cv_measured"]["ade_m"],
     ]
     ng_v = [
-        d_nb["unambig_51"]["no_graph_bayes"]["ade_m"],
-        d_nb["strict_31"]["no_graph_bayes"]["ade_m"],
+        du["o2_no_graph_bayes"]["ade_m"],
         im["full_clk_bayes"]["seq_equal_ade_m"],
         j_nb["no_graph_bayes"]["scene_equal_ade_m"],
+        d_0["strict_31"]["ours_o2_full_t5_clk_bayes"]["ade_m"],
     ]
     gr_v = [
-        d_nb["unambig_51"]["real_graph_bayes"]["ade_m"],
-        d_nb["strict_31"]["real_graph_bayes"]["ade_m"],
+        du["o2_nullsink_real_bayes"]["ade_m"],
         im["full_graph_clk_bayes"]["seq_equal_ade_m"],
         j_nb["graph_bayes"]["scene_equal_ade_m"],
+        d_0["strict_31"]["ours_o2_full_t2_clk_bayes"]["ade_m"],
     ]
     ax_a.bar(xa - 0.25, cv_v, width=0.23, color="#cbd5e1", label="Measured-Clock CV")
-    ax_a.bar(xa + 0.00, ng_v, width=0.23, color="#64748b", label="Ours_O2_Full (No Graph)")
-    ax_a.bar(xa + 0.25, gr_v, width=0.23, color="#0b4f4a", label="Ours_O2_Full (+ 10m O(2) Graph)")
+    ax_a.bar(xa + 0.00, ng_v, width=0.23, color="#64748b", label="O(2) No-Graph / T5->T2")
+    ax_a.bar(xa + 0.25, gr_v, width=0.23, color="#0b4f4a", label="Ours_O2_Full (+10m Graph / T2)")
     for xi, v in zip(xa + 0.25, gr_v):
-        ax_a.text(xi, v + 0.028, f"{v:.3f}", ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0b4f4a")
+        ax_a.text(xi, v + 0.025, f"{v:.3f}", ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0b4f4a")
     ax_a.set_xticks(xa, cats, fontsize=8.3)
     ax_a.set_ylim(0.0, max(cv_v) * 1.15)
     ax_a.set_ylabel("Zero-shot ADE (m, lower better)", fontsize=9.0)
-    ax_a.set_title("(a) External 10m neighbor-graph audit: DAIR, IMPTC, JRDB", fontsize=10.2, fontweight="bold", loc="left", pad=7)
+    ax_a.set_title("(a) Six-benchmark external O(2) synthesis (DUT, IMPTC, JRDB, DAIR)", fontsize=10.0, fontweight="bold", loc="left", pad=7)
     ax_a.grid(axis="y", color="#e2e8f0", lw=0.7)
     ax_a.spines["top"].set_visible(False); ax_a.spines["right"].set_visible(False)
-    ax_a.legend(loc="upper right", fontsize=7.4, framealpha=0.95)
+    ax_a.legend(loc="upper left", fontsize=7.3, framealpha=0.95)
 
     # Panel (b): JRDB 1,677 outdoor 2.5 Hz windows across 3 Stanford scenes
     sc_order = ["hewlett-packard-intersection-2019-01-24_0", "huang-lane-2019-02-12_0", "tressider-2019-03-16_1"]
@@ -99,16 +100,14 @@ def _panel_cd(ax_c, ax_d, cb: dict) -> None:
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     res = root / "results"
-    dg = json.loads((res / "dair_roadside_neighbor_graph_o2_5seed_verified.json").read_text())["report"]
     jr = json.loads((res / "jrdb_outdoor_o2_full_5seed_verified.json").read_text())["report"]
     cb = json.loads((res / "table1_cluster_bootstrap_o2_full_5seed_verified.json").read_text())["report"]
     ext12 = json.loads((res / "imptc_and_dair_o2_full_5seed_verified.json").read_text())["report"]
-    jta = json.loads((res / "jta_o2_bioeq_5seed_verified.json").read_text())["report"]
     dut = json.loads((res / "o2_hetero_graph_pinns_and_dut_5seed_verified.json").read_text())["report"]
     plt.rcParams.update({"font.family": "DejaVu Sans", "axes.edgecolor": "#334155", "axes.linewidth": 0.9})
     fig, axes = plt.subplots(2, 2, figsize=(13.4, 9.6), dpi=300)
     fig.patch.set_facecolor("white")
-    _panel_ab(axes[0, 0], axes[0, 1], dg, jr, ext12, jta, dut)
+    _panel_ab(axes[0, 0], axes[0, 1], jr, ext12, dut)
     _panel_cd(axes[1, 0], axes[1, 1], cb)
     fig.tight_layout(pad=1.7)
     out = root / "docs/figures/fig16_six_dataset_matrix_and_cluster_bootstrap.png"
