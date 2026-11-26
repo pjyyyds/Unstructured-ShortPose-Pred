@@ -7,7 +7,7 @@
 
 ## 1. 核心目标与项目背景 (Objective & Background)
 - **项目定位**: 紧扣《彭嘉钰答辩.pptx》全部 20 页设定，面向无标线混合交通场景，在严格因果短时历史（主设定 10 Hz 五帧 $0.4\text{ s}$，扩展 $T \in \{2, 5, 8, 10, 20\}$）与可变质量 2D/3D 姿态下，联合预测未来 $3.0\text{ s}$（`JRDB` 为 $2.8\text{ s}$、`JTA` 为 $4.8\text{ s}$）$K=6$ 多模态地面轨迹与五类可观测动态动作（`Start, Stop, Turn-Left, Turn-Right, Maintain`）。
-- **当前阶段状态**: 已完成 **Waves 1–18 共 47 项成功云端实验归档**的双层 SHA-256 核验、**十幅 300-DPI 出版级图表（`fig10..19`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）与 **20 页答辩 PPT 逐页证据链映射表**（`paper/PPT_20Slides_Defense_Evidence_Map.md`），正在继续推进 **Wave 19** 跨基准（`DUT 3,066` 窗与 `IMPTC 485` 窗）因果冲突门控及不重训分裂共形安全验证。
+- **当前阶段状态**: 已完成 **Waves 1–19a 共 49 项成功云端实验归档**的双层 SHA-256 核验、**十幅 300-DPI 出版级图表（`fig10..19`）**、中文学位论文、**IEEE T-ITS 英文投稿手稿**与 **20 页答辩 PPT 逐页证据映射表**：端到端串联单调门控与因果冲突门控（`U_M2b_mono_conflict`）在 `PINNS` 创下最佳首选 **`0.4510 / 1.0097 m`**（`JRDB` `U_M3_rerank` 达 **`0.2917 / 0.5638 m`**），且零样本迁移至 `DUT`（`3,066` 窗）与 `IMPTC`（`564` 窗）五轴摆动 `0.0 m`、跨片/跨序列不重训共形覆盖 **`89.76% / 95.50%`** 与 **`89.51% / 94.21%`**。当前 `w19_gpu2`（`374521294`，框高/有效率边界与 12/72 配对局部加权共形）正在跑 `JRDB` 最后收尾阶段。
 
 ---
 

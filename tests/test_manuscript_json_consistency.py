@@ -89,6 +89,22 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
             self.assertIn(f"{b12['O2_M2b_conflict_gate']['p50_ms']:.3f} / {b12['O2_M2b_conflict_gate']['p95_ms']:.3f}", txt)
             self.assertIn("fig19_wave18_conflict_rerank_ext_and_t4_pareto.png", txt)
 
+        w19_ext = json.loads((res / "wave19_dut_imptc_conflict_and_conformal_5seed_verified.json").read_text())
+        dut_cg = w19_ext["dut_3066_zero_shot"]["strata"]["all"]["models"]["M2b_ttc_conflict_gate"]["group_equal"]
+        dut_cf = w19_ext["dut_3066_zero_shot"]["zero_retrain_split_conformal"]["cross_group_ordered_pairs_no_retrain"]["M2b_ttc_conflict_gate"]
+        imp_cg = w19_ext["imptc_564_zero_shot"]["strata"]["all"]["models"]["M2b_ttc_conflict_gate"]["group_equal"]
+        imp_cf = w19_ext["imptc_564_zero_shot"]["zero_retrain_split_conformal"]["cross_group_ordered_pairs_no_retrain"]["M2b_ttc_conflict_gate"]
+        w19_uni = json.loads((res / "wave19_unified_clean_m0_to_m3_5seed_verified.json").read_text())
+        uni_p = w19_uni["pinns_4site_loso_1482"]["strata"]["all_1482"]["models"]["U_M2b_mono_conflict"]["group_equal"]
+        uni_j = w19_uni["jrdb_9location_lolo_5836"]["strata"]["all_10scenes"]["models"]["U_M3_mono_conflict_rerank"]["group_equal"]
+        for txt in (zh, en):
+            self.assertIn(f"{uni_p['ade1_m']:.4f} / {uni_p['fde1_m']:.4f}", txt)
+            self.assertIn(f"{uni_j['ade1_m']:.4f} / {uni_j['fde1_m']:.4f}", txt)
+            self.assertIn(f"{dut_cg['ade1_m']:.4f} / {dut_cg['fde1_m']:.4f}", txt)
+            self.assertIn(f"{imp_cg['ade1_m']:.4f} / {imp_cg['fde1_m']:.4f}", txt)
+            self.assertIn(f"{dut_cf['90']['cov_u6'] * 100:.2f}% / {dut_cf['95']['cov_u6'] * 100:.2f}%", txt)
+            self.assertIn(f"{imp_cf['90']['cov_u6'] * 100:.2f}% / {imp_cf['95']['cov_u6'] * 100:.2f}%", txt)
+
 
 if __name__ == "__main__":
     unittest.main()
