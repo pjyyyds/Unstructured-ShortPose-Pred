@@ -115,11 +115,12 @@ def load_jrdb_10scene_rc2_rc3(repo_root: Path) -> dict:
                     scene_l.append(sc); loc_l.append(_scene_location(sc)); actor_l.append(f"{sc}:{person}")
 
     hist_np, truth_np = np.stack(hist_l), np.stack(truth_l)
-    pf = build_jrdb_3d_pose_o2_features(np.stack(joints_l))
+    j3d_np = np.stack(joints_l)
+    pf = build_jrdb_3d_pose_o2_features(j3d_np)
     n = len(hist_np)
     sc_arr = np.asarray(scene_l, dtype=str)
     return {
-        "history": torch.from_numpy(hist_np), "truth": torch.from_numpy(truth_np),
+        "history": torch.from_numpy(hist_np), "truth": torch.from_numpy(truth_np), "joints_3d": j3d_np,
         "edges": torch.from_numpy(np.stack(edges_l)), "is_car": torch.zeros((n, 12), dtype=torch.float32),
         "nbr_mask": torch.from_numpy(np.stack(nmsk_l)),
         "y_act": torch.from_numpy(np.stack(ya_l)), "valid_act": torch.from_numpy(np.stack(va_l)),
