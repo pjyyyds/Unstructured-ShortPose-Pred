@@ -77,6 +77,39 @@ class TestWave17ExtAndSlide5Stress(unittest.TestCase):
         self.assertEqual(rep["max_abs_gate_when_mpose_zero"], 0.0)
         self.assertGreater(float(rep["spearman_gate_vs_q1_valid_joint_ratio"]), 0.99)
 
+    def test_end_to_end_pinns_and_jrdb_evaluate_dataset_matrix_aggregation(self) -> None:
+        import scripts.run_wave17_slide5_pose_noise_and_gate_response as s5
+        from scripts.run_pinns_matched_o2_multiduration import SITES, paired_site_clip_ci
+
+        old_seeds = s5.SEEDS
+        s5.SEEDS = (42,)
+        try:
+            n = 16
+            sites = np.array([SITES[i % 4] for i in range(n)], dtype=str)
+            clips = np.array([f"{sites[i]}_c{i // 4}" for i in range(n)], dtype=str)
+            hist = torch.randn(n, 5, 2, dtype=torch.float64) * 0.3
+            truth = torch.randn(n, 30, 2, dtype=torch.float64) * 0.5
+            pk = {
+                "bio_even": torch.randn(n, 5, 11),
+                "pose_vec_world": torch.randn(n, 5, 2, 2, dtype=torch.float64) * 0.2,
+                "signed_knee": torch.randn(n, 5, 1) * 0.1,
+                "quality": torch.full((n, 4), 0.9),
+                "m_pose": torch.ones(n),
+            }
+            pk_drop = {**pk, "m_pose": torch.zeros(n), "quality": torch.zeros(n, 4)}
+            packs = {"Test_Natural": pk, "Test_Jitter020": pk, "Test_LowerOcc": pk, "Test_FullDrop": pk_drop}
+            qb = np.array([0 if i % 2 == 0 else 1 for i in range(n)])
+            obs_dt = torch.full((n, 4), 0.1, dtype=torch.float64)
+            fut_s = torch.arange(1, 31, dtype=torch.float64)[None].expand(n, -1) * 0.1
+            res_p, _ = s5.evaluate_dataset_matrix("pinns", sites, clips, True, hist, truth, truth.numpy(), packs, qb, obs_dt, fut_s, 8, 1, 1, torch.device("cpu"))
+            self.assertIn("ade_m", res_p["train_test_matrix"]["VarQTrain"]["Test_Jitter020"]["M1_minus_M1a"]["ci95"])
+            res_j, _ = s5.evaluate_dataset_matrix("jrdb", sites, clips, False, hist, truth, truth.numpy(), packs, qb, obs_dt, fut_s, 8, 1, 1, torch.device("cpu"))
+            self.assertIn("location_equal", res_j["train_test_matrix"]["CleanTrain"]["Test_Jitter020"]["M1_minus_M1a"])
+            ci = paired_site_clip_ci(np.zeros((n, 2)), sites, clips)
+            self.assertEqual(ci["mean"]["ade_m"], 0.0)
+        finally:
+            s5.SEEDS = old_seeds
+
 
 if __name__ == "__main__":
     unittest.main()

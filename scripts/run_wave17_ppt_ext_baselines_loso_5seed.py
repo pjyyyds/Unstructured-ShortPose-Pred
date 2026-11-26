@@ -235,13 +235,54 @@ def _agg_group_top_min(top_5s: np.ndarray, min_5s: np.ndarray, grp: np.ndarray, 
     }
 
 
+def _fit_fast_o2_ref(seed: int, grp_arr: np.ndarray, gd: dict, tr_ids: np.ndarray, top_arm: str, bsz: int, ep_s: tuple[int, int, int, int], lr_s: tuple[float, float, float, float], soff_s: tuple[int, int, int, int], device: torch.device) -> dict:
+    from scripts.ppt_mainline_o2_models import PPTMainlineO2Forecaster
+    from scripts.run_jrdb_rc2_rc3_graph_and_actions_5seed import _fwd_gd
+    from scripts.run_ppt_mainline_o2_m0_m3_and_fixed_conformal import _copy_matching
+    from src.models.bioeq_o2_joint import o2_joint_loss
+
+    w_tr = make_site_weights(grp_arr, tr_ids).to(device)
+    tr_t = torch.from_numpy(tr_ids).to(device)
+    truth_tr, ya_tr, va_tr = gd["truth"][tr_t], gd["y_act"][tr_t], gd["valid_act"][tr_t]
+    pw = (((~ya_tr) & va_tr).sum(0).float().clamp_min(1.0) / (ya_tr & va_tr).sum(0).float().clamp_min(1.0)).clamp(1.0, 12.0)
+
+    def _tr(net: PPTMainlineO2Forecaster, prefs: tuple[str, ...], ep: int, lr: float, wd: float, aw: float, soff: int) -> PPTMainlineO2Forecaster:
+        for nm, p in net.named_parameters():
+            p.requires_grad = nm.startswith(prefs) or nm in prefs
+        opt = torch.optim.AdamW([p for p in net.parameters() if p.requires_grad], lr=lr, weight_decay=wd)
+        gen = torch.Generator().manual_seed(seed + soff)
+        net.train()
+        for _ in range(ep):
+            for ch in torch.randperm(len(tr_ids), generator=gen).split(bsz):
+                cg = ch.to(device)
+                loss = o2_joint_loss(_fwd_gd(net, gd, tr_t[cg]), truth_tr[cg], w_tr[cg], ya_tr[cg] if aw > 0 else None, va_tr[cg] if aw > 0 else None, pw if aw > 0 else None, act_weight=aw)
+                if loss is not None:
+                    opt.zero_grad(set_to_none=True); loss.backward(); opt.step()
+        return net.eval()
+
+    torch.manual_seed(seed)
+    m0 = _tr(PPTMainlineO2Forecaster("M0").to(device), ("motion.", "ctx_proj.", "cv_low_bonus", "central_", "pair_"), ep_s[0], lr_s[0], 1e-4, 0.0, soff_s[0])
+    torch.manual_seed(seed); m1 = PPTMainlineO2Forecaster("M1").to(device); _copy_matching(m1, m0)
+    m1 = _tr(m1, ("pose_", "gate_", "central_", "pair_", "cv_low_bonus"), ep_s[1], lr_s[1], 3e-4, 0.0, soff_s[1])
+    torch.manual_seed(seed); m2b = PPTMainlineO2Forecaster("M2b").to(device); _copy_matching(m2b, m1)
+    m2b = _tr(m2b, ("edge_", "graph_proj", "null_logit"), ep_s[2], lr_s[2], 3e-4, 0.0, soff_s[2])
+    torch.manual_seed(seed); m3 = PPTMainlineO2Forecaster(top_arm).to(device); _copy_matching(m3, m2b)
+    m3 = _tr(m3, ("ctx_proj.", "act_", "bridge_", "central_", "pair_", "cv_low_bonus"), ep_s[3], lr_s[3], 2e-4, 0.25, soff_s[3])
+    return {"M2b": m2b, top_arm: m3}
+
+
 def run_pinns_ext_loso(meta_dir: Path, pose_npz: Path, joint_zip: Path, causal_map_bin: Path, device: torch.device) -> tuple[dict, dict[str, np.ndarray]]:
-    from scripts.run_wave17_rc3_clean_chain_and_jrdb_conformal import fit_clean_pinns_nopoly_fold
+    from scripts.run_jrdb_rc2_rc3_graph_and_actions_5seed import _fwd_gd
 
     data = load_ppt_cohort_with_causal_maps(meta_dir, pose_npz, joint_zip, causal_map_bin)
     packs_cpu = build_pinns_ext_tensors(data, pose_npz, meta_dir)
     packs = {m: {k: v.to(device) for k, v in d.items()} for m, d in packs_cpu.items()}
     n = len(data["history"])
+    gdp = {k: data[k].to(device) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask", "y_act", "valid_act")}
+    gdp["obs_dt"] = torch.full((n, 4), 0.1, dtype=torch.float64, device=device)
+    gdp["fut_s"] = torch.arange(1, 31, dtype=torch.float64, device=device)[None].expand(n, -1) * 0.1
+    gdp["p_env"] = torch.zeros((n, 16, 10, 11), dtype=torch.float32, device=device)
+    gdp["m_map"] = torch.zeros(n, dtype=torch.float32, device=device)
     truth_np = data["truth"].numpy()
     p_env_np = data["p_env"].numpy()
     m_map_ok = data["m_map"].numpy() > 0.5
@@ -267,17 +308,11 @@ def run_pinns_ext_loso(meta_dir: Path, pose_npz: Path, joint_zip: Path, causal_m
                     seed, kind, gp, truth_np, tr_ids, te_ids, w_tr, fut_steps=30, dt=0.1, epochs=32, batch_size=64, device=device
                 )
                 top_s[nm][si, te_ids], min_s[nm][si, te_ids], paths_seed[nm][te_ids] = te_top, te_min, p_top
-            o2_mods = fit_clean_pinns_nopoly_fold(seed, data, tr_ids, device)
+            o2_mods = _fit_fast_o2_ref(seed, data["site"], gdp, tr_ids, "M3", 64, (45, 25, 26, 28), (2e-3, 1.2e-3, 1.5e-3, 1.2e-3), (0, 10, 21, 32), device)
             with torch.inference_mode():
-                id_t = torch.from_numpy(te_ids)
-                zm = torch.zeros(len(te_ids), dtype=torch.float32, device=device)
-                zp = torch.zeros((len(te_ids), 16, 10, 11), dtype=torch.float32, device=device)
+                id_g = torch.from_numpy(te_ids).to(device)
                 for r_nm, arm in (("O2_M2b_ref", "M2b"), ("O2_M3_ref", "M3")):
-                    oo = o2_mods[arm](
-                        data["history"][id_t].to(device), data["bio_even"][id_t].to(device), data["pose_vec_world"][id_t].to(device),
-                        data["signed_knee"][id_t].to(device), data["quality"][id_t].to(device), data["m_pose"][id_t].to(device),
-                        zp, zm, data["edges"][id_t].to(device), data["is_car"][id_t].to(device), data["nbr_mask"][id_t].to(device),
-                    )
+                    oo = _fwd_gd(o2_mods[arm], gdp, id_g)
                     pp, qq = oo["paths"].cpu().numpy(), oo["logits"].softmax(1).cpu().numpy()
                     dd = np.linalg.norm(pp - truth_np[te_ids][:, None], axis=-1)
                     tp, ii = qq.argmax(1), np.arange(len(te_ids))
@@ -292,15 +327,23 @@ def run_pinns_ext_loso(meta_dir: Path, pose_npz: Path, joint_zip: Path, causal_m
     mm = {nm: v.mean(0) for nm, v in min_s.items()}
     strata_out = {}
     for s_nm, msk in data["strata"].items():
-        strata_out[s_nm] = {"n_windows": int(msk.sum()), "Last2_CV": {"ade_m": float(cv_err[msk, 0].mean()), "fde_m": float(cv_err[msk, 1].mean())}}
+        cv_sub, gs = cv_err[msk], data["site"][msk]
+        ug = sorted(set(gs.tolist()))
+        strata_out[s_nm] = {
+            "n_windows": int(msk.sum()),
+            "Last2_CV": {
+                "group_equal": {"ade1_m": float(np.mean([cv_sub[gs == g, 0].mean() for g in ug])), "fde1_m": float(np.mean([cv_sub[gs == g, 1].mean() for g in ug]))},
+                "window_equal": {"ade1_m": float(cv_sub[:, 0].mean()), "fde1_m": float(cv_sub[:, 1].mean())},
+            },
+        }
         for nm in names:
             strata_out[s_nm][nm] = _agg_group_top_min(top_s[nm], min_s[nm], data["site"], msk)
     comps = {}
     for nm, _, _ in EXT_SPECS:
-        comps[f"O2_M2b_minus_{nm}_all"] = paired_site_clip_ci(tm["O2_M2b_ref"][:, 0] - tm[nm][:, 0], tm["O2_M2b_ref"][:, 1] - tm[nm][:, 1], data["site"], data["clip"])
-        comps[f"{nm}_minus_CV_all"] = paired_site_clip_ci(tm[nm][:, 0] - cv_err[:, 0], tm[nm][:, 1] - cv_err[:, 1], data["site"], data["clip"])
+        comps[f"O2_M2b_minus_{nm}_all"] = paired_site_clip_ci(tm["O2_M2b_ref"] - tm[nm], data["site"], data["clip"])
+        comps[f"{nm}_minus_CV_all"] = paired_site_clip_ci(tm[nm] - cv_err, data["site"], data["clip"])
     for b_nm in ("Ext1_MCENET", "Ext2_HST", "Ext3_SocialTransmotion"):
-        comps[f"{b_nm}_Frenet_minus_Raw"] = paired_site_clip_ci(tm[f"{b_nm}_Frenet"][:, 0] - tm[b_nm][:, 0], tm[f"{b_nm}_Frenet"][:, 1] - tm[b_nm][:, 1], data["site"], data["clip"])
+        comps[f"{b_nm}_Frenet_minus_Raw"] = paired_site_clip_ci(tm[f"{b_nm}_Frenet"] - tm[b_nm], data["site"], data["clip"])
     summary = {
         "n_windows": n,
         "param_counts": {nm: int(sum(p.numel() for p in _make_ext_model(kind, 30, 0.1).parameters())) for nm, kind, _ in EXT_SPECS[:3]},
@@ -313,7 +356,7 @@ def run_pinns_ext_loso(meta_dir: Path, pose_npz: Path, joint_zip: Path, causal_m
 
 
 def run_jrdb_ext_lolo(repo_root: Path, device: torch.device) -> tuple[dict, dict[str, np.ndarray]]:
-    from scripts.run_jrdb_rc2_rc3_graph_and_actions_5seed import _eval_gd, _stage_gpu_dict, fit_jrdb_rc2_rc3_fold
+    from scripts.run_jrdb_rc2_rc3_graph_and_actions_5seed import _eval_gd, _stage_gpu_dict
 
     data = load_jrdb_10scene_rc2_rc3(repo_root)
     packs_cpu = build_jrdb_ext_tensors(data)
@@ -339,10 +382,10 @@ def run_jrdb_ext_lolo(repo_root: Path, device: torch.device) -> tuple[dict, dict
             for nm, kind, use_fr in EXT_SPECS:
                 gp = packs["frenet" if use_fr else "raw"]
                 te_top, te_min, _ = fit_and_eval_ext_fold(
-                    seed, kind, gp, truth_np, tr_ids, te_ids, w_tr, fut_steps=7, dt=0.4, epochs=24, batch_size=128, device=device
+                    seed, kind, gp, truth_np, tr_ids, te_ids, w_tr, fut_steps=7, dt=0.4, epochs=24, batch_size=256, device=device
                 )
                 top_s[nm][si, te_ids], min_s[nm][si, te_ids] = te_top, te_min
-            o2_mods = fit_jrdb_rc2_rc3_fold(seed, data["location"], gd, tr_ids, device)
+            o2_mods = _fit_fast_o2_ref(seed, data["location"], gd, tr_ids, "M3a", 512, (45, 28, 28, 30), (2.5e-3, 1.5e-3, 1.8e-3, 1.5e-3), (0, 12, 21, 30), device)
             for r_nm, arm in (("O2_M2b_ref", "M2b"), ("O2_M3a_ref", "M3a")):
                 top_s[r_nm][si, te_ids], min_s[r_nm][si, te_ids] = _eval_gd(o2_mods[arm], gd, truth_np, te_ids, device)
         print(f"[W17-EXT JRDB] seed={seed} MCENET={top_s['Ext1_MCENET'][si].mean(0)[0]:.4f} ST_Fr={top_s['Ext3_SocialTransmotion_Frenet'][si].mean(0)[0]:.4f} O2_M3a={top_s['O2_M3a_ref'][si].mean(0)[0]:.4f}", flush=True)
@@ -351,7 +394,15 @@ def run_jrdb_ext_lolo(repo_root: Path, device: torch.device) -> tuple[dict, dict
     mm = {nm: v.mean(0) for nm, v in min_s.items()}
     strata_out = {}
     for s_nm, msk in data["strata"].items():
-        strata_out[s_nm] = {"n_windows": int(msk.sum()), "Last2_CV": {"ade_m": float(cv_err[msk, 0].mean()), "fde_m": float(cv_err[msk, 1].mean())}}
+        cv_sub, gs = cv_err[msk], data["location"][msk]
+        ug = sorted(set(gs.tolist()))
+        strata_out[s_nm] = {
+            "n_windows": int(msk.sum()),
+            "Last2_CV": {
+                "group_equal": {"ade1_m": float(np.mean([cv_sub[gs == g, 0].mean() for g in ug])), "fde1_m": float(np.mean([cv_sub[gs == g, 1].mean() for g in ug]))},
+                "window_equal": {"ade1_m": float(cv_sub[:, 0].mean()), "fde1_m": float(cv_sub[:, 1].mean())},
+            },
+        }
         for nm in names:
             strata_out[s_nm][nm] = _agg_group_top_min(top_s[nm], min_s[nm], data["location"], msk)
     all_m = data["strata"]["all_10scenes"]
