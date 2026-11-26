@@ -309,7 +309,7 @@ def main() -> None:
             "n_locations": len(u_locs),
             "models": mod_d,
             "paired_top1_location_ci": {cn: _loc_bootstrap_ci(mean_m[ma][mask, :2] - mean_m[mb][mask, :2], sub_l) for cn, ma, mb in contrasts},
-            "paired_top1_person_ci": {cn: person_bootstrap_ci(mean_m[ma][:, 0] - mean_m[mb][:, 0], mask, act_arr) for cn, ma, mb in contrasts},
+            "paired_top1_person_ci": {cn: person_bootstrap_ci(mean_m[ma][:, :2] - mean_m[mb][:, :2], mask, act_arr) for cn, ma, mb in contrasts},
         }
 
     # 5-axis O(2) invariance check on trained M1 across first 64 windows

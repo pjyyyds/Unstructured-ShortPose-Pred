@@ -80,6 +80,9 @@ class TestWave14PPTMainline(unittest.TestCase):
         self.assertEqual(ev_m1.shape, (16, 7))
         ci = _loc_bootstrap_ci(rng.normal(size=(n, 2)), locs, n_boot=200)
         self.assertIn("ci95", ci)
+        from scripts.run_dair_o2_bioeq_external import person_bootstrap_ci
+        pci = person_bootstrap_ci(rng.normal(size=(n, 2)), np.ones(n, dtype=bool), np.array([f"p{i // 2}" for i in range(n)]))
+        self.assertIn("person_equal", pci)
 
         # Synthetic 4-site PINNS cohort for fixed-predictor split-conformal
         from scripts.run_pinns_matched_o2_multiduration import SITES
