@@ -13,9 +13,14 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
         res = root / "results"
         zh = (root / "paper/ShortPose_Unstructured_Pedestrian_Paper.md").read_text(encoding="utf-8")
         en = (root / "paper/IEEE_TITS_ShortPose_Manuscript.md").read_text(encoding="utf-8")
+        ppt_map = (root / "paper/PPT_20Slides_Defense_Evidence_Map.md").read_text(encoding="utf-8")
 
-        for fn, txt in (("zh", zh), ("en", en)):
-            p = root / ("paper/ShortPose_Unstructured_Pedestrian_Paper.md" if fn == "zh" else "paper/IEEE_TITS_ShortPose_Manuscript.md")
+        for fn, txt, rel in (
+            ("zh", zh, "paper/ShortPose_Unstructured_Pedestrian_Paper.md"),
+            ("en", en, "paper/IEEE_TITS_ShortPose_Manuscript.md"),
+            ("ppt_map", ppt_map, "paper/PPT_20Slides_Defense_Evidence_Map.md"),
+        ):
+            p = root / rel
             links = re.findall(r"\]\((?!https?://|#|file://)([^)]+)\)", txt)
             missing = [lk for lk in links if not (p.parent / lk.split("#")[0]).exists()]
             self.assertEqual(missing, [], f"Broken links in {fn}: {missing}")
@@ -65,6 +70,24 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
             self.assertIn(f"{cg_p['ade1_m']:.4f} / {cg_p['fde1_m']:.4f}", txt)
             self.assertIn(f"{ece_p:.4f}", txt)
             self.assertIn(f"{f1_p:.4f}", txt)
+
+        ext = json.loads((res / "wave17_ppt_ext_baselines_loso_5seed_verified.json").read_text())
+        pm = ext["pinns_4site_loso_1482"]["strata"]["all_1482"]
+        jm = ext["jrdb_9location_lolo_5836"]["strata"]["all_10scenes"]
+        t4 = json.loads((res / "wave18_t4_latency_and_monotonic_gate_5seed_verified.json").read_text())
+        b12 = t4["hardware_profile"]["batch_sizes"]["B12"]
+        rho_mp = t4["pinns_monotonic_gate_1482"]["gate_audit"]["M1_mono_q"]["spearman_gate_vs_q1_valid_joint_ratio"]
+        rho_mj = t4["jrdb_monotonic_gate_5836"]["gate_audit"]["M1_mono_q"]["spearman_gate_vs_q1_valid_joint_ratio"]
+        mono_p = t4["pinns_monotonic_gate_1482"]["test_conditions"]["Test_Natural"]["M1_mono_q"]
+        for txt in (zh, en):
+            for k in ("Ext1_MCENET", "Ext1_MCENET_Frenet", "Ext2_HST", "Ext2_HST_Frenet", "Ext3_SocialTransmotion", "Ext3_SocialTransmotion_Frenet"):
+                self.assertIn(f"{pm[k]['group_equal']['ade1_m']:.4f} / {pm[k]['group_equal']['fde1_m']:.4f}", txt)
+                self.assertIn(f"{jm[k]['group_equal']['ade1_m']:.4f} / {jm[k]['group_equal']['fde1_m']:.4f}", txt)
+            self.assertIn(f"+{rho_mp:.4f}", txt)
+            self.assertIn(f"+{rho_mj:.4f}", txt)
+            self.assertIn(f"{mono_p['group_equal_ade1_m']:.4f} / {mono_p['group_equal_fde1_m']:.4f}", txt)
+            self.assertIn(f"{b12['O2_M2b_conflict_gate']['p50_ms']:.3f} / {b12['O2_M2b_conflict_gate']['p95_ms']:.3f}", txt)
+            self.assertIn("fig19_wave18_conflict_rerank_ext_and_t4_pareto.png", txt)
 
 
 if __name__ == "__main__":

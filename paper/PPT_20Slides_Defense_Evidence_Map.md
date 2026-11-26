@@ -1,0 +1,26 @@
+# 《彭嘉钰答辩.pptx》20 页逐页证据链与论文映射表 (Slide-by-Slide Verified Evidence Map)
+
+> 本文档严格对照 `/Users/pengjiayu/Desktop/彭嘉钰答辩.pptx` 全部 20 页设定，将每一页的研究问题、技术路线与验收判据逐一映射到经双层 SHA-256 及运行期几何断言复核的云端实验 JSON、中英文论文图表与诚实科学边界（正结果、零效应情形 C 与负向机制发现同等呈现）。
+
+## 一、背景、问题定义与文献基准（Slides 1–7）
+
+| PPT 页码与主题 | 对应实验与论文图表 | 核心实测结论与诚实边界 |
+| :--- | :--- | :--- |
+| **Slides 1–4**: 课题背景、短时五帧（`0.4 s`）初现与无标线场景挑战 | 中文论文第 1 节、`IEEE_TITS` Sec. I、[`pinns_observation_audit.json`](../results/pinns_observation_audit.json) | 明确区分 `PINNS` `1,482` 不重叠留出窗中的 `449` 个 10 Hz 首采样窗、`261` 个原始首帧窗与 `323` 个 `< 0.5 m` 小位移窗（系标注起点而非人工判读物理遮挡物消除）；表 1 的 `497` 滑窗来自 `21` 段视频（整片自举 `16/25` 项 `< 0`）。 |
+| **Slide 5**: `Social-Pose` 噪声姿态退化对照（清晰训练 vs. 可变质量训练 × 抖动/遮挡/全丢） | [`wave17_slide5_pose_noise_and_gate_response_5seed_verified.json`](../results/wave17_slide5_pose_noise_and_gate_response_5seed_verified.json)、[`wave18_t4_latency_and_monotonic_gate_5seed_verified.json`](../results/wave18_t4_latency_and_monotonic_gate_5seed_verified.json)、图 18c、图 19c | `VarQTrain` 较 `CleanTrain` 在 `PINNS` 降 **`−2.41 / −4.72 cm`**、`JRDB` 降 **`−3.78 / −7.59 cm`**（`Jitter020` 降 **`−4.28 cm`**）；`m_pose=0` 硬关断在 `Test_FullDrop` 较无硬关断降 **`−3.27 cm` (`PINNS`) / `−3.68 cm` (`JRDB`)**；发现无约束 `MLP` 门控与有效率负秩相关（`−0.1883 / −0.2184`），并用结构单调门控 `M1_mono_q` 恢复至 **`+0.7301 / +0.6691`**（`PINNS` 20 px 抖动降 **`−2.31 / −4.53 cm`**）。 |
+| **Slides 6–7**: 人车动态风险场与多特征/动作联合预测文献脉络 | 中文论文第 2 节、`IEEE_TITS` Sec. II、表 10 / Table V | 同口径五种子复现 `MCENET`、`HST`、`Social-Transmotion`：原生全局坐标跨站 `ADE_1` 为 `0.8052 / 0.7808 / 0.8792 m`，补齐本文 `SO(2) Frenet` 后大幅降至 `0.5734 / 0.5498 / 0.6217 m`，证明局部正交规范化是跨相机泛化的首要前提。 |
+
+## 二、总体框架与三大研究内容（Slides 8–12, 17–19）
+
+| PPT 页码与研究内容 | 对应实验与论文图表 | 核心实测结论与诚实边界 |
+| :--- | :--- | :--- |
+| **Slides 8–9, 17（研究内容一）**: 可变质量短时姿态与运动融合（`M0 -> M1a -> M1b -> M1 -> M1_mono_q`）、`3×3` 地面朝向与 `< 0.5 m` 初现 | [`pinns_short_disp_hardq_anchor_corrected_v2_5seed_verified.json`](../results/pinns_short_disp_hardq_anchor_corrected_v2_5seed_verified.json)、[`wave17_rc1_2x2_factorial_and_lowdisp_regime_5seed_verified.json`](../results/wave17_rc1_2x2_factorial_and_lowdisp_regime_5seed_verified.json)、[`ppt_rc1_3x3_true20f_corrected_v2_5seed_verified.json`](../results/ppt_rc1_3x3_true20f_corrected_v2_5seed_verified.json)、表 9、图 17–19 | 运行期断言确证秩-3 `3×3` 单应（`6,930/7,410` 帧朝向非零、足底残差 `2.24 µm`）。`M0_anchor` 在 `1,482` 全窗达 **`0.4522 / 1.0194 m`**（`449` 首采样窗 `0.5014 / 1.0886 m`）；**但在 `323` 个 `< 0.5 m` 窗上仍以末两点匀速（`0.3545 / 0.8491 m`）为参照**——即便 `< 0.5 m` 专域训练 `Regime_M1_ground`（`0.3538 / 0.8462 m`）较 `Regime_M0` 降 `−0.22 cm`（`[−0.31, −0.03] cm`），其对匀速的 `−0.07 cm` 区间 `[−0.20, +0.26] cm` 仍跨零。`2×2` 析因确证自然全集单纯 `q` 主效应跨零（`T=5 Heavy` 20f 降 `−0.88 cm`），高速抑制在 `JRDB` 降 `−0.82 cm`。 |
+| **Slides 8, 10, 18（研究内容二）**: 行人周边 `20 m` 折线（`M2a`）与 `10 m` 有向异构逼近交互（`M2b ± v_rad` + 因果冲突门控） | [`ppt_mainline_o2_m0_m3_corrected_v3_5seed_verified.json`](../results/ppt_mainline_o2_m0_m3_corrected_v3_5seed_verified.json)、[`wave18_conflict_gated_interaction_5seed_verified.json`](../results/wave18_conflict_gated_interaction_5seed_verified.json)、图 17a、图 19a | 以行人真实世界坐标 `pt0_ego` 截取 `20 m` 折线（改变 `835/835` 有图窗）后，真值穿线率达 `2.36%`（有图窗 `4.19%`），`M2a` 较 `M1` 升 `+1.58 cm`（情形 C）。`10 m` 邻体图 `M2b` 将 `minFDE₆` 降至 **`0.6539 m`**（重遮挡 `v_rad` 降 `−1.65 cm`）；引入因果径向冲突门控 `M2b_ttc_conflict_gate` 消除非逼近邻体干扰，将 `PINNS` 全窗首选 `ADE_1 / FDE_1` 降至 **`0.4572 / 1.0223 m`**（较原版 `M2b` 降 **`−2.45 cm`**，`TTC <= 4s` 较 `M1` 降 **`−1.96 / −3.56 cm`**；`JRDB` 全窗较原版 `M2b` 降 **`−0.49 cm`**）。 |
+| **Slides 8, 11–12, 19（研究内容三）**: 五类动态可观测动作（`M3a / M3b / M3 Stop-Grad`）、零泄漏校准重排与不重训分裂共形 | [`wave17_rc3_clean_chain_and_jrdb_conformal_5seed_verified.json`](../results/wave17_rc3_clean_chain_and_jrdb_conformal_5seed_verified.json)、[`wave18_action_calibration_and_rerank_5seed_verified.json`](../results/wave18_action_calibration_and_rerank_5seed_verified.json)、表 9、Table III–IV、图 17c、图 18d、图 19c | `JRDB` 五动作监督使 `M3a/M3b` 较 `M2b` 显著降 **`−0.80 / −0.78 cm ADE_1`**；内层留一 Platt 校准使 `ECE` 降 **4.9 倍**（`PINNS` `0.1717 -> 0.0349`，宏 F1 **`0.3911`**）与 **23.6 倍**（`JRDB` `0.0933 -> 0.0040`），动作一致性重排在 `JRDB` 再降 **`−0.43 / −0.81 cm`**；`PINNS` `<0.5m` 上 `Stop-Grad M3` 较 `M3b` 降 `−0.78 cm FDE_1`。**全程不重训分裂共形**：`PINNS` 同站 **`90.60% / 94.94%`**（12 跨国对 `86.48% / 91.74%`），`JRDB` 同场景 **`88.37% / 94.48%`**（72 跨地点对 `86.77% / 92.81%`），管道半径缩减 **`36.4%–47.8%`**。 |
+
+## 三、评测指标、硬件实时性与进度收官（Slides 13–16, 20）
+
+| PPT 页码与主题 | 对应实验与论文图表 | 核心实测结论与诚实边界 |
+| :--- | :--- | :--- |
+| **Slides 13–14**: 同口径指标矩阵、跨数据集泛化（`PINNS, JRDB, JTA, DUT, IMPTC, DAIR-V2X`）与统计检验 | [`wave17_ppt_ext_baselines_loso_5seed_verified.json`](../results/wave17_ppt_ext_baselines_loso_5seed_verified.json)、图 16、表 10 / Table V | 严格主报 `Top-1` 同口径 `ADE_1 / FDE_1`，分列 `minADE₆ / minFDE₆`、穿线率、五动作 `AP / F1 / ECE` 与固定预测器共形覆盖率；配齐整片/整点/整人聚簇自举 95% 区间。 |
+| **Slides 15–16, 20**: 算量参数上限、`Tesla T4` 端到端时延与论文发表闭环 | [`wave18_t4_latency_and_monotonic_gate_5seed_verified.json`](../results/wave18_t4_latency_and_monotonic_gate_5seed_verified.json)、[`ShortPose_Unstructured_Pedestrian_Paper.md`](./ShortPose_Unstructured_Pedestrian_Paper.md)、[`IEEE_TITS_ShortPose_Manuscript.md`](./IEEE_TITS_ShortPose_Manuscript.md)、图 19d | `O2` 系列参数仅 **`20,739–28,005`**（`B=12` 算量 `0.17–9.47 MFLOPs`，较 `HST` 低 **396 倍**），`Tesla T4` 上 `B=12` 的 `P50 / P95` 延迟仅 **`2.75–6.32 ms` / `3.14–7.13 ms`**，双语论文与 `114+` 项单测全套齐备。 |
