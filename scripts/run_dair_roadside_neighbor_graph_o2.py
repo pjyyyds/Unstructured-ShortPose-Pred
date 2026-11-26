@@ -14,7 +14,7 @@ import numpy as np
 import torch
 
 from scripts.run_dair_attached_o2_bioeq import load_attached_dair_54
-from scripts.run_dair_o2_bioeq_external import COCO_SWAP, SEEDS, person_bootstrap_ci
+from scripts.run_dair_o2_bioeq_external import COCO_SWAP, RESILIENT_SPAN, SEEDS, person_bootstrap_ci
 from scripts.run_imptc_and_dair_o2_full_external import TRANSFORMS
 from scripts.run_pinns_matched_o2_multiduration import SITES
 from scripts.run_unified_o2_full_gpu_benchmark import fit_unified_fold, load_unified_cohort, select_unified_scales
@@ -26,11 +26,22 @@ VEHICLE_TYPES = {"Car", "Van", "Truck", "Bus", "Motorcyclist"}
 VRU_TYPES = {"Pedestrian", "Cyclist", "Tricyclist", "Barrowlist"}
 
 
-def build_dair_world_neighbor_edges(repo_root: Path, dair_zip: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    rev_dir = repo_root / "reviews/dair_roadside_external"
-    if str(rev_dir) not in sys.path:
-        sys.path.insert(0, str(rev_dir))
-    import full_range  # type: ignore
+def build_dair_world_neighbor_edges(repo_root: Path, dair_zip: Path, work_dir: Path | None = None) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    import importlib.util
+    import shutil
+    import tempfile
+
+    src_dir = repo_root / "reviews/dair_roadside_external"
+    exp_dir = (work_dir or Path(tempfile.mkdtemp(prefix="dair_nb_"))) / "dair_range"
+    exp_dir.mkdir(parents=True, exist_ok=True)
+    fr_txt = (src_dir / "full_range.py").read_text().replace("max_workers=10", "max_workers=2").replace("max_workers=5", "max_workers=2")
+    fr_txt = fr_txt.split("if __name__=='__main__':")[0] + "\n" + RESILIENT_SPAN + "\n"
+    fr_path = exp_dir / "full_range.py"
+    fr_path.write_text(fr_txt)
+    spec = importlib.util.spec_from_file_location("dair_full_range_resilient", fr_path)
+    assert spec is not None and spec.loader is not None
+    full_range = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(full_range)
 
     with zipfile.ZipFile(dair_zip) as zf:
         import io

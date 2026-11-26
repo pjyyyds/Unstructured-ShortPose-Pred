@@ -80,18 +80,25 @@ def _panel_cd(ax_c, ax_d, ext: dict, off: dict) -> None:
     xd = np.arange(4)
     s_fde = [mx[k]["site_equal_fde_m"] for k in m_keys]
     a_fde = [mx[k]["affected_597_fde_m"] for k in m_keys]
-    ax_d.plot(xd, s_fde, "o-", color="#0b4f4a", lw=2.3, ms=7.0, label="4-Site Equal 3.0s FDE (1,482)")
-    ax_d.plot(xd, a_fde, "s--", color="#2a9d8f", lw=2.0, ms=6.2, label="3 Zero-Origin US Clips FDE (597)")
+    ax_d.plot(xd, s_fde, "o-", color="#0b4f4a", lw=2.3, ms=7.0, label="4-Site Equal FDE (1,482, left)")
     for xi, sv in zip(xd, s_fde):
-        ax_d.annotate(f"{sv:.4f} m", (xi, sv), xytext=(0, 8), textcoords="offset points", ha="center", fontsize=7.6, fontweight="bold", color="#0b4f4a")
-    lo_y, hi_y = min(min(s_fde), min(a_fde)) - 0.025, max(max(s_fde), max(a_fde)) + 0.038
+        ax_d.annotate(f"{sv:.4f} m", (xi, sv), xytext=(0, 9), textcoords="offset points", ha="center", fontsize=7.5, fontweight="bold", color="#0b4f4a")
+    ax_dr = ax_d.twinx()
+    ax_dr.plot(xd, a_fde, "s--", color="#c26a4a", lw=2.0, ms=6.2, label="3 Zero-Origin US Clips FDE (597, right)")
+    for xi, av in zip(xd, a_fde):
+        ax_dr.annotate(f"{av:.4f} m", (xi, av), xytext=(0, -14), textcoords="offset points", ha="center", fontsize=7.5, fontweight="bold", color="#c26a4a")
+    ax_d.set_xlim(-0.35, 3.35)
     ax_d.set_xticks(xd, m_lbls, fontsize=8.1)
-    ax_d.set_ylim(lo_y, hi_y)
-    ax_d.set_ylabel("3.0 s Bayesian FDE (m)", fontsize=9.0)
-    ax_d.set_title("(d) +1 video-frame 2x2 retraining sensitivity (5 seeds)", fontsize=10.2, fontweight="bold", loc="left", pad=7)
+    ms, ma = float(np.mean(s_fde)), float(np.mean(a_fde))
+    ax_d.set_ylim(ms - 0.008, ms + 0.012)
+    ax_dr.set_ylim(ma - 0.012, ma + 0.008)
+    ax_d.set_ylabel("4-Site Equal 3.0 s FDE (m)", fontsize=8.9, color="#0b4f4a")
+    ax_dr.set_ylabel("597 Affected US Windows FDE (m)", fontsize=8.9, color="#c26a4a")
+    ax_d.set_title("(d) +1 video-frame 2x2 retraining (<0.8 mm shift)", fontsize=10.2, fontweight="bold", loc="left", pad=7)
     ax_d.grid(True, color="#e2e8f0", lw=0.7)
-    ax_d.spines["top"].set_visible(False); ax_d.spines["right"].set_visible(False)
-    ax_d.legend(loc="best", fontsize=7.5, framealpha=0.95)
+    ax_d.spines["top"].set_visible(False); ax_dr.spines["top"].set_visible(False)
+    h1, l1 = ax_d.get_legend_handles_labels(); h2, l2 = ax_dr.get_legend_handles_labels()
+    ax_d.legend(h1 + h2, l1 + l2, loc="upper left", fontsize=7.3, framealpha=0.95)
 
 
 def main() -> None:

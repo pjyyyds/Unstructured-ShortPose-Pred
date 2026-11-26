@@ -1,0 +1,224 @@
+{
+  "archive_name": "pinns_frame_offset_retrain_5seed.zip",
+  "archive_sha256": "f015978d69ce8ba4b08605a28ea663e0828243ffe13687a71c89a0c296a845d6",
+  "outer_download_sha256": "95ec27ef842f33a45bd5382fccb536f4dcd92eae4e417e98249d23a2be9a5292",
+  "manifest_sha256": {
+    "report.json": "38a1ec5529ec7c58717ac3318a234cc6834981e589c75856aafd514f051f31cf",
+    "RESULTS.md": "1df0b42e7247c69f5cfa7fad08d807f634c1e89cfeb35a987a78b0bc84937f85"
+  },
+  "report": {
+    "study": "Five-seed Ours_O2_Full +1 video-frame retraining sensitivity (2x2 train/test matrix) & CUDA/CPU replay audit",
+    "seeds": [
+      42,
+      1024,
+      2025,
+      3407,
+      4096
+    ],
+    "pose_extraction_provenance": {
+      "active_providers": [
+        "CUDAExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "clips": {
+        "america_crossroad_summer_daytime_sunny_0": {
+          "windows": 103,
+          "same0_vs_frozen_xy_max_px": 0.0,
+          "same0_vs_frozen_conf_max": 0.0,
+          "plus1_vs_same0_xy_median_px": 0.9691162109375,
+          "plus1_vs_same0_xy_p95_px": 6.835384368896484,
+          "changed_frames": 515
+        },
+        "america_crossroad_summer_nightfall_sunny_0": {
+          "windows": 104,
+          "same0_vs_frozen_xy_max_px": 0.0,
+          "same0_vs_frozen_conf_max": 0.0,
+          "plus1_vs_same0_xy_median_px": 0.2263031005859375,
+          "plus1_vs_same0_xy_p95_px": 4.277612686157227,
+          "changed_frames": 519
+        },
+        "america_crossroad_summer_nightfall_sunny_1": {
+          "windows": 390,
+          "same0_vs_frozen_xy_max_px": 0.0,
+          "same0_vs_frozen_conf_max": 0.0,
+          "plus1_vs_same0_xy_median_px": 0.3316650390625,
+          "plus1_vs_same0_xy_p95_px": 11.353469848632812,
+          "changed_frames": 1949
+        }
+      }
+    },
+    "cuda_vs_cpu_unaffected_219_audit": {
+      "unaffected_us_windows": 219,
+      "same_device_offset1_minus_offset0_exact_zero": true,
+      "same_device_max_abs_m": 0.0,
+      "cuda_minus_cpu_same_weights_exact_equal": false,
+      "cuda_minus_cpu_max_abs_m": 4.17255236584424e-06,
+      "cuda_minus_cpu_p95_abs_m": 3.905145169236228e-07,
+      "runtime_device": "cuda"
+    },
+    "train_test_2x2_matrix": {
+      "train0_test0": {
+        "site_equal_ade_m": 0.45818149551439574,
+        "site_equal_fde_m": 1.009589007263031,
+        "site_equal_min_fde6_m": 0.6915982099217652,
+        "site_equal_macro_ap": 0.3822956258031306,
+        "affected_597_ade_m": 1.0145819789942543,
+        "affected_597_fde_m": 1.9714895446377736,
+        "unaffected_us_219_ade_m": 0.39875770160759716,
+        "by_site": {
+          "america_crossroad": {
+            "ade_m": 0.8493056104309235,
+            "fde_m": 1.6876742721614721,
+            "min_fde6_m": 1.2120773566896308
+          },
+          "italy_park": {
+            "ade_m": 0.3460859448510777,
+            "fde_m": 0.8242169204703554,
+            "min_fde6_m": 0.5983080636974913
+          },
+          "japan_crossroad": {
+            "ade_m": 0.3185579628615465,
+            "fde_m": 0.7438467470471914,
+            "min_fde6_m": 0.4722033211273794
+          },
+          "thailand_street": {
+            "ade_m": 0.3187764639140353,
+            "fde_m": 0.782618089373105,
+            "min_fde6_m": 0.48380409817255954
+          }
+        }
+      },
+      "train0_test1": {
+        "site_equal_ade_m": 0.4581931155312841,
+        "site_equal_fde_m": 1.0096099106806027,
+        "site_equal_min_fde6_m": 0.6916060103649048,
+        "site_equal_macro_ap": 0.38204420755575197,
+        "affected_597_ade_m": 1.01464550953885,
+        "affected_597_fde_m": 1.9716038306594723,
+        "unaffected_us_219_ade_m": 0.39875770160759716,
+        "by_site": {
+          "america_crossroad": {
+            "ade_m": 0.849352090498477,
+            "fde_m": 1.687757885831759,
+            "min_fde6_m": 1.212108558462189
+          },
+          "italy_park": {
+            "ade_m": 0.3460859448510777,
+            "fde_m": 0.8242169204703554,
+            "min_fde6_m": 0.5983080636974913
+          },
+          "japan_crossroad": {
+            "ade_m": 0.3185579628615465,
+            "fde_m": 0.7438467470471914,
+            "min_fde6_m": 0.4722033211273794
+          },
+          "thailand_street": {
+            "ade_m": 0.3187764639140353,
+            "fde_m": 0.782618089373105,
+            "min_fde6_m": 0.48380409817255954
+          }
+        }
+      },
+      "train1_test1": {
+        "site_equal_ade_m": 0.4585064736395609,
+        "site_equal_fde_m": 1.0103054101124127,
+        "site_equal_min_fde6_m": 0.6922021973847204,
+        "site_equal_macro_ap": 0.37931934034215825,
+        "affected_597_ade_m": 1.01464550953885,
+        "affected_597_fde_m": 1.9716038306594723,
+        "unaffected_us_219_ade_m": 0.39875770160759716,
+        "by_site": {
+          "america_crossroad": {
+            "ade_m": 0.849352090498477,
+            "fde_m": 1.687757885831759,
+            "min_fde6_m": 1.212108558462189
+          },
+          "italy_park": {
+            "ade_m": 0.34603264840665315,
+            "fde_m": 0.8241786270011331,
+            "min_fde6_m": 0.5993813524583523
+          },
+          "japan_crossroad": {
+            "ade_m": 0.31917673692753035,
+            "fde_m": 0.7456693206006662,
+            "min_fde6_m": 0.4733301185364918
+          },
+          "thailand_street": {
+            "ade_m": 0.31946441872558307,
+            "fde_m": 0.7836158070160928,
+            "min_fde6_m": 0.48398876008184855
+          }
+        }
+      },
+      "train1_test0": {
+        "site_equal_ade_m": 0.4584948536226725,
+        "site_equal_fde_m": 1.0102845066948412,
+        "site_equal_min_fde6_m": 0.6921943969415809,
+        "site_equal_macro_ap": 0.3795707585895368,
+        "affected_597_ade_m": 1.0145819789942543,
+        "affected_597_fde_m": 1.9714895446377736,
+        "unaffected_us_219_ade_m": 0.39875770160759716,
+        "by_site": {
+          "america_crossroad": {
+            "ade_m": 0.8493056104309235,
+            "fde_m": 1.6876742721614721,
+            "min_fde6_m": 1.2120773566896308
+          },
+          "italy_park": {
+            "ade_m": 0.34603264840665315,
+            "fde_m": 0.8241786270011331,
+            "min_fde6_m": 0.5993813524583523
+          },
+          "japan_crossroad": {
+            "ade_m": 0.31917673692753035,
+            "fde_m": 0.7456693206006662,
+            "min_fde6_m": 0.4733301185364918
+          },
+          "thailand_street": {
+            "ade_m": 0.31946441872558307,
+            "fde_m": 0.7836158070160928,
+            "min_fde6_m": 0.48398876008184855
+          }
+        }
+      }
+    },
+    "paired_site_clip_ci": {
+      "retrained_11_minus_baseline_00": {
+        "mean": {
+          "ade_m": 0.0003249781251651313,
+          "fde_m": 0.000716402849381817
+        },
+        "ci95": {
+          "ade_m": [
+            4.182959926335213e-06,
+            0.0005817038943348609
+          ],
+          "fde_m": [
+            -7.970696006422753e-05,
+            0.0013403663556579076
+          ]
+        }
+      },
+      "frozen_01_minus_baseline_00": {
+        "mean": {
+          "ade_m": 1.1620016888368329e-05,
+          "fde_m": 2.0903417571750685e-05
+        },
+        "ci95": {
+          "ade_m": [
+            -1.0336399774523638e-05,
+            2.3032615608234157e-05
+          ],
+          "fde_m": [
+            -3.4159319586739e-05,
+            4.381740162088463e-05
+          ]
+        }
+      }
+    },
+    "affected_597_window_delta_stats": {
+      "retrained_11_minus_00_fde_p95_abs_m": 0.00319264134831729,
+      "frozen_01_minus_00_fde_p95_abs_m": 0.00319264134831729
+    }
+  }
+}
