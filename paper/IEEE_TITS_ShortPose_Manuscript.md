@@ -154,6 +154,19 @@ On `JRDB` ($5,836$ windows across $9$ campus locations, `374304954` & `374375632
 
 ![Figure 2: Orthogonal 2x2 (q x speed) factorial, <0.5 m regime bound, Slide-5 keypoint-degradation & gate rank-inversion audit, and JRDB 72-pair split-conformal coverage](../docs/figures/fig18_wave17_factorial_slide5_and_jrdb_conformal.png)
 
+### E. Causal Radial-Conflict Gated Interaction and Zero-Leakage Action Reranking
+To resolve why un-gated `O2-M2b` improved `minFDE_6` while perturbing `Top-1 ADE_1` on `PINNS` (`+1.38 cm` over `M1`), Table IV decomposes neighbor-graph variants across physical approaching strata (`374440205`) alongside zero-leakage inner-fold Platt action calibration and candidate reranking.
+
+**Table IV: Causal Radial-Conflict Gating (`M2b_ttc_conflict_gate`) and Zero-Leakage Action Calibration / Reranking (5 Seeds)**
+
+| Evaluation Stratum / Metric | `PINNS` (`n = 1,482`, 4-Site LOSO) | `JRDB` (`n = 5,836`, 9-Location LOLO) | Paired 95% Clip / Location CI & Boundary Note |
+| :--- | :---: | :---: | :--- |
+| `S1_non_approaching` (`M2b_frozen − M1`) | `+2.57 / +4.43 cm` (`n = 527`) | `+0.02 / −0.42 cm` (`n = 2,860`) | Confirms receding/distant traffic perturbs un-gated `PINNS` mode logits (`[+0.90, +5.81] cm`) |
+| **`All` Windows: `M2b_ttc_conflict_gate`** | **`0.4572 / 1.0223 m`** (`M1`: `0.4679 / 1.0424`) | **`0.2987 / 0.5806 m`** (`M2b`: `0.3036 / 0.5845`) | `PINNS` vs. `M1`: **`[−1.52, −0.58] cm`** (vs. `M2b`: **`−2.45 cm`**); `JRDB` vs. `M2b`: **`[−0.93, −0.05] cm`** |
+| **Close Conflict (`TTC <= 4 s` / `d <= 6 m`)** | **`−1.96 / −3.56 cm`** vs. `M1` (`TTC <= 4s`) | **`−0.71 / −1.79 cm`** vs. `M1` (`d <= 6m`) | `PINNS` `TTC<=4s` CI **`[−2.78, −0.60] cm`**; `PINNS` Car-Approach (`315`) vs. `M2b`: **`−1.98 cm`** (`[−4.90, −0.25]`) |
+| **5-Action ECE (`Raw 0.5 -> Inner Platt`)** | **`0.1717 -> 0.0349`** (`Macro-F1`: `0.3606 ->` **`0.3911`**) | **`0.0933 -> 0.0040`** (`Macro-AP`: **`0.3567`**) | Cuts `PINNS` `Left / Right` false positives from `236 / 231` to `76 / 46` (zero test leakage) |
+| **Action-Consistent `Top-1` Reranking (`M3`)** | `0.4810 -> 0.4769 m` (`−0.41 / −0.82 cm`) | **`0.2973 -> 0.2930 m` (`−0.43 / −0.81 cm`)** | `JRDB` CI **`[−0.66, −0.25] cm`** (driven by `Maintain` `−0.53 cm`; `PINNS` CI `[−0.96, +0.14] cm` crosses zero) |
+
 ---
 
 ## VI. Discussion, Limitations, and Conclusion

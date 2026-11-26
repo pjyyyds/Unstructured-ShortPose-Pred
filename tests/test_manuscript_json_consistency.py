@@ -56,6 +56,16 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
             self.assertIn(f"{rho_p:.4f}", txt)
             self.assertIn(f"{rho_j:.4f}", txt)
 
+        w18_cg = json.loads((res / "wave18_conflict_gated_interaction_5seed_verified.json").read_text())
+        cg_p = w18_cg["pinns_4site_loso_1482"]["strata"]["all"]["models"]["M2b_ttc_conflict_gate"]["group_equal"]
+        w18_ac = json.loads((res / "wave18_action_calibration_and_rerank_5seed_verified.json").read_text())
+        ece_p = w18_ac["pinns_4site_loso_1482"]["action_metrics_platt_inner_opt_thr"]["group_equal"]["mean_ece"]
+        f1_p = w18_ac["pinns_4site_loso_1482"]["action_metrics_platt_inner_opt_thr"]["group_equal"]["macro_f1"]
+        for txt in (zh, en):
+            self.assertIn(f"{cg_p['ade1_m']:.4f} / {cg_p['fde1_m']:.4f}", txt)
+            self.assertIn(f"{ece_p:.4f}", txt)
+            self.assertIn(f"{f1_p:.4f}", txt)
+
 
 if __name__ == "__main__":
     unittest.main()
