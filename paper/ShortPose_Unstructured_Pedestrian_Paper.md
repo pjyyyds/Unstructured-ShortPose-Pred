@@ -543,6 +543,8 @@ PINNS 作者将怀俄明和东京的机位归为路口，将皮斯托亚和素�
 
 ![图17 经真实 3×3 单应与世界坐标校验的正交等变 M0–M3 单因素消融、地面朝向 <0.5m 对照与固定预测器分裂共形](../docs/figures/fig17_ppt_mainline_conformal_and_short_disp.png)
 
+![图18 正交 2×2 质量-速度抑制析因、<0.5m 低位移专域边界、Slide-5 姿态退化压测与门控秩相关诊断及 JRDB 72 配对分裂共形覆盖](../docs/figures/fig18_wave17_factorial_slide5_and_jrdb_conformal.png)
+
 ---
 
 ## 6 讨论与局限性分析 (Discussion & Limitations)
