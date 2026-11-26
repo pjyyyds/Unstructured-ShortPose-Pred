@@ -102,6 +102,13 @@ class TestWave14PPTMainline(unittest.TestCase):
         self.assertIn("within_site_clip_split_fixed_3site_predictor", conf)
         self.assertIn("cross_site_12pair_fixed_2site_predictor_no_retrain", conf)
 
+        from scripts.run_pinns_hybrid_action_events_5seed import score_action_matrix
+        ya_s = rng.integers(0, 2, size=(n_p, 5)).astype(bool)
+        va_s = np.ones((n_p, 5), dtype=bool)
+        pr_s = rng.uniform(0.1, 0.9, size=(n_p, 5))
+        sc_a = score_action_matrix(ya_s, va_s, pr_s, sites, np.full(5, 0.5, dtype=np.float64))
+        self.assertIn("site_equal", sc_a)
+
         from scripts.run_ppt_rc1_3x3_duration_quality_matrix import eval_rc1_dur, fit_rc1_dur_fold
         h20 = torch.from_numpy(rng.normal(0.0, 0.25, size=(n_p, 20, 2))); h20[:, -1] = 0.0
         d3x3 = {**data_p, "hist20": h20}

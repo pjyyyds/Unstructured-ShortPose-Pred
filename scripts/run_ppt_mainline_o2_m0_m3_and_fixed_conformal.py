@@ -235,7 +235,35 @@ def predict_arm_numpy(net: PPTMainlineO2Forecaster, data: dict, ids: np.ndarray,
 
 
 def fit_single_m3(seed: int, data: dict, tr_ids: np.ndarray, device: torch.device) -> PPTMainlineO2Forecaster:
-    return fit_ppt_chain_fold(seed, data, tr_ids, device)["M3"]
+    w_tr = make_site_weights(data["site"], tr_ids).to(device)
+    truth_tr = data["truth"][tr_ids].to(device)
+    ya_tr, va_tr = data["y_act"][tr_ids].to(device), data["valid_act"][tr_ids].to(device)
+    pos = (ya_tr & va_tr).sum(0).float().clamp_min(1.0)
+    neg = ((~ya_tr) & va_tr).sum(0).float().clamp_min(1.0)
+    pw = (neg / pos).clamp(1.0, 12.0).to(device)
+    tr_t = torch.from_numpy(tr_ids)
+
+    def _run(net: PPTMainlineO2Forecaster, prefs: tuple[str, ...], ep: int, lr: float, wd: float, aw: float, soff: int) -> PPTMainlineO2Forecaster:
+        for nm, p in net.named_parameters():
+            p.requires_grad = nm.startswith(prefs) or nm in prefs
+        opt = torch.optim.AdamW([p for p in net.parameters() if p.requires_grad], lr=lr, weight_decay=wd)
+        gen = torch.Generator().manual_seed(seed + soff)
+        net.train()
+        for _ in range(ep):
+            for ch in torch.randperm(len(tr_ids), generator=gen).split(64):
+                loss = o2_joint_loss(_forward_arm(net, data, tr_t[ch], device), truth_tr[ch], w_tr[ch], ya_tr[ch] if aw > 0 else None, va_tr[ch] if aw > 0 else None, pw if aw > 0 else None, act_weight=aw)
+                if loss is not None:
+                    opt.zero_grad(set_to_none=True); loss.backward(); opt.step()
+        return net.eval()
+
+    torch.manual_seed(seed)
+    m0 = _run(PPTMainlineO2Forecaster("M0").to(device), ("motion.", "ctx_proj.", "cv_low_bonus", "central_", "pair_"), 45, 2e-3, 1e-4, 0.0, 0)
+    torch.manual_seed(seed); m1 = PPTMainlineO2Forecaster("M1").to(device); _copy_matching(m1, m0)
+    m1 = _run(m1, ("pose_", "gate_", "central_", "pair_", "cv_low_bonus"), 25, 1.2e-3, 3e-4, 0.0, 12)
+    torch.manual_seed(seed); m2 = PPTMainlineO2Forecaster("M2").to(device); _copy_matching(m2, m1)
+    m2 = _run(m2, ("poly_", "edge_", "graph_proj", "null_logit"), 26, 1.5e-3, 3e-4, 0.0, 23)
+    torch.manual_seed(seed); m3 = PPTMainlineO2Forecaster("M3").to(device); _copy_matching(m3, m2)
+    return _run(m3, ("ctx_proj.", "act_", "bridge_", "central_", "pair_", "cv_low_bonus"), 28, 1.2e-3, 2e-4, 0.25, 32)
 
 
 def evaluate_fixed_predictor_conformal(
@@ -365,8 +393,9 @@ def main() -> None:
 
     mean_m = {"CV": cv_metrics, **{a: arm_acc[a].mean(axis=0) for a in PPT_ARMS}}
     ya_np, va_np = data["y_act"].numpy(), data["valid_act"].numpy()
+    th_fixed = np.full(5, 0.5, dtype=np.float64)
     act_summary = {
-        a: score_action_matrix(act_acc[a].mean(axis=0), ya_np, va_np, site_arr, 0.5)
+        a: score_action_matrix(ya_np, va_np, act_acc[a].mean(axis=0), site_arr, th_fixed)
         for a in ("M3a", "M3b", "M3")
     }
 
