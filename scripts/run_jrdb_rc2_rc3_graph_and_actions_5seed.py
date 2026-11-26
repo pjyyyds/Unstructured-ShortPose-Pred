@@ -104,6 +104,11 @@ def load_jrdb_10scene_rc2_rc3(repo_root: Path) -> dict:
             "all_10scenes": np.ones(n, dtype=bool),
             "outdoor_3scenes_1677": np.isin(sc_arr, list(OUTDOOR_SCENES)),
             "with_neighbors": (np.stack(nmsk_l).sum(axis=1) > 0),
+            "short_disp_lt05": np.linalg.norm(hist_np[:, 1] - hist_np[:, 0], axis=-1) < 0.50,
+            "clear_pose": pf["q_buckets"] == 0,
+            "partial_pose": pf["q_buckets"] == 1,
+            "missing_pose": pf["q_buckets"] == 2,
+            "short_disp_clear": (np.linalg.norm(hist_np[:, 1] - hist_np[:, 0], axis=-1) < 0.50) & (pf["q_buckets"] == 0),
         },
     }
 
@@ -162,11 +167,12 @@ def fit_jrdb_rc2_rc3_fold(seed: int, loc_arr: np.ndarray, gd: dict, tr_ids: np.n
 
     torch.manual_seed(seed)
     m0 = _train(PPTMainlineO2Forecaster("M0").to(device), ("motion.", "ctx_proj.", "cv_low_bonus", "central_", "pair_"), 45, 2.5e-3, 1e-4, 0.0, 0)
-    torch.manual_seed(seed); m1 = PPTMainlineO2Forecaster("M1").to(device); _copy(m1, m0)
-    m1 = _train(m1, ("pose_", "gate_", "central_", "pair_", "cv_low_bonus"), 28, 1.5e-3, 3e-4, 0.0, 10)
-    models = {"M0": m0, "M1": m1}
+    models = {"M0": m0}
+    for i, arm in enumerate(("M1a", "M1b", "M1")):
+        torch.manual_seed(seed); net = PPTMainlineO2Forecaster(arm).to(device); _copy(net, m0)
+        models[arm] = _train(net, ("pose_", "gate_", "central_", "pair_", "cv_low_bonus"), 28, 1.5e-3, 3e-4, 0.0, 10 + i)
     for i, arm in enumerate(("M2b_no_vrad", "M2b")):
-        torch.manual_seed(seed); net = PPTMainlineO2Forecaster(arm).to(device); _copy(net, m1)
+        torch.manual_seed(seed); net = PPTMainlineO2Forecaster(arm).to(device); _copy(net, models["M1"])
         models[arm] = _train(net, ("edge_", "graph_proj", "null_logit"), 28, 1.8e-3, 3e-4, 0.0, 20 + i)
     for i, arm in enumerate(("M3a", "M3b", "M3")):
         torch.manual_seed(seed); net = PPTMainlineO2Forecaster(arm).to(device); _copy(net, models["M2b"])
@@ -240,7 +246,7 @@ def main() -> None:
     n = len(data["scene"])
     loc_arr, act_arr = data["location"], data["actors"]
     locs = sorted(set(loc_arr.tolist()))
-    arms = ("M0", "M1", "M2b_no_vrad", "M2b", "M3a", "M3b", "M3")
+    arms = ("M0", "M1a", "M1b", "M1", "M2b_no_vrad", "M2b", "M3a", "M3b", "M3")
 
     hist_np, truth_np = data["history"].numpy(), data["truth"].numpy()
     cv_p = (hist_np[:, 1:] - hist_np[:, :1]) * np.arange(1, 8, dtype=np.float64)[None, :, None]
@@ -258,11 +264,11 @@ def main() -> None:
                 acc[a][si, te_ids] = m_out
                 if a in act_acc:
                     act_acc[a][si, te_ids] = ap_out
-        print(f"Finished fast JRDB RC2+RC3 seed={seed}", flush=True)
+        print(f"Finished fast JRDB M0-M3 chain seed={seed}", flush=True)
 
     mean_m = {"CV": cv_m, **{a: acc[a].mean(0) for a in arms}}
     cols = ("ade1_m", "fde1_m", "min_ade6_m", "min_fde6_m", "bayes_ade_m", "bayes_fde_m", "mean_gate")
-    contrasts = (("M0_minus_CV", "M0", "CV"), ("M2b_minus_M1", "M2b", "M1"), ("M2b_minus_M2b_no_vrad", "M2b", "M2b_no_vrad"), ("M3a_minus_M2b", "M3a", "M2b"), ("M3b_minus_M2b", "M3b", "M2b"), ("M3_minus_M3b", "M3", "M3b"), ("M3_minus_M2b", "M3", "M2b"))
+    contrasts = (("M0_minus_CV", "M0", "CV"), ("M1_minus_CV", "M1", "CV"), ("M1a_minus_M0", "M1a", "M0"), ("M1b_minus_M1a", "M1b", "M1a"), ("M1_minus_M1b", "M1", "M1b"), ("M1_minus_M0", "M1", "M0"), ("M2b_minus_M1", "M2b", "M1"), ("M2b_minus_M2b_no_vrad", "M2b", "M2b_no_vrad"), ("M3a_minus_M2b", "M3a", "M2b"), ("M3b_minus_M2b", "M3b", "M2b"), ("M3_minus_M3b", "M3", "M3b"), ("M3_minus_M2b", "M3", "M2b"))
 
     st_out = {}
     for sn, sm in data["strata"].items():
