@@ -124,6 +124,61 @@ class TestWave21EmergenceAnd6Slot(unittest.TestCase):
         paths_rel[0, :, 0] = np.linspace(0.1, 2.5, 30)
         self.assertAlmostEqual(polyline_crossing_rate_np(paths_rel, p_env), 0.5)
 
+    def test_pinns_blind_emergence_and_direct_npz_causal_map(self) -> None:
+        import json, tempfile
+        from pathlib import Path
+        from scripts.run_wave21_pinns_true_emergence_and_6slot_diag import blind_pinns_physical_emergence_audit
+        from scripts.run_wave21_polyline_crop_fix_and_dual_boundary import build_uncropped_and_dual_confirmed_maps
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "labels").mkdir(parents=True)
+            sites4 = [("america", "crossroad"), ("italy", "park"), ("japan", "crossroad"), ("thailand", "street")]
+            mem_l, clips_l, pids_l, t0s_l, sites_l, box_l = [], [], [], [], [], []
+            for loc, scn in sites4:
+                cond = f"{loc}_{scn}"
+                (root / "videos" / cond).mkdir(parents=True)
+                mem_l.append(f"videos/{cond}/videos/ori_1.mp4")
+                (root / "videos" / cond / "calib.json").write_text(json.dumps({
+                    "fps": 30, "location": loc, "scene": scn,
+                    "u_size": 1920, "v_size": 1080,  # Scalar ints matching real PINNS calib.json!
+                    "y_min": -10.0, "y_max": 20.0,
+                    "pts_2d": [[100, 100], [1800, 100], [1800, 900], [100, 900]],
+                    "pts_3d": [[0.0, 0.0], [20.0, 0.0], [20.0, 15.0], [0.0, 15.0]],
+                }))
+                lines = []
+                for f10 in range(50):
+                    rf = 3 * f10 + 1
+                    lines.append(f"{rf} Car 99 500.0 460.0 0.95 140.0 90.0 5.0 4.0 1")
+                    if f10 < 35:
+                        lines.append(f"{rf} Person 1 200.0 300.0 0.95 50.0 120.0 {1.0 + 0.1 * f10:.2f} 2.0 0")
+                    if 10 <= f10 < 45:
+                        lines.append(f"{rf} Person 2 510.0 450.0 0.95 50.0 120.0 5.2 {4.2 + 0.08 * (f10 - 10):.2f} 0")
+                (root / "labels" / f"{cond}_1.txt").write_text("\n".join(lines) + "\n")
+                for pid, t0v, bx in ((1, 4, [200, 240, 50, 120]), (2, 14, [510, 390, 50, 120])):
+                    clips_l.append(f"{cond}_1"); pids_l.append(pid); t0s_l.append(t0v); sites_l.append(cond); box_l.append([bx] * 5)
+            (root / "archive_members.txt").write_text("\n".join(mem_l) + "\n")
+            pose_npz = root / "pose.npz"
+            np.savez(
+                pose_npz, clip=np.array(clips_l), person_id=np.array(pids_l), t0=np.array(t0s_l),
+                hist_kpts=np.ones((8, 5, 17, 3), dtype=np.float32) * 0.9, hist_bbox=np.array(box_l, dtype=np.float32),
+            )
+            dp_mock = {"history": torch.zeros((8, 5, 2), dtype=torch.float64), "site": np.array(sites_l), "clip": np.array(clips_l)}
+            blind = blind_pinns_physical_emergence_audit(root, pose_npz, dp_mock)
+            self.assertEqual(int(blind["e_clip_start"].sum()), 4)
+            self.assertEqual(int(blind["e_true_vehicle"].sum()), 4)
+
+            map_bin = root / "pinns_source_label_causal_maps.bin"
+            p_im = np.zeros((1, 16, 10, 11), dtype=np.float32)
+            p_im[0, 0, :, 0] = np.linspace(0.0, 4.0, 10)
+            p_im[0, 0, :, 1] = 8.0
+            p_im[0, 0, :, [2, 9, 10]] = 1.0
+            with open(map_bin, "wb") as mf:
+                np.savez(mf, clip=np.array(["america_crossroad_1"]), person_id=np.array([1]), t0=np.array([4]),
+                         source_eligible=np.array([True]), p_env_image=p_im)
+            maps, mdiag = build_uncropped_and_dual_confirmed_maps(root, root / "dummy.zip", map_bin)
+            self.assertEqual(maps["p_fix"].shape, (8, 16, 10, 11))
+            self.assertGreaterEqual(mdiag["windows_with_dual_confirmed_solid_barriers"], 1)
 
 
 if __name__ == "__main__":

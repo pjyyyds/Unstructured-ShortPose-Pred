@@ -47,8 +47,11 @@ def build_uncropped_and_dual_confirmed_maps(
     rows = [r for s in sorted(groups) for r in groups[s]]
     n = len(rows)
     with zipfile.ZipFile(causal_map_bin) as mz:
-        nm = next(x for x in mz.namelist() if x.endswith("causal_image_maps.npz"))
-        raw_map = mz.read(nm)
+        if "p_env_image.npy" in mz.namelist():
+            raw_map = causal_map_bin.read_bytes()
+        else:
+            nm = next(x for x in mz.namelist() if x.endswith(".npz"))
+            raw_map = mz.read(nm)
 
     clip_snaps: dict[str, dict[int, dict[int, np.ndarray]]] = {}
     clip_parked: dict[str, dict[int, list[tuple[np.ndarray, np.ndarray]]]] = {}
@@ -73,7 +76,7 @@ def build_uncropped_and_dual_confirmed_maps(
                     wx, wy = float(o["wx"]), float(o["wy"])
                     rect = np.array([[wx - 1.9, wy - 0.9], [wx + 1.9, wy - 0.9], [wx + 1.9, wy + 0.9], [wx - 1.9, wy + 0.9], [wx - 1.9, wy - 0.9]], dtype=np.float64)
                     at = np.zeros(8, dtype=np.float32)
-                    at[[1, 7]] = 1.0  # Explicit solid parked vehicle barrier
+                    at[[4, 6]] = 1.0  # Explicit solid parked vehicle closed contour (ch 4 & 6)
                     boxes.append((rect, at))
             if boxes:
                 pk_t[t] = boxes
@@ -132,25 +135,52 @@ def build_uncropped_and_dual_confirmed_maps(
             p_fix[i], m_map[i] = build_local_polylines(dedup, pt0_ego[i], map_available=True)
 
             # 3) Dual independent blind classification (0=solid_barrier, 1=traversable_edge, 2=uncertain)
-            causal_pts = np.asarray([xy for t_k, d_k in clip_snaps[r.clip].items() if t_k <= int(r.t0) for xy in d_k.values()], dtype=np.float64)
+            causal_pts_l = [xy for t_k, d_k in clip_snaps[r.clip].items() if t_k <= int(r.t0) for xy in d_k.values()]
+            causal_pts = np.asarray(causal_pts_l, dtype=np.float64) if causal_pts_l else np.zeros((0, 2), dtype=np.float64)
+            # Build strictly causal (<= t0) historical pedestrian step segments in this clip
+            ped_hist_tracks: dict[int, list[np.ndarray]] = {}
+            for t_k in sorted(k for k in clip_snaps[r.clip] if k <= int(r.t0)):
+                for pid_k, xy_k in clip_snaps[r.clip][t_k].items():
+                    ped_hist_tracks.setdefault(pid_k, []).append(xy_k)
+            causal_segs_a, causal_segs_b = [], []
+            for pts_tr in ped_hist_tracks.values():
+                if len(pts_tr) >= 2:
+                    arr_tr = np.asarray(pts_tr, dtype=np.float64)
+                    step_d = np.linalg.norm(arr_tr[1:] - arr_tr[:-1], axis=-1)
+                    ok_s = step_d <= 1.5
+                    if ok_s.any():
+                        causal_segs_a.append(arr_tr[:-1][ok_s])
+                        causal_segs_b.append(arr_tr[1:][ok_s])
+            cs_a = np.concatenate(causal_segs_a, axis=0) if causal_segs_a else np.zeros((0, 2), dtype=np.float64)
+            cs_b = np.concatenate(causal_segs_b, axis=0) if causal_segs_b else np.zeros((0, 2), dtype=np.float64)
+
             h_box = clip_hull_3d[r.clip]
             x_lo, x_hi = float(h_box[:, 0].min()) - 2.0, float(h_box[:, 0].max()) + 2.0
             y_lo, y_hi = float(h_box[:, 1].min()) - 2.0, float(h_box[:, 1].max()) + 2.0
             solid_list, trav_list = [], []
             for xy, attr in dedup:
                 seg_len = float(np.linalg.norm(np.diff(xy, axis=0), axis=-1).sum())
-                is_parked = float(attr[1]) > 0.5
+                is_parked = (float(attr[4]) > 0.5) or (float(attr[1]) > 0.5)
                 is_hull = float(attr[5]) > 0.5
                 in_cal = bool((xy[:, 0] >= x_lo).all() and (xy[:, 0] <= x_hi).all() and (xy[:, 1] >= y_lo).all() and (xy[:, 1] <= y_hi).all())
                 near_ped_interior = False
                 if len(causal_pts) >= 5:
-                    mid = xy.mean(axis=0)
-                    d_ped = np.linalg.norm(causal_pts - mid[None, :], axis=-1)
-                    near_ped_interior = int((d_ped < 0.65).sum()) >= 3
-                # Rater A: physical type & causal pedestrian interior occupancy exclusion
+                    d_mat = np.linalg.norm(xy[:, None, :] - causal_pts[None, :, :], axis=-1)
+                    near_ped_interior = int((d_mat < 0.80).sum(axis=1).max()) >= 3
+                crossed_causally = False
+                if len(cs_a) > 0 and len(xy) >= 2:
+                    pa, pb = xy[:-1][:, None, :], xy[1:][:, None, :]
+                    qa, qb = cs_a[None, :, :], cs_b[None, :, :]
+                    da, db, dp_c = pb - pa, qb - qa, qa - pa
+                    den = da[..., 0] * db[..., 1] - da[..., 1] * db[..., 0]
+                    ok_d = np.abs(den) > 1e-9
+                    t_c = np.where(ok_d, (db[..., 0] * dp_c[..., 1] - db[..., 1] * dp_c[..., 0]) / np.where(ok_d, den, 1.0), -1.0)
+                    u_c = np.where(ok_d, (da[..., 0] * dp_c[..., 1] - da[..., 1] * dp_c[..., 0]) / np.where(ok_d, den, 1.0), -1.0)
+                    crossed_causally = bool(np.any(ok_d & (t_c >= 0.0) & (t_c <= 1.0) & (u_c >= 0.0) & (u_c <= 1.0)))
+                # Rater A: physical parked-obstacle / point-cloud occupancy clearance
                 ca = 0 if (is_parked or (not is_hull and not near_ped_interior and seg_len >= 2.0)) else (1 if (is_hull or near_ped_interior) else 2)
-                # Rater B: strict calibration-hull support & continuous >=2.5m obstacle arc
-                cb = 0 if (in_cal and (is_parked or (not is_hull and seg_len >= 2.5 and not near_ped_interior))) else (1 if near_ped_interior else 2)
+                # Rater B: strict calibration-domain support & zero causal (<= t0) pedestrian trajectory crossings
+                cb = 1 if crossed_causally else (0 if (in_cal and (is_parked or (not is_hull and seg_len >= 2.5 and not near_ped_interior))) else (1 if near_ped_interior else 2))
                 rater_a_lbls.append(ca)
                 rater_b_lbls.append(cb)
                 if ca == 0 and cb == 0:
@@ -267,7 +297,12 @@ def main() -> None:
                     net = PPTMainlineO2Forecaster("M2").to(dev)
                     net.load_state_dict(base.state_dict(), strict=True)
                     for pn, pp in net.named_parameters():
-                        pp.requires_grad = pn.startswith("poly_") or pn in ("central_dx.weight", "central_dx.bias", "central_dy.weight", "pair_knots.weight", "pair_knots.bias")
+                        pp.requires_grad = pn.startswith("poly_") or pn in (
+                            "central_dx.weight", "central_dx.bias", "central_dy.weight",
+                            "pair_knots.weight", "pair_knots.bias",
+                            "central_scores.weight", "central_scores.bias",
+                            "pair_score.weight", "pair_score.bias",
+                        )
                     optp = torch.optim.AdamW([p for p in net.parameters() if p.requires_grad], lr=9e-4, weight_decay=3e-4)
                     net.train()
                     for ep in range(24):

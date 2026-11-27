@@ -82,7 +82,8 @@ def blind_pinns_physical_emergence_audit(
             continue
         cond, _ = r.clip.rsplit("_", 1)
         cal = json.loads((meta_dir / "videos" / cond / "calib.json").read_text())
-        vw, vh = float(cal["v_size"][0]), float(cal["v_size"][1])
+        vw = float(cal["u_size"]) if "u_size" in cal else float(cal["v_size"][0])
+        vh = float(cal["v_size"]) if isinstance(cal["v_size"], (int, float)) else float(cal["v_size"][1])
         by_raw, min_raw, first_p = parse_raw_30hz_boxes(meta_dir / "labels" / f"{r.clip}.txt")
         # Identify interior architectural/foliage occlusion zones where >=2 distinct tracks originate after clip start
         starts_xy: list[tuple[float, float]] = []
@@ -91,10 +92,10 @@ def blind_pinns_physical_emergence_audit(
                 continue
             for ob in by_raw.get(rf0, []):
                 if ob["type"].lower().startswith("per") and ob["id"] == pid:
-                    x1, y1 = ob["ox"] - 0.5 * ob["w"], ob["oy"] - 0.5 * ob["h"]
-                    x2, y2 = ob["ox"] + 0.5 * ob["w"], ob["oy"] + 0.5 * ob["h"]
+                    x1, y1 = ob["ox"] - 0.5 * ob["w"], ob["oy"] - ob["h"]
+                    x2, y2 = ob["ox"] + 0.5 * ob["w"], ob["oy"]
                     if x1 > 45.0 and y1 > 35.0 and x2 < vw - 45.0 and y2 < vh - 35.0:
-                        starts_xy.append((ob["ox"], ob["oy"]))
+                        starts_xy.append((ob["ox"], ob["oy"] - 0.5 * ob["h"]))
                     break
         clip_cache[r.clip] = (by_raw, min_raw, (vw, vh), starts_xy)
 
@@ -130,7 +131,7 @@ def blind_pinns_physical_emergence_audit(
                 if ob["type"].lower().startswith("per") and ob["id"] == r.person_id:
                     continue
                 h_gap = abs(ob["ox"] - cx) - 0.55 * (ob["w"] + bw)
-                ob_bot = ob["oy"] + 0.5 * ob["h"]
+                ob_bot = ob["oy"]
                 if h_gap <= 20.0 and ob_bot >= y1 + 0.25 * bh:
                     if ob["type"].lower().startswith(VEH_PREFIXES):
                         veh_occ = True
