@@ -199,13 +199,13 @@ def blind_pinns_homography_and_raw_video_audit(
         for off in (-12, -6, 0, 6, 12):
             clip_req_raw0.setdefault(r.clip, set()).add(max(0, s0 + off))
 
-    mp4_map = _fetch_needed_ori_videos(sorted(clip_req_raw0), video_cache_dir) if cv2 is not None else {}
+    overrides = json.loads(visual_override_json.read_text()) if (visual_override_json and visual_override_json.is_file()) else {}
+    need_vid_decode = (cv2 is not None) and ((not overrides) or (sheets_zip_path is not None))
+    mp4_map = _fetch_needed_ori_videos(sorted(clip_req_raw0), video_cache_dir) if need_vid_decode else {}
     decoded_clips: dict[str, tuple[dict[int, np.ndarray], np.ndarray | None]] = {}
     for cl, reqs in clip_req_raw0.items():
         if cl in mp4_map:
             decoded_clips[cl] = _decode_clip_frames_and_median(mp4_map[cl], reqs)
-
-    overrides = json.loads(visual_override_json.read_text()) if (visual_override_json and visual_override_json.is_file()) else {}
     e_buggy_bev_veh = np.zeros(n, dtype=bool)
     e_veh_cam = np.zeros(n, dtype=bool)
     e_pers_cam = np.zeros(n, dtype=bool)
@@ -577,11 +577,13 @@ def main() -> None:
     blind = blind_pinns_homography_and_raw_video_audit(
         args.meta_dir, args.pose_npz, dp, args.video_cache_dir, args.sheets_zip, args.visual_override_json,
     )
+    f323_c = dp["strata"]["first_short_323"]
     census = {
         "median_ped_reproj_px": blind["median_ped_reproj_px_across_clips"],
         "n_ori_videos_decoded": blind["n_videos_decoded"],
+        "visual_override_applied": bool(args.visual_override_json and args.visual_override_json.is_file()),
         "old_buggy_bev_vehicle_windows": int(blind["e_buggy_bev_veh"].sum()),
-        "homography_verified_cam_vehicle_windows": int(blind["e_veh_cam"].sum()),
+        "homography_or_visual_vehicle_windows": int(blind["e_veh_cam"].sum()),
         "old_buggy_bev_survived_homography": int((blind["e_buggy_bev_veh"] & blind["e_veh_cam"]).sum()),
         "cam_person_occluder_windows": int(blind["e_pers_cam"].sum()),
         "video_verified_static_portal_windows": int(blind["e_static_vid"].sum()),
@@ -591,6 +593,16 @@ def main() -> None:
         "open_field_or_late_detector_pickup_windows": int(blind["e_open_late"].sum()),
         "phys_emergence_clear_torso_ge50px": int((blind["e_phys_all"] & blind["vis_torso"]).sum()),
         "phys_emergence_clear_feet_ge50px": int((blind["e_phys_all"] & blind["vis_feet"]).sum()),
+        "first_short_323_breakdown": {
+            "n_windows": int(f323_c.sum()),
+            "vehicle_occluder": int((f323_c & blind["e_veh_cam"]).sum()),
+            "person_occluder": int((f323_c & blind["e_pers_cam"]).sum()),
+            "static_portal_occluder": int((f323_c & blind["e_static_vid"]).sum()),
+            "total_phys_emergence": int((f323_c & blind["e_phys_all"]).sum()),
+            "border_entry": int((f323_c & blind["e_border"]).sum()),
+            "clip_start_frame0": int((f323_c & blind["e_clip_start"]).sum()),
+            "open_late_pickup": int((f323_c & blind["e_open_late"]).sum()),
+        },
     }
     if args.stage_sheets_only:
         args.zip_path.write_text(json.dumps(census, indent=2) + "\n", encoding="utf-8")
