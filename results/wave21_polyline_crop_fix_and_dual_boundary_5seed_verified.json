@@ -1,0 +1,428 @@
+{
+  "experiment": "wave21_polyline_crop_fix_and_dual_boundary",
+  "map_and_rater_diagnostics": {
+    "map_eligible_windows": 835,
+    "windows_gaining_polylines_after_uncrop_fix": 350,
+    "mean_polylines_buggy_double_crop": 7.447904191616766,
+    "mean_polylines_fixed_uncropped": 8.238323353293413,
+    "windows_with_dual_confirmed_solid_barriers": 768,
+    "dual_rater_agreement_rate": 0.9366504854368932,
+    "dual_rater_cohen_kappa": 0.8731419349358702,
+    "segment_counts_consensus": {
+      "solid_non_traversable": 3560,
+      "traversable_edge": 4680,
+      "uncertain_excluded": 0
+    },
+    "gt_crossing_rate_all_1482": {
+      "buggy_double_crop_auto": 0.023616734143049933,
+      "fixed_uncropped_auto": 0.023616734143049933,
+      "dual_confirmed_solid_barriers": 0.002699055330634278,
+      "traversable_edges_only": 0.020917678812415654
+    }
+  },
+  "pinns_4site_loso": {
+    "all_1482": {
+      "n_windows": 1482,
+      "models": {
+        "Arm0_No_Map": {
+          "ade1_m": 0.4695429019680654,
+          "fde1_m": 1.0421291215908894,
+          "minfde6_m": 0.6627475163120837,
+          "solid_barrier_cross_rate": 0.002699055330634278
+        },
+        "Arm1_Buggy_DoubleCrop_Auto": {
+          "ade1_m": 0.4783684289828414,
+          "fde1_m": 1.0601883088510178,
+          "minfde6_m": 0.6601391685083797,
+          "solid_barrier_cross_rate": 0.0035087719298245615
+        },
+        "Arm2_Fixed_Uncropped_Auto": {
+          "ade1_m": 0.47784444296628936,
+          "fde1_m": 1.0604226610106877,
+          "minfde6_m": 0.659670568790025,
+          "solid_barrier_cross_rate": 0.003643724696356275
+        },
+        "Arm3_DualConfirmed_Solid_Barriers": {
+          "ade1_m": 0.47706527560455103,
+          "fde1_m": 1.0572611047688978,
+          "minfde6_m": 0.6574108808404414,
+          "solid_barrier_cross_rate": 0.003508771929824561
+        }
+      },
+      "paired_top1_ci": {
+        "fixed_auto_minus_buggy_auto": {
+          "mean": {
+            "ade_m": -0.000523986016551947,
+            "fde_m": 0.00023435215967002162
+          },
+          "ci95": {
+            "ade_m": [
+              -0.002486252650763809,
+              0.002562374049236486
+            ],
+            "fde_m": [
+              -0.00419376130325375,
+              0.006782478876232115
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "fixed_auto_minus_no_map": {
+          "mean": {
+            "ade_m": 0.008301540998223892,
+            "fde_m": 0.018293539419798423
+          },
+          "ci95": {
+            "ade_m": [
+              0.003191972024979364,
+              0.012784653848202158
+            ],
+            "fde_m": [
+              0.005603602459490402,
+              0.030232563202270985
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_no_map": {
+          "mean": {
+            "ade_m": 0.007522373636485549,
+            "fde_m": 0.015131983178008436
+          },
+          "ci95": {
+            "ade_m": [
+              0.002614213591955317,
+              0.011251620541190006
+            ],
+            "fde_m": [
+              0.004200834325077808,
+              0.024261514389927772
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_fixed_auto": {
+          "mean": {
+            "ade_m": -0.0007791673617383476,
+            "fde_m": -0.003161556241789985
+          },
+          "ci95": {
+            "ade_m": [
+              -0.003218874661680766,
+              0.0012946988476210926
+            ],
+            "fde_m": [
+              -0.008570730353888712,
+              0.0015983156936981138
+            ]
+          },
+          "n_sites_present": 4
+        }
+      }
+    },
+    "map_eligible_835": {
+      "n_windows": 835,
+      "models": {
+        "Arm0_No_Map": {
+          "ade1_m": 0.49187437931548933,
+          "fde1_m": 1.0618732013234973,
+          "minfde6_m": 0.692709707922728,
+          "solid_barrier_cross_rate": 0.004790419161676647
+        },
+        "Arm1_Buggy_DoubleCrop_Auto": {
+          "ade1_m": 0.5093672022449068,
+          "fde1_m": 1.0995239645779493,
+          "minfde6_m": 0.6920534923144755,
+          "solid_barrier_cross_rate": 0.006227544910179641
+        },
+        "Arm2_Fixed_Uncropped_Auto": {
+          "ade1_m": 0.511797033536448,
+          "fde1_m": 1.106283002762433,
+          "minfde6_m": 0.6890740061128262,
+          "solid_barrier_cross_rate": 0.006467065868263473
+        },
+        "Arm3_DualConfirmed_Solid_Barriers": {
+          "ade1_m": 0.5068800698790991,
+          "fde1_m": 1.0948608738756045,
+          "minfde6_m": 0.6881410166835622,
+          "solid_barrier_cross_rate": 0.006227544910179641
+        }
+      },
+      "paired_top1_ci": {
+        "fixed_auto_minus_buggy_auto": {
+          "mean": {
+            "ade_m": 0.002429831291541208,
+            "fde_m": 0.006759038184483656
+          },
+          "ci95": {
+            "ade_m": [
+              -0.006651491358905206,
+              0.016018943125068658
+            ],
+            "fde_m": [
+              -0.012455943257624596,
+              0.03444609383709235
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "fixed_auto_minus_no_map": {
+          "mean": {
+            "ade_m": 0.019922654220958645,
+            "fde_m": 0.04440980143893587
+          },
+          "ci95": {
+            "ade_m": [
+              0.004669542755624867,
+              0.04088462114745275
+            ],
+            "fde_m": [
+              0.010152050018828478,
+              0.09058792667022587
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_no_map": {
+          "mean": {
+            "ade_m": 0.015005690563609673,
+            "fde_m": 0.03298767255210751
+          },
+          "ci95": {
+            "ade_m": [
+              0.0032239912446236784,
+              0.02812019753330858
+            ],
+            "fde_m": [
+              0.006070189534324007,
+              0.06201946143481619
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_fixed_auto": {
+          "mean": {
+            "ade_m": -0.004916963657348973,
+            "fde_m": -0.011422128886828364
+          },
+          "ci95": {
+            "ade_m": [
+              -0.015049835944699674,
+              0.0008017444521260375
+            ],
+            "fde_m": [
+              -0.03391667951675235,
+              0.0015462114136368312
+            ]
+          },
+          "n_sites_present": 4
+        }
+      }
+    },
+    "near_confirmed_solid_le6m": {
+      "n_windows": 296,
+      "models": {
+        "Arm0_No_Map": {
+          "ade1_m": 0.43002229113603807,
+          "fde1_m": 0.9275364593576566,
+          "minfde6_m": 0.6018772850886689,
+          "solid_barrier_cross_rate": 0.013513513513513514
+        },
+        "Arm1_Buggy_DoubleCrop_Auto": {
+          "ade1_m": 0.440690854012598,
+          "fde1_m": 0.9503969090622543,
+          "minfde6_m": 0.6032372538799833,
+          "solid_barrier_cross_rate": 0.01756756756756757
+        },
+        "Arm2_Fixed_Uncropped_Auto": {
+          "ade1_m": 0.4496687046778839,
+          "fde1_m": 0.9693819616406985,
+          "minfde6_m": 0.602099521487817,
+          "solid_barrier_cross_rate": 0.018243243243243244
+        },
+        "Arm3_DualConfirmed_Solid_Barriers": {
+          "ade1_m": 0.44199629896550535,
+          "fde1_m": 0.9519319900732539,
+          "minfde6_m": 0.5964719567968833,
+          "solid_barrier_cross_rate": 0.01756756756756757
+        }
+      },
+      "paired_top1_ci": {
+        "fixed_auto_minus_buggy_auto": {
+          "mean": {
+            "ade_m": 0.00897785066528574,
+            "fde_m": 0.01898505257844414
+          },
+          "ci95": {
+            "ade_m": [
+              -0.004763190043922413,
+              0.022093347474506614
+            ],
+            "fde_m": [
+              -0.009018330137614066,
+              0.04565864654772114
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "fixed_auto_minus_no_map": {
+          "mean": {
+            "ade_m": 0.019646413541845764,
+            "fde_m": 0.04184550228304179
+          },
+          "ci95": {
+            "ade_m": [
+              -0.004552138097972024,
+              0.045474930159408025
+            ],
+            "fde_m": [
+              -0.012092186105465115,
+              0.09874552436675003
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_no_map": {
+          "mean": {
+            "ade_m": 0.01197400782946729,
+            "fde_m": 0.024395530715597333
+          },
+          "ci95": {
+            "ade_m": [
+              -0.004363744101338001,
+              0.028979417268113546
+            ],
+            "fde_m": [
+              -0.013123016448584544,
+              0.06230273139337733
+            ]
+          },
+          "n_sites_present": 4
+        },
+        "dual_solid_minus_fixed_auto": {
+          "mean": {
+            "ade_m": -0.007672405712378474,
+            "fde_m": -0.017449971567444465
+          },
+          "ci95": {
+            "ade_m": [
+              -0.018944662777658345,
+              0.002038311548054198
+            ],
+            "fde_m": [
+              -0.041808806663928055,
+              0.004376764754640681
+            ]
+          },
+          "n_sites_present": 4
+        }
+      }
+    },
+    "true_occluder_emergence": {
+      "n_windows": 197,
+      "models": {
+        "Arm0_No_Map": {
+          "ade1_m": 0.6203930723632675,
+          "fde1_m": 1.242321806179507,
+          "minfde6_m": 0.819522270897178,
+          "solid_barrier_cross_rate": 0.0
+        },
+        "Arm1_Buggy_DoubleCrop_Auto": {
+          "ade1_m": 0.6360690726632772,
+          "fde1_m": 1.2804528502520458,
+          "minfde6_m": 0.8138922237902754,
+          "solid_barrier_cross_rate": 0.0
+        },
+        "Arm2_Fixed_Uncropped_Auto": {
+          "ade1_m": 0.632411555322815,
+          "fde1_m": 1.2737167995633711,
+          "minfde6_m": 0.8123133827855206,
+          "solid_barrier_cross_rate": 0.0010152284263959391
+        },
+        "Arm3_DualConfirmed_Solid_Barriers": {
+          "ade1_m": 0.6322383076297843,
+          "fde1_m": 1.2763516996558992,
+          "minfde6_m": 0.8128679877876226,
+          "solid_barrier_cross_rate": 0.0010152284263959391
+        }
+      },
+      "paired_top1_ci": {
+        "fixed_auto_minus_buggy_auto": {
+          "mean": {
+            "ade_m": -0.0036575173404620087,
+            "fde_m": -0.006736050688674739
+          },
+          "ci95": {
+            "ade_m": [
+              -0.00807154021043625,
+              0.00015498940926042586
+            ],
+            "fde_m": [
+              -0.01789123882823351,
+              0.0027403342747793235
+            ]
+          },
+          "n_sites_present": 3
+        },
+        "fixed_auto_minus_no_map": {
+          "mean": {
+            "ade_m": 0.012018482959547614,
+            "fde_m": 0.03139499338386414
+          },
+          "ci95": {
+            "ade_m": [
+              -0.0002138101765599596,
+              0.02265509585957151
+            ],
+            "fde_m": [
+              0.0056567058636062175,
+              0.050804681034735164
+            ]
+          },
+          "n_sites_present": 3
+        },
+        "dual_solid_minus_no_map": {
+          "mean": {
+            "ade_m": 0.01184523526651673,
+            "fde_m": 0.03402989347639249
+          },
+          "ci95": {
+            "ade_m": [
+              -0.0005350523598347708,
+              0.02303570215457016
+            ],
+            "fde_m": [
+              0.003202704011378261,
+              0.05661628046996297
+            ]
+          },
+          "n_sites_present": 3
+        },
+        "dual_solid_minus_fixed_auto": {
+          "mean": {
+            "ade_m": -0.0001732476930308829,
+            "fde_m": 0.0026349000925283625
+          },
+          "ci95": {
+            "ade_m": [
+              -0.003924425400655258,
+              0.002914151325934303
+            ],
+            "fde_m": [
+              -0.010015283448382392,
+              0.010978407412329892
+            ]
+          },
+          "n_sites_present": 3
+        }
+      }
+    }
+  },
+  "verification": {
+    "source_zip_name": "wave21_polyline_crop_fix_and_dual_boundary.zip",
+    "outer_zip_bytes": 3000,
+    "outer_zip_sha256": "e56481030d254a0d04f01083d351a28217785c504fd892a0289eff63c7fb11aa",
+    "inner_summary_sha256": "38529d2389dda778270a57c8fb418bce825e6fb28f01128e86adc3b8b02ddaa3",
+    "dual_sha256_verified": true
+  }
+}
