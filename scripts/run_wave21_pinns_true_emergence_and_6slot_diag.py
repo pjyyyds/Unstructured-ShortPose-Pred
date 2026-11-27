@@ -67,10 +67,14 @@ def blind_pinns_physical_emergence_audit(
     """Blind prediction-free physical occluder, torso/foot visibility, & matched-control audit on PINNS."""
     groups, _, _ = load_site_windows(meta_dir)
     rows = [r for s in sorted(groups) for r in groups[s]]
+    keys = [(str(r.clip), int(r.person_id), int(r.t0)) for r in rows]
     n = len(rows)
-    with np.load(pose_npz) as pz:
-        kpts = pz["keypoints"].astype(np.float64)   # [N, 5, 17, 3]
-        bbox = pz["bboxes"].astype(np.float64)      # [N, 5, 4] cx, cy, w, h
+    with np.load(pose_npz, allow_pickle=False) as pz:
+        ck = list(zip(pz["clip"].tolist(), pz["person_id"].tolist(), pz["t0"].tolist()))
+        ord_map = {k: i for i, k in enumerate(ck)}
+        ids = [ord_map[k] for k in keys]
+        kpts = pz["hist_kpts"][ids].astype(np.float64)   # [N, 5, 17, 3]
+        bbox = pz["hist_bbox"][ids].astype(np.float64)   # [N, 5, 4] cx, cy, w, h
 
     clip_cache: dict[str, tuple[dict[int, list[dict]], int, tuple[float, float], list[tuple[float, float]]]] = {}
     for r in rows:
@@ -332,7 +336,11 @@ def run_2x2_6slot_and_baseline_eval(
             return {"n": int(msk.sum())}
         if is_pinns:
             return safe_site_clip_ci(diff2[msk], grp_arr[msk], unit_arr[msk])
-        return _loc_bootstrap_ci(diff2[msk], grp_arr[msk]) if len(set(grp_arr[msk].tolist())) >= 2 else {"mean": {"ade_m": float(diff2[msk, 0].mean()), "fde_m": float(diff2[msk, 1].mean())}}
+        if len(set(grp_arr[msk].tolist())) >= 2:
+            return _loc_bootstrap_ci(diff2[msk], grp_arr[msk])
+        if len(set(unit_arr[msk].tolist())) >= 2:
+            return _loc_bootstrap_ci(diff2[msk], unit_arr[msk])
+        return {"mean": {"ade_m": float(diff2[msk, 0].mean()), "fde_m": float(diff2[msk, 1].mean())}}
 
     def _agg_row(arr6: np.ndarray, sm: np.ndarray) -> dict[str, float]:
         gs = sorted(set(grp_arr[sm].tolist()))

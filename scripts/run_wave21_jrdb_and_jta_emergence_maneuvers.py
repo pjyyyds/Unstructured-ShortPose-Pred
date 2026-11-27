@@ -114,8 +114,8 @@ def load_jrdb_with_blind_emergence(repo_root: Path) -> tuple[dict, dict]:
     loc_arr = np.asarray(loc_l)
     e_true = np.asarray(e_occ_l, dtype=bool)
     prior_m = np.asarray(prior_long_l, dtype=bool)
-    vis_torso = np.isfinite(joints[:, :, [11, 12, 23, 24]]).all(axis=-1).sum(axis=1) >= 3
-    vis_feet = np.isfinite(joints[:, :, [27, 28, 31, 32]]).all(axis=-1).sum(axis=1) >= 3
+    vis_torso = np.isfinite(joints[:, :, [11, 12, 23, 24]]).all(axis=(2, 3)).sum(axis=1) >= 3
+    vis_feet = np.isfinite(joints[:, :, [27, 28, 31, 32]]).all(axis=(2, 3)).sum(axis=1) >= 3
     v0 = np.linalg.norm(hist[:, 1] - hist[:, 0], axis=-1) / 0.4
     ctrl = np.zeros(len(hist), dtype=bool)
     for idx in np.flatnonzero(e_true):
@@ -265,7 +265,7 @@ def load_jta228_native_emergence_cohort(st_zip: Path, max_train_files: int = 80)
                             else:
                                 nb_v.append(np.zeros(2)); nb_vv.append(0.0)
                         if nb_p:
-                            nt = np.zeros((len(nb_p), 8), dtype=np.float32); nt[:, 0] = 1.0
+                            nt = np.zeros(len(nb_p), dtype=np.int64)
                             ed, _, nmk = build_neighbor_edges(h_xy[1], (h_xy[1] - h_xy[0]) / 0.4, 1.0, 1.0, np.asarray(nb_p), np.asarray(nb_v), np.asarray(nb_vv), np.ones(len(nb_p)), nt)
                         else:
                             ed, nmk = np.zeros((12, 9), dtype=np.float32), np.zeros(12, dtype=np.float32)

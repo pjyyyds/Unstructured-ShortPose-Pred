@@ -91,6 +91,40 @@ class TestWave21EmergenceAnd6Slot(unittest.TestCase):
         jr = eval_jaad2_5seed(jd, [42], torch.device("cpu"))
         self.assertEqual(jr["err_arms"]["J_Full_pose_veh"].shape, (5, 6))
 
+    def test_loader_shapes_pose_npz_and_m2_state_transfer(self) -> None:
+        from pathlib import Path
+        from scripts.ppt_mainline_o2_models import PPTMainlineO2Forecaster, polyline_crossing_rate_np
+        from src.data.scene_graph import build_neighbor_edges
+
+        # Verify 1-D integer nbr_types for JTA & ETH/UCY neighbor builder
+        ed, _, nmk = build_neighbor_edges(
+            np.zeros(2), np.array([1.0, 0.0]), 1.0, 1.0,
+            np.array([[2.0, 0.5], [3.0, -1.0]]), np.array([[-0.5, 0.0], [0.0, 0.5]]),
+            np.ones(2), np.ones(2), np.zeros(2, dtype=np.int64),
+        )
+        self.assertEqual(ed.shape, (12, 9))
+        self.assertEqual(int(nmk.sum()), 2)
+
+        # Verify JRDB 4-D (N, 5, 4, 3) visibility reduction -> 1-D (N,) boolean
+        j_syn = np.ones((7, 5, 33, 3), dtype=np.float64)
+        j_syn[0, :3, 11] = np.nan
+        vis_t = np.isfinite(j_syn[:, :, [11, 12, 23, 24]]).all(axis=(2, 3)).sum(axis=1) >= 3
+        self.assertEqual(vis_t.shape, (7,))
+        self.assertFalse(bool(vis_t[0]))
+        self.assertTrue(bool(vis_t[1]))
+
+        # Verify M2b -> M2 state_dict compatibility & polyline_crossing_rate_np
+        b_net = PPTMainlineO2Forecaster("M2b")
+        m_net = PPTMainlineO2Forecaster("M2")
+        m_net.load_state_dict(b_net.state_dict(), strict=True)
+        p_env = np.zeros((2, 16, 10, 11), dtype=np.float32)
+        p_env[0, 0, :2, :2] = [[1.0, -1.0], [1.0, 1.0]]
+        p_env[0, 0, :2, 10] = 1.0
+        paths_rel = np.zeros((2, 30, 2), dtype=np.float64)
+        paths_rel[0, :, 0] = np.linspace(0.1, 2.5, 30)
+        self.assertAlmostEqual(polyline_crossing_rate_np(paths_rel, p_env), 0.5)
+
+
 
 if __name__ == "__main__":
     unittest.main()

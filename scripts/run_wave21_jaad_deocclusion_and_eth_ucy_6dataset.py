@@ -384,7 +384,7 @@ def load_eth_ucy_5scene_emergence(scratch_dir: Path) -> tuple[dict, dict]:
                             else:
                                 nb_v.append(np.zeros(2)); nb_vv.append(0.0)
                         if nb_p:
-                            nt = np.zeros((len(nb_p), 8), dtype=np.float32); nt[:, 0] = 1.0
+                            nt = np.zeros(len(nb_p), dtype=np.int64)
                             ed, _, nmk = build_neighbor_edges(h_xy[1], (h_xy[1] - h_xy[0]) / 0.4, 1.0, 1.0, np.asarray(nb_p), np.asarray(nb_v), np.asarray(nb_vv), np.ones(len(nb_p)), nt)
                         else:
                             ed, nmk = np.zeros((12, 9), dtype=np.float32), np.zeros(12, dtype=np.float32)
