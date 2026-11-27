@@ -7,7 +7,7 @@
 
 ## 1. 核心目标与项目背景 (Objective & Background)
 - **项目定位**: 严格对标《彭嘉钰答辩.pptx》全部 20 页设定，面向无标线混合交通场景，在因果短时历史（主设定 10 Hz 五帧 $0.4\text{ s}$，扩展 $T \in \{2, 5, 8, 10, 20\}$）与可变质量 2D/3D 姿态下，联合预测未来 $3.0\text{ s}$（`JRDB` $2.8\text{ s}$、`JTA` $4.8\text{ s}$）$K=6$ 多模态地面轨迹与五类可观测动态动作（`Start, Stop, Turn-Left, Turn-Right, Maintain`）。
-- **当前阶段状态**: 已完成 **Waves 1–22 共 59 项成功云端实验归档**的双层 SHA-256 核验（覆盖 `PINNS, JRDB, JAAD 2.0, JTA-228, ETH/UCY, DUT, IMPTC` 七大异构基准 + `DAIR-V2X`）、**`126/126` 项本地单测全绿**、**十三幅 300-DPI 出版级图表（`fig10..22`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**双套 Overleaf 即传源码包**（`paper/ieee_tits_latex/` 双栏 `IEEEtran` + `paper/thuthesis_latex/` 中文 `XeLaTeX`）、**逐页精准对齐的 20 页答辩 PPT 映射表与动态生成 PPTX**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到强优势可发表与可答辩收官状态。
+- **当前阶段状态**: 已完成 **Waves 1–22 共 59 项成功云端实验归档**的双层 SHA-256 核验（覆盖 `PINNS, JRDB, JAAD 2.0, JTA-228, ETH/UCY, DUT, IMPTC` 七大异构基准 + `DAIR-V2X`）、**`128/128` 项本地单测全绿**、**十三幅 300-DPI 出版级图表（`fig10..22`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**双套 Overleaf 即传源码包**（`paper/ieee_tits_latex/` 双栏 `IEEEtran` + `paper/thuthesis_latex/` 中文 `XeLaTeX`）、**逐页精准对齐的 20 页答辩 PPT 映射表与动态生成 PPTX**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到强优势可发表与可答辩收官状态。
 
 ---
 
@@ -33,13 +33,11 @@
 ---
 
 ## 4. 核心资产索引 (Core File Index)
-- `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（含连续 `[1]–[20]` 引文、表 1–10 / Tables I–VI 与图 10–20）。
+- `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（中文 `[1]–[26]` 引文、表 1–11、图 10–22；英文 `[1]–[22]` 引文、Tables I–VII、Figs. 1–6）。
 - `paper/ieee_tits_latex/main.tex`, `paper/thuthesis_latex/main.tex` & `scripts/build_overleaf_bundle.py`: 英文双栏 `IEEEtran` 期刊与中文 `XeLaTeX`（`ctexrep`）硕士学位论文双套 Overleaf 即传源码包与一键打包脚本。
 - `paper/PPT_20Slides_Defense_Evidence_Map.md` & `scripts/build_defense_final_pptx.py`: 严格对齐原始 Slide 01–20 标题的证据链映射与 20 页清华紫结题答辩 PPTX 动态生成器。
-- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_thuthesis_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 53 份验证 JSON 逐位数值/版面/引文一致性单测。
+- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_thuthesis_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 **59 份验证 JSON** 逐位数值/版面/引文一致性单测。
 
 ## 5. 最近交互提要 (Recent Interactions)
-- `Turn 2`: 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/` 与 `test_ieee_latex_submission.py`（提交 `906271a`）。
-- `Turn 3`: 将 `PPT_20Slides_Defense_Evidence_Map.md` 对齐原始 Slide 01–20，新增 20 页结题答辩 PPTX 生成器与单测（提交 `b0c3db7`）。
-- `Turn 4`: 同步校准中文学位论文摘要/结论并新增 `XeLaTeX` 源码包 `paper/thuthesis_latex/`（提交 `38c073a`）。
-- `Turn 5`: 用户明确下一阶段聚焦核心问题“遮挡后刚初现时五帧姿态能否比只看位置更早判断起步/停止/转向”并要求多用不同数据集 -> 查明 `low_damp` 与 `cv_low_bonus` 导致小位移下“没生成+没选中”及跨站混用动作阈值、重复裁剪漏线两处代码缺陷；新增 `O2Maneuver6SlotPrecursorNet`（显式六槽假设+时序姿态先兆+源折精度约束切换）与盲审遮挡初现分级、双判据实体障碍（因果历史不穿线+标定域占有排除）及 `PINNS + JRDB + JTA-228 + JAAD-2.0 + ETH/UCY + DUT + IMPTC` 七基准评测套件（提交 `8b839a1 -> 3c27697 -> 6ff7544`）。已透明记录早期数据键/尺寸烟测失败（`374729264`, `374730656`, `374744655`），当前 `w21b_gpu2`（`374746238`）在 Kaggle `GPU T4 x2` 稳定运行中（已完成 `JAAD-2.0`、`ETH/UCY` 全 5 种子与 `JRDB` 首种子），`w21c_gpu1`（`374755093`）已紧随排队待自动接续执行。
+- `Turn 2–4`: 完成双栏 `IEEEtran` 投稿包、20 页答辩 PPTX 动态生成器与中文 `XeLaTeX` 源码包（提交 `906271a -> b0c3db7 -> 38c073a`）。
+- `Turn 5`: 围绕用户核心问题“遮挡后刚初现时五帧姿态能否比只看位置更早判断起步/停止/转向”及跨数据集强化指令，完成 Waves 21–22 六份云端归档（`w21c-gpu1` `374755093`、`w21b-gpu2` `374746238 rc1=0`、`w21d-cpu1` `374798593`、`w22-cpu1` `374799207`；透明记录烟测修复 `374729264, 374730656, 374744655` 及 `374746238 rc0` 1-D `q_bio` 修复），渲染 `fig21/fig22`，同步更新全部中英论文、双套 Overleaf ZIP、20 页 PPTX 并通过 `128/128` 项单测（提交 `0a9ce8c`）。
