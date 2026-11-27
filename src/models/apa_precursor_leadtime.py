@@ -144,3 +144,126 @@ def build_delayed_onset_start_stop_candidates(
     post_d = spd * 0.45 * (1.0 - np.exp(-post_t / 0.45))
     stop_paths = hist_xy[:, -1:, :] + (pre_d + post_d)[:, :, None] * v_dir[:, None, :]
     return start_paths, stop_paths
+
+
+def evaluate_iso_test_fpr_and_unconflated_leadtime(
+    probs_test: np.ndarray,
+    rel_tau_s: np.ndarray,
+    event_id: np.ndarray,
+    event_cls: np.ndarray,
+    is_neg_ctrl: np.ndarray,
+    target_test_fpr: float = 0.05,
+    explicit_thr: np.ndarray | None = None,
+) -> dict[str, dict]:
+    """Evaluate unconflated pre-onset recall, miss count, and hit-only alarm lead time at exact test FPR.
+
+    Never mixes censored miss penalties into alarm timing: reports hit count, miss count, recall,
+    and conditional mean/median alarm lead time (ms before onset) strictly on detected events.
+    """
+    names = ("Start", "Stop", "Turn")
+    neg_p = probs_test[is_neg_ctrl]
+    if explicit_thr is not None:
+        thr = np.asarray(explicit_thr, dtype=np.float64)
+    else:
+        thr = np.full(probs_test.shape[1], 0.50, dtype=np.float64)
+        if len(neg_p) >= 5:
+            q = float(np.clip(1.0 - target_test_fpr, 0.50, 0.998))
+            for c in range(probs_test.shape[1]):
+                thr[c] = float(np.quantile(neg_p[:, c], q))
+                # Tie-break upward if discrete ties push empirical FPR > target_test_fpr + 0.015
+                if (neg_p[:, c] >= thr[c]).mean() > target_test_fpr + 0.015:
+                    thr[c] = float(np.nextafter(thr[c], np.inf))
+
+    out: dict[str, dict] = {}
+    for c, nm in enumerate(names):
+        emp_fpr = float((neg_p[:, c] >= thr[c]).mean()) if len(neg_p) > 0 else 0.0
+        ev_mask = (~is_neg_ctrl) & (event_cls == c)
+        eids = sorted(set(event_id[ev_mask].tolist()))
+        pre_lead_by_eid: dict[int, float] = {}
+        any_hits = 0
+        for eid in eids:
+            m_e = ev_mask & (event_id == eid)
+            order = np.argsort(rel_tau_s[m_e])
+            taus = rel_tau_s[m_e][order]
+            ps = probs_test[m_e, c][order]
+            hits = np.flatnonzero(ps >= thr[c])
+            if len(hits) > 0:
+                any_hits += 1
+                t_first = float(taus[int(hits[0])])
+                if t_first <= 1e-6:
+                    pre_lead_by_eid[int(eid)] = -t_first * 1000.0  # ms BEFORE kinematic onset (>= 0)
+        n_ev = len(eids)
+        pre_hits = len(pre_lead_by_eid)
+        pre_vals = list(pre_lead_by_eid.values())
+        out[nm] = {
+            "n_events": n_ev,
+            "threshold": float(thr[c]),
+            "empirical_test_fpr": emp_fpr,
+            "pre_onset_hit_count": pre_hits,
+            "pre_onset_miss_count": n_ev - pre_hits,
+            "pre_onset_recall": float(pre_hits / max(n_ev, 1)),
+            "any_window_hit_count": any_hits,
+            "any_window_miss_count": n_ev - any_hits,
+            "mean_lead_ms_given_pre_hit": float(np.mean(pre_vals)) if pre_vals else 0.0,
+            "median_lead_ms_given_pre_hit": float(np.median(pre_vals)) if pre_vals else 0.0,
+            "pre_hit_lead_ms_by_eid": {str(k): v for k, v in pre_lead_by_eid.items()},
+            "event_ids_ordered": [int(x) for x in eids],
+        }
+    return out
+
+
+def paired_iso_fpr_comparison(
+    res_b: dict[str, dict],
+    res_a: dict[str, dict],
+    seed: int = 2026,
+    n_boot: int = 2000,
+) -> dict[str, dict]:
+    """Compare Model B vs Baseline A at matched FPR without any censored miss penalty.
+
+    Separates:
+      1) Paired pre-onset recall gain (hit_B - hit_A) across all N events with bootstrap 95% CI;
+      2) Paired alarm-time gain (lead_B - lead_A in ms) strictly on events pre-hit by BOTH models.
+    """
+    rng = np.random.default_rng(seed)
+    comp: dict[str, dict] = {}
+    for nm in ("Start", "Stop", "Turn"):
+        eb, ea = res_b[nm], res_a[nm]
+        eids = eb["event_ids_ordered"]
+        n_ev = len(eids)
+        hb = np.array([1.0 if str(e) in eb["pre_hit_lead_ms_by_eid"] else 0.0 for e in eids])
+        ha = np.array([1.0 if str(e) in ea["pre_hit_lead_ms_by_eid"] else 0.0 for e in eids])
+        d_rec = hb - ha
+        rec_mean = float(d_rec.mean()) if n_ev > 0 else 0.0
+        if n_ev >= 2:
+            idx = rng.integers(0, n_ev, size=(n_boot, n_ev))
+            rec_ci = [float(x) for x in np.quantile(d_rec[idx].mean(axis=1), [0.025, 0.975])]
+        else:
+            rec_ci = [rec_mean, rec_mean]
+
+        common = [str(e) for e in eids if (str(e) in eb["pre_hit_lead_ms_by_eid"] and str(e) in ea["pre_hit_lead_ms_by_eid"])]
+        only_b = sum(1 for e in eids if (str(e) in eb["pre_hit_lead_ms_by_eid"] and str(e) not in ea["pre_hit_lead_ms_by_eid"]))
+        only_a = sum(1 for e in eids if (str(e) not in eb["pre_hit_lead_ms_by_eid"] and str(e) in ea["pre_hit_lead_ms_by_eid"]))
+        if len(common) >= 1:
+            d_common = np.array([eb["pre_hit_lead_ms_by_eid"][k] - ea["pre_hit_lead_ms_by_eid"][k] for k in common])
+            c_mean = float(d_common.mean())
+            if len(common) >= 2:
+                c_idx = rng.integers(0, len(common), size=(n_boot, len(common)))
+                c_ci = [float(x) for x in np.quantile(d_common[c_idx].mean(axis=1), [0.025, 0.975])]
+            else:
+                c_ci = [c_mean, c_mean]
+        else:
+            c_mean, c_ci = 0.0, [0.0, 0.0]
+
+        comp[nm] = {
+            "n_events": n_ev,
+            "fpr_model_b": eb["empirical_test_fpr"],
+            "fpr_baseline_a": ea["empirical_test_fpr"],
+            "recall_diff_mean": rec_mean,
+            "recall_diff_ci95": rec_ci,
+            "n_both_pre_hit": len(common),
+            "n_only_model_b_pre_hit": int(only_b),
+            "n_only_baseline_a_pre_hit": int(only_a),
+            "common_hit_lead_diff_ms_mean": c_mean,
+            "common_hit_lead_diff_ms_ci95": c_ci,
+        }
+    return comp

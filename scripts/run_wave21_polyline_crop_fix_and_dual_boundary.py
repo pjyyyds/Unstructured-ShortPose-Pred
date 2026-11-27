@@ -177,9 +177,9 @@ def build_uncropped_and_dual_confirmed_maps(
                     t_c = np.where(ok_d, (db[..., 0] * dp_c[..., 1] - db[..., 1] * dp_c[..., 0]) / np.where(ok_d, den, 1.0), -1.0)
                     u_c = np.where(ok_d, (da[..., 0] * dp_c[..., 1] - da[..., 1] * dp_c[..., 0]) / np.where(ok_d, den, 1.0), -1.0)
                     crossed_causally = bool(np.any(ok_d & (t_c >= 0.0) & (t_c <= 1.0) & (u_c >= 0.0) & (u_c <= 1.0)))
-                # Rater A: physical parked-obstacle / point-cloud occupancy clearance
+                # Automated Rule A (occupancy/parked-obstacle geometry) & Automated Rule B (calibration-domain & causal <=t0 non-crossing)
+                # Note: kappa measures concordance between two automated geometric/causal rules (which share parked/interior guards), NOT independent human visual annotation.
                 ca = 0 if (is_parked or (not is_hull and not near_ped_interior and seg_len >= 2.0)) else (1 if (is_hull or near_ped_interior) else 2)
-                # Rater B: strict calibration-domain support & zero causal (<= t0) pedestrian trajectory crossings
                 cb = 1 if crossed_causally else (0 if (in_cal and (is_parked or (not is_hull and seg_len >= 2.5 and not near_ped_interior))) else (1 if near_ped_interior else 2))
                 rater_a_lbls.append(ca)
                 rater_b_lbls.append(cb)

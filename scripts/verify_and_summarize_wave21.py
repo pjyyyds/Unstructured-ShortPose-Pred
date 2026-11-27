@@ -15,6 +15,8 @@ EXPECTED_JOBS = (
     ("wave21_jaad_deocclusion_and_eth_ucy_6dataset.zip", "wave21_jaad_deocclusion_and_eth_ucy_6dataset_5seed_verified.json"),
     ("wave22_apa_leadtime_jaad_jta_and_pinns_delayed.zip", "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json"),
     ("wave22_jrdb_delayed_apa_upgrade.zip", "wave22_jrdb_delayed_apa_upgrade_5seed_verified.json"),
+    ("wave23_pinns_video_audit_and_6slot_ranker.zip", "wave23_pinns_video_audit_and_6slot_ranker_5seed_verified.json"),
+    ("wave23_jaad_autopose_and_isofpr_leadtime.zip", "wave23_jaad_autopose_and_isofpr_leadtime_5seed_verified.json"),
 )
 
 
