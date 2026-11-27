@@ -31,11 +31,12 @@
 
 ## 4. 核心资产索引 (Core File Index)
 - `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（含连续 `[1]–[20]` 引文、表 1–10 / Tables I–VI 与图 10–20）。
-- `paper/ieee_tits_latex/main.tex` & `paper/ieee_tits_latex/references.bib` & `scripts/build_overleaf_bundle.py`: 双栏 `IEEEtran` LaTeX 期刊投稿源码包与一键 Overleaf 压缩包生成工具。
+- `paper/ieee_tits_latex/main.tex`, `paper/thuthesis_latex/main.tex` & `scripts/build_overleaf_bundle.py`: 英文双栏 `IEEEtran` 期刊与中文 `XeLaTeX`（`ctexrep`）硕士学位论文双套 Overleaf 即传源码包与一键打包脚本。
 - `paper/PPT_20Slides_Defense_Evidence_Map.md` & `scripts/build_defense_final_pptx.py`: 严格对齐原始 Slide 01–20 标题的证据链映射与 20 页清华紫结题答辩 PPTX 动态生成器。
-- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 双语 Markdown、`IEEEtran` LaTeX、综述与 20 页答辩 PPTX 同 53 份验证 JSON 逐位数值/版面/引文一致性单测。
+- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_thuthesis_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 53 份验证 JSON 逐位数值/版面/引文一致性单测。
 
 ## 5. 最近交互提要 (Recent Interactions)
 - `Turn 1`: 用户询问 `做的怎么样了` -> 完整汇报 Waves 1–20（53 份 SHA-256 归档）三大研究主线正负结论与核心交付索引。
-- `Turn 2`: 30 分钟巡检触发 -> 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/`、一键 Overleaf 打包脚本与 `test_ieee_latex_submission.py`（提交 `906271a`）。
-- `Turn 3`: 30 分钟巡检触发 -> 将 `PPT_20Slides_Defense_Evidence_Map.md` 精确对齐原始 Slide 01–20 真实标题，补齐 `PROJECT_REVIEW_SUMMARY.md` Waves 19–20 闭环，新增 20 页清华紫结题答辩 PPTX 自动生成脚本与版面/数值单测 `test_defense_pptx_and_map.py`。
+- `Turn 2`: 30 分钟巡检触发 -> 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/` 与 `test_ieee_latex_submission.py`（提交 `906271a`）。
+- `Turn 3`: 30 分钟巡检触发 -> 将 `PPT_20Slides_Defense_Evidence_Map.md` 精确对齐原始 Slide 01–20，补齐 `PROJECT_REVIEW_SUMMARY.md` Waves 19–20 闭环，新增 20 页结题答辩 PPTX 自动生成脚本与单测（提交 `b0c3db7`）。
+- `Turn 4`: 30 分钟巡检触发 -> 同步校准中文学位论文 `ShortPose_Unstructured_Pedestrian_Paper.md` 中英文摘要与第七章结论（纳入 Waves 19–20 全套指标），新增 Overleaf 即传中文硕士论文 `XeLaTeX` 源码包 `paper/thuthesis_latex/` 与 `test_thuthesis_latex_submission.py`。
