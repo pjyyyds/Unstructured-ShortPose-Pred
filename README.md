@@ -3,7 +3,7 @@
 **Joint Pedestrian Action and Trajectory Prediction on Unstructured Roads under Short-Term Variable-Quality Pose Observation**  
 *短时姿态观测下的非结构化道路行人动作与轨迹联合预测*
 
-- **Manuscripts & Defense Evidence**: [Chinese Thesis Manuscript](paper/ShortPose_Unstructured_Pedestrian_Paper.md) · [IEEE T-ITS English Manuscript](paper/IEEE_TITS_ShortPose_Manuscript.md) · [20-Slide Defense Evidence Map](paper/PPT_20Slides_Defense_Evidence_Map.md) · [Full Empirical Review](reviews/PROJECT_REVIEW_SUMMARY.md)
+- **Manuscripts & Defense Evidence**: [Chinese Thesis Manuscript](paper/ShortPose_Unstructured_Pedestrian_Paper.md) · [IEEE T-ITS English Manuscript](paper/IEEE_TITS_ShortPose_Manuscript.md) · [IEEEtran LaTeX Source (Overleaf-Ready)](paper/ieee_tits_latex/main.tex) · [20-Slide Defense Evidence Map](paper/PPT_20Slides_Defense_Evidence_Map.md) · [Full Empirical Review](reviews/PROJECT_REVIEW_SUMMARY.md)
 - **Latest Verified Figures (`300 DPI`)**: [Figure 17 (`O(2) M0–M3` & `PINNS` Conformal)](docs/figures/fig17_ppt_mainline_conformal_and_short_disp.png) · [Figure 18 (`2×2` Factorial, `<0.5 m` Bound, Slide-5 Audit & `JRDB` Conformal)](docs/figures/fig18_wave17_factorial_slide5_and_jrdb_conformal.png) · [Figure 19 (Conflict Gate, External Baselines, Monotonic Gate & `Tesla T4` Pareto)](docs/figures/fig19_wave18_conflict_rerank_ext_and_t4_pareto.png) · [Figure 20 (Decoupled Synergy, `DUT/IMPTC` Transfer, `<50 px` Boundary & Adaptive Conformal)](docs/figures/fig20_wave19_20_unified_dut_boundary_and_adaptive_conformal.png)
 
 ---

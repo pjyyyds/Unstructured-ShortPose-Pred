@@ -9,6 +9,7 @@ __pycache__/
 data_cache/raw_tmp/
 data_cache/*.pkl
 data_cache/*.zip
+dist/
 *.mp4
 
 # OS artifacts
