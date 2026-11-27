@@ -71,7 +71,7 @@ def render_fig21(results_dir: Path, out_png: Path) -> Path:
     ax = axes[1, 0]
     ds_rows = [
         ("PINNS\n(True Emg)", p_pinns["pinns_4site_loso"]["strata"]["true_occluder_emergence_all"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
-        ("JRDB\n(9-Loc Emg)", p_jj["jrdb_9location_lolo"]["strata"]["true_emergence_all"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
+        ("JRDB\n(9-Loc Emg)", p_jj["jrdb_9location_lolo"]["strata"]["true_deocclusion_emergence"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
         ("JTA-228\n(Test Emg)", p_jj["jta_native_urban_emergence"]["strata"]["official_locked_test_true_emergence"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
         ("JAAD 2.0\n(De-Occl*)", p_j6["jaad2_human_deocclusion_346vid"]["strata"]["human_annotated_deocclusion"]["models"], "J_Full_pose_veh", "ade_full", "ade_post_onset_1p0s"),
         ("ETH/UCY\n(5-Scene)", p_j6["eth_ucy_5scene_lodo"]["strata"]["true_emergence_midclip"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),

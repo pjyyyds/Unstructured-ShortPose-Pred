@@ -180,6 +180,18 @@ class TestWave21EmergenceAnd6Slot(unittest.TestCase):
             self.assertEqual(maps["p_fix"].shape, (8, 16, 10, 11))
             self.assertGreaterEqual(mdiag["windows_with_dual_confirmed_solid_barriers"], 1)
 
+        # Verify 1-D q_vec (shape=(B,)) in O2Maneuver6SlotPrecursorNet._mono_gate (regression test for JTA q_bio)
+        net1d = O2Maneuver6SlotPrecursorNet(use_pose=True, use_interaction=True)
+        out1d = net1d(
+            torch.randn(4, 2, 2, dtype=torch.float64), torch.randn(4, 2, 10),
+            torch.randn(4, 2, 2, 2, dtype=torch.float64), torch.randn(4, 2, 2),
+            torch.tensor([0.8, 0.9, 0.7, 1.0]), torch.ones(4),
+            torch.randn(4, 12, 9), torch.zeros(4, 12), torch.ones(4, 12),
+            obs_dt=torch.full((4, 1), 0.4, dtype=torch.float64),
+            fut_times_s=torch.arange(1, 9, dtype=torch.float64)[None].expand(4, -1) * 0.4,
+        )
+        self.assertEqual(out1d["paths"].shape, (4, 6, 8, 2))
+
 
 if __name__ == "__main__":
     unittest.main()

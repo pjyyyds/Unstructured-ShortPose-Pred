@@ -304,10 +304,12 @@ def load_jta228_native_emergence_cohort(st_zip: Path, max_train_files: int = 80)
     if mv.sum() >= 20 and float((disp[mv] * pvw[mv, -1, 0]).sum()) < 0.0:
         pvw[:, :, 0] = -pvw[:, :, 0]
     gp_j = build_ground_pose_o2_inputs(torch.from_numpy(hist), torch.from_numpy(kp_np), torch.from_numpy(bb_np))
+    bh_q = (torch.from_numpy(bb_np[:, :, 3].mean(axis=1)) / 80.0).clamp(0.0, 1.0).float()
+    q4_j = torch.stack((gp_j["q_bio"].float(), bh_q, gp_j["m_pose"].float(), torch.ones_like(bh_q)), dim=-1)
     return {
         "history": torch.from_numpy(hist), "truth": torch.from_numpy(truth),
         "bio_even": gp_j["bio_even"], "pose_vec_world": torch.from_numpy(pvw),
-        "signed_knee": gp_j["signed_knee"], "quality": gp_j["q_bio"], "m_pose": gp_j["m_pose"],
+        "signed_knee": gp_j["signed_knee"], "quality": q4_j, "m_pose": gp_j["m_pose"],
         "edges": torch.from_numpy(np.asarray(ed_l, dtype=np.float32)),
         "is_car": torch.zeros((len(hist), 12), dtype=torch.float32),
         "nbr_mask": torch.from_numpy(np.asarray(nm_l, dtype=np.float32)),
@@ -323,66 +325,72 @@ def main() -> None:
     ap.add_argument("--scratch-dir", type=Path, required=True)
     ap.add_argument("--zip-path", type=Path, required=True)
     ap.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
+    ap.add_argument("--skip-unified", action="store_true")
+    ap.add_argument("--only", choices=("both", "jrdb", "jta"), default="both")
     args = ap.parse_args()
 
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    args.scratch_dir.mkdir(parents=True, exist_ok=True)
+    j_res, jta_res = {}, {}
 
-    # 1) JRDB 9-location 5,836 windows with blind ray/pose de-occlusion & matched controls
-    dj, bj = load_jrdb_with_blind_emergence(args.repo_root)
-    nj = len(dj["history"])
-    hj_np, tj_np = dj["history"].numpy(), dj["truth"].numpy()
-    gdj = {k: dj[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
-    gdj["y_act"] = torch.from_numpy(dj["y_act"]).to(dev)
-    gdj["valid_act"] = torch.from_numpy(dj["valid_act"]).to(dev)
-    gdj["obs_dt"] = torch.full((nj, 1), 0.4, dtype=torch.float64, device=dev)
-    gdj["fut_s"] = torch.arange(1, FUTURE_STEPS + 1, dtype=torch.float64, device=dev)[None].expand(nj, -1) * 0.4
-    cv_j = ((hj_np[:, 1:2] - hj_np[:, 0:1]) / 0.4) * (np.arange(1, FUTURE_STEPS + 1)[None, :, None] * 0.4)
-    disp_j = np.linalg.norm(hj_np[:, 1] - hj_np[:, 0], axis=-1)
-    man_j = (dj["y_act"][:, :4] & dj["valid_act"][:, :4]).any(axis=1)
-    j_strata = {
-        "all_5836": np.ones(nj, dtype=bool),
-        "locked_eval_locations_all": bj["locked_eval_mask"],
-        "true_deocclusion_emergence": bj["e_true"],
-        "locked_eval_true_emergence": bj["locked_eval_mask"] & bj["e_true"],
-        "true_emergence_lowdisp_lt0p5m": bj["e_true"] & (disp_j < 0.50),
-        "true_emergence_clear_torso_feet": bj["e_true"] & bj["vis_torso"] & bj["vis_feet"],
-        "true_emergence_active_maneuver": bj["e_true"] & man_j,
-        "matched_continuously_visible_ctrl": bj["matched_ctrl"],
-    }
-    j_res = run_2x2_6slot_and_baseline_eval(
-        "jrdb", dj["location"], dj["actors"], False, gdj, hj_np, tj_np, cv_j, dj["y_act"], dj["valid_act"], dj["onset"],
-        j_strata, bj["e_true"], 0.4, 512, (45, 28, 28, 30), 34, (2.5e-3, 1.5e-3, 1.8e-3, 1.5e-3), 1.8e-3, list(args.seeds), dev, True,
-    )
+    if args.only in ("both", "jrdb"):
+        # 1) JRDB 9-location 5,836 windows with blind ray/pose de-occlusion & matched controls
+        dj, bj = load_jrdb_with_blind_emergence(args.repo_root)
+        nj = len(dj["history"])
+        hj_np, tj_np = dj["history"].numpy(), dj["truth"].numpy()
+        gdj = {k: dj[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
+        gdj["y_act"] = torch.from_numpy(dj["y_act"]).to(dev)
+        gdj["valid_act"] = torch.from_numpy(dj["valid_act"]).to(dev)
+        gdj["obs_dt"] = torch.full((nj, 1), 0.4, dtype=torch.float64, device=dev)
+        gdj["fut_s"] = torch.arange(1, FUTURE_STEPS + 1, dtype=torch.float64, device=dev)[None].expand(nj, -1) * 0.4
+        cv_j = ((hj_np[:, 1:2] - hj_np[:, 0:1]) / 0.4) * (np.arange(1, FUTURE_STEPS + 1)[None, :, None] * 0.4)
+        disp_j = np.linalg.norm(hj_np[:, 1] - hj_np[:, 0], axis=-1)
+        man_j = (dj["y_act"][:, :4] & dj["valid_act"][:, :4]).any(axis=1)
+        j_strata = {
+            "all_5836": np.ones(nj, dtype=bool),
+            "locked_eval_locations_all": bj["locked_eval_mask"],
+            "true_deocclusion_emergence": bj["e_true"],
+            "locked_eval_true_emergence": bj["locked_eval_mask"] & bj["e_true"],
+            "true_emergence_lowdisp_lt0p5m": bj["e_true"] & (disp_j < 0.50),
+            "true_emergence_clear_torso_feet": bj["e_true"] & bj["vis_torso"] & bj["vis_feet"],
+            "true_emergence_active_maneuver": bj["e_true"] & man_j,
+            "matched_continuously_visible_ctrl": bj["matched_ctrl"],
+        }
+        j_res = run_2x2_6slot_and_baseline_eval(
+            "jrdb", dj["location"], dj["actors"], False, gdj, hj_np, tj_np, cv_j, dj["y_act"], dj["valid_act"], dj["onset"],
+            j_strata, bj["e_true"], 0.4, 512, (45, 28, 28, 30), 34, (2.5e-3, 1.5e-3, 1.8e-3, 1.5e-3), 1.8e-3,
+            list(args.seeds), dev, not args.skip_unified,
+        )
 
-    # 2) JTA native uncorrupted urban sequences (val dev vs locked official test)
-    st_zip = args.scratch_dir / "st_releases.zip"
-    if not st_zip.exists():
-        _download_verified_zip(ST_RELEASE_URL, st_zip)
-    dt_jta, bt_jta = load_jta228_native_emergence_cohort(st_zip, max_train_files=80)
-    # Use 4-fold cross-group over val+test evaluated against train+other folds (or train->test)
-    nt = len(dt_jta["history"])
-    ht_np, tt_np = dt_jta["history"].numpy(), dt_jta["truth"].numpy()
-    gdt = {k: dt_jta[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
-    gdt["y_act"] = torch.from_numpy(dt_jta["y_act"]).to(dev)
-    gdt["valid_act"] = torch.from_numpy(dt_jta["valid_act"]).to(dev)
-    gdt["obs_dt"] = torch.full((nt, 1), 0.4, dtype=torch.float64, device=dev)
-    gdt["fut_s"] = torch.arange(1, 9, dtype=torch.float64, device=dev)[None].expand(nt, -1) * 0.4
-    cv_t = ((ht_np[:, 1:2] - ht_np[:, 0:1]) / 0.4) * (np.arange(1, 9)[None, :, None] * 0.4)
-    # Assign train samples into 3 source groups and keep official val & test as separate held-out groups
-    sp = dt_jta["split"]
-    grp_t = np.where(sp == "test", "heldout_test", np.where(sp == "val", "dev_val", dt_jta["group"]))
-    man_t = (dt_jta["y_act"][:, :4] & dt_jta["valid_act"][:, :4]).any(axis=1)
-    t_strata = {
-        "official_locked_test_all": sp == "test",
-        "official_locked_test_true_emergence": (sp == "test") & bt_jta["e_true"],
-        "official_locked_test_emergence_maneuver": (sp == "test") & bt_jta["e_true"] & man_t,
-        "official_locked_test_steady_ctrl": (sp == "test") & bt_jta["prior_steady"],
-        "dev_val_true_emergence": (sp == "val") & bt_jta["e_true"],
-    }
-    jta_res = run_2x2_6slot_and_baseline_eval(
-        "jta_native", grp_t, dt_jta["seq"], False, gdt, ht_np, tt_np, cv_t, dt_jta["y_act"], dt_jta["valid_act"], dt_jta["onset"],
-        t_strata, (sp == "test") & bt_jta["e_true"], 0.4, 512, (35, 22, 22, 24), 28, (2e-3, 1.4e-3, 1.5e-3, 1.4e-3), 1.6e-3, list(args.seeds), dev, False,
-    )
+    if args.only in ("both", "jta"):
+        # 2) JTA native uncorrupted urban sequences (val dev vs locked official test)
+        st_zip = args.scratch_dir / "st_releases.zip"
+        if not st_zip.exists():
+            _download_verified_zip(ST_RELEASE_URL, st_zip)
+        dt_jta, bt_jta = load_jta228_native_emergence_cohort(st_zip, max_train_files=80)
+        nt = len(dt_jta["history"])
+        ht_np, tt_np = dt_jta["history"].numpy(), dt_jta["truth"].numpy()
+        gdt = {k: dt_jta[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
+        gdt["y_act"] = torch.from_numpy(dt_jta["y_act"]).to(dev)
+        gdt["valid_act"] = torch.from_numpy(dt_jta["valid_act"]).to(dev)
+        gdt["obs_dt"] = torch.full((nt, 1), 0.4, dtype=torch.float64, device=dev)
+        gdt["fut_s"] = torch.arange(1, 9, dtype=torch.float64, device=dev)[None].expand(nt, -1) * 0.4
+        cv_t = ((ht_np[:, 1:2] - ht_np[:, 0:1]) / 0.4) * (np.arange(1, 9)[None, :, None] * 0.4)
+        sp = dt_jta["split"]
+        grp_t = np.where(sp == "test", "heldout_test", np.where(sp == "val", "dev_val", dt_jta["group"]))
+        man_t = (dt_jta["y_act"][:, :4] & dt_jta["valid_act"][:, :4]).any(axis=1)
+        t_strata = {
+            "official_locked_test_all": sp == "test",
+            "official_locked_test_true_emergence": (sp == "test") & bt_jta["e_true"],
+            "official_locked_test_emergence_maneuver": (sp == "test") & bt_jta["e_true"] & man_t,
+            "official_locked_test_steady_ctrl": (sp == "test") & bt_jta["prior_steady"],
+            "dev_val_true_emergence": (sp == "val") & bt_jta["e_true"],
+        }
+        jta_res = run_2x2_6slot_and_baseline_eval(
+            "jta_native", grp_t, dt_jta["seq"], False, gdt, ht_np, tt_np, cv_t, dt_jta["y_act"], dt_jta["valid_act"], dt_jta["onset"],
+            t_strata, (sp == "test") & bt_jta["e_true"], 0.4, 512, (35, 22, 22, 24), 28, (2e-3, 1.4e-3, 1.5e-3, 1.4e-3), 1.6e-3,
+            list(args.seeds), dev, False,
+        )
 
     summary = {"experiment": "wave21_jrdb_and_jta_emergence_maneuvers", "jrdb_9location_lolo": j_res, "jta_native_urban_emergence": jta_res}
     raw = (json.dumps(summary, indent=2, allow_nan=False) + "\n").encode("utf-8")

@@ -254,6 +254,12 @@ class O2Maneuver6SlotPrecursorNet(nn.Module):
 
     def _mono_gate(self, q_vec: torch.Tensor, m_pose: torch.Tensor) -> torch.Tensor:
         qc = q_vec.clamp(0.0, 1.0).float()
+        if qc.ndim == 1:
+            qc = qc[:, None].expand(-1, 4)
+        elif qc.size(1) < 4:
+            qc = F.pad(qc, (0, 4 - qc.size(1)), value=1.0)
+        else:
+            qc = qc[:, :4]
         gamma = F.softplus(self.q_gamma_raw) + 0.15
         w_pos = F.softplus(self.q_w_raw)
         env = ((qc[:, 0] * qc[:, 1]).clamp_min(1e-6)) ** gamma

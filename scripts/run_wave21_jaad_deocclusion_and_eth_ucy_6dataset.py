@@ -457,49 +457,53 @@ def main() -> None:
     ap.add_argument("--imptc-tar", type=Path, default=None)
     ap.add_argument("--zip-path", type=Path, required=True)
     ap.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
+    ap.add_argument("--only", choices=("all", "jaad_eth", "dut_imptc"), default="all")
     args = ap.parse_args()
 
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    args.scratch_dir.mkdir(parents=True, exist_ok=True)
+    jaad_res, eth_res, dut_res, imptc_res = {}, {}, {}, {}
 
-    # 1) JAAD 2.0 (346 videos: human-annotated physical de-occlusion + pose/gaze + vehicle context)
-    jd = load_jaad2_human_deocclusion_benchmark(args.scratch_dir)
-    jaad_res = _summarize_jaad(jd, eval_jaad2_5seed(jd, list(args.seeds), dev))
-    print(f"[W21-JAAD2] Completed n_total={jaad_res['n_total_windows']} n_test={jaad_res['n_test_windows']}", flush=True)
+    if args.only in ("all", "jaad_eth"):
+        # 1) JAAD 2.0 (346 videos: human-annotated physical de-occlusion + pose/gaze + vehicle context)
+        jd = load_jaad2_human_deocclusion_benchmark(args.scratch_dir)
+        jaad_res = _summarize_jaad(jd, eval_jaad2_5seed(jd, list(args.seeds), dev))
+        print(f"[W21-JAAD2] Completed n_total={jaad_res['n_total_windows']} n_test={jaad_res['n_test_windows']}", flush=True)
 
-    # 2) ETH/UCY 5-Scene Leave-One-Dataset-Out (eth, hotel, univ, zara1, zara2)
-    de, be = load_eth_ucy_5scene_emergence(args.scratch_dir)
-    ne = len(de["history"])
-    he_np, te_np = de["history"].numpy(), de["truth"].numpy()
-    gde = {k: de[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
-    gde["y_act"] = torch.from_numpy(de["y_act"]).to(dev)
-    gde["valid_act"] = torch.from_numpy(de["valid_act"]).to(dev)
-    gde["obs_dt"] = torch.full((ne, 1), 0.4, dtype=torch.float64, device=dev)
-    gde["fut_s"] = torch.arange(1, 9, dtype=torch.float64, device=dev)[None].expand(ne, -1) * 0.4
-    cv_e = ((he_np[:, 1:2] - he_np[:, 0:1]) / 0.4) * (np.arange(1, 9)[None, :, None] * 0.4)
-    disp_e = np.linalg.norm(he_np[:, 1] - he_np[:, 0], axis=-1)
-    man_e = (de["y_act"][:, :4] & de["valid_act"][:, :4]).any(axis=1)
-    eth_strata = {
-        "all_5scenes": np.ones(ne, dtype=bool),
-        "true_emergence_midclip": be["e_true"],
-        "true_emergence_lowdisp_lt0p5m": be["e_true"] & (disp_e < 0.50),
-        "emergence_active_maneuver": be["e_true"] & man_e,
-        "steady_visible_ctrl": be["ctrl"],
-    }
-    eth_res = run_2x2_6slot_and_baseline_eval(
-        "eth_ucy_5scene", de["scene"], de["actor"], False, gde, he_np, te_np, cv_e, de["y_act"], de["valid_act"], de["onset"],
-        eth_strata, be["e_true"] | man_e, 0.4, 512, (30, 20, 20, 22), 28, (2e-3, 1.4e-3, 1.5e-3, 1.4e-3), 1.6e-3, list(args.seeds), dev, False,
-    )
-    print(f"[W21-ETH-UCY] Completed n={ne}", flush=True)
+        # 2) ETH/UCY 5-Scene Leave-One-Dataset-Out (eth, hotel, univ, zara1, zara2)
+        de, be = load_eth_ucy_5scene_emergence(args.scratch_dir)
+        ne = len(de["history"])
+        he_np, te_np = de["history"].numpy(), de["truth"].numpy()
+        gde = {k: de[k].to(dev) for k in ("history", "truth", "bio_even", "pose_vec_world", "signed_knee", "quality", "m_pose", "edges", "is_car", "nbr_mask")}
+        gde["y_act"] = torch.from_numpy(de["y_act"]).to(dev)
+        gde["valid_act"] = torch.from_numpy(de["valid_act"]).to(dev)
+        gde["obs_dt"] = torch.full((ne, 1), 0.4, dtype=torch.float64, device=dev)
+        gde["fut_s"] = torch.arange(1, 9, dtype=torch.float64, device=dev)[None].expand(ne, -1) * 0.4
+        cv_e = ((he_np[:, 1:2] - he_np[:, 0:1]) / 0.4) * (np.arange(1, 9)[None, :, None] * 0.4)
+        disp_e = np.linalg.norm(he_np[:, 1] - he_np[:, 0], axis=-1)
+        man_e = (de["y_act"][:, :4] & de["valid_act"][:, :4]).any(axis=1)
+        eth_strata = {
+            "all_5scenes": np.ones(ne, dtype=bool),
+            "true_emergence_midclip": be["e_true"],
+            "true_emergence_lowdisp_lt0p5m": be["e_true"] & (disp_e < 0.50),
+            "emergence_active_maneuver": be["e_true"] & man_e,
+            "steady_visible_ctrl": be["ctrl"],
+        }
+        eth_res = run_2x2_6slot_and_baseline_eval(
+            "eth_ucy_5scene", de["scene"], de["actor"], False, gde, he_np, te_np, cv_e, de["y_act"], de["valid_act"], de["onset"],
+            eth_strata, be["e_true"] | man_e, 0.4, 512, (30, 20, 20, 22), 28, (2e-3, 1.4e-3, 1.5e-3, 1.4e-3), 1.6e-3, list(args.seeds), dev, False,
+        )
+        print(f"[W21-ETH-UCY] Completed n={ne}", flush=True)
 
-    # 3) DUT (3,066 campus mixed-traffic windows) & IMPTC (564 intersection windows) if provided
-    dut_res, imptc_res = {}, {}
-    if args.dut_zip is not None and args.dut_zip.exists():
-        dut_coh = load_dut_graph_cohort(args.dut_zip)
-        dut_res = _eval_motion_interaction_dataset("dut_11clip", dut_coh, 0.1, 256, 28, list(args.seeds), dev)
-    if args.imptc_tar is not None:
-        imp_path = ensure_imptc_sample(args.imptc_tar)
-        imp_coh = adapt_imptc_cohort(load_imptc_with_neighbors(imp_path))
-        imptc_res = _eval_motion_interaction_dataset("imptc_4seq", imp_coh, 0.1, 128, 28, list(args.seeds), dev)
+    if args.only in ("all", "dut_imptc"):
+        # 3) DUT (3,066 campus mixed-traffic windows) & IMPTC (564 intersection windows) if provided
+        if args.dut_zip is not None and args.dut_zip.exists():
+            dut_coh = load_dut_graph_cohort(args.dut_zip)
+            dut_res = _eval_motion_interaction_dataset("dut_11clip", dut_coh, 0.1, 256, 28, list(args.seeds), dev)
+        if args.imptc_tar is not None:
+            imp_path = ensure_imptc_sample(args.imptc_tar)
+            imp_coh = adapt_imptc_cohort(load_imptc_with_neighbors(imp_path))
+            imptc_res = _eval_motion_interaction_dataset("imptc_4seq", imp_coh, 0.1, 128, 28, list(args.seeds), dev)
 
     summary = {
         "experiment": "wave21_jaad_deocclusion_and_eth_ucy_6dataset",

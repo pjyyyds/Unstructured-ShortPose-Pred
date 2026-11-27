@@ -13,6 +13,8 @@ EXPECTED_JOBS = (
     ("wave21_polyline_crop_fix_and_dual_boundary.zip", "wave21_polyline_crop_fix_and_dual_boundary_5seed_verified.json"),
     ("wave21_jrdb_and_jta_emergence_maneuvers.zip", "wave21_jrdb_and_jta_emergence_maneuvers_5seed_verified.json"),
     ("wave21_jaad_deocclusion_and_eth_ucy_6dataset.zip", "wave21_jaad_deocclusion_and_eth_ucy_6dataset_5seed_verified.json"),
+    ("wave22_apa_leadtime_jaad_jta_and_pinns_delayed.zip", "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json"),
+    ("wave22_jrdb_delayed_apa_upgrade.zip", "wave22_jrdb_delayed_apa_upgrade_5seed_verified.json"),
 )
 
 
