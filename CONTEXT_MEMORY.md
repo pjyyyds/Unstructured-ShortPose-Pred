@@ -7,7 +7,7 @@
 
 ## 1. 核心目标与项目背景 (Objective & Background)
 - **项目定位**: 严格对标《彭嘉钰答辩.pptx》全部 20 页设定，面向无标线混合交通场景，在因果短时历史（主设定 10 Hz 五帧 $0.4\text{ s}$，扩展 $T \in \{2, 5, 8, 10, 20\}$）与可变质量 2D/3D 姿态下，联合预测未来 $3.0\text{ s}$（`JRDB` $2.8\text{ s}$、`JTA` $4.8\text{ s}$）$K=6$ 多模态地面轨迹与五类可观测动态动作（`Start, Stop, Turn-Left, Turn-Right, Maintain`）。
-- **当前阶段状态**: 已完成 **Waves 1–20 共 53 项成功云端实验归档**的双层 SHA-256 核验、**`119/119` 项本地单测全绿**、**十一幅 300-DPI 出版级图表（`fig10..20`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**Overleaf 即传双栏 `IEEEtran` LaTeX 投稿源码包**（`paper/ieee_tits_latex/main.tex` + `references.bib`）与 **20 页答辩 PPT 逐页证据映射表**（`paper/PPT_20Slides_Defense_Evidence_Map.md`），当前云端 `0 Active Events`、`0` 草稿会话，达到完整可答辩与可投稿状态。
+- **当前阶段状态**: 已完成 **Waves 1–20 共 53 项成功云端实验归档**的双层 SHA-256 核验、**`121/121` 项本地单测全绿**、**十一幅 300-DPI 出版级图表（`fig10..20`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**Overleaf 即传双栏 `IEEEtran` LaTeX 投稿源码包**（`paper/ieee_tits_latex/main.tex` + `references.bib`）、**逐页精准对齐的 20 页答辩 PPT 映射表与自动生成脚本**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到完整可答辩与可投稿状态。
 
 ---
 
@@ -32,9 +32,10 @@
 ## 4. 核心资产索引 (Core File Index)
 - `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（含连续 `[1]–[20]` 引文、表 1–10 / Tables I–VI 与图 10–20）。
 - `paper/ieee_tits_latex/main.tex` & `paper/ieee_tits_latex/references.bib` & `scripts/build_overleaf_bundle.py`: 双栏 `IEEEtran` LaTeX 期刊投稿源码包与一键 Overleaf 压缩包生成工具。
-- `paper/PPT_20Slides_Defense_Evidence_Map.md`: 20 页答辩 PPT 逐页证据映射表。
-- `tests/test_manuscript_json_consistency.py` & `tests/test_ieee_latex_submission.py`: 双语 Markdown 与 `IEEEtran` LaTeX 同 53 份验证 JSON 逐位数值/语法/引文一致性单测。
+- `paper/PPT_20Slides_Defense_Evidence_Map.md` & `scripts/build_defense_final_pptx.py`: 严格对齐原始 Slide 01–20 标题的证据链映射与 20 页清华紫结题答辩 PPTX 动态生成器。
+- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 双语 Markdown、`IEEEtran` LaTeX、综述与 20 页答辩 PPTX 同 53 份验证 JSON 逐位数值/版面/引文一致性单测。
 
 ## 5. 最近交互提要 (Recent Interactions)
 - `Turn 1`: 用户询问 `做的怎么样了` -> 完整汇报 Waves 1–20（53 份 SHA-256 归档）三大研究主线正负结论与核心交付索引。
-- `Turn 2`: 30 分钟巡检触发 -> 校准 `IEEE_TITS_ShortPose_Manuscript.md` 摘要与连续 `[1]–[20]` 文献，新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/`、一键 Overleaf 打包脚本与 `test_ieee_latex_submission.py` 全绿校验。
+- `Turn 2`: 30 分钟巡检触发 -> 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/`、一键 Overleaf 打包脚本与 `test_ieee_latex_submission.py`（提交 `906271a`）。
+- `Turn 3`: 30 分钟巡检触发 -> 将 `PPT_20Slides_Defense_Evidence_Map.md` 精确对齐原始 Slide 01–20 真实标题，补齐 `PROJECT_REVIEW_SUMMARY.md` Waves 19–20 闭环，新增 20 页清华紫结题答辩 PPTX 自动生成脚本与版面/数值单测 `test_defense_pptx_and_map.py`。
