@@ -36,7 +36,7 @@
 - `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_thuthesis_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 53 份验证 JSON 逐位数值/版面/引文一致性单测。
 
 ## 5. 最近交互提要 (Recent Interactions)
-- `Turn 1`: 用户询问 `做的怎么样了` -> 完整汇报 Waves 1–20（53 份 SHA-256 归档）三大研究主线正负结论与核心交付索引。
-- `Turn 2`: 30 分钟巡检触发 -> 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/` 与 `test_ieee_latex_submission.py`（提交 `906271a`）。
-- `Turn 3`: 30 分钟巡检触发 -> 将 `PPT_20Slides_Defense_Evidence_Map.md` 精确对齐原始 Slide 01–20，补齐 `PROJECT_REVIEW_SUMMARY.md` Waves 19–20 闭环，新增 20 页结题答辩 PPTX 自动生成脚本与单测（提交 `b0c3db7`）。
-- `Turn 4`: 30 分钟巡检触发 -> 同步校准中文学位论文 `ShortPose_Unstructured_Pedestrian_Paper.md` 中英文摘要与第七章结论（纳入 Waves 19–20 全套指标），新增 Overleaf 即传中文硕士论文 `XeLaTeX` 源码包 `paper/thuthesis_latex/` 与 `test_thuthesis_latex_submission.py`。
+- `Turn 2`: 新增双栏 `IEEEtran` 投稿包 `paper/ieee_tits_latex/` 与 `test_ieee_latex_submission.py`（提交 `906271a`）。
+- `Turn 3`: 将 `PPT_20Slides_Defense_Evidence_Map.md` 对齐原始 Slide 01–20，新增 20 页结题答辩 PPTX 生成器与单测（提交 `b0c3db7`）。
+- `Turn 4`: 同步校准中文学位论文摘要/结论并新增 `XeLaTeX` 源码包 `paper/thuthesis_latex/`（提交 `38c073a`）。
+- `Turn 5`: 用户明确下一阶段聚焦核心问题“遮挡后刚初现时五帧姿态能否比只看位置更早判断起步/停止/转向”并要求多用不同数据集 -> 查明 `low_damp` 与 `cv_low_bonus` 导致小位移下“没生成+没选中”及跨站混用动作阈值、重复裁剪漏线两处代码缺陷；新增 `O2Maneuver6SlotPrecursorNet`（显式六槽假设+时序姿态先兆+源折精度约束切换）与盲审遮挡初现分级、双判据实体障碍及 `PINNS + JRDB + JTA-228 + JAAD-2.0 + ETH/UCY + DUT + IMPTC` 多数据集评测套件（提交 `8b839a1`），通过本地 PyTorch 单测并启动并行 Kaggle `GPU T4 x2` Wave 21 作业。
