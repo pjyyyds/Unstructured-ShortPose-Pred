@@ -100,13 +100,20 @@ class TestIeeeLatexSubmission(unittest.TestCase):
         self.assertIn(f"{dec_ap:.4f}", tex)
         self.assertIn(f"{jc_hyb['90']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}\\% / {jc_hyb['95']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}\\%", tex)
 
+        w21_p = json.loads((res / "wave21_pinns_true_emergence_and_6slot_diag_5seed_verified.json").read_text())
+        s6p = w21_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_pose_nbr"]
+        w22_l = json.loads((res / "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json").read_text())
+        lead_st = w22_l["jaad2_sliding_leadtime"]["matched_fpr_0p05"]["locked_test_post_deocclusion"]["paired_lead_gain_s"]["Start"]["pose_minus_kin_lead_s_mean"] * 1000.0
+        self.assertIn(f"{s6p['ade1_full_m']:.4f} / {s6p['fde1_full_m']:.4f}", tex)
+        self.assertIn(f"+{lead_st:.1f}", tex)
+
         with tempfile.TemporaryDirectory() as td:
             out_zip = build_overleaf_zip(Path(td) / "overleaf.zip")
             with zipfile.ZipFile(out_zip) as zf:
                 names = set(zf.namelist())
                 self.assertIn("main.tex", names)
                 self.assertIn("references.bib", names)
-                self.assertEqual(len([n for n in names if n.startswith("figures/")]), 4)
+                self.assertEqual(len([n for n in names if n.startswith("figures/")]), 6)
 
 
 if __name__ == "__main__":

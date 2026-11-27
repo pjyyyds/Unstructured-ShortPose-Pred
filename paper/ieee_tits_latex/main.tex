@@ -301,10 +301,50 @@ Three targeted audits close the remaining architectural and safety questions (Fi
 \label{fig:wave19_20}
 \end{figure*}
 
-\section{Discussion, Limitations, and Conclusion}
-\textbf{Limitations and Methodological Transparency:} (1) On $<0.5\text{ m}$ monocular emergence (\texttt{first\_short\_323}), single-camera 2D pose back-projection yields $-0.22\text{ cm}$ over \texttt{Regime\_M0} yet remains statistically indistinguishable from \texttt{Last-2 CV} ($[-0.20, +0.26]\text{ cm}$), consistent with $\sim 0.28\text{ m}$ roadside homography tolerances in \texttt{PINNS}~\cite{peng2026pinns}; boxes $<50\text{ px}$ or $q_1 < 0.75$ require monotonic shutoff. (2) First-sampled cohorts ($449 / 261$ windows) track annotation onset rather than segmented physical occluders, and passive BEV contours ($2.36\%$ GT crossing) cannot replace physical barrier labels. (3) All $53$ cloud result archives carry dual-layer SHA-256 verification and open reproduction scripts (\url{https://github.com/pjyyyds/Unstructured-ShortPose-Pred}).
+\subsection{True Physical De-Occlusion Emergence, 6-Slot Precursors, and APA Millisecond Lead-Time Across Seven Benchmarks}
+To test whether 5 frames of pose judge \texttt{Start}, \texttt{Stop}, or \texttt{Turn} earlier than ground position right after physical de-occlusion, Table~\ref{tab:wave21_22} and Figs.~\ref{fig:wave21}--\ref{fig:wave22} synthesize Waves 21--22 across seven benchmarks (\texttt{PINNS}, \texttt{JRDB}, \texttt{JAAD 2.0}~\cite{kotseruba2017jaad}, native \texttt{JTA-228}, \texttt{ETH/UCY}~\cite{pellegrini2009eth}, \texttt{DUT}, and \texttt{IMPTC}):
+\begin{enumerate}
+  \item \textbf{Blind Occluder Census \& 6-Slot Precursors:} Prediction-free raw-track auditing shows $175 / 323$ ($54.2\%$) of \texttt{first\_short\_323} are Frame-0 clip-start artifacts, leaving $197 / 449$ ($118 / 323$) true physical occluder emergences ($75.6\%$ clear torso $\ge 50\text{ px}$). Removing low-displacement damping in \texttt{O2Maneuver6SlotPrecursorNet} ($O(2)$ equivariance error $4.44\times 10^{-16}\text{ m}$) lifts \texttt{PINNS} \texttt{Start} candidate generation from $1/9$ (\texttt{S6\_M0}) to $9/9$ ($100\%$), sets our new best 4-country \texttt{PINNS} $\text{ADE}_1 / \text{FDE}_1$ at $0.4472 / 0.9926\text{ m}$ ($-9.37 / -22.11\text{ cm}$ vs.\ \texttt{CV} on $197$ true emergences; pure-pose post-onset $+0.5\text{ s}/+1.0\text{ s}$ $-2.17 / -2.19\text{ cm}$ on $109$ emerging maneuvers, 95\% CIs $[-2.30, -1.58]$ / $[-2.39, -1.60]$), and for the first time surpasses \texttt{Last-2 CV} ($0.2812 / 0.5521\text{ m}$) on 9-location \texttt{JRDB} ($0.2772 / 0.5357\text{ m}$ \texttt{S6\_M2b}, $0.2786 / 0.5402\text{ m}$ \texttt{S6\_Full}; pure 3D pose post-onset $-0.22 / -0.25\text{ cm}$ on $507$ true de-occlusions).
+  \item \textbf{Human-Annotated De-Occlusion \& Millisecond APA Lead-Time:} Across $406$ human-annotated \texttt{full/part->none} de-occlusion test windows ($74$ videos in \texttt{JAAD 2.0}), 5-frame pose + gaze cuts post-onset $+0.5\text{ s}/+1.0\text{ s}$ error by $-17.2\%$ ($[-0.0541, -0.0155]$ / $[-0.0772, -0.0314]$; $-25.2\%$ on $82$ maneuvers; \texttt{Start/Stop/Cross} AP $0.6039/0.0754/0.3470 \to 0.7443/0.1620/0.4203$). At matched $5\%$ val-calibrated negative FPR ($6{,}491$ \texttt{JAAD 2.0} and $7{,}143$ \texttt{JTA-228} sliding windows), pose + gaze detects post-de-occlusion \texttt{Start} $+873.1\text{ ms}$ earlier than position alone ($[+596.1, +1153.8]\text{ ms}$, pre-onset recall $19.23\% \to 73.08\%$, $80.77\%$ with vehicle) and \texttt{Stop} $+557.9\text{ ms}$ earlier ($[+326.3, +810.5]\text{ ms}$, recall $15.79\% \to 57.89\%$). Delayed-onset APA curves raise \texttt{Stop} candidate generation to $18/18$ (\texttt{PINNS}) and $2/2$ (\texttt{JRDB}), while forced $5\%$-FPR \texttt{Top-1} overrides on unaligned $3.0\text{ s}$ windows confirm rare-event false positives ($9/39$ \texttt{Start}, $19/264$ \texttt{Stop}).
+  \item \textbf{Un-Cropped Polyline Fix \& Solid-Barrier Audit:} Unioning causal clip polylines restores missing lines in $350 / 835$ windows, and dual-criterion blind classification ($\kappa = 0.8731$) reduces GT crossing rate from $2.36\%$ to $0.27\%$, yet \texttt{No\_Map} ($0.4919\text{ m}$) still outperforms both fixed auto ($0.5118\text{ m}$) and dual-confirmed solid barriers ($0.5069\text{ m}$).
+\end{enumerate}
 
-\textbf{Conclusion:} Across six mixed-traffic benchmarks, $O(2)$ parity-equivariant Frenet canonicalization, structurally monotonic quality gating, causal radial-conflict neighbor gating, representation-decoupled Platt action reranking, and zero-retrain locally-weighted split-conformal calibration achieve compact ($20.7\text{k}\text{--}28.0\text{k}$ parameters), real-time ($2.75\text{--}4.78\text{ ms}$ on \texttt{Tesla T4}), and statistically rigorous pedestrian trajectory forecasting.
+\begin{table*}[!t]
+\centering
+\caption{Seven-Benchmark Physical De-Occlusion Emergence, $2\times 2$ Pose Attribution, and APA Millisecond Lead-Time Summary (5 Seeds)}
+\label{tab:wave21_22}
+\footnotesize
+\begin{tabular}{lllll}
+\toprule
+Benchmark \& Split & Emergence Cohort & Primary ($\text{ADE}_1 / \text{FDE}_1$) & Post-Onset $+0.5\text{s} / +1.0\text{s}$ Pose/Full Gain & Precursor Gen \& $5\%$-FPR Lead \\
+\midrule
+\texttt{PINNS} 4-Country & $1{,}482$ / $197$ Emg & \textbf{0.4472 / 0.9926 m} (CV 0.4839) & Maneuver ($109$) Pose: \textbf{$-2.17 / -2.19\text{ cm}$} & \texttt{Start/Stop} Gen \textbf{100\%} \\
+\texttt{JAAD 2.0} Dashcam & $953$ / $406$ De-Occl & \textbf{0.4250 / 1.0461} (CV 0.4873) & De-Occl Pose: \textbf{$-17.2\%$} ($82$ Man \textbf{$-25.2\%$}) & \texttt{Start} \textbf{+873.1 ms}, \texttt{Stop} \textbf{+557.9 ms} \\
+\texttt{JRDB} 9-Location & $5{,}836$ / $507$ De-Occl & \textbf{0.2772--0.2786 m} (CV 0.2812) & De-Occl 3D Pose: \textbf{$-0.22 / -0.25\text{ cm}$} & APA \texttt{Stop} Gen \textbf{2/2 (100\%)} \\
+\texttt{JTA-228} Urban & $1{,}267$ Locked Test & \textbf{0.5564 / 1.1214 m} (CV 0.5659) & Test Pure Pose: \textbf{$-0.19 / -0.20\text{ cm}$} & 100\% Pre-Onset \texttt{Start/Stop} \\
+\texttt{ETH/UCY} + \texttt{DUT/IMPTC} & $4{,}187 + 3{,}066 + 564$ & \texttt{DUT} \textbf{0.3483} / \texttt{IMPTC} \textbf{0.2061 m} & \texttt{ETH} Man \textbf{$-9.11 / -11.08\text{ cm}$}; $0.0\text{ cm}$ leak & Zero-pose negative control verified \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{fig21_wave21_true_emergence_6slot_and_7dataset_precursors.png}
+\caption{Blind physical emergence decomposition, 6-candidate generation vs.\ selection audit, 7-benchmark relative error synthesis, and un-cropped polyline \& dual-confirmed solid barrier evaluation.}
+\label{fig:wave21}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{fig22_wave22_apa_leadtime_and_delayed_onset.png}
+\caption{Biomechanical APA pre-onset millisecond lead-time on \texttt{JAAD 2.0} and \texttt{JTA-228}, matched-FPR pre-onset recall on \texttt{PINNS}/\texttt{JRDB}, and delayed-onset \texttt{Start/Stop} candidate upgrade.}
+\label{fig:wave22}
+\end{figure*}
+
+\section{Discussion, Limitations, and Conclusion}
+\textbf{Limitations and Methodological Transparency:} (1) On $<0.5\text{ m}$ monocular emergence (\texttt{first\_short\_323}), single-camera 2D pose back-projection yields $-0.22\text{ cm}$ over \texttt{Regime\_M0} (and $-1.01 / -2.33\text{ cm}$ under conflict interaction in \texttt{S6\_Full}, $0.3492 / 0.8187\text{ m}$) yet remains statistically tied with \texttt{Last-2 CV} ($[-2.68, +1.54]\text{ cm}$), consistent with $\sim 0.28\text{ m}$ roadside homography tolerances in \texttt{PINNS}~\cite{peng2026pinns} and $54.2\%$ Frame-0 clip-start composition; boxes $<50\text{ px}$ or $q_1 < 0.75$ require monotonic shutoff. (2) Even after un-cropped clip polyline union and dual-confirmed solid-barrier filtering ($\kappa = 0.8731$, $0.27\%$ GT crossing), static $20\text{ m}$ polylines do not improve \texttt{Top-1} forecasting over \texttt{No\_Map}. (3) All $59$ cloud result archives carry dual-layer SHA-256 verification (\url{https://github.com/pjyyyds/Unstructured-ShortPose-Pred}).
+
+\textbf{Conclusion:} Across seven mixed-traffic benchmarks, $O(2)$ parity-equivariant Frenet canonicalization, structurally monotonic quality gating, causal radial-conflict neighbor gating, decoupled Platt action reranking, explicit 6-slot APA precursors ($0.4472 / 0.9926\text{ m}$ on \texttt{PINNS}, $0.2772\text{--}0.2786\text{ m}$ surpassing \texttt{CV} on \texttt{JRDB}, $+873.1\text{ ms}$ \texttt{Start} and $+557.9\text{ ms}$ \texttt{Stop} lead time on \texttt{JAAD 2.0}), and zero-retrain locally-weighted split-conformal calibration achieve compact ($20.7\text{k}\text{--}28.0\text{k}$ parameters), real-time ($2.75\text{--}4.78\text{ ms}$ on \texttt{Tesla T4}), and statistically rigorous pedestrian forecasting.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

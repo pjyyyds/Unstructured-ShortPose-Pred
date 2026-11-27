@@ -122,6 +122,30 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
             self.assertIn(f"{jc_hyb['90']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}% / {jc_hyb['95']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}%", txt)
             self.assertIn("fig20_wave19_20_unified_dut_boundary_and_adaptive_conformal.png", txt)
 
+        w21_p = json.loads((res / "wave21_pinns_true_emergence_and_6slot_diag_5seed_verified.json").read_text())
+        s6p = w21_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_pose_nbr"]
+        c_323_st = w21_p["blind_emergence_census"]["first_short_323"]["clip_start_frame0_artifact"]
+        w21_b = json.loads((res / "wave21_polyline_crop_fix_and_dual_boundary_5seed_verified.json").read_text())
+        kap = w21_b["map_and_rater_diagnostics"]["dual_rater_cohen_kappa"]
+        w21_j = json.loads((res / "wave21_jrdb_and_jta_emergence_maneuvers_5seed_verified.json").read_text())
+        s6j = w21_j["jrdb_9location_lolo"]["strata"]["all_5836"]["models"]["S6_M2b_nopose_nbr"]
+        w21_6 = json.loads((res / "wave21_jaad_deocclusion_and_eth_ucy_6dataset_5seed_verified.json").read_text())
+        j_deocc = w21_6["jaad2_human_deocclusion_346vid"]["strata"]["human_annotated_deocclusion"]["models"]["J_Full_pose_veh"]
+        w22_l = json.loads((res / "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json").read_text())
+        lead_st = w22_l["jaad2_sliding_leadtime"]["matched_fpr_0p05"]["locked_test_post_deocclusion"]["paired_lead_gain_s"]["Start"]["pose_minus_kin_lead_s_mean"] * 1000.0
+        w22_jr = json.loads((res / "wave22_jrdb_delayed_apa_upgrade_5seed_verified.json").read_text())
+        self.assertTrue(w22_jr["verification"]["dual_sha256_verified"])
+
+        for txt in (zh, en):
+            self.assertIn(f"{s6p['ade1_full_m']:.4f} / {s6p['fde1_full_m']:.4f}", txt)
+            self.assertIn(f"{c_323_st} / 323", txt)
+            self.assertIn(f"{kap:.4f}", txt)
+            self.assertIn(f"{s6j['ade1_full_m']:.4f} / {s6j['fde1_full_m']:.4f}", txt)
+            self.assertIn(f"{j_deocc['ade_full']:.4f} / {j_deocc['fde_full']:.4f}", txt)
+            self.assertIn(f"+{lead_st:.1f} ms", txt)
+            self.assertIn("fig21_wave21_true_emergence_6slot_and_7dataset_precursors.png", txt)
+            self.assertIn("fig22_wave22_apa_leadtime_and_delayed_onset.png", txt)
+
 
 if __name__ == "__main__":
     unittest.main()

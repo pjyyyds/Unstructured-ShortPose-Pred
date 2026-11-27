@@ -72,11 +72,17 @@ def _load_verified_metrics(res: Path) -> dict[str, str]:
     w19_ac = json.loads((res / "wave19_adaptive_conformal_12_and_72pair_5seed_verified.json").read_text())
     w20_d = json.loads((res / "wave20_decoupled_m2b_m3_synergy_5seed_verified.json").read_text())
     w20_m = json.loads((res / "wave20_true20f_mono_3x3_matrix_5seed_verified.json").read_text())
+    w21_p = json.loads((res / "wave21_pinns_true_emergence_and_6slot_diag_5seed_verified.json").read_text())
+    w21_j = json.loads((res / "wave21_jrdb_and_jta_emergence_maneuvers_5seed_verified.json").read_text())
+    w22_l = json.loads((res / "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json").read_text())
 
     m0a = anch["strata"]["all_1482"]["models"]["M0_anchor"]["site_equal"]
     cv323 = anch["strata"]["first_short_323"]["models"]["CV"]["site_equal"]
     rg = w17_1["pinns_lowdisp_regime_loso"]["first_short_323"]["models"]["Regime_M1_ground"]["site_equal"]
     dec = w20_d["pinns_4site_loso_1482"]["strata"]["all_1482"]["models"]["U_M3_decoupled_platt_rerank"]
+    s6p = w21_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_pose_nbr"]
+    s6j = w21_j["jrdb_9location_lolo"]["strata"]["all_5836"]["models"]["S6_M2b_nopose_nbr"]
+    lead_st = w22_l["jaad2_sliding_leadtime"]["matched_fpr_0p05"]["locked_test_post_deocclusion"]["paired_lead_gain_s"]["Start"]["pose_minus_kin_lead_s_mean"] * 1000.0
     uni_j = w19_uni["jrdb_9location_lolo_5836"]["strata"]["all_10scenes"]["models"]["U_M3_mono_conflict_rerank"]["group_equal"]
     c_ws = m03["fixed_predictor_split_conformal"]["within_site_clip_split_fixed_3site_predictor"]
     dut_cf = w19_ext["dut_3066_zero_shot"]["zero_retrain_split_conformal"]["cross_group_ordered_pairs_no_retrain"]["M2b_ttc_conflict_gate"]
@@ -88,6 +94,9 @@ def _load_verified_metrics(res: Path) -> dict[str, str]:
         "cv323": f"{cv323['ade1_m']:.4f} / {cv323['fde1_m']:.4f} m",
         "rg323": f"{rg['ade1_m']:.4f} / {rg['fde1_m']:.4f} m",
         "dec_p": f"{dec['group_equal_ade1_m']:.4f} / {dec['group_equal_fde1_m']:.4f} m",
+        "s6_p": f"{s6p['ade1_full_m']:.4f} / {s6p['fde1_full_m']:.4f} m",
+        "s6_j": f"{s6j['ade1_full_m']:.4f} / {s6j['fde1_full_m']:.4f} m",
+        "lead_st": f"+{lead_st:.1f} ms",
         "dec_ap": f"{w20_d['pinns_4site_loso_1482']['decoupled_action_platt_inner_opt_thr']['group_equal']['macro_ap']:.4f}",
         "uni_j": f"{uni_j['ade1_m']:.4f} / {uni_j['fde1_m']:.4f} m",
         "rho_p": f"+{t4['pinns_monotonic_gate_1482']['gate_audit']['M1_mono_q']['spearman_gate_vs_q1_valid_joint_ratio']:.4f}",
@@ -131,7 +140,7 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
     p2.font.color.rgb = WHITE
     p2.space_before = Pt(16)
     p3 = tf.add_paragraph()
-    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  53 份云端双层 SHA-256 验证归档 · 正负结论全透明"
+    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  59 份云端双层 SHA-256 验证归档 · 七大基准正负结论全透明"
     p3.font.size = Pt(16)
     p3.font.color.rgb = WHITE
     p3.space_before = Pt(28)
@@ -225,16 +234,14 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
                    "fig20_wave19_20_unified_dut_boundary_and_adaptive_conformal.png")
 
 
-    # Slide 12: Datasets & Usable Conditions
-    s12 = _add_chrome(prs, "03 主要研究内容", "数据基准与姿态可用样本条件", 12)
-    _add_card(s12, 0.6, 1.35, 5.95, 5.3, "六大跨场景测试基准（无测试泄漏）",
-              ["PINNS 四国跨站留一：1,482 不重叠窗 + 623 真 20 帧窗（47 段视频）",
-               "JRDB 校园九地留一：5,836 不重叠窗（800 独立行人，3D BlazePose）",
-               "外部泛化：DUT（3,066 混行窗）、IMPTC（564 路口窗）、JTA（960 窗）、DAIR-V2X（54 窗）"])
-    _add_card(s12, 6.8, 1.35, 5.95, 5.3, "定量确立的三大物理与统计可用边界",
-              ["位移边界：5 帧位移 <0.5 m（first_short_323）单目地面反投影未超越末两点匀速",
-               "分辨率与完整度边界：框高 >=50 px 且有效关节率 q1 >=0.75 方可安全启用非零姿态",
-               "滑窗相关性边界：旧 497 滑窗按 21 段视频整段重采样仅 16/25 项区间排除零"])
+    # Slide 12: 7 Benchmarks & Blind Emergence Census (with Fig 21)
+    _add_fig_slide(12, "03 主要研究内容", "七大跨场景测试基准、真实遮挡初现与可用条件",
+                   "七大异构基准与盲审实体遮挡初现发现",
+                   ["盲审发现 first_short_323 中 54.2% 为录像首帧伪影，真实体遮挡初现 197/449 窗",
+                    f"六槽先兆 S6 创 PINNS 新低 {m['s6_p']}，JRDB 九地首次超越匀速达 {m['s6_j']}",
+                    "车载 JAAD 2.0（406 人工解遮挡测试窗）五帧姿态起点后误差显著降 -17.2%（机动 -25.2%）",
+                    "双盲实体障碍确认（kappa=0.8731，穿线率 0.27%）证实静态折线仍逊于 No_Map；框高需 >=50 px"],
+                   "fig21_wave21_true_emergence_6slot_and_7dataset_precursors.png")
 
     # Slide 13: Full Ablation & Zero-Retrain Conformal (with Fig 17)
     _add_fig_slide(13, "03 主要研究内容", "三项研究的实验对照、消融与零重训分裂共形",
@@ -245,11 +252,17 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
                     "JRDB >=1 m/s 快速行人 90% 覆盖率由 75.06% 跃升至 89.51%（历史重训经验覆盖单独区分）"],
                    "fig17_ppt_mainline_conformal_and_short_disp.png")
 
-    # Slides 14-20: Schedule, Outcomes, Thanks, & 4 Appendix Slides
+    # Slide 14: APA Millisecond Lead-Time & Project Completion (with Fig 22)
+    _add_fig_slide(14, "04 研究计划与预期成果", "预期姿态调整（APA）毫秒级提前量与 Waves 1–22 收官",
+                   "59 份 SHA-256 云端归档与 APA 提前量突破",
+                   [f"JAAD 2.0 同 5% 误报门限下：解遮挡起步检出提前 {m['lead_st']}（召回 19.2% -> 80.8%），停步提前 +557.9 ms",
+                    "延迟起点 APA 升级将 PINNS/JRDB 起步与停步六候选生成命中率拉满至 100%",
+                    "证实稀有机动基率定律：<=0.8 s APA 先兆期显著提前判别，远期非对齐窗保守净收益门限最优",
+                    "累计完成 59 份双层 SHA-256 验证归档（覆盖 7 大基准，正负结论与烟测修复全透明）"],
+                   "fig22_wave22_apa_leadtime_and_delayed_onset.png")
+
+    # Slides 15-20: Outcomes, Thanks, & 4 Appendix Slides
     for pg, sec, ttl, h1, b1, h2, b2 in [
-        (14, "04 研究计划与预期成果", "论文工作进度总结（Waves 1–20 全部收官）",
-         "云端受控实验与双层哈希核验", ["累计完成 Waves 1–20 共 53 份 Kaggle 云端实验归档（全部双层 SHA-256 核验）", "如实归档历史失败与提前取消运行记录（w13-cpu1 限额、374265835 等）"],
-         "自动化回归测试与开源复现体系", ["构建 120+ 项本地单测（含 O(2) 精确等变、零重训共形、中英 LaTeX 逐位数值核验）", "公开仓库严守数据隐私红线（零私有权重/原始视频泄露）"]),
         (15, "04 研究计划与预期成果", "预期成果达成情况与实测硬件帕累托",
          "Tesla T4 实测计算效率（全面优于开题预期）", ["参数量仅 20,739–28,005（约为主流姿态 Transformer 的 1/18）", f"B=12 算量仅 1.56 MFLOPs（比 HST 低 396 倍），P50/P95 延迟 {m['t4_lat']}，显存 23.48 MiB"],
          "学术论文与答辩交付物", ["中文硕士学位论文完整稿（含表 1–10、300-DPI 图 1–20）", "IEEE T-ITS 双栏英文手稿及 Overleaf 即传 IEEEtran LaTeX 源码包"]),

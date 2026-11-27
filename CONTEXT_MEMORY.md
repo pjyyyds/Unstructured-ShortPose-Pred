@@ -7,7 +7,7 @@
 
 ## 1. 核心目标与项目背景 (Objective & Background)
 - **项目定位**: 严格对标《彭嘉钰答辩.pptx》全部 20 页设定，面向无标线混合交通场景，在因果短时历史（主设定 10 Hz 五帧 $0.4\text{ s}$，扩展 $T \in \{2, 5, 8, 10, 20\}$）与可变质量 2D/3D 姿态下，联合预测未来 $3.0\text{ s}$（`JRDB` $2.8\text{ s}$、`JTA` $4.8\text{ s}$）$K=6$ 多模态地面轨迹与五类可观测动态动作（`Start, Stop, Turn-Left, Turn-Right, Maintain`）。
-- **当前阶段状态**: 已完成 **Waves 1–20 共 53 项成功云端实验归档**的双层 SHA-256 核验、**`121/121` 项本地单测全绿**、**十一幅 300-DPI 出版级图表（`fig10..20`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**Overleaf 即传双栏 `IEEEtran` LaTeX 投稿源码包**（`paper/ieee_tits_latex/main.tex` + `references.bib`）、**逐页精准对齐的 20 页答辩 PPT 映射表与自动生成脚本**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到完整可答辩与可投稿状态。
+- **当前阶段状态**: 已完成 **Waves 1–22 共 59 项成功云端实验归档**的双层 SHA-256 核验（覆盖 `PINNS, JRDB, JAAD 2.0, JTA-228, ETH/UCY, DUT, IMPTC` 七大异构基准 + `DAIR-V2X`）、**`126/126` 项本地单测全绿**、**十三幅 300-DPI 出版级图表（`fig10..22`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**双套 Overleaf 即传源码包**（`paper/ieee_tits_latex/` 双栏 `IEEEtran` + `paper/thuthesis_latex/` 中文 `XeLaTeX`）、**逐页精准对齐的 20 页答辩 PPT 映射表与动态生成 PPTX**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到强优势可发表与可答辩收官状态。
 
 ---
 
@@ -26,6 +26,9 @@
 - [x] **研究内容三（解耦五动作校准重排、不重训局部加权共形与 `Tesla T4` 效率）**:
   - 冻结 `U_M2b_mono_conflict` 控制点解耦训练五动作并重排（`U_M3_decoupled_platt_rerank`，`0.0 m` 漂移）在 `PINNS` 创最佳首选 **`0.4505 / 1.0085 m`**（较联合微调降 **`−2.20 / −4.08 cm`**，宏 AP **`0.4051`**）；`JRDB` 大折重排达 **`0.2917 / 0.5638 m`**（`ECE` 降 **18.6–23.6x**）。
   - **全程不重训分裂共形**覆盖四大基准：`PINNS` 同站 `90.60%/94.94%`（12 跨国对 `86.48%/91.74%`），`DUT` 72 跨片对 **`89.76%/95.50%`**，`IMPTC` 12 跨序列对 **`89.51%/94.21%`**；`JRDB` 72 跨地点对经源折因果速度-离散度加权升至 **`88.89%/94.20%`**（半径缩 **`−55.8%/−52.5%`**，`>=1 m/s` 快速覆盖由 `75.06%` 升至 **`89.51%`**）。`Tesla T4` `B=12` `P50` 仅 **`2.75–4.78 ms`**（算量较 `HST` 低 **396 倍**）。
+- [x] **深化聚焦（实体遮挡初现先兆、APA 毫秒级提前量与七基准闭环，Waves 21–22）**:
+  - 盲审揭示 `PINNS` `first_short_323` 中 **`175/323`（`54.2%`）为录像第 0 帧伪影**，真实实体遮挡初现 `197/449` 窗；显式六槽先兆网络 **`O2Maneuver6SlotPrecursorNet`** 创 `PINNS` 最优 **`0.4472 / 0.9926 m`**（起步与延迟 APA 停步六候选生成 **`100%`**，真初现机动 `109` 窗纯姿态起点后降 **`−2.17 / −2.19 cm`**），并在 `JRDB` 九地留一首次超越匀速（`0.2812 m`）达 **`0.2772–0.2786 m`**（真解遮挡 `507` 窗纯 3D 姿态起点后降 **`−0.22 / −0.25 cm`**）。
+  - **JAAD 2.0**（346 段视频，`406` 个人工标注真实解遮挡测试窗）五帧姿态与注视降低起点后误差 **`−17.2%`**（`82` 机动窗 **`−25.2%`**），且在同 `5%` 验证集误报门限下将解遮挡**起步检出提前 `+873.1 ms`（召回 `19.23% -> 80.77%`）、停步提前 `+557.9 ms`（召回 `15.79% -> 57.89%`）**；修复整片折线并集（`350/835` 窗）与双确认实体障碍（$\kappa=0.8731$，穿线率 `0.27%`）证实静态折线仍逊于 `No_Map`（`+1.50 cm`）。
 
 ---
 

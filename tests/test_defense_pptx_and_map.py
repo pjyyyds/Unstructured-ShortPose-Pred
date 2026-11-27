@@ -6,13 +6,17 @@ import re
 import tempfile
 import unittest
 
-from pptx import Presentation
-from pptx.enum.shapes import MSO_SHAPE_TYPE
-
-from scripts.build_defense_final_pptx import build_defense_pptx
+try:
+    from pptx import Presentation
+    from pptx.enum.shapes import MSO_SHAPE_TYPE
+    from scripts.build_defense_final_pptx import build_defense_pptx
+    HAS_PPTX = True
+except ImportError:
+    HAS_PPTX = False
 
 
 class TestDefensePptxAndReviewLinks(unittest.TestCase):
+    @unittest.skipUnless(HAS_PPTX, "python-pptx installed in system python")
     def test_defense_pptx_20_slides_bounds_figures_and_metrics(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             out = build_defense_pptx(Path(td) / "defense_20.pptx")
@@ -36,10 +40,13 @@ class TestDefensePptxAndReviewLinks(unittest.TestCase):
                     if sh.has_text_frame:
                         full_text_chunks.append(sh.text_frame.text)
 
-            self.assertEqual(pic_slides, [9, 10, 11, 13])
+            self.assertEqual(pic_slides, [9, 10, 11, 12, 13, 14])
             joined = "\n".join(full_text_chunks)
             for expected in (
                 "0.4505 / 1.0085 m",
+                "0.4472 / 0.9926 m",
+                "0.2772 / 0.5357 m",
+                "+873.1 ms",
                 "0.3545 / 0.8491 m",
                 "+0.7301",
                 "89.76% / 95.50%",

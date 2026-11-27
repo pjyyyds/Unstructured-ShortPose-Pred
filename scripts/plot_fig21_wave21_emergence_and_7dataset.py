@@ -53,10 +53,10 @@ def render_fig21(results_dir: Path, out_png: Path) -> Path:
     cd = p_pinns["pinns_4site_loso"]["candidate_generation_vs_selection_seed0"]
     mans = ["Start", "Stop", "Turn_Left", "Turn_Right"]
     xm = np.arange(len(mans))
-    u_gen = [100.0 * cd["U_M3_decoupled_site_thr"][m]["any6_gen_hit_rate"] for m in mans]
-    u_sel = [100.0 * cd["U_M3_decoupled_site_thr"][m]["top1_selected_hit_rate"] for m in mans]
-    s_gen = [100.0 * cd["S6_Full_pose_nbr"][m]["any6_gen_hit_rate"] for m in mans]
-    s_sel = [100.0 * cd["S6_Full_pose_nbr"][m]["top1_selected_hit_rate"] for m in mans]
+    u_gen = [100.0 * cd["U_M3_decoupled_site_thr"][m]["any6_generated_hits"] / max(cd["U_M3_decoupled_site_thr"][m]["n_true"], 1) for m in mans]
+    u_sel = [100.0 * cd["U_M3_decoupled_site_thr"][m]["top1_selected_hits"] / max(cd["U_M3_decoupled_site_thr"][m]["n_true"], 1) for m in mans]
+    s_gen = [100.0 * cd["S6_Full_pose_nbr"][m]["any6_generated_hits"] / max(cd["S6_Full_pose_nbr"][m]["n_true"], 1) for m in mans]
+    s_sel = [100.0 * cd["S6_Full_pose_nbr"][m]["top1_selected_hits"] / max(cd["S6_Full_pose_nbr"][m]["n_true"], 1) for m in mans]
     ax.bar(xm - 0.27, u_gen, width=0.17, color="#AEB6BF", label="Legacy U_M3 Any-6 Gen (%)")
     ax.bar(xm - 0.09, u_sel, width=0.17, color="#566573", label="Legacy U_M3 Top-1 Sel (%)")
     ax.bar(xm + 0.09, s_gen, width=0.17, color="#85C1E9", label="6-Slot S6_Full Any-6 Gen (%)")
@@ -67,37 +67,47 @@ def render_fig21(results_dir: Path, out_png: Path) -> Path:
     ax.set_title("(b) 'Not Generated' vs 'Not Selected' 6-Candidate Audit")
     ax.legend(frameon=False, fontsize=7.8, ncol=2, loc="upper right")
     ax.grid(axis="y", linestyle="--", alpha=0.32)
-    # Panel (c): 7-Dataset Emergence / Maneuver-Onset Gain vs Constant Velocity (cm, negative = better)
+    # Panel (c): Dimensionally consistent Relative ADE1 Delta vs. Last-2 CV (%) across all 7 Benchmarks
     ax = axes[1, 0]
-    ds_rows = [
-        ("PINNS\n(True Emg)", p_pinns["pinns_4site_loso"]["strata"]["true_occluder_emergence_all"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
-        ("JRDB\n(9-Loc Emg)", p_jj["jrdb_9location_lolo"]["strata"]["true_deocclusion_emergence"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
-        ("JTA-228\n(Test Emg)", p_jj["jta_native_urban_emergence"]["strata"]["official_locked_test_true_emergence"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
-        ("JAAD 2.0\n(De-Occl*)", p_j6["jaad2_human_deocclusion_346vid"]["strata"]["human_annotated_deocclusion"]["models"], "J_Full_pose_veh", "ade_full", "ade_post_onset_1p0s"),
-        ("ETH/UCY\n(5-Scene)", p_j6["eth_ucy_5scene_lodo"]["strata"]["true_emergence_midclip"]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"),
+    j_emg = p_j6["jaad2_human_deocclusion_346vid"]["strata"]["human_annotated_deocclusion"]["models"]
+    j_man = p_j6["jaad2_human_deocclusion_346vid"]["strata"]["human_deocclusion_start_stop_cross"]["models"]
+    ds7 = [
+        ("PINNS\n(4 Countries)",
+         p_pinns["pinns_4site_loso"]["strata"]["true_occluder_emergence_all"]["models"],
+         p_pinns["pinns_4site_loso"]["strata"]["true_emergence_active_maneuver"]["models"],
+         "S6_Full_pose_nbr", "ade1_full_m"),
+        ("JRDB\n(9 Locations)",
+         p_jj["jrdb_9location_lolo"]["strata"]["true_deocclusion_emergence"]["models"],
+         p_jj["jrdb_9location_lolo"]["strata"]["true_emergence_active_maneuver"]["models"],
+         "S6_Full_pose_nbr", "ade1_full_m"),
+        ("JAAD 2.0\n(346 Videos)", j_emg, j_man, "J_M1_pose_gaze", "ade_post_onset_1p0s"),
+        ("JTA-228\n(Urban Test)",
+         p_jj["jta_native_urban_emergence"]["strata"]["official_locked_test_all"]["models"],
+         p_jj["jta_native_urban_emergence"]["strata"]["official_locked_test_true_emergence"]["models"],
+         "S6_Full_pose_nbr", "ade1_full_m"),
+        ("ETH/UCY\n(5 Scenes)",
+         p_j6["eth_ucy_5scene_lodo"]["strata"]["true_emergence_midclip"]["models"],
+         p_j6["eth_ucy_5scene_lodo"]["strata"]["emergence_active_maneuver"]["models"],
+         "S6_Full_pose_nbr", "ade1_full_m"),
+        ("DUT\n(11 Clips)",
+         p_j6["dut_3066_maneuver_onset"]["strata"]["all_windows"]["models"],
+         p_j6["dut_3066_maneuver_onset"]["strata"]["active_maneuver_start_stop_turn"]["models"],
+         "S6_Full_pose_nbr", "ade1_full_m"),
+        ("IMPTC\n(4 Intersect.)",
+         p_j6["imptc_564_maneuver_onset"]["strata"]["all_windows"]["models"],
+         p_j6["imptc_564_maneuver_onset"]["strata"]["active_maneuver_start_stop_turn"]["models"],
+         "S6_M0_nopose_nonbr", "ade1_post_onset_1p0s_m"),
     ]
-    if p_j6.get("dut_3066_maneuver_onset", {}).get("strata"):
-        ds_st = p_j6["dut_3066_maneuver_onset"]["strata"]
-        dk = "true_emergence_or_entry" if "true_emergence_or_entry" in ds_st else next(iter(ds_st))
-        ds_rows.append(("DUT\n(11-Clip)", ds_st[dk]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"))
-    if p_j6.get("imptc_564_maneuver_onset", {}).get("strata"):
-        im_st = p_j6["imptc_564_maneuver_onset"]["strata"]
-        ik = "true_emergence_or_entry" if "true_emergence_or_entry" in im_st else next(iter(im_st))
-        ds_rows.append(("IMPTC\n(4-Seq)", im_st[ik]["models"], "S6_Full_pose_nbr", "ade1_full_m", "ade1_post_onset_1p0s_m"))
-
-    xd = np.arange(len(ds_rows))
-    g_full, g_post = [], []
-    for lbl, md, m_key, kf, kp in ds_rows:
-        scale = 1.0 if "JAAD" in lbl else 100.0  # JAAD normalized/px scale vs metric meters -> cm
-        g_full.append(scale * (md[m_key][kf] - md["Last2_CV"][kf]))
-        g_post.append(scale * (md[m_key][kp] - md["Last2_CV"][kp]))
+    xd = np.arange(len(ds7))
+    rel_all = [100.0 * (m_a[mk][kf] - m_a["Last2_CV"][kf]) / max(m_a["Last2_CV"][kf], 1e-6) for _, m_a, _, mk, kf in ds7]
+    rel_man = [100.0 * (m_m[mk][kf] - m_m["Last2_CV"][kf]) / max(m_m["Last2_CV"][kf], 1e-6) for _, _, m_m, mk, kf in ds7]
     ax.axhline(0.0, color="#2C3E50", linewidth=1.0)
-    ax.bar(xd - 0.17, g_full, width=0.32, color="#2874A6", alpha=0.88, label="Full-Horizon ADE1 - CV (cm; *JAAD norm)")
-    ax.bar(xd + 0.17, g_post, width=0.32, color="#117A65", alpha=0.88, label="Post-Onset +1.0s ADE1 - CV (cm; *JAAD norm)")
-    ax.set_xticks(xd, [r[0] for r in ds_rows], fontsize=8.0)
-    ax.set_ylabel("Paired Error Delta vs. CV (Negative = Better)")
-    ax.set_title("(c) Cross-Dataset Emergence & Post-Onset Gain Across 7 Benchmarks")
-    ax.legend(frameon=False, fontsize=7.8, loc="best")
+    ax.bar(xd - 0.17, rel_all, width=0.32, color="#2874A6", alpha=0.88, label="All De-Occlusion / Cohort vs. CV (%)")
+    ax.bar(xd + 0.17, rel_man, width=0.32, color="#117A65", alpha=0.88, label="Active Maneuver / Emg Subset vs. CV (%)")
+    ax.set_xticks(xd, [r[0] for r in ds7], fontsize=7.8)
+    ax.set_ylabel("Relative Error Change vs. CV (%)")
+    ax.set_title("(c) Cross-Dataset Relative Error Delta Across 7 Benchmarks (<0 Better)")
+    ax.legend(frameon=False, fontsize=7.8, loc="lower left")
     ax.grid(axis="y", linestyle="--", alpha=0.32)
 
     # Panel (d): Un-Cropped Polyline Bug Fix & Dual-Confirmed Solid Barrier Audit
