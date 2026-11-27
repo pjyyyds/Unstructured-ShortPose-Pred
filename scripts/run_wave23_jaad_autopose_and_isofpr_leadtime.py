@@ -31,6 +31,7 @@ except ImportError:
 from scripts.run_heldout_cloud import MODEL_SHA, MODEL_URL, download_zip
 from scripts.run_wave18_conflict_gated_interaction_5seed import _loc_bootstrap_ci
 from scripts.run_wave21_jaad_deocclusion_and_eth_ucy_6dataset import JAAD_ZIP_URL, VEH_ACT_MAP, _fetch_url_bytes
+from scripts.run_wave21_jrdb_and_jta_emergence_maneuvers import ST_RELEASE_URL, _download_verified_zip
 from scripts.run_wave21_pinns_true_emergence_and_6slot_diag import SEEDS
 from scripts.run_wave22_apa_leadtime_and_delayed_onset_4dataset import TAUS_10HZ, extract_jta_sliding_leadtime_events
 from src.data.pinns_extractor import RTMPoseONNXExtractor
@@ -775,7 +776,10 @@ def main() -> None:
     jaad_lead["n_sliding_windows"] = int(len(slide_ds["split"]))
 
     # Also evaluate exact iso-Test-FPR unconflated lead-time on JTA-228 native 3D skeleton
-    jta_ds = extract_jta_sliding_leadtime_events(args.scratch_dir)
+    st_zip = args.scratch_dir / "st_releases.zip"
+    if not st_zip.is_file():
+        _download_verified_zip(ST_RELEASE_URL, st_zip)
+    jta_ds = extract_jta_sliding_leadtime_events(st_zip)
     t_arms = [
         ("Lead_M0_kin_only", jta_ds["pose"], jta_ds["q"], False, False),
         ("Lead_M1_3dpose", jta_ds["pose"], jta_ds["q"], True, False),
