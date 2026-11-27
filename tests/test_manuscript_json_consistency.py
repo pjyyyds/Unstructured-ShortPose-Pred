@@ -105,6 +105,23 @@ class TestManuscriptJsonConsistency(unittest.TestCase):
             self.assertIn(f"{dut_cf['90']['cov_u6'] * 100:.2f}% / {dut_cf['95']['cov_u6'] * 100:.2f}%", txt)
             self.assertIn(f"{imp_cf['90']['cov_u6'] * 100:.2f}% / {imp_cf['95']['cov_u6'] * 100:.2f}%", txt)
 
+        w19_b = json.loads((res / "wave19_usable_pose_boundary_audit_5seed_verified.json").read_text())
+        b0_m1a = w19_b["pinns_4site_loso_1482"]["strata"]["B0_tiny_lt50px"]["paired_top1_ci"]["M1a_minus_M0"]["mean"]["ade_m"] * 100
+        w19_ac = json.loads((res / "wave19_adaptive_conformal_12_and_72pair_5seed_verified.json").read_text())
+        jc_hyb = w19_ac["jrdb_72pair_adaptive_conformal"]["cross_group_ordered_pairs_fixed_predictor_no_retrain"]
+        w20_d = json.loads((res / "wave20_decoupled_m2b_m3_synergy_5seed_verified.json").read_text())
+        dec_p = w20_d["pinns_4site_loso_1482"]["strata"]["all_1482"]["models"]["U_M3_decoupled_platt_rerank"]
+        dec_ap = w20_d["pinns_4site_loso_1482"]["decoupled_action_platt_inner_opt_thr"]["group_equal"]["macro_ap"]
+        w20_m = json.loads((res / "wave20_true20f_mono_3x3_matrix_5seed_verified.json").read_text())
+        r20 = w20_m["durations"]["T20"]["gate_audit"]["M1_mono_q"]["spearman_gate_vs_q1"]
+        for txt in (zh, en):
+            self.assertIn(f"+{b0_m1a:.2f}", txt)
+            self.assertIn(f"{dec_p['group_equal_ade1_m']:.4f} / {dec_p['group_equal_fde1_m']:.4f}", txt)
+            self.assertIn(f"{dec_ap:.4f}", txt)
+            self.assertIn(f"+{r20:.4f}", txt)
+            self.assertIn(f"{jc_hyb['90']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}% / {jc_hyb['95']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}%", txt)
+            self.assertIn("fig20_wave19_20_unified_dut_boundary_and_adaptive_conformal.png", txt)
+
 
 if __name__ == "__main__":
     unittest.main()
