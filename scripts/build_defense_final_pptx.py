@@ -148,7 +148,7 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
     p2.font.color.rgb = WHITE
     p2.space_before = Pt(16)
     p3 = tf.add_paragraph()
-    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  61 份云端双层 SHA-256 验证归档 · 分区七大基准正负结论全透明"
+    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  62 份云端双层 SHA-256 验证归档 · 分区七大基准正负结论全透明"
     p3.font.size = Pt(16)
     p3.font.color.rgb = WHITE
     p3.space_before = Pt(28)
@@ -208,7 +208,7 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
          [f"研究内容一：结构单调质量门控 M1_mono_q、>=50 px 可用阈值与 <0.5 m 匀速边界",
           "研究内容二：20 m 被动折线负向检验（2.36% 穿线）与 10 m 因果径向冲突门控",
           f"研究内容三：解耦五动作 Platt 校准重排（PINNS {m['dec_p']}）与零重训分裂共形"],
-         "跨场景留一验证规模（61 份 SHA-256 归档）",
+         "跨场景留一验证规模（62 份 SHA-256 归档）",
          ["PINNS 四国跨站留一（1,482 不重叠窗 + 623 真 20 帧窗）与 JRDB 九地留一（5,836 窗）",
           f"DUT（3,066 窗）与 IMPTC（564 窗）冻结权重零样本迁移共形覆盖 {m['dut_cf']} / {m['imp_cf']}",
           "同步覆盖 JTA（960 窗）与北京路侧 DAIR-V2X（54 窗），全系固定五随机种子"]),
@@ -261,12 +261,12 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
                    "fig17_ppt_mainline_conformal_and_short_disp.png")
 
     # Slide 14: RTMPose-17 Iso-Test-FPR Lead-Time & Project Completion (with Fig 22)
-    _add_fig_slide(14, "04 研究计划与预期成果", "自动 RTMPose-17 同实现误报率提前量与 Waves 1–23 收官",
-                   "61 份 SHA-256 云端归档与同实现 5.10% 测试误报率验证",
+    _add_fig_slide(14, "04 研究计划与预期成果", "自动 RTMPose-17 同实现误报率提前量与 Waves 1–24 收官",
+                   "62 份 SHA-256 云端归档与同实现 5.10% 测试误报率验证",
                    [f"JAAD 2.0 实提 21,078 帧自动 RTMPose-17：严格解遮挡起步召回 {m['auto_rec']}，停步 0.0% -> 30.0%",
                     f"精确 5.10% 测试误报率（剔除漏检惩罚混同）下：自动骨架共同命中提前 {m['com_lead']}（起步/横穿）",
-                    "五种子全复核：PINNS/JRDB 起步与停步六候选生成率均达 100%（Rank-1 保守抑制稀有机动误报）",
-                    "累计完成 61 份双层 SHA-256 验证归档（覆盖 4 含姿态 + 3 零姿态基准，正负结论与修复全透明）"],
+                    "PINNS 140 对 140 配对对照：持续可见姿态降 -0.91 cm，路侧初现靠交通冲突门控 S6_M2b 降 -5.26 cm",
+                    "累计完成 62 份双层 SHA-256 验证归档（覆盖 4 含姿态 + 3 零姿态基准，正负结论与修复全透明）"],
                    "fig22_wave22_apa_leadtime_and_delayed_onset.png")
 
     # Slides 15-20: Outcomes, Thanks, & 4 Appendix Slides

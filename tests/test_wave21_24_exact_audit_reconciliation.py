@@ -24,6 +24,7 @@ class TestWave21To24ExactAuditReconciliation(unittest.TestCase):
         for jf in (
             "wave23_pinns_video_audit_and_6slot_ranker_5seed_verified.json",
             "wave23_jaad_autopose_and_isofpr_leadtime_5seed_verified.json",
+            "wave24_pinns_raw_video_annotated_emergence_5seed_verified.json",
         ):
             payload = json.loads((root / "results" / jf).read_text(encoding="utf-8"))
             self.assertTrue(payload["verification"]["dual_sha256_verified"], jf)
