@@ -18,6 +18,8 @@ EXPECTED_JOBS = (
     ("wave23_pinns_video_audit_and_6slot_ranker.zip", "wave23_pinns_video_audit_and_6slot_ranker_5seed_verified.json"),
     ("wave23_jaad_autopose_and_isofpr_leadtime.zip", "wave23_jaad_autopose_and_isofpr_leadtime_5seed_verified.json"),
     ("wave24_pinns_raw_video_annotated_emergence.zip", "wave24_pinns_raw_video_annotated_emergence_5seed_verified.json"),
+    ("wave25_pinns_explicit_audit_and_emergence_safe.zip", "wave25_pinns_explicit_audit_and_emergence_safe_5seed_verified.json"),
+    ("wave25_jaad_reappearance_per_event_audit.zip", "wave25_jaad_reappearance_per_event_audit_5seed_verified.json"),
 )
 
 
