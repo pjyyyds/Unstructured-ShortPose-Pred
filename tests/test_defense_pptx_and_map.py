@@ -45,16 +45,22 @@ class TestDefensePptxAndReviewLinks(unittest.TestCase):
             for expected in (
                 "0.4505 / 1.0085 m",
                 "0.4382 / 0.9778 m",
+                "0.5249 / 1.1011 m",
+                "0.2803 m",
                 "0.2772 m",
+                "22/431=5.10%",
+                "p=0.125",
                 "+250.0 ms / +500.0 ms",
                 "0.3545 / 0.8491 m",
                 "+0.7301",
                 "89.76% / 95.50%",
                 "88.89% / 94.20%",
                 "4.782 / 5.231 ms",
+                "64 份",
             ):
                 self.assertIn(expected, joined)
             self.assertNotIn("0.26%", joined)
+            self.assertNotIn("0.2764", joined)
             self.assertNotIn("+873.1 ms", joined)
 
     def test_project_review_summary_links_and_waves_19_20(self) -> None:
