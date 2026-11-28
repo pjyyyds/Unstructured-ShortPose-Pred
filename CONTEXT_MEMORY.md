@@ -7,7 +7,7 @@
 
 ## 1. 核心目标与项目背景 (Objective & Background)
 - **项目定位**: 严格对标《彭嘉钰答辩.pptx》全部 20 页设定，面向无标线混合交通场景，在因果短时历史（主设定 10 Hz 五帧 $0.4\text{ s}$，扩展 $T \in \{2, 5, 8, 10, 20\}$）与可变质量 2D/3D 姿态下，联合预测未来 $3.0\text{ s}$（`JRDB` $2.8\text{ s}$、`JTA` $4.8\text{ s}$）$K=6$ 多模态地面轨迹与五类可观测动态动作（`Start, Stop, Turn-Left, Turn-Right, Maintain`）。
-- **当前阶段状态**: 已完成 **Waves 1–22 共 59 项成功云端实验归档**的双层 SHA-256 核验（覆盖 `PINNS, JRDB, JAAD 2.0, JTA-228, ETH/UCY, DUT, IMPTC` 七大异构基准 + `DAIR-V2X`）、**`128/128` 项本地单测全绿**、**十三幅 300-DPI 出版级图表（`fig10..22`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**双套 Overleaf 即传源码包**（`paper/ieee_tits_latex/` 双栏 `IEEEtran` + `paper/thuthesis_latex/` 中文 `XeLaTeX`）、**逐页精准对齐的 20 页答辩 PPT 映射表与动态生成 PPTX**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），当前云端 `0 Active Events`、`0` 草稿会话，达到强优势可发表与可答辩收官状态。
+- **当前阶段状态**: 已完成 **Waves 1–23 共 61 项成功云端实验归档**的双层 SHA-256 核验（严格分区为四项含姿态基准 `PINNS, JAAD 2.0, JRDB, JTA-228` 与三项零姿态对照基准 `ETH/UCY, DUT, IMPTC` + `DAIR-V2X`；另 `w24-cpu1` `375104643` 正在执行锁定目视初现五种子回放）、**`134/134` 项本地单测全绿**、**十三幅 300-DPI 出版级图表（`fig10..22`）**、中文学位论文（`paper/ShortPose_Unstructured_Pedestrian_Paper.md`）、**IEEE T-ITS 英文投稿手稿**（`paper/IEEE_TITS_ShortPose_Manuscript.md`）、**双套 Overleaf 即传源码包**（`paper/ieee_tits_latex/` 双栏 `IEEEtran` + `paper/thuthesis_latex/` 中文 `XeLaTeX`）、**逐页精准对齐的 20 页答辩 PPT 映射表与动态生成 PPTX**（`paper/PPT_20Slides_Defense_Evidence_Map.md` + `scripts/build_defense_final_pptx.py`），逐条闭环修复了 2026-11-27 外部独立审查指出的全部四项问题并实现模型继续突破。
 
 ---
 
@@ -26,18 +26,19 @@
 - [x] **研究内容三（解耦五动作校准重排、不重训局部加权共形与 `Tesla T4` 效率）**:
   - 冻结 `U_M2b_mono_conflict` 控制点解耦训练五动作并重排（`U_M3_decoupled_platt_rerank`，`0.0 m` 漂移）在 `PINNS` 创最佳首选 **`0.4505 / 1.0085 m`**（较联合微调降 **`−2.20 / −4.08 cm`**，宏 AP **`0.4051`**）；`JRDB` 大折重排达 **`0.2917 / 0.5638 m`**（`ECE` 降 **18.6–23.6x**）。
   - **全程不重训分裂共形**覆盖四大基准：`PINNS` 同站 `90.60%/94.94%`（12 跨国对 `86.48%/91.74%`），`DUT` 72 跨片对 **`89.76%/95.50%`**，`IMPTC` 12 跨序列对 **`89.51%/94.21%`**；`JRDB` 72 跨地点对经源折因果速度-离散度加权升至 **`88.89%/94.20%`**（半径缩 **`−55.8%/−52.5%`**，`>=1 m/s` 快速覆盖由 `75.06%` 升至 **`89.51%`**）。`Tesla T4` `B=12` `P50` 仅 **`2.75–4.78 ms`**（算量较 `HST` 低 **396 倍**）。
-- [x] **深化聚焦（实体遮挡初现先兆、APA 毫秒级提前量与七基准闭环，Waves 21–22）**:
-  - 盲审揭示 `PINNS` `first_short_323` 中 **`175/323`（`54.2%`）为录像第 0 帧伪影**，真实实体遮挡初现 `197/449` 窗；显式六槽先兆网络 **`O2Maneuver6SlotPrecursorNet`** 创 `PINNS` 最优 **`0.4472 / 0.9926 m`**（起步与延迟 APA 停步六候选生成 **`100%`**，真初现机动 `109` 窗纯姿态起点后降 **`−2.17 / −2.19 cm`**），并在 `JRDB` 九地留一首次超越匀速（`0.2812 m`）达 **`0.2772–0.2786 m`**（真解遮挡 `507` 窗纯 3D 姿态起点后降 **`−0.22 / −0.25 cm`**）。
-  - **JAAD 2.0**（346 段视频，`406` 个人工标注真实解遮挡测试窗）五帧姿态与注视降低起点后误差 **`−17.2%`**（`82` 机动窗 **`−25.2%`**），且在同 `5%` 验证集误报门限下将解遮挡**起步检出提前 `+873.1 ms`（召回 `19.23% -> 80.77%`）、停步提前 `+557.9 ms`（召回 `15.79% -> 57.89%`）**；修复整片折线并集（`350/835` 窗）与双确认实体障碍（$\kappa=0.8731$，穿线率 `0.27%`）证实静态折线仍逊于 `No_Map`（`+1.50 cm`）。
+- [x] **深化聚焦与外部审查全量纠偏突破（原视频盲态复核、自动 `RTMPose-17`、精确 `5.10%` 同实现测试误报率提前量与条件化中位解码，Waves 21–23）**:
+  - **相机单应投影修复、26 段 `ori_*.mp4` 盲态目视复核与 `PINNS` 新最优 `0.4382 / 0.9778 m`**: 满秩单应逆投影车辆框至原始相机像素（足底残差 `3.28e-5 px`）表明旧 BEV 像素规则 `34` 例仅 `1` 例成立（单应候选 `189` 窗）；先于结果解包提交哈希（`7e3fc87f`）盲态逐窗目视复核 `241` 个非首帧窗口，确证 **`140/449`（`31.2%`）个目视物理遮挡初现**（车后 `32`、柱体/门洞 `63`、前景行人 `45`）及 `208`（`46.3%`）个首帧伪影（`first_short_323` 占 `175/323 = 54.2%`）。提出条件化先兆风险中位解码 **`S6_Full_CondMedoid`**，创 `PINNS` 最优 **`0.4382 / 0.9778 m`**（较匀速降 `−4.56 / −12.68 cm`，较 `S6_Full` `0.4472 / 0.9926 m` 再降 `−0.90 / −1.49 cm`；`JRDB` 九地达 **`0.2764 m`**，无姿态 `S6_M2b` `0.2772 m`）；五种子均实现起步（`9.0/9`）与停步（`18.0/18`）`100%` 候选生成（Rank-1 选中 `0.0/9` 与 `1.8/18`），初现主动机动 `107` 窗纯姿态起点后降 **`−2.17 / −2.19 cm`** 确由转向主导（`95/107` 含转向，纯转向降 `−2.12 / −2.13 cm`，仅 `2` 起步）。
+  - **JAAD 2.0 实提 `21,078` 帧自动 `RTMPose-17` 骨架与精确 `5.10%` 同实现测试误报率无混同提前量**: 修正总窗 `2,363` / 锁定测试 `953`（单位 `bbox_heights`，低位移 `<0.25` 框高）与 `406` 窗分类（严格五帧解遮挡 `168` + 仍半遮挡 `114` + 仍全遮挡 `74` + 晚入轨 `50`）。从 317 段原视频实提 17 关节自动骨架：严格解遮挡 `168` 窗上 `J_AutoPose_veh`（**`0.5027 / 1.1718`**）显著优于匀速（`0.5155 / 1.2031`）并将 `Start/Stop/Cross` AP 升至 **`0.8998 / 0.1640 / 0.5540`**（人工朝向注视全集达 `0.4250 / 1.0461`，`406` 窗起点后降 `−17.2%`）。在**精确 `5.10%` 实现测试误报率（剔除 `-0.60 s` 漏检惩罚混同）**下，五帧自动 `RTMPose-17` 将严格解遮挡恢复起步/停步召回由纯框运动 `16.7% (2/12)` 与 `0.0% (0/10)` 提升至 **`50.0% (6/12, Δ=+33.3%)` 与 `30.0% (3/10；全集 38 停步 2.6%->23.7%)`**，并在全部测试集共同命中事件上提前 **`+250.0 ms`（起步 `n=10`）与 `+500.0 ms`（横穿 `n=14`；解遮挡共同命中 `AutoPose+Veh` 较 `VehOnly` 提前 `+340.0 ms`）**。
+  - **分区七基准对账与双自动规则正名**: 严格隔离四项含姿态基准与三项零姿态对照基准（`ETH/UCY` 全集 `0.3919 > CV 0.3892 m`，机动窗降 `−9.11 / −11.08 cm`），并将原误称更正为**双自动几何与因果轨迹规则过滤**（$\kappa_{\text{rule}}=0.8731$，穿线率 `0.27%`，静态折线仍逊于 `No_Map` `+1.50 cm`）。
 
 ---
 
 ## 4. 核心资产索引 (Core File Index)
-- `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（中文 `[1]–[26]` 引文、表 1–11、图 10–22；英文 `[1]–[22]` 引文、Tables I–VII、Figs. 1–6）。
+- `paper/ShortPose_Unstructured_Pedestrian_Paper.md` & `paper/IEEE_TITS_ShortPose_Manuscript.md`: 中英文双语完整手稿（中文 `[1]–[26]` 引文、分区表 1–11、图 10–22；英文 `[1]–[22]` 引文、Tables I–VII、Figs. 1–6）。
 - `paper/ieee_tits_latex/main.tex`, `paper/thuthesis_latex/main.tex` & `scripts/build_overleaf_bundle.py`: 英文双栏 `IEEEtran` 期刊与中文 `XeLaTeX`（`ctexrep`）硕士学位论文双套 Overleaf 即传源码包与一键打包脚本。
 - `paper/PPT_20Slides_Defense_Evidence_Map.md` & `scripts/build_defense_final_pptx.py`: 严格对齐原始 Slide 01–20 标题的证据链映射与 20 页清华紫结题答辩 PPTX 动态生成器。
-- `tests/test_manuscript_json_consistency.py`, `tests/test_ieee_latex_submission.py`, `tests/test_thuthesis_latex_submission.py`, `tests/test_defense_pptx_and_map.py`: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 **59 份验证 JSON** 逐位数值/版面/引文一致性单测。
+- `tests/test_wave21_24_exact_audit_reconciliation.py`, `tests/test_wave23_homography_isofpr_and_ranker.py` 等: 中英双语 Markdown、双套 LaTeX、综述与 20 页答辩 PPTX 同 **61 份验证 JSON** 逐位数值/版面/引文及无遗留陈旧口径单测。
 
 ## 5. 最近交互提要 (Recent Interactions)
-- `Turn 2–4`: 完成双栏 `IEEEtran` 投稿包、20 页答辩 PPTX 动态生成器与中文 `XeLaTeX` 源码包（提交 `906271a -> b0c3db7 -> 38c073a`）。
-- `Turn 5`: 围绕用户核心问题“遮挡后刚初现时五帧姿态能否比只看位置更早判断起步/停止/转向”及跨数据集强化指令，完成 Waves 21–22 六份云端归档（`w21c-gpu1` `374755093`、`w21b-gpu2` `374746238 rc1=0`、`w21d-cpu1` `374798593`、`w22-cpu1` `374799207`；透明记录烟测修复 `374729264, 374730656, 374744655` 及 `374746238 rc0` 1-D `q_bio` 修复），渲染 `fig21/fig22`，同步更新全部中英论文、双套 Overleaf ZIP、20 页 PPTX 并通过 `128/128` 项单测（提交 `0a9ce8c`）。
+- `Turn 5`: 完成 Waves 21–22 六份云端归档（提交 `0a9ce8c` -> `64ecce0`）。
+- `Turn 6`: 针对 `64ecce0` 外部四项独立审查意见，逐一完成相机单应车辆逆投影、26 段 `ori_*.mp4` 盲态目视复核（`140` 目视物理遮挡初现，`7e3fc87f`）、`JAAD 2.0` 实提 `21,078` 帧自动 `RTMPose-17` 骨架、精确 `5.10%` 同实现测试误报率无混同提前量评估、条件化风险中位解码 `S6_Full_CondMedoid`（`PINNS` 新低 `0.4382 / 0.9778 m`）及分区七基准对账（`w23-cpu1` `374948056`、`w23b-cpu2` `374962485`，透明记录 `374950532` 目录路径异常修复），全量更新中英论文、双套 Overleaf ZIP 与 20 页 PPTX 并通过 `134/134` 项单测。

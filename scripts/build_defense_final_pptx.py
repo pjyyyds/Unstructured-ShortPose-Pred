@@ -72,17 +72,24 @@ def _load_verified_metrics(res: Path) -> dict[str, str]:
     w19_ac = json.loads((res / "wave19_adaptive_conformal_12_and_72pair_5seed_verified.json").read_text())
     w20_d = json.loads((res / "wave20_decoupled_m2b_m3_synergy_5seed_verified.json").read_text())
     w20_m = json.loads((res / "wave20_true20f_mono_3x3_matrix_5seed_verified.json").read_text())
-    w21_p = json.loads((res / "wave21_pinns_true_emergence_and_6slot_diag_5seed_verified.json").read_text())
     w21_j = json.loads((res / "wave21_jrdb_and_jta_emergence_maneuvers_5seed_verified.json").read_text())
-    w22_l = json.loads((res / "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json").read_text())
+    w24_file = res / "wave24_pinns_raw_video_annotated_emergence_5seed_verified.json"
+    w23_file = res / "wave23_pinns_video_audit_and_6slot_ranker_5seed_verified.json"
+    w23_p = json.loads((w24_file if w24_file.is_file() else w23_file).read_text())
+    w23_jr = json.loads(w23_file.read_text())["jrdb_9loc_lolo"]
+    w23_j = json.loads((res / "wave23_jaad_autopose_and_isofpr_leadtime_5seed_verified.json").read_text())
 
     m0a = anch["strata"]["all_1482"]["models"]["M0_anchor"]["site_equal"]
     cv323 = anch["strata"]["first_short_323"]["models"]["CV"]["site_equal"]
     rg = w17_1["pinns_lowdisp_regime_loso"]["first_short_323"]["models"]["Regime_M1_ground"]["site_equal"]
     dec = w20_d["pinns_4site_loso_1482"]["strata"]["all_1482"]["models"]["U_M3_decoupled_platt_rerank"]
-    s6p = w21_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_pose_nbr"]
+    cm_p = w23_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_CondMedoid"]
     s6j = w21_j["jrdb_9location_lolo"]["strata"]["all_5836"]["models"]["S6_M2b_nopose_nbr"]
-    lead_st = w22_l["jaad2_sliding_leadtime"]["matched_fpr_0p05"]["locked_test_post_deocclusion"]["paired_lead_gain_s"]["Start"]["pose_minus_kin_lead_s_mean"] * 1000.0
+    cm_j = w23_jr["strata"]["all_5836"]["models"]["S6_Full_CondMedoid"]
+    iso_st = w23_j["jaad2_sliding_isofpr_leadtime_5seed"]["iso_test_fpr"]["fpr_0p050"]["locked_test_post_deocclusion_strict_recovered"]["models"]
+    all_p = w23_j["jaad2_sliding_isofpr_leadtime_5seed"]["iso_test_fpr"]["fpr_0p050"]["locked_test_all_events"]["apple_to_apple_pairs"]["autopose_vs_kin_only"]
+    com_st = all_p["Start"]["common_hit_lead_diff_ms_mean"]
+    com_cr = all_p["Turn"]["common_hit_lead_diff_ms_mean"]
     uni_j = w19_uni["jrdb_9location_lolo_5836"]["strata"]["all_10scenes"]["models"]["U_M3_mono_conflict_rerank"]["group_equal"]
     c_ws = m03["fixed_predictor_split_conformal"]["within_site_clip_split_fixed_3site_predictor"]
     dut_cf = w19_ext["dut_3066_zero_shot"]["zero_retrain_split_conformal"]["cross_group_ordered_pairs_no_retrain"]["M2b_ttc_conflict_gate"]
@@ -93,10 +100,11 @@ def _load_verified_metrics(res: Path) -> dict[str, str]:
         "m0a": f"{m0a['ade1_m']:.4f} / {m0a['fde1_m']:.4f} m",
         "cv323": f"{cv323['ade1_m']:.4f} / {cv323['fde1_m']:.4f} m",
         "rg323": f"{rg['ade1_m']:.4f} / {rg['fde1_m']:.4f} m",
-        "dec_p": f"{dec['group_equal_ade1_m']:.4f} / {dec['group_equal_fde1_m']:.4f} m",
-        "s6_p": f"{s6p['ade1_full_m']:.4f} / {s6p['fde1_full_m']:.4f} m",
-        "s6_j": f"{s6j['ade1_full_m']:.4f} / {s6j['fde1_full_m']:.4f} m",
-        "lead_st": f"+{lead_st:.1f} ms",
+        "dec_p": f"{dec['group_equal_ade1_m']:.4f} / {dec['fde1_m' if 'fde1_m' in dec else 'group_equal_fde1_m']:.4f} m",
+        "cm_p": f"{cm_p['ade1_full_m']:.4f} / {cm_p['fde1_full_m']:.4f} m",
+        "s6_j": f"{cm_j['ade1_full_m']:.4f}（无姿态 M2b {s6j['ade1_full_m']:.4f} m）",
+        "auto_rec": f"{iso_st['Lead_M0_kin_only']['Start']['pre_onset_recall']*100:.1f}% -> {iso_st['Lead_AutoPose_rtmpose17']['Start']['pre_onset_recall']*100:.1f}%",
+        "com_lead": f"+{com_st:.1f} ms / +{com_cr:.1f} ms",
         "dec_ap": f"{w20_d['pinns_4site_loso_1482']['decoupled_action_platt_inner_opt_thr']['group_equal']['macro_ap']:.4f}",
         "uni_j": f"{uni_j['ade1_m']:.4f} / {uni_j['fde1_m']:.4f} m",
         "rho_p": f"+{t4['pinns_monotonic_gate_1482']['gate_audit']['M1_mono_q']['spearman_gate_vs_q1_valid_joint_ratio']:.4f}",
@@ -140,7 +148,7 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
     p2.font.color.rgb = WHITE
     p2.space_before = Pt(16)
     p3 = tf.add_paragraph()
-    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  59 份云端双层 SHA-256 验证归档 · 七大基准正负结论全透明"
+    p3.text = "答辩人：彭嘉钰    指导教师：姚丹亚 教授\n清华大学自动化系  |  61 份云端双层 SHA-256 验证归档 · 分区七大基准正负结论全透明"
     p3.font.size = Pt(16)
     p3.font.color.rgb = WHITE
     p3.space_before = Pt(28)
@@ -200,7 +208,7 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
          [f"研究内容一：结构单调质量门控 M1_mono_q、>=50 px 可用阈值与 <0.5 m 匀速边界",
           "研究内容二：20 m 被动折线负向检验（2.36% 穿线）与 10 m 因果径向冲突门控",
           f"研究内容三：解耦五动作 Platt 校准重排（PINNS {m['dec_p']}）与零重训分裂共形"],
-         "跨场景留一验证规模（53 份 SHA-256 归档）",
+         "跨场景留一验证规模（61 份 SHA-256 归档）",
          ["PINNS 四国跨站留一（1,482 不重叠窗 + 623 真 20 帧窗）与 JRDB 九地留一（5,836 窗）",
           f"DUT（3,066 窗）与 IMPTC（564 窗）冻结权重零样本迁移共形覆盖 {m['dut_cf']} / {m['imp_cf']}",
           "同步覆盖 JTA（960 窗）与北京路侧 DAIR-V2X（54 窗），全系固定五随机种子"]),
@@ -234,13 +242,13 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
                    "fig20_wave19_20_unified_dut_boundary_and_adaptive_conformal.png")
 
 
-    # Slide 12: 7 Benchmarks & Blind Emergence Census (with Fig 21)
-    _add_fig_slide(12, "03 主要研究内容", "七大跨场景测试基准、真实遮挡初现与可用条件",
-                   "七大异构基准与盲审实体遮挡初现发现",
-                   ["盲审发现 first_short_323 中 54.2% 为录像首帧伪影，真实体遮挡初现 197/449 窗",
-                    f"六槽先兆 S6 创 PINNS 新低 {m['s6_p']}，JRDB 九地首次超越匀速达 {m['s6_j']}",
-                    "车载 JAAD 2.0（406 人工解遮挡测试窗）五帧姿态起点后误差显著降 -17.2%（机动 -25.2%）",
-                    "双盲实体障碍确认（kappa=0.8731，穿线率 0.27%）证实静态折线仍逊于 No_Map；框高需 >=50 px"],
+    # Slide 12: Partitioned 7 Benchmarks & Raw-Video Blind Emergence Audit (with Fig 21)
+    _add_fig_slide(12, "03 主要研究内容", "分区七大基准、原始视频遮挡复核与可用条件",
+                   "原视频盲态复核与分区基准（四含姿态 + 三零姿态）",
+                   ["26 段 ori_*.mp4 逐窗盲态目视复核：确证 140/449 目视实体遮挡初现（208 首帧伪影，323 中占 54.2%）",
+                    f"条件化中位解码 CondMedoid 创 PINNS 最优 {m['cm_p']}，JRDB 九地达 {m['s6_j']}",
+                    "转向主导初现机动（95/107 含转向）纯姿态起点后降 -2.17 / -2.19 cm；零姿态 ETH 全集 0.3919 > CV 0.3892 m",
+                    "双自动几何与轨迹规则过滤（kappa_rule=0.8731，穿线率 0.27%）确证静态折线仍逊于 No_Map；框高需 >=50 px"],
                    "fig21_wave21_true_emergence_6slot_and_7dataset_precursors.png")
 
     # Slide 13: Full Ablation & Zero-Retrain Conformal (with Fig 17)
@@ -252,20 +260,20 @@ def build_defense_pptx(out_path: Path | None = None) -> Path:
                     "JRDB >=1 m/s 快速行人 90% 覆盖率由 75.06% 跃升至 89.51%（历史重训经验覆盖单独区分）"],
                    "fig17_ppt_mainline_conformal_and_short_disp.png")
 
-    # Slide 14: APA Millisecond Lead-Time & Project Completion (with Fig 22)
-    _add_fig_slide(14, "04 研究计划与预期成果", "预期姿态调整（APA）毫秒级提前量与 Waves 1–22 收官",
-                   "59 份 SHA-256 云端归档与 APA 提前量突破",
-                   [f"JAAD 2.0 同 5% 误报门限下：解遮挡起步检出提前 {m['lead_st']}（召回 19.2% -> 80.8%），停步提前 +557.9 ms",
-                    "延迟起点 APA 升级将 PINNS/JRDB 起步与停步六候选生成命中率拉满至 100%",
-                    "证实稀有机动基率定律：<=0.8 s APA 先兆期显著提前判别，远期非对齐窗保守净收益门限最优",
-                    "累计完成 59 份双层 SHA-256 验证归档（覆盖 7 大基准，正负结论与烟测修复全透明）"],
+    # Slide 14: RTMPose-17 Iso-Test-FPR Lead-Time & Project Completion (with Fig 22)
+    _add_fig_slide(14, "04 研究计划与预期成果", "自动 RTMPose-17 同实现误报率提前量与 Waves 1–23 收官",
+                   "61 份 SHA-256 云端归档与同实现 5.10% 测试误报率验证",
+                   [f"JAAD 2.0 实提 21,078 帧自动 RTMPose-17：严格解遮挡起步召回 {m['auto_rec']}，停步 0.0% -> 30.0%",
+                    f"精确 5.10% 测试误报率（剔除漏检惩罚混同）下：自动骨架共同命中提前 {m['com_lead']}（起步/横穿）",
+                    "五种子全复核：PINNS/JRDB 起步与停步六候选生成率均达 100%（Rank-1 保守抑制稀有机动误报）",
+                    "累计完成 61 份双层 SHA-256 验证归档（覆盖 4 含姿态 + 3 零姿态基准，正负结论与修复全透明）"],
                    "fig22_wave22_apa_leadtime_and_delayed_onset.png")
 
     # Slides 15-20: Outcomes, Thanks, & 4 Appendix Slides
     for pg, sec, ttl, h1, b1, h2, b2 in [
         (15, "04 研究计划与预期成果", "预期成果达成情况与实测硬件帕累托",
          "Tesla T4 实测计算效率（全面优于开题预期）", ["参数量仅 20,739–28,005（约为主流姿态 Transformer 的 1/18）", f"B=12 算量仅 1.56 MFLOPs（比 HST 低 396 倍），P50/P95 延迟 {m['t4_lat']}，显存 23.48 MiB"],
-         "学术论文与答辩交付物", ["中文硕士学位论文完整稿（含表 1–10、300-DPI 图 1–20）", "IEEE T-ITS 双栏英文手稿及 Overleaf 即传 IEEEtran LaTeX 源码包"]),
+         "学术论文与答辩交付物", ["中文硕士学位论文完整稿 + 清华中文 XeLaTeX Overleaf 源码包（表 1–11、图 10–22）", "IEEE T-ITS 双栏英文手稿及 Overleaf 即传 IEEEtran LaTeX 源码包"]),
         (16, "致谢", "总结与致谢",
          "核心学术贡献凝练", ["提出 O(2) 奇偶等变局部正交框架，彻底解决跨相机坐标系旋转崩溃", "揭示无约束门控负相关机制并提出结构单调门控 M1_mono_q 与 >=50 px 可用边界", "提出因果径向冲突门控、解耦五动作校准重排与源折局部加权零重训分裂共形"],
          "诚挚致谢", ["衷心感谢导师姚丹亚教授的悉心指导与严谨治学要求！", "恳请各位评审专家批评指正！"]),

@@ -100,12 +100,13 @@ class TestIeeeLatexSubmission(unittest.TestCase):
         self.assertIn(f"{dec_ap:.4f}", tex)
         self.assertIn(f"{jc_hyb['90']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}\\% / {jc_hyb['95']['M3_speed_spread_scaled']['u6_cov'] * 100:.2f}\\%", tex)
 
-        w21_p = json.loads((res / "wave21_pinns_true_emergence_and_6slot_diag_5seed_verified.json").read_text())
-        s6p = w21_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_pose_nbr"]
-        w22_l = json.loads((res / "wave22_apa_leadtime_jaad_jta_and_pinns_delayed_5seed_verified.json").read_text())
-        lead_st = w22_l["jaad2_sliding_leadtime"]["matched_fpr_0p05"]["locked_test_post_deocclusion"]["paired_lead_gain_s"]["Start"]["pose_minus_kin_lead_s_mean"] * 1000.0
-        self.assertIn(f"{s6p['ade1_full_m']:.4f} / {s6p['fde1_full_m']:.4f}", tex)
-        self.assertIn(f"+{lead_st:.1f}", tex)
+        w23_p = json.loads((res / "wave23_pinns_video_audit_and_6slot_ranker_5seed_verified.json").read_text())
+        cm_p = w23_p["pinns_4site_loso"]["strata"]["all_1482"]["models"]["S6_Full_CondMedoid"]
+        w23_j = json.loads((res / "wave23_jaad_autopose_and_isofpr_leadtime_5seed_verified.json").read_text())
+        com_st = w23_j["jaad2_sliding_isofpr_leadtime_5seed"]["iso_test_fpr"]["fpr_0p050"]["locked_test_all_events"]["apple_to_apple_pairs"]["autopose_vs_kin_only"]["Start"]["common_hit_lead_diff_ms_mean"]
+        self.assertIn(f"{cm_p['ade1_full_m']:.4f} / {cm_p['fde1_full_m']:.4f}", tex)
+        self.assertIn(f"+{com_st:.1f}", tex)
+        self.assertNotIn("+873.1", tex)
 
         with tempfile.TemporaryDirectory() as td:
             out_zip = build_overleaf_zip(Path(td) / "overleaf.zip")

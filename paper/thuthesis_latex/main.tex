@@ -201,22 +201,27 @@ Unmanned delivery and shuttle vehicles operating in campuses, parks, and residen
 \label{fig:thu_f20}
 \end{figure}
 
-\section{真实实体遮挡初现先兆、预期姿态调整提前量与七基准综合验证}
-围绕“遮挡后刚初现时五帧姿态能否比纯位置更早预判起步、停步或转向”，如表~\ref{tab:thu_w21_22} 与图~\ref{fig:thu_f21}--\ref{fig:thu_f22} 所示，在七大异构基准（\texttt{PINNS}、\texttt{JRDB}、\texttt{JAAD 2.0}~\cite{kotseruba2017jaad}、\texttt{JTA-228}、\texttt{ETH/UCY}~\cite{pellegrini2009eth}、\texttt{DUT}、\texttt{IMPTC}）上得出三项核心结论：（1）盲审普查表明 \texttt{PINNS} \texttt{first\_short\_323} 中 $175/323$（$54.2\%$）为录像第 $0$ 帧伪影，真实体遮挡初现共 $197/449$ 窗；显式六槽先兆网络 \texttt{O2Maneuver6SlotPrecursorNet} 将 \texttt{PINNS} 推进至 $0.4472 / 0.9926\text{ m}$（起步与 APA 停步候选生成均达 $100\%$，真初现机动 $109$ 窗纯姿态起点后降 $-2.17 / -2.19\text{ cm}$），并首次将 \texttt{JRDB} 九地点首选推进至低于匀速（$0.2812\text{ m}$）的 $0.2772\text{--}0.2786\text{ m}$（真解遮挡 $507$ 窗纯三维姿态起点后降 $-0.22 / -0.25\text{ cm}$）；（2）在 \texttt{JAAD 2.0} 锁定测试集 $406$ 个人工标注真实解遮挡窗上，五帧姿态与注视显著降低起点后误差 $-17.2\%$（$82$ 个主动机动窗降 $-25.2\%$），并在验证集标定 $5\%$ 误报门限下将解遮挡起步与停步检出分别提前 $+873.1\text{ ms}$（召回 $19.23\% \to 80.77\%$）与 $+557.9\text{ ms}$（召回 $15.79\% \to 57.89\%$）；（3）修复整片因果折线并集漏线（$350/835$ 窗）与双确认实体障碍（$\kappa = 0.8731$，真值穿线率 $0.27\%$）证实静态折线仍逊于 \texttt{No\_Map}（$+1.50\text{ cm}$）。
+\section{原始视频遮挡复核、自动视频骨架提取、同实现误报率提前量与分区基准验证}
+围绕“遮挡后刚初现时五帧姿态能否比纯位置更早预判起步、停步或转向”，如表~\ref{tab:thu_w21_22} 与图~\ref{fig:thu_f21}--\ref{fig:thu_f22} 所示，在四项含姿态基准与三项零姿态运动/交互对照基准上得出三项核心结论：（1）经满秩单应将三维车辆投影回原始相机画面修正 BEV 像素错配（旧 $34$ 例仅 $1$ 例在相机画面成立，单应候选 $189$ 窗），并对 $26$ 段 \texttt{ori\_*.mp4} 中全部 $241$ 个非首帧窗口开展盲态逐窗目视复核，确证 $140/449$（$31.2\%$）个真实物理遮挡初现（车后 $32$、柱体/门洞 $63$、前景行人 $45$）及 $208$（$46.3\%$）个首帧伪影（\texttt{first\_short\_323} 中占 $175/323=54.2\%$）；条件化风险中位轨迹解码 \texttt{S6\_Full\_CondMedoid} 将 \texttt{PINNS} 全集推进至最优 $0.4382 / 0.9778\text{ m}$（较匀速降 $-4.56 / -12.68\text{ cm}$，较 \texttt{S6\_Full} $0.4472 / 0.9926\text{ m}$ 再降 $-0.90 / -1.49\text{ cm}$），五种子均实现起步（$9.0/9$）与停步（$18.0/18$）$100\%$ 候选生成（Rank-1 选中 $0.0/9$ 与 $1.8/18$），而初现主动机动窗上纯姿态起点后 $+0.5\text{ s}/+1.0\text{ s}$ 降 $-2.17 / -2.19\text{ cm}$ 主要由转向主导（$95/107$ 或旧 $99/109$ 窗含转向，纯转向 $95$ 窗降 $-2.12 / -2.13\text{ cm}$，仅 $2$ 起步）；\texttt{JRDB} 九地点达 $0.2764\text{--}0.2786\text{ m}$（无姿态 \texttt{S6\_M2b} $0.2772\text{ m}$，真解遮挡 $507$ 窗纯 3D 姿态起点后降 $-0.22 / -0.25\text{ cm}$）。（2）在 \texttt{JAAD 2.0}~\cite{kotseruba2017jaad}（总 $2{,}363$ 窗、锁定测试 $953$ 窗，单位 \texttt{bbox\_heights}，低位移 $<0.25$ 框高；$406$ 窗拆解为严格五帧解遮挡 $168$、仍半遮挡 $114$、仍全遮挡 $74$ 与晚入轨 $50$）上，从 $317$ 段原视频实提 $21{,}078$ 帧 \texttt{RTMPose-m} 17 关节自动骨架：严格解遮挡 $168$ 窗上 \texttt{J\_AutoPose\_veh}（$0.5027 / 1.1718$）显著优于匀速（$0.5155 / 1.2031$）并将 \texttt{Start/Stop/Cross} AP 升至 $0.8998 / 0.1640 / 0.5540$（人工朝向注视 \texttt{HumanAttr+Veh} 全集达 $0.4250 / 1.0461$，$406$ 窗起点后降 $-17.2\%$）；在精确对齐测试集实现误报率 $5.10\%$（剔除 $-0.60\text{ s}$ 漏检惩罚混同）下，严格解遮挡恢复事件（$12$ 起步、$10$ 停步）中五帧自动 \texttt{RTMPose-17} 将召回由纯框运动的 $16.7\%\ (2/12)$ 与 $0.0\%\ (0/10)$ 提升至 $50.0\%\ (6/12,\ \Delta=+33.3\%)$ 与 $30.0\%\ (3/10$；全集 $38$ 停步 $2.6\%\to 23.7\%)$，并在全部共同检出事件上较纯框运动提前 $+250.0\text{ ms}$（起步 $n=10$，$[+50.0, +470.0]\text{ ms}$）与 $+500.0\text{ ms}$（横穿 $n=14$，$[+342.9, +642.9]\text{ ms}$；解遮挡起步共同命中 \texttt{AutoPose+Veh} 较 \texttt{VehOnly} 提前 $+340.0\text{ ms}$）。（3）整片折线并集补回 $350/835$ 窗漏线，双自动几何与因果轨迹规则过滤（$\kappa_{\text{rule}}=0.8731$，自动规则一致性而非人工双盲标注）将穿线率压至 $0.27\%$，但静态折线（$0.5069\text{ m}$）仍逊于 \texttt{No\_Map}（$0.4919\text{ m}$）。
 
 \begin{table}[!htbp]
 \centering
-\caption{七大基准真实解遮挡初现、姿态先兆效应与预期姿态调整（APA）提前量综合对比（五随机种子）}
+\caption{分区七大基准验证：四项含姿态基准与三项零姿态对照基准（五随机种子，统一单位与同实现 $5.10\%$ 测试误报率）}
 \label{tab:thu_w21_22}
 \footnotesize
 \begin{tabular}{llll}
 \toprule
-基准与评测设定 & 初现/测试规模 & 首选 $\text{ADE}_1/\text{FDE}_1$ & 起点后姿态增益与 $5\%$ 误报门限提前量 \\
+基准与物理单位 & 评测/解遮挡规模 & 首选 $\text{ADE}_1/\text{FDE}_1$（匀速参照） & 姿态/交互增益与 $5.10\%$ 同测试误报率审计 \\
 \midrule
-\texttt{PINNS} 四国留一域 & $1{,}482$ / 初现 $197$ & \textbf{0.4472 / 0.9926 m} & 初现机动纯姿态 \textbf{$-2.17 / -2.19\text{ cm}$}；起步生成 \textbf{100\%} \\
-\texttt{JAAD 2.0} 车载解遮挡 & 测试 $953$ / 解遮挡 $406$ & \textbf{0.4250 / 1.0461} & 解遮挡姿态 \textbf{$-17.2\%$}；起步 \textbf{+873.1 ms} / 停步 \textbf{+557.9 ms} \\
-\texttt{JRDB} 九地点留一域 & $5{,}836$ / 解遮挡 $507$ & \textbf{0.2772--0.2786 m} & 解遮挡纯 3D 姿态 \textbf{$-0.22 / -0.25\text{ cm}$}；APA 停步生成 \textbf{100\%} \\
-\texttt{JTA-228} + \texttt{ETH/DUT/IMPTC} & $1{,}267 + 4{,}187 + 3{,}630$ & \texttt{DUT} \textbf{0.3483} / \texttt{IMPTC} \textbf{0.2061} & \texttt{JTA} 纯姿态 $-0.40\text{ cm}$；\texttt{ETH} 机动 $-9.11 / -11.08\text{ cm}$ \\
+\multicolumn{4}{l}{\textit{A 组：含姿态基准（自动 2D/3D 视频骨架或人工视觉属性）}} \\
+\texttt{PINNS}（m） & $1{,}482$ / 目视初现 $140$ & \textbf{0.4382 / 0.9778}（CV 0.4839） & 转向主导机动纯姿态 \textbf{$-2.17 / -2.19\text{ cm}$}；五种子生成 \textbf{100\%} \\
+\texttt{JAAD 2.0}（框高） & 测试 $953$ / 严格解遮挡 $168$ & 自动 \textbf{0.5027}（CV 0.5155）；人工 \textbf{0.4250} & 自动召回 \textbf{50\% / 30\%}；共同命中提前 \textbf{+250 / +500 ms} \\
+\texttt{JRDB}（m） & $5{,}836$ / 解遮挡 $507$ & \texttt{CondMed} \textbf{0.2764}；\texttt{M2b} \textbf{0.2772}（CV 0.2812） & 解遮挡纯 3D 姿态 \textbf{$-0.22 / -0.25\text{ cm}$}；五种子生成 \textbf{100\%} \\
+\texttt{JTA-228}（m） & 锁定测试 $1{,}267$ & \texttt{M1} \textbf{0.5564 / 1.1214}（\texttt{M0} 0.5602, CV 0.5659） & 测试纯 3D 姿态降 \textbf{$-0.38\text{ cm}$}；停步召回 $20.0\%\to 33.8\%$ \\
+\midrule
+\multicolumn{4}{l}{\textit{B 组：零姿态运动与交互对照基准（全程 $m_{\text{pose}}\equiv 0$ 严格校验）}} \\
+\texttt{ETH/UCY}~\cite{pellegrini2009eth}（m） & 五场景 $4{,}187$（无姿态） & \texttt{Full} 0.3919 $>$ CV \textbf{0.3892}（$+0.27\text{ cm}$） & 主动机动窗降 \textbf{$-9.11 / -11.08\text{ cm}$}；零姿态泄漏 $0.0\text{ cm}$ \\
+\texttt{DUT + IMPTC}（m） & $3{,}066$（$<0.5$m $400$）+ $564$（$365$） & \texttt{DUT} \textbf{0.3483}（CV 0.5067）；\texttt{IMPTC} \textbf{0.2061} & \texttt{IMPTC} $<0.5$m：0.2126$\to$\textbf{0.1942}/0.2004；零样本摆动 $0.0\text{ m}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -224,22 +229,22 @@ Unmanned delivery and shuttle vehicles operating in campuses, parks, and residen
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.96\textwidth]{fig21_wave21_true_emergence_6slot_and_7dataset_precursors.png}
-\caption{\texttt{PINNS} 盲审实体遮挡初现拆解、六候选生成与选中审计、七大基准对比及双确认实体障碍四臂核验。}
+\caption{\texttt{PINNS} 原视频盲态目视初现拆解（目视实体遮挡 $140$ 窗、首帧伪影 $208$ 窗）、五种子六候选生成与选中审计、分区七基准对比及双自动规则实体障碍核验（$\kappa_{\text{rule}}=0.8731$）。}
 \label{fig:thu_f21}
 \end{figure}
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.96\textwidth]{fig22_wave22_apa_leadtime_and_delayed_onset.png}
-\caption{生物力学预期姿态调整（APA）滑窗毫秒级提前量、同误报门限检出与延迟起点候选升级。}
+\caption{\texttt{JAAD 2.0} 严格五帧解遮挡在精确 $5.10\%$ 测试误报率下的无惩罚混同召回与命中时刻（自动 \texttt{RTMPose-17} 对比人工属性与纯框运动）、共同命中提前量（$+250.0 / +500.0\text{ ms}$）及五种子条件化中位选择。}
 \label{fig:thu_f22}
 \end{figure}
 
 \chapter{讨论与局限性分析}
-（1）\textbf{单目近静止初现与基率误报边界：}受限于路侧单目单应约 $0.28\text{ m}$ 地面标定公差~\cite{peng2026pinns} 与录像首帧伪影（$54.2\%$），$<0.5\text{ m}$ 聚合子组仍与匀速统计相当（$[-2.68, +1.54]\text{ cm}$），而在 $\le 0.8\text{ s}$ 生物力学 APA 先兆期内平视姿态具备百毫秒级提前判别优势；框高 $<50\text{ px}$ 或 $q_1 < 0.75$ 须依赖单调门控压低权重。（2）\textbf{静态折线边界：}即使补齐整片因果折线并集并通过双盲确认实体障碍（$\kappa=0.8731$，穿线率 $0.27\%$），静态折线对首选解码仍无净收益。（3）\textbf{全部可复现资产：}全部 59 份云端结果归档均通过双层 SHA-256 核验并开源复现代码（\url{https://github.com/pjyyyds/Unstructured-ShortPose-Pred}）。
+（1）\textbf{单目近静止初现与基率误报边界：}受限于路侧单目单应约 $0.28\text{ m}$ 地面标定公差~\cite{peng2026pinns} 与录像首帧伪影（$54.2\%$），$<0.5\text{ m}$ 聚合子组即使在 \texttt{S6\_Full\_CondMedoid}（$0.3459 / 0.8157\text{ m}$，较匀速降 $-0.86\text{ cm}$）下其 $95\%$ 区间 $[-2.68, +0.94]\text{ cm}$ 仍跨零，而在车载平视视角严格解遮挡恢复后五帧自动 \texttt{RTMPose-17} 可在精确 $5.10\%$ 测试误报率下将起步/停步召回提升至 $50.0\%/30.0\%$ 并于共同命中事件提前 $+250.0 / +500.0\text{ ms}$；框高 $<50\text{ px}$ 或 $q_1 < 0.75$ 须依赖单调门控压低权重。（2）\textbf{静态折线边界：}即使补齐整片因果折线并集并通过双自动几何与因果轨迹规则过滤实体障碍（$\kappa_{\text{rule}}=0.8731$，穿线率 $0.27\%$），静态折线（$0.5069\text{ m}$）对首选解码仍逊于 \texttt{No\_Map}（$0.4919\text{ m}$）。（3）\textbf{全部可复现资产：}全部 61 份云端结果归档均通过双层 SHA-256 核验并开源复现代码（\url{https://github.com/pjyyyds/Unstructured-ShortPose-Pred}）。
 
 \chapter{总结与展望}
-本文针对非结构化道路短时可变质量姿态下的行人动作与轨迹联合预测，提出了正交奇偶等变 Frenet 规范化、结构单调质量门控、因果径向冲突门控、解耦五动作校准重排、显式六槽预期姿态调整（APA）先兆网络与源折局部加权零重训分裂共形方法，在七大异构基准上实现了紧凑参数（$20.7\text{k}\text{--}28.0\text{k}$）、毫秒级延迟（\texttt{Tesla T4} $2.75\text{--}4.78\text{ ms}$）且正负结论透明可复核的预测体系。未来工作将进一步面向车载双目/激光深度融合与实车嵌入式闭环避障验证展开。
+本文针对非结构化道路短时可变质量姿态下的行人动作与轨迹联合预测，提出了正交奇偶等变 Frenet 规范化、结构单调质量门控、因果径向冲突门控、解耦五动作校准重排、条件化六槽预期姿态调整（APA）风险中位解码（\texttt{PINNS} 创最优 $0.4382 / 0.9778\text{ m}$，\texttt{JRDB} 达 $0.2764\text{--}0.2786\text{ m}$）与源折局部加权零重训分裂共形方法，在四项含姿态基准与三项零姿态对照基准上实现了紧凑参数（$20.7\text{k}\text{--}28.0\text{k}$）、毫秒级延迟（\texttt{Tesla T4} $2.75\text{--}4.78\text{ ms}$）且正负结论透明可复核的预测体系。未来工作将进一步面向车载双目/激光深度融合与实车嵌入式闭环避障验证展开。
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
